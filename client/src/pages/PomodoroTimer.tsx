@@ -195,6 +195,9 @@ export default function PomodoroTimer() {
   const resetTimer = () => {
     setIsRunning(false);
     setTimerState('idle');
+    // 세션 정보 리셋
+    setCompletedPomodoros(0);
+    setCurrentCycle(1);
     // 현재 선택된 할 일의 설정값으로 리셋
     const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
     const workTime = currentTask?.customWorkTime || settings.workTime;

@@ -195,7 +195,10 @@ export default function PomodoroTimer() {
   const resetTimer = () => {
     setIsRunning(false);
     setTimerState('idle');
-    setTimeLeft(settings.workTime * 60);
+    // 현재 선택된 할 일의 설정값으로 리셋
+    const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
+    const workTime = currentTask?.customWorkTime || settings.workTime;
+    setTimeLeft(workTime * 60);
   };
 
   const skipSession = () => {
@@ -431,7 +434,8 @@ export default function PomodoroTimer() {
                       }
                     }
                   }}
-                  className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600"
+                  disabled={isRunning}
+                  className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <option value="">할 일을 선택하세요</option>
                   {tasks.filter(task => !task.completed).map(task => (

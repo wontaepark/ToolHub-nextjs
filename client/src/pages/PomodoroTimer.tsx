@@ -560,50 +560,52 @@ export default function PomodoroTimer() {
               </div>
 
               {/* Task list */}
-              <div className="space-y-2 max-h-64 overflow-y-auto">
+              <div className="space-y-1 max-h-48 overflow-y-auto">
                 {tasks.map((task) => (
                   <div 
                     key={task.id} 
-                    className={`flex items-center space-x-2 p-2 rounded border transition-colors ${
+                    className={`flex items-center justify-between p-2 rounded border transition-colors ${
                       currentTaskId === task.id 
                         ? 'border-primary bg-primary/5' 
                         : 'border-border hover:bg-muted/50'
                     } ${task.completed ? 'opacity-60' : ''}`}
                   >
-                    <input
-                      type="checkbox"
-                      checked={task.completed}
-                      onChange={() => toggleTaskComplete(task.id)}
-                      className="rounded"
-                    />
-                    <div 
-                      className={`flex-1 text-sm cursor-pointer ${
-                        task.completed ? 'line-through text-muted-foreground' : ''
-                      }`}
-                      onClick={() => selectTask(task.id)}
-                    >
-                      <div>{task.text}</div>
-                      {task.completedPomodoros > 0 && (
-                        <div className="text-xs text-muted-foreground">
-                          🍅 {task.completedPomodoros}개 완료
-                        </div>
-                      )}
+                    <div className="flex items-center space-x-2 flex-1 min-w-0">
+                      <input
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => toggleTaskComplete(task.id)}
+                        className="rounded flex-shrink-0"
+                      />
+                      <div 
+                        className={`text-sm cursor-pointer truncate ${
+                          task.completed ? 'line-through text-muted-foreground' : ''
+                        }`}
+                        onClick={() => selectTask(task.id)}
+                        title={task.text}
+                      >
+                        {task.text}
+                        {task.completedPomodoros > 0 && (
+                          <span className="ml-2 text-xs text-muted-foreground">
+                            🍅{task.completedPomodoros}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <Button 
                       onClick={() => deleteTask(task.id)}
                       variant="ghost"
                       size="sm"
-                      className="p-1 h-auto text-muted-foreground hover:text-destructive"
+                      className="p-1 h-auto text-muted-foreground hover:text-destructive flex-shrink-0"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-3 w-3" />
                     </Button>
                   </div>
                 ))}
                 
                 {tasks.length === 0 && (
-                  <div className="text-center py-6 text-muted-foreground">
-                    <p className="text-sm">아직 할일이 없습니다.</p>
-                    <p className="text-xs mt-1">위에서 새 할일을 추가해보세요!</p>
+                  <div className="text-center py-4 text-muted-foreground">
+                    <p className="text-sm">할일을 추가해보세요!</p>
                   </div>
                 )}
               </div>
@@ -615,11 +617,26 @@ export default function PomodoroTimer() {
             <CardContent className="p-6">
               <h3 className="font-semibold text-lg mb-4">포모도로 팁</h3>
               <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
-                <p className="flex items-center space-x-2"><span>🍅</span><span>한 번에 하나의 작업에만 집중하세요</span></p>
-                <p className="flex items-center space-x-2"><span>⏰</span><span>25분 동안은 방해 요소를 차단하세요</span></p>
-                <p className="flex items-center space-x-2"><span>🚫</span><span>휴식 시간을 건너뛰지 마세요</span></p>
-                <p className="flex items-center space-x-2"><span>📝</span><span>완료한 작업을 기록해보세요</span></p>
-                <p className="flex items-center space-x-2"><span>🎯</span><span>하루 목표를 설정해보세요</span></p>
+                <p className="flex items-start space-x-2">
+                  <span className="flex-shrink-0">🍅</span>
+                  <span className="leading-relaxed">한 번에 하나의 작업에만 집중하세요</span>
+                </p>
+                <p className="flex items-start space-x-2">
+                  <span className="flex-shrink-0">⏰</span>
+                  <span className="leading-relaxed">25분 동안은 방해 요소를 차단하세요</span>
+                </p>
+                <p className="flex items-start space-x-2">
+                  <span className="flex-shrink-0">🚫</span>
+                  <span className="leading-relaxed">휴식 시간을 건너뛰지 마세요</span>
+                </p>
+                <p className="flex items-start space-x-2">
+                  <span className="flex-shrink-0">📝</span>
+                  <span className="leading-relaxed">완료한 작업을 기록해보세요</span>
+                </p>
+                <p className="flex items-start space-x-2">
+                  <span className="flex-shrink-0">🎯</span>
+                  <span className="leading-relaxed">하루 목표를 설정해보세요</span>
+                </p>
               </div>
             </CardContent>
           </Card>

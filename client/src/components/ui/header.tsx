@@ -44,15 +44,6 @@ export default function Header() {
             </Button>
           </Link>
           
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleTheme}
-            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          >
-            {theme === 'light' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-          
           <a 
             href="https://github.com" 
             target="_blank" 
@@ -62,6 +53,21 @@ export default function Header() {
             <Github className="h-5 w-5" />
             <span>GitHub</span>
           </a>
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleTheme}
+            aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
+            className="flex items-center justify-center border border-border hover:bg-accent"
+            title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
+          >
+            {theme === 'light' ? (
+              <Moon className="h-5 w-5 transition-all" />
+            ) : (
+              <Sun className="h-5 w-5 transition-all" />
+            )}
+          </Button>
           
           <Button 
             variant="ghost" 

@@ -16,59 +16,56 @@ export default function Home() {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Calculator Card */}
-        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden hover:shadow-xl">
-          <div className="h-32 gradient-bg flex items-center justify-center">
-            <i className="ri-calculator-line text-white text-5xl"></i>
+        <Link href="/calculator">
+          <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-all duration-300 hover:scale-105">
+            <div className="h-32 gradient-bg flex items-center justify-center">
+              <i className="ri-calculator-line text-white text-5xl"></i>
+            </div>
+            <div className="p-5">
+              <h3 className="font-semibold text-lg mb-2">계산기</h3>
+              <p className="text-muted-foreground text-sm">기본 사칙연산과 고급 계산 기능을 제공합니다.</p>
+            </div>
           </div>
-          <div className="p-5">
-            <h3 className="font-semibold text-lg mb-2">Calculator</h3>
-            <p className="text-muted-foreground text-sm mb-4">Perform basic and advanced calculations with ease.</p>
-            <Link href="/calculator">
-              <Button className="w-full">
-                Open Tool
-              </Button>
-            </Link>
-          </div>
-        </div>
+        </Link>
         
         {/* Timer Card (Coming Soon) */}
-        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80">
+        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80 cursor-not-allowed">
           <div className="h-32 bg-muted flex items-center justify-center">
             <i className="ri-timer-line text-muted-foreground text-5xl"></i>
           </div>
           <div className="p-5">
-            <h3 className="font-semibold text-lg mb-2">Timer</h3>
-            <p className="text-muted-foreground text-sm mb-4">Set timers and countdowns for your tasks.</p>
+            <h3 className="font-semibold text-lg mb-2">타이머</h3>
+            <p className="text-muted-foreground text-sm mb-4">작업을 위한 타이머와 카운트다운을 설정합니다.</p>
             <div className="w-full py-2 px-4 bg-muted text-muted-foreground rounded-lg text-center">
-              Coming Soon
+              준비 중
             </div>
           </div>
         </div>
         
         {/* Unit Converter Card (Coming Soon) */}
-        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80">
+        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80 cursor-not-allowed">
           <div className="h-32 bg-muted flex items-center justify-center">
             <i className="ri-scales-3-line text-muted-foreground text-5xl"></i>
           </div>
           <div className="p-5">
-            <h3 className="font-semibold text-lg mb-2">Unit Converter</h3>
-            <p className="text-muted-foreground text-sm mb-4">Convert between different units of measurement.</p>
+            <h3 className="font-semibold text-lg mb-2">단위 변환기</h3>
+            <p className="text-muted-foreground text-sm mb-4">다양한 측정 단위 간 변환을 제공합니다.</p>
             <div className="w-full py-2 px-4 bg-muted text-muted-foreground rounded-lg text-center">
-              Coming Soon
+              준비 중
             </div>
           </div>
         </div>
         
         {/* Weather Card (Coming Soon) */}
-        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80">
+        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80 cursor-not-allowed">
           <div className="h-32 bg-muted flex items-center justify-center">
             <i className="ri-sun-cloudy-line text-muted-foreground text-5xl"></i>
           </div>
           <div className="p-5">
-            <h3 className="font-semibold text-lg mb-2">Weather</h3>
-            <p className="text-muted-foreground text-sm mb-4">Check the current weather and forecast.</p>
+            <h3 className="font-semibold text-lg mb-2">날씨</h3>
+            <p className="text-muted-foreground text-sm mb-4">현재 날씨와 일기예보를 확인합니다.</p>
             <div className="w-full py-2 px-4 bg-muted text-muted-foreground rounded-lg text-center">
-              Coming Soon
+              준비 중
             </div>
           </div>
         </div>

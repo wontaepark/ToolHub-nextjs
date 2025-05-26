@@ -307,12 +307,23 @@ export default function PomodoroTimer() {
           <Card className="p-8 text-center">
             <CardContent className="space-y-6">
               {/* Current State Badge */}
-              <Badge 
-                variant="secondary" 
-                className={`text-white px-4 py-2 text-lg ${getStateColor()}`}
-              >
-                {getStateText()}
-              </Badge>
+              <div className="flex items-center justify-center space-x-4">
+                <Badge 
+                  variant="secondary" 
+                  className={`text-white px-4 py-2 text-lg ${getStateColor()}`}
+                >
+                  {getStateText()}
+                </Badge>
+                {timerState === 'work' && (
+                  <Badge 
+                    variant="outline" 
+                    className="px-3 py-1 cursor-pointer hover:bg-muted"
+                    onClick={() => setCurrentCycle(prev => prev === 4 ? 1 : prev + 1)}
+                  >
+                    세션 {currentCycle}
+                  </Badge>
+                )}
+              </div>
 
               {/* Timer Display */}
               <div className="relative w-64 h-64 mx-auto">
@@ -603,12 +614,12 @@ export default function PomodoroTimer() {
           <Card>
             <CardContent className="p-6">
               <h3 className="font-semibold text-lg mb-4">포모도로 팁</h3>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>🍅 한 번에 하나의 작업에만 집중하세요</p>
-                <p>⏰ 25분 동안은 방해 요소를 차단하세요</p>
-                <p>🚫 휴식 시간을 건너뛰지 마세요</p>
-                <p>📝 완료한 작업을 기록해보세요</p>
-                <p>🎯 하루 목표를 설정해보세요</p>
+              <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
+                <p className="flex items-center space-x-2"><span>🍅</span><span>한 번에 하나의 작업에만 집중하세요</span></p>
+                <p className="flex items-center space-x-2"><span>⏰</span><span>25분 동안은 방해 요소를 차단하세요</span></p>
+                <p className="flex items-center space-x-2"><span>🚫</span><span>휴식 시간을 건너뛰지 마세요</span></p>
+                <p className="flex items-center space-x-2"><span>📝</span><span>완료한 작업을 기록해보세요</span></p>
+                <p className="flex items-center space-x-2"><span>🎯</span><span>하루 목표를 설정해보세요</span></p>
               </div>
             </CardContent>
           </Card>

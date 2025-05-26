@@ -434,6 +434,59 @@ export default function PomodoroTimer() {
                     {Math.floor(completedPomodoros / 4)}
                   </Badge>
                 </div>
+
+                {/* Progress Bars */}
+                <div className="space-y-3 pt-2">
+                  {/* Current Session Progress */}
+                  <div>
+                    <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                      <span>현재 사이클 진행</span>
+                      <span>{completedPomodoros % 4}/4</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className="bg-red-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${((completedPomodoros % 4) / 4) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Daily Goal Progress */}
+                  <div>
+                    <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                      <span>일일 목표 (8개)</span>
+                      <span>{Math.min(dailyPomodoros, 8)}/8</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${Math.min((dailyPomodoros / 8) * 100, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Timer Progress (only when active) */}
+                  {timerState !== 'idle' && (
+                    <div>
+                      <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                        <span>{getStateText()} 진행</span>
+                        <span>{formatTime(getCurrentTimeTotal() - timeLeft)}/{formatTime(getCurrentTimeTotal())}</span>
+                      </div>
+                      <div className="w-full bg-muted rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-1000 ${
+                            timerState === 'work' 
+                              ? 'bg-red-500' 
+                              : timerState === 'shortBreak' 
+                                ? 'bg-green-500' 
+                                : 'bg-blue-500'
+                          }`}
+                          style={{ width: `${getProgressPercentage()}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>

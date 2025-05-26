@@ -414,41 +414,41 @@ export default function PomodoroTimer() {
                 </Button>
               </div>
 
-              {/* Task Selection */}
-              <div className="text-sm">
-                {timerState === 'work' && (
-                  <div className="space-y-2">
-                    <label className="block text-muted-foreground">작업 중:</label>
-                    <select
-                      value={currentTaskId || ""}
-                      onChange={(e) => {
-                        setCurrentTaskId(e.target.value || null);
-                        // 할 일을 선택했을 때 즉시 그 할 일의 시간으로 변경
-                        if (e.target.value && timerState === 'work' && !isRunning) {
-                          const selectedTask = tasks.find(t => t.id === e.target.value);
-                          if (selectedTask?.customWorkTime) {
-                            setTimeLeft(selectedTask.customWorkTime * 60);
-                          }
-                        }
-                      }}
-                      className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600"
-                    >
-                      <option value="">할 일을 선택하세요</option>
-                      {tasks.filter(task => !task.completed).map(task => (
-                        <option key={task.id} value={task.id}>
-                          {task.text}
-                          {settings.taskBasedTiming && task.customWorkTime && ` (${task.customWorkTime}분)`}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-                {timerState === 'shortBreak' && (
-                  <p className="text-muted-foreground">짧은 휴식 후 다음 포모도로가 시작됩니다</p>
-                )}
-                {timerState === 'longBreak' && (
-                  <p className="text-muted-foreground">긴 휴식 후 새로운 사이클이 시작됩니다</p>
-                )}
+              {/* Task Selection - Always Visible */}
+              <div className="text-sm space-y-2">
+                <label className="block text-muted-foreground">작업할 일:</label>
+                <select
+                  value={currentTaskId || ""}
+                  onChange={(e) => {
+                    setCurrentTaskId(e.target.value || null);
+                    // 할 일을 선택했을 때 즉시 그 할 일의 시간으로 변경
+                    if (e.target.value && !isRunning) {
+                      const selectedTask = tasks.find(t => t.id === e.target.value);
+                      if (selectedTask?.customWorkTime) {
+                        setTimeLeft(selectedTask.customWorkTime * 60);
+                      } else {
+                        setTimeLeft(settings.workTime * 60);
+                      }
+                    }
+                  }}
+                  className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600"
+                >
+                  <option value="">할 일을 선택하세요</option>
+                  {tasks.filter(task => !task.completed).map(task => (
+                    <option key={task.id} value={task.id}>
+                      {task.text}
+                      {settings.taskBasedTiming && task.customWorkTime && ` (${task.customWorkTime}분)`}
+                    </option>
+                  ))}
+                </select>
+                
+                {/* Session Status */}
+                <div className="text-xs text-muted-foreground mt-2">
+                  {timerState === 'work' && <p>🍅 집중 시간</p>}
+                  {timerState === 'shortBreak' && <p>☕ 짧은 휴식</p>}
+                  {timerState === 'longBreak' && <p>🛋️ 긴 휴식</p>}
+                  {timerState === 'idle' && <p>⏸️ 준비 상태</p>}
+                </div>
               </div>
             </CardContent>
           </Card>

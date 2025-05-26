@@ -38,8 +38,12 @@ export function ThemeProvider({
     root.classList.remove("light", "dark");
     root.classList.add(theme);
     
+    // Also set data attribute for better CSS targeting
+    root.setAttribute("data-theme", theme);
+    
     try {
       localStorage.setItem("theme", theme);
+      console.log("Theme set to:", theme);
     } catch (error) {
       console.warn("Failed to save theme to localStorage:", error);
     }

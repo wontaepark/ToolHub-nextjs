@@ -349,20 +349,28 @@ export default function PomodoroTimer() {
               <div className="flex items-center justify-center space-x-4">
                 <Badge 
                   variant="secondary" 
-                  className={`text-white px-4 py-2 text-lg ${getStateColor()}`}
+                  className={`text-white px-4 py-2 text-lg transition-all duration-500 ease-in-out transform ${getStateColor()} ${
+                    isRunning ? 'scale-105 shadow-lg' : 'scale-100'
+                  }`}
+                  style={{
+                    animation: isRunning ? 'pulseGlow 2s infinite' : 'none'
+                  }}
                 >
                   {getStateText()}
                 </Badge>
                 {timerState === 'work' && (
                   <Badge 
                     variant="outline" 
-                    className="px-3 py-1 cursor-pointer hover:bg-muted"
+                    className="px-3 py-1 cursor-pointer hover:bg-muted transition-all duration-300 hover:scale-105"
                     onClick={() => {
                       // 세션 증가 (1-4 순환)
                       const newCycle = currentCycle === 4 ? 1 : currentCycle + 1;
                       setCurrentCycle(newCycle);
                       // completedPomodoros도 함께 업데이트 (세션 번호에 맞춰)
                       setCompletedPomodoros(newCycle - 1);
+                    }}
+                    style={{
+                      animation: 'scaleIn 0.3s ease-out'
                     }}
                   >
                     세션 {currentCycle}

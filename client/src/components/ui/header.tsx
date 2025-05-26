@@ -20,20 +20,20 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
+      <div className="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Link href="/">
-            <div className="flex items-center space-x-2 cursor-pointer">
-              <div className="h-8 w-8 rounded-lg gradient-bg flex items-center justify-center">
-                <i className="ri-tools-fill text-white text-xl"></i>
+            <div className="flex items-center space-x-2 cursor-pointer group">
+              <div className="h-7 w-7 md:h-8 md:w-8 rounded-lg gradient-bg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                <i className="ri-tools-fill text-white text-lg md:text-xl"></i>
               </div>
-              <h1 className="text-xl font-bold">ToolHub<span className="text-primary">.io</span></h1>
+              <h1 className="text-lg md:text-xl font-bold">ToolHub<span className="text-primary">.io</span></h1>
             </div>
           </Link>
         </div>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <Link href="/">
             <Button 
               variant="ghost" 
@@ -50,7 +50,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
           >
-            <Github className="h-5 w-5" />
+            <Github className="h-4 w-4 md:h-5 md:w-5" />
             <span>GitHub</span>
           </a>
           
@@ -59,55 +59,75 @@ export default function Header() {
             size="icon" 
             onClick={toggleTheme}
             aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
-            className="flex items-center justify-center border border-border hover:bg-accent"
+            className="flex items-center justify-center border border-border hover:bg-accent h-9 w-9 md:h-10 md:w-10"
             title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
           >
             {theme === 'light' ? (
-              <Sun className="h-5 w-5 transition-all" />
+              <Sun className="h-4 w-4 md:h-5 md:w-5 transition-all" />
             ) : (
-              <Moon className="h-5 w-5 transition-all" />
+              <Moon className="h-4 w-4 md:h-5 md:w-5 transition-all" />
             )}
           </Button>
           
           <Button 
             variant="ghost" 
             size="icon" 
-            className="md:hidden" 
+            className="md:hidden h-9 w-9" 
             onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
+            aria-label="메뉴 열기"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-t">
+        <div className="md:hidden bg-background/95 backdrop-blur-sm border-t">
           <nav className="container mx-auto px-4 py-3">
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
                 <Link href="/">
-                  <a className={`block py-2 px-4 rounded-lg transition-colors ${location === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}>
-                    Home
-                  </a>
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-home-line text-lg"></i>
+                    <span className="font-medium">홈</span>
+                  </div>
                 </Link>
               </li>
               <li>
                 <Link href="/calculator">
-                  <a className={`block py-2 px-4 rounded-lg transition-colors ${location === "/calculator" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}>
-                    Calculator
-                  </a>
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/calculator" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-calculator-line text-lg"></i>
+                    <span className="font-medium">계산기</span>
+                  </div>
                 </Link>
               </li>
               <li>
+                <Link href="/pomodoro">
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/pomodoro" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-timer-line text-lg"></i>
+                    <span className="font-medium">포모도로 타이머</span>
+                  </div>
+                </Link>
+              </li>
+              <li className="border-t pt-2 mt-2">
                 <a 
                   href="https://github.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="block py-2 px-4 rounded-lg hover:bg-muted transition-colors"
+                  className="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-muted transition-colors"
                 >
-                  GitHub
+                  <Github className="h-4 w-4" />
+                  <span className="font-medium">GitHub</span>
                 </a>
               </li>
             </ul>

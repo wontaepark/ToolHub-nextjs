@@ -354,7 +354,13 @@ export default function PomodoroTimer() {
                   <Badge 
                     variant="outline" 
                     className="px-3 py-1 cursor-pointer hover:bg-muted"
-                    onClick={() => setCurrentCycle(prev => prev === 4 ? 1 : prev + 1)}
+                    onClick={() => {
+                      // 세션 증가 (1-4 순환)
+                      const newCycle = currentCycle === 4 ? 1 : currentCycle + 1;
+                      setCurrentCycle(newCycle);
+                      // completedPomodoros도 함께 업데이트 (세션 번호에 맞춰)
+                      setCompletedPomodoros(newCycle - 1);
+                    }}
                   >
                     세션 {currentCycle}
                   </Badge>

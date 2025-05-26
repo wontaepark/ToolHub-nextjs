@@ -437,20 +437,6 @@ export default function PomodoroTimer() {
 
                 {/* Progress Bars */}
                 <div className="space-y-3 pt-2">
-                  {/* Current Session Progress */}
-                  <div>
-                    <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                      <span>현재 사이클 진행</span>
-                      <span>{completedPomodoros % 4}/4</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-red-500 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${((completedPomodoros % 4) / 4) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-
                   {/* Daily Goal Progress */}
                   <div>
                     <div className="flex justify-between text-xs text-muted-foreground mb-1">
@@ -465,24 +451,39 @@ export default function PomodoroTimer() {
                     </div>
                   </div>
 
-                  {/* Timer Progress (only when active) */}
+                  {/* Overall Session Progress (only when active) */}
                   {timerState !== 'idle' && (
                     <div>
                       <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                        <span>{getStateText()} 진행</span>
-                        <span>{formatTime(getCurrentTimeTotal() - timeLeft)}/{formatTime(getCurrentTimeTotal())}</span>
+                        <span>전체 세션 진행</span>
+                        <span>{completedPomodoros + (timerState === 'work' ? 1 : 0)}/4</span>
                       </div>
                       <div className="w-full bg-muted rounded-full h-2">
-                        <div 
-                          className={`h-2 rounded-full transition-all duration-1000 ${
-                            timerState === 'work' 
-                              ? 'bg-red-500' 
-                              : timerState === 'shortBreak' 
-                                ? 'bg-green-500' 
-                                : 'bg-blue-500'
-                          }`}
-                          style={{ width: `${getProgressPercentage()}%` }}
-                        />
+                        <div className="flex w-full">
+                          {/* Show 4 segments for each pomodoro */}
+                          {[0, 1, 2, 3].map((index) => {
+                            let segmentProgress = 0;
+                            
+                            if (index < completedPomodoros) {
+                              // Completed pomodoros
+                              segmentProgress = 100;
+                            } else if (index === completedPomodoros && timerState === 'work') {
+                              // Current work session
+                              segmentProgress = getProgressPercentage();
+                            }
+                            
+                            return (
+                              <div key={index} className="flex-1 mr-1 last:mr-0">
+                                <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                                  <div 
+                                    className="bg-red-500 h-2 rounded-full transition-all duration-1000"
+                                    style={{ width: `${segmentProgress}%` }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   )}

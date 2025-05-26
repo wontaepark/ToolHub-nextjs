@@ -28,19 +28,18 @@ export default function Home() {
           </div>
         </Link>
         
-        {/* Timer Card (Coming Soon) */}
-        <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80 cursor-not-allowed">
-          <div className="h-32 bg-muted flex items-center justify-center">
-            <i className="ri-timer-line text-muted-foreground text-5xl"></i>
-          </div>
-          <div className="p-5">
-            <h3 className="font-semibold text-lg mb-2">타이머</h3>
-            <p className="text-muted-foreground text-sm mb-4">작업을 위한 타이머와 카운트다운을 설정합니다.</p>
-            <div className="w-full py-2 px-4 bg-muted text-muted-foreground rounded-lg text-center">
-              준비 중
+        {/* Pomodoro Timer Card */}
+        <Link href="/pomodoro">
+          <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-all duration-300 hover:scale-105">
+            <div className="h-32 bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+              <i className="ri-timer-line text-white text-5xl"></i>
+            </div>
+            <div className="p-5">
+              <h3 className="font-semibold text-lg mb-2">포모도로 타이머</h3>
+              <p className="text-muted-foreground text-sm">25분 집중 + 5분 휴식으로 생산성을 향상시키세요.</p>
             </div>
           </div>
-        </div>
+        </Link>
         
         {/* Unit Converter Card (Coming Soon) */}
         <div className="tool-card bg-card rounded-xl shadow-lg overflow-hidden opacity-80 cursor-not-allowed">

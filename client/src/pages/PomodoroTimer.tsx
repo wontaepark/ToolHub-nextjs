@@ -1,0 +1,443 @@
+import { useState, useEffect, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Play, Pause, Square, Settings, Volume2 } from "lucide-react";
+
+type TimerState = 'work' | 'shortBreak' | 'longBreak' | 'idle';
+
+interface PomodoroSettings {
+  workTime: number; // minutes
+  shortBreakTime: number; // minutes
+  longBreakTime: number; // minutes
+  autoStart: boolean;
+  soundEnabled: boolean;
+}
+
+export default function PomodoroTimer() {
+  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  const [isRunning, setIsRunning] = useState(false);
+  const [timerState, setTimerState] = useState<TimerState>('idle');
+  const [completedPomodoros, setCompletedPomodoros] = useState(0);
+  const [currentCycle, setCurrentCycle] = useState(1);
+  const [dailyPomodoros, setDailyPomodoros] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
+  
+  const [settings, setSettings] = useState<PomodoroSettings>({
+    workTime: 25,
+    shortBreakTime: 5,
+    longBreakTime: 15,
+    autoStart: false,
+    soundEnabled: true
+  });
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio
+  useEffect(() => {
+    // Create a simple beep sound using Web Audio API
+    const createBeepSound = () => {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.5);
+    };
+
+    audioRef.current = { play: createBeepSound } as any;
+  }, []);
+
+  // Load saved data from localStorage
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('pomodoroSettings');
+    const savedDaily = localStorage.getItem('dailyPomodoros');
+    const savedDate = localStorage.getItem('pomodoroDate');
+    const today = new Date().toDateString();
+
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+
+    if (savedDate === today && savedDaily) {
+      setDailyPomodoros(parseInt(savedDaily));
+    } else {
+      // Reset daily count for new day
+      setDailyPomodoros(0);
+      localStorage.setItem('pomodoroDate', today);
+    }
+  }, []);
+
+  // Save settings to localStorage
+  useEffect(() => {
+    localStorage.setItem('pomodoroSettings', JSON.stringify(settings));
+  }, [settings]);
+
+  // Save daily pomodoros to localStorage
+  useEffect(() => {
+    localStorage.setItem('dailyPomodoros', dailyPomodoros.toString());
+  }, [dailyPomodoros]);
+
+  // Timer logic
+  useEffect(() => {
+    if (isRunning && timeLeft > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      handleTimerComplete();
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isRunning, timeLeft]);
+
+  const handleTimerComplete = () => {
+    setIsRunning(false);
+    
+    if (settings.soundEnabled && audioRef.current) {
+      audioRef.current.play();
+    }
+
+    if (timerState === 'work') {
+      const newCompleted = completedPomodoros + 1;
+      setCompletedPomodoros(newCompleted);
+      setDailyPomodoros(prev => prev + 1);
+
+      // After 4 pomodoros, take a long break
+      if (newCompleted % 4 === 0) {
+        setTimerState('longBreak');
+        setTimeLeft(settings.longBreakTime * 60);
+        setCurrentCycle(1);
+      } else {
+        setTimerState('shortBreak');
+        setTimeLeft(settings.shortBreakTime * 60);
+        setCurrentCycle(prev => prev + 1);
+      }
+    } else {
+      // Break is over, back to work
+      setTimerState('work');
+      setTimeLeft(settings.workTime * 60);
+    }
+
+    if (settings.autoStart) {
+      setIsRunning(true);
+    }
+  };
+
+  const startTimer = () => {
+    if (timerState === 'idle') {
+      setTimerState('work');
+      setTimeLeft(settings.workTime * 60);
+    }
+    setIsRunning(true);
+  };
+
+  const pauseTimer = () => {
+    setIsRunning(false);
+  };
+
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimerState('idle');
+    setTimeLeft(settings.workTime * 60);
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getCurrentTimeTotal = () => {
+    switch (timerState) {
+      case 'work':
+        return settings.workTime * 60;
+      case 'shortBreak':
+        return settings.shortBreakTime * 60;
+      case 'longBreak':
+        return settings.longBreakTime * 60;
+      default:
+        return settings.workTime * 60;
+    }
+  };
+
+  const getProgressPercentage = () => {
+    const total = getCurrentTimeTotal();
+    return ((total - timeLeft) / total) * 100;
+  };
+
+  const getStateText = () => {
+    switch (timerState) {
+      case 'work':
+        return '집중 시간';
+      case 'shortBreak':
+        return '짧은 휴식';
+      case 'longBreak':
+        return '긴 휴식';
+      default:
+        return '시작 대기';
+    }
+  };
+
+  const getStateColor = () => {
+    switch (timerState) {
+      case 'work':
+        return 'bg-red-500';
+      case 'shortBreak':
+        return 'bg-green-500';
+      case 'longBreak':
+        return 'bg-blue-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-3xl font-bold mb-2">포모도로 타이머</h2>
+        <p className="text-muted-foreground">
+          25분 집중, 5분 휴식의 과학적인 시간 관리 기법으로 생산성을 향상시키세요.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Timer */}
+        <div className="lg:col-span-2">
+          <Card className="p-8 text-center">
+            <CardContent className="space-y-6">
+              {/* Current State Badge */}
+              <Badge 
+                variant="secondary" 
+                className={`text-white px-4 py-2 text-lg ${getStateColor()}`}
+              >
+                {getStateText()}
+              </Badge>
+
+              {/* Timer Display */}
+              <div className="relative w-64 h-64 mx-auto">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-6xl font-mono font-bold">
+                    {formatTime(timeLeft)}
+                  </span>
+                </div>
+                <Progress 
+                  value={getProgressPercentage()} 
+                  className="w-full h-4 mt-4" 
+                />
+              </div>
+
+              {/* Timer Controls */}
+              <div className="flex justify-center space-x-4">
+                {!isRunning ? (
+                  <Button 
+                    onClick={startTimer} 
+                    size="lg" 
+                    className="flex items-center space-x-2"
+                  >
+                    <Play className="h-5 w-5" />
+                    <span>시작</span>
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={pauseTimer} 
+                    size="lg" 
+                    variant="secondary"
+                    className="flex items-center space-x-2"
+                  >
+                    <Pause className="h-5 w-5" />
+                    <span>일시정지</span>
+                  </Button>
+                )}
+                
+                <Button 
+                  onClick={resetTimer} 
+                  size="lg" 
+                  variant="outline"
+                  className="flex items-center space-x-2"
+                >
+                  <Square className="h-5 w-5" />
+                  <span>리셋</span>
+                </Button>
+              </div>
+
+              {/* Current Session Info */}
+              <div className="text-sm text-muted-foreground">
+                {timerState === 'work' && (
+                  <p>현재 사이클: {currentCycle}/4</p>
+                )}
+                {timerState === 'shortBreak' && (
+                  <p>짧은 휴식 후 다음 포모도로가 시작됩니다</p>
+                )}
+                {timerState === 'longBreak' && (
+                  <p>긴 휴식 후 새로운 사이클이 시작됩니다</p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Stats and Settings */}
+        <div className="space-y-6">
+          {/* Stats Card */}
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-lg mb-4">오늘의 진행 상황</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span>완료된 포모도로</span>
+                  <Badge variant="outline" className="text-lg px-3 py-1">
+                    {dailyPomodoros}
+                  </Badge>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span>현재 세션</span>
+                  <Badge variant="outline" className="text-lg px-3 py-1">
+                    {completedPomodoros % 4 + 1}/4
+                  </Badge>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span>총 완료 사이클</span>
+                  <Badge variant="outline" className="text-lg px-3 py-1">
+                    {Math.floor(completedPomodoros / 4)}
+                  </Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Settings Card */}
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-lg">설정</h3>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setShowSettings(!showSettings)}
+                >
+                  <Settings className="h-5 w-5" />
+                </Button>
+              </div>
+
+              {showSettings && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium">작업 시간 (분)</label>
+                    <input
+                      type="number"
+                      min="15"
+                      max="60"
+                      value={settings.workTime}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        workTime: parseInt(e.target.value)
+                      })}
+                      className="w-full mt-1 px-3 py-2 border rounded-md"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium">짧은 휴식 (분)</label>
+                    <input
+                      type="number"
+                      min="3"
+                      max="15"
+                      value={settings.shortBreakTime}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        shortBreakTime: parseInt(e.target.value)
+                      })}
+                      className="w-full mt-1 px-3 py-2 border rounded-md"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium">긴 휴식 (분)</label>
+                    <input
+                      type="number"
+                      min="10"
+                      max="45"
+                      value={settings.longBreakTime}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        longBreakTime: parseInt(e.target.value)
+                      })}
+                      className="w-full mt-1 px-3 py-2 border rounded-md"
+                    />
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="autoStart"
+                      checked={settings.autoStart}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        autoStart: e.target.checked
+                      })}
+                      className="rounded"
+                    />
+                    <label htmlFor="autoStart" className="text-sm">자동 시작</label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="soundEnabled"
+                      checked={settings.soundEnabled}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        soundEnabled: e.target.checked
+                      })}
+                      className="rounded"
+                    />
+                    <label htmlFor="soundEnabled" className="text-sm flex items-center space-x-1">
+                      <Volume2 className="h-4 w-4" />
+                      <span>알림음</span>
+                    </label>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Tips Card */}
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-lg mb-4">포모도로 팁</h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>🍅 한 번에 하나의 작업에만 집중하세요</p>
+                <p>⏰ 25분 동안은 방해 요소를 차단하세요</p>
+                <p>🚫 휴식 시간을 건너뛰지 마세요</p>
+                <p>📝 완료한 작업을 기록해보세요</p>
+                <p>🎯 하루 목표를 설정해보세요</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}

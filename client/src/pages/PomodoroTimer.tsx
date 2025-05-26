@@ -424,17 +424,7 @@ export default function PomodoroTimer() {
                 <div className="flex justify-between items-center">
                   <span>현재 세션</span>
                   <Badge variant="outline" className="text-lg px-3 py-1">
-                    {(() => {
-                      // Calculate session progress as percentage
-                      const baseProgress = (completedPomodoros / 4) * 100;
-                      let currentProgress = 0;
-                      
-                      if (timerState === 'work') {
-                        currentProgress = (getProgressPercentage() / 100) * 25;
-                      }
-                      
-                      return Math.min(Math.round(baseProgress + currentProgress), 100);
-                    })()}%
+                    {completedPomodoros % 4 + 1}/4
                   </Badge>
                 </div>
 
@@ -466,7 +456,17 @@ export default function PomodoroTimer() {
                     <div>
                       <div className="flex justify-between text-xs text-muted-foreground mb-1">
                         <span>전체 세션 진행</span>
-                        <span>{completedPomodoros}/4</span>
+                        <span>{(() => {
+                          // Calculate session progress as percentage
+                          const baseProgress = (completedPomodoros / 4) * 100;
+                          let currentProgress = 0;
+                          
+                          if (timerState === 'work') {
+                            currentProgress = (getProgressPercentage() / 100) * 25;
+                          }
+                          
+                          return Math.min(Math.round(baseProgress + currentProgress), 100);
+                        })()}%</span>
                       </div>
                       <div className="w-full bg-muted rounded-full h-2">
                         <div 

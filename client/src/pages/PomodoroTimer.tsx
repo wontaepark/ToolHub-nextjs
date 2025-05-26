@@ -205,7 +205,7 @@ export default function PomodoroTimer() {
   };
 
   const skipSession = () => {
-    setIsRunning(false);
+    const wasRunning = isRunning;
     const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
     
     if (timerState === 'work') {
@@ -225,6 +225,9 @@ export default function PomodoroTimer() {
       const workTime = currentTask?.customWorkTime || settings.workTime;
       setTimeLeft(workTime * 60);
     }
+    
+    // 원래 실행 중이었다면 계속 실행 상태 유지
+    setIsRunning(wasRunning);
   };
 
   // Task management functions

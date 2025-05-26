@@ -34,6 +34,16 @@ export default function Header() {
         </div>
         
         <div className="flex items-center space-x-4">
+          <Link href="/">
+            <Button 
+              variant="ghost" 
+              className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
+            >
+              <i className="ri-home-line text-lg"></i>
+              <span>홈</span>
+            </Button>
+          </Link>
+          
           <Button 
             variant="ghost" 
             size="icon" 

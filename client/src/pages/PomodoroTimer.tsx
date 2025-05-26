@@ -456,27 +456,37 @@ export default function PomodoroTimer() {
                     <div>
                       <div className="flex justify-between text-xs text-muted-foreground mb-1">
                         <span>전체 세션 진행</span>
-                        <span>{completedPomodoros + (timerState === 'work' ? 1 : 0)}/4</span>
+                        <span>{Math.floor((completedPomodoros * 2 + (timerState === 'work' ? 1 : timerState !== 'idle' ? 2 : 0)) / 2)}/4</span>
                       </div>
                       <div className="w-full bg-muted rounded-full h-2">
                         <div className="flex w-full">
-                          {/* Show 4 segments for each pomodoro */}
-                          {[0, 1, 2, 3].map((index) => {
+                          {/* Show 7 segments: 4 work + 3 breaks */}
+                          {[0, 1, 2, 3, 4, 5, 6].map((index) => {
+                            const isWorkSegment = index % 2 === 0; // 0,2,4,6 are work, 1,3,5 are breaks
+                            const pomodoroIndex = Math.floor(index / 2);
                             let segmentProgress = 0;
                             
-                            if (index < completedPomodoros) {
-                              // Completed pomodoros
-                              segmentProgress = 100;
-                            } else if (index === completedPomodoros && timerState === 'work') {
-                              // Current work session
-                              segmentProgress = getProgressPercentage();
+                            if (isWorkSegment) {
+                              // Work segments
+                              if (pomodoroIndex < completedPomodoros) {
+                                segmentProgress = 100;
+                              } else if (pomodoroIndex === completedPomodoros && timerState === 'work') {
+                                segmentProgress = getProgressPercentage();
+                              }
+                            } else {
+                              // Break segments
+                              if (pomodoroIndex < completedPomodoros) {
+                                segmentProgress = 100;
+                              } else if (pomodoroIndex === completedPomodoros && (timerState === 'shortBreak' || timerState === 'longBreak')) {
+                                segmentProgress = getProgressPercentage();
+                              }
                             }
                             
                             return (
-                              <div key={index} className="flex-1 mr-1 last:mr-0">
+                              <div key={index} className="flex-1 mr-0.5 last:mr-0">
                                 <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                                   <div 
-                                    className="bg-red-500 h-2 rounded-full transition-all duration-1000"
+                                    className="bg-green-500 h-2 rounded-full transition-all duration-1000"
                                     style={{ width: `${segmentProgress}%` }}
                                   />
                                 </div>

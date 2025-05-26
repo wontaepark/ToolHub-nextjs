@@ -181,7 +181,9 @@ export default function PomodoroTimer() {
   const startTimer = () => {
     if (timerState === 'idle') {
       setTimerState('work');
-      setTimeLeft(settings.workTime * 60);
+      const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
+      const workTime = currentTask?.customWorkTime || settings.workTime;
+      setTimeLeft(workTime * 60);
     }
     setIsRunning(true);
   };
@@ -198,20 +200,24 @@ export default function PomodoroTimer() {
 
   const skipSession = () => {
     setIsRunning(false);
+    const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
     
     if (timerState === 'work') {
       // Skip work session, go to break
       if (completedPomodoros % 4 === 3) {
         setTimerState('longBreak');
-        setTimeLeft(settings.longBreakTime * 60);
+        const longBreakTime = currentTask?.customLongBreak || settings.longBreakTime;
+        setTimeLeft(longBreakTime * 60);
       } else {
         setTimerState('shortBreak');
-        setTimeLeft(settings.shortBreakTime * 60);
+        const shortBreakTime = currentTask?.customShortBreak || settings.shortBreakTime;
+        setTimeLeft(shortBreakTime * 60);
       }
     } else {
       // Skip break, go to work
       setTimerState('work');
-      setTimeLeft(settings.workTime * 60);
+      const workTime = currentTask?.customWorkTime || settings.workTime;
+      setTimeLeft(workTime * 60);
     }
   };
 
@@ -271,15 +277,17 @@ export default function PomodoroTimer() {
   };
 
   const getCurrentTimeTotal = () => {
+    const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
+    
     switch (timerState) {
       case 'work':
-        return settings.workTime * 60;
+        return (currentTask?.customWorkTime || settings.workTime) * 60;
       case 'shortBreak':
-        return settings.shortBreakTime * 60;
+        return (currentTask?.customShortBreak || settings.shortBreakTime) * 60;
       case 'longBreak':
-        return settings.longBreakTime * 60;
+        return (currentTask?.customLongBreak || settings.longBreakTime) * 60;
       default:
-        return settings.workTime * 60;
+        return (currentTask?.customWorkTime || settings.workTime) * 60;
     }
   };
 
@@ -406,23 +414,40 @@ export default function PomodoroTimer() {
                 </Button>
               </div>
 
-              {/* Current Session Info */}
-              <div className="text-sm text-muted-foreground">
+              {/* Task Selection */}
+              <div className="text-sm">
                 {timerState === 'work' && (
-                  <div className="space-y-1">
-                    <p>현재 사이클: {currentCycle}/4</p>
-                    {currentTaskId && (
-                      <p className="text-primary font-medium">
-                        작업 중: {tasks.find(t => t.id === currentTaskId)?.text}
-                      </p>
-                    )}
+                  <div className="space-y-2">
+                    <label className="block text-muted-foreground">작업 중:</label>
+                    <select
+                      value={currentTaskId || ""}
+                      onChange={(e) => {
+                        setCurrentTaskId(e.target.value || null);
+                        // 할 일을 선택했을 때 즉시 그 할 일의 시간으로 변경
+                        if (e.target.value && timerState === 'work' && !isRunning) {
+                          const selectedTask = tasks.find(t => t.id === e.target.value);
+                          if (selectedTask?.customWorkTime) {
+                            setTimeLeft(selectedTask.customWorkTime * 60);
+                          }
+                        }
+                      }}
+                      className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600"
+                    >
+                      <option value="">할 일을 선택하세요</option>
+                      {tasks.filter(task => !task.completed).map(task => (
+                        <option key={task.id} value={task.id}>
+                          {task.text}
+                          {settings.taskBasedTiming && task.customWorkTime && ` (${task.customWorkTime}분)`}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 )}
                 {timerState === 'shortBreak' && (
-                  <p>짧은 휴식 후 다음 포모도로가 시작됩니다</p>
+                  <p className="text-muted-foreground">짧은 휴식 후 다음 포모도로가 시작됩니다</p>
                 )}
                 {timerState === 'longBreak' && (
-                  <p>긴 휴식 후 새로운 사이클이 시작됩니다</p>
+                  <p className="text-muted-foreground">긴 휴식 후 새로운 사이클이 시작됩니다</p>
                 )}
               </div>
             </CardContent>

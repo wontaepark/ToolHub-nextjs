@@ -63,9 +63,9 @@ export default function Header() {
             title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
           >
             {theme === 'light' ? (
-              <Moon className="h-5 w-5 transition-all" />
-            ) : (
               <Sun className="h-5 w-5 transition-all" />
+            ) : (
+              <Moon className="h-5 w-5 transition-all" />
             )}
           </Button>
           

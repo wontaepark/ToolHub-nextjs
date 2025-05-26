@@ -370,17 +370,50 @@ export default function PomodoroTimer() {
                 )}
               </div>
 
-              {/* Timer Display */}
+              {/* Timer Display with Animated Ring */}
               <div className="relative w-64 h-64 mx-auto">
+                {/* Animated SVG Progress Ring */}
+                <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 100 100">
+                  {/* Background Circle */}
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    fill="none"
+                    className="text-muted opacity-20"
+                  />
+                  {/* Progress Circle */}
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    fill="none"
+                    strokeLinecap="round"
+                    className={`transition-all duration-1000 ease-in-out ${
+                      timerState === 'work' 
+                        ? 'text-red-500' 
+                        : timerState === 'shortBreak' 
+                          ? 'text-green-500' 
+                          : 'text-blue-500'
+                    }`}
+                    style={{
+                      strokeDasharray: `${2 * Math.PI * 45}`,
+                      strokeDashoffset: `${2 * Math.PI * 45 * (1 - getProgressPercentage() / 100)}`,
+                      transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.3s ease-in-out'
+                    }}
+                  />
+                </svg>
+                
+                {/* Timer Text Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl font-mono font-bold">
+                  <span className="text-6xl font-mono font-bold transition-colors duration-300">
                     {formatTime(timeLeft)}
                   </span>
                 </div>
-                <Progress 
-                  value={getProgressPercentage()} 
-                  className="w-full h-4 mt-4" 
-                />
               </div>
 
               {/* Timer Controls */}
@@ -506,10 +539,14 @@ export default function PomodoroTimer() {
                       <span>일일 목표 (8개)</span>
                       <span>{Math.min(dailyPomodoros, 8)}/8</span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                       <div 
-                        className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${Math.min((dailyPomodoros / 8) * 100, 100)}%` }}
+                        className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-700 ease-out transform"
+                        style={{ 
+                          width: `${Math.min((dailyPomodoros / 8) * 100, 100)}%`,
+                          transform: `translateX(${Math.min((dailyPomodoros / 8) * 100, 100) < 5 ? '-100%' : '0%'})`,
+                          animation: dailyPomodoros > 0 ? 'slideInProgress 0.7s ease-out' : 'none'
+                        }}
                       />
                     </div>
                   </div>
@@ -531,9 +568,9 @@ export default function PomodoroTimer() {
                           return Math.min(Math.round(baseProgress + currentProgress), 100);
                         })()}%</span>
                       </div>
-                      <div className="w-full bg-muted rounded-full h-2">
+                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                         <div 
-                          className="bg-green-500 h-2 rounded-full transition-all duration-1000"
+                          className="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-out"
                           style={{ 
                             width: `${(() => {
                               // Simple calculation: 4 pomodoros = 100% progress
@@ -552,7 +589,8 @@ export default function PomodoroTimer() {
                               }
                               
                               return Math.min(baseProgress + currentProgress, 100);
-                            })()}%`
+                            })()}%`,
+                            transformOrigin: 'left'
                           }}
                         />
                       </div>

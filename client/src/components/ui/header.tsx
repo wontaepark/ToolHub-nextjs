@@ -22,12 +22,12 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Link href="/">
-            <a className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 cursor-pointer">
               <div className="h-8 w-8 rounded-lg gradient-bg flex items-center justify-center">
                 <i className="ri-tools-fill text-white text-xl"></i>
               </div>
               <h1 className="text-xl font-bold">ToolHub<span className="text-primary">.io</span></h1>
-            </a>
+            </div>
           </Link>
         </div>
         

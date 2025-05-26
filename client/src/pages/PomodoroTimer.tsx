@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Play, Pause, Square, Settings, Volume2 } from "lucide-react";
+import { Play, Pause, Square, Settings, Volume2, SkipForward, Plus, Trash2 } from "lucide-react";
 
 type TimerState = 'work' | 'shortBreak' | 'longBreak' | 'idle';
 
@@ -15,6 +15,13 @@ interface PomodoroSettings {
   soundEnabled: boolean;
 }
 
+interface Task {
+  id: string;
+  text: string;
+  completed: boolean;
+  completedPomodoros: number;
+}
+
 export default function PomodoroTimer() {
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
@@ -23,6 +30,9 @@ export default function PomodoroTimer() {
   const [currentCycle, setCurrentCycle] = useState(1);
   const [dailyPomodoros, setDailyPomodoros] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTaskText, setNewTaskText] = useState("");
+  const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   
   const [settings, setSettings] = useState<PomodoroSettings>({
     workTime: 25,
@@ -64,10 +74,15 @@ export default function PomodoroTimer() {
     const savedSettings = localStorage.getItem('pomodoroSettings');
     const savedDaily = localStorage.getItem('dailyPomodoros');
     const savedDate = localStorage.getItem('pomodoroDate');
+    const savedTasks = localStorage.getItem('pomodoroTasks');
     const today = new Date().toDateString();
 
     if (savedSettings) {
       setSettings(JSON.parse(savedSettings));
+    }
+
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
     }
 
     if (savedDate === today && savedDaily) {
@@ -88,6 +103,11 @@ export default function PomodoroTimer() {
   useEffect(() => {
     localStorage.setItem('dailyPomodoros', dailyPomodoros.toString());
   }, [dailyPomodoros]);
+
+  // Save tasks to localStorage
+  useEffect(() => {
+    localStorage.setItem('pomodoroTasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   // Timer logic
   useEffect(() => {
@@ -121,6 +141,15 @@ export default function PomodoroTimer() {
       const newCompleted = completedPomodoros + 1;
       setCompletedPomodoros(newCompleted);
       setDailyPomodoros(prev => prev + 1);
+
+      // Update current task pomodoro count
+      if (currentTaskId) {
+        setTasks(prev => prev.map(task => 
+          task.id === currentTaskId 
+            ? { ...task, completedPomodoros: task.completedPomodoros + 1 }
+            : task
+        ));
+      }
 
       // After 4 pomodoros, take a long break
       if (newCompleted % 4 === 0) {
@@ -159,6 +188,58 @@ export default function PomodoroTimer() {
     setIsRunning(false);
     setTimerState('idle');
     setTimeLeft(settings.workTime * 60);
+  };
+
+  const skipSession = () => {
+    setIsRunning(false);
+    
+    if (timerState === 'work') {
+      // Skip work session, go to break
+      if (completedPomodoros % 4 === 3) {
+        setTimerState('longBreak');
+        setTimeLeft(settings.longBreakTime * 60);
+      } else {
+        setTimerState('shortBreak');
+        setTimeLeft(settings.shortBreakTime * 60);
+      }
+    } else {
+      // Skip break, go to work
+      setTimerState('work');
+      setTimeLeft(settings.workTime * 60);
+    }
+  };
+
+  // Task management functions
+  const addTask = () => {
+    if (newTaskText.trim()) {
+      const newTask: Task = {
+        id: Date.now().toString(),
+        text: newTaskText.trim(),
+        completed: false,
+        completedPomodoros: 0
+      };
+      setTasks(prev => [...prev, newTask]);
+      setNewTaskText("");
+    }
+  };
+
+  const deleteTask = (taskId: string) => {
+    setTasks(prev => prev.filter(task => task.id !== taskId));
+    if (currentTaskId === taskId) {
+      setCurrentTaskId(null);
+    }
+  };
+
+  const toggleTaskComplete = (taskId: string) => {
+    setTasks(prev => prev.map(task => 
+      task.id === taskId 
+        ? { ...task, completed: !task.completed }
+        : task
+    ));
+  };
+
+  const selectTask = (taskId: string) => {
+    setCurrentTaskId(taskId);
   };
 
   const formatTime = (seconds: number) => {
@@ -269,6 +350,18 @@ export default function PomodoroTimer() {
                   </Button>
                 )}
                 
+                {timerState !== 'idle' && (
+                  <Button 
+                    onClick={skipSession} 
+                    size="lg" 
+                    variant="outline"
+                    className="flex items-center space-x-2"
+                  >
+                    <SkipForward className="h-5 w-5" />
+                    <span>스킵</span>
+                  </Button>
+                )}
+                
                 <Button 
                   onClick={resetTimer} 
                   size="lg" 
@@ -283,7 +376,14 @@ export default function PomodoroTimer() {
               {/* Current Session Info */}
               <div className="text-sm text-muted-foreground">
                 {timerState === 'work' && (
-                  <p>현재 사이클: {currentCycle}/4</p>
+                  <div className="space-y-1">
+                    <p>현재 사이클: {currentCycle}/4</p>
+                    {currentTaskId && (
+                      <p className="text-primary font-medium">
+                        작업 중: {tasks.find(t => t.id === currentTaskId)?.text}
+                      </p>
+                    )}
+                  </div>
                 )}
                 {timerState === 'shortBreak' && (
                   <p>짧은 휴식 후 다음 포모도로가 시작됩니다</p>
@@ -420,6 +520,82 @@ export default function PomodoroTimer() {
                   </div>
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Tasks Card */}
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-lg mb-4">할일 목록</h3>
+              
+              {/* Add new task */}
+              <div className="flex space-x-2 mb-4">
+                <input
+                  type="text"
+                  value={newTaskText}
+                  onChange={(e) => setNewTaskText(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && addTask()}
+                  placeholder="새 할일을 입력하세요..."
+                  className="flex-1 px-3 py-2 text-sm border rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+                <Button 
+                  onClick={addTask} 
+                  size="sm"
+                  className="px-3"
+                  disabled={!newTaskText.trim()}
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* Task list */}
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {tasks.map((task) => (
+                  <div 
+                    key={task.id} 
+                    className={`flex items-center space-x-2 p-2 rounded border transition-colors ${
+                      currentTaskId === task.id 
+                        ? 'border-primary bg-primary/5' 
+                        : 'border-border hover:bg-muted/50'
+                    } ${task.completed ? 'opacity-60' : ''}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskComplete(task.id)}
+                      className="rounded"
+                    />
+                    <div 
+                      className={`flex-1 text-sm cursor-pointer ${
+                        task.completed ? 'line-through text-muted-foreground' : ''
+                      }`}
+                      onClick={() => selectTask(task.id)}
+                    >
+                      <div>{task.text}</div>
+                      {task.completedPomodoros > 0 && (
+                        <div className="text-xs text-muted-foreground">
+                          🍅 {task.completedPomodoros}개 완료
+                        </div>
+                      )}
+                    </div>
+                    <Button 
+                      onClick={() => deleteTask(task.id)}
+                      variant="ghost"
+                      size="sm"
+                      className="p-1 h-auto text-muted-foreground hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+                
+                {tasks.length === 0 && (
+                  <div className="text-center py-6 text-muted-foreground">
+                    <p className="text-sm">아직 할일이 없습니다.</p>
+                    <p className="text-xs mt-1">위에서 새 할일을 추가해보세요!</p>
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
 

@@ -59,7 +59,18 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (newTheme: Theme) => {
+      console.log("Setting theme to:", newTheme);
       setTheme(newTheme);
+      
+      // Force immediate DOM update
+      const root = window.document.documentElement;
+      root.classList.remove("light", "dark");
+      if (newTheme === "dark") {
+        root.classList.add("dark");
+      } else {
+        root.classList.add("light");
+      }
+      console.log("Forced theme update:", newTheme, "Classes:", root.className);
     },
   };
 

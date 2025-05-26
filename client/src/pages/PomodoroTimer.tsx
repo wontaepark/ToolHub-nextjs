@@ -13,6 +13,7 @@ interface PomodoroSettings {
   longBreakTime: number; // minutes
   autoStart: boolean;
   soundEnabled: boolean;
+  taskBasedTiming: boolean;
 }
 
 interface Task {
@@ -20,6 +21,9 @@ interface Task {
   text: string;
   completed: boolean;
   completedPomodoros: number;
+  customWorkTime?: number; // minutes
+  customShortBreak?: number; // minutes
+  customLongBreak?: number; // minutes
 }
 
 export default function PomodoroTimer() {
@@ -33,13 +37,15 @@ export default function PomodoroTimer() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskText, setNewTaskText] = useState("");
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
+  const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   
   const [settings, setSettings] = useState<PomodoroSettings>({
     workTime: 25,
     shortBreakTime: 5,
     longBreakTime: 15,
     autoStart: false,
-    soundEnabled: true
+    soundEnabled: true,
+    taskBasedTiming: false
   });
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -216,11 +222,27 @@ export default function PomodoroTimer() {
         id: Date.now().toString(),
         text: newTaskText.trim(),
         completed: false,
-        completedPomodoros: 0
+        completedPomodoros: 0,
+        customWorkTime: settings.taskBasedTiming ? settings.workTime : undefined,
+        customShortBreak: settings.taskBasedTiming ? settings.shortBreakTime : undefined,
+        customLongBreak: settings.taskBasedTiming ? settings.longBreakTime : undefined
       };
       setTasks(prev => [...prev, newTask]);
       setNewTaskText("");
     }
+  };
+
+  const updateTaskTiming = (taskId: string, workTime: number, shortBreak: number, longBreak: number) => {
+    setTasks(prev => prev.map(task => 
+      task.id === taskId 
+        ? { 
+            ...task, 
+            customWorkTime: workTime, 
+            customShortBreak: shortBreak, 
+            customLongBreak: longBreak 
+          }
+        : task
+    ));
   };
 
   const deleteTask = (taskId: string) => {
@@ -516,49 +538,70 @@ export default function PomodoroTimer() {
 
               {showSettings && (
                 <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium">작업 시간 (분)</label>
-                    <input
-                      type="number"
-                      min="15"
-                      max="60"
-                      value={settings.workTime}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        workTime: parseInt(e.target.value)
-                      })}
-                      className="w-full mt-1 px-3 py-2 border rounded-md"
-                    />
-                  </div>
+                  <div className="mb-4">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <input
+                        type="checkbox"
+                        id="taskBasedTiming"
+                        checked={settings.taskBasedTiming}
+                        onChange={(e) => setSettings({...settings, taskBasedTiming: e.target.checked})}
+                        className="rounded"
+                      />
+                      <label htmlFor="taskBasedTiming" className="text-sm font-medium">할 일별 시간 설정</label>
+                    </div>
+                    
+                    {settings.taskBasedTiming ? (
+                      <div className="text-sm text-muted-foreground p-3 bg-muted rounded-md">
+                        각 할 일마다 개별적으로 시간을 설정할 수 있습니다. 할 일 목록에서 각 항목을 클릭하여 시간을 설정하세요.
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-sm font-medium">작업 시간 (분)</label>
+                          <input
+                            type="number"
+                            min="15"
+                            max="60"
+                            value={settings.workTime}
+                            onChange={(e) => setSettings({
+                              ...settings,
+                              workTime: parseInt(e.target.value)
+                            })}
+                            className="w-full mt-1 px-3 py-2 border rounded-md"
+                          />
+                        </div>
 
-                  <div>
-                    <label className="text-sm font-medium">짧은 휴식 (분)</label>
-                    <input
-                      type="number"
-                      min="3"
-                      max="15"
-                      value={settings.shortBreakTime}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        shortBreakTime: parseInt(e.target.value)
-                      })}
-                      className="w-full mt-1 px-3 py-2 border rounded-md"
-                    />
-                  </div>
+                        <div>
+                          <label className="text-sm font-medium">짧은 휴식 (분)</label>
+                          <input
+                            type="number"
+                            min="3"
+                            max="15"
+                            value={settings.shortBreakTime}
+                            onChange={(e) => setSettings({
+                              ...settings,
+                              shortBreakTime: parseInt(e.target.value)
+                            })}
+                            className="w-full mt-1 px-3 py-2 border rounded-md"
+                          />
+                        </div>
 
-                  <div>
-                    <label className="text-sm font-medium">긴 휴식 (분)</label>
-                    <input
-                      type="number"
-                      min="10"
-                      max="45"
-                      value={settings.longBreakTime}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        longBreakTime: parseInt(e.target.value)
-                      })}
-                      className="w-full mt-1 px-3 py-2 border rounded-md"
-                    />
+                        <div>
+                          <label className="text-sm font-medium">긴 휴식 (분)</label>
+                          <input
+                            type="number"
+                            min="10"
+                            max="45"
+                            value={settings.longBreakTime}
+                            onChange={(e) => setSettings({
+                              ...settings,
+                              longBreakTime: parseInt(e.target.value)
+                            })}
+                            className="w-full mt-1 px-3 py-2 border rounded-md"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center space-x-2">
@@ -644,12 +687,18 @@ export default function PomodoroTimer() {
                           task.completed ? 'line-through text-muted-foreground' : ''
                         }`}
                         onClick={() => selectTask(task.id)}
-                        title={task.text}
+                        onDoubleClick={() => settings.taskBasedTiming && setEditingTaskId(task.id)}
+                        title={settings.taskBasedTiming ? `${task.text} (더블클릭으로 시간 설정)` : task.text}
                       >
                         {task.text}
                         {task.completedPomodoros > 0 && (
                           <span className="ml-2 text-xs text-muted-foreground">
                             🍅{task.completedPomodoros}
+                          </span>
+                        )}
+                        {settings.taskBasedTiming && task.customWorkTime && (
+                          <span className="ml-2 text-xs text-blue-600">
+                            ⏱️{task.customWorkTime}분
                           </span>
                         )}
                       </div>

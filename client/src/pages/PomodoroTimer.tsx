@@ -473,9 +473,9 @@ export default function PomodoroTimer() {
                                 // Current work session progress (0-25% of one pomodoro)
                                 currentProgress = (getProgressPercentage() / 100) * 25;
                               } else if (timerState === 'shortBreak' || timerState === 'longBreak') {
-                                // Break time counts as completing the work session
-                                // So add full 25% for the completed work + break progress
-                                currentProgress = 25 + ((getProgressPercentage() / 100) * 0); // Break doesn't add to overall progress
+                                // Break time doesn't add to overall progress
+                                // Stay at the same level as when work was completed
+                                currentProgress = 0;
                               }
                               
                               return Math.min(baseProgress + currentProgress, 100);

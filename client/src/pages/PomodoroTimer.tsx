@@ -456,44 +456,50 @@ export default function PomodoroTimer() {
                     <div>
                       <div className="flex justify-between text-xs text-muted-foreground mb-1">
                         <span>전체 세션 진행</span>
-                        <span>{Math.floor((completedPomodoros * 2 + (timerState === 'work' ? 1 : timerState !== 'idle' ? 2 : 0)) / 2)}/4</span>
+                        <span>{completedPomodoros}/4</span>
                       </div>
                       <div className="w-full bg-muted rounded-full h-2">
-                        <div className="flex w-full">
-                          {/* Show 7 segments: 4 work + 3 breaks */}
-                          {[0, 1, 2, 3, 4, 5, 6].map((index) => {
-                            const isWorkSegment = index % 2 === 0; // 0,2,4,6 are work, 1,3,5 are breaks
-                            const pomodoroIndex = Math.floor(index / 2);
-                            let segmentProgress = 0;
-                            
-                            if (isWorkSegment) {
-                              // Work segments
-                              if (pomodoroIndex < completedPomodoros) {
-                                segmentProgress = 100;
-                              } else if (pomodoroIndex === completedPomodoros && timerState === 'work') {
-                                segmentProgress = getProgressPercentage();
+                        <div 
+                          className="bg-green-500 h-2 rounded-full transition-all duration-1000"
+                          style={{ 
+                            width: `${(() => {
+                              // Calculate total session progress including work and breaks
+                              const workTime = settings.workTime * 60; // 25 minutes in seconds
+                              const shortBreakTime = settings.shortBreakTime * 60; // 5 minutes in seconds
+                              const longBreakTime = settings.longBreakTime * 60; // 15 minutes in seconds
+                              
+                              // Total time for one complete cycle (4 pomodoros + 3 breaks)
+                              const totalCycleTime = (workTime * 4) + (shortBreakTime * 2) + longBreakTime;
+                              
+                              // Time completed so far
+                              let completedTime = 0;
+                              
+                              // Add completed pomodoros and their breaks
+                              for (let i = 0; i < completedPomodoros; i++) {
+                                completedTime += workTime; // Work time
+                                if (i < 3) { // Add break time except after 4th pomodoro
+                                  completedTime += (i === 2) ? longBreakTime : shortBreakTime;
+                                }
                               }
-                            } else {
-                              // Break segments
-                              if (pomodoroIndex < completedPomodoros) {
-                                segmentProgress = 100;
-                              } else if (pomodoroIndex === completedPomodoros && (timerState === 'shortBreak' || timerState === 'longBreak')) {
-                                segmentProgress = getProgressPercentage();
+                              
+                              // Add current session progress
+                              if (timerState === 'work') {
+                                const currentWorkProgress = (workTime - timeLeft);
+                                completedTime += currentWorkProgress;
+                              } else if (timerState === 'shortBreak') {
+                                completedTime += workTime; // Full work session completed
+                                const currentBreakProgress = (shortBreakTime - timeLeft);
+                                completedTime += currentBreakProgress;
+                              } else if (timerState === 'longBreak') {
+                                completedTime += workTime; // Full work session completed
+                                const currentBreakProgress = (longBreakTime - timeLeft);
+                                completedTime += currentBreakProgress;
                               }
-                            }
-                            
-                            return (
-                              <div key={index} className="flex-1 mr-0.5 last:mr-0">
-                                <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                                  <div 
-                                    className="bg-green-500 h-2 rounded-full transition-all duration-1000"
-                                    style={{ width: `${segmentProgress}%` }}
-                                  />
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
+                              
+                              return Math.min((completedTime / totalCycleTime) * 100, 100);
+                            })()}%`
+                          }}
+                        />
                       </div>
                     </div>
                   )}

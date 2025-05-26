@@ -720,6 +720,88 @@ export default function PomodoroTimer() {
                   </div>
                 )}
               </div>
+
+              {/* Task Time Settings Modal */}
+              {editingTaskId && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 max-w-[90vw]">
+                    <h3 className="text-lg font-semibold mb-4">시간 설정</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium block mb-1">작업 시간 (분)</label>
+                        <input
+                          type="number"
+                          min="15"
+                          max="60"
+                          defaultValue={tasks.find(t => t.id === editingTaskId)?.customWorkTime || settings.workTime}
+                          onChange={(e) => {
+                            const task = tasks.find(t => t.id === editingTaskId);
+                            if (task) {
+                              updateTaskTiming(
+                                editingTaskId,
+                                parseInt(e.target.value) || settings.workTime,
+                                task.customShortBreak || settings.shortBreakTime,
+                                task.customLongBreak || settings.longBreakTime
+                              );
+                            }
+                          }}
+                          className="w-full px-3 py-2 border rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium block mb-1">짧은 휴식 (분)</label>
+                        <input
+                          type="number"
+                          min="3"
+                          max="15"
+                          defaultValue={tasks.find(t => t.id === editingTaskId)?.customShortBreak || settings.shortBreakTime}
+                          onChange={(e) => {
+                            const task = tasks.find(t => t.id === editingTaskId);
+                            if (task) {
+                              updateTaskTiming(
+                                editingTaskId,
+                                task.customWorkTime || settings.workTime,
+                                parseInt(e.target.value) || settings.shortBreakTime,
+                                task.customLongBreak || settings.longBreakTime
+                              );
+                            }
+                          }}
+                          className="w-full px-3 py-2 border rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium block mb-1">긴 휴식 (분)</label>
+                        <input
+                          type="number"
+                          min="10"
+                          max="45"
+                          defaultValue={tasks.find(t => t.id === editingTaskId)?.customLongBreak || settings.longBreakTime}
+                          onChange={(e) => {
+                            const task = tasks.find(t => t.id === editingTaskId);
+                            if (task) {
+                              updateTaskTiming(
+                                editingTaskId,
+                                task.customWorkTime || settings.workTime,
+                                task.customShortBreak || settings.shortBreakTime,
+                                parseInt(e.target.value) || settings.longBreakTime
+                              );
+                            }
+                          }}
+                          className="w-full px-3 py-2 border rounded-md"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-end space-x-2 mt-6">
+                      <Button
+                        variant="outline"
+                        onClick={() => setEditingTaskId(null)}
+                      >
+                        닫기
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
 

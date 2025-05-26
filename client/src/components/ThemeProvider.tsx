@@ -35,15 +35,22 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
     
+    // Clear existing theme classes
     root.classList.remove("light", "dark");
-    root.classList.add(theme);
+    
+    // Add new theme class
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.add("light");
+    }
     
     // Also set data attribute for better CSS targeting
     root.setAttribute("data-theme", theme);
     
     try {
       localStorage.setItem("theme", theme);
-      console.log("Theme set to:", theme);
+      console.log("Theme applied:", theme, "Classes:", root.className);
     } catch (error) {
       console.warn("Failed to save theme to localStorage:", error);
     }

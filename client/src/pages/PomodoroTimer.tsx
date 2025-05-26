@@ -463,39 +463,22 @@ export default function PomodoroTimer() {
                           className="bg-green-500 h-2 rounded-full transition-all duration-1000"
                           style={{ 
                             width: `${(() => {
-                              // Total of 7 phases: Work1-Break1-Work2-Break2-Work3-LongBreak-Work4
-                              // Each phase represents equal portion of the progress bar (100/7 ≈ 14.28% each)
-                              const phasePercentage = 100 / 7;
+                              // Simple calculation: 4 pomodoros = 100% progress
+                              // Each pomodoro represents 25% of the total progress
+                              const baseProgress = (completedPomodoros / 4) * 100;
                               
-                              // Calculate which phase we're in and how much progress within that phase
-                              let totalProgress = 0;
-                              
-                              // Add completed phases
-                              if (completedPomodoros > 0) {
-                                // Each completed pomodoro adds 2 phases (work + break) except the last one
-                                totalProgress += Math.min(completedPomodoros, 3) * 2 * phasePercentage;
-                                
-                                // If we completed the 4th pomodoro, add just one more phase (no break after)
-                                if (completedPomodoros >= 4) {
-                                  totalProgress += phasePercentage;
-                                }
-                              }
-                              
-                              // Add current phase progress
-                              const currentPhaseProgress = getProgressPercentage();
-                              
+                              // Add current session progress
+                              let currentProgress = 0;
                               if (timerState === 'work') {
-                                // We're in a work phase
-                                totalProgress += (currentPhaseProgress / 100) * phasePercentage;
+                                // Current work session progress (0-25% of one pomodoro)
+                                currentProgress = (getProgressPercentage() / 100) * 25;
                               } else if (timerState === 'shortBreak' || timerState === 'longBreak') {
-                                // We're in a break phase - add the completed work phase first
-                                if (completedPomodoros < 4) {
-                                  totalProgress += phasePercentage; // The work phase just completed
-                                  totalProgress += (currentPhaseProgress / 100) * phasePercentage; // Current break progress
-                                }
+                                // Break time counts as completing the work session
+                                // So add full 25% for the completed work + break progress
+                                currentProgress = 25 + ((getProgressPercentage() / 100) * 0); // Break doesn't add to overall progress
                               }
                               
-                              return Math.min(totalProgress, 100);
+                              return Math.min(baseProgress + currentProgress, 100);
                             })()}%`
                           }}
                         />

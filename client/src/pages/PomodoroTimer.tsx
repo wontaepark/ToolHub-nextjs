@@ -692,7 +692,12 @@ export default function PomodoroTimer() {
               </div>
 
               {showSettings && (
-                <div className="space-y-4">
+                <div className={`space-y-4 ${isRunning ? 'opacity-50 pointer-events-none' : ''}`}>
+                  {isRunning && (
+                    <div className="text-xs text-muted-foreground p-2 bg-muted rounded-md mb-3">
+                      타이머 실행 중에는 설정을 변경할 수 없습니다.
+                    </div>
+                  )}
                   <div className="mb-4">
                     <div className="flex items-center space-x-2 mb-3">
                       <input
@@ -700,6 +705,7 @@ export default function PomodoroTimer() {
                         id="taskBasedTiming"
                         checked={settings.taskBasedTiming}
                         onChange={(e) => setSettings({...settings, taskBasedTiming: e.target.checked})}
+                        disabled={isRunning}
                         className="rounded"
                       />
                       <label htmlFor="taskBasedTiming" className="text-sm font-medium">할 일별 시간 설정</label>
@@ -768,6 +774,7 @@ export default function PomodoroTimer() {
                         ...settings,
                         autoStart: e.target.checked
                       })}
+                      disabled={isRunning}
                       className="rounded"
                     />
                     <label htmlFor="autoStart" className="text-sm">자동 시작</label>
@@ -782,6 +789,7 @@ export default function PomodoroTimer() {
                         ...settings,
                         soundEnabled: e.target.checked
                       })}
+                      disabled={isRunning}
                       className="rounded"
                     />
                     <label htmlFor="soundEnabled" className="text-sm flex items-center space-x-1">

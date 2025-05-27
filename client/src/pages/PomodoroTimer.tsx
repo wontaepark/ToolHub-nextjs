@@ -796,8 +796,13 @@ export default function PomodoroTimer() {
 
           {/* Tasks Card */}
           <Card>
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-lg mb-4">할일 목록</h3>
+            <CardContent className={`p-6 ${!isRunning && timerState !== 'idle' ? 'opacity-50 pointer-events-none' : ''}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-lg">할일 목록</h3>
+                {!isRunning && timerState !== 'idle' && (
+                  <span className="text-xs text-muted-foreground">(일시정지 중 비활성화)</span>
+                )}
+              </div>
               
               {/* Add new task */}
               <div className="flex space-x-2 mb-4">

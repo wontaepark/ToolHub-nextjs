@@ -194,6 +194,16 @@ export default function Timer() {
     
     if (matchedPreset && state === 'idle') {
       console.log('프리셋 선택:', matchedPreset.name);
+      
+      // 해당 프리셋이 속한 카테고리로 전환
+      const presetCategory = Object.keys(TIMER_PRESETS).find(category => 
+        TIMER_PRESETS[category as keyof typeof TIMER_PRESETS].includes(matchedPreset)
+      );
+      if (presetCategory) {
+        setActiveCategory(presetCategory);
+        console.log('카테고리 전환:', presetCategory);
+      }
+      
       setMinutes(matchedPreset.minutes);
       setSeconds(matchedPreset.seconds);
       

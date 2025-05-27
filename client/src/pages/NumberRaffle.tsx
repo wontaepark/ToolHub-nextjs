@@ -13,7 +13,8 @@ interface RaffleResult {
 
 export default function NumberRaffle() {
   const [maxNumber, setMaxNumber] = useState(100);
-  const [currentNumber, setCurrentNumber] = useState(0);
+  const [drawCount, setDrawCount] = useState(1);
+  const [currentNumbers, setCurrentNumbers] = useState<number[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [drawnNumbers, setDrawnNumbers] = useState<RaffleResult[]>([]);
   const [availableNumbers, setAvailableNumbers] = useState<number[]>([]);
@@ -67,42 +68,64 @@ export default function NumberRaffle() {
   };
 
   const finalizeNumber = () => {
-    if (availableNumbers.length === 0) {
+    if (availableNumbers.length < drawCount) {
       setIsDrawing(false);
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * availableNumbers.length);
-    const selectedNumber = availableNumbers[randomIndex];
+    // 선택할 번호들을 무작위로 뽑기
+    const shuffled = [...availableNumbers].sort(() => Math.random() - 0.5);
+    const selectedNumbers = shuffled.slice(0, drawCount).sort((a, b) => a - b);
     
-    setCurrentNumber(selectedNumber);
+    setCurrentNumbers(selectedNumbers);
     
-    // Show the final number with golden highlight
-    setAnimationNumbers([selectedNumber, selectedNumber, selectedNumber, selectedNumber, selectedNumber, selectedNumber]);
+    // 6개 슬롯에 번호 배치
+    let finalSlots: number[] = [];
+    
+    if (drawCount === 1) {
+      // 1개: 모든 슬롯에 같은 번호
+      finalSlots = Array(6).fill(selectedNumbers[0]);
+    } else if (drawCount === 2) {
+      // 2개: 각각 3슬롯씩
+      finalSlots = [
+        selectedNumbers[0], selectedNumbers[0], selectedNumbers[0],
+        selectedNumbers[1], selectedNumbers[1], selectedNumbers[1]
+      ];
+    } else if (drawCount === 3) {
+      // 3개: 각각 2슬롯씩
+      finalSlots = [
+        selectedNumbers[0], selectedNumbers[0],
+        selectedNumbers[1], selectedNumbers[1],
+        selectedNumbers[2], selectedNumbers[2]
+      ];
+    }
+    
+    setAnimationNumbers(finalSlots);
     
     setTimeout(() => {
-      const newResult: RaffleResult = {
-        number: selectedNumber,
-        order: drawnNumbers.length + 1,
-        timestamp: Date.now()
-      };
+      // 여러 개의 결과를 추가
+      const newResults: RaffleResult[] = selectedNumbers.map((num, index) => ({
+        number: num,
+        order: drawnNumbers.length + index + 1,
+        timestamp: Date.now() + index
+      }));
       
-      setDrawnNumbers(prev => [newResult, ...prev]);
+      setDrawnNumbers(prev => [...newResults, ...prev]);
       setIsDrawing(false);
     }, 1000);
   };
 
   const handleDraw = () => {
-    if (availableNumbers.length === 0) return;
+    if (availableNumbers.length < drawCount) return;
     
     setIsDrawing(true);
-    setCurrentNumber(0);
+    setCurrentNumbers([]);
     startSlotAnimation();
   };
 
   const handleReset = () => {
     setDrawnNumbers([]);
-    setCurrentNumber(0);
+    setCurrentNumbers([]);
     setAnimationNumbers([0, 0, 0, 0, 0, 0]);
   };
 
@@ -157,6 +180,20 @@ export default function NumberRaffle() {
                     disabled={isDrawing}
                   />
                 </div>
+
+                <div>
+                  <label className="text-sm font-medium mb-2 block">추첨 개수</label>
+                  <select
+                    value={drawCount}
+                    onChange={(e) => setDrawCount(parseInt(e.target.value))}
+                    disabled={isDrawing}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  >
+                    <option value={1}>1개</option>
+                    <option value={2}>2개</option>
+                    <option value={3}>3개</option>
+                  </select>
+                </div>
                 
                 <Button
                   onClick={handleReset}
@@ -200,7 +237,7 @@ export default function NumberRaffle() {
                         className={`w-16 h-20 md:w-20 md:h-24 rounded-lg border-2 flex items-center justify-center text-2xl md:text-3xl font-bold transition-all duration-300 ${
                           isDrawing
                             ? 'bg-gray-100 border-gray-300 text-gray-700'
-                            : currentNumber > 0
+                            : currentNumbers.length > 0
                             ? 'bg-gradient-to-br from-yellow-400 to-orange-500 border-yellow-400 text-white shadow-lg scale-110'
                             : 'bg-white border-gray-300 text-gray-400'
                         }`}
@@ -215,12 +252,18 @@ export default function NumberRaffle() {
                   </div>
 
                   {/* Current Result Display */}
-                  {currentNumber > 0 && !isDrawing && (
+                  {currentNumbers.length > 0 && !isDrawing && (
                     <div className="mb-6">
-                      <div className="text-6xl md:text-8xl font-bold text-transparent bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text mb-2 animate-bounce">
-                        {currentNumber}
+                      <div className="flex flex-wrap justify-center gap-4 mb-4">
+                        {currentNumbers.map((num, index) => (
+                          <div key={index} className="text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text animate-bounce">
+                            {num}
+                          </div>
+                        ))}
                       </div>
-                      <p className="text-xl text-gray-600">당첨 번호!</p>
+                      <p className="text-xl text-gray-600">
+                        {currentNumbers.length === 1 ? '당첨 번호!' : `${currentNumbers.length}개 당첨 번호!`}
+                      </p>
                     </div>
                   )}
 

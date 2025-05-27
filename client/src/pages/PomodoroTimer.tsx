@@ -841,22 +841,29 @@ export default function PomodoroTimer() {
                       currentTaskId === task.id 
                         ? 'border-primary bg-primary/5' 
                         : 'border-border hover:bg-muted/50'
-                    } ${task.completed ? 'opacity-60' : ''}`}
+                    } ${task.completed ? 'opacity-60' : ''} ${isRunning ? 'opacity-75 pointer-events-none' : ''}`}
                   >
                     <div className="flex items-center space-x-2 flex-1 min-w-0">
                       <input
                         type="checkbox"
                         checked={task.completed}
                         onChange={() => toggleTaskComplete(task.id)}
+                        disabled={isRunning}
                         className="rounded flex-shrink-0"
                       />
                       <div 
-                        className={`text-sm cursor-pointer truncate ${
+                        className={`text-sm ${isRunning ? 'cursor-default' : 'cursor-pointer'} truncate ${
                           task.completed ? 'line-through text-muted-foreground' : ''
                         }`}
-                        onClick={() => selectTask(task.id)}
-                        onDoubleClick={() => settings.taskBasedTiming && setEditingTaskId(task.id)}
-                        title={settings.taskBasedTiming ? `${task.text} (더블클릭으로 시간 설정)` : task.text}
+                        onClick={() => !isRunning && selectTask(task.id)}
+                        onDoubleClick={() => !isRunning && settings.taskBasedTiming && setEditingTaskId(task.id)}
+                        title={
+                          isRunning 
+                            ? `${task.text} (타이머 실행 중 변경 불가)` 
+                            : settings.taskBasedTiming 
+                              ? `${task.text} (더블클릭으로 시간 설정)` 
+                              : task.text
+                        }
                       >
                         {task.text}
                         {task.completedPomodoros > 0 && (
@@ -875,6 +882,7 @@ export default function PomodoroTimer() {
                       onClick={() => deleteTask(task.id)}
                       variant="ghost"
                       size="sm"
+                      disabled={isRunning}
                       className="p-1 h-auto text-muted-foreground hover:text-destructive flex-shrink-0"
                     >
                       <Trash2 className="h-3 w-3" />

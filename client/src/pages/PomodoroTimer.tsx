@@ -81,6 +81,7 @@ export default function PomodoroTimer() {
     const savedDaily = localStorage.getItem('dailyPomodoros');
     const savedDate = localStorage.getItem('pomodoroDate');
     const savedTasks = localStorage.getItem('pomodoroTasks');
+    const savedTimerState = localStorage.getItem('pomodoroTimerState');
     const today = new Date().toDateString();
 
     if (savedSettings) {
@@ -98,6 +99,21 @@ export default function PomodoroTimer() {
       setDailyPomodoros(0);
       localStorage.setItem('pomodoroDate', today);
     }
+
+    // Restore timer state if saved
+    if (savedTimerState) {
+      const timerData = JSON.parse(savedTimerState);
+      const timeSaved = Date.now() - timerData.timestamp;
+      
+      if (timerData.isRunning && timeSaved < timerData.timeLeft * 1000) {
+        // Calculate remaining time
+        const remainingTime = Math.max(0, timerData.timeLeft - Math.floor(timeSaved / 1000));
+        setTimerState(timerData.timerState);
+        setTimeLeft(remainingTime);
+        setIsRunning(remainingTime > 0);
+        setCompletedPomodoros(timerData.completedPomodoros);
+      }
+    }
   }, []);
 
   // Save settings to localStorage
@@ -114,6 +130,22 @@ export default function PomodoroTimer() {
   useEffect(() => {
     localStorage.setItem('pomodoroTasks', JSON.stringify(tasks));
   }, [tasks]);
+
+  // Save timer state to localStorage when running
+  useEffect(() => {
+    if (isRunning) {
+      const timerData = {
+        isRunning,
+        timerState,
+        timeLeft,
+        completedPomodoros,
+        timestamp: Date.now()
+      };
+      localStorage.setItem('pomodoroTimerState', JSON.stringify(timerData));
+    } else {
+      localStorage.removeItem('pomodoroTimerState');
+    }
+  }, [isRunning, timerState, timeLeft, completedPomodoros]);
 
   // Timer logic
   useEffect(() => {

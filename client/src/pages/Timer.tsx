@@ -82,6 +82,53 @@ export default function Timer() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
 
+  // Load saved timer state on component mount
+  useEffect(() => {
+    const savedTimerState = localStorage.getItem('universalTimerState');
+    if (savedTimerState) {
+      const timerData = JSON.parse(savedTimerState);
+      const timePassed = Date.now() - timerData.timestamp;
+      
+      if (timerData.state === 'running' && timePassed < timerData.timeLeft * 1000) {
+        // Calculate remaining time
+        const remainingTime = Math.max(0, timerData.timeLeft - Math.floor(timePassed / 1000));
+        if (remainingTime > 0) {
+          setMinutes(timerData.minutes);
+          setSeconds(timerData.seconds);
+          setTimeLeft(remainingTime);
+          setInitialTime(timerData.initialTime);
+          setState('running');
+          setSelectedPreset(timerData.selectedPreset);
+        }
+      } else if (timerData.state === 'paused') {
+        setMinutes(timerData.minutes);
+        setSeconds(timerData.seconds);
+        setTimeLeft(timerData.timeLeft);
+        setInitialTime(timerData.initialTime);
+        setState('paused');
+        setSelectedPreset(timerData.selectedPreset);
+      }
+    }
+  }, []);
+
+  // Save timer state to localStorage when running or paused
+  useEffect(() => {
+    if (state === 'running' || state === 'paused') {
+      const timerData = {
+        state,
+        minutes,
+        seconds,
+        timeLeft,
+        initialTime,
+        selectedPreset,
+        timestamp: Date.now()
+      };
+      localStorage.setItem('universalTimerState', JSON.stringify(timerData));
+    } else if (state === 'idle') {
+      localStorage.removeItem('universalTimerState');
+    }
+  }, [state, minutes, seconds, timeLeft, initialTime, selectedPreset]);
+
   useEffect(() => {
     if (state === 'running' && timeLeft > 0) {
       intervalRef.current = setInterval(() => {

@@ -270,22 +270,31 @@ export default function NumberRaffle() {
                   {/* Draw Button */}
                   <Button
                     onClick={handleDraw}
-                    disabled={isDrawing || availableNumbers.length === 0}
+                    disabled={isDrawing || availableNumbers.length < drawCount}
                     size="lg"
                     className={`w-32 h-32 rounded-full text-xl font-bold transition-all duration-300 ${
                       isDrawing
                         ? 'bg-gray-400 animate-spin'
-                        : availableNumbers.length === 0
+                        : availableNumbers.length < drawCount
                         ? 'bg-gray-300'
                         : 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transform hover:scale-105'
                     }`}
                   >
                     {isDrawing ? (
-                      <Shuffle className="w-8 h-8" />
-                    ) : availableNumbers.length === 0 ? (
-                      '완료'
+                      <div className="flex flex-col items-center">
+                        <Shuffle className="w-8 h-8 mb-1" />
+                        <span className="text-sm">추첨중...</span>
+                      </div>
+                    ) : availableNumbers.length < drawCount ? (
+                      <div className="flex flex-col items-center text-xs">
+                        <span>남은 번호</span>
+                        <span>부족</span>
+                      </div>
                     ) : (
-                      '추첨하기'
+                      <div className="flex flex-col items-center">
+                        <Shuffle className="w-8 h-8 mb-1" />
+                        <span className="text-sm">{drawCount}개 추첨</span>
+                      </div>
                     )}
                   </Button>
 

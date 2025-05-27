@@ -684,6 +684,8 @@ export default function PomodoroTimer() {
                   variant="ghost" 
                   size="icon"
                   onClick={() => setShowSettings(!showSettings)}
+                  disabled={isRunning}
+                  className={isRunning ? "opacity-50 cursor-not-allowed" : ""}
                 >
                   <Settings className="h-5 w-5" />
                 </Button>

@@ -891,11 +891,14 @@ export default function Timer() {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Settings className="w-5 h-5" />
+            <Settings className={`w-5 h-5 ${(state === 'running' || state === 'paused') ? 'opacity-50' : ''}`} />
             사운드 설정
+            {(state === 'running' || state === 'paused') && (
+              <span className="text-xs text-muted-foreground ml-2">(타이머 실행 중 비활성화)</span>
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className={`space-y-4 ${(state === 'running' || state === 'paused') ? 'opacity-50 pointer-events-none' : ''}`}>
           {/* 볼륨 조절 */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">

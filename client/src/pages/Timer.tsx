@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon } from 'lucide-react';
+import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings } from 'lucide-react';
 
 type TimerState = 'idle' | 'running' | 'paused' | 'finished';
 
@@ -12,16 +12,43 @@ interface Preset {
   minutes: number;
   seconds: number;
   color: string;
+  category: string;
 }
 
-const TIMER_PRESETS: Preset[] = [
-  { name: '5분', minutes: 5, seconds: 0, color: 'bg-blue-500' },
-  { name: '10분', minutes: 10, seconds: 0, color: 'bg-green-500' },
-  { name: '15분', minutes: 15, seconds: 0, color: 'bg-orange-500' },
-  { name: '30분', minutes: 30, seconds: 0, color: 'bg-purple-500' },
-  { name: '45분', minutes: 45, seconds: 0, color: 'bg-pink-500' },
-  { name: '1시간', minutes: 60, seconds: 0, color: 'bg-red-500' },
-];
+const TIMER_PRESETS = {
+  basic: [
+    { name: '5분', minutes: 5, seconds: 0, color: 'bg-blue-500', category: '기본' },
+    { name: '10분', minutes: 10, seconds: 0, color: 'bg-green-500', category: '기본' },
+    { name: '15분', minutes: 15, seconds: 0, color: 'bg-orange-500', category: '기본' },
+    { name: '30분', minutes: 30, seconds: 0, color: 'bg-purple-500', category: '기본' },
+  ],
+  workout: [
+    { name: 'HIIT 라운드', minutes: 0, seconds: 30, color: 'bg-red-500', category: '운동' },
+    { name: 'HIIT 휴식', minutes: 0, seconds: 10, color: 'bg-orange-500', category: '운동' },
+    { name: '스트레칭', minutes: 5, seconds: 0, color: 'bg-green-500', category: '운동' },
+    { name: '플랭크', minutes: 1, seconds: 0, color: 'bg-yellow-500', category: '운동' },
+    { name: '휴식', minutes: 2, seconds: 0, color: 'bg-blue-500', category: '운동' },
+  ],
+  cooking: [
+    { name: '라면', minutes: 3, seconds: 0, color: 'bg-red-500', category: '요리' },
+    { name: '계란 (반숙)', minutes: 6, seconds: 0, color: 'bg-yellow-500', category: '요리' },
+    { name: '계란 (완숙)', minutes: 10, seconds: 0, color: 'bg-orange-500', category: '요리' },
+    { name: '차 우리기', minutes: 3, seconds: 0, color: 'bg-green-500', category: '요리' },
+    { name: '커피 추출', minutes: 4, seconds: 0, color: 'bg-amber-600', category: '요리' },
+  ],
+  study: [
+    { name: '집중 45분', minutes: 45, seconds: 0, color: 'bg-purple-500', category: '학습' },
+    { name: '딥워크 90분', minutes: 90, seconds: 0, color: 'bg-indigo-500', category: '학습' },
+    { name: '복습 20분', minutes: 20, seconds: 0, color: 'bg-blue-500', category: '학습' },
+    { name: '휴식 15분', minutes: 15, seconds: 0, color: 'bg-green-500', category: '학습' },
+  ],
+  meeting: [
+    { name: '스탠드업', minutes: 15, seconds: 0, color: 'bg-cyan-500', category: '회의' },
+    { name: '발표 시간', minutes: 10, seconds: 0, color: 'bg-purple-500', category: '회의' },
+    { name: '브레인스톰', minutes: 30, seconds: 0, color: 'bg-pink-500', category: '회의' },
+    { name: '피드백', minutes: 5, seconds: 0, color: 'bg-orange-500', category: '회의' },
+  ],
+};
 
 export default function Timer() {
   const [minutes, setMinutes] = useState(25);
@@ -29,7 +56,12 @@ export default function Timer() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [state, setState] = useState<TimerState>('idle');
   const [initialTime, setInitialTime] = useState(0);
+  const [activeCategory, setActiveCategory] = useState('basic');
+  const [volume, setVolume] = useState(0.7);
+  const [selectedSound, setSelectedSound] = useState('chime');
+  const [isListening, setIsListening] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     if (state === 'running' && timeLeft > 0) {
@@ -37,6 +69,8 @@ export default function Timer() {
         setTimeLeft(prev => {
           if (prev <= 1) {
             setState('finished');
+            // 완료 사운드 재생
+            playCompletionSound();
             // 타이머 완료 알림
             if ('Notification' in window && Notification.permission === 'granted') {
               new Notification('타이머 완료!', {
@@ -63,12 +97,108 @@ export default function Timer() {
     };
   }, [state, timeLeft]);
 
-  // 알림 권한 요청
+  // 알림 권한 요청 및 음성 인식 초기화
   useEffect(() => {
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission();
     }
+    
+    // 음성 인식 초기화
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'ko-KR';
+      
+      recognitionRef.current.onresult = (event: any) => {
+        const command = event.results[0][0].transcript.toLowerCase();
+        handleVoiceCommand(command);
+        setIsListening(false);
+      };
+      
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+      
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
   }, []);
+
+  // 사운드 재생 함수
+  const playCompletionSound = () => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // 선택된 사운드에 따라 다른 주파수 패턴
+    const soundPatterns: Record<string, number[]> = {
+      chime: [523.25, 659.25, 783.99], // C-E-G
+      bell: [440, 554.37, 659.25], // A-C#-E
+      beep: [800, 800, 800], // Simple beep
+      gentle: [261.63, 329.63, 392.00], // C-E-G lower octave
+    };
+    
+    const pattern = soundPatterns[selectedSound] || soundPatterns.chime;
+    
+    pattern.forEach((frequency, index) => {
+      setTimeout(() => {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        gain.gain.setValueAtTime(0, audioContext.currentTime);
+        gain.gain.linearRampToValueAtTime(volume * 0.3, audioContext.currentTime + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.5);
+      }, index * 200);
+    });
+  };
+
+  // 음성 명령 처리
+  const handleVoiceCommand = (command: string) => {
+    if (command.includes('시작') || command.includes('start')) {
+      if (state === 'idle' || state === 'paused') {
+        startTimer();
+      }
+    } else if (command.includes('정지') || command.includes('stop')) {
+      stopTimer();
+    } else if (command.includes('일시정지') || command.includes('pause')) {
+      if (state === 'running') {
+        pauseTimer();
+      }
+    } else if (command.includes('분')) {
+      const minuteMatch = command.match(/(\d+)분/);
+      if (minuteMatch && state === 'idle') {
+        const mins = parseInt(minuteMatch[1]);
+        setMinutes(mins);
+        setSeconds(0);
+      }
+    }
+  };
+
+  // 음성 인식 시작/중지
+  const toggleVoiceRecognition = () => {
+    if (!recognitionRef.current) return;
+    
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
+    }
+  };
 
   const startTimer = () => {
     if (state === 'idle') {
@@ -213,45 +343,59 @@ export default function Timer() {
             </div>
 
             {/* 컨트롤 버튼 */}
-            <div className="flex justify-center gap-3">
-              {state === 'idle' && (
-                <Button 
-                  onClick={startTimer} 
-                  size="lg" 
-                  className="px-8"
-                  disabled={minutes === 0 && seconds === 0}
-                >
-                  <Play className="w-5 h-5 mr-2" />
-                  시작
-                </Button>
-              )}
-              
-              {state === 'running' && (
-                <Button onClick={pauseTimer} size="lg" className="px-8" variant="outline">
-                  <Pause className="w-5 h-5 mr-2" />
-                  일시정지
-                </Button>
-              )}
-              
-              {state === 'paused' && (
-                <>
-                  <Button onClick={startTimer} size="lg" className="px-8">
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex justify-center gap-3">
+                {state === 'idle' && (
+                  <Button 
+                    onClick={startTimer} 
+                    size="lg" 
+                    className="px-8"
+                    disabled={minutes === 0 && seconds === 0}
+                  >
                     <Play className="w-5 h-5 mr-2" />
-                    재개
+                    시작
                   </Button>
-                  <Button onClick={resetTimer} size="lg" variant="outline">
-                    <RotateCcw className="w-5 h-5 mr-2" />
-                    리셋
+                )}
+                
+                {state === 'running' && (
+                  <Button onClick={pauseTimer} size="lg" className="px-8" variant="outline">
+                    <Pause className="w-5 h-5 mr-2" />
+                    일시정지
                   </Button>
-                </>
-              )}
+                )}
+                
+                {state === 'paused' && (
+                  <>
+                    <Button onClick={startTimer} size="lg" className="px-8">
+                      <Play className="w-5 h-5 mr-2" />
+                      재개
+                    </Button>
+                    <Button onClick={resetTimer} size="lg" variant="outline">
+                      <RotateCcw className="w-5 h-5 mr-2" />
+                      리셋
+                    </Button>
+                  </>
+                )}
 
-              {(state === 'running' || state === 'paused' || state === 'finished') && (
-                <Button onClick={stopTimer} size="lg" variant="destructive">
-                  <Square className="w-5 h-5 mr-2" />
-                  정지
-                </Button>
-              )}
+                {(state === 'running' || state === 'paused' || state === 'finished') && (
+                  <Button onClick={stopTimer} size="lg" variant="destructive">
+                    <Square className="w-5 h-5 mr-2" />
+                    정지
+                  </Button>
+                )}
+              </div>
+              
+              {/* 음성 명령 버튼 */}
+              <Button
+                onClick={toggleVoiceRecognition}
+                variant={isListening ? "default" : "outline"}
+                size="sm"
+                className={`${isListening ? 'bg-red-500 hover:bg-red-600' : ''}`}
+                disabled={!recognitionRef.current}
+              >
+                {isListening ? <MicOff className="w-4 h-4 mr-2" /> : <Mic className="w-4 h-4 mr-2" />}
+                {isListening ? '음성 인식 중...' : '음성 명령'}
+              </Button>
             </div>
           </div>
         </CardContent>

@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings, ChevronDown } from 'lucide-react';
+import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings, ChevronDown, Check } from 'lucide-react';
 
 type TimerState = 'idle' | 'running' | 'paused' | 'finished';
 
@@ -71,6 +71,10 @@ export default function Timer() {
     };
   });
   const [editingPreset, setEditingPreset] = useState<string | null>(null);
+  const [favoritePresets, setFavoritePresets] = useState(() => {
+    const saved = localStorage.getItem('timer-favorite-presets');
+    return saved ? JSON.parse(saved) : ['라면', '플랭크', '집중', '계란'];
+  });
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
 
@@ -431,6 +435,41 @@ export default function Timer() {
     setEditingPreset(null);
   };
 
+  // 즐겨찾기 프리셋 토글
+  const toggleFavoritePreset = (presetName: string) => {
+    let newFavorites;
+    if (favoritePresets.includes(presetName)) {
+      newFavorites = favoritePresets.filter((name: string) => name !== presetName);
+    } else {
+      newFavorites = [...favoritePresets, presetName];
+    }
+    setFavoritePresets(newFavorites);
+    localStorage.setItem('timer-favorite-presets', JSON.stringify(newFavorites));
+  };
+
+  // 즐겨찾기된 프리셋들의 실제 데이터 가져오기
+  const getFavoritePresetsData = () => {
+    const allPresets = Object.values(TIMER_PRESETS).flat();
+    return favoritePresets.map((name: string) => {
+      // 먼저 기본 프리셋에서 찾기
+      const defaultPreset = allPresets.find((preset: Preset) => preset.name === name);
+      if (defaultPreset) return defaultPreset;
+      
+      // 커스텀 프리셋에서 찾기
+      const customData = customPresets[name];
+      if (customData) {
+        return {
+          name,
+          minutes: customData.minutes,
+          seconds: customData.seconds,
+          color: 'bg-blue-500',
+          category: '즐겨찾기'
+        };
+      }
+      return null;
+    }).filter(Boolean);
+  };
+
   const formatTime = (totalSeconds: number) => {
     const hrs = Math.floor(totalSeconds / 3600);
     const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -590,96 +629,41 @@ export default function Timer() {
                 <div className="space-y-3 mt-4">
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">빠른 설정</h4>
                   <div className="grid grid-cols-2 gap-2">
-                    {Object.entries(customPresets).map(([name, preset]) => (
-                      <div key={name} className="relative">
-                        {editingPreset === name ? (
-                          <div className="p-2 border rounded-lg space-y-2">
-                            <div className="text-xs font-medium">{name}</div>
-                            <div className="flex gap-1">
-                              <Input
-                                type="number"
-                                min="0"
-                                max="99"
-                                value={preset.minutes}
-                                onChange={(e) => {
-                                  const newPresets = {
-                                    ...customPresets,
-                                    [name]: { ...preset, minutes: parseInt(e.target.value) || 0 }
-                                  };
-                                  setCustomPresets(newPresets);
-                                }}
-                                className="h-6 text-xs"
-                                placeholder="분"
-                              />
-                              <Input
-                                type="number"
-                                min="0"
-                                max="59"
-                                value={preset.seconds}
-                                onChange={(e) => {
-                                  const newPresets = {
-                                    ...customPresets,
-                                    [name]: { ...preset, seconds: parseInt(e.target.value) || 0 }
-                                  };
-                                  setCustomPresets(newPresets);
-                                }}
-                                className="h-6 text-xs"
-                                placeholder="초"
-                              />
+                    {getFavoritePresetsData().map((preset: any) => (
+                      <div key={preset.name} className="relative">
+                        <Button
+                          onClick={() => applyPreset(preset)}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs h-12 w-full relative group"
+                        >
+                          <div className="text-center">
+                            <div className="text-sm">
+                              {preset.name === '라면' && '🍜'} 
+                              {preset.name === '플랭크' && '💪'} 
+                              {preset.name === '집중시간' && '📚'} 
+                              {preset.name === '계란 (반숙)' && '🥚'} 
+                              {preset.name === '스탠드업' && '👥'} 
+                              {preset.name === '발표 시간' && '🎤'} 
+                              {preset.name === '브레이크아웃' && '🏃'} 
+                              {preset.name === '푸쉬업' && '💪'} 
+                              {preset.name === '커피 추출' && '☕'} 
+                              {preset.name === '차 우리기' && '🍵'} 
+                              {preset.name}
                             </div>
-                            <div className="flex gap-1">
-                              <Button
-                                size="sm"
-                                className="h-6 text-xs px-2"
-                                onClick={() => updateCustomPreset(name, preset.minutes, preset.seconds)}
-                              >
-                                저장
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                className="h-6 text-xs px-2"
-                                onClick={() => setEditingPreset(null)}
-                              >
-                                취소
-                              </Button>
+                            <div className="text-xs text-gray-500">
+                              {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
                             </div>
                           </div>
-                        ) : (
-                          <Button
-                            onClick={() => applyCustomPreset(name)}
-                            onContextMenu={(e) => {
-                              e.preventDefault();
-                              setEditingPreset(name);
-                            }}
-                            onDoubleClick={() => setEditingPreset(name)}
-                            variant="outline"
-                            size="sm"
-                            className="text-xs h-12 w-full relative group"
-                          >
-                            <div className="text-center">
-                              <div className="text-sm">
-                                {name === '라면' && '🍜'} 
-                                {name === '플랭크' && '💪'} 
-                                {name === '집중' && '📚'} 
-                                {name === '계란' && '🥚'} 
-                                {name}
-                              </div>
-                              <div className="text-xs text-gray-500">
-                                {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
-                              </div>
-                            </div>
-                            <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <Settings className="w-3 h-3 text-gray-400" />
-                            </div>
-                          </Button>
-                        )}
+                        </Button>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                    버튼을 더블클릭하거나 우클릭하여 시간 수정
-                  </p>
+                  {getFavoritePresetsData().length === 0 && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                      아래 카테고리에서 체크박스를 클릭하여 즐겨찾기를 추가하세요
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -742,21 +726,44 @@ export default function Timer() {
             {/* 선택된 카테고리의 프리셋들 */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS]?.map((preset: Preset, index: number) => (
-                <Button
-                  key={index}
-                  variant={selectedPreset === preset.name ? "default" : "outline"}
-                  onClick={() => applyPreset(preset)}
-                  className={`h-16 flex flex-col items-center justify-center gap-1 transition-all ${
-                    selectedPreset === preset.name 
-                      ? 'bg-primary text-primary-foreground shadow-lg scale-105' 
-                      : 'hover:bg-primary/10'
-                  }`}
-                >
-                  <div className={`w-3 h-3 rounded-full ${
-                    selectedPreset === preset.name ? 'bg-white' : preset.color
-                  }`} />
-                  <span className="font-semibold text-xs">{preset.name}</span>
-                </Button>
+                <div key={index} className="relative">
+                  <Button
+                    variant={selectedPreset === preset.name ? "default" : "outline"}
+                    onClick={() => applyPreset(preset)}
+                    className={`h-16 w-full flex flex-col items-center justify-center gap-1 transition-all ${
+                      selectedPreset === preset.name 
+                        ? 'bg-primary text-primary-foreground shadow-lg scale-105' 
+                        : 'hover:bg-primary/10'
+                    }`}
+                  >
+                    <div className={`w-3 h-3 rounded-full ${
+                      selectedPreset === preset.name ? 'bg-white' : preset.color
+                    }`} />
+                    <span className="font-semibold text-xs">{preset.name}</span>
+                    <span className="text-xs opacity-70">
+                      {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
+                    </span>
+                  </Button>
+                  
+                  {/* 즐겨찾기 체크박스 */}
+                  <div 
+                    className="absolute top-2 right-2 cursor-pointer z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavoritePreset(preset.name);
+                    }}
+                  >
+                    <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
+                      favoritePresets.includes(preset.name) 
+                        ? 'bg-blue-500 border-blue-500 text-white' 
+                        : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                    }`}>
+                      {favoritePresets.includes(preset.name) && (
+                        <Check className="w-3 h-3" />
+                      )}
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </CardContent>

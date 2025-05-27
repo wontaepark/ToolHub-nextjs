@@ -60,6 +60,7 @@ export default function Timer() {
   const [volume, setVolume] = useState(0.7);
   const [selectedSound, setSelectedSound] = useState('chime');
   const [isListening, setIsListening] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
 
@@ -206,6 +207,7 @@ export default function Timer() {
       
       setMinutes(matchedPreset.minutes);
       setSeconds(matchedPreset.seconds);
+      setSelectedPreset(matchedPreset.name);
       
       // "플랭크 시작" 같은 명령이면 바로 시작
       if (command.includes('시작') || command.includes('start')) {
@@ -302,6 +304,8 @@ export default function Timer() {
       setInitialTime(totalSeconds);
     }
     setState('running');
+    // 타이머 시작 시 선택된 프리셋 해제
+    setSelectedPreset(null);
   };
 
   const pauseTimer = () => {
@@ -323,6 +327,7 @@ export default function Timer() {
     if (state === 'idle') {
       setMinutes(preset.minutes);
       setSeconds(preset.seconds);
+      setSelectedPreset(preset.name);
     }
   };
 
@@ -527,11 +532,17 @@ export default function Timer() {
               {TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS]?.map((preset: Preset, index: number) => (
                 <Button
                   key={index}
-                  variant="outline"
+                  variant={selectedPreset === preset.name ? "default" : "outline"}
                   onClick={() => applyPreset(preset)}
-                  className="h-16 flex flex-col items-center justify-center gap-1 hover:bg-primary/10"
+                  className={`h-16 flex flex-col items-center justify-center gap-1 transition-all ${
+                    selectedPreset === preset.name 
+                      ? 'bg-primary text-primary-foreground shadow-lg scale-105' 
+                      : 'hover:bg-primary/10'
+                  }`}
                 >
-                  <div className={`w-3 h-3 rounded-full ${preset.color}`} />
+                  <div className={`w-3 h-3 rounded-full ${
+                    selectedPreset === preset.name ? 'bg-white' : preset.color
+                  }`} />
                   <span className="font-semibold text-xs">{preset.name}</span>
                 </Button>
               ))}

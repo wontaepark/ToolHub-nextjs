@@ -49,7 +49,7 @@ export default function Home() {
       {/* Tools Section */}
       <div className="mb-10 md:mb-12 px-4">
         <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">사용 가능한 도구들</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Calculator Card */}
           <Link href="/calculator">
             <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-primary/30 active:scale-[0.98]">
@@ -99,6 +99,33 @@ export default function Home() {
                   <Badge variant="outline" className="text-xs">25분 타이머</Badge>
                   <Badge variant="outline" className="text-xs">할 일 관리</Badge>
                   <Badge variant="outline" className="text-xs">진행률 표시</Badge>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Timer Card */}
+          <Link href="/timer">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-blue-500/30 active:scale-[0.98]">
+              <div className="h-32 md:h-40 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent"></div>
+                <i className="ri-time-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">범용 타이머</h3>
+                  <Badge variant="default" className="bg-blue-500/10 text-blue-600 text-xs flex-shrink-0 ml-2">
+                    사용 가능
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  원하는 시간을 자유롭게 설정할 수 있는 카운트다운 타이머입니다. 
+                  요리, 운동, 휴식 등 다양한 용도로 활용하세요.
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">자유 설정</Badge>
+                  <Badge variant="outline" className="text-xs">브라우저 알림</Badge>
+                  <Badge variant="outline" className="text-xs">빠른 프리셋</Badge>
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@ import Footer from "./components/ui/footer";
 import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import PomodoroTimer from "./pages/PomodoroTimer";
+import Timer from "./pages/Timer";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" component={Home} />
           <Route path="/calculator" component={Calculator} />
           <Route path="/pomodoro" component={PomodoroTimer} />
+          <Route path="/timer" component={Timer} />
           <Route component={NotFound} />
         </Switch>
       </main>

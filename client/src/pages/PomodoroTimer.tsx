@@ -334,6 +334,7 @@ export default function PomodoroTimer() {
 
   const getProgressPercentage = () => {
     const total = getCurrentTimeTotal();
+    if (total === 0) return 0;
     return ((total - timeLeft) / total) * 100;
   };
 
@@ -442,8 +443,10 @@ export default function PomodoroTimer() {
                     }`}
                     style={{
                       strokeDasharray: `${2 * Math.PI * 45}`,
-                      strokeDashoffset: `${2 * Math.PI * 45 - (2 * Math.PI * 45 * getProgressPercentage() / 100)}`,
-                      transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.3s ease-in-out'
+                      strokeDashoffset: `${2 * Math.PI * 45 * (1 - getProgressPercentage() / 100)}`,
+                      transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.3s ease-in-out',
+                      transform: 'scaleY(-1)',
+                      transformOrigin: '50% 50%'
                     }}
                   />
                 </svg>

@@ -407,9 +407,29 @@ export default function Timer() {
           <CardHeader>
             <CardTitle className="text-lg">빠른 설정</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
+            {/* 카테고리 선택 */}
+            <div className="flex flex-wrap gap-2">
+              {Object.keys(TIMER_PRESETS).map((category) => (
+                <Button
+                  key={category}
+                  variant={activeCategory === category ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveCategory(category)}
+                  className="capitalize"
+                >
+                  {category === 'basic' && '기본'}
+                  {category === 'workout' && '운동'}
+                  {category === 'cooking' && '요리'}
+                  {category === 'study' && '학습'}
+                  {category === 'meeting' && '회의'}
+                </Button>
+              ))}
+            </div>
+            
+            {/* 선택된 카테고리의 프리셋들 */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {TIMER_PRESETS.map((preset, index) => (
+              {TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS]?.map((preset: Preset, index: number) => (
                 <Button
                   key={index}
                   variant="outline"
@@ -417,13 +437,77 @@ export default function Timer() {
                   className="h-16 flex flex-col items-center justify-center gap-1 hover:bg-primary/10"
                 >
                   <div className={`w-3 h-3 rounded-full ${preset.color}`} />
-                  <span className="font-semibold">{preset.name}</span>
+                  <span className="font-semibold text-xs">{preset.name}</span>
                 </Button>
               ))}
             </div>
           </CardContent>
         </Card>
       )}
+
+      {/* 사운드 설정 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            사운드 설정
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* 볼륨 조절 */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium flex items-center gap-2">
+                <Volume2 className="w-4 h-4" />
+                볼륨
+              </label>
+              <span className="text-sm text-muted-foreground">{Math.round(volume * 100)}%</span>
+            </div>
+            <Input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              className="w-full"
+            />
+          </div>
+          
+          {/* 사운드 선택 */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">알람음</label>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { id: 'chime', name: '차임' },
+                { id: 'bell', name: '벨' },
+                { id: 'beep', name: '비프' },
+                { id: 'gentle', name: '부드러운' },
+              ].map((sound) => (
+                <Button
+                  key={sound.id}
+                  variant={selectedSound === sound.id ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedSound(sound.id)}
+                  className="text-xs"
+                >
+                  {sound.name}
+                </Button>
+              ))}
+            </div>
+          </div>
+          
+          {/* 사운드 테스트 */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={playCompletionSound}
+            className="w-full"
+          >
+            사운드 테스트
+          </Button>
+        </CardContent>
+      </Card>
 
       {/* 사용 팁 */}
       <Card>
@@ -432,9 +516,10 @@ export default function Timer() {
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• 브라우저 알림을 허용하면 타이머 완료 시 알림을 받을 수 있습니다</p>
-          <p>• 빠른 설정 버튼으로 자주 사용하는 시간을 쉽게 설정할 수 있습니다</p>
+          <p>• 카테고리별 프리셋으로 용도에 맞는 타이머를 빠르게 설정하세요</p>
+          <p>• 음성 명령으로 "시작", "정지", "10분 타이머" 등을 말해보세요</p>
+          <p>• 볼륨과 알람음을 취향에 맞게 조절할 수 있습니다</p>
           <p>• 타이머가 실행 중일 때도 다른 탭에서 작업할 수 있습니다</p>
-          <p>• 일시정지 후 리셋하면 원래 설정 시간으로 돌아갑니다</p>
         </CardContent>
       </Card>
     </div>

@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings } from 'lucide-react';
+import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings, ChevronDown } from 'lucide-react';
 
 type TimerState = 'idle' | 'running' | 'paused' | 'finished';
 
@@ -549,17 +549,69 @@ export default function Timer() {
                 )}
               </div>
               
-              {/* 음성 명령 버튼 */}
-              <Button
-                onClick={toggleVoiceRecognition}
-                variant={isListening ? "default" : "outline"}
-                size="sm"
-                className={`${isListening ? 'bg-red-500 hover:bg-red-600' : ''}`}
-                disabled={!recognitionRef.current}
-              >
-                {isListening ? <MicOff className="w-4 h-4 mr-2" /> : <Mic className="w-4 h-4 mr-2" />}
-                {isListening ? '음성 인식 중...' : '음성 명령'}
-              </Button>
+              {/* 빠른 프리셋 버튼들 */}
+              {state === 'idle' && (
+                <div className="grid grid-cols-2 gap-2 mt-4">
+                  <Button 
+                    onClick={() => applyPreset(TIMER_PRESETS.cooking.find((p: Preset) => p.name === '라면')!)}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs h-10"
+                  >
+                    🍜 라면<br/>3분
+                  </Button>
+                  <Button 
+                    onClick={() => applyPreset(TIMER_PRESETS.workout.find((p: Preset) => p.name === '플랭크')!)}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs h-10"
+                  >
+                    💪 플랭크<br/>1분
+                  </Button>
+                  <Button 
+                    onClick={() => applyPreset(TIMER_PRESETS.study.find((p: Preset) => p.name === '집중시간')!)}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs h-10"
+                  >
+                    📚 집중<br/>25분
+                  </Button>
+                  <Button 
+                    onClick={() => applyPreset(TIMER_PRESETS.cooking.find((p: Preset) => p.name === '계란 (반숙)')!)}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs h-10"
+                  >
+                    🥚 계란<br/>6분
+                  </Button>
+                </div>
+              )}
+
+              {/* 음성 명령 버튼 (접을 수 있게) */}
+              <details className="group mt-3">
+                <summary className="list-none cursor-pointer">
+                  <div className="flex items-center justify-center text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                    <Mic className="w-3 h-3 mr-1" />
+                    음성 명령 (실험적)
+                    <ChevronDown className="w-3 h-3 ml-1 group-open:rotate-180 transition-transform" />
+                  </div>
+                </summary>
+                <div className="mt-2">
+                  <Button
+                    onClick={toggleVoiceRecognition}
+                    variant={isListening ? "default" : "outline"}
+                    size="sm"
+                    className={`w-full ${isListening ? 'bg-red-500 hover:bg-red-600' : ''}`}
+                    disabled={!recognitionRef.current}
+                  >
+                    {isListening ? <MicOff className="w-4 h-4 mr-2" /> : <Mic className="w-4 h-4 mr-2" />}
+                    {isListening ? '음성 인식 중...' : '음성 명령'}
+                  </Button>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">
+                    "라면", "플랭크", "3분 시작" 등
+                  </p>
+                </div>
+              </details>
             </div>
           </div>
         </CardContent>

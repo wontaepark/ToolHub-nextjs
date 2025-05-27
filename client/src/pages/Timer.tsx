@@ -61,6 +61,16 @@ export default function Timer() {
   const [selectedSound, setSelectedSound] = useState('chime');
   const [isListening, setIsListening] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
+  const [customPresets, setCustomPresets] = useState(() => {
+    const saved = localStorage.getItem('timer-custom-presets');
+    return saved ? JSON.parse(saved) : {
+      라면: { minutes: 3, seconds: 0 },
+      플랭크: { minutes: 1, seconds: 0 },
+      집중: { minutes: 25, seconds: 0 },
+      계란: { minutes: 6, seconds: 0 }
+    };
+  });
+  const [editingPreset, setEditingPreset] = useState<string | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
 
@@ -395,6 +405,32 @@ export default function Timer() {
     }
   };
 
+  // 커스텀 프리셋 저장
+  const saveCustomPresets = (newPresets: any) => {
+    setCustomPresets(newPresets);
+    localStorage.setItem('timer-custom-presets', JSON.stringify(newPresets));
+  };
+
+  // 커스텀 프리셋 적용
+  const applyCustomPreset = (name: string) => {
+    const preset = customPresets[name];
+    if (preset && state === 'idle') {
+      setMinutes(preset.minutes);
+      setSeconds(preset.seconds);
+      setSelectedPreset(name);
+    }
+  };
+
+  // 커스텀 프리셋 수정
+  const updateCustomPreset = (name: string, minutes: number, seconds: number) => {
+    const newPresets = {
+      ...customPresets,
+      [name]: { minutes, seconds }
+    };
+    saveCustomPresets(newPresets);
+    setEditingPreset(null);
+  };
+
   const formatTime = (totalSeconds: number) => {
     const hrs = Math.floor(totalSeconds / 3600);
     const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -551,39 +587,99 @@ export default function Timer() {
               
               {/* 빠른 프리셋 버튼들 */}
               {state === 'idle' && (
-                <div className="grid grid-cols-2 gap-2 mt-4">
-                  <Button 
-                    onClick={() => applyPreset(TIMER_PRESETS.cooking.find((p: Preset) => p.name === '라면')!)}
-                    variant="outline"
-                    size="sm"
-                    className="text-xs h-10"
-                  >
-                    🍜 라면<br/>3분
-                  </Button>
-                  <Button 
-                    onClick={() => applyPreset(TIMER_PRESETS.workout.find((p: Preset) => p.name === '플랭크')!)}
-                    variant="outline"
-                    size="sm"
-                    className="text-xs h-10"
-                  >
-                    💪 플랭크<br/>1분
-                  </Button>
-                  <Button 
-                    onClick={() => applyPreset(TIMER_PRESETS.study.find((p: Preset) => p.name === '집중시간')!)}
-                    variant="outline"
-                    size="sm"
-                    className="text-xs h-10"
-                  >
-                    📚 집중<br/>25분
-                  </Button>
-                  <Button 
-                    onClick={() => applyPreset(TIMER_PRESETS.cooking.find((p: Preset) => p.name === '계란 (반숙)')!)}
-                    variant="outline"
-                    size="sm"
-                    className="text-xs h-10"
-                  >
-                    🥚 계란<br/>6분
-                  </Button>
+                <div className="space-y-3 mt-4">
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">빠른 설정</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {Object.entries(customPresets).map(([name, preset]) => (
+                      <div key={name} className="relative">
+                        {editingPreset === name ? (
+                          <div className="p-2 border rounded-lg space-y-2">
+                            <div className="text-xs font-medium">{name}</div>
+                            <div className="flex gap-1">
+                              <Input
+                                type="number"
+                                min="0"
+                                max="99"
+                                value={preset.minutes}
+                                onChange={(e) => {
+                                  const newPresets = {
+                                    ...customPresets,
+                                    [name]: { ...preset, minutes: parseInt(e.target.value) || 0 }
+                                  };
+                                  setCustomPresets(newPresets);
+                                }}
+                                className="h-6 text-xs"
+                                placeholder="분"
+                              />
+                              <Input
+                                type="number"
+                                min="0"
+                                max="59"
+                                value={preset.seconds}
+                                onChange={(e) => {
+                                  const newPresets = {
+                                    ...customPresets,
+                                    [name]: { ...preset, seconds: parseInt(e.target.value) || 0 }
+                                  };
+                                  setCustomPresets(newPresets);
+                                }}
+                                className="h-6 text-xs"
+                                placeholder="초"
+                              />
+                            </div>
+                            <div className="flex gap-1">
+                              <Button
+                                size="sm"
+                                className="h-6 text-xs px-2"
+                                onClick={() => updateCustomPreset(name, preset.minutes, preset.seconds)}
+                              >
+                                저장
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="h-6 text-xs px-2"
+                                onClick={() => setEditingPreset(null)}
+                              >
+                                취소
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={() => applyCustomPreset(name)}
+                            onContextMenu={(e) => {
+                              e.preventDefault();
+                              setEditingPreset(name);
+                            }}
+                            onDoubleClick={() => setEditingPreset(name)}
+                            variant="outline"
+                            size="sm"
+                            className="text-xs h-12 w-full relative group"
+                          >
+                            <div className="text-center">
+                              <div className="text-sm">
+                                {name === '라면' && '🍜'} 
+                                {name === '플랭크' && '💪'} 
+                                {name === '집중' && '📚'} 
+                                {name === '계란' && '🥚'} 
+                                {name}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
+                              </div>
+                            </div>
+                            <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <Settings className="w-3 h-3 text-gray-400" />
+                            </div>
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                    버튼을 더블클릭하거나 우클릭하여 시간 수정
+                  </p>
                 </div>
               )}
 

@@ -118,10 +118,16 @@ export default function PomodoroTimer() {
     }
   }, []);
 
-  // Save settings to localStorage
+  // Save settings to localStorage and update timer when not running
   useEffect(() => {
     localStorage.setItem('pomodoroSettings', JSON.stringify(settings));
-  }, [settings]);
+    
+    // 타이머가 실행 중이 아닐 때 시간 업데이트
+    if (!isRunning) {
+      const newTime = getCurrentTimeTotal();
+      setTimeLeft(newTime);
+    }
+  }, [settings, isRunning]);
 
   // Save daily pomodoros to localStorage
   useEffect(() => {

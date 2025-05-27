@@ -179,7 +179,7 @@ export default function PomodoroTimer() {
     } else {
       localStorage.removeItem('pomodoroTimerState');
     }
-  }, [isRunning, timerState, timeLeft, completedPomodoros, currentTask, settings, tasks]);
+  }, [isRunning, timerState, timeLeft, completedPomodoros, currentTaskId, settings, tasks]);
 
   // Timer logic
   useEffect(() => {

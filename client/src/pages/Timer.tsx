@@ -113,7 +113,9 @@ export default function Timer() {
       recognitionRef.current.lang = 'ko-KR';
       
       recognitionRef.current.onresult = (event: any) => {
-        const command = event.results[0][0].transcript.toLowerCase();
+        const command = event.results[0][0].transcript.toLowerCase().trim();
+        console.log('원본 음성 인식:', event.results[0][0].transcript);
+        console.log('처리할 명령:', command);
         handleVoiceCommand(command);
         setIsListening(false);
       };

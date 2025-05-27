@@ -136,12 +136,14 @@ export default function PomodoroTimer() {
   // Save timer state to localStorage when running
   useEffect(() => {
     if (isRunning) {
+      const currentTotal = getCurrentTimeTotal();
       const timerData = {
         isRunning,
         timerState,
         timeLeft,
         completedPomodoros,
-        totalTime: getCurrentTimeTotal(),
+        totalTime: currentTotal,
+        initialTimeLeft: currentTotal, // 시작 시점의 시간
         timestamp: Date.now()
       };
       localStorage.setItem('pomodoroTimerState', JSON.stringify(timerData));
@@ -218,7 +220,11 @@ export default function PomodoroTimer() {
       setTimerState('work');
       const currentTask = currentTaskId ? tasks.find(t => t.id === currentTaskId) : null;
       const workTime = currentTask?.customWorkTime || settings.workTime;
-      setTimeLeft(workTime * 60);
+      const totalSeconds = workTime * 60;
+      setTimeLeft(totalSeconds);
+      
+      // 새로 시작할 때는 저장된 상태 제거하고 새로운 상태로 시작
+      localStorage.removeItem('pomodoroTimerState');
     }
     setIsRunning(true);
   };
@@ -336,7 +342,21 @@ export default function PomodoroTimer() {
   };
 
   const getProgressPercentage = () => {
-    const total = getCurrentTimeTotal();
+    // 저장된 타이머 상태가 있으면 해당 총 시간 사용
+    const savedTimerState = localStorage.getItem('pomodoroTimerState');
+    let total = getCurrentTimeTotal();
+    
+    if (savedTimerState && isRunning) {
+      try {
+        const timerData = JSON.parse(savedTimerState);
+        if (timerData.totalTime) {
+          total = timerData.totalTime;
+        }
+      } catch (e) {
+        // JSON 파싱 오류 시 기본값 사용
+      }
+    }
+    
     if (total === 0) return 0;
     const progress = ((total - timeLeft) / total) * 100;
     // 0과 100 사이로 제한하여 애니메이션 오류 방지

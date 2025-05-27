@@ -84,8 +84,11 @@ export default function PomodoroTimer() {
     const savedTimerState = localStorage.getItem('pomodoroTimerState');
     const today = new Date().toDateString();
 
+    // First restore settings
+    let restoredSettings = settings;
     if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
+      restoredSettings = JSON.parse(savedSettings);
+      setSettings(restoredSettings);
     }
 
     if (savedTasks) {
@@ -100,7 +103,8 @@ export default function PomodoroTimer() {
       localStorage.setItem('pomodoroDate', today);
     }
 
-    // Restore timer state if saved
+    // Restore timer state if saved and running
+    let timerRestored = false;
     if (savedTimerState) {
       const timerData = JSON.parse(savedTimerState);
       const timePassed = Math.floor((Date.now() - timerData.timestamp) / 1000);
@@ -113,8 +117,26 @@ export default function PomodoroTimer() {
           setTimeLeft(remainingTime);
           setIsRunning(true);
           setCompletedPomodoros(timerData.completedPomodoros);
+          timerRestored = true;
         }
       }
+    }
+
+    // 타이머가 복원되지 않았다면 설정에 따른 초기 시간 설정
+    if (!timerRestored) {
+      const getInitialTime = () => {
+        switch (timerState) {
+          case 'work':
+            return restoredSettings.workTime * 60;
+          case 'shortBreak':
+            return restoredSettings.shortBreakTime * 60;
+          case 'longBreak':
+            return restoredSettings.longBreakTime * 60;
+          default:
+            return restoredSettings.workTime * 60;
+        }
+      };
+      setTimeLeft(getInitialTime());
     }
   }, []);
 

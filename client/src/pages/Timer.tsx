@@ -167,8 +167,23 @@ export default function Timer() {
 
   // 음성 명령 처리
   const handleVoiceCommand = (command: string) => {
+    console.log('음성 명령:', command);
+    
     if (command.includes('시작') || command.includes('start')) {
-      if (state === 'idle' || state === 'paused') {
+      // "10분 타이머 시작" 같은 명령 처리
+      const minuteMatch = command.match(/(\d+)분/);
+      if (minuteMatch && state === 'idle') {
+        const mins = parseInt(minuteMatch[1]);
+        setMinutes(mins);
+        setSeconds(0);
+        // 약간의 지연 후 타이머 시작
+        setTimeout(() => {
+          const totalSeconds = mins * 60;
+          setTimeLeft(totalSeconds);
+          setInitialTime(totalSeconds);
+          setState('running');
+        }, 100);
+      } else if (state === 'idle' || state === 'paused') {
         startTimer();
       }
     } else if (command.includes('정지') || command.includes('stop')) {
@@ -177,12 +192,26 @@ export default function Timer() {
       if (state === 'running') {
         pauseTimer();
       }
-    } else if (command.includes('분')) {
+    } else if (command.includes('분') && !command.includes('시작')) {
+      // "10분" 이라고만 말했을 때
       const minuteMatch = command.match(/(\d+)분/);
       if (minuteMatch && state === 'idle') {
         const mins = parseInt(minuteMatch[1]);
         setMinutes(mins);
         setSeconds(0);
+      }
+    } else if (command.includes('초')) {
+      // "30초" 같은 명령 처리
+      const secondMatch = command.match(/(\d+)초/);
+      if (secondMatch && state === 'idle') {
+        const secs = parseInt(secondMatch[1]);
+        if (secs < 60) {
+          setMinutes(0);
+          setSeconds(secs);
+        } else {
+          setMinutes(Math.floor(secs / 60));
+          setSeconds(secs % 60);
+        }
       }
     }
   };

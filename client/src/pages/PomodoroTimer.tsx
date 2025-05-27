@@ -135,19 +135,33 @@ export default function PomodoroTimer() {
 
   // Save timer state to localStorage when running
   useEffect(() => {
-    if (isRunning) {
-      const currentTotal = getCurrentTimeTotal();
+    if (isRunning && timeLeft > 0) {
+      // 저장된 상태에서 총 시간을 가져오거나 현재 총 시간 사용
+      const savedState = localStorage.getItem('pomodoroTimerState');
+      let originalTotal = getCurrentTimeTotal();
+      
+      if (savedState) {
+        try {
+          const existingData = JSON.parse(savedState);
+          if (existingData.originalTotal) {
+            originalTotal = existingData.originalTotal;
+          }
+        } catch (e) {
+          // 파싱 오류 시 현재 총 시간 사용
+        }
+      }
+      
       const timerData = {
         isRunning,
         timerState,
         timeLeft,
         completedPomodoros,
-        totalTime: currentTotal,
-        initialTimeLeft: currentTotal, // 시작 시점의 시간
+        totalTime: getCurrentTimeTotal(),
+        originalTotal: originalTotal, // 처음 시작했을 때의 총 시간
         timestamp: Date.now()
       };
       localStorage.setItem('pomodoroTimerState', JSON.stringify(timerData));
-    } else {
+    } else if (!isRunning) {
       localStorage.removeItem('pomodoroTimerState');
     }
   }, [isRunning, timerState, timeLeft, completedPomodoros]);
@@ -342,14 +356,17 @@ export default function PomodoroTimer() {
   };
 
   const getProgressPercentage = () => {
-    // 저장된 타이머 상태가 있으면 해당 총 시간 사용
+    // 저장된 타이머 상태에서 원래 총 시간 사용
     const savedTimerState = localStorage.getItem('pomodoroTimerState');
     let total = getCurrentTimeTotal();
     
     if (savedTimerState && isRunning) {
       try {
         const timerData = JSON.parse(savedTimerState);
-        if (timerData.totalTime) {
+        // originalTotal을 우선 사용, 없으면 totalTime 사용
+        if (timerData.originalTotal) {
+          total = timerData.originalTotal;
+        } else if (timerData.totalTime) {
           total = timerData.totalTime;
         }
       } catch (e) {

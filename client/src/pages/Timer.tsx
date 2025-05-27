@@ -169,18 +169,68 @@ export default function Timer() {
   const handleVoiceCommand = (command: string) => {
     console.log('음성 명령:', command);
     
+    // 한글 숫자를 아라비아 숫자로 변환
+    const convertKoreanNumbers = (text: string) => {
+      const koreanNumbers: Record<string, string> = {
+        '십': '10', '일': '1', '이': '2', '삼': '3', '사': '4', '오': '5',
+        '육': '6', '칠': '7', '팔': '8', '구': '9', '영': '0'
+      };
+      
+      let converted = text;
+      Object.entries(koreanNumbers).forEach(([korean, number]) => {
+        converted = converted.replace(new RegExp(korean, 'g'), number);
+      });
+      return converted;
+    };
+    
+    const convertedCommand = convertKoreanNumbers(command);
+    
+    // 프리셋 명령 확인
+    const allPresets = Object.values(TIMER_PRESETS).flat();
+    const matchedPreset = allPresets.find(preset => 
+      convertedCommand.includes(preset.name) || 
+      command.includes(preset.name)
+    );
+    
+    if (matchedPreset && state === 'idle') {
+      console.log('프리셋 선택:', matchedPreset.name);
+      setMinutes(matchedPreset.minutes);
+      setSeconds(matchedPreset.seconds);
+      
+      // "플랭크 시작" 같은 명령이면 바로 시작
+      if (command.includes('시작') || command.includes('start')) {
+        setTimeout(() => {
+          const totalSeconds = matchedPreset.minutes * 60 + matchedPreset.seconds;
+          setTimeLeft(totalSeconds);
+          setInitialTime(totalSeconds);
+          setState('running');
+        }, 100);
+      }
+      return;
+    }
+    
     if (command.includes('시작') || command.includes('start')) {
       // "10분 타이머 시작" 같은 명령 처리
-      const minuteMatch = command.match(/(\d+)분/);
+      const minuteMatch = convertedCommand.match(/(\d+)분/);
+      const secondMatch = convertedCommand.match(/(\d+)초/);
+      
       if (minuteMatch && state === 'idle') {
         const mins = parseInt(minuteMatch[1]);
         setMinutes(mins);
         setSeconds(0);
-        // 약간의 지연 후 타이머 시작
         setTimeout(() => {
           const totalSeconds = mins * 60;
           setTimeLeft(totalSeconds);
           setInitialTime(totalSeconds);
+          setState('running');
+        }, 100);
+      } else if (secondMatch && state === 'idle') {
+        const secs = parseInt(secondMatch[1]);
+        setMinutes(Math.floor(secs / 60));
+        setSeconds(secs % 60);
+        setTimeout(() => {
+          setTimeLeft(secs);
+          setInitialTime(secs);
           setState('running');
         }, 100);
       } else if (state === 'idle' || state === 'paused') {
@@ -192,17 +242,17 @@ export default function Timer() {
       if (state === 'running') {
         pauseTimer();
       }
-    } else if (command.includes('분') && !command.includes('시작')) {
+    } else if (convertedCommand.includes('분') && !command.includes('시작')) {
       // "10분" 이라고만 말했을 때
-      const minuteMatch = command.match(/(\d+)분/);
+      const minuteMatch = convertedCommand.match(/(\d+)분/);
       if (minuteMatch && state === 'idle') {
         const mins = parseInt(minuteMatch[1]);
         setMinutes(mins);
         setSeconds(0);
       }
-    } else if (command.includes('초')) {
-      // "30초" 같은 명령 처리
-      const secondMatch = command.match(/(\d+)초/);
+    } else if (convertedCommand.includes('초')) {
+      // "30초", "십 초" 같은 명령 처리
+      const secondMatch = convertedCommand.match(/(\d+)초/);
       if (secondMatch && state === 'idle') {
         const secs = parseInt(secondMatch[1]);
         if (secs < 60) {
@@ -213,6 +263,12 @@ export default function Timer() {
           setSeconds(secs % 60);
         }
       }
+    } else if (command.includes('운동') || command.includes('요리') || command.includes('학습') || command.includes('회의')) {
+      // 카테고리 변경
+      if (command.includes('운동')) setActiveCategory('workout');
+      else if (command.includes('요리')) setActiveCategory('cooking');
+      else if (command.includes('학습')) setActiveCategory('study');
+      else if (command.includes('회의')) setActiveCategory('meeting');
     }
   };
 

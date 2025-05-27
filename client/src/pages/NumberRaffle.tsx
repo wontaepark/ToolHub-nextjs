@@ -67,6 +67,18 @@ export default function NumberRaffle() {
     }, 800);
   };
 
+  // 번호별 색상 반환 함수
+  const getNumberColor = (number: number, selectedNumbers: number[]) => {
+    const colors = [
+      'bg-gradient-to-br from-yellow-400 to-orange-500 border-yellow-400',
+      'bg-gradient-to-br from-blue-400 to-indigo-500 border-blue-400',
+      'bg-gradient-to-br from-green-400 to-emerald-500 border-green-400'
+    ];
+    
+    const index = selectedNumbers.indexOf(number);
+    return index !== -1 ? colors[index] : 'bg-gradient-to-br from-yellow-400 to-orange-500 border-yellow-400';
+  };
+
   const finalizeNumber = () => {
     if (availableNumbers.length < drawCount) {
       setIsDrawing(false);
@@ -238,7 +250,7 @@ export default function NumberRaffle() {
                           isDrawing
                             ? 'bg-gray-100 border-gray-300 text-gray-700'
                             : currentNumbers.length > 0
-                            ? 'bg-gradient-to-br from-yellow-400 to-orange-500 border-yellow-400 text-white shadow-lg scale-110'
+                            ? `${getNumberColor(num, currentNumbers)} text-white shadow-lg scale-110`
                             : 'bg-white border-gray-300 text-gray-400'
                         }`}
                         style={{
@@ -255,11 +267,18 @@ export default function NumberRaffle() {
                   {currentNumbers.length > 0 && !isDrawing && (
                     <div className="mb-6">
                       <div className="flex flex-wrap justify-center gap-4 mb-4">
-                        {currentNumbers.map((num, index) => (
-                          <div key={index} className="text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text animate-bounce">
-                            {num}
-                          </div>
-                        ))}
+                        {currentNumbers.map((num, index) => {
+                          const colors = [
+                            'from-yellow-400 via-orange-500 to-red-500',
+                            'from-blue-400 via-indigo-500 to-purple-500', 
+                            'from-green-400 via-emerald-500 to-teal-500'
+                          ];
+                          return (
+                            <div key={index} className={`text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r ${colors[index]} bg-clip-text animate-bounce`}>
+                              {num}
+                            </div>
+                          );
+                        })}
                       </div>
                       <p className="text-xl text-gray-600">
                         {currentNumbers.length === 1 ? '당첨 번호!' : `${currentNumbers.length}개 당첨 번호!`}

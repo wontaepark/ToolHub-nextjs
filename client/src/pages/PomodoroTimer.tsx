@@ -443,6 +443,8 @@ export default function PomodoroTimer() {
                     style={{
                       strokeDasharray: `${2 * Math.PI * 45}`,
                       strokeDashoffset: `${2 * Math.PI * 45 * (1 - getProgressPercentage() / 100)}`,
+                      transform: 'rotate(180deg)',
+                      transformOrigin: '50% 50%',
                       transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.3s ease-in-out'
                     }}
                   />

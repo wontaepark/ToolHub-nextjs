@@ -27,7 +27,24 @@ interface Task {
 }
 
 export default function PomodoroTimer() {
-  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  // Load initial settings from localStorage
+  const getInitialSettings = (): PomodoroSettings => {
+    const savedSettings = localStorage.getItem('pomodoroSettings');
+    if (savedSettings) {
+      return JSON.parse(savedSettings);
+    }
+    return {
+      workTime: 25,
+      shortBreakTime: 5,
+      longBreakTime: 15,
+      autoStart: false,
+      soundEnabled: true,
+      taskBasedTiming: false
+    };
+  };
+
+  const initialSettings = getInitialSettings();
+  const [timeLeft, setTimeLeft] = useState(initialSettings.workTime * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [timerState, setTimerState] = useState<TimerState>('idle');
   const [completedPomodoros, setCompletedPomodoros] = useState(0);
@@ -39,14 +56,7 @@ export default function PomodoroTimer() {
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   
-  const [settings, setSettings] = useState<PomodoroSettings>({
-    workTime: 25,
-    shortBreakTime: 5,
-    longBreakTime: 15,
-    autoStart: false,
-    soundEnabled: true,
-    taskBasedTiming: false
-  });
+  const [settings, setSettings] = useState<PomodoroSettings>(initialSettings);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);

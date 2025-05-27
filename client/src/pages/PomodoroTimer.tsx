@@ -103,15 +103,17 @@ export default function PomodoroTimer() {
     // Restore timer state if saved
     if (savedTimerState) {
       const timerData = JSON.parse(savedTimerState);
-      const timeSaved = Date.now() - timerData.timestamp;
+      const timePassed = Math.floor((Date.now() - timerData.timestamp) / 1000);
       
-      if (timerData.isRunning && timeSaved < timerData.timeLeft * 1000) {
+      if (timerData.isRunning && timePassed < timerData.timeLeft) {
         // Calculate remaining time
-        const remainingTime = Math.max(0, timerData.timeLeft - Math.floor(timeSaved / 1000));
-        setTimerState(timerData.timerState);
-        setTimeLeft(remainingTime);
-        setIsRunning(remainingTime > 0);
-        setCompletedPomodoros(timerData.completedPomodoros);
+        const remainingTime = Math.max(0, timerData.timeLeft - timePassed);
+        if (remainingTime > 0) {
+          setTimerState(timerData.timerState);
+          setTimeLeft(remainingTime);
+          setIsRunning(true);
+          setCompletedPomodoros(timerData.completedPomodoros);
+        }
       }
     }
   }, []);
@@ -139,6 +141,7 @@ export default function PomodoroTimer() {
         timerState,
         timeLeft,
         completedPomodoros,
+        totalTime: getCurrentTimeTotal(),
         timestamp: Date.now()
       };
       localStorage.setItem('pomodoroTimerState', JSON.stringify(timerData));
@@ -335,7 +338,9 @@ export default function PomodoroTimer() {
   const getProgressPercentage = () => {
     const total = getCurrentTimeTotal();
     if (total === 0) return 0;
-    return ((total - timeLeft) / total) * 100;
+    const progress = ((total - timeLeft) / total) * 100;
+    // 0과 100 사이로 제한하여 애니메이션 오류 방지
+    return Math.max(0, Math.min(100, progress));
   };
 
   const getStateText = () => {

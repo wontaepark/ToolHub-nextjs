@@ -112,6 +112,29 @@ export default function PomodoroTimer() {
         setTimeLeft(remainingTime);
         setIsRunning(remainingTime > 0);
         setCompletedPomodoros(timerData.completedPomodoros);
+        
+        // Restore current task info if exists
+        if (timerData.currentTask) {
+          setCurrentTaskId(timerData.currentTask);
+        }
+        
+        // Restore custom settings if task-based timing is enabled
+        if (timerData.customSettings) {
+          setSettings(prev => ({ ...prev, ...timerData.customSettings }));
+        }
+      } else if (timerData.timerState && !timerData.isRunning) {
+        // Restore paused or stopped state
+        setTimerState(timerData.timerState);
+        setTimeLeft(timerData.timeLeft);
+        setCompletedPomodoros(timerData.completedPomodoros);
+        
+        if (timerData.currentTask) {
+          setCurrentTaskId(timerData.currentTask);
+        }
+        
+        if (timerData.customSettings) {
+          setSettings(prev => ({ ...prev, ...timerData.customSettings }));
+        }
       }
     }
   }, []);
@@ -133,19 +156,30 @@ export default function PomodoroTimer() {
 
   // Save timer state to localStorage when running
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning || timerState !== 'idle') {
+      // Get current task and its custom settings
+      const currentTaskData = currentTaskId ? tasks.find(task => task.id === currentTaskId) : null;
+      const customSettings = currentTaskData && settings.taskBasedTiming ? {
+        workTime: currentTaskData.customWorkTime || settings.workTime,
+        shortBreakTime: currentTaskData.customShortBreak || settings.shortBreakTime,
+        longBreakTime: currentTaskData.customLongBreak || settings.longBreakTime,
+        taskBasedTiming: settings.taskBasedTiming
+      } : null;
+
       const timerData = {
         isRunning,
         timerState,
         timeLeft,
         completedPomodoros,
+        currentTask: currentTaskId,
+        customSettings,
         timestamp: Date.now()
       };
       localStorage.setItem('pomodoroTimerState', JSON.stringify(timerData));
     } else {
       localStorage.removeItem('pomodoroTimerState');
     }
-  }, [isRunning, timerState, timeLeft, completedPomodoros]);
+  }, [isRunning, timerState, timeLeft, completedPomodoros, currentTask, settings, tasks]);
 
   // Timer logic
   useEffect(() => {

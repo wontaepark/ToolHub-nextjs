@@ -413,7 +413,7 @@ export default function PomodoroTimer() {
               {/* Timer Display with Animated Ring */}
               <div className="relative w-64 h-64 mx-auto">
                 {/* Animated SVG Progress Ring */}
-                <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 100 100">
+                <svg className="w-64 h-64 transform rotate-90" viewBox="0 0 100 100">
                   {/* Background Circle */}
                   <circle
                     cx="50"
@@ -443,8 +443,6 @@ export default function PomodoroTimer() {
                     style={{
                       strokeDasharray: `${2 * Math.PI * 45}`,
                       strokeDashoffset: `${2 * Math.PI * 45 * (1 - getProgressPercentage() / 100)}`,
-                      transform: 'rotate(180deg)',
-                      transformOrigin: '50% 50%',
                       transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.3s ease-in-out'
                     }}
                   />

@@ -188,12 +188,23 @@ export default function Timer() {
     
     const convertedCommand = convertKoreanNumbers(command);
     
-    // 프리셋 명령 확인
+    // 프리셋 명령 확인 (더 정확한 매칭)
     const allPresets = Object.values(TIMER_PRESETS).flat();
-    const matchedPreset = allPresets.find(preset => 
-      convertedCommand.includes(preset.name) || 
-      command.includes(preset.name)
-    );
+    const matchedPreset = allPresets.find(preset => {
+      const presetName = preset.name.toLowerCase();
+      // 정확한 매칭 또는 포함 관계 확인
+      return command === presetName || 
+             convertedCommand === presetName ||
+             command.includes(presetName) || 
+             convertedCommand.includes(presetName) ||
+             // 유사한 발음 매칭
+             (presetName === '라면' && (command.includes('라') || command.includes('면'))) ||
+             (presetName === '플랭크' && (command.includes('플랭') || command.includes('플랑'))) ||
+             (presetName === '계란 (반숙)' && (command.includes('계란') && command.includes('반'))) ||
+             (presetName === '계란 (완숙)' && (command.includes('계란') && command.includes('완'))) ||
+             (presetName === '커피 추출' && (command.includes('커피'))) ||
+             (presetName === '차 우리기' && (command.includes('차')));
+    });
     
     if (matchedPreset && state === 'idle') {
       console.log('프리셋 선택:', matchedPreset.name);

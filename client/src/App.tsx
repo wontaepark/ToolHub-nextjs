@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import PomodoroTimer from "./pages/PomodoroTimer";
 import Timer from "./pages/Timer";
+import NumberRaffle from "./pages/NumberRaffle";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/calculator" component={Calculator} />
           <Route path="/pomodoro" component={PomodoroTimer} />
           <Route path="/timer" component={Timer} />
+          <Route path="/raffle" component={NumberRaffle} />
           <Route component={NotFound} />
         </Switch>
       </main>

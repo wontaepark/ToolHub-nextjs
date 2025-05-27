@@ -130,6 +130,32 @@ export default function Home() {
               </div>
             </div>
           </Link>
+          {/* Number Raffle Card */}
+          <Link href="/raffle">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105 h-full">
+              <div className="relative bg-gradient-to-br from-purple-500 to-pink-600 h-24 md:h-32 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-black/10"></div>
+                <i className="ri-shuffle-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">번호 추첨기</h3>
+                  <Badge variant="default" className="bg-primary/10 text-primary text-xs flex-shrink-0 ml-2">
+                    새로운
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  공정하고 재미있는 번호 추첨을 위한 도구입니다. 
+                  슬롯머신 애니메이션과 함께 시각적으로 즐거운 추첨 경험을 제공합니다.
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">슬롯머신 효과</Badge>
+                  <Badge variant="outline" className="text-xs">중복 제거</Badge>
+                  <Badge variant="outline" className="text-xs">추첨 기록</Badge>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 

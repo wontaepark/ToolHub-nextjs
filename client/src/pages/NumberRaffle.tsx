@@ -34,8 +34,6 @@ export default function NumberRaffle() {
     const saved = localStorage.getItem('raffle-animation-numbers');
     return saved ? JSON.parse(saved) : [0, 0, 0, 0, 0, 0];
   });
-  const [slotSpinning, setSlotSpinning] = useState<boolean[]>([false, false, false, false, false, false]);
-  const [slotNumbers, setSlotNumbers] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
@@ -68,62 +66,41 @@ export default function NumberRaffle() {
     setAvailableNumbers(remaining);
   }, [maxNumber, drawnNumbers]);
 
-  // 개별 슬롯 회전 애니메이션
+  // Slot machine animation effect
   const startSlotAnimation = () => {
-    // 모든 슬롯을 스피닝 상태로 설정
-    setSlotSpinning([true, true, true, true, true, true]);
-    setSlotNumbers([1, 1, 1, 1, 1, 1]);
-    
-    // 각 슬롯의 애니메이션 제어
-    const slotIntervals: NodeJS.Timeout[] = [];
-    
-    for (let slotIndex = 0; slotIndex < 6; slotIndex++) {
-      let speed = 50 + slotIndex * 10; // 각 슬롯마다 다른 시작 속도
-      
-      const animateSlot = () => {
-        setSlotNumbers(prev => {
-          const newNumbers = [...prev];
-          newNumbers[slotIndex] = Math.floor(Math.random() * maxNumber) + 1;
-          return newNumbers;
-        });
-        
-        // 점진적으로 속도 감소
-        speed += 8;
-        
-        if (speed < 500) {
-          slotIntervals[slotIndex] = setTimeout(animateSlot, speed);
-        } else {
-          // 이 슬롯 정지
-          setSlotSpinning(prev => {
-            const newSpinning = [...prev];
-            newSpinning[slotIndex] = false;
-            return newSpinning;
-          });
-        }
-      };
-      
-      // 각 슬롯을 약간 다른 시간에 시작
-      setTimeout(() => {
-        animateSlot();
-      }, slotIndex * 50);
-      
-      // 각 슬롯을 순차적으로 정지 (왼쪽부터)
-      setTimeout(() => {
-        if (slotIntervals[slotIndex]) {
-          clearTimeout(slotIntervals[slotIndex]);
-        }
-        setSlotSpinning(prev => {
-          const newSpinning = [...prev];
-          newSpinning[slotIndex] = false;
-          return newSpinning;
-        });
-      }, 2500 + slotIndex * 400);
-    }
-    
-    // 모든 슬롯이 정지한 후 최종 결과 표시
+    let speed = 50; // Start fast
+    const animate = () => {
+      setAnimationNumbers(prev => 
+        prev.map(() => Math.floor(Math.random() * maxNumber) + 1)
+      );
+    };
+
+    // Fast animation phase
+    animationRef.current = setInterval(animate, speed);
+
+    // Gradually slow down
     setTimeout(() => {
-      finalizeNumber();
-    }, 5000);
+      if (animationRef.current) clearInterval(animationRef.current);
+      speed = 100;
+      animationRef.current = setInterval(animate, speed);
+      
+      setTimeout(() => {
+        if (animationRef.current) clearInterval(animationRef.current);
+        speed = 200;
+        animationRef.current = setInterval(animate, speed);
+        
+        setTimeout(() => {
+          if (animationRef.current) clearInterval(animationRef.current);
+          speed = 400;
+          animationRef.current = setInterval(animate, speed);
+          
+          setTimeout(() => {
+            if (animationRef.current) clearInterval(animationRef.current);
+            finalizeNumber();
+          }, 800);
+        }, 600);
+      }, 400);
+    }, 800);
   };
 
   // 번호별 색상 반환 함수
@@ -302,20 +279,22 @@ export default function NumberRaffle() {
                 {/* Slot Machine Display */}
                 <div className="text-center mb-8">
                   <div className="flex justify-center items-center gap-2 mb-6">
-                    {(isDrawing ? slotNumbers : animationNumbers).map((num, index) => (
+                    {animationNumbers.map((num, index) => (
                       <div
                         key={index}
                         className={`w-16 h-20 md:w-20 md:h-24 rounded-lg border-2 flex items-center justify-center text-2xl md:text-3xl font-bold transition-all duration-300 ${
                           isDrawing
-                            ? slotSpinning[index] 
-                              ? 'bg-gradient-to-br from-purple-100 to-purple-200 border-purple-300 text-purple-700 slot-spinning'
-                              : 'bg-gradient-to-br from-yellow-200 to-yellow-300 border-yellow-400 text-gray-800 slot-stopped'
+                            ? 'bg-gray-100 border-gray-300 text-gray-700'
                             : currentNumbers.length > 0
                             ? `${getNumberColor(num, currentNumbers)} text-white shadow-lg scale-110`
                             : 'bg-white border-gray-300 text-gray-400'
                         }`}
+                        style={{
+                          transform: isDrawing ? `translateY(${Math.sin(Date.now() * 0.01 + index) * 5}px)` : undefined,
+                          animation: isDrawing ? 'pulse 0.5s infinite' : undefined
+                        }}
                       >
-                        {isDrawing && slotSpinning[index] ? '?' : (num || '?')}
+                        {num || '?'}
                       </div>
                     ))}
                   </div>

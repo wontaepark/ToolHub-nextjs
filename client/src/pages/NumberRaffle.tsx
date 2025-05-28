@@ -12,16 +12,52 @@ interface RaffleResult {
 }
 
 export default function NumberRaffle() {
-  const [maxNumber, setMaxNumber] = useState(100);
-  const [drawCount, setDrawCount] = useState(1);
-  const [currentNumbers, setCurrentNumbers] = useState<number[]>([]);
+  const [maxNumber, setMaxNumber] = useState(() => {
+    const saved = localStorage.getItem('raffle-max-number');
+    return saved ? parseInt(saved) : 100;
+  });
+  const [drawCount, setDrawCount] = useState(() => {
+    const saved = localStorage.getItem('raffle-draw-count');
+    return saved ? parseInt(saved) : 1;
+  });
+  const [currentNumbers, setCurrentNumbers] = useState<number[]>(() => {
+    const saved = localStorage.getItem('raffle-current-numbers');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [isDrawing, setIsDrawing] = useState(false);
-  const [drawnNumbers, setDrawnNumbers] = useState<RaffleResult[]>([]);
+  const [drawnNumbers, setDrawnNumbers] = useState<RaffleResult[]>(() => {
+    const saved = localStorage.getItem('raffle-drawn-numbers');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [availableNumbers, setAvailableNumbers] = useState<number[]>([]);
-  const [animationNumbers, setAnimationNumbers] = useState<number[]>([0, 0, 0, 0, 0, 0]);
+  const [animationNumbers, setAnimationNumbers] = useState<number[]>(() => {
+    const saved = localStorage.getItem('raffle-animation-numbers');
+    return saved ? JSON.parse(saved) : [0, 0, 0, 0, 0, 0];
+  });
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
+
+  // localStorage에 상태 저장
+  useEffect(() => {
+    localStorage.setItem('raffle-max-number', maxNumber.toString());
+  }, [maxNumber]);
+
+  useEffect(() => {
+    localStorage.setItem('raffle-draw-count', drawCount.toString());
+  }, [drawCount]);
+
+  useEffect(() => {
+    localStorage.setItem('raffle-current-numbers', JSON.stringify(currentNumbers));
+  }, [currentNumbers]);
+
+  useEffect(() => {
+    localStorage.setItem('raffle-drawn-numbers', JSON.stringify(drawnNumbers));
+  }, [drawnNumbers]);
+
+  useEffect(() => {
+    localStorage.setItem('raffle-animation-numbers', JSON.stringify(animationNumbers));
+  }, [animationNumbers]);
 
   // Initialize available numbers when maxNumber changes
   useEffect(() => {

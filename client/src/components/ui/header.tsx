@@ -28,7 +28,7 @@ export default function Header() {
               <div className="h-7 w-7 md:h-8 md:w-8 rounded-lg gradient-bg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                 <i className="ri-tools-fill text-white text-lg md:text-xl"></i>
               </div>
-              <h1 className="text-lg md:text-xl font-bold">ToolHub<span className="text-primary">.io</span></h1>
+              <h1 className="text-lg md:text-xl font-bold">ToolHub<span className="text-primary">.tools</span></h1>
             </div>
           </Link>
         </div>
@@ -127,6 +127,17 @@ export default function Header() {
                   >
                     <i className="ri-time-line text-lg"></i>
                     <span className="font-medium">범용 타이머</span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link href="/raffle">
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/raffle" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-shuffle-line text-lg"></i>
+                    <span className="font-medium">번호 추첨기</span>
                   </div>
                 </Link>
               </li>

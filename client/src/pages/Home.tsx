@@ -18,7 +18,7 @@ export default function Home() {
         </Badge>
         
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight">
-          ToolHub<span className="text-primary">.io</span>
+          ToolHub<span className="text-primary">.tools</span>
         </h1>
         
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-foreground px-2">
@@ -161,53 +161,97 @@ export default function Home() {
 
       {/* Coming Soon Section */}
       <div className="mb-12 md:mb-16 px-4">
-        <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">곧 출시될 도구들</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-          {/* Unit Converter Card (Coming Soon) */}
-          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden opacity-75 cursor-not-allowed border border-border/30">
-            <div className="h-32 md:h-40 bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center">
-              <i className="ri-scales-3-line text-muted-foreground text-4xl md:text-6xl"></i>
+        <div className="text-center mb-8">
+          <h3 className="text-xl md:text-2xl font-bold mb-3">다음 주차 출시 예정</h3>
+          <p className="text-sm md:text-base text-muted-foreground">매주 새로운 도구가 추가됩니다</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+          {/* Unit Converter - Next Week */}
+          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-blue-200 relative">
+            <div className="absolute top-2 right-2 z-10">
+              <Badge className="bg-blue-500 text-white text-xs">다음 주</Badge>
             </div>
-            <div className="p-4 md:p-6">
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="font-bold text-lg md:text-xl text-muted-foreground leading-tight">단위 변환기</h3>
-                <Badge variant="secondary" className="bg-muted text-muted-foreground text-xs flex-shrink-0 ml-2">
-                  준비 중
-                </Badge>
-              </div>
-              <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                길이, 무게, 온도 등 다양한 측정 단위 간 변환을 쉽고 빠르게 할 수 있습니다.
+            <div className="h-24 md:h-32 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+              <i className="ri-scales-3-line text-white text-3xl md:text-5xl"></i>
+            </div>
+            <div className="p-3 md:p-4">
+              <h4 className="font-bold text-sm md:text-base mb-2">단위 변환기</h4>
+              <p className="text-xs md:text-sm text-muted-foreground mb-2">
+                길이, 무게, 온도 등 다양한 단위 변환
               </p>
-              <div className="flex flex-wrap gap-1.5 md:gap-2">
-                <Badge variant="outline" className="text-xs opacity-50">길이 변환</Badge>
-                <Badge variant="outline" className="text-xs opacity-50">무게 변환</Badge>
-                <Badge variant="outline" className="text-xs opacity-50">온도 변환</Badge>
+              <div className="flex flex-wrap gap-1">
+                <Badge variant="outline" className="text-xs">길이</Badge>
+                <Badge variant="outline" className="text-xs">무게</Badge>
               </div>
             </div>
           </div>
-          
-          {/* Weather Card (Coming Soon) */}
-          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden opacity-75 cursor-not-allowed border border-border/30">
-            <div className="h-32 md:h-40 bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center">
-              <i className="ri-sun-cloudy-line text-muted-foreground text-4xl md:text-6xl"></i>
+
+          {/* Password Generator - Week 2 */}
+          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-orange-200 relative opacity-90">
+            <div className="absolute top-2 right-2 z-10">
+              <Badge variant="outline" className="bg-orange-100 text-orange-600 text-xs">2주 후</Badge>
             </div>
-            <div className="p-4 md:p-6">
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="font-bold text-lg md:text-xl text-muted-foreground leading-tight">날씨 정보</h3>
-                <Badge variant="secondary" className="bg-muted text-muted-foreground text-xs flex-shrink-0 ml-2">
-                  준비 중
-                </Badge>
-              </div>
-              <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                현재 날씨와 주간 일기예보를 한눈에 확인할 수 있는 날씨 도구입니다.
+            <div className="h-24 md:h-32 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+              <i className="ri-shield-keyhole-line text-white text-3xl md:text-5xl"></i>
+            </div>
+            <div className="p-3 md:p-4">
+              <h4 className="font-bold text-sm md:text-base mb-2">비밀번호 생성기</h4>
+              <p className="text-xs md:text-sm text-muted-foreground mb-2">
+                안전하고 강력한 비밀번호 생성
               </p>
-              <div className="flex flex-wrap gap-1.5 md:gap-2">
-                <Badge variant="outline" className="text-xs opacity-50">현재 날씨</Badge>
-                <Badge variant="outline" className="text-xs opacity-50">주간 예보</Badge>
-                <Badge variant="outline" className="text-xs opacity-50">날씨 알림</Badge>
+              <div className="flex flex-wrap gap-1">
+                <Badge variant="outline" className="text-xs">보안</Badge>
+                <Badge variant="outline" className="text-xs">랜덤</Badge>
               </div>
             </div>
           </div>
+
+          {/* QR Code Generator - Week 3 */}
+          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-purple-200 relative opacity-75">
+            <div className="absolute top-2 right-2 z-10">
+              <Badge variant="outline" className="bg-purple-100 text-purple-600 text-xs">3주 후</Badge>
+            </div>
+            <div className="h-24 md:h-32 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+              <i className="ri-qr-code-line text-white text-3xl md:text-5xl"></i>
+            </div>
+            <div className="p-3 md:p-4">
+              <h4 className="font-bold text-sm md:text-base mb-2">QR코드 생성기</h4>
+              <p className="text-xs md:text-sm text-muted-foreground mb-2">
+                링크, 텍스트를 QR코드로 변환
+              </p>
+              <div className="flex flex-wrap gap-1">
+                <Badge variant="outline" className="text-xs">QR</Badge>
+                <Badge variant="outline" className="text-xs">공유</Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* Weather Info - Month 2 */}
+          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-green-200 relative opacity-60">
+            <div className="absolute top-2 right-2 z-10">
+              <Badge variant="outline" className="bg-green-100 text-green-600 text-xs">다음 달</Badge>
+            </div>
+            <div className="h-24 md:h-32 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+              <i className="ri-sun-cloudy-line text-white text-3xl md:text-5xl"></i>
+            </div>
+            <div className="p-3 md:p-4">
+              <h4 className="font-bold text-sm md:text-base mb-2">날씨 정보</h4>
+              <p className="text-xs md:text-sm text-muted-foreground mb-2">
+                실시간 날씨와 주간 예보
+              </p>
+              <div className="flex flex-wrap gap-1">
+                <Badge variant="outline" className="text-xs">실시간</Badge>
+                <Badge variant="outline" className="text-xs">예보</Badge>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="text-center mt-6">
+          <p className="text-xs md:text-sm text-muted-foreground">
+            📅 정기적인 업데이트로 더 많은 도구들이 추가될 예정입니다
+          </p>
         </div>
       </div>
       
@@ -215,13 +259,13 @@ export default function Home() {
       <Card className="mt-8 md:mt-16 mx-4">
         <CardContent className="p-6 md:p-8">
           <div className="text-center">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">ToolHub.io에 대하여</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4">ToolHub.tools에 대하여</h3>
             <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6 max-w-2xl mx-auto leading-relaxed">
-              ToolHub.io는 일상생활에 도움이 되는 실용적인 웹 도구들을 모아놓은 플랫폼입니다. 
-              간단하고 빠르며 무료로 사용할 수 있는 유틸리티를 모든 기기에서 원활하게 제공하는 것이 우리의 목표입니다.
+              ToolHub.tools는 일상생활에 도움이 되는 실용적인 웹 도구들을 모아놓은 플랫폼입니다. 
+              매주 새로운 도구가 추가되는 정기 업데이트를 통해 점점 더 유용한 서비스가 되어가고 있습니다.
             </p>
             <p className="text-muted-foreground text-sm md:text-base">
-              새로운 도구들을 지속적으로 추가하고 있습니다. 제안이나 피드백이 있으시면 언제든 알려주세요!
+              🗓️ 주차별 출시 계획: 단위변환기 → 비밀번호 생성기 → QR코드 생성기 → 날씨정보
             </p>
           </div>
         </CardContent>

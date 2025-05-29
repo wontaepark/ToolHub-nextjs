@@ -42,6 +42,7 @@ export default function NumberRaffle() {
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const drumAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // localStorage에 상태 저장
   useEffect(() => {
@@ -67,6 +68,16 @@ export default function NumberRaffle() {
   useEffect(() => {
     localStorage.setItem('raffle-sound-enabled', JSON.stringify(soundEnabled));
   }, [soundEnabled]);
+
+  // 드럼 오디오 초기화
+  useEffect(() => {
+    if (!drumAudioRef.current) {
+      drumAudioRef.current = new Audio();
+      drumAudioRef.current.src = '/attached_assets/Drum_org.mp3';
+      drumAudioRef.current.preload = 'auto';
+      drumAudioRef.current.volume = 0.7;
+    }
+  }, []);
 
   // 오디오 컨텍스트 초기화
   const initAudioContext = () => {
@@ -174,6 +185,21 @@ export default function NumberRaffle() {
     oscillator.stop(audioContext.currentTime + 0.05);
   };
 
+  // 제공해주신 드럼 사운드 재생
+  const playDrumSound = async () => {
+    if (!soundEnabled || !drumAudioRef.current) return;
+    
+    try {
+      // 오디오를 처음부터 재생하기 위해 currentTime 리셋
+      drumAudioRef.current.currentTime = 0;
+      await drumAudioRef.current.play();
+    } catch (error) {
+      console.log('드럼 사운드 재생 실패:', error);
+      // 실패 시 기본 스네어 드럼으로 대체
+      playSnareRoll();
+    }
+  };
+
   // Initialize available numbers when maxNumber changes
   useEffect(() => {
     const numbers = Array.from({ length: maxNumber }, (_, i) => i + 1);
@@ -183,8 +209,8 @@ export default function NumberRaffle() {
 
   // Slot machine animation effect
   const startSlotAnimation = () => {
-    // 시작 시 드럼롤 사운드
-    playSnareRoll();
+    // 시작 시 멋진 드럼 사운드 재생
+    playDrumSound();
     
     let speed = 50; // Start fast
     let tickCount = 0;
@@ -207,13 +233,13 @@ export default function NumberRaffle() {
     // Gradually slow down
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
-      playSnareRoll(); // 속도 변경 시 드럼롤
+      playDrumSound(); // 속도 변경 시 드럼 사운드
       speed = 100;
       animationRef.current = setInterval(animate, speed);
       
       setTimeout(() => {
         if (animationRef.current) clearInterval(animationRef.current);
-        playSnareRoll(); // 더 느려질 때 드럼롤
+        playDrumSound(); // 더 느려질 때 드럼 사운드
         speed = 200;
         animationRef.current = setInterval(animate, speed);
         

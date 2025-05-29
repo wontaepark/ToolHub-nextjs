@@ -38,11 +38,16 @@ export default function NumberRaffle() {
     const saved = localStorage.getItem('raffle-sound-enabled');
     return saved ? JSON.parse(saved) : true;
   });
+  const [volume, setVolume] = useState(() => {
+    const saved = localStorage.getItem('raffle-volume');
+    return saved ? parseFloat(saved) : 0.8;
+  });
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const drumAudioRef = useRef<HTMLAudioElement | null>(null);
+  const isPlayingRef = useRef<boolean>(false);
 
   // localStorage에 상태 저장
   useEffect(() => {
@@ -69,6 +74,13 @@ export default function NumberRaffle() {
     localStorage.setItem('raffle-sound-enabled', JSON.stringify(soundEnabled));
   }, [soundEnabled]);
 
+  useEffect(() => {
+    localStorage.setItem('raffle-volume', volume.toString());
+    if (drumAudioRef.current) {
+      drumAudioRef.current.volume = volume;
+    }
+  }, [volume]);
+
   // 드럼 오디오 초기화
   useEffect(() => {
     if (!drumAudioRef.current) {
@@ -78,13 +90,18 @@ export default function NumberRaffle() {
         if (drumAudioRef.current) {
           drumAudioRef.current.src = module.default;
           drumAudioRef.current.preload = 'auto';
-          drumAudioRef.current.volume = 0.8;
+          drumAudioRef.current.volume = volume;
+          
+          // 재생 완료 시 플래그 리셋
+          drumAudioRef.current.addEventListener('ended', () => {
+            isPlayingRef.current = false;
+          });
         }
       }).catch(() => {
-        console.log('드럼 사운드 파일을 찾을 수 없습니다. 기본 사운드를 사용합니다.');
+        console.log('드럼 사운드 파일을 찾을 수 없습니다.');
       });
     }
-  }, []);
+  }, [volume]);
 
   // 오디오 컨텍스트 초기화
   const initAudioContext = () => {
@@ -192,15 +209,18 @@ export default function NumberRaffle() {
     oscillator.stop(audioContext.currentTime + 0.05);
   };
 
-  // 멋진 드럼 사운드 재생 (유일한 사운드 효과)
+  // 멋진 드럼 사운드 재생 (중복 재생 방지)
   const playDrumSound = async () => {
-    if (!soundEnabled || !drumAudioRef.current) return;
+    if (!soundEnabled || !drumAudioRef.current || isPlayingRef.current) return;
     
     try {
+      isPlayingRef.current = true;
       // 오디오를 처음부터 재생하기 위해 currentTime 리셋
       drumAudioRef.current.currentTime = 0;
+      drumAudioRef.current.volume = volume;
       await drumAudioRef.current.play();
     } catch (error) {
+      isPlayingRef.current = false;
       console.log('드럼 사운드 재생 중 오류 발생');
     }
   };
@@ -412,6 +432,28 @@ export default function NumberRaffle() {
                     </span>
                   </label>
                 </div>
+
+                {soundEnabled && (
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">
+                      볼륨 조절 ({Math.round(volume * 100)}%)
+                    </label>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xs">🔇</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={volume}
+                        onChange={(e) => setVolume(parseFloat(e.target.value))}
+                        disabled={isDrawing}
+                        className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                      />
+                      <span className="text-xs">🔊</span>
+                    </div>
+                  </div>
+                )}
                 
                 <Button
                   onClick={handleReset}

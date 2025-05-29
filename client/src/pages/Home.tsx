@@ -156,6 +156,33 @@ export default function Home() {
               </div>
             </div>
           </Link>
+
+          {/* YouTube Thumbnail Downloader Card */}
+          <Link href="/thumbnail">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-red-500/30 active:scale-[0.98]">
+              <div className="h-32 md:h-40 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-transparent"></div>
+                <i className="ri-image-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">썸네일 다운로더</h3>
+                  <Badge variant="default" className="bg-red-500/10 text-red-600 text-xs flex-shrink-0 ml-2">
+                    신규
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  YouTube 동영상의 고화질 썸네일 이미지를 간편하게 다운로드하세요. 
+                  다양한 해상도 옵션을 제공합니다.
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">고화질</Badge>
+                  <Badge variant="outline" className="text-xs">여러 해상도</Badge>
+                  <Badge variant="outline" className="text-xs">원클릭 다운로드</Badge>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 

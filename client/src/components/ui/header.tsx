@@ -141,6 +141,17 @@ export default function Header() {
                   </div>
                 </Link>
               </li>
+              <li>
+                <Link href="/thumbnail">
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/thumbnail" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-image-line text-lg"></i>
+                    <span className="font-medium">썸네일 다운로더</span>
+                  </div>
+                </Link>
+              </li>
               <li className="border-t pt-2 mt-2">
                 <a 
                   href="https://github.com" 

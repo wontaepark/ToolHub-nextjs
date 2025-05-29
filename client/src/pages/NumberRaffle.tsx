@@ -73,9 +73,16 @@ export default function NumberRaffle() {
   useEffect(() => {
     if (!drumAudioRef.current) {
       drumAudioRef.current = new Audio();
-      drumAudioRef.current.src = '/attached_assets/Drum_org.mp3';
-      drumAudioRef.current.preload = 'auto';
-      drumAudioRef.current.volume = 0.7;
+      // Vite의 assets 처리 방식에 맞춰 import 사용
+      import('@assets/Drum_org.mp3').then((module) => {
+        if (drumAudioRef.current) {
+          drumAudioRef.current.src = module.default;
+          drumAudioRef.current.preload = 'auto';
+          drumAudioRef.current.volume = 0.8;
+        }
+      }).catch(() => {
+        console.log('드럼 사운드 파일을 찾을 수 없습니다. 기본 사운드를 사용합니다.');
+      });
     }
   }, []);
 
@@ -185,7 +192,7 @@ export default function NumberRaffle() {
     oscillator.stop(audioContext.currentTime + 0.05);
   };
 
-  // 제공해주신 드럼 사운드 재생
+  // 멋진 드럼 사운드 재생 (유일한 사운드 효과)
   const playDrumSound = async () => {
     if (!soundEnabled || !drumAudioRef.current) return;
     
@@ -194,9 +201,7 @@ export default function NumberRaffle() {
       drumAudioRef.current.currentTime = 0;
       await drumAudioRef.current.play();
     } catch (error) {
-      console.log('드럼 사운드 재생 실패:', error);
-      // 실패 시 기본 스네어 드럼으로 대체
-      playSnareRoll();
+      console.log('드럼 사운드 재생 중 오류 발생');
     }
   };
 
@@ -213,18 +218,11 @@ export default function NumberRaffle() {
     playDrumSound();
     
     let speed = 50; // Start fast
-    let tickCount = 0;
     
     const animate = () => {
       setAnimationNumbers(prev => 
         prev.map(() => Math.floor(Math.random() * maxNumber) + 1)
       );
-      
-      // 주기적으로 틱 사운드 재생
-      tickCount++;
-      if (tickCount % 4 === 0) {
-        playTickSound();
-      }
     };
 
     // Fast animation phase
@@ -233,25 +231,18 @@ export default function NumberRaffle() {
     // Gradually slow down
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
-      playDrumSound(); // 속도 변경 시 드럼 사운드
       speed = 100;
       animationRef.current = setInterval(animate, speed);
       
       setTimeout(() => {
         if (animationRef.current) clearInterval(animationRef.current);
-        playDrumSound(); // 더 느려질 때 드럼 사운드
         speed = 200;
         animationRef.current = setInterval(animate, speed);
         
         setTimeout(() => {
           if (animationRef.current) clearInterval(animationRef.current);
           speed = 400;
-          animationRef.current = setInterval(() => {
-            setAnimationNumbers(prev => 
-              prev.map(() => Math.floor(Math.random() * maxNumber) + 1)
-            );
-            playTickSound(); // 마지막 단계에서 매번 틱 소리
-          }, speed);
+          animationRef.current = setInterval(animate, speed);
           
           setTimeout(() => {
             if (animationRef.current) clearInterval(animationRef.current);
@@ -310,8 +301,8 @@ export default function NumberRaffle() {
     setAnimationNumbers(finalSlots);
     
     setTimeout(() => {
-      // 당첨 순간 심벌즈 크래시 사운드
-      playCymbalCrash();
+      // 당첨 순간 드럼 사운드
+      playDrumSound();
       
       // 여러 개의 결과를 추가
       const newResults: RaffleResult[] = selectedNumbers.map((num, index) => ({

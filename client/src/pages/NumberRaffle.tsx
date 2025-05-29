@@ -38,10 +38,6 @@ export default function NumberRaffle() {
     const saved = localStorage.getItem('raffle-sound-enabled');
     return saved ? JSON.parse(saved) : true;
   });
-  const [selectedSoundType, setSelectedSoundType] = useState(() => {
-    const saved = localStorage.getItem('raffle-sound-type');
-    return saved || 'classic';
-  });
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
@@ -73,10 +69,6 @@ export default function NumberRaffle() {
     localStorage.setItem('raffle-sound-enabled', JSON.stringify(soundEnabled));
   }, [soundEnabled]);
 
-  useEffect(() => {
-    localStorage.setItem('raffle-sound-type', selectedSoundType);
-  }, [selectedSoundType]);
-
   // 드럼 오디오 초기화
   useEffect(() => {
     if (!drumAudioRef.current) {
@@ -95,33 +87,9 @@ export default function NumberRaffle() {
     return audioContextRef.current;
   };
 
-  // 다양한 드럼 사운드 타입들
-  const playDrumByType = (type: string) => {
+  // 스네어 드럼 사운드 (긴장감 있는 롤링 효과)
+  const playSnareRoll = () => {
     if (!soundEnabled) return;
-    
-    switch (type) {
-      case 'classic':
-        playClassicSnare();
-        break;
-      case 'electronic':
-        playElectronicKick();
-        break;
-      case 'orchestra':
-        playOrchestraTimpani();
-        break;
-      case 'jazz':
-        playJazzBrush();
-        break;
-      case 'rock':
-        playRockKick();
-        break;
-      default:
-        playClassicSnare();
-    }
-  };
-
-  // 클래식 스네어 드럼
-  const playClassicSnare = () => {
     const audioContext = initAudioContext();
     
     // 노이즈 생성 (스네어 효과)
@@ -160,101 +128,6 @@ export default function NumberRaffle() {
     
     noise.start();
     noise.stop(audioContext.currentTime + 0.1);
-  };
-
-  // 일렉트로닉 킥 드럼
-  const playElectronicKick = () => {
-    const audioContext = initAudioContext();
-    
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(60, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
-    gainNode.gain.setValueAtTime(0.8, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.3);
-  };
-
-  // 오케스트라 팀파니
-  const playOrchestraTimpani = () => {
-    const audioContext = initAudioContext();
-    
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(80, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(70, audioContext.currentTime + 0.5);
-    
-    gainNode.gain.setValueAtTime(0.6, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.8);
-  };
-
-  // 재즈 브러시 드럼
-  const playJazzBrush = () => {
-    const audioContext = initAudioContext();
-    
-    // 하이햇 같은 소리
-    const bufferSize = audioContext.sampleRate * 0.05;
-    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-    
-    for (let i = 0; i < bufferSize; i++) {
-      output[i] = (Math.random() * 2 - 1) * 0.2;
-    }
-    
-    const noise = audioContext.createBufferSource();
-    noise.buffer = buffer;
-    
-    const highpass = audioContext.createBiquadFilter();
-    highpass.type = 'highpass';
-    highpass.frequency.value = 8000;
-    
-    const gainNode = audioContext.createGain();
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
-    
-    noise.connect(highpass);
-    highpass.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    noise.start();
-    noise.stop(audioContext.currentTime + 0.05);
-  };
-
-  // 록 킥 드럼
-  const playRockKick = () => {
-    const audioContext = initAudioContext();
-    
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.type = 'square';
-    oscillator.frequency.setValueAtTime(50, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-    
-    gainNode.gain.setValueAtTime(0.7, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.2);
   };
 
   // 심벌즈 크래시 (당첨 시)
@@ -312,9 +185,19 @@ export default function NumberRaffle() {
     oscillator.stop(audioContext.currentTime + 0.05);
   };
 
-  // 선택된 타입의 드럼 사운드 재생
-  const playSelectedDrumSound = () => {
-    playDrumByType(selectedSoundType);
+  // 제공해주신 드럼 사운드 재생
+  const playDrumSound = async () => {
+    if (!soundEnabled || !drumAudioRef.current) return;
+    
+    try {
+      // 오디오를 처음부터 재생하기 위해 currentTime 리셋
+      drumAudioRef.current.currentTime = 0;
+      await drumAudioRef.current.play();
+    } catch (error) {
+      console.log('드럼 사운드 재생 실패:', error);
+      // 실패 시 기본 스네어 드럼으로 대체
+      playSnareRoll();
+    }
   };
 
   // Initialize available numbers when maxNumber changes
@@ -326,8 +209,8 @@ export default function NumberRaffle() {
 
   // Slot machine animation effect
   const startSlotAnimation = () => {
-    // 시작 시 선택된 드럼 사운드 재생
-    playSelectedDrumSound();
+    // 시작 시 멋진 드럼 사운드 재생
+    playDrumSound();
     
     let speed = 50; // Start fast
     let tickCount = 0;
@@ -350,13 +233,13 @@ export default function NumberRaffle() {
     // Gradually slow down
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
-      playSelectedDrumSound(); // 속도 변경 시 드럼 사운드
+      playDrumSound(); // 속도 변경 시 드럼 사운드
       speed = 100;
       animationRef.current = setInterval(animate, speed);
       
       setTimeout(() => {
         if (animationRef.current) clearInterval(animationRef.current);
-        playSelectedDrumSound(); // 더 느려질 때 드럼 사운드
+        playDrumSound(); // 더 느려질 때 드럼 사운드
         speed = 200;
         animationRef.current = setInterval(animate, speed);
         
@@ -537,29 +420,6 @@ export default function NumberRaffle() {
                       {soundEnabled ? '🔊 ON' : '🔇 OFF'}
                     </span>
                   </label>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium mb-2 block">드럼 사운드</label>
-                  <select
-                    value={selectedSoundType}
-                    onChange={(e) => setSelectedSoundType(e.target.value)}
-                    disabled={isDrawing}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                  >
-                    <option value="classic">🥁 클래식 스네어</option>
-                    <option value="electronic">🔈 일렉트로닉 킥</option>
-                    <option value="orchestra">🎼 오케스트라 팀파니</option>
-                    <option value="jazz">🎷 재즈 브러시</option>
-                    <option value="rock">🎸 록 킥드럼</option>
-                  </select>
-                  <button
-                    onClick={playSelectedDrumSound}
-                    disabled={isDrawing || !soundEnabled}
-                    className="mt-2 w-full px-3 py-2 text-sm bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    🎵 미리 듣기
-                  </button>
                 </div>
                 
                 <Button

@@ -277,8 +277,6 @@ export default function NumberRaffle() {
     const shuffled = [...availableNumbers].sort(() => Math.random() - 0.5);
     const selectedNumbers = shuffled.slice(0, drawCount).sort((a, b) => a - b);
     
-    setCurrentNumbers(selectedNumbers);
-    
     // 6개 슬롯에 번호 배치
     let finalSlots: number[] = [];
     
@@ -314,10 +312,11 @@ export default function NumberRaffle() {
     
     setDrawnNumbers(prev => [...newResults, ...prev]);
     
-    // 1초 후 추첨 완료 (당첨 번호 표시 시간 확보)
+    // 판 색상 변경과 동시에 당첨 번호 설정
     setTimeout(() => {
+      setCurrentNumbers(selectedNumbers);
       setIsDrawing(false);
-    }, 1000);
+    }, 100);
   };
 
   const handleDraw = () => {

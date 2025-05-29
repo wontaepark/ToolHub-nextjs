@@ -237,7 +237,7 @@ export default function NumberRaffle() {
     // 시작 시 멋진 드럼 사운드 재생
     playDrumSound();
     
-    let speed = 50; // Start fast
+    const speed = 100; // 일정한 속도 유지
     
     const animate = () => {
       setAnimationNumbers(prev => 
@@ -245,32 +245,14 @@ export default function NumberRaffle() {
       );
     };
 
-    // Fast animation phase
+    // 일정한 속도로 애니메이션 유지
     animationRef.current = setInterval(animate, speed);
 
-    // Gradually slow down
+    // 드럼 사운드 길이에 맞춰 애니메이션 지속 (약 2.5초)
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
-      speed = 100;
-      animationRef.current = setInterval(animate, speed);
-      
-      setTimeout(() => {
-        if (animationRef.current) clearInterval(animationRef.current);
-        speed = 200;
-        animationRef.current = setInterval(animate, speed);
-        
-        setTimeout(() => {
-          if (animationRef.current) clearInterval(animationRef.current);
-          speed = 400;
-          animationRef.current = setInterval(animate, speed);
-          
-          setTimeout(() => {
-            if (animationRef.current) clearInterval(animationRef.current);
-            finalizeNumber();
-          }, 800);
-        }, 600);
-      }, 400);
-    }, 800);
+      finalizeNumber();
+    }, 2500);
   };
 
   // 번호별 색상 반환 함수

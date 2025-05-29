@@ -37,6 +37,7 @@ export default function NumberRaffle() {
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   // localStorage에 상태 저장
   useEffect(() => {
@@ -58,6 +59,109 @@ export default function NumberRaffle() {
   useEffect(() => {
     localStorage.setItem('raffle-animation-numbers', JSON.stringify(animationNumbers));
   }, [animationNumbers]);
+
+  // 오디오 컨텍스트 초기화
+  const initAudioContext = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    return audioContextRef.current;
+  };
+
+  // 스네어 드럼 사운드 (긴장감 있는 롤링 효과)
+  const playSnareRoll = () => {
+    const audioContext = initAudioContext();
+    
+    // 노이즈 생성 (스네어 효과)
+    const bufferSize = audioContext.sampleRate * 0.1;
+    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    const output = buffer.getChannelData(0);
+    
+    for (let i = 0; i < bufferSize; i++) {
+      output[i] = (Math.random() * 2 - 1) * 0.3;
+    }
+    
+    const noise = audioContext.createBufferSource();
+    noise.buffer = buffer;
+    
+    // 하이패스 필터 (스네어 특성)
+    const highpass = audioContext.createBiquadFilter();
+    highpass.type = 'highpass';
+    highpass.frequency.value = 1000;
+    
+    // 밴드패스 필터
+    const bandpass = audioContext.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 200;
+    bandpass.Q.value = 1;
+    
+    // 게인 조절
+    const gainNode = audioContext.createGain();
+    gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    // 연결
+    noise.connect(bandpass);
+    bandpass.connect(highpass);
+    highpass.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    noise.start();
+    noise.stop(audioContext.currentTime + 0.1);
+  };
+
+  // 심벌즈 크래시 (당첨 시)
+  const playCymbalCrash = () => {
+    const audioContext = initAudioContext();
+    
+    // 여러 주파수의 사인파 조합 (심벌즈 효과)
+    const frequencies = [523, 659, 784, 987, 1174, 1397];
+    const duration = 1.5;
+    
+    frequencies.forEach((freq, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.type = 'sawtooth';
+      oscillator.frequency.value = freq + (Math.random() * 50 - 25);
+      
+      // 크래시 효과를 위한 엔벨로프
+      gainNode.gain.setValueAtTime(0.1 / frequencies.length, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+      
+      // 하이패스 필터 (밝은 소리)
+      const highpass = audioContext.createBiquadFilter();
+      highpass.type = 'highpass';
+      highpass.frequency.value = 500;
+      
+      oscillator.connect(highpass);
+      highpass.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start(audioContext.currentTime + index * 0.01);
+      oscillator.stop(audioContext.currentTime + duration);
+    });
+  };
+
+  // 틱 사운드 (애니메이션 중)
+  const playTickSound = () => {
+    const audioContext = initAudioContext();
+    
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.type = 'square';
+    oscillator.frequency.value = 800;
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.05);
+  };
 
   // Initialize available numbers when maxNumber changes
   useEffect(() => {

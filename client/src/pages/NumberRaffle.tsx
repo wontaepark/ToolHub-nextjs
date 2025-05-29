@@ -34,6 +34,10 @@ export default function NumberRaffle() {
     const saved = localStorage.getItem('raffle-animation-numbers');
     return saved ? JSON.parse(saved) : [0, 0, 0, 0, 0, 0];
   });
+  const [soundEnabled, setSoundEnabled] = useState(() => {
+    const saved = localStorage.getItem('raffle-sound-enabled');
+    return saved ? JSON.parse(saved) : true;
+  });
   
   const animationRef = useRef<NodeJS.Timeout | null>(null);
   const slowdownRef = useRef<NodeJS.Timeout | null>(null);
@@ -60,6 +64,10 @@ export default function NumberRaffle() {
     localStorage.setItem('raffle-animation-numbers', JSON.stringify(animationNumbers));
   }, [animationNumbers]);
 
+  useEffect(() => {
+    localStorage.setItem('raffle-sound-enabled', JSON.stringify(soundEnabled));
+  }, [soundEnabled]);
+
   // 오디오 컨텍스트 초기화
   const initAudioContext = () => {
     if (!audioContextRef.current) {
@@ -70,6 +78,7 @@ export default function NumberRaffle() {
 
   // 스네어 드럼 사운드 (긴장감 있는 롤링 효과)
   const playSnareRoll = () => {
+    if (!soundEnabled) return;
     const audioContext = initAudioContext();
     
     // 노이즈 생성 (스네어 효과)
@@ -112,6 +121,7 @@ export default function NumberRaffle() {
 
   // 심벌즈 크래시 (당첨 시)
   const playCymbalCrash = () => {
+    if (!soundEnabled) return;
     const audioContext = initAudioContext();
     
     // 여러 주파수의 사인파 조합 (심벌즈 효과)
@@ -145,6 +155,7 @@ export default function NumberRaffle() {
 
   // 틱 사운드 (애니메이션 중)
   const playTickSound = () => {
+    if (!soundEnabled) return;
     const audioContext = initAudioContext();
     
     const oscillator = audioContext.createOscillator();
@@ -172,11 +183,22 @@ export default function NumberRaffle() {
 
   // Slot machine animation effect
   const startSlotAnimation = () => {
+    // 시작 시 드럼롤 사운드
+    playSnareRoll();
+    
     let speed = 50; // Start fast
+    let tickCount = 0;
+    
     const animate = () => {
       setAnimationNumbers(prev => 
         prev.map(() => Math.floor(Math.random() * maxNumber) + 1)
       );
+      
+      // 주기적으로 틱 사운드 재생
+      tickCount++;
+      if (tickCount % 4 === 0) {
+        playTickSound();
+      }
     };
 
     // Fast animation phase
@@ -185,18 +207,25 @@ export default function NumberRaffle() {
     // Gradually slow down
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
+      playSnareRoll(); // 속도 변경 시 드럼롤
       speed = 100;
       animationRef.current = setInterval(animate, speed);
       
       setTimeout(() => {
         if (animationRef.current) clearInterval(animationRef.current);
+        playSnareRoll(); // 더 느려질 때 드럼롤
         speed = 200;
         animationRef.current = setInterval(animate, speed);
         
         setTimeout(() => {
           if (animationRef.current) clearInterval(animationRef.current);
           speed = 400;
-          animationRef.current = setInterval(animate, speed);
+          animationRef.current = setInterval(() => {
+            setAnimationNumbers(prev => 
+              prev.map(() => Math.floor(Math.random() * maxNumber) + 1)
+            );
+            playTickSound(); // 마지막 단계에서 매번 틱 소리
+          }, speed);
           
           setTimeout(() => {
             if (animationRef.current) clearInterval(animationRef.current);
@@ -255,6 +284,9 @@ export default function NumberRaffle() {
     setAnimationNumbers(finalSlots);
     
     setTimeout(() => {
+      // 당첨 순간 심벌즈 크래시 사운드
+      playCymbalCrash();
+      
       // 여러 개의 결과를 추가
       const newResults: RaffleResult[] = selectedNumbers.map((num, index) => ({
         number: num,
@@ -345,6 +377,23 @@ export default function NumberRaffle() {
                     <option value={2}>2개</option>
                     <option value={3}>3개</option>
                   </select>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium">효과음</label>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={soundEnabled}
+                      onChange={(e) => setSoundEnabled(e.target.checked)}
+                      disabled={isDrawing}
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                    <span className="ml-3 text-sm text-gray-600">
+                      {soundEnabled ? '🔊 ON' : '🔇 OFF'}
+                    </span>
+                  </label>
                 </div>
                 
                 <Button

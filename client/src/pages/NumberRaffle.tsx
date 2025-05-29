@@ -248,11 +248,11 @@ export default function NumberRaffle() {
     // 일정한 속도로 애니메이션 유지
     animationRef.current = setInterval(animate, speed);
 
-    // 드럼 사운드 길이에 맞춰 애니메이션 지속 (약 1.2초)
+    // 드럼 사운드 길이에 맞춰 애니메이션 지속 (약 2.8초)
     setTimeout(() => {
       if (animationRef.current) clearInterval(animationRef.current);
       finalizeNumber();
-    }, 1200);
+    }, 2800);
   };
 
   // 번호별 색상 반환 함수

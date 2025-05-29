@@ -302,18 +302,20 @@ export default function NumberRaffle() {
     
     setAnimationNumbers(finalSlots);
     
+    // 당첨 순간 드럼 사운드 (판과 동시에)
+    playDrumSound();
+    
+    // 여러 개의 결과를 추가 (판과 동시에)
+    const newResults: RaffleResult[] = selectedNumbers.map((num, index) => ({
+      number: num,
+      order: drawnNumbers.length + index + 1,
+      timestamp: Date.now() + index
+    }));
+    
+    setDrawnNumbers(prev => [...newResults, ...prev]);
+    
+    // 1초 후 추첨 완료 (당첨 번호 표시 시간 확보)
     setTimeout(() => {
-      // 당첨 순간 드럼 사운드
-      playDrumSound();
-      
-      // 여러 개의 결과를 추가
-      const newResults: RaffleResult[] = selectedNumbers.map((num, index) => ({
-        number: num,
-        order: drawnNumbers.length + index + 1,
-        timestamp: Date.now() + index
-      }));
-      
-      setDrawnNumbers(prev => [...newResults, ...prev]);
       setIsDrawing(false);
     }, 1000);
   };

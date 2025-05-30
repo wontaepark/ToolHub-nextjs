@@ -335,6 +335,10 @@
       "cooking": "料理",
       "study": "学習",
       "meeting": "会議"
+    },
+    "notification": {
+      "title": "タイマー完了！",
+      "body": "設定した時間が完了しました。"
     }
   }
 }

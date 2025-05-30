@@ -335,6 +335,10 @@
       "cooking": "Cooking",
       "study": "Study",
       "meeting": "Meeting"
+    },
+    "notification": {
+      "title": "Timer Complete!",
+      "body": "Your set time has finished."
     }
   }
 }

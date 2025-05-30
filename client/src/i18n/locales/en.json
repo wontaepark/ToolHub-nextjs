@@ -154,6 +154,9 @@
       "decimal": "Decimal: ."
     }
   },
+  "pomodoroTimer": {
+    "title": "Pomodoro Timer"
+  },
   "pomodoro": {
     "description": "A Pomodoro Technique timer for improving focus and productivity. Includes task management and session tracking features.",
     "states": {

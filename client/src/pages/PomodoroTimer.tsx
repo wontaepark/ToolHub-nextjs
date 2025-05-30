@@ -402,7 +402,7 @@ export default function PomodoroTimer() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2">{t('tools.pomodoroTimer.title')}</h2>
+        <h2 className="text-3xl font-bold mb-2">{t('pomodoroTimer.title')}</h2>
         <p className="text-muted-foreground">
           {t('pomodoro.description')}
         </p>

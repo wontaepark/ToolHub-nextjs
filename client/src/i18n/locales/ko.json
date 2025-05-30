@@ -154,6 +154,9 @@
       "decimal": "소수점: ."
     }
   },
+  "pomodoroTimer": {
+    "title": "포모도로 타이머"
+  },
   "pomodoro": {
     "description": "집중력 향상을 위한 포모도로 기법 타이머입니다. 작업 목록 관리와 세션 추적 기능을 제공합니다.",
     "states": {

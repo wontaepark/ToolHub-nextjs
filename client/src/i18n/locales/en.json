@@ -360,6 +360,30 @@
       "tip3": "Try voice commands like \"start\", \"stop\", \"10 minute timer\"",
       "tip4": "Adjust volume and alarm sound to your preference",
       "tip5": "Timer continues running even when you switch to other tabs"
+    },
+    "presets": {
+      "5분": "5 min",
+      "10분": "10 min",
+      "15분": "15 min",
+      "30분": "30 min",
+      "HIIT 라운드": "HIIT Round",
+      "HIIT 휴식": "HIIT Rest",
+      "스트레칭": "Stretching",
+      "플랭크": "Plank",
+      "휴식": "Rest",
+      "라면": "Instant Noodles",
+      "계란 (반숙)": "Soft-boiled Egg",
+      "계란 (완숙)": "Hard-boiled Egg",
+      "차 우리기": "Steeping Tea",
+      "커피 추출": "Coffee Brewing",
+      "집중 45분": "Focus 45min",
+      "딥워크 90분": "Deep Work 90min",
+      "복습 20분": "Review 20min",
+      "휴식 15분": "Break 15min",
+      "스탠드업": "Stand-up",
+      "발표 시간": "Presentation",
+      "브레인스톰": "Brainstorm",
+      "피드백": "Feedback"
     }
   }
 }

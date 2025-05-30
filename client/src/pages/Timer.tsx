@@ -846,9 +846,9 @@ export default function Timer() {
                         <div className={`w-3 h-3 rounded-full ${
                           selectedPreset === preset.name ? 'bg-white' : preset.color
                         }`} />
-                        <span className="font-semibold text-xs">{preset.name}</span>
+                        <span className="font-semibold text-xs">{t(`timer.presets.${preset.name}`)}</span>
                         <span className="text-xs opacity-70">
-                          {displayMinutes}분 {displaySeconds > 0 && `${displaySeconds}초`}
+                          {displayMinutes}{t('timer.minutes')} {displaySeconds > 0 && `${displaySeconds}${t('timer.seconds')}`}
                           {customized && <span className="text-blue-500"> ✓</span>}
                         </span>
                         {!editingPreset && (

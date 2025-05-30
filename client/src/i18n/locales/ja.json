@@ -179,6 +179,7 @@
     },
     "settings": {
       "title": "ポモドーロ設定",
+      "timeSettings": "時間設定",
       "workTime": "作業時間（分）",
       "shortBreak": "短い休憩（分）",
       "longBreak": "長い休憩（分）",

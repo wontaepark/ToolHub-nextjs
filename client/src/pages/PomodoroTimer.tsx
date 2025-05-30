@@ -903,10 +903,10 @@ export default function PomodoroTimer() {
               {editingTaskId && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 max-w-[90vw]">
-                    <h3 className="text-lg font-semibold mb-4">시간 설정</h3>
+                    <h3 className="text-lg font-semibold mb-4">{t('pomodoro.settings.timeSettings')}</h3>
                     <div className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium block mb-1">작업 시간 (분)</label>
+                        <label className="text-sm font-medium block mb-1">{t('pomodoro.settings.workTime')}</label>
                         <input
                           type="number"
                           min="15"
@@ -927,7 +927,7 @@ export default function PomodoroTimer() {
                         />
                       </div>
                       <div>
-                        <label className="text-sm font-medium block mb-1">짧은 휴식 (분)</label>
+                        <label className="text-sm font-medium block mb-1">{t('pomodoro.settings.shortBreak')}</label>
                         <input
                           type="number"
                           min="3"
@@ -948,7 +948,7 @@ export default function PomodoroTimer() {
                         />
                       </div>
                       <div>
-                        <label className="text-sm font-medium block mb-1">긴 휴식 (분)</label>
+                        <label className="text-sm font-medium block mb-1">{t('pomodoro.settings.longBreak')}</label>
                         <input
                           type="number"
                           min="10"

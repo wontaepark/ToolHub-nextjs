@@ -179,6 +179,7 @@
     },
     "settings": {
       "title": "포모도로 설정",
+      "timeSettings": "시간 설정",
       "workTime": "작업 시간 (분)",
       "shortBreak": "짧은 휴식 (분)",
       "longBreak": "긴 휴식 (분)",

@@ -179,6 +179,7 @@
     },
     "settings": {
       "title": "Pomodoro Settings",
+      "timeSettings": "Time Settings",
       "workTime": "Work Time (minutes)",
       "shortBreak": "Short Break (minutes)",
       "longBreak": "Long Break (minutes)",

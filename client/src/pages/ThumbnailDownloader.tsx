@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Download, LinkIcon, ImageIcon, AlertCircle, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useTranslation } from 'react-i18next';
 
 interface ThumbnailData {
   videoId: string;
@@ -19,7 +18,6 @@ interface ThumbnailData {
 }
 
 export default function ThumbnailDownloader() {
-  const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const [thumbnailData, setThumbnailData] = useState<ThumbnailData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -42,11 +40,11 @@ export default function ThumbnailDownloader() {
   // Generate thumbnail URLs for different qualities
   const generateThumbnailUrls = (videoId: string) => {
     return [
-      { quality: t('thumbnailDownloader.qualities.maxres'), url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
-      { quality: t('thumbnailDownloader.qualities.hq'), url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
-      { quality: t('thumbnailDownloader.qualities.mq'), url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
-      { quality: t('thumbnailDownloader.qualities.sd'), url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
-      { quality: t('thumbnailDownloader.qualities.default'), url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
+      { quality: 'Maximum Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
+      { quality: 'High Quality', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
+      { quality: 'Medium Quality', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
+      { quality: 'Standard', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
+      { quality: 'Default', url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
     ];
   };
 
@@ -56,13 +54,13 @@ export default function ThumbnailDownloader() {
     setThumbnailData(null);
 
     if (!url.trim()) {
-      setError(t('thumbnailDownloader.errors.enterUrl'));
+      setError('Please enter a YouTube URL');
       return;
     }
 
     const videoId = extractVideoId(url);
     if (!videoId) {
-      setError(t('thumbnailDownloader.errors.invalidUrl'));
+      setError('Invalid YouTube URL. Please enter a valid YouTube video URL.');
       return;
     }
 
@@ -75,7 +73,7 @@ export default function ThumbnailDownloader() {
         thumbnails
       });
     } catch (err) {
-      setError(t('thumbnailDownloader.errors.processingFailed'));
+      setError('Failed to process the URL. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -95,7 +93,7 @@ export default function ThumbnailDownloader() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (err) {
-      setError(t('thumbnailDownloader.errors.downloadFailed'));
+      setError('Failed to download thumbnail. Please try again.');
     }
   };
 
@@ -108,11 +106,11 @@ export default function ThumbnailDownloader() {
               <ImageIcon className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              {t('tools.thumbnail.title')}
+              YouTube Thumbnail Downloader
             </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            {t('tools.thumbnail.description')}
+            Download high-quality thumbnails from any YouTube video in multiple resolutions
           </p>
         </div>
 
@@ -120,10 +118,10 @@ export default function ThumbnailDownloader() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <LinkIcon className="h-5 w-5" />
-              {t('thumbnailDownloader.urlInput')}
+              Enter YouTube URL
             </CardTitle>
             <CardDescription>
-              {t('thumbnailDownloader.urlDescription')}
+              Paste any YouTube video URL (youtube.com, youtu.be, or shorts)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -131,13 +129,13 @@ export default function ThumbnailDownloader() {
               <div className="flex gap-2">
                 <Input
                   type="url"
-                  placeholder={t('thumbnailDownloader.urlPlaceholder')}
+                  placeholder="https://www.youtube.com/watch?v=..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   className="flex-1"
                 />
                 <Button type="submit" disabled={loading} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                  {loading ? t('common.processing') : t('thumbnailDownloader.getThumbnails')}
+                  {loading ? 'Processing...' : 'Get Thumbnails'}
                 </Button>
               </div>
             </form>
@@ -157,7 +155,7 @@ export default function ThumbnailDownloader() {
           <div className="space-y-6">
             <div className="text-center">
               <Badge variant="secondary" className="mb-4">
-                {t('thumbnailDownloader.videoId')}: {thumbnailData.videoId}
+                Video ID: {thumbnailData.videoId}
               </Badge>
             </div>
 
@@ -169,7 +167,7 @@ export default function ThumbnailDownloader() {
                       <div>
                         <CardTitle className="text-lg">{thumbnail.quality}</CardTitle>
                         <CardDescription>
-                          {thumbnail.width} × {thumbnail.height} {t('thumbnailDownloader.pixels')}
+                          {thumbnail.width} × {thumbnail.height} pixels
                         </CardDescription>
                       </div>
                       <Button
@@ -177,7 +175,7 @@ export default function ThumbnailDownloader() {
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <Download className="h-4 w-4 mr-2" />
-                        {t('common.download')}
+                        Download
                       </Button>
                     </div>
                   </CardHeader>
@@ -199,7 +197,7 @@ export default function ThumbnailDownloader() {
                         className="text-center text-gray-500 dark:text-gray-400 py-8"
                       >
                         <AlertCircle className="h-8 w-8 mx-auto mb-2" />
-                        <p>{t('thumbnailDownloader.thumbnailNotAvailable')}</p>
+                        <p>Thumbnail not available in this quality</p>
                       </div>
                     </div>
                   </CardContent>
@@ -210,7 +208,7 @@ export default function ThumbnailDownloader() {
             <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
               <CheckCircle className="h-4 w-4 text-green-600" />
               <AlertDescription className="text-green-800 dark:text-green-200">
-                {t('thumbnailDownloader.loadedSuccess')}
+                Thumbnails loaded successfully! Click the download button for any resolution you need.
               </AlertDescription>
             </Alert>
           </div>
@@ -218,12 +216,14 @@ export default function ThumbnailDownloader() {
 
         <Card className="mt-8 shadow-lg border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-lg">{t('thumbnailDownloader.howToUse')}</CardTitle>
+            <CardTitle className="text-lg">How to Use</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-            {t('thumbnailDownloader.instructions', { returnObjects: true }).map((instruction: string, index: number) => (
-              <p key={index}>• {instruction}</p>
-            ))}
+            <p>• Copy any YouTube video URL from your browser</p>
+            <p>• Paste it in the input field above</p>
+            <p>• Click "Get Thumbnails" to load all available resolutions</p>
+            <p>• Choose your preferred quality and click "Download"</p>
+            <p>• Supports youtube.com, youtu.be, and YouTube Shorts URLs</p>
           </CardContent>
         </Card>
       </div>

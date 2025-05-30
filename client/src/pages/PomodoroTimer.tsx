@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Play, Pause, Square, Settings, Volume2, SkipForward, Plus, Trash2 } from "lucide-react";
-import { useTranslation } from 'react-i18next';
 
 type TimerState = 'work' | 'shortBreak' | 'longBreak' | 'idle';
 
@@ -28,7 +27,6 @@ interface Task {
 }
 
 export default function PomodoroTimer() {
-  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [timerState, setTimerState] = useState<TimerState>('idle');
@@ -376,13 +374,13 @@ export default function PomodoroTimer() {
   const getStateText = () => {
     switch (timerState) {
       case 'work':
-        return t('pomodoro.work');
+        return '집중 시간';
       case 'shortBreak':
-        return t('pomodoro.shortBreak');
+        return '짧은 휴식';
       case 'longBreak':
-        return t('pomodoro.longBreak');
+        return '긴 휴식';
       default:
-        return t('pomodoro.idle');
+        return '시작 대기';
     }
   };
 
@@ -501,7 +499,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Play className="h-5 w-5" />
-                    <span>{t('pomodoro.start')}</span>
+                    <span>시작</span>
                   </Button>
                 ) : (
                   <Button 
@@ -511,7 +509,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Pause className="h-5 w-5" />
-                    <span>{t('pomodoro.pause')}</span>
+                    <span>일시정지</span>
                   </Button>
                 )}
                 
@@ -523,7 +521,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <SkipForward className="h-5 w-5" />
-                    <span>{t('pomodoro.skip')}</span>
+                    <span>스킵</span>
                   </Button>
                 )}
                 
@@ -534,13 +532,13 @@ export default function PomodoroTimer() {
                   className="flex items-center space-x-2"
                 >
                   <Square className="h-5 w-5" />
-                  <span>{t('pomodoro.stop')}</span>
+                  <span>리셋</span>
                 </Button>
               </div>
 
               {/* Task Selection - Always Visible */}
               <div className="text-sm space-y-2">
-                <label className="block text-muted-foreground">{t('pomodoro.currentTask')}:</label>
+                <label className="block text-muted-foreground">작업할 일:</label>
                 <select
                   value={currentTaskId || ""}
                   onChange={(e) => {

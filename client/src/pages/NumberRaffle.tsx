@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Shuffle, RotateCcw, Settings } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 interface RaffleResult {
   number: number;
@@ -13,7 +12,6 @@ interface RaffleResult {
 }
 
 export default function NumberRaffle() {
-  const { t } = useTranslation();
   const [maxNumber, setMaxNumber] = useState(() => {
     const saved = localStorage.getItem('raffle-max-number');
     return saved ? parseInt(saved) : 100;
@@ -356,10 +354,10 @@ export default function NumberRaffle() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
-            {t('raffle.title')}
+            번호 추첨기
           </h1>
           <p className="text-xl md:text-2xl text-white/90 drop-shadow-lg">
-            1~{maxNumber}{t('raffle.numberRange')}
+            1~{maxNumber}번 중 추첨
           </p>
         </div>
 
@@ -370,12 +368,12 @@ export default function NumberRaffle() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Settings className="w-5 h-5" />
-                  {t('raffle.settings')}
+                  설정
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">{t('raffle.maxNumber')}</label>
+                  <label className="text-sm font-medium mb-2 block">최대 번호</label>
                   <Input
                     type="number"
                     min="1"
@@ -388,21 +386,21 @@ export default function NumberRaffle() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">{t('raffle.drawCount')}</label>
+                  <label className="text-sm font-medium mb-2 block">추첨 개수</label>
                   <select
                     value={drawCount}
                     onChange={(e) => setDrawCount(parseInt(e.target.value))}
                     disabled={isDrawing}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                   >
-                    <option value={1}>{t('raffle.drawCounts.one')}</option>
-                    <option value={2}>{t('raffle.drawCounts.two')}</option>
-                    <option value={3}>{t('raffle.drawCounts.three')}</option>
+                    <option value={1}>1개</option>
+                    <option value={2}>2개</option>
+                    <option value={3}>3개</option>
                   </select>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium">{t('raffle.soundEffect')}</label>
+                  <label className="text-sm font-medium">효과음</label>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
@@ -413,7 +411,7 @@ export default function NumberRaffle() {
                     />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
                     <span className="ml-3 text-sm text-gray-600">
-                      {soundEnabled ? t('raffle.soundStatus.on') : t('raffle.soundStatus.off')}
+                      {soundEnabled ? '🔊 ON' : '🔇 OFF'}
                     </span>
                   </label>
                 </div>
@@ -421,7 +419,7 @@ export default function NumberRaffle() {
                 {soundEnabled && (
                   <div>
                     <label className="text-sm font-medium mb-2 block">
-                      {t('raffle.volumeControl')} ({Math.round(volume * 100)}%)
+                      볼륨 조절 ({Math.round(volume * 100)}%)
                     </label>
                     <div className="flex items-center space-x-3">
                       <span className="text-xs">🔇</span>
@@ -447,7 +445,7 @@ export default function NumberRaffle() {
                   disabled={isDrawing || drawnNumbers.length === 0}
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
-                  {t('raffle.reset')}
+                  초기화
                 </Button>
 
                 {/* Statistics */}

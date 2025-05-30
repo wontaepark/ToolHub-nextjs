@@ -3,14 +3,11 @@ import { Link, useLocation } from "wouter";
 import { useTheme } from "../ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon, Menu, Github } from "lucide-react";
-import LanguageSelector from "../LanguageSelector";
-import { useTranslation } from 'react-i18next';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [location] = useLocation();
-  const { t } = useTranslation();
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -43,7 +40,7 @@ export default function Header() {
               className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
             >
               <i className="ri-home-line text-lg"></i>
-              <span>{t('common.home')}</span>
+              <span>홈</span>
             </Button>
           </Link>
           
@@ -54,18 +51,16 @@ export default function Header() {
             className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
           >
             <Github className="h-4 w-4 md:h-5 md:w-5" />
-            <span>{t('common.github')}</span>
+            <span>GitHub</span>
           </a>
-
-          <LanguageSelector />
           
           <Button 
             variant="ghost" 
             size="icon" 
             onClick={toggleTheme}
-            aria-label={theme === 'light' ? t('header.darkMode') : t('header.lightMode')}
+            aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
             className="flex items-center justify-center border border-border hover:bg-accent h-9 w-9 md:h-10 md:w-10"
-            title={theme === 'light' ? t('header.darkMode') : t('header.lightMode')}
+            title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
           >
             {theme === 'light' ? (
               <Sun className="h-4 w-4 md:h-5 md:w-5 transition-all" />
@@ -98,7 +93,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-home-line text-lg"></i>
-                    <span className="font-medium">{t('common.home')}</span>
+                    <span className="font-medium">홈</span>
                   </div>
                 </Link>
               </li>
@@ -109,7 +104,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-calculator-line text-lg"></i>
-                    <span className="font-medium">{t('tools.calculator.title')}</span>
+                    <span className="font-medium">계산기</span>
                   </div>
                 </Link>
               </li>
@@ -120,7 +115,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-timer-line text-lg"></i>
-                    <span className="font-medium">{t('tools.pomodoro.title')}</span>
+                    <span className="font-medium">포모도로 타이머</span>
                   </div>
                 </Link>
               </li>
@@ -131,7 +126,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-time-line text-lg"></i>
-                    <span className="font-medium">{t('tools.timer.title')}</span>
+                    <span className="font-medium">범용 타이머</span>
                   </div>
                 </Link>
               </li>
@@ -142,7 +137,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-shuffle-line text-lg"></i>
-                    <span className="font-medium">{t('tools.raffle.title')}</span>
+                    <span className="font-medium">번호 추첨기</span>
                   </div>
                 </Link>
               </li>
@@ -153,7 +148,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-image-line text-lg"></i>
-                    <span className="font-medium">{t('tools.thumbnail.title')}</span>
+                    <span className="font-medium">썸네일 다운로더</span>
                   </div>
                 </Link>
               </li>
@@ -165,7 +160,7 @@ export default function Header() {
                   className="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-muted transition-colors"
                 >
                   <Github className="h-4 w-4" />
-                  <span className="font-medium">{t('common.github')}</span>
+                  <span className="font-medium">GitHub</span>
                 </a>
               </li>
             </ul>

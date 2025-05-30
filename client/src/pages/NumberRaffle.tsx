@@ -370,12 +370,12 @@ export default function NumberRaffle() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Settings className="w-5 h-5" />
-                  설정
+{t('numberRaffle.settings.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">최대 번호</label>
+                  <label className="text-sm font-medium mb-2 block">{t('numberRaffle.settings.maxNumber')}</label>
                   <Input
                     type="number"
                     min="1"
@@ -388,7 +388,7 @@ export default function NumberRaffle() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">추첨 개수</label>
+                  <label className="text-sm font-medium mb-2 block">{t('numberRaffle.settings.drawCount')}</label>
                   <select
                     value={drawCount}
                     onChange={(e) => setDrawCount(parseInt(e.target.value))}
@@ -453,15 +453,15 @@ export default function NumberRaffle() {
                 {/* Statistics */}
                 <div className="space-y-2 pt-4 border-t">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">전체 번호</span>
+                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.totalNumbers')}</span>
                     <Badge variant="secondary">{maxNumber}개</Badge>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">추첨된 번호</span>
+                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.drawnNumbers')}</span>
                     <Badge variant="default">{drawnCount}개</Badge>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">남은 번호</span>
+                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.remainingNumbers')}</span>
                     <Badge variant="outline">{remainingCount}개</Badge>
                   </div>
                 </div>
@@ -561,7 +561,7 @@ export default function NumberRaffle() {
             {drawnNumbers.length > 0 && (
               <Card className="bg-white/95 backdrop-blur-sm shadow-2xl mt-6">
                 <CardHeader>
-                  <CardTitle>추첨된 번호들</CardTitle>
+                  <CardTitle>{t('numberRaffle.history.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 max-h-64 overflow-y-auto">

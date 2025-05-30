@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Star, Zap } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
   return (

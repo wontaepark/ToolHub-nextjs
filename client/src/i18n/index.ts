@@ -126,15 +126,27 @@ const resources = {
       },
       "raffle": {
         "title": "번호 추첨기",
-        "minNumber": "최소 번호",
+        "numberRange": "번 중 추첨",
+        "settings": "설정",
         "maxNumber": "최대 번호",
         "drawCount": "추첨 개수",
-        "excludeDuplicates": "중복 제거",
+        "soundEffect": "효과음",
+        "volumeControl": "볼륨 조절",
+        "reset": "초기화",
         "drawNumbers": "번호 추첨",
-        "reset": "리셋",
         "winningNumbers": "당첨 번호",
-        "volume": "볼륨",
-        "soundEnabled": "사운드 활성화"
+        "drawHistory": "추첨 기록",
+        "remaining": "남은 번호",
+        "drawn": "추첨된 번호",
+        "drawCounts": {
+          "one": "1개",
+          "two": "2개", 
+          "three": "3개"
+        },
+        "soundStatus": {
+          "on": "🔊 ON",
+          "off": "🔇 OFF"
+        }
       }
     }
   },
@@ -261,15 +273,27 @@ const resources = {
       },
       "raffle": {
         "title": "Number Raffle",
-        "minNumber": "Min Number",
+        "numberRange": " numbers to draw from",
+        "settings": "Settings",
         "maxNumber": "Max Number",
         "drawCount": "Draw Count",
-        "excludeDuplicates": "Exclude Duplicates",
-        "drawNumbers": "Draw Numbers",
+        "soundEffect": "Sound Effect",
+        "volumeControl": "Volume Control",
         "reset": "Reset",
+        "drawNumbers": "Draw Numbers",
         "winningNumbers": "Winning Numbers",
-        "volume": "Volume",
-        "soundEnabled": "Sound Enabled"
+        "drawHistory": "Draw History",
+        "remaining": "Remaining",
+        "drawn": "Drawn",
+        "drawCounts": {
+          "one": "1 number",
+          "two": "2 numbers",
+          "three": "3 numbers"
+        },
+        "soundStatus": {
+          "on": "🔊 ON",
+          "off": "🔇 OFF"
+        }
       }
     }
   },
@@ -395,15 +419,27 @@ const resources = {
       },
       "raffle": {
         "title": "番号抽選機",
-        "minNumber": "最小番号",
+        "numberRange": "番の中から抽選",
+        "settings": "設定",
         "maxNumber": "最大番号",
         "drawCount": "抽選数",
-        "excludeDuplicates": "重複除去",
-        "drawNumbers": "番号抽選",
+        "soundEffect": "効果音",
+        "volumeControl": "音量調節",
         "reset": "リセット",
+        "drawNumbers": "番号抽選",
         "winningNumbers": "当選番号",
-        "volume": "音量",
-        "soundEnabled": "サウンド有効"
+        "drawHistory": "抽選履歴",
+        "remaining": "残り番号",
+        "drawn": "抽選済み番号",
+        "drawCounts": {
+          "one": "1個",
+          "two": "2個",
+          "three": "3個"
+        },
+        "soundStatus": {
+          "on": "🔊 ON",
+          "off": "🔇 OFF"
+        }
       }
     }
   }

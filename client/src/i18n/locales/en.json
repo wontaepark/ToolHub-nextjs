@@ -287,7 +287,17 @@
     "pixels": "pixels",
     "errors": {
       "processingFailed": "URL processing failed. Please try again.",
-      "downloadFailed": "Thumbnail download failed. Please try again."
+      "downloadFailed": "Thumbnail download failed. Please try again.",
+      "unavailable": "This quality thumbnail is not available"
+    },
+    "success": "Thumbnails loaded successfully! Click the download button for your desired resolution.",
+    "instructions": {
+      "title": "How to Use",
+      "step1": "Copy the YouTube video URL from your browser",
+      "step2": "Paste it in the input field above",
+      "step3": "Click \"Get Thumbnail\" to load all resolutions",
+      "step4": "Select your desired quality and click \"Download\"",
+      "step5": "Supports youtube.com, youtu.be, and YouTube Shorts URLs"
     }
   }
 }

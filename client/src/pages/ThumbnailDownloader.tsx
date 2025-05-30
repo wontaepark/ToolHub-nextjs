@@ -199,7 +199,7 @@ export default function ThumbnailDownloader() {
                         className="text-center text-gray-500 dark:text-gray-400 py-8"
                       >
                         <AlertCircle className="h-8 w-8 mx-auto mb-2" />
-                        <p>이 화질의 썸네일을 사용할 수 없습니다</p>
+                        <p>{t('thumbnail.errors.unavailable')}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -210,7 +210,7 @@ export default function ThumbnailDownloader() {
             <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
               <CheckCircle className="h-4 w-4 text-green-600" />
               <AlertDescription className="text-green-800 dark:text-green-200">
-                썸네일을 성공적으로 불러왔습니다! 원하는 해상도의 다운로드 버튼을 클릭하세요.
+                {t('thumbnail.success')}
               </AlertDescription>
             </Alert>
           </div>
@@ -218,14 +218,14 @@ export default function ThumbnailDownloader() {
 
         <Card className="mt-8 shadow-lg border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-lg">사용 방법</CardTitle>
+            <CardTitle className="text-lg">{t('thumbnail.instructions.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-            <p>• 브라우저에서 YouTube 동영상 URL을 복사하세요</p>
-            <p>• 위의 입력 필드에 붙여넣으세요</p>
-            <p>• "썸네일 가져오기"를 클릭하여 모든 해상도를 불러오세요</p>
-            <p>• 원하는 화질을 선택하고 "다운로드"를 클릭하세요</p>
-            <p>• youtube.com, youtu.be, YouTube Shorts URL을 지원합니다</p>
+            <p>• {t('thumbnail.instructions.step1')}</p>
+            <p>• {t('thumbnail.instructions.step2')}</p>
+            <p>• {t('thumbnail.instructions.step3')}</p>
+            <p>• {t('thumbnail.instructions.step4')}</p>
+            <p>• {t('thumbnail.instructions.step5')}</p>
           </CardContent>
         </Card>
       </div>

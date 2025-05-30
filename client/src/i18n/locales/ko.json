@@ -287,7 +287,17 @@
     "pixels": "픽셀",
     "errors": {
       "processingFailed": "URL 처리에 실패했습니다. 다시 시도해주세요.",
-      "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요."
+      "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요.",
+      "unavailable": "이 화질의 썸네일을 사용할 수 없습니다"
+    },
+    "success": "썸네일을 성공적으로 불러왔습니다! 원하는 해상도의 다운로드 버튼을 클릭하세요.",
+    "instructions": {
+      "title": "사용 방법",
+      "step1": "브라우저에서 YouTube 동영상 URL을 복사하세요",
+      "step2": "위의 입력 필드에 붙여넣으세요",
+      "step3": "\"썸네일 가져오기\"를 클릭하여 모든 해상도를 불러오세요",
+      "step4": "원하는 화질을 선택하고 \"다운로드\"를 클릭하세요",
+      "step5": "youtube.com, youtu.be, YouTube Shorts URL을 지원합니다"
     }
   }
 }

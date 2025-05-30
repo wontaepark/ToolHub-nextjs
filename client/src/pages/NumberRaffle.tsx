@@ -402,7 +402,7 @@ export default function NumberRaffle() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium">{t('raffle.settings.sound')}</label>
+                  <label className="text-sm font-medium">{t('numberRaffle.settings.sound')}</label>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"

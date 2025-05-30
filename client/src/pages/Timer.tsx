@@ -710,10 +710,10 @@ export default function Timer() {
                               {preset.name === '푸쉬업' && '💪'} 
                               {preset.name === '커피 추출' && '☕'} 
                               {preset.name === '차 우리기' && '🍵'} 
-                              {preset.name}
+                              {t(`timer.presets.${preset.name}`)}
                             </div>
                             <div className="text-xs text-gray-500">
-                              {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
+                              {preset.minutes}{t('timer.minutes')} {preset.seconds > 0 && `${preset.seconds}${t('timer.seconds')}`}
                             </div>
                           </div>
                         </Button>

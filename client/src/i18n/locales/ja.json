@@ -269,5 +269,25 @@
       "drawCountMin": "抽選数は1以上である必要があります",
       "drawCountMax": "抽選数は最大番号を超えることはできません"
     }
+  },
+  "thumbnail": {
+    "title": "YouTube サムネイルダウンローダー",
+    "description": "YouTube動画の高画質サムネイルを様々な解像度でダウンロード",
+    "urlInput": {
+      "title": "YouTube URL入力",
+      "description": "YouTube動画のURLを貼り付けてください (youtube.com, youtu.be, または shorts)",
+      "placeholder": "https://www.youtube.com/watch?v=..."
+    },
+    "buttons": {
+      "fetch": "サムネイル取得",
+      "processing": "処理中...",
+      "download": "ダウンロード"
+    },
+    "videoId": "動画ID",
+    "pixels": "ピクセル",
+    "errors": {
+      "processingFailed": "URL処理に失敗しました。再試行してください。",
+      "downloadFailed": "サムネイルダウンロードに失敗しました。再試行してください。"
+    }
   }
 }

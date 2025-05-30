@@ -169,7 +169,7 @@ export default function ThumbnailDownloader() {
                       <div>
                         <CardTitle className="text-lg">{thumbnail.quality}</CardTitle>
                         <CardDescription>
-                          {thumbnail.width} × {thumbnail.height} 픽셀
+                          {thumbnail.width} × {thumbnail.height} {t('thumbnail.pixels')}
                         </CardDescription>
                       </div>
                       <Button
@@ -177,7 +177,7 @@ export default function ThumbnailDownloader() {
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <Download className="h-4 w-4 mr-2" />
-                        다운로드
+                        {t('thumbnail.buttons.download')}
                       </Button>
                     </div>
                   </CardHeader>

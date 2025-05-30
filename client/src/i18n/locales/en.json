@@ -269,5 +269,25 @@
       "drawCountMin": "Draw count must be at least 1",
       "drawCountMax": "Draw count cannot exceed max number"
     }
+  },
+  "thumbnail": {
+    "title": "YouTube Thumbnail Downloader",
+    "description": "Download high-quality YouTube video thumbnails in various resolutions",
+    "urlInput": {
+      "title": "Enter YouTube URL",
+      "description": "Paste a YouTube video URL (youtube.com, youtu.be, or shorts)",
+      "placeholder": "https://www.youtube.com/watch?v=..."
+    },
+    "buttons": {
+      "fetch": "Get Thumbnail",
+      "processing": "Processing...",
+      "download": "Download"
+    },
+    "videoId": "Video ID",
+    "pixels": "pixels",
+    "errors": {
+      "processingFailed": "URL processing failed. Please try again.",
+      "downloadFailed": "Thumbnail download failed. Please try again."
+    }
   }
 }

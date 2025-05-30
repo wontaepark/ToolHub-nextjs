@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,7 @@ interface RaffleResult {
 }
 
 export default function NumberRaffle() {
+  const { t } = useTranslation();
   const [maxNumber, setMaxNumber] = useState(() => {
     const saved = localStorage.getItem('raffle-max-number');
     return saved ? parseInt(saved) : 100;
@@ -354,10 +356,10 @@ export default function NumberRaffle() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
-            번호 추첨기
+            {t('tools.numberRaffle.title')}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 drop-shadow-lg">
-            1~{maxNumber}번 중 추첨
+            {t('numberRaffle.description')}
           </p>
         </div>
 

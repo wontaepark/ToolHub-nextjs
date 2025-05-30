@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Download, LinkIcon, ImageIcon, AlertCircle, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useTranslation } from 'react-i18next';
 
 interface ThumbnailData {
   videoId: string;
@@ -18,6 +19,7 @@ interface ThumbnailData {
 }
 
 export default function ThumbnailDownloader() {
+  const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const [thumbnailData, setThumbnailData] = useState<ThumbnailData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -54,13 +56,13 @@ export default function ThumbnailDownloader() {
     setThumbnailData(null);
 
     if (!url.trim()) {
-      setError('Please enter a YouTube URL');
+      setError(t('thumbnailDownloader.errors.enterUrl'));
       return;
     }
 
     const videoId = extractVideoId(url);
     if (!videoId) {
-      setError('Invalid YouTube URL. Please enter a valid YouTube video URL.');
+      setError(t('thumbnailDownloader.errors.invalidUrl'));
       return;
     }
 
@@ -73,7 +75,7 @@ export default function ThumbnailDownloader() {
         thumbnails
       });
     } catch (err) {
-      setError('Failed to process the URL. Please try again.');
+      setError(t('thumbnailDownloader.errors.processingFailed'));
     } finally {
       setLoading(false);
     }
@@ -93,7 +95,7 @@ export default function ThumbnailDownloader() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (err) {
-      setError('Failed to download thumbnail. Please try again.');
+      setError(t('thumbnailDownloader.errors.downloadFailed'));
     }
   };
 
@@ -106,11 +108,11 @@ export default function ThumbnailDownloader() {
               <ImageIcon className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              YouTube Thumbnail Downloader
+              {t('tools.thumbnail.title')}
             </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            Download high-quality thumbnails from any YouTube video in multiple resolutions
+            {t('tools.thumbnail.description')}
           </p>
         </div>
 

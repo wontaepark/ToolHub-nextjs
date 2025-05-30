@@ -40,7 +40,39 @@ const resources = {
           "title": "번호 추첨기"
         },
         "thumbnail": {
-          "title": "썸네일 다운로더"
+          "title": "썸네일 다운로더",
+          "description": "YouTube 동영상의 고화질 썸네일 이미지를 간편하게 다운로드하세요. 다양한 해상도 옵션을 제공합니다."
+        }
+      },
+      "thumbnailDownloader": {
+        "urlInput": "YouTube URL 입력",
+        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+        "urlDescription": "YouTube 동영상 URL을 붙여넣으세요 (youtube.com, youtu.be, 또는 shorts)",
+        "getThumbnails": "썸네일 가져오기",
+        "videoId": "동영상 ID",
+        "qualities": {
+          "maxres": "최대 해상도",
+          "hq": "고화질",
+          "mq": "중간 화질",
+          "sd": "표준",
+          "default": "기본"
+        },
+        "pixels": "픽셀",
+        "thumbnailNotAvailable": "이 화질의 썸네일을 사용할 수 없습니다",
+        "loadedSuccess": "썸네일을 성공적으로 불러왔습니다! 원하는 해상도의 다운로드 버튼을 클릭하세요.",
+        "howToUse": "사용 방법",
+        "instructions": [
+          "브라우저에서 YouTube 동영상 URL을 복사하세요",
+          "위의 입력 필드에 붙여넣으세요",
+          "'썸네일 가져오기'를 클릭하여 모든 해상도를 불러오세요",
+          "원하는 화질을 선택하고 '다운로드'를 클릭하세요",
+          "youtube.com, youtu.be, YouTube Shorts URL을 지원합니다"
+        ],
+        "errors": {
+          "enterUrl": "YouTube URL을 입력해주세요",
+          "invalidUrl": "유효하지 않은 YouTube URL입니다. 올바른 YouTube 동영상 URL을 입력해주세요.",
+          "processingFailed": "URL 처리에 실패했습니다. 다시 시도해주세요.",
+          "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요."
         }
       }
     }
@@ -82,7 +114,39 @@ const resources = {
           "title": "Number Raffle"
         },
         "thumbnail": {
-          "title": "Thumbnail Downloader"
+          "title": "Thumbnail Downloader",
+          "description": "Easily download high-quality thumbnail images from YouTube videos. Provides various resolution options."
+        }
+      },
+      "thumbnailDownloader": {
+        "urlInput": "Enter YouTube URL",
+        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+        "urlDescription": "Paste any YouTube video URL (youtube.com, youtu.be, or shorts)",
+        "getThumbnails": "Get Thumbnails",
+        "videoId": "Video ID",
+        "qualities": {
+          "maxres": "Maximum Resolution",
+          "hq": "High Quality",
+          "mq": "Medium Quality",
+          "sd": "Standard",
+          "default": "Default"
+        },
+        "pixels": "pixels",
+        "thumbnailNotAvailable": "Thumbnail not available in this quality",
+        "loadedSuccess": "Thumbnails loaded successfully! Click the download button for any resolution you need.",
+        "howToUse": "How to Use",
+        "instructions": [
+          "Copy any YouTube video URL from your browser",
+          "Paste it in the input field above",
+          "Click 'Get Thumbnails' to load all available resolutions",
+          "Choose your preferred quality and click 'Download'",
+          "Supports youtube.com, youtu.be, and YouTube Shorts URLs"
+        ],
+        "errors": {
+          "enterUrl": "Please enter a YouTube URL",
+          "invalidUrl": "Invalid YouTube URL. Please enter a valid YouTube video URL.",
+          "processingFailed": "Failed to process the URL. Please try again.",
+          "downloadFailed": "Failed to download thumbnail. Please try again."
         }
       }
     }
@@ -124,7 +188,39 @@ const resources = {
           "title": "番号抽選機"
         },
         "thumbnail": {
-          "title": "サムネイルダウンローダー"
+          "title": "サムネイルダウンローダー",
+          "description": "YouTube動画の高画質サムネイル画像を簡単にダウンロードできます。様々な解像度オプションを提供します。"
+        }
+      },
+      "thumbnailDownloader": {
+        "urlInput": "YouTube URL入力",
+        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+        "urlDescription": "YouTube動画URLを貼り付けてください（youtube.com、youtu.be、またはshorts）",
+        "getThumbnails": "サムネイル取得",
+        "videoId": "動画ID",
+        "qualities": {
+          "maxres": "最大解像度",
+          "hq": "高画質",
+          "mq": "中画質",
+          "sd": "標準",
+          "default": "デフォルト"
+        },
+        "pixels": "ピクセル",
+        "thumbnailNotAvailable": "この画質のサムネイルは利用できません",
+        "loadedSuccess": "サムネイルの読み込みが完了しました！必要な解像度のダウンロードボタンをクリックしてください。",
+        "howToUse": "使用方法",
+        "instructions": [
+          "ブラウザからYouTube動画URLをコピーしてください",
+          "上の入力フィールドに貼り付けてください",
+          "'サムネイル取得'をクリックして全ての解像度を読み込んでください",
+          "お好みの画質を選択して'ダウンロード'をクリックしてください",
+          "youtube.com、youtu.be、YouTube Shorts URLに対応しています"
+        ],
+        "errors": {
+          "enterUrl": "YouTube URLを入力してください",
+          "invalidUrl": "無効なYouTube URLです。有効なYouTube動画URLを入力してください。",
+          "processingFailed": "URLの処理に失敗しました。再度お試しください。",
+          "downloadFailed": "サムネイルのダウンロードに失敗しました。再度お試しください。"
         }
       }
     }

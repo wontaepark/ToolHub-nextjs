@@ -181,6 +181,8 @@
       "autoStart": "자동 시작",
       "soundEnabled": "알림음",
       "taskBasedTiming": "작업별 시간 설정",
+      "taskBasedTimingDesc": "각 할 일마다 개별적으로 시간을 설정할 수 있습니다. 할 일 목록에서 각 항목을 클릭하여 시간을 설정하세요.",
+      "disabledMessage": "타이머 실행 중에는 설정을 변경할 수 없습니다.",
       "save": "저장",
       "cancel": "취소"
     },
@@ -198,6 +200,39 @@
       "workComplete": "작업 시간이 완료되었습니다! 휴식을 취하세요.",
       "breakComplete": "휴식 시간이 완료되었습니다! 작업을 시작하세요.",
       "cycleComplete": "사이클이 완료되었습니다!"
+    }
+  },
+  "numberRaffle": {
+    "description": "공정한 번호 추첨 시스템입니다. 드럼 사운드와 함께 무작위 번호를 뽑아보세요.",
+    "settings": {
+      "maxNumber": "최대 번호",
+      "drawCount": "뽑을 개수",
+      "soundEnabled": "사운드 활성화",
+      "volume": "볼륨"
+    },
+    "buttons": {
+      "draw": "추첨하기",
+      "reset": "초기화",
+      "settings": "설정"
+    },
+    "results": {
+      "title": "추첨 결과",
+      "order": "순서",
+      "number": "번호",
+      "time": "시간",
+      "empty": "아직 추첨 결과가 없습니다",
+      "emptyDesc": "추첨하기 버튼을 눌러 번호를 뽑아보세요!"
+    },
+    "status": {
+      "drawing": "추첨 중...",
+      "complete": "추첨 완료!",
+      "remaining": "남은 번호"
+    },
+    "validation": {
+      "maxNumberMin": "최대 번호는 1 이상이어야 합니다",
+      "maxNumberMax": "최대 번호는 999 이하여야 합니다",
+      "drawCountMin": "뽑을 개수는 1 이상이어야 합니다",
+      "drawCountMax": "뽑을 개수가 최대 번호보다 클 수 없습니다"
     }
   }
 }

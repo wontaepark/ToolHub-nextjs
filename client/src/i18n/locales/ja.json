@@ -199,5 +199,38 @@
       "breakComplete": "休憩時間が終了しました！作業を開始しましょう。",
       "cycleComplete": "サイクルが完了しました！"
     }
+  },
+  "numberRaffle": {
+    "description": "公正な番号抽選システムです。ドラム音と一緒にランダムな番号を抽選してみてください。",
+    "settings": {
+      "maxNumber": "最大番号",
+      "drawCount": "抽選数",
+      "soundEnabled": "サウンド有効",
+      "volume": "音量"
+    },
+    "buttons": {
+      "draw": "抽選",
+      "reset": "リセット",
+      "settings": "設定"
+    },
+    "results": {
+      "title": "抽選結果",
+      "order": "順序",
+      "number": "番号",
+      "time": "時間",
+      "empty": "まだ抽選結果がありません",
+      "emptyDesc": "抽選ボタンをクリックして番号を抽選してみてください！"
+    },
+    "status": {
+      "drawing": "抽選中...",
+      "complete": "抽選完了！",
+      "remaining": "残り番号"
+    },
+    "validation": {
+      "maxNumberMin": "最大番号は1以上である必要があります",
+      "maxNumberMax": "最大番号は999以下である必要があります",
+      "drawCountMin": "抽選数は1以上である必要があります",
+      "drawCountMax": "抽選数は最大番号を超えることはできません"
+    }
   }
 }

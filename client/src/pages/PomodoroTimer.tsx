@@ -601,7 +601,7 @@ export default function PomodoroTimer() {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <span>총 완료 사이클</span>
+                  <span>{t('pomodoro.stats.cycle')}</span>
                   <Badge variant="outline" className="text-lg px-3 py-1">
                     {Math.floor(completedPomodoros / 4)}
                   </Badge>
@@ -681,7 +681,7 @@ export default function PomodoroTimer() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-lg">설정</h3>
+                <h3 className="font-semibold text-lg">{t('pomodoro.buttons.settings')}</h3>
                 <Button 
                   variant="ghost" 
                   size="icon"
@@ -697,7 +697,7 @@ export default function PomodoroTimer() {
                 <div className={`space-y-4 ${isRunning ? 'opacity-50 pointer-events-none' : ''}`}>
                   {isRunning && (
                     <div className="text-xs text-muted-foreground p-2 bg-muted rounded-md mb-3">
-                      타이머 실행 중에는 설정을 변경할 수 없습니다.
+{t('pomodoro.settings.disabledMessage')}
                     </div>
                   )}
                   <div className="mb-4">
@@ -710,12 +710,12 @@ export default function PomodoroTimer() {
                         disabled={isRunning}
                         className="rounded"
                       />
-                      <label htmlFor="taskBasedTiming" className="text-sm font-medium">할 일별 시간 설정</label>
+                      <label htmlFor="taskBasedTiming" className="text-sm font-medium">{t('pomodoro.settings.taskBasedTiming')}</label>
                     </div>
                     
                     {settings.taskBasedTiming ? (
                       <div className="text-sm text-muted-foreground p-3 bg-muted rounded-md">
-                        각 할 일마다 개별적으로 시간을 설정할 수 있습니다. 할 일 목록에서 각 항목을 클릭하여 시간을 설정하세요.
+{t('pomodoro.settings.taskBasedTimingDesc')}
                       </div>
                     ) : (
                       <div className="space-y-3">

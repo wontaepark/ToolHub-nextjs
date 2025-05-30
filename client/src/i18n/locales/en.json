@@ -199,5 +199,38 @@
       "breakComplete": "Break time is over! Ready to work.",
       "cycleComplete": "Cycle completed!"
     }
+  },
+  "numberRaffle": {
+    "description": "A fair number drawing system. Draw random numbers with drum sound effects.",
+    "settings": {
+      "maxNumber": "Max Number",
+      "drawCount": "Draw Count",
+      "soundEnabled": "Sound Enabled",
+      "volume": "Volume"
+    },
+    "buttons": {
+      "draw": "Draw",
+      "reset": "Reset",
+      "settings": "Settings"
+    },
+    "results": {
+      "title": "Draw Results",
+      "order": "Order",
+      "number": "Number",
+      "time": "Time",
+      "empty": "No draw results yet",
+      "emptyDesc": "Click the Draw button to start drawing numbers!"
+    },
+    "status": {
+      "drawing": "Drawing...",
+      "complete": "Draw Complete!",
+      "remaining": "Remaining Numbers"
+    },
+    "validation": {
+      "maxNumberMin": "Max number must be at least 1",
+      "maxNumberMax": "Max number must be 999 or less",
+      "drawCountMin": "Draw count must be at least 1",
+      "drawCountMax": "Draw count cannot exceed max number"
+    }
   }
 }

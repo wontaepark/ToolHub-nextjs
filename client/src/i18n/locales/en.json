@@ -339,6 +339,27 @@
     "notification": {
       "title": "Timer Complete!",
       "body": "Your set time has finished."
+    },
+    "settings": {
+      "title": "Sound Settings",
+      "disabled": "Disabled during timer",
+      "volume": "Volume",
+      "alarmSound": "Alarm Sound",
+      "testSound": "Test Sound",
+      "sounds": {
+        "chime": "Chime",
+        "bell": "Bell",
+        "beep": "Beep",
+        "gentle": "Gentle"
+      }
+    },
+    "tips": {
+      "title": "Usage Tips",
+      "tip1": "Allow browser notifications to receive alerts when timer completes",
+      "tip2": "Use category presets to quickly set timers for specific purposes",
+      "tip3": "Try voice commands like \"start\", \"stop\", \"10 minute timer\"",
+      "tip4": "Adjust volume and alarm sound to your preference",
+      "tip5": "Timer continues running even when you switch to other tabs"
     }
   }
 }

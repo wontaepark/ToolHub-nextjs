@@ -890,9 +890,9 @@ export default function Timer() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <Settings className={`w-5 h-5 ${(state === 'running' || state === 'paused') ? 'opacity-50' : ''}`} />
-            사운드 설정
+            {t('timer.settings.title')}
             {(state === 'running' || state === 'paused') && (
-              <span className="text-xs text-muted-foreground ml-2">(타이머 실행 중 비활성화)</span>
+              <span className="text-xs text-muted-foreground ml-2">({t('timer.settings.disabled')})</span>
             )}
           </CardTitle>
         </CardHeader>
@@ -902,7 +902,7 @@ export default function Timer() {
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium flex items-center gap-2">
                 <Volume2 className="w-4 h-4" />
-                볼륨
+                {t('timer.settings.volume')}
               </label>
               <span className="text-sm text-muted-foreground">{Math.round(volume * 100)}%</span>
             </div>
@@ -919,13 +919,13 @@ export default function Timer() {
           
           {/* 사운드 선택 */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">알람음</label>
+            <label className="text-sm font-medium">{t('timer.settings.alarmSound')}</label>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { id: 'chime', name: '차임' },
-                { id: 'bell', name: '벨' },
-                { id: 'beep', name: '비프' },
-                { id: 'gentle', name: '부드러운' },
+                { id: 'chime', name: t('timer.settings.sounds.chime') },
+                { id: 'bell', name: t('timer.settings.sounds.bell') },
+                { id: 'beep', name: t('timer.settings.sounds.beep') },
+                { id: 'gentle', name: t('timer.settings.sounds.gentle') },
               ].map((sound) => (
                 <Button
                   key={sound.id}
@@ -947,7 +947,7 @@ export default function Timer() {
             onClick={playCompletionSound}
             className="w-full"
           >
-            사운드 테스트
+            {t('timer.settings.testSound')}
           </Button>
         </CardContent>
       </Card>
@@ -955,14 +955,14 @@ export default function Timer() {
       {/* 사용 팁 */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">사용 팁</CardTitle>
+          <CardTitle className="text-lg">{t('timer.tips.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>• 브라우저 알림을 허용하면 타이머 완료 시 알림을 받을 수 있습니다</p>
-          <p>• 카테고리별 프리셋으로 용도에 맞는 타이머를 빠르게 설정하세요</p>
-          <p>• 음성 명령으로 "시작", "정지", "10분 타이머" 등을 말해보세요</p>
-          <p>• 볼륨과 알람음을 취향에 맞게 조절할 수 있습니다</p>
-          <p>• 타이머가 실행 중일 때도 다른 탭에서 작업할 수 있습니다</p>
+          <p>• {t('timer.tips.tip1')}</p>
+          <p>• {t('timer.tips.tip2')}</p>
+          <p>• {t('timer.tips.tip3')}</p>
+          <p>• {t('timer.tips.tip4')}</p>
+          <p>• {t('timer.tips.tip5')}</p>
         </CardContent>
       </Card>
     </div>

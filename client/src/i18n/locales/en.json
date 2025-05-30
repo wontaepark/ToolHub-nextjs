@@ -234,11 +234,19 @@
     },
     "buttons": {
       "draw": "Draw",
+      "drawing": "Drawing...",
+      "drawNumbers": "Draw {{count}}",
       "reset": "Reset",
       "settings": "Settings"
     },
+    "messages": {
+      "notEnough": "Not enough",
+      "remaining": "numbers"
+    },
     "results": {
       "title": "Draw Results",
+      "winningNumber": "Winning Number!",
+      "winningNumbers": "{{count}} Winning Numbers!",
       "order": "Order",
       "number": "Number",
       "time": "Time",

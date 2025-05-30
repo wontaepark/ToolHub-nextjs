@@ -244,11 +244,9 @@
       "remaining": "부족"
     },
     "results": {
-      "winningNumber": "당첨 번호!",
-      "winningNumbers": "{{count}}개 당첨 번호!"
-    },
-    "results": {
       "title": "추첨 결과",
+      "winningNumber": "당첨 번호!",
+      "winningNumbers": "{{count}}개 당첨 번호!",
       "order": "순서",
       "number": "번호",
       "time": "시간",

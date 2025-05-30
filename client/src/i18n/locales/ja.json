@@ -234,11 +234,19 @@
     },
     "buttons": {
       "draw": "抽選",
+      "drawing": "抽選中...",
+      "drawNumbers": "{{count}}個抽選",
       "reset": "リセット",
       "settings": "設定"
     },
+    "messages": {
+      "notEnough": "残り番号",
+      "remaining": "不足"
+    },
     "results": {
       "title": "抽選結果",
+      "winningNumber": "当選番号！",
+      "winningNumbers": "{{count}}個当選番号！",
       "order": "順序",
       "number": "番号",
       "time": "時間",

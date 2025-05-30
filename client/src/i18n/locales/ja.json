@@ -118,5 +118,39 @@
       "processingFailed": "URLの処理に失敗しました。再度お試しください。",
       "downloadFailed": "サムネイルのダウンロードに失敗しました。再度お試しください。"
     }
+  },
+  "calculator": {
+    "description": "基本的な四則演算と高度な機能をサポートする電卓です。キーボード入力にも対応しています。",
+    "display": {
+      "result": "結果",
+      "expression": "式"
+    },
+    "buttons": {
+      "clear": "全クリア",
+      "clearEntry": "入力クリア",
+      "backspace": "バックスペース",
+      "divide": "割り算",
+      "multiply": "掛け算",
+      "subtract": "引き算",
+      "add": "足し算",
+      "equals": "計算",
+      "decimal": "小数点",
+      "negate": "符号変更"
+    },
+    "history": {
+      "title": "計算履歴",
+      "clear": "履歴をクリア",
+      "use": "使用",
+      "empty": "計算履歴がありません"
+    },
+    "shortcuts": {
+      "title": "キーボードショートカット",
+      "numbers": "数字: 0-9",
+      "operations": "演算: +, -, *, /",
+      "equals": "計算: Enter",
+      "clear": "全クリア: Escape",
+      "backspace": "バックスペース: Backspace",
+      "decimal": "小数点: ."
+    }
   }
 }

@@ -118,5 +118,39 @@
       "processingFailed": "URL 처리에 실패했습니다. 다시 시도해주세요.",
       "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요."
     }
+  },
+  "calculator": {
+    "description": "기본 사칙연산과 고급 기능을 지원하는 계산기입니다. 키보드 입력도 지원합니다.",
+    "display": {
+      "result": "결과",
+      "expression": "수식"
+    },
+    "buttons": {
+      "clear": "전체 지우기",
+      "clearEntry": "입력 지우기",
+      "backspace": "뒤로",
+      "divide": "나누기",
+      "multiply": "곱하기",
+      "subtract": "빼기",
+      "add": "더하기",
+      "equals": "계산",
+      "decimal": "소수점",
+      "negate": "부호 변경"
+    },
+    "history": {
+      "title": "계산 기록",
+      "clear": "기록 지우기",
+      "use": "사용",
+      "empty": "계산 기록이 없습니다"
+    },
+    "shortcuts": {
+      "title": "키보드 단축키",
+      "numbers": "숫자: 0-9",
+      "operations": "연산: +, -, *, /",
+      "equals": "계산: Enter",
+      "clear": "전체 지우기: Escape",
+      "backspace": "뒤로: Backspace",
+      "decimal": "소수점: ."
+    }
   }
 }

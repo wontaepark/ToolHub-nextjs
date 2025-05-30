@@ -118,5 +118,39 @@
       "processingFailed": "Failed to process the URL. Please try again.",
       "downloadFailed": "Failed to download thumbnail. Please try again."
     }
+  },
+  "calculator": {
+    "description": "A calculator that supports basic arithmetic operations and advanced features. Keyboard input is also supported.",
+    "display": {
+      "result": "Result",
+      "expression": "Expression"
+    },
+    "buttons": {
+      "clear": "Clear All",
+      "clearEntry": "Clear Entry",
+      "backspace": "Backspace",
+      "divide": "Divide",
+      "multiply": "Multiply",
+      "subtract": "Subtract",
+      "add": "Add",
+      "equals": "Calculate",
+      "decimal": "Decimal Point",
+      "negate": "Change Sign"
+    },
+    "history": {
+      "title": "Calculation History",
+      "clear": "Clear History",
+      "use": "Use",
+      "empty": "No calculation history"
+    },
+    "shortcuts": {
+      "title": "Keyboard Shortcuts",
+      "numbers": "Numbers: 0-9",
+      "operations": "Operations: +, -, *, /",
+      "equals": "Calculate: Enter",
+      "clear": "Clear All: Escape",
+      "backspace": "Backspace: Backspace",
+      "decimal": "Decimal: ."
+    }
   }
 }

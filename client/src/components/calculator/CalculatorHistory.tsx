@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { HistoryItem } from "@/lib/calculator";
 import { Button } from "@/components/ui/button";
@@ -14,12 +15,14 @@ export function CalculatorHistory({
   onClearHistory,
   onUseResult
 }: CalculatorHistoryProps) {
+  const { t } = useTranslation();
+  
   return (
     <div className="w-full md:w-1/2 lg:w-2/3">
       <Card className="h-full">
         <CardContent className="p-5">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Calculation History</h3>
+            <h3 className="text-lg font-semibold">{t('calculator.history.title')}</h3>
             <Button 
               variant="ghost" 
               size="sm" 
@@ -27,7 +30,7 @@ export function CalculatorHistory({
               className="text-sm text-muted-foreground hover:text-primary"
               disabled={history.length === 0}
             >
-              Clear History
+              {t('calculator.history.clear')}
             </Button>
           </div>
           
@@ -44,7 +47,7 @@ export function CalculatorHistory({
                     size="icon" 
                     onClick={() => onUseResult(item.result)}
                     className="text-muted-foreground hover:text-primary"
-                    aria-label="Use this result"
+                    aria-label={t('calculator.history.use')}
                   >
                     <RefreshCw className="h-4 w-4" />
                   </Button>

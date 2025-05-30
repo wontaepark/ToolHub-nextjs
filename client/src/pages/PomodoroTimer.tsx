@@ -720,7 +720,7 @@ export default function PomodoroTimer() {
                     ) : (
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm font-medium">작업 시간 (분)</label>
+                          <label className="text-sm font-medium">{t('pomodoro.settings.workTime')}</label>
                           <input
                             type="number"
                             min="15"
@@ -735,7 +735,7 @@ export default function PomodoroTimer() {
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium">짧은 휴식 (분)</label>
+                          <label className="text-sm font-medium">{t('pomodoro.settings.shortBreak')}</label>
                           <input
                             type="number"
                             min="3"
@@ -750,7 +750,7 @@ export default function PomodoroTimer() {
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium">긴 휴식 (분)</label>
+                          <label className="text-sm font-medium">{t('pomodoro.settings.longBreak')}</label>
                           <input
                             type="number"
                             min="10"
@@ -779,7 +779,7 @@ export default function PomodoroTimer() {
                       disabled={isRunning}
                       className="rounded"
                     />
-                    <label htmlFor="autoStart" className="text-sm">자동 시작</label>
+                    <label htmlFor="autoStart" className="text-sm">{t('pomodoro.settings.autoStart')}</label>
                   </div>
 
                   <div className="flex items-center space-x-2">
@@ -796,7 +796,7 @@ export default function PomodoroTimer() {
                     />
                     <label htmlFor="soundEnabled" className="text-sm flex items-center space-x-1">
                       <Volume2 className="h-4 w-4" />
-                      <span>알림음</span>
+                      <span>{t('pomodoro.settings.soundEnabled')}</span>
                     </label>
                   </div>
                 </div>
@@ -808,7 +808,7 @@ export default function PomodoroTimer() {
           <Card>
             <CardContent className={`p-6 ${!isRunning && timerState !== 'idle' ? 'opacity-50 pointer-events-none' : ''}`}>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-lg">할일 목록</h3>
+                <h3 className="font-semibold text-lg">{t('pomodoro.tasks.title')}</h3>
                 {!isRunning && timerState !== 'idle' && (
                   <span className="text-xs text-muted-foreground">(일시정지 중 비활성화)</span>
                 )}
@@ -821,7 +821,7 @@ export default function PomodoroTimer() {
                   value={newTaskText}
                   onChange={(e) => setNewTaskText(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addTask()}
-                  placeholder="새 할일을 입력하세요..."
+                  placeholder={t('pomodoro.tasks.placeholder')}
                   className="flex-1 px-3 py-2 text-sm border rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
                 <Button 
@@ -894,7 +894,7 @@ export default function PomodoroTimer() {
                 
                 {tasks.length === 0 && (
                   <div className="text-center py-4 text-muted-foreground">
-                    <p className="text-sm">할일을 추가해보세요!</p>
+                    <p className="text-sm">{t('pomodoro.tasks.emptyDesc')}</p>
                   </div>
                 )}
               </div>

@@ -152,5 +152,52 @@
       "backspace": "Backspace: Backspace",
       "decimal": "Decimal: ."
     }
+  },
+  "pomodoro": {
+    "description": "A Pomodoro Technique timer for improving focus and productivity. Includes task management and session tracking features.",
+    "states": {
+      "work": "Work Time",
+      "shortBreak": "Short Break",
+      "longBreak": "Long Break",
+      "idle": "Idle"
+    },
+    "buttons": {
+      "start": "Start",
+      "pause": "Pause",
+      "reset": "Reset",
+      "settings": "Settings",
+      "skip": "Skip"
+    },
+    "stats": {
+      "completed": "Completed Pomodoros",
+      "cycle": "Cycle",
+      "daily": "Today"
+    },
+    "settings": {
+      "title": "Pomodoro Settings",
+      "workTime": "Work Time (minutes)",
+      "shortBreak": "Short Break (minutes)",
+      "longBreak": "Long Break (minutes)",
+      "autoStart": "Auto Start",
+      "soundEnabled": "Sound Notifications",
+      "taskBasedTiming": "Task-based Timing",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "tasks": {
+      "title": "Task List",
+      "add": "Add Task",
+      "placeholder": "Enter a new task...",
+      "current": "Current Task",
+      "completed": "Completed",
+      "pomodoros": "Pomodoros",
+      "empty": "No tasks yet",
+      "emptyDesc": "Add a task to start your pomodoro session"
+    },
+    "messages": {
+      "workComplete": "Work session completed! Take a break.",
+      "breakComplete": "Break time is over! Ready to work.",
+      "cycleComplete": "Cycle completed!"
+    }
   }
 }

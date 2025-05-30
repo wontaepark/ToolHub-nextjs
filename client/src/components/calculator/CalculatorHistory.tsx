@@ -59,8 +59,7 @@ export function CalculatorHistory({
           {history.length === 0 && (
             <div className="text-center py-8">
               <i className="ri-history-line text-4xl text-muted mb-2"></i>
-              <p className="text-muted-foreground">No calculation history yet.</p>
-              <p className="text-sm text-muted-foreground mt-1">Use the calculator to see your history appear here.</p>
+              <p className="text-muted-foreground">{t('calculator.history.empty')}</p>
             </div>
           )}
         </CardContent>

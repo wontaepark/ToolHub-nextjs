@@ -152,5 +152,52 @@
       "backspace": "뒤로: Backspace",
       "decimal": "소수점: ."
     }
+  },
+  "pomodoro": {
+    "description": "집중력 향상을 위한 포모도로 기법 타이머입니다. 작업 목록 관리와 세션 추적 기능을 제공합니다.",
+    "states": {
+      "work": "작업 시간",
+      "shortBreak": "짧은 휴식",
+      "longBreak": "긴 휴식",
+      "idle": "대기"
+    },
+    "buttons": {
+      "start": "시작",
+      "pause": "일시정지",
+      "reset": "초기화",
+      "settings": "설정",
+      "skip": "건너뛰기"
+    },
+    "stats": {
+      "completed": "완료된 포모도로",
+      "cycle": "사이클",
+      "daily": "오늘"
+    },
+    "settings": {
+      "title": "포모도로 설정",
+      "workTime": "작업 시간 (분)",
+      "shortBreak": "짧은 휴식 (분)",
+      "longBreak": "긴 휴식 (분)",
+      "autoStart": "자동 시작",
+      "soundEnabled": "알림음",
+      "taskBasedTiming": "작업별 시간 설정",
+      "save": "저장",
+      "cancel": "취소"
+    },
+    "tasks": {
+      "title": "작업 목록",
+      "add": "작업 추가",
+      "placeholder": "새 작업을 입력하세요...",
+      "current": "현재 작업",
+      "completed": "완료",
+      "pomodoros": "포모도로",
+      "empty": "작업이 없습니다",
+      "emptyDesc": "작업을 추가하여 포모도로를 시작해보세요"
+    },
+    "messages": {
+      "workComplete": "작업 시간이 완료되었습니다! 휴식을 취하세요.",
+      "breakComplete": "휴식 시간이 완료되었습니다! 작업을 시작하세요.",
+      "cycleComplete": "사이클이 완료되었습니다!"
+    }
   }
 }

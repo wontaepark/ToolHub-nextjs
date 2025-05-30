@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -27,6 +28,7 @@ interface Task {
 }
 
 export default function PomodoroTimer() {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [timerState, setTimerState] = useState<TimerState>('idle');
@@ -374,13 +376,13 @@ export default function PomodoroTimer() {
   const getStateText = () => {
     switch (timerState) {
       case 'work':
-        return '집중 시간';
+        return t('pomodoro.states.work');
       case 'shortBreak':
-        return '짧은 휴식';
+        return t('pomodoro.states.shortBreak');
       case 'longBreak':
-        return '긴 휴식';
+        return t('pomodoro.states.longBreak');
       default:
-        return '시작 대기';
+        return t('pomodoro.states.idle');
     }
   };
 
@@ -400,9 +402,9 @@ export default function PomodoroTimer() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2">포모도로 타이머</h2>
+        <h2 className="text-3xl font-bold mb-2">{t('tools.pomodoroTimer.title')}</h2>
         <p className="text-muted-foreground">
-          25분 집중, 5분 휴식의 과학적인 시간 관리 기법으로 생산성을 향상시키세요.
+          {t('pomodoro.description')}
         </p>
       </div>
 

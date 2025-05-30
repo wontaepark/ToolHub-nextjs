@@ -70,9 +70,9 @@ export default function Home() {
                   {t('tools.calculator.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  {t('tools.calculator.tags', { returnObjects: true }).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">{tag}</Badge>
-                  ))}
+                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.2')}</Badge>
                 </div>
               </div>
             </div>
@@ -96,9 +96,9 @@ export default function Home() {
                   {t('tools.pomodoro.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  {t('tools.pomodoro.tags', { returnObjects: true }).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">{tag}</Badge>
-                  ))}
+                  <Badge variant="outline" className="text-xs">{t('tools.pomodoro.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.pomodoro.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.pomodoro.tags.2')}</Badge>
                 </div>
               </div>
             </div>
@@ -113,19 +113,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">범용 타이머</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.timer.title')}</h3>
                   <Badge variant="default" className="bg-blue-500/10 text-blue-600 text-xs flex-shrink-0 ml-2">
-                    사용 가능
+                    {t('common.available')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  원하는 시간을 자유롭게 설정할 수 있는 카운트다운 타이머입니다. 
-                  요리, 운동, 휴식 등 다양한 용도로 활용하세요.
+                  {t('tools.timer.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">자유 설정</Badge>
-                  <Badge variant="outline" className="text-xs">브라우저 알림</Badge>
-                  <Badge variant="outline" className="text-xs">빠른 프리셋</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.timer.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.timer.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.timer.tags.2')}</Badge>
                 </div>
               </div>
             </div>
@@ -139,19 +138,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">번호 추첨기</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.raffle.title')}</h3>
                   <Badge variant="default" className="bg-primary/10 text-primary text-xs flex-shrink-0 ml-2">
-                    새로운
+                    {t('common.new')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  공정하고 재미있는 번호 추첨을 위한 도구입니다. 
-                  슬롯머신 애니메이션과 함께 시각적으로 즐거운 추첨 경험을 제공합니다.
+                  {t('tools.raffle.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">슬롯머신 효과</Badge>
-                  <Badge variant="outline" className="text-xs">중복 제거</Badge>
-                  <Badge variant="outline" className="text-xs">추첨 기록</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.raffle.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.raffle.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.raffle.tags.2')}</Badge>
                 </div>
               </div>
             </div>
@@ -166,19 +164,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">썸네일 다운로더</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.thumbnail.title')}</h3>
                   <Badge variant="default" className="bg-red-500/10 text-red-600 text-xs flex-shrink-0 ml-2">
-                    신규
+                    {t('common.new')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  YouTube 동영상의 고화질 썸네일 이미지를 간편하게 다운로드하세요. 
-                  다양한 해상도 옵션을 제공합니다.
+                  {t('tools.thumbnail.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">고화질</Badge>
-                  <Badge variant="outline" className="text-xs">여러 해상도</Badge>
-                  <Badge variant="outline" className="text-xs">원클릭 다운로드</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.thumbnail.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.thumbnail.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.thumbnail.tags.2')}</Badge>
                 </div>
               </div>
             </div>
@@ -189,27 +186,27 @@ export default function Home() {
       {/* Coming Soon Section */}
       <div className="mb-12 md:mb-16 px-4">
         <div className="text-center mb-8">
-          <h3 className="text-xl md:text-2xl font-bold mb-3">다음 주차 출시 예정</h3>
-          <p className="text-sm md:text-base text-muted-foreground">매주 새로운 도구가 추가됩니다</p>
+          <h3 className="text-xl md:text-2xl font-bold mb-3">{t('home.nextWeekRelease')}</h3>
+          <p className="text-sm md:text-base text-muted-foreground">{t('home.weeklyUpdates')}</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
           {/* Unit Converter - Next Week */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-blue-200 relative">
             <div className="absolute top-2 right-2 z-10">
-              <Badge className="bg-blue-500 text-white text-xs">다음 주</Badge>
+              <Badge className="bg-blue-500 text-white text-xs">{t('common.nextWeek')}</Badge>
             </div>
             <div className="h-24 md:h-32 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
               <i className="ri-scales-3-line text-white text-3xl md:text-5xl"></i>
             </div>
             <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">단위 변환기</h4>
+              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.unitConverter.title')}</h4>
               <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                길이, 무게, 온도 등 다양한 단위 변환
+                {t('tools.unitConverter.description')}
               </p>
               <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">길이</Badge>
-                <Badge variant="outline" className="text-xs">무게</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.0')}</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.1')}</Badge>
               </div>
             </div>
           </div>
@@ -217,19 +214,19 @@ export default function Home() {
           {/* Password Generator - Week 2 */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-orange-200 relative opacity-90">
             <div className="absolute top-2 right-2 z-10">
-              <Badge variant="outline" className="bg-orange-100 text-orange-600 text-xs">2주 후</Badge>
+              <Badge variant="outline" className="bg-orange-100 text-orange-600 text-xs">{t('common.week2')}</Badge>
             </div>
             <div className="h-24 md:h-32 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
               <i className="ri-shield-keyhole-line text-white text-3xl md:text-5xl"></i>
             </div>
             <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">비밀번호 생성기</h4>
+              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.passwordGenerator.title')}</h4>
               <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                안전하고 강력한 비밀번호 생성
+                {t('tools.passwordGenerator.description')}
               </p>
               <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">보안</Badge>
-                <Badge variant="outline" className="text-xs">랜덤</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.0')}</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.1')}</Badge>
               </div>
             </div>
           </div>
@@ -237,19 +234,19 @@ export default function Home() {
           {/* QR Code Generator - Week 3 */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-purple-200 relative opacity-75">
             <div className="absolute top-2 right-2 z-10">
-              <Badge variant="outline" className="bg-purple-100 text-purple-600 text-xs">3주 후</Badge>
+              <Badge variant="outline" className="bg-purple-100 text-purple-600 text-xs">{t('common.week3')}</Badge>
             </div>
             <div className="h-24 md:h-32 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
               <i className="ri-qr-code-line text-white text-3xl md:text-5xl"></i>
             </div>
             <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">QR코드 생성기</h4>
+              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.qrGenerator.title')}</h4>
               <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                링크, 텍스트를 QR코드로 변환
+                {t('tools.qrGenerator.description')}
               </p>
               <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">QR</Badge>
-                <Badge variant="outline" className="text-xs">공유</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.qrGenerator.tags.0')}</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.qrGenerator.tags.1')}</Badge>
               </div>
             </div>
           </div>

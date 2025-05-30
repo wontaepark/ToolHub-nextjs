@@ -185,6 +185,8 @@
       "autoStart": "自動開始",
       "soundEnabled": "サウンド通知",
       "taskBasedTiming": "タスクベースのタイミング",
+      "taskBasedTimingDesc": "各タスクに個別の時間設定ができます。タスクリストの各項目をクリックしてカスタム時間を設定してください。",
+      "disabledMessage": "タイマー実行中は設定を変更できません。",
       "save": "保存",
       "cancel": "キャンセル"
     },

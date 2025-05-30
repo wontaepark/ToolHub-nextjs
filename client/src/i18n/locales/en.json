@@ -185,6 +185,8 @@
       "autoStart": "Auto Start",
       "soundEnabled": "Sound Notifications",
       "taskBasedTiming": "Task-based Timing",
+      "taskBasedTimingDesc": "You can set individual time settings for each task. Click on each item in the task list to set custom timing.",
+      "disabledMessage": "Settings cannot be changed while the timer is running.",
       "save": "Save",
       "cancel": "Cancel"
     },

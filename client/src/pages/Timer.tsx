@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Square, RotateCcw, Clock, Timer as TimerIcon, Mic, MicOff, Volume2, Settings, ChevronDown, Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 type TimerState = 'idle' | 'running' | 'paused' | 'finished';
 
@@ -51,6 +52,7 @@ const TIMER_PRESETS = {
 };
 
 export default function Timer() {
+  const { t } = useTranslation();
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -552,10 +554,10 @@ export default function Timer() {
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 flex items-center justify-center gap-3">
           <TimerIcon className="h-8 w-8 md:h-10 md:w-10 text-primary" />
-          범용 타이머
+          {t('timer.title')}
         </h1>
         <p className="text-muted-foreground">
-          원하는 시간을 설정하고 카운트다운을 시작하세요
+          {t('timer.description')}
         </p>
       </div>
 
@@ -566,10 +568,10 @@ export default function Timer() {
             {/* 시간 설정 (idle 상태에서만) */}
             {state === 'idle' && (
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">시간 설정</h3>
+                <h3 className="text-lg font-semibold">{t('timer.timeSetup')}</h3>
                 <div className="flex justify-center items-center gap-4 max-w-xs mx-auto">
                   <div className="flex flex-col items-center gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">분</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('timer.minutes')}</label>
                     <Input
                       type="number"
                       min="0"
@@ -581,7 +583,7 @@ export default function Timer() {
                   </div>
                   <div className="text-2xl font-bold mt-6">:</div>
                   <div className="flex flex-col items-center gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">초</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('timer.seconds')}</label>
                     <Input
                       type="number"
                       min="0"
@@ -616,25 +618,25 @@ export default function Timer() {
                 {state === 'idle' && (
                   <Badge variant="secondary" className="px-4 py-2">
                     <Clock className="w-4 h-4 mr-2" />
-                    대기 중
+                    {t('timer.status.waiting')}
                   </Badge>
                 )}
                 {state === 'running' && (
                   <Badge variant="default" className="px-4 py-2 bg-green-500">
                     <Play className="w-4 h-4 mr-2" />
-                    실행 중
+                    {t('timer.status.running')}
                   </Badge>
                 )}
                 {state === 'paused' && (
                   <Badge variant="outline" className="px-4 py-2">
                     <Pause className="w-4 h-4 mr-2" />
-                    일시정지
+                    {t('timer.status.paused')}
                   </Badge>
                 )}
                 {state === 'finished' && (
                   <Badge variant="destructive" className="px-4 py-2">
                     <Square className="w-4 h-4 mr-2" />
-                    완료
+                    {t('timer.status.finished')}
                   </Badge>
                 )}
               </div>
@@ -651,14 +653,14 @@ export default function Timer() {
                     disabled={minutes === 0 && seconds === 0}
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    시작
+                    {t('timer.buttons.start')}
                   </Button>
                 )}
                 
                 {state === 'running' && (
                   <Button onClick={pauseTimer} size="lg" className="px-8" variant="outline">
                     <Pause className="w-5 h-5 mr-2" />
-                    일시정지
+                    {t('timer.buttons.pause')}
                   </Button>
                 )}
                 
@@ -666,11 +668,11 @@ export default function Timer() {
                   <>
                     <Button onClick={startTimer} size="lg" className="px-8">
                       <Play className="w-5 h-5 mr-2" />
-                      재개
+                      {t('timer.buttons.resume')}
                     </Button>
                     <Button onClick={resetTimer} size="lg" variant="outline">
                       <RotateCcw className="w-5 h-5 mr-2" />
-                      리셋
+                      {t('timer.buttons.reset')}
                     </Button>
                   </>
                 )}
@@ -678,7 +680,7 @@ export default function Timer() {
                 {(state === 'running' || state === 'paused' || state === 'finished') && (
                   <Button onClick={stopTimer} size="lg" variant="destructive">
                     <Square className="w-5 h-5 mr-2" />
-                    정지
+                    {t('timer.buttons.stop')}
                   </Button>
                 )}
               </div>
@@ -686,7 +688,7 @@ export default function Timer() {
               {/* 빠른 프리셋 버튼들 */}
               {state === 'idle' && (
                 <div className="space-y-3 mt-4">
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">빠른 설정</h4>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('timer.quickSetup')}</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {getFavoritePresetsData().map((preset: any) => (
                       <div key={preset.name} className="relative">

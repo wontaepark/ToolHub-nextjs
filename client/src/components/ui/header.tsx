@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, useLocation } from "wouter";
 import { useTheme } from "../ThemeProvider";
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
+import LanguageSelector from "../LanguageSelector";
 import { Sun, Moon, Menu, Github } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation();
   const [location] = useLocation();
 
   const toggleTheme = () => {
@@ -40,7 +43,7 @@ export default function Header() {
               className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
             >
               <i className="ri-home-line text-lg"></i>
-              <span>홈</span>
+              <span>{t('common.home')}</span>
             </Button>
           </Link>
           
@@ -51,16 +54,18 @@ export default function Header() {
             className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
           >
             <Github className="h-4 w-4 md:h-5 md:w-5" />
-            <span>GitHub</span>
+            <span>{t('common.github')}</span>
           </a>
+          
+          <LanguageSelector />
           
           <Button 
             variant="ghost" 
             size="icon" 
             onClick={toggleTheme}
-            aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
+            aria-label={theme === 'light' ? t('header.darkMode') : t('header.lightMode')}
             className="flex items-center justify-center border border-border hover:bg-accent h-9 w-9 md:h-10 md:w-10"
-            title={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
+            title={theme === 'light' ? t('header.darkMode') : t('header.lightMode')}
           >
             {theme === 'light' ? (
               <Sun className="h-4 w-4 md:h-5 md:w-5 transition-all" />
@@ -93,7 +98,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-home-line text-lg"></i>
-                    <span className="font-medium">홈</span>
+                    <span className="font-medium">{t('common.home')}</span>
                   </div>
                 </Link>
               </li>
@@ -104,7 +109,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-calculator-line text-lg"></i>
-                    <span className="font-medium">계산기</span>
+                    <span className="font-medium">{t('tools.calculator.title')}</span>
                   </div>
                 </Link>
               </li>
@@ -115,7 +120,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-timer-line text-lg"></i>
-                    <span className="font-medium">포모도로 타이머</span>
+                    <span className="font-medium">{t('tools.pomodoro.title')}</span>
                   </div>
                 </Link>
               </li>
@@ -126,7 +131,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-time-line text-lg"></i>
-                    <span className="font-medium">범용 타이머</span>
+                    <span className="font-medium">{t('tools.timer.title')}</span>
                   </div>
                 </Link>
               </li>
@@ -137,7 +142,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-shuffle-line text-lg"></i>
-                    <span className="font-medium">번호 추첨기</span>
+                    <span className="font-medium">{t('tools.raffle.title')}</span>
                   </div>
                 </Link>
               </li>

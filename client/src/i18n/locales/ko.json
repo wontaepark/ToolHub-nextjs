@@ -286,6 +286,8 @@
     "videoId": "동영상 ID",
     "pixels": "픽셀",
     "errors": {
+      "emptyUrl": "YouTube URL을 입력해주세요",
+      "invalidUrl": "유효하지 않은 YouTube URL입니다. 올바른 YouTube 동영상 URL을 입력해주세요.",
       "processingFailed": "URL 처리에 실패했습니다. 다시 시도해주세요.",
       "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요.",
       "unavailable": "이 화질의 썸네일을 사용할 수 없습니다"

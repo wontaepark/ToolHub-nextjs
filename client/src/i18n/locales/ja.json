@@ -286,6 +286,8 @@
     "videoId": "動画ID",
     "pixels": "ピクセル",
     "errors": {
+      "emptyUrl": "YouTube URLを入力してください",
+      "invalidUrl": "無効なYouTube URLです。正しいYouTube動画URLを入力してください。",
       "processingFailed": "URL処理に失敗しました。再試行してください。",
       "downloadFailed": "サムネイルダウンロードに失敗しました。再試行してください。",
       "unavailable": "この画質のサムネイルは利用できません"

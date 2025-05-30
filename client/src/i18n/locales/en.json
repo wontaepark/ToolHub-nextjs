@@ -286,6 +286,8 @@
     "videoId": "Video ID",
     "pixels": "pixels",
     "errors": {
+      "emptyUrl": "Please enter a YouTube URL",
+      "invalidUrl": "Invalid YouTube URL. Please enter a valid YouTube video URL.",
       "processingFailed": "URL processing failed. Please try again.",
       "downloadFailed": "Thumbnail download failed. Please try again.",
       "unavailable": "This quality thumbnail is not available"

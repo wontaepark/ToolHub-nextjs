@@ -56,13 +56,13 @@ export default function ThumbnailDownloader() {
     setThumbnailData(null);
 
     if (!url.trim()) {
-      setError('YouTube URL을 입력해주세요');
+      setError(t('thumbnail.errors.emptyUrl'));
       return;
     }
 
     const videoId = extractVideoId(url);
     if (!videoId) {
-      setError('유효하지 않은 YouTube URL입니다. 올바른 YouTube 동영상 URL을 입력해주세요.');
+      setError(t('thumbnail.errors.invalidUrl'));
       return;
     }
 

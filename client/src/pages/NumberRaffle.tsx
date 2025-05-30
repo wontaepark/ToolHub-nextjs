@@ -421,7 +421,7 @@ export default function NumberRaffle() {
                 {soundEnabled && (
                   <div>
                     <label className="text-sm font-medium mb-2 block">
-                      볼륨 조절 ({Math.round(volume * 100)}%)
+{t('numberRaffle.settings.volume')} ({Math.round(volume * 100)}%)
                     </label>
                     <div className="flex items-center space-x-3">
                       <span className="text-xs">🔇</span>
@@ -447,7 +447,7 @@ export default function NumberRaffle() {
                   disabled={isDrawing || drawnNumbers.length === 0}
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
-                  초기화
+{t('numberRaffle.buttons.reset')}
                 </Button>
 
                 {/* Statistics */}
@@ -514,7 +514,7 @@ export default function NumberRaffle() {
                         })}
                       </div>
                       <p className="text-xl text-gray-600">
-                        {currentNumbers.length === 1 ? '당첨 번호!' : `${currentNumbers.length}개 당첨 번호!`}
+{currentNumbers.length === 1 ? t('numberRaffle.results.winningNumber') : t('numberRaffle.results.winningNumbers', { count: currentNumbers.length })}
                       </p>
                     </div>
                   )}
@@ -535,17 +535,17 @@ export default function NumberRaffle() {
                     {isDrawing ? (
                       <div className="flex flex-col items-center">
                         <Shuffle className="w-8 h-8 mb-1" />
-                        <span className="text-sm">추첨중...</span>
+                        <span className="text-sm">{t('numberRaffle.buttons.drawing')}</span>
                       </div>
                     ) : availableNumbers.length < drawCount ? (
                       <div className="flex flex-col items-center text-xs">
-                        <span>남은 번호</span>
-                        <span>부족</span>
+                        <span>{t('numberRaffle.messages.notEnough')}</span>
+                        <span>{t('numberRaffle.messages.remaining')}</span>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center">
                         <Shuffle className="w-8 h-8 mb-1" />
-                        <span className="text-sm">{drawCount}개 추첨</span>
+                        <span className="text-sm">{t('numberRaffle.buttons.drawNumbers', { count: drawCount })}</span>
                       </div>
                     )}
                   </Button>

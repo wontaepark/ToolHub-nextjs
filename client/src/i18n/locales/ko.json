@@ -234,8 +234,18 @@
     },
     "buttons": {
       "draw": "추첨하기",
+      "drawing": "추첨중...",
+      "drawNumbers": "{{count}}개 추첨",
       "reset": "초기화",
       "settings": "설정"
+    },
+    "messages": {
+      "notEnough": "남은 번호",
+      "remaining": "부족"
+    },
+    "results": {
+      "winningNumber": "당첨 번호!",
+      "winningNumbers": "{{count}}개 당첨 번호!"
     },
     "results": {
       "title": "추첨 결과",

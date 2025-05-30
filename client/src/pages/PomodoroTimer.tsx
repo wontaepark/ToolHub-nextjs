@@ -875,7 +875,7 @@ export default function PomodoroTimer() {
                         )}
                         {settings.taskBasedTiming && task.customWorkTime && (
                           <span className="ml-2 text-xs text-blue-600">
-                            ⏱️{task.customWorkTime}분
+                            ⏱️{task.customWorkTime}{t('common.minutes')}
                           </span>
                         )}
                       </div>
@@ -974,7 +974,7 @@ export default function PomodoroTimer() {
                         variant="outline"
                         onClick={() => setEditingTaskId(null)}
                       >
-                        닫기
+{t('pomodoro.settings.cancel')}
                       </Button>
                     </div>
                   </div>
@@ -986,27 +986,27 @@ export default function PomodoroTimer() {
           {/* Tips Card */}
           <Card>
             <CardContent className="p-6">
-              <h3 className="font-semibold text-lg mb-4">포모도로 팁</h3>
+              <h3 className="font-semibold text-lg mb-4">{t('pomodoro.tips.title')}</h3>
               <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground">
                 <p className="flex items-start space-x-2">
                   <span className="flex-shrink-0">🍅</span>
-                  <span className="leading-relaxed">한 번에 하나의 작업에만 집중하세요</span>
+                  <span className="leading-relaxed">{t('pomodoro.tips.tip1')}</span>
                 </p>
                 <p className="flex items-start space-x-2">
                   <span className="flex-shrink-0">⏰</span>
-                  <span className="leading-relaxed">25분 동안은 방해 요소를 차단하세요</span>
+                  <span className="leading-relaxed">{t('pomodoro.tips.tip2')}</span>
                 </p>
                 <p className="flex items-start space-x-2">
                   <span className="flex-shrink-0">🚫</span>
-                  <span className="leading-relaxed">휴식 시간을 건너뛰지 마세요</span>
+                  <span className="leading-relaxed">{t('pomodoro.tips.tip3')}</span>
                 </p>
                 <p className="flex items-start space-x-2">
                   <span className="flex-shrink-0">📝</span>
-                  <span className="leading-relaxed">완료한 작업을 기록해보세요</span>
+                  <span className="leading-relaxed">{t('pomodoro.tips.tip4')}</span>
                 </p>
                 <p className="flex items-start space-x-2">
                   <span className="flex-shrink-0">🎯</span>
-                  <span className="leading-relaxed">하루 목표를 설정해보세요</span>
+                  <span className="leading-relaxed">{t('pomodoro.tips.tip5')}</span>
                 </p>
               </div>
             </CardContent>

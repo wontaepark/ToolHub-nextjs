@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +19,7 @@ interface ThumbnailData {
 }
 
 export default function ThumbnailDownloader() {
+  const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const [thumbnailData, setThumbnailData] = useState<ThumbnailData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ export default function ThumbnailDownloader() {
         thumbnails
       });
     } catch (err) {
-      setError('URL 처리에 실패했습니다. 다시 시도해주세요.');
+      setError(t('thumbnail.errors.processingFailed'));
     } finally {
       setLoading(false);
     }
@@ -93,7 +95,7 @@ export default function ThumbnailDownloader() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (err) {
-      setError('썸네일 다운로드에 실패했습니다. 다시 시도해주세요.');
+      setError(t('thumbnail.errors.downloadFailed'));
     }
   };
 
@@ -106,11 +108,11 @@ export default function ThumbnailDownloader() {
               <ImageIcon className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              YouTube 썸네일 다운로더
+              {t('thumbnail.title')}
             </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            YouTube 동영상의 고화질 썸네일을 다양한 해상도로 다운로드하세요
+            {t('thumbnail.description')}
           </p>
         </div>
 
@@ -118,10 +120,10 @@ export default function ThumbnailDownloader() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <LinkIcon className="h-5 w-5" />
-              YouTube URL 입력
+              {t('thumbnail.urlInput.title')}
             </CardTitle>
             <CardDescription>
-              YouTube 동영상 URL을 붙여넣으세요 (youtube.com, youtu.be, 또는 shorts)
+              {t('thumbnail.urlInput.description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -129,13 +131,13 @@ export default function ThumbnailDownloader() {
               <div className="flex gap-2">
                 <Input
                   type="url"
-                  placeholder="https://www.youtube.com/watch?v=..."
+                  placeholder={t('thumbnail.urlInput.placeholder')}
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   className="flex-1"
                 />
                 <Button type="submit" disabled={loading} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                  {loading ? '처리 중...' : '썸네일 가져오기'}
+                  {loading ? t('thumbnail.buttons.processing') : t('thumbnail.buttons.fetch')}
                 </Button>
               </div>
             </form>
@@ -155,7 +157,7 @@ export default function ThumbnailDownloader() {
           <div className="space-y-6">
             <div className="text-center">
               <Badge variant="secondary" className="mb-4">
-                동영상 ID: {thumbnailData.videoId}
+                {t('thumbnail.videoId')}: {thumbnailData.videoId}
               </Badge>
             </div>
 

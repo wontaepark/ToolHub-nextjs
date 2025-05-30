@@ -106,11 +106,11 @@ export default function ThumbnailDownloader() {
               <ImageIcon className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              YouTube Thumbnail Downloader
+              YouTube 썸네일 다운로더
             </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            Download high-quality thumbnails from any YouTube video in multiple resolutions
+            YouTube 동영상의 고화질 썸네일을 다양한 해상도로 다운로드하세요
           </p>
         </div>
 
@@ -118,10 +118,10 @@ export default function ThumbnailDownloader() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <LinkIcon className="h-5 w-5" />
-              Enter YouTube URL
+              YouTube URL 입력
             </CardTitle>
             <CardDescription>
-              Paste any YouTube video URL (youtube.com, youtu.be, or shorts)
+              YouTube 동영상 URL을 붙여넣으세요 (youtube.com, youtu.be, 또는 shorts)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -135,7 +135,7 @@ export default function ThumbnailDownloader() {
                   className="flex-1"
                 />
                 <Button type="submit" disabled={loading} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                  {loading ? 'Processing...' : 'Get Thumbnails'}
+                  {loading ? '처리 중...' : '썸네일 가져오기'}
                 </Button>
               </div>
             </form>

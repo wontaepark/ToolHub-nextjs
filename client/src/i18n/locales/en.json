@@ -11,6 +11,7 @@
     "week2": "2 Weeks",
     "week3": "3 Weeks",
     "nextMonth": "Next Month",
+    "minutes": "min",
     "download": "Download",
     "processing": "Processing...",
     "error": "Error",
@@ -200,6 +201,14 @@
       "workComplete": "Work session completed! Take a break.",
       "breakComplete": "Break time is over! Ready to work.",
       "cycleComplete": "Cycle completed!"
+    },
+    "tips": {
+      "title": "Pomodoro Tips",
+      "tip1": "Focus on one task at a time",
+      "tip2": "Block distractions for 25 minutes",
+      "tip3": "Don't skip breaks",
+      "tip4": "Track your completed tasks",
+      "tip5": "Set daily goals"
     }
   },
   "numberRaffle": {

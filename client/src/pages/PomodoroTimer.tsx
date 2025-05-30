@@ -562,7 +562,7 @@ export default function PomodoroTimer() {
                   {tasks.filter(task => !task.completed).map(task => (
                     <option key={task.id} value={task.id}>
                       {task.text}
-                      {settings.taskBasedTiming && task.customWorkTime && ` (${task.customWorkTime}분)`}
+                      {settings.taskBasedTiming && task.customWorkTime && ` (${task.customWorkTime}${t('common.minutes')})`}
                     </option>
                   ))}
                 </select>

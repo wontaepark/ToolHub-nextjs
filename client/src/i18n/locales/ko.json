@@ -216,6 +216,7 @@
     }
   },
   "numberRaffle": {
+    "title": "번호 추첨기",
     "description": "공정한 번호 추첨 시스템입니다. 드럼 사운드와 함께 무작위 번호를 뽑아보세요.",
     "settings": {
       "title": "설정",

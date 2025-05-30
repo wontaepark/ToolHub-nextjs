@@ -216,6 +216,7 @@
     }
   },
   "numberRaffle": {
+    "title": "番号抽選機",
     "description": "公正な番号抽選システムです。ドラム音と一緒にランダムな番号を抽選してみてください。",
     "settings": {
       "title": "設定",

@@ -216,6 +216,7 @@
     }
   },
   "numberRaffle": {
+    "title": "Number Raffle",
     "description": "A fair number drawing system. Draw random numbers with drum sound effects.",
     "settings": {
       "title": "Settings",

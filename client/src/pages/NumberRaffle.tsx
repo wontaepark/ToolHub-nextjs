@@ -356,7 +356,7 @@ export default function NumberRaffle() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
-            {t('tools.numberRaffle.title')}
+            {t('numberRaffle.title')}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 drop-shadow-lg">
             {t('numberRaffle.description')}

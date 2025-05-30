@@ -803,7 +803,7 @@ export default function Timer() {
                               saveCustomizedPreset(preset.name, newMinutes, displaySeconds);
                             }}
                             className="h-5 text-xs"
-                            placeholder="분"
+                            placeholder={t('timer.minutes')}
                           />
                           <Input
                             type="number"
@@ -815,7 +815,7 @@ export default function Timer() {
                               saveCustomizedPreset(preset.name, displayMinutes, newSeconds);
                             }}
                             className="h-5 text-xs"
-                            placeholder="초"
+                            placeholder={t('timer.seconds')}
                           />
                           <Button
                             size="sm"

@@ -218,10 +218,19 @@
   "numberRaffle": {
     "description": "公正な番号抽選システムです。ドラム音と一緒にランダムな番号を抽選してみてください。",
     "settings": {
+      "title": "設定",
       "maxNumber": "最大番号",
       "drawCount": "抽選数",
       "soundEnabled": "サウンド有効",
       "volume": "音量"
+    },
+    "stats": {
+      "totalNumbers": "全体番号",
+      "drawnNumbers": "抽選された番号",
+      "remainingNumbers": "残り番号"
+    },
+    "history": {
+      "title": "抽選された番号"
     },
     "buttons": {
       "draw": "抽選",

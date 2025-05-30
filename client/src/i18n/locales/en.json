@@ -218,10 +218,19 @@
   "numberRaffle": {
     "description": "A fair number drawing system. Draw random numbers with drum sound effects.",
     "settings": {
+      "title": "Settings",
       "maxNumber": "Max Number",
       "drawCount": "Draw Count",
       "soundEnabled": "Sound Enabled",
       "volume": "Volume"
+    },
+    "stats": {
+      "totalNumbers": "Total Numbers",
+      "drawnNumbers": "Drawn Numbers",
+      "remainingNumbers": "Remaining Numbers"
+    },
+    "history": {
+      "title": "Drawn Numbers"
     },
     "buttons": {
       "draw": "Draw",

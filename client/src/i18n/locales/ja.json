@@ -171,6 +171,7 @@
     },
     "stats": {
       "completed": "完了したポモドーロ",
+      "currentSession": "現在のセッション",
       "cycle": "サイクル",
       "daily": "今日",
       "dailyGoal": "今日の目標",

@@ -594,7 +594,7 @@ export default function PomodoroTimer() {
                 </div>
                 
                 <div className="flex justify-between items-center">
-                  <span>현재 세션</span>
+                  <span>{t('pomodoro.stats.currentSession')}</span>
                   <Badge variant="outline" className="text-lg px-3 py-1">
                     {completedPomodoros % 4 + 1}/4
                   </Badge>

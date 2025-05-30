@@ -6,6 +6,8 @@ import { Sparkles, Star, Zap } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t } = useTranslation();
+  
   return (
     <div>
       {/* Hero Section */}
@@ -15,20 +17,19 @@ export default function Home() {
         
         <Badge variant="secondary" className="mb-4 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm">
           <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
-          새로운 도구들이 계속 추가됩니다
+          {t('common.newTools')}
         </Badge>
         
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight">
-          ToolHub<span className="text-primary">.tools</span>
+          {t('header.title')}
         </h1>
         
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-foreground px-2">
-          일상을 더 편리하게 만드는 <span className="text-primary">도구 모음</span>
+          {t('home.subtitle')}
         </h2>
         
         <p className="text-base md:text-lg text-muted-foreground max-w-2xl md:max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed px-2">
-          계산기부터 포모도로 타이머까지, 생산성을 높이고 일상을 편리하게 만드는 
-          다양한 웹 도구들을 한 곳에서 만나보세요. 모든 기기에서 빠르고 간편하게 사용할 수 있습니다.
+          {t('home.description')}
         </p>
         
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">

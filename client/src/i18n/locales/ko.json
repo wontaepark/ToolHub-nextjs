@@ -221,6 +221,7 @@
       "title": "설정",
       "maxNumber": "최대 번호",
       "drawCount": "추첨 개수",
+      "sound": "효과음",
       "soundEnabled": "사운드 활성화",
       "volume": "볼륨"
     },

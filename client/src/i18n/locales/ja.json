@@ -221,6 +221,7 @@
       "title": "設定",
       "maxNumber": "最大番号",
       "drawCount": "抽選数",
+      "sound": "効果音",
       "soundEnabled": "サウンド有効",
       "volume": "音量"
     },

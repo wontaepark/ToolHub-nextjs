@@ -221,6 +221,7 @@
       "title": "Settings",
       "maxNumber": "Max Number",
       "drawCount": "Draw Count",
+      "sound": "Sound Effects",
       "soundEnabled": "Sound Enabled",
       "volume": "Volume"
     },

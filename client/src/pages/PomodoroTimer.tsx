@@ -612,7 +612,7 @@ export default function PomodoroTimer() {
                   {/* Daily Goal Progress */}
                   <div>
                     <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                      <span>일일 목표 (8개)</span>
+                      <span>{t('pomodoro.stats.dailyGoal')} (8개)</span>
                       <span>{Math.min(dailyPomodoros, 8)}/8</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
@@ -631,7 +631,7 @@ export default function PomodoroTimer() {
                   {timerState !== 'idle' && (
                     <div>
                       <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                        <span>전체 세션 진행</span>
+                        <span>{t('pomodoro.stats.sessionProgress')}</span>
                         <span>{(() => {
                           // Calculate session progress as percentage
                           const baseProgress = (completedPomodoros / 4) * 100;

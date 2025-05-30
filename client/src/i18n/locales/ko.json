@@ -171,7 +171,9 @@
     "stats": {
       "completed": "완료된 포모도로",
       "cycle": "사이클",
-      "daily": "오늘"
+      "daily": "오늘",
+      "dailyGoal": "일일 목표",
+      "sessionProgress": "세션 진행률"
     },
     "settings": {
       "title": "포모도로 설정",

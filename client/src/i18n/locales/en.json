@@ -171,7 +171,9 @@
     "stats": {
       "completed": "Completed Pomodoros",
       "cycle": "Cycle",
-      "daily": "Today"
+      "daily": "Today",
+      "dailyGoal": "Daily Goal",
+      "sessionProgress": "Session Progress"
     },
     "settings": {
       "title": "Pomodoro Settings",

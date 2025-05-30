@@ -376,13 +376,13 @@ export default function PomodoroTimer() {
   const getStateText = () => {
     switch (timerState) {
       case 'work':
-        return '집중 시간';
+        return t('pomodoro.work');
       case 'shortBreak':
-        return '짧은 휴식';
+        return t('pomodoro.shortBreak');
       case 'longBreak':
-        return '긴 휴식';
+        return t('pomodoro.longBreak');
       default:
-        return '시작 대기';
+        return t('pomodoro.idle');
     }
   };
 
@@ -501,7 +501,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Play className="h-5 w-5" />
-                    <span>시작</span>
+                    <span>{t('pomodoro.start')}</span>
                   </Button>
                 ) : (
                   <Button 
@@ -511,7 +511,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Pause className="h-5 w-5" />
-                    <span>일시정지</span>
+                    <span>{t('pomodoro.pause')}</span>
                   </Button>
                 )}
                 
@@ -523,7 +523,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <SkipForward className="h-5 w-5" />
-                    <span>스킵</span>
+                    <span>{t('pomodoro.skip')}</span>
                   </Button>
                 )}
                 
@@ -534,13 +534,13 @@ export default function PomodoroTimer() {
                   className="flex items-center space-x-2"
                 >
                   <Square className="h-5 w-5" />
-                  <span>리셋</span>
+                  <span>{t('pomodoro.stop')}</span>
                 </Button>
               </div>
 
               {/* Task Selection - Always Visible */}
               <div className="text-sm space-y-2">
-                <label className="block text-muted-foreground">작업할 일:</label>
+                <label className="block text-muted-foreground">{t('pomodoro.currentTask')}:</label>
                 <select
                   value={currentTaskId || ""}
                   onChange={(e) => {

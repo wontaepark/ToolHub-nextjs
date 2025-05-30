@@ -9,114 +9,67 @@ const resources = {
         "home": "홈",
         "tools": "도구",
         "github": "GitHub",
-        "newTools": "새로운 도구들이 계속 추가됩니다",
+        "newTools": "새로운 도구들이 지속적으로 추가되고 있습니다",
         "available": "사용 가능",
-        "new": "새로운",
-        "download": "다운로드",
-        "processing": "처리 중..."
+        "comingSoon": "출시 예정"
       },
-      "header": {
-        "title": "ToolHub.tools",
-        "lightMode": "라이트 모드로 전환",
-        "darkMode": "다크 모드로 전환"
+      "nav": {
+        "calculator": "계산기",
+        "pomodoro": "포모도로 타이머",
+        "timer": "범용 타이머",
+        "raffle": "번호 추첨기",
+        "thumbnail": "썸네일 다운로더"
       },
       "home": {
-        "title": "ToolHub.tools",
-        "subtitle": "일상을 더 편리하게 만드는 도구 모음",
-        "description": "계산기부터 포모도로 타이머까지, 생산성을 높이고 일상을 편리하게 만드는 다양한 웹 도구들을 한 곳에서 만나보세요.",
-        "availableTools": "사용 가능한 도구들"
-      },
-      "tools": {
-        "calculator": {
-          "title": "계산기",
-          "description": "기본 사칙연산과 고급 기능을 지원하는 계산기입니다. 키보드 입력도 지원합니다."
-        },
-        "pomodoro": {
-          "title": "포모도로 타이머"
-        },
-        "timer": {
-          "title": "범용 타이머"
-        },
-        "raffle": {
-          "title": "번호 추첨기"
-        },
-        "thumbnail": {
-          "title": "썸네일 다운로더",
-          "description": "YouTube 동영상의 고화질 썸네일 이미지를 간편하게 다운로드하세요. 다양한 해상도 옵션을 제공합니다."
-        }
-      },
-      "thumbnailDownloader": {
-        "urlInput": "YouTube URL 입력",
-        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
-        "urlDescription": "YouTube 동영상 URL을 붙여넣으세요 (youtube.com, youtu.be, 또는 shorts)",
-        "getThumbnails": "썸네일 가져오기",
-        "videoId": "동영상 ID",
-        "qualities": {
-          "maxres": "최대 해상도",
-          "hq": "고화질",
-          "mq": "중간 화질",
-          "sd": "표준",
-          "default": "기본"
-        },
-        "pixels": "픽셀",
-        "thumbnailNotAvailable": "이 화질의 썸네일을 사용할 수 없습니다",
-        "loadedSuccess": "썸네일을 성공적으로 불러왔습니다! 원하는 해상도의 다운로드 버튼을 클릭하세요.",
-        "howToUse": "사용 방법",
-        "instructions": [
-          "브라우저에서 YouTube 동영상 URL을 복사하세요",
-          "위의 입력 필드에 붙여넣으세요",
-          "'썸네일 가져오기'를 클릭하여 모든 해상도를 불러오세요",
-          "원하는 화질을 선택하고 '다운로드'를 클릭하세요",
-          "youtube.com, youtu.be, YouTube Shorts URL을 지원합니다"
-        ],
-        "errors": {
-          "enterUrl": "YouTube URL을 입력해주세요",
-          "invalidUrl": "유효하지 않은 YouTube URL입니다. 올바른 YouTube 동영상 URL을 입력해주세요.",
-          "processingFailed": "URL 처리에 실패했습니다. 다시 시도해주세요.",
-          "downloadFailed": "썸네일 다운로드에 실패했습니다. 다시 시도해주세요."
-        }
+        "title": "도구 허브",
+        "subtitle": "일상에 유용한 도구들을 한 곳에서",
+        "description": "다양한 유틸리티 도구들을 간편하게 사용하세요. 계산기, 타이머, 추첨기 등 실용적인 기능들을 제공합니다.",
+        "openTool": "도구 열기",
+        "comingSoonTitle": "출시 예정 도구",
+        "comingSoonDesc": "더 많은 도구들이 개발 중입니다",
+        "unitConverter": "단위 변환기",
+        "unitConverterDesc": "길이, 무게, 온도 등 다양한 단위 변환",
+        "passwordGen": "비밀번호 생성기", 
+        "passwordGenDesc": "안전한 비밀번호 자동 생성",
+        "qrGenerator": "QR 코드 생성기",
+        "qrGeneratorDesc": "텍스트를 QR 코드로 변환",
+        "weather": "날씨 정보",
+        "weatherDesc": "실시간 날씨 및 예보 정보"
       },
       "calculator": {
         "title": "계산기",
         "clear": "지우기",
-        "clearEntry": "CE",
-        "backspace": "뒤로",
+        "clearEntry": "입력 지우기",
+        "backspace": "백스페이스",
+        "negate": "부호 변경",
+        "divide": "나누기",
+        "multiply": "곱하기", 
+        "subtract": "빼기",
+        "add": "더하기",
         "equals": "계산",
-        "history": "히스토리",
-        "clearHistory": "히스토리 지우기",
+        "decimal": "소수점",
+        "history": "기록",
+        "clearHistory": "기록 지우기",
         "keyboardShortcuts": "키보드 단축키",
-        "shortcuts": {
-          "numbers": "숫자 입력: 0-9",
-          "operators": "연산자: +, -, *, /",
-          "equals": "계산: Enter 또는 =",
-          "clear": "지우기: Escape",
-          "backspace": "뒤로: Backspace"
-        }
+        "useResult": "결과 사용"
       },
-      "pomodoro": {
-        "title": "포모도로 타이머",
-        "work": "작업",
-        "shortBreak": "짧은 휴식",
-        "longBreak": "긴 휴식",
-        "start": "시작",
-        "pause": "일시정지",
-        "reset": "리셋",
-        "skip": "건너뛰기",
-        "settings": "설정",
-        "tasks": "할 일",
-        "addTask": "할 일 추가",
-        "taskPlaceholder": "할 일을 입력하세요...",
-        "completedTasks": "완료된 작업",
-        "session": "세션",
-        "minutes": "분",
-        "seconds": "초"
+      "thumbnail": {
+        "title": "YouTube 썸네일 다운로더",
+        "description": "YouTube 동영상의 썸네일을 다양한 해상도로 다운로드하세요",
+        "urlPlaceholder": "YouTube URL을 입력하세요",
+        "getImages": "이미지 가져오기",
+        "downloadAll": "모든 이미지 다운로드",
+        "noImages": "썸네일을 찾을 수 없습니다",
+        "invalidUrl": "유효하지 않은 YouTube URL입니다",
+        "loading": "로딩 중...",
+        "download": "다운로드"
       },
       "timer": {
         "title": "범용 타이머",
         "setTimer": "타이머 설정",
         "start": "시작",
         "pause": "일시정지",
-        "reset": "리셋",
+        "reset": "초기화",
         "finished": "완료!",
         "presets": "프리셋",
         "cooking": "요리",
@@ -186,105 +139,58 @@ const resources = {
         "github": "GitHub",
         "newTools": "New tools are continuously being added",
         "available": "Available",
-        "new": "New",
-        "download": "Download",
-        "processing": "Processing..."
+        "comingSoon": "Coming Soon"
       },
-      "header": {
-        "title": "ToolHub.tools",
-        "lightMode": "Switch to light mode",
-        "darkMode": "Switch to dark mode"
+      "nav": {
+        "calculator": "Calculator",
+        "pomodoro": "Pomodoro Timer",
+        "timer": "Universal Timer",
+        "raffle": "Number Raffle",
+        "thumbnail": "Thumbnail Downloader"
       },
       "home": {
-        "title": "ToolHub.tools",
-        "subtitle": "A collection of tools to make your daily life more convenient",
-        "description": "From calculators to pomodoro timers, discover various web tools that enhance productivity and convenience.",
-        "availableTools": "Available Tools"
-      },
-      "tools": {
-        "calculator": {
-          "title": "Calculator",
-          "description": "A complete calculator supporting everything from basic arithmetic to advanced calculations. Provides keyboard shortcuts and calculation history features."
-        },
-        "pomodoro": {
-          "title": "Pomodoro Timer"
-        },
-        "timer": {
-          "title": "Universal Timer"
-        },
-        "raffle": {
-          "title": "Number Raffle"
-        },
-        "thumbnail": {
-          "title": "Thumbnail Downloader",
-          "description": "Easily download high-quality thumbnail images from YouTube videos. Provides various resolution options."
-        }
-      },
-      "thumbnailDownloader": {
-        "urlInput": "Enter YouTube URL",
-        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
-        "urlDescription": "Paste any YouTube video URL (youtube.com, youtu.be, or shorts)",
-        "getThumbnails": "Get Thumbnails",
-        "videoId": "Video ID",
-        "qualities": {
-          "maxres": "Maximum Resolution",
-          "hq": "High Quality",
-          "mq": "Medium Quality",
-          "sd": "Standard",
-          "default": "Default"
-        },
-        "pixels": "pixels",
-        "thumbnailNotAvailable": "Thumbnail not available in this quality",
-        "loadedSuccess": "Thumbnails loaded successfully! Click the download button for any resolution you need.",
-        "howToUse": "How to Use",
-        "instructions": [
-          "Copy any YouTube video URL from your browser",
-          "Paste it in the input field above",
-          "Click 'Get Thumbnails' to load all available resolutions",
-          "Choose your preferred quality and click 'Download'",
-          "Supports youtube.com, youtu.be, and YouTube Shorts URLs"
-        ],
-        "errors": {
-          "enterUrl": "Please enter a YouTube URL",
-          "invalidUrl": "Invalid YouTube URL. Please enter a valid YouTube video URL.",
-          "processingFailed": "Failed to process the URL. Please try again.",
-          "downloadFailed": "Failed to download thumbnail. Please try again."
-        }
+        "title": "Tool Hub",
+        "subtitle": "Useful tools for everyday life in one place",
+        "description": "Use various utility tools conveniently. We provide practical features like calculator, timer, raffle, and more.",
+        "openTool": "Open Tool",
+        "comingSoonTitle": "Coming Soon Tools",
+        "comingSoonDesc": "More tools are in development",
+        "unitConverter": "Unit Converter",
+        "unitConverterDesc": "Convert various units like length, weight, temperature",
+        "passwordGen": "Password Generator",
+        "passwordGenDesc": "Generate secure passwords automatically",
+        "qrGenerator": "QR Code Generator", 
+        "qrGeneratorDesc": "Convert text to QR codes",
+        "weather": "Weather Info",
+        "weatherDesc": "Real-time weather and forecast information"
       },
       "calculator": {
         "title": "Calculator",
         "clear": "Clear",
-        "clearEntry": "CE",
-        "backspace": "Back",
-        "equals": "Calculate",
+        "clearEntry": "Clear Entry",
+        "backspace": "Backspace",
+        "negate": "Negate",
+        "divide": "Divide",
+        "multiply": "Multiply",
+        "subtract": "Subtract", 
+        "add": "Add",
+        "equals": "Equals",
+        "decimal": "Decimal",
         "history": "History",
         "clearHistory": "Clear History",
         "keyboardShortcuts": "Keyboard Shortcuts",
-        "shortcuts": {
-          "numbers": "Number input: 0-9",
-          "operators": "Operators: +, -, *, /",
-          "equals": "Calculate: Enter or =",
-          "clear": "Clear: Escape",
-          "backspace": "Back: Backspace"
-        }
+        "useResult": "Use Result"
       },
-      "pomodoro": {
-        "title": "Pomodoro Timer",
-        "work": "Work",
-        "shortBreak": "Short Break",
-        "longBreak": "Long Break",
-        "start": "Start",
-        "pause": "Pause",
-        "reset": "Reset",
-        "skip": "Skip",
-        "settings": "Settings",
-        "tasks": "Tasks",
-        "addTask": "Add Task",
-        "taskPlaceholder": "Enter a task...",
-        "completedTasks": "Completed Tasks",
-        "session": "Session",
-        "minutes": "minutes",
-        "seconds": "seconds"
+      "thumbnail": {
+        "title": "YouTube Thumbnail Downloader",
+        "description": "Download YouTube video thumbnails in various resolutions",
+        "urlPlaceholder": "Enter YouTube URL",
+        "getImages": "Get Images",
+        "downloadAll": "Download All Images",
+        "noImages": "No thumbnails found",
+        "invalidUrl": "Invalid YouTube URL",
+        "loading": "Loading...",
+        "download": "Download"
       },
       "timer": {
         "title": "Universal Timer",
@@ -322,6 +228,34 @@ const resources = {
           "on": "🔊 ON",
           "off": "🔇 OFF"
         }
+      },
+      "pomodoro": {
+        "title": "Pomodoro Timer",
+        "work": "Work",
+        "shortBreak": "Short Break",
+        "longBreak": "Long Break",
+        "idle": "Ready",
+        "start": "Start",
+        "pause": "Pause",
+        "stop": "Stop",
+        "skip": "Skip",
+        "settings": "Settings",
+        "tasks": "Tasks",
+        "addTask": "Add Task",
+        "taskPlaceholder": "Enter task description...",
+        "currentTask": "Current Task",
+        "completedPomodoros": "Completed Pomodoros",
+        "todaysProgress": "Today's Progress",
+        "cycle": "Cycle",
+        "sessionComplete": "Session Complete!",
+        "timeToBreak": "Time for a break!",
+        "backToWork": "Back to work!",
+        "workTime": "Work Time (minutes)",
+        "shortBreakTime": "Short Break (minutes)",
+        "longBreakTime": "Long Break (minutes)",
+        "autoStart": "Auto-start next session",
+        "soundEnabled": "Sound notifications",
+        "taskBasedTiming": "Task-based timing"
       }
     }
   },
@@ -333,104 +267,58 @@ const resources = {
         "github": "GitHub",
         "newTools": "新しいツールが継続的に追加されています",
         "available": "利用可能",
-        "new": "新規",
-        "download": "ダウンロード",
-        "processing": "処理中..."
+        "comingSoon": "近日公開"
       },
-      "header": {
-        "title": "ToolHub.tools",
-        "lightMode": "ライトモードに切り替え",
-        "darkMode": "ダークモードに切り替え"
+      "nav": {
+        "calculator": "電卓",
+        "pomodoro": "ポモドーロタイマー",
+        "timer": "汎用タイマー",
+        "raffle": "番号抽選機",
+        "thumbnail": "サムネイルダウンローダー"
       },
       "home": {
-        "title": "ToolHub.tools",
-        "subtitle": "日常をより便利にするツールコレクション",
-        "description": "計算機からポモドーロタイマーまで、生産性を向上させる様々なWebツールを一箇所で見つけてください。",
-        "availableTools": "利用可能なツール"
-      },
-      "tools": {
-        "calculator": {
-          "title": "計算機"
-        },
-        "pomodoro": {
-          "title": "ポモドーロタイマー"
-        },
-        "timer": {
-          "title": "汎用タイマー"
-        },
-        "raffle": {
-          "title": "番号抽選機"
-        },
-        "thumbnail": {
-          "title": "サムネイルダウンローダー",
-          "description": "YouTube動画の高画質サムネイル画像を簡単にダウンロードできます。様々な解像度オプションを提供します。"
-        }
-      },
-      "thumbnailDownloader": {
-        "urlInput": "YouTube URL入力",
-        "urlPlaceholder": "https://www.youtube.com/watch?v=...",
-        "urlDescription": "YouTube動画URLを貼り付けてください（youtube.com、youtu.be、またはshorts）",
-        "getThumbnails": "サムネイル取得",
-        "videoId": "動画ID",
-        "qualities": {
-          "maxres": "最大解像度",
-          "hq": "高画質",
-          "mq": "中画質",
-          "sd": "標準",
-          "default": "デフォルト"
-        },
-        "pixels": "ピクセル",
-        "thumbnailNotAvailable": "この画質のサムネイルは利用できません",
-        "loadedSuccess": "サムネイルの読み込みが完了しました！必要な解像度のダウンロードボタンをクリックしてください。",
-        "howToUse": "使用方法",
-        "instructions": [
-          "ブラウザからYouTube動画URLをコピーしてください",
-          "上の入力フィールドに貼り付けてください",
-          "'サムネイル取得'をクリックして全ての解像度を読み込んでください",
-          "お好みの画質を選択して'ダウンロード'をクリックしてください",
-          "youtube.com、youtu.be、YouTube Shorts URLに対応しています"
-        ],
-        "errors": {
-          "enterUrl": "YouTube URLを入力してください",
-          "invalidUrl": "無効なYouTube URLです。有効なYouTube動画URLを入力してください。",
-          "processingFailed": "URLの処理に失敗しました。再度お試しください。",
-          "downloadFailed": "サムネイルのダウンロードに失敗しました。再度お試しください。"
-        }
+        "title": "ツールハブ",
+        "subtitle": "日常に役立つツールを一箇所で",
+        "description": "様々なユーティリティツールを便利に使用できます。電卓、タイマー、抽選機など実用的な機能を提供します。",
+        "openTool": "ツールを開く",
+        "comingSoonTitle": "近日公開ツール",
+        "comingSoonDesc": "より多くのツールが開発中です",
+        "unitConverter": "単位変換器",
+        "unitConverterDesc": "長さ、重量、温度など様々な単位変換",
+        "passwordGen": "パスワード生成器",
+        "passwordGenDesc": "安全なパスワードを自動生成",
+        "qrGenerator": "QRコード生成器",
+        "qrGeneratorDesc": "テキストをQRコードに変換",
+        "weather": "天気情報",
+        "weatherDesc": "リアルタイム天気と予報情報"
       },
       "calculator": {
-        "title": "計算機",
+        "title": "電卓",
         "clear": "クリア",
-        "clearEntry": "CE",
-        "backspace": "戻る",
+        "clearEntry": "エントリクリア",
+        "backspace": "バックスペース",
+        "negate": "符号変更",
+        "divide": "割り算",
+        "multiply": "掛け算",
+        "subtract": "引き算",
+        "add": "足し算",
         "equals": "計算",
+        "decimal": "小数点",
         "history": "履歴",
-        "clearHistory": "履歴をクリア",
+        "clearHistory": "履歴クリア",
         "keyboardShortcuts": "キーボードショートカット",
-        "shortcuts": {
-          "numbers": "数字入力: 0-9",
-          "operators": "演算子: +, -, *, /",
-          "equals": "計算: Enter または =",
-          "clear": "クリア: Escape",
-          "backspace": "戻る: Backspace"
-        }
+        "useResult": "結果を使用"
       },
-      "pomodoro": {
-        "title": "ポモドーロタイマー",
-        "work": "作業",
-        "shortBreak": "短い休憩",
-        "longBreak": "長い休憩",
-        "start": "開始",
-        "pause": "一時停止",
-        "reset": "リセット",
-        "skip": "スキップ",
-        "settings": "設定",
-        "tasks": "タスク",
-        "addTask": "タスク追加",
-        "taskPlaceholder": "タスクを入力...",
-        "completedTasks": "完了したタスク",
-        "session": "セッション",
-        "minutes": "分",
-        "seconds": "秒"
+      "thumbnail": {
+        "title": "YouTube サムネイルダウンローダー",
+        "description": "YouTube動画のサムネイルを様々な解像度でダウンロード",
+        "urlPlaceholder": "YouTube URLを入力",
+        "getImages": "画像を取得",
+        "downloadAll": "全画像ダウンロード",
+        "noImages": "サムネイルが見つかりません",
+        "invalidUrl": "無効なYouTube URL",
+        "loading": "読み込み中...",
+        "download": "ダウンロード"
       },
       "timer": {
         "title": "汎用タイマー",
@@ -506,17 +394,11 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'ko',
-    debug: false,
-    
+    lng: 'ko',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
-    
-    detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
-      caches: ['localStorage']
-    }
   });
 
 export default i18n;

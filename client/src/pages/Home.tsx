@@ -254,19 +254,19 @@ export default function Home() {
           {/* Weather Info - Month 2 */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-green-200 relative opacity-60">
             <div className="absolute top-2 right-2 z-10">
-              <Badge variant="outline" className="bg-green-100 text-green-600 text-xs">다음 달</Badge>
+              <Badge variant="outline" className="bg-green-100 text-green-600 text-xs">{t('common.nextMonth')}</Badge>
             </div>
             <div className="h-24 md:h-32 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
               <i className="ri-sun-cloudy-line text-white text-3xl md:text-5xl"></i>
             </div>
             <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">날씨 정보</h4>
+              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.weather.title')}</h4>
               <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                실시간 날씨와 주간 예보
+                {t('tools.weather.description')}
               </p>
               <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">실시간</Badge>
-                <Badge variant="outline" className="text-xs">예보</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.weather.tags.0')}</Badge>
+                <Badge variant="outline" className="text-xs">{t('tools.weather.tags.1')}</Badge>
               </div>
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function Home() {
         
         <div className="text-center mt-6">
           <p className="text-xs md:text-sm text-muted-foreground">
-            📅 정기적인 업데이트로 더 많은 도구들이 추가될 예정입니다
+            📅 {t('home.regularUpdates')}
           </p>
         </div>
       </div>
@@ -283,13 +283,12 @@ export default function Home() {
       <Card className="mt-8 md:mt-16 mx-4">
         <CardContent className="p-6 md:p-8">
           <div className="text-center">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">ToolHub.tools에 대하여</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4">{t('home.aboutTitle')}</h3>
             <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6 max-w-2xl mx-auto leading-relaxed">
-              ToolHub.tools는 일상생활에 도움이 되는 실용적인 웹 도구들을 모아놓은 플랫폼입니다. 
-              매주 새로운 도구가 추가되는 정기 업데이트를 통해 점점 더 유용한 서비스가 되어가고 있습니다.
+              {t('home.aboutDescription')}
             </p>
             <p className="text-muted-foreground text-sm md:text-base">
-              🗓️ 주차별 출시 계획: 단위변환기 → 비밀번호 생성기 → QR코드 생성기 → 날씨정보
+              🗓️ {t('home.roadmap')}
             </p>
           </div>
         </CardContent>

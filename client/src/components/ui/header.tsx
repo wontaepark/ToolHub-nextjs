@@ -153,7 +153,7 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="ri-image-line text-lg"></i>
-                    <span className="font-medium">썸네일 다운로더</span>
+                    <span className="font-medium">{t('tools.thumbnail.title')}</span>
                   </div>
                 </Link>
               </li>
@@ -165,7 +165,7 @@ export default function Header() {
                   className="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-muted transition-colors"
                 >
                   <Github className="h-4 w-4" />
-                  <span className="font-medium">GitHub</span>
+                  <span className="font-medium">{t('common.github')}</span>
                 </a>
               </li>
             </ul>

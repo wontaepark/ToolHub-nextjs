@@ -1,10 +1,13 @@
 import { Link } from "wouter";
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Star, Zap } from "lucide-react";
 
 export default function Home() {
+  const { t } = useTranslation();
+  
   return (
     <div>
       {/* Hero Section */}
@@ -14,7 +17,7 @@ export default function Home() {
         
         <Badge variant="secondary" className="mb-4 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm">
           <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
-          새로운 도구들이 계속 추가됩니다
+          {t('common.newTools')}
         </Badge>
         
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight">
@@ -22,33 +25,32 @@ export default function Home() {
         </h1>
         
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-foreground px-2">
-          일상을 더 편리하게 만드는 <span className="text-primary">도구 모음</span>
+          {t('home.subtitle')} <span className="text-primary">{t('common.tools')}</span>
         </h2>
         
         <p className="text-base md:text-lg text-muted-foreground max-w-2xl md:max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed px-2">
-          계산기부터 포모도로 타이머까지, 생산성을 높이고 일상을 편리하게 만드는 
-          다양한 웹 도구들을 한 곳에서 만나보세요. 모든 기기에서 빠르고 간편하게 사용할 수 있습니다.
+          {t('home.description')}
         </p>
         
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
           <div className="flex items-center gap-1.5 md:gap-2">
             <Zap className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-            빠른 접근
+            {t('home.features.fastAccess')}
           </div>
           <div className="flex items-center gap-1.5 md:gap-2">
             <Star className="w-3 h-3 md:w-4 md:h-4 text-secondary" />
-            무료 사용
+            {t('home.features.freeUse')}
           </div>
           <div className="flex items-center gap-1.5 md:gap-2">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-            모든 기기 지원
+            {t('home.features.allDevices')}
           </div>
         </div>
       </div>
       
       {/* Tools Section */}
       <div className="mb-10 md:mb-12 px-4">
-        <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">사용 가능한 도구들</h3>
+        <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">{t('home.availableTools')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Calculator Card */}
           <Link href="/calculator">
@@ -59,19 +61,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">계산기</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.calculator.title')}</h3>
                   <Badge variant="default" className="bg-primary/10 text-primary text-xs flex-shrink-0 ml-2">
-                    사용 가능
+                    {t('common.available')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  기본 사칙연산부터 고급 계산까지 지원하는 완전한 계산기입니다. 
-                  키보드 단축키와 계산 히스토리 기능을 제공합니다.
+                  {t('tools.calculator.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">사칙연산</Badge>
-                  <Badge variant="outline" className="text-xs">키보드 지원</Badge>
-                  <Badge variant="outline" className="text-xs">히스토리</Badge>
+                  {t('tools.calculator.tags', { returnObjects: true }).map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">{tag}</Badge>
+                  ))}
                 </div>
               </div>
             </div>
@@ -86,19 +87,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">포모도로 타이머</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.pomodoro.title')}</h3>
                   <Badge variant="default" className="bg-red-500/10 text-red-600 text-xs flex-shrink-0 ml-2">
-                    사용 가능
+                    {t('common.available')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  25분 집중 + 5분 휴식의 포모도로 기법으로 생산성을 극대화하세요. 
-                  할 일 관리와 진행률 시각화 기능을 제공합니다.
+                  {t('tools.pomodoro.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">25분 타이머</Badge>
-                  <Badge variant="outline" className="text-xs">할 일 관리</Badge>
-                  <Badge variant="outline" className="text-xs">진행률 표시</Badge>
+                  {t('tools.pomodoro.tags', { returnObjects: true }).map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">{tag}</Badge>
+                  ))}
                 </div>
               </div>
             </div>

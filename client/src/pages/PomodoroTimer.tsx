@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Play, Pause, Square, Settings, Volume2, SkipForward, Plus, Trash2 } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 type TimerState = 'work' | 'shortBreak' | 'longBreak' | 'idle';
 
@@ -27,6 +28,7 @@ interface Task {
 }
 
 export default function PomodoroTimer() {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [timerState, setTimerState] = useState<TimerState>('idle');

@@ -147,6 +147,34 @@ const resources = {
           "on": "🔊 ON",
           "off": "🔇 OFF"
         }
+      },
+      "pomodoro": {
+        "title": "포모도로 타이머",
+        "work": "작업",
+        "shortBreak": "짧은 휴식",
+        "longBreak": "긴 휴식",
+        "idle": "대기 중",
+        "start": "시작",
+        "pause": "일시정지",
+        "stop": "정지",
+        "skip": "건너뛰기",
+        "settings": "설정",
+        "tasks": "할일 목록",
+        "addTask": "할일 추가",
+        "taskPlaceholder": "할일 내용을 입력하세요...",
+        "currentTask": "현재 작업",
+        "completedPomodoros": "완료된 포모도로",
+        "todaysProgress": "오늘의 진행상황",
+        "cycle": "사이클",
+        "sessionComplete": "세션 완료!",
+        "timeToBreak": "휴식 시간입니다!",
+        "backToWork": "다시 작업을 시작하세요!",
+        "workTime": "작업 시간 (분)",
+        "shortBreakTime": "짧은 휴식 (분)",
+        "longBreakTime": "긴 휴식 (분)",
+        "autoStart": "다음 세션 자동 시작",
+        "soundEnabled": "알림음 활성화",
+        "taskBasedTiming": "작업 기반 타이밍"
       }
     }
   },
@@ -440,6 +468,34 @@ const resources = {
           "on": "🔊 ON",
           "off": "🔇 OFF"
         }
+      },
+      "pomodoro": {
+        "title": "ポモドーロタイマー",
+        "work": "作業",
+        "shortBreak": "短い休憩",
+        "longBreak": "長い休憩",
+        "idle": "待機中",
+        "start": "開始",
+        "pause": "一時停止",
+        "stop": "停止",
+        "skip": "スキップ",
+        "settings": "設定",
+        "tasks": "タスク",
+        "addTask": "タスク追加",
+        "taskPlaceholder": "タスクの説明を入力...",
+        "currentTask": "現在のタスク",
+        "completedPomodoros": "完了したポモドーロ",
+        "todaysProgress": "今日の進捗",
+        "cycle": "サイクル",
+        "sessionComplete": "セッション完了！",
+        "timeToBreak": "休憩時間です！",
+        "backToWork": "作業に戻りましょう！",
+        "workTime": "作業時間（分）",
+        "shortBreakTime": "短い休憩（分）",
+        "longBreakTime": "長い休憩（分）",
+        "autoStart": "次のセッションを自動開始",
+        "soundEnabled": "音声通知",
+        "taskBasedTiming": "タスク基準タイミング"
       }
     }
   }

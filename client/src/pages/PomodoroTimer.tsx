@@ -441,7 +441,7 @@ export default function PomodoroTimer() {
                       animation: 'scaleIn 0.3s ease-out'
                     }}
                   >
-                    세션 {currentCycle}
+{t('pomodoro.stats.cycle')} {currentCycle}
                   </Badge>
                 )}
               </div>
@@ -501,7 +501,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Play className="h-5 w-5" />
-                    <span>시작</span>
+                    <span>{t('pomodoro.buttons.start')}</span>
                   </Button>
                 ) : (
                   <Button 
@@ -511,7 +511,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <Pause className="h-5 w-5" />
-                    <span>일시정지</span>
+                    <span>{t('pomodoro.buttons.pause')}</span>
                   </Button>
                 )}
                 
@@ -523,7 +523,7 @@ export default function PomodoroTimer() {
                     className="flex items-center space-x-2"
                   >
                     <SkipForward className="h-5 w-5" />
-                    <span>스킵</span>
+                    <span>{t('pomodoro.buttons.skip')}</span>
                   </Button>
                 )}
                 
@@ -534,13 +534,13 @@ export default function PomodoroTimer() {
                   className="flex items-center space-x-2"
                 >
                   <Square className="h-5 w-5" />
-                  <span>리셋</span>
+                  <span>{t('pomodoro.buttons.reset')}</span>
                 </Button>
               </div>
 
               {/* Task Selection - Always Visible */}
               <div className="text-sm space-y-2">
-                <label className="block text-muted-foreground">작업할 일:</label>
+                <label className="block text-muted-foreground">{t('pomodoro.tasks.current')}:</label>
                 <select
                   value={currentTaskId || ""}
                   onChange={(e) => {
@@ -558,7 +558,7 @@ export default function PomodoroTimer() {
                   disabled={isRunning}
                   className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <option value="">할 일을 선택하세요</option>
+                  <option value="">{t('pomodoro.tasks.placeholder')}</option>
                   {tasks.filter(task => !task.completed).map(task => (
                     <option key={task.id} value={task.id}>
                       {task.text}
@@ -569,10 +569,10 @@ export default function PomodoroTimer() {
                 
                 {/* Session Status */}
                 <div className="text-xs text-muted-foreground mt-2">
-                  {timerState === 'work' && <p>🍅 집중 시간</p>}
-                  {timerState === 'shortBreak' && <p>☕ 짧은 휴식</p>}
-                  {timerState === 'longBreak' && <p>🛋️ 긴 휴식</p>}
-                  {timerState === 'idle' && <p>⏸️ 준비 상태</p>}
+                  {timerState === 'work' && <p>🍅 {t('pomodoro.states.work')}</p>}
+                  {timerState === 'shortBreak' && <p>☕ {t('pomodoro.states.shortBreak')}</p>}
+                  {timerState === 'longBreak' && <p>🛋️ {t('pomodoro.states.longBreak')}</p>}
+                  {timerState === 'idle' && <p>⏸️ {t('pomodoro.states.idle')}</p>}
                 </div>
               </div>
             </CardContent>
@@ -584,10 +584,10 @@ export default function PomodoroTimer() {
           {/* Stats Card */}
           <Card>
             <CardContent className="p-6">
-              <h3 className="font-semibold text-lg mb-4">오늘의 진행 상황</h3>
+              <h3 className="font-semibold text-lg mb-4">{t('pomodoro.stats.daily')}</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span>완료된 포모도로</span>
+                  <span>{t('pomodoro.stats.completed')}</span>
                   <Badge variant="outline" className="text-lg px-3 py-1">
                     {dailyPomodoros}
                   </Badge>

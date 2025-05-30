@@ -40,11 +40,11 @@ export default function ThumbnailDownloader() {
   // Generate thumbnail URLs for different qualities
   const generateThumbnailUrls = (videoId: string) => {
     return [
-      { quality: 'Maximum Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
-      { quality: 'High Quality', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
-      { quality: 'Medium Quality', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
-      { quality: 'Standard', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
-      { quality: 'Default', url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
+      { quality: '최대 해상도', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
+      { quality: '고화질', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
+      { quality: '중간 화질', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
+      { quality: '표준', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
+      { quality: '기본', url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
     ];
   };
 
@@ -54,13 +54,13 @@ export default function ThumbnailDownloader() {
     setThumbnailData(null);
 
     if (!url.trim()) {
-      setError('Please enter a YouTube URL');
+      setError('YouTube URL을 입력해주세요');
       return;
     }
 
     const videoId = extractVideoId(url);
     if (!videoId) {
-      setError('Invalid YouTube URL. Please enter a valid YouTube video URL.');
+      setError('유효하지 않은 YouTube URL입니다. 올바른 YouTube 동영상 URL을 입력해주세요.');
       return;
     }
 
@@ -73,7 +73,7 @@ export default function ThumbnailDownloader() {
         thumbnails
       });
     } catch (err) {
-      setError('Failed to process the URL. Please try again.');
+      setError('URL 처리에 실패했습니다. 다시 시도해주세요.');
     } finally {
       setLoading(false);
     }
@@ -93,7 +93,7 @@ export default function ThumbnailDownloader() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (err) {
-      setError('Failed to download thumbnail. Please try again.');
+      setError('썸네일 다운로드에 실패했습니다. 다시 시도해주세요.');
     }
   };
 
@@ -155,7 +155,7 @@ export default function ThumbnailDownloader() {
           <div className="space-y-6">
             <div className="text-center">
               <Badge variant="secondary" className="mb-4">
-                Video ID: {thumbnailData.videoId}
+                동영상 ID: {thumbnailData.videoId}
               </Badge>
             </div>
 
@@ -167,7 +167,7 @@ export default function ThumbnailDownloader() {
                       <div>
                         <CardTitle className="text-lg">{thumbnail.quality}</CardTitle>
                         <CardDescription>
-                          {thumbnail.width} × {thumbnail.height} pixels
+                          {thumbnail.width} × {thumbnail.height} 픽셀
                         </CardDescription>
                       </div>
                       <Button
@@ -175,7 +175,7 @@ export default function ThumbnailDownloader() {
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <Download className="h-4 w-4 mr-2" />
-                        Download
+                        다운로드
                       </Button>
                     </div>
                   </CardHeader>
@@ -197,7 +197,7 @@ export default function ThumbnailDownloader() {
                         className="text-center text-gray-500 dark:text-gray-400 py-8"
                       >
                         <AlertCircle className="h-8 w-8 mx-auto mb-2" />
-                        <p>Thumbnail not available in this quality</p>
+                        <p>이 화질의 썸네일을 사용할 수 없습니다</p>
                       </div>
                     </div>
                   </CardContent>
@@ -208,7 +208,7 @@ export default function ThumbnailDownloader() {
             <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
               <CheckCircle className="h-4 w-4 text-green-600" />
               <AlertDescription className="text-green-800 dark:text-green-200">
-                Thumbnails loaded successfully! Click the download button for any resolution you need.
+                썸네일을 성공적으로 불러왔습니다! 원하는 해상도의 다운로드 버튼을 클릭하세요.
               </AlertDescription>
             </Alert>
           </div>

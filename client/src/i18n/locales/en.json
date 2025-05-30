@@ -1,0 +1,122 @@
+{
+  "common": {
+    "home": "Home",
+    "tools": "Tools",
+    "github": "GitHub",
+    "newTools": "New tools are continuously being added",
+    "available": "Available",
+    "new": "New",
+    "comingSoon": "Coming Soon",
+    "nextWeek": "Next Week",
+    "week2": "2 Weeks",
+    "week3": "3 Weeks",
+    "nextMonth": "Next Month",
+    "download": "Download",
+    "processing": "Processing...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "header": {
+    "title": "ToolHub.tools",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode",
+    "openMenu": "Open menu"
+  },
+  "home": {
+    "title": "ToolHub.tools",
+    "subtitle": "A collection of tools to make your daily life more convenient",
+    "description": "From calculators to pomodoro timers, discover various web tools that enhance productivity and convenience in your daily life. Quick and easy to use on all devices.",
+    "features": {
+      "fastAccess": "Fast Access",
+      "freeUse": "Free to Use",
+      "allDevices": "All Devices Supported"
+    },
+    "availableTools": "Available Tools",
+    "nextWeekRelease": "Scheduled for Next Week Release",
+    "weeklyUpdates": "New tools are added every week",
+    "aboutTitle": "About ToolHub.tools",
+    "aboutDescription": "ToolHub.tools is a platform that brings together practical web tools for everyday life. Through regular updates with new tools added weekly, it continues to become an increasingly useful service.",
+    "roadmap": "Weekly Release Plan: Unit Converter → Password Generator → QR Code Generator → Weather Info",
+    "regularUpdates": "More tools will be added through regular updates"
+  },
+  "tools": {
+    "calculator": {
+      "title": "Calculator",
+      "description": "A complete calculator supporting everything from basic arithmetic to advanced calculations. Provides keyboard shortcuts and calculation history features.",
+      "tags": ["Arithmetic", "Keyboard Support", "History"]
+    },
+    "pomodoro": {
+      "title": "Pomodoro Timer",
+      "description": "Maximize productivity with the Pomodoro technique of 25 minutes focus + 5 minutes break. Provides task management and progress visualization features.",
+      "tags": ["25min Timer", "Task Management", "Progress Display"]
+    },
+    "timer": {
+      "title": "Universal Timer",
+      "description": "A countdown timer that allows you to freely set any desired time. Use it for various purposes like cooking, exercise, rest, etc.",
+      "tags": ["Custom Setting", "Browser Notification", "Quick Presets"]
+    },
+    "raffle": {
+      "title": "Number Raffle",
+      "description": "A tool for fair and fun number draws. Provides a visually enjoyable drawing experience with slot machine animations.",
+      "tags": ["Slot Machine Effect", "No Duplicates", "Draw History"]
+    },
+    "thumbnail": {
+      "title": "Thumbnail Downloader",
+      "description": "Easily download high-quality thumbnail images from YouTube videos. Provides various resolution options.",
+      "tags": ["High Quality", "Multiple Resolutions", "One-Click Download"]
+    },
+    "unitConverter": {
+      "title": "Unit Converter",
+      "description": "Convert various units including length, weight, temperature",
+      "tags": ["Length", "Weight"]
+    },
+    "passwordGenerator": {
+      "title": "Password Generator",
+      "description": "Generate secure and strong passwords",
+      "tags": ["Security", "Random"]
+    },
+    "qrGenerator": {
+      "title": "QR Code Generator",
+      "description": "Convert links and text to QR codes",
+      "tags": ["QR", "Share"]
+    },
+    "weather": {
+      "title": "Weather Info",
+      "description": "Real-time weather and weekly forecast",
+      "tags": ["Real-time", "Forecast"]
+    }
+  },
+  "thumbnailDownloader": {
+    "title": "YouTube Thumbnail Downloader",
+    "subtitle": "Download high-quality thumbnails from YouTube videos in various resolutions",
+    "urlInput": "Enter YouTube URL",
+    "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+    "urlDescription": "Paste any YouTube video URL (youtube.com, youtu.be, or shorts)",
+    "getThumbnails": "Get Thumbnails",
+    "videoId": "Video ID",
+    "qualities": {
+      "maxres": "Maximum Resolution",
+      "hq": "High Quality",
+      "mq": "Medium Quality",
+      "sd": "Standard",
+      "default": "Default"
+    },
+    "pixels": "pixels",
+    "thumbnailNotAvailable": "Thumbnail not available in this quality",
+    "loadedSuccess": "Thumbnails loaded successfully! Click the download button for any resolution you need.",
+    "howToUse": "How to Use",
+    "instructions": [
+      "Copy any YouTube video URL from your browser",
+      "Paste it in the input field above",
+      "Click 'Get Thumbnails' to load all available resolutions",
+      "Choose your preferred quality and click 'Download'",
+      "Supports youtube.com, youtu.be, and YouTube Shorts URLs"
+    ],
+    "errors": {
+      "enterUrl": "Please enter a YouTube URL",
+      "invalidUrl": "Invalid YouTube URL. Please enter a valid YouTube video URL.",
+      "processingFailed": "Failed to process the URL. Please try again.",
+      "downloadFailed": "Failed to download thumbnail. Please try again."
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "common": {
+    "home": "ホーム",
+    "tools": "ツール",
+    "github": "GitHub",
+    "newTools": "新しいツールが継続的に追加されています",
+    "available": "利用可能",
+    "new": "新規",
+    "comingSoon": "リリース予定",
+    "nextWeek": "来週",
+    "week2": "2週間後",
+    "week3": "3週間後",
+    "nextMonth": "来月",
+    "download": "ダウンロード",
+    "processing": "処理中...",
+    "error": "エラー",
+    "success": "成功"
+  },
+  "header": {
+    "title": "ToolHub.tools",
+    "lightMode": "ライトモードに切り替え",
+    "darkMode": "ダークモードに切り替え",
+    "openMenu": "メニューを開く"
+  },
+  "home": {
+    "title": "ToolHub.tools",
+    "subtitle": "日常をより便利にするツールコレクション",
+    "description": "計算機からポモドーロタイマーまで、生産性を向上させ日常生活を便利にする様々なWebツールを一箇所で見つけてください。すべてのデバイスで迅速かつ簡単に使用できます。",
+    "features": {
+      "fastAccess": "高速アクセス",
+      "freeUse": "無料利用",
+      "allDevices": "全デバイス対応"
+    },
+    "availableTools": "利用可能なツール",
+    "nextWeekRelease": "来週リリース予定",
+    "weeklyUpdates": "毎週新しいツールが追加されます",
+    "aboutTitle": "ToolHub.toolsについて",
+    "aboutDescription": "ToolHub.toolsは日常生活に役立つ実用的なWebツールを集めたプラットフォームです。毎週新しいツールが追加される定期更新により、ますます便利なサービスになっています。",
+    "roadmap": "週次リリース計画：単位変換器 → パスワード生成器 → QRコード生成器 → 天気情報",
+    "regularUpdates": "定期的な更新でより多くのツールが追加される予定です"
+  },
+  "tools": {
+    "calculator": {
+      "title": "計算機",
+      "description": "基本的な四則演算から高度な計算まで対応する完全な計算機です。キーボードショートカットと計算履歴機能を提供します。",
+      "tags": ["四則演算", "キーボード対応", "履歴"]
+    },
+    "pomodoro": {
+      "title": "ポモドーロタイマー",
+      "description": "25分集中＋5分休憩のポモドーロテクニックで生産性を最大化しましょう。タスク管理と進捗可視化機能を提供します。",
+      "tags": ["25分タイマー", "タスク管理", "進捗表示"]
+    },
+    "timer": {
+      "title": "汎用タイマー",
+      "description": "お好みの時間を自由に設定できるカウントダウンタイマーです。料理、運動、休憩など様々な用途でご活用ください。",
+      "tags": ["自由設定", "ブラウザ通知", "クイックプリセット"]
+    },
+    "raffle": {
+      "title": "番号抽選機",
+      "description": "公正で楽しい番号抽選のためのツールです。スロットマシンアニメーションで視覚的に楽しい抽選体験を提供します。",
+      "tags": ["スロットマシン効果", "重複除去", "抽選記録"]
+    },
+    "thumbnail": {
+      "title": "サムネイルダウンローダー",
+      "description": "YouTube動画の高画質サムネイル画像を簡単にダウンロードできます。様々な解像度オプションを提供します。",
+      "tags": ["高画質", "複数解像度", "ワンクリックダウンロード"]
+    },
+    "unitConverter": {
+      "title": "単位変換器",
+      "description": "長さ、重量、温度など様々な単位変換",
+      "tags": ["長さ", "重量"]
+    },
+    "passwordGenerator": {
+      "title": "パスワード生成器",
+      "description": "安全で強力なパスワード生成",
+      "tags": ["セキュリティ", "ランダム"]
+    },
+    "qrGenerator": {
+      "title": "QRコード生成器",
+      "description": "リンク、テキストをQRコードに変換",
+      "tags": ["QR", "共有"]
+    },
+    "weather": {
+      "title": "天気情報",
+      "description": "リアルタイム天気と週間予報",
+      "tags": ["リアルタイム", "予報"]
+    }
+  },
+  "thumbnailDownloader": {
+    "title": "YouTube サムネイルダウンローダー",
+    "subtitle": "YouTube動画の高画質サムネイルを様々な解像度でダウンロード",
+    "urlInput": "YouTube URL入力",
+    "urlPlaceholder": "https://www.youtube.com/watch?v=...",
+    "urlDescription": "YouTube動画URLを貼り付けてください（youtube.com、youtu.be、またはshorts）",
+    "getThumbnails": "サムネイル取得",
+    "videoId": "動画ID",
+    "qualities": {
+      "maxres": "最大解像度",
+      "hq": "高画質",
+      "mq": "中画質",
+      "sd": "標準",
+      "default": "デフォルト"
+    },
+    "pixels": "ピクセル",
+    "thumbnailNotAvailable": "この画質のサムネイルは利用できません",
+    "loadedSuccess": "サムネイルの読み込みが完了しました！必要な解像度のダウンロードボタンをクリックしてください。",
+    "howToUse": "使用方法",
+    "instructions": [
+      "ブラウザからYouTube動画URLをコピーしてください",
+      "上の入力フィールドに貼り付けてください",
+      "'サムネイル取得'をクリックして全ての解像度を読み込んでください",
+      "お好みの画質を選択して'ダウンロード'をクリックしてください",
+      "youtube.com、youtu.be、YouTube Shorts URLに対応しています"
+    ],
+    "errors": {
+      "enterUrl": "YouTube URLを入力してください",
+      "invalidUrl": "無効なYouTube URLです。有効なYouTube動画URLを入力してください。",
+      "processingFailed": "URLの処理に失敗しました。再度お試しください。",
+      "downloadFailed": "サムネイルのダウンロードに失敗しました。再度お試しください。"
+    }
+  }
+}

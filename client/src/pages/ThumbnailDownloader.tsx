@@ -216,14 +216,14 @@ export default function ThumbnailDownloader() {
 
         <Card className="mt-8 shadow-lg border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-lg">How to Use</CardTitle>
+            <CardTitle className="text-lg">사용 방법</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-            <p>• Copy any YouTube video URL from your browser</p>
-            <p>• Paste it in the input field above</p>
-            <p>• Click "Get Thumbnails" to load all available resolutions</p>
-            <p>• Choose your preferred quality and click "Download"</p>
-            <p>• Supports youtube.com, youtu.be, and YouTube Shorts URLs</p>
+            <p>• 브라우저에서 YouTube 동영상 URL을 복사하세요</p>
+            <p>• 위의 입력 필드에 붙여넣으세요</p>
+            <p>• "썸네일 가져오기"를 클릭하여 모든 해상도를 불러오세요</p>
+            <p>• 원하는 화질을 선택하고 "다운로드"를 클릭하세요</p>
+            <p>• youtube.com, youtu.be, YouTube Shorts URL을 지원합니다</p>
           </CardContent>
         </Card>
       </div>

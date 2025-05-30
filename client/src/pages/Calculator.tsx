@@ -1,16 +1,18 @@
 import { Calculator } from "@/components/calculator/Calculator";
 import { CalculatorHistory } from "@/components/calculator/CalculatorHistory";
 import { useCalculator } from "@/hooks/use-calculator";
+import { useTranslation } from 'react-i18next';
 
 export default function CalculatorPage() {
+  const { t } = useTranslation();
   const { state, operations, calculations } = useCalculator();
 
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-2">계산기</h2>
+        <h2 className="text-2xl font-bold mb-2">{t('calculator.title')}</h2>
         <p className="text-muted-foreground">
-          기본 사칙연산과 고급 기능을 지원하는 계산기입니다. 키보드 입력도 지원합니다.
+          {t('tools.calculator.description')}
         </p>
       </div>
       

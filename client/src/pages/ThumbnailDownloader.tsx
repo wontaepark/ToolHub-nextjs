@@ -42,11 +42,11 @@ export default function ThumbnailDownloader() {
   // Generate thumbnail URLs for different qualities
   const generateThumbnailUrls = (videoId: string) => {
     return [
-      { quality: 'Maximum Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
-      { quality: 'High Quality', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
-      { quality: 'Medium Quality', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
-      { quality: 'Standard', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
-      { quality: 'Default', url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
+      { quality: t('thumbnailDownloader.qualities.maxres'), url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, width: 1280, height: 720 },
+      { quality: t('thumbnailDownloader.qualities.hq'), url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, width: 480, height: 360 },
+      { quality: t('thumbnailDownloader.qualities.mq'), url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`, width: 320, height: 180 },
+      { quality: t('thumbnailDownloader.qualities.sd'), url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`, width: 640, height: 480 },
+      { quality: t('thumbnailDownloader.qualities.default'), url: `https://img.youtube.com/vi/${videoId}/default.jpg`, width: 120, height: 90 }
     ];
   };
 
@@ -120,10 +120,10 @@ export default function ThumbnailDownloader() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <LinkIcon className="h-5 w-5" />
-              Enter YouTube URL
+              {t('thumbnailDownloader.urlInput')}
             </CardTitle>
             <CardDescription>
-              Paste any YouTube video URL (youtube.com, youtu.be, or shorts)
+              {t('thumbnailDownloader.urlDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -131,13 +131,13 @@ export default function ThumbnailDownloader() {
               <div className="flex gap-2">
                 <Input
                   type="url"
-                  placeholder="https://www.youtube.com/watch?v=..."
+                  placeholder={t('thumbnailDownloader.urlPlaceholder')}
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   className="flex-1"
                 />
                 <Button type="submit" disabled={loading} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                  {loading ? 'Processing...' : 'Get Thumbnails'}
+                  {loading ? t('common.processing') : t('thumbnailDownloader.getThumbnails')}
                 </Button>
               </div>
             </form>
@@ -157,7 +157,7 @@ export default function ThumbnailDownloader() {
           <div className="space-y-6">
             <div className="text-center">
               <Badge variant="secondary" className="mb-4">
-                Video ID: {thumbnailData.videoId}
+                {t('thumbnailDownloader.videoId')}: {thumbnailData.videoId}
               </Badge>
             </div>
 
@@ -169,7 +169,7 @@ export default function ThumbnailDownloader() {
                       <div>
                         <CardTitle className="text-lg">{thumbnail.quality}</CardTitle>
                         <CardDescription>
-                          {thumbnail.width} × {thumbnail.height} pixels
+                          {thumbnail.width} × {thumbnail.height} {t('thumbnailDownloader.pixels')}
                         </CardDescription>
                       </div>
                       <Button
@@ -177,7 +177,7 @@ export default function ThumbnailDownloader() {
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <Download className="h-4 w-4 mr-2" />
-                        Download
+                        {t('common.download')}
                       </Button>
                     </div>
                   </CardHeader>
@@ -199,7 +199,7 @@ export default function ThumbnailDownloader() {
                         className="text-center text-gray-500 dark:text-gray-400 py-8"
                       >
                         <AlertCircle className="h-8 w-8 mx-auto mb-2" />
-                        <p>Thumbnail not available in this quality</p>
+                        <p>{t('thumbnailDownloader.thumbnailNotAvailable')}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -210,7 +210,7 @@ export default function ThumbnailDownloader() {
             <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
               <CheckCircle className="h-4 w-4 text-green-600" />
               <AlertDescription className="text-green-800 dark:text-green-200">
-                Thumbnails loaded successfully! Click the download button for any resolution you need.
+                {t('thumbnailDownloader.loadedSuccess')}
               </AlertDescription>
             </Alert>
           </div>
@@ -218,14 +218,12 @@ export default function ThumbnailDownloader() {
 
         <Card className="mt-8 shadow-lg border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-lg">How to Use</CardTitle>
+            <CardTitle className="text-lg">{t('thumbnailDownloader.howToUse')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-            <p>• Copy any YouTube video URL from your browser</p>
-            <p>• Paste it in the input field above</p>
-            <p>• Click "Get Thumbnails" to load all available resolutions</p>
-            <p>• Choose your preferred quality and click "Download"</p>
-            <p>• Supports youtube.com, youtu.be, and YouTube Shorts URLs</p>
+            {t('thumbnailDownloader.instructions', { returnObjects: true }).map((instruction: string, index: number) => (
+              <p key={index}>• {instruction}</p>
+            ))}
           </CardContent>
         </Card>
       </div>

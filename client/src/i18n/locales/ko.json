@@ -301,5 +301,44 @@
       "step4": "원하는 화질을 선택하고 \"다운로드\"를 클릭하세요",
       "step5": "youtube.com, youtu.be, YouTube Shorts URL을 지원합니다"
     }
+  },
+  "timer": {
+    "title": "범용 타이머",
+    "description": "원하는 시간을 설정하고 카운트다운을 시작하세요",
+    "timeSetup": "시간 설정",
+    "minutes": "분",
+    "seconds": "초",
+    "quickSetup": "빠른 설정",
+    "favoriteInstructions": "아래 카테고리에서 체크박스를 클릭하여 즐겨찾기를 추가하세요",
+    "status": {
+      "waiting": "대기 중",
+      "running": "실행 중",
+      "paused": "일시정지",
+      "finished": "완료"
+    },
+    "buttons": {
+      "start": "시작",
+      "pause": "일시정지",
+      "resume": "재개",
+      "reset": "리셋",
+      "stop": "정지"
+    },
+    "voiceCommand": {
+      "title": "음성 명령 (실험적)",
+      "button": "음성 명령",
+      "listening": "음성 인식 중...",
+      "examples": "\"라면\", \"플랭크\", \"3분 시작\" 등"
+    },
+    "categories": {
+      "basic": "기본",
+      "workout": "운동",
+      "cooking": "요리",
+      "study": "학습",
+      "meeting": "회의"
+    },
+    "notification": {
+      "title": "타이머 완료!",
+      "body": "설정한 시간이 완료되었습니다."
+    }
   }
 }

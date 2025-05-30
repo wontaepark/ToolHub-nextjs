@@ -301,5 +301,40 @@
       "step4": "お好みの画質を選択して「ダウンロード」をクリックしてください",
       "step5": "youtube.com、youtu.be、YouTube Shorts URLに対応しています"
     }
+  },
+  "timer": {
+    "title": "汎用タイマー",
+    "description": "お好みの時間を設定してカウントダウンを開始してください",
+    "timeSetup": "時間設定",
+    "minutes": "分",
+    "seconds": "秒",
+    "quickSetup": "クイック設定",
+    "favoriteInstructions": "下のカテゴリでチェックボックスをクリックしてお気に入りを追加してください",
+    "status": {
+      "waiting": "待機中",
+      "running": "実行中",
+      "paused": "一時停止",
+      "finished": "完了"
+    },
+    "buttons": {
+      "start": "開始",
+      "pause": "一時停止",
+      "resume": "再開",
+      "reset": "リセット",
+      "stop": "停止"
+    },
+    "voiceCommand": {
+      "title": "音声コマンド（実験的）",
+      "button": "音声コマンド",
+      "listening": "音声認識中...",
+      "examples": "「ラーメン」、「プランク」、「3分スタート」など"
+    },
+    "categories": {
+      "basic": "基本",
+      "workout": "運動",
+      "cooking": "料理",
+      "study": "学習",
+      "meeting": "会議"
+    }
   }
 }

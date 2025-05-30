@@ -141,8 +141,8 @@ export default function Timer() {
             playCompletionSound();
             // 타이머 완료 알림
             if ('Notification' in window && Notification.permission === 'granted') {
-              new Notification('타이머 완료!', {
-                body: '설정한 시간이 완료되었습니다.',
+              new Notification(t('timer.notification.title'), {
+                body: t('timer.notification.body'),
                 icon: '/favicon.ico'
               });
             }
@@ -722,7 +722,7 @@ export default function Timer() {
                   </div>
                   {getFavoritePresetsData().length === 0 && (
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                      아래 카테고리에서 체크박스를 클릭하여 즐겨찾기를 추가하세요
+                      {t('timer.favoriteInstructions')}
                     </p>
                   )}
                 </div>
@@ -733,7 +733,7 @@ export default function Timer() {
                 <summary className="list-none cursor-pointer">
                   <div className="flex items-center justify-center text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                     <Mic className="w-3 h-3 mr-1" />
-                    음성 명령 (실험적)
+                    {t('timer.voiceCommand.title')}
                     <ChevronDown className="w-3 h-3 ml-1 group-open:rotate-180 transition-transform" />
                   </div>
                 </summary>
@@ -746,10 +746,10 @@ export default function Timer() {
                     disabled={!recognitionRef.current}
                   >
                     {isListening ? <MicOff className="w-4 h-4 mr-2" /> : <Mic className="w-4 h-4 mr-2" />}
-                    {isListening ? '음성 인식 중...' : '음성 명령'}
+                    {isListening ? t('timer.voiceCommand.listening') : t('timer.voiceCommand.button')}
                   </Button>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">
-                    "라면", "플랭크", "3분 시작" 등
+                    {t('timer.voiceCommand.examples')}
                   </p>
                 </div>
               </details>
@@ -762,7 +762,7 @@ export default function Timer() {
       {state === 'idle' && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">빠른 설정</CardTitle>
+            <CardTitle className="text-lg">{t('timer.quickSetup')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* 카테고리 선택 */}
@@ -775,11 +775,7 @@ export default function Timer() {
                   onClick={() => setActiveCategory(category)}
                   className="capitalize"
                 >
-                  {category === 'basic' && '기본'}
-                  {category === 'workout' && '운동'}
-                  {category === 'cooking' && '요리'}
-                  {category === 'study' && '학습'}
-                  {category === 'meeting' && '회의'}
+                  {t(`timer.categories.${category}`)}
                 </Button>
               ))}
             </div>

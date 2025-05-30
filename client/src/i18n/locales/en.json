@@ -301,5 +301,40 @@
       "step4": "Select your desired quality and click \"Download\"",
       "step5": "Supports youtube.com, youtu.be, and YouTube Shorts URLs"
     }
+  },
+  "timer": {
+    "title": "Universal Timer",
+    "description": "Set your desired time and start the countdown",
+    "timeSetup": "Time Setup",
+    "minutes": "min",
+    "seconds": "sec",
+    "quickSetup": "Quick Setup",
+    "favoriteInstructions": "Click checkboxes in the categories below to add favorites",
+    "status": {
+      "waiting": "Waiting",
+      "running": "Running",
+      "paused": "Paused",
+      "finished": "Finished"
+    },
+    "buttons": {
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "reset": "Reset",
+      "stop": "Stop"
+    },
+    "voiceCommand": {
+      "title": "Voice Commands (Experimental)",
+      "button": "Voice Command",
+      "listening": "Listening...",
+      "examples": "\"Instant noodles\", \"Plank\", \"Start 3 minutes\", etc."
+    },
+    "categories": {
+      "basic": "Basic",
+      "workout": "Workout",
+      "cooking": "Cooking",
+      "study": "Study",
+      "meeting": "Meeting"
+    }
   }
 }

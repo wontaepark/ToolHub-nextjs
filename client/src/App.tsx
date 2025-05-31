@@ -7,6 +7,7 @@ import PomodoroTimer from "./pages/PomodoroTimer";
 import Timer from "./pages/Timer";
 import NumberRaffle from "./pages/NumberRaffle";
 import ThumbnailDownloader from "./pages/ThumbnailDownloader";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/timer" component={Timer} />
           <Route path="/raffle" component={NumberRaffle} />
           <Route path="/thumbnail" component={ThumbnailDownloader} />
+          <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
       </main>

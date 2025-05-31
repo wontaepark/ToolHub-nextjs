@@ -47,6 +47,16 @@ export default function Header() {
             </Button>
           </Link>
           
+          <Link href="/contact">
+            <Button 
+              variant="ghost" 
+              className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
+            >
+              <i className="ri-mail-line text-lg"></i>
+              <span>{t('common.contact')}</span>
+            </Button>
+          </Link>
+          
           <a 
             href="https://github.com" 
             target="_blank" 
@@ -154,6 +164,17 @@ export default function Header() {
                   >
                     <i className="ri-image-line text-lg"></i>
                     <span className="font-medium">{t('tools.thumbnail.title')}</span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact">
+                  <div 
+                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/contact" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="ri-mail-line text-lg"></i>
+                    <span className="font-medium">{t('common.contact')}</span>
                   </div>
                 </Link>
               </li>

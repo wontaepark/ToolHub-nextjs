@@ -8,7 +8,7 @@ export default function Contact() {
 
   const handleContactForm = () => {
     // Google Form 링크 - 실제 사용 시 여기에 생성한 Google Form URL을 입력하세요
-    const googleFormUrl = 'https://forms.gle/YOUR_FORM_ID_HERE';
+    const googleFormUrl = 'https://forms.gle/NAXfD8CqYD3UsxyP7';
     window.open(googleFormUrl, '_blank');
   };
 

@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Serve sitemap.xml and robots.txt as static files
+RewriteRule ^sitemap\.xml$ sitemap.xml [L]
+RewriteRule ^robots\.txt$ robots.txt [L]
+
+# All other routes go to index.html for SPA
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

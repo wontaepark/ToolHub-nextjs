@@ -420,5 +420,78 @@
       "q2": "Some features don't work on mobile",
       "a2": "We recommend using the latest browser, please describe the specific symptoms"
     }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "section1": {
+      "title": "Personal Information Collection and Use",
+      "content": "Toolhub.tools collects minimal personal information for service provision. We collect anonymized usage statistics through Google Analytics when using the website, which is used solely for service improvement."
+    },
+    "section2": {
+      "title": "Information We Collect",
+      "item1": "Website visit statistics (page views, visit duration, etc.)",
+      "item2": "Anonymized user behavior data",
+      "item3": "Device information (browser type, operating system, etc.)",
+      "item4": "User settings stored in local storage (calculator history, timer settings, etc.)"
+    },
+    "section3": {
+      "title": "Purpose of Information Use",
+      "content": "Collected information is used only for the following purposes:",
+      "item1": "Service quality improvement and feature enhancement",
+      "item2": "Website performance analysis and optimization",
+      "item3": "Statistical analysis for user experience improvement"
+    },
+    "section4": {
+      "title": "Information Security",
+      "content": "All data is securely protected, and we do not collect personally identifiable information. User calculator history, timer settings, etc. are stored only in browser local storage and are not transmitted externally."
+    },
+    "section5": {
+      "title": "Cookie Usage",
+      "content": "This website uses cookies for Google Analytics service provision. You can block cookies in your browser settings, but some functions may be limited."
+    },
+    "section6": {
+      "title": "Third-Party Services",
+      "content": "We do not share user information with third parties except for Google Analytics. Google's privacy policy applies separately."
+    },
+    "section7": {
+      "title": "Contact",
+      "content": "If you have any questions about personal information processing, please contact us through the contact page."
+    },
+    "lastUpdated": "Last Updated"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "section1": {
+      "title": "Service Introduction",
+      "content": "Toolhub.tools is a service that provides various web tools such as calculators, timers, and number raffles for free. These terms regulate basic matters regarding service use."
+    },
+    "section2": {
+      "title": "Service Use",
+      "item1": "All tools are provided free of charge and can be used without registration",
+      "item2": "The service is accessible through web browsers",
+      "item3": "User data is stored only in the local browser",
+      "item4": "Users must comply with relevant laws when using the service"
+    },
+    "section3": {
+      "title": "Service Scope",
+      "content": "Toolhub.tools provides the service as-is and does not guarantee the accuracy or completeness of the service. Users must use the service at their own responsibility."
+    },
+    "section4": {
+      "title": "User Responsibility",
+      "content": "Users must use the service only for lawful and appropriate purposes and must not engage in acts that harm other users or third parties."
+    },
+    "section5": {
+      "title": "Service Changes and Discontinuation",
+      "content": "The service provider may change or discontinue the service content as needed, with prior notice as a principle, except in urgent cases."
+    },
+    "section6": {
+      "title": "Disclaimer",
+      "content": "Users are responsible for all consequences arising from service use, and the service provider bears no responsibility except as specified by relevant laws."
+    },
+    "section7": {
+      "title": "Terms Changes",
+      "content": "These terms may be changed as needed, and the revised terms take effect upon posting on the website."
+    },
+    "lastUpdated": "Last Updated"
   }
 }

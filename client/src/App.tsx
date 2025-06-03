@@ -8,6 +8,8 @@ import Timer from "./pages/Timer";
 import NumberRaffle from "./pages/NumberRaffle";
 import ThumbnailDownloader from "./pages/ThumbnailDownloader";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route path="/raffle" component={NumberRaffle} />
           <Route path="/thumbnail" component={ThumbnailDownloader} />
           <Route path="/contact" component={Contact} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/terms" component={Terms} />
           <Route component={NotFound} />
         </Switch>
       </main>

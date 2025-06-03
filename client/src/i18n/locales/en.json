@@ -37,9 +37,25 @@
     "nextWeekRelease": "Scheduled for Next Week Release",
     "weeklyUpdates": "New tools are added every week",
     "aboutTitle": "About ToolHub.tools",
-    "aboutDescription": "ToolHub.tools is a platform that brings together practical web tools for everyday life. Through regular updates with new tools added weekly, it continues to become an increasingly useful service.",
+    "aboutDescription": "ToolHub.tools is a collection of web-based utility tools that anyone can use easily and quickly. We provide various functions useful for daily life and work, such as calculators, timers, number raffles, and YouTube thumbnail downloaders, all in one website. Our goal is to enhance user productivity and convenience through free tools that can be used directly in the browser without installation or registration.",
     "roadmap": "Weekly Release Plan: Unit Converter → Password Generator → QR Code Generator → Weather Info",
-    "regularUpdates": "More tools will be added through regular updates"
+    "regularUpdates": "More tools will be added through regular updates",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We enhance user productivity and convenience through free tools that can be used directly in the browser without installation or registration."
+    },
+    "security": {
+      "title": "Security & Privacy",
+      "description": "All data is stored only in your browser and never transmitted to external servers, ensuring complete privacy protection."
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "We support Korean, English, and Japanese languages and provide optimized experiences across all mobile and desktop environments."
+    },
+    "contact": {
+      "description": "If you have any inquiries or suggestions, please feel free to contact us anytime. We will continue to develop into a more convenient service by reflecting user feedback.",
+      "button": "Contact Us"
+    }
   },
   "tools": {
     "calculator": {

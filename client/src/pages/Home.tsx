@@ -282,14 +282,56 @@ export default function Home() {
       {/* About Section */}
       <Card className="mt-8 md:mt-16 mx-4">
         <CardContent className="p-6 md:p-8">
-          <div className="text-center">
+          <div className="text-center mb-8">
             <h3 className="text-xl md:text-2xl font-bold mb-4">{t('home.aboutTitle')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6 max-w-3xl mx-auto leading-relaxed">
               {t('home.aboutDescription')}
             </p>
-            <p className="text-muted-foreground text-sm md:text-base">
-              🗓️ {t('home.roadmap')}
-            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-rocket-line text-blue-600 text-2xl"></i>
+              </div>
+              <h4 className="font-semibold mb-2">{t('home.mission.title')}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t('home.mission.description')}
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-shield-check-line text-green-600 text-2xl"></i>
+              </div>
+              <h4 className="font-semibold mb-2">{t('home.security.title')}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t('home.security.description')}
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-global-line text-purple-600 text-2xl"></i>
+              </div>
+              <h4 className="font-semibold mb-2">{t('home.accessibility.title')}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t('home.accessibility.description')}
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-8 pt-6 border-t border-border">
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground mb-4">
+                {t('home.contact.description')}
+              </p>
+              <Link href="/contact">
+                <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                  {t('home.contact.button')}
+                </button>
+              </Link>
+            </div>
           </div>
         </CardContent>
       </Card>

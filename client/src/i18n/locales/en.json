@@ -493,5 +493,12 @@
       "content": "These terms may be changed as needed, and the revised terms take effect upon posting on the website."
     },
     "lastUpdated": "Last Updated"
+  },
+  "cookies": {
+    "title": "Cookie Usage Notice",
+    "message": "This website uses Google Analytics cookies for service improvement.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "reject": "Reject"
   }
 }

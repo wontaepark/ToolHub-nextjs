@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import Header from "./components/ui/header";
 import Footer from "./components/ui/footer";
+import CookieConsent from "./components/CookieConsent";
 import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import PomodoroTimer from "./pages/PomodoroTimer";
@@ -31,6 +32,7 @@ function App() {
         </Switch>
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 }

@@ -493,5 +493,12 @@
       "content": "본 약관은 필요에 따라 변경될 수 있으며, 변경된 약관은 웹사이트에 게시함으로써 효력이 발생합니다."
     },
     "lastUpdated": "최종 수정일"
+  },
+  "cookies": {
+    "title": "쿠키 사용 안내",
+    "message": "이 웹사이트는 서비스 개선을 위해 Google Analytics 쿠키를 사용합니다.",
+    "learnMore": "자세히 보기",
+    "accept": "동의",
+    "reject": "거부"
   }
 }

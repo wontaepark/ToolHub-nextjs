@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Calculator } from "@/components/calculator/Calculator";
 import { CalculatorHistory } from "@/components/calculator/CalculatorHistory";
 import { useCalculator } from "@/hooks/use-calculator";
-import AdSense from "@/components/AdSense";
 
 export default function CalculatorPage() {
   const { t } = useTranslation();

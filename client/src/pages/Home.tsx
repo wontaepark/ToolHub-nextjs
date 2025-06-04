@@ -181,6 +181,32 @@ export default function Home() {
               </div>
             </div>
           </Link>
+
+          {/* Password Generator */}
+          <Link href="/password">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-orange-500/30 active:scale-[0.98]">
+              <div className="h-32 md:h-40 bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent"></div>
+                <i className="ri-shield-keyhole-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.passwordGenerator.title')}</h3>
+                  <Badge variant="default" className="bg-orange-500/10 text-orange-600 text-xs flex-shrink-0 ml-2">
+                    {t('common.available')}
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  {t('tools.passwordGenerator.description')}
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.2')}</Badge>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 
@@ -212,31 +238,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Password Generator */}
-          <Link href="/password">
-            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-orange-500/30 active:scale-[0.98]">
-              <div className="h-32 md:h-40 bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent"></div>
-                <i className="ri-shield-keyhole-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
-              </div>
-              <div className="p-4 md:p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.passwordGenerator.title')}</h3>
-                  <Badge variant="default" className="bg-orange-500/10 text-orange-600 text-xs flex-shrink-0 ml-2">
-                    {t('common.available')}
-                  </Badge>
-                </div>
-                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  {t('tools.passwordGenerator.description')}
-                </p>
-                <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.0')}</Badge>
-                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.1')}</Badge>
-                  <Badge variant="outline" className="text-xs">{t('tools.passwordGenerator.tags.2')}</Badge>
-                </div>
-              </div>
-            </div>
-          </Link>
+
 
           {/* QR Code Generator - Week 3 */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-purple-200 relative opacity-75">

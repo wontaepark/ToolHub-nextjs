@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Star, Zap } from "lucide-react";
+import AdSense from "@/components/AdSense";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -277,6 +278,15 @@ export default function Home() {
             📅 {t('home.regularUpdates')}
           </p>
         </div>
+      </div>
+
+      {/* AdSense Banner */}
+      <div className="mt-8 mx-4">
+        <AdSense 
+          adSlot="1234567890"
+          style={{ display: 'block', textAlign: 'center', minHeight: '250px' }}
+          className="rounded-lg"
+        />
       </div>
       
       {/* About Section */}

@@ -90,8 +90,8 @@
     },
     "passwordGenerator": {
       "title": "パスワード生成器",
-      "description": "安全で強力なパスワード生成",
-      "tags": ["セキュリティ", "ランダム"]
+      "description": "安全で強力なパスワードを自動生成します。様々なオプションを設定してカスタマイズされたパスワードを作成できます。",
+      "tags": ["セキュリティ", "ランダム生成", "強度測定"]
     },
     "qrGenerator": {
       "title": "QRコード生成器",
@@ -102,6 +102,53 @@
       "title": "天気情報",
       "description": "リアルタイム天気と週間予報",
       "tags": ["リアルタイム", "予報"]
+    }
+  },
+  "passwordGenerator": {
+    "title": "パスワード生成器",
+    "description": "安全で強力なパスワードを自動生成します。強度測定とコピー機能を提供します。",
+    "settings": "設定",
+    "length": "長さ",
+    "includeCharacters": "含める文字",
+    "lowercase": "小文字",
+    "uppercase": "大文字",
+    "numbers": "数字",
+    "symbols": "記号",
+    "advancedOptions": "高度なオプション",
+    "excludeSimilar": "類似文字を除外",
+    "excludeAmbiguous": "曖昧な文字を除外",
+    "generate": "パスワード生成",
+    "generatedPassword": "生成されたパスワード",
+    "copySuccess": "コピー完了",
+    "copySuccessDesc": "パスワードがクリップボードにコピーされました",
+    "copyError": "コピー失敗",
+    "copyErrorDesc": "クリップボードへのコピーに失敗しました",
+    "history": "生成履歴",
+    "strength": {
+      "title": "パスワード強度",
+      "weak": "弱い",
+      "medium": "普通",
+      "strong": "強い",
+      "veryStrong": "とても強い",
+      "suggestions": "改善提案",
+      "tooShort": "8文字以上にしてください",
+      "needLowercase": "小文字を含めてください",
+      "needUppercase": "大文字を含めてください",
+      "needNumbers": "数字を含めてください",
+      "needSymbols": "記号を含めてください",
+      "avoidRepeating": "繰り返し文字を避けてください",
+      "avoidSequential": "連続した文字を避けてください"
+    },
+    "securityTips": {
+      "title": "セキュリティのヒント",
+      "tip1": "アカウントごとに異なるパスワードを使用してください",
+      "tip2": "定期的にパスワードを変更してください",
+      "tip3": "パスワードマネージャーの使用をお勧めします",
+      "tip4": "二段階認証を有効にしてください"
+    },
+    "errors": {
+      "noCharacterSet": "文字セットなし",
+      "selectAtLeastOne": "少なくとも一つの文字タイプを選択してください"
     }
   },
   "thumbnailDownloader": {

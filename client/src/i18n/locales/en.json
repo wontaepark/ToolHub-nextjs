@@ -90,8 +90,8 @@
     },
     "passwordGenerator": {
       "title": "Password Generator",
-      "description": "Generate secure and strong passwords",
-      "tags": ["Security", "Random"]
+      "description": "Automatically generate secure and strong passwords. Create customized passwords with various options.",
+      "tags": ["Security", "Random Generation", "Strength Meter"]
     },
     "qrGenerator": {
       "title": "QR Code Generator",
@@ -102,6 +102,53 @@
       "title": "Weather Info",
       "description": "Real-time weather and weekly forecast",
       "tags": ["Real-time", "Forecast"]
+    }
+  },
+  "passwordGenerator": {
+    "title": "Password Generator",
+    "description": "Generate secure and strong passwords automatically. Provides strength measurement and copy functionality.",
+    "settings": "Settings",
+    "length": "Length",
+    "includeCharacters": "Include Characters",
+    "lowercase": "Lowercase",
+    "uppercase": "Uppercase",
+    "numbers": "Numbers", 
+    "symbols": "Symbols",
+    "advancedOptions": "Advanced Options",
+    "excludeSimilar": "Exclude Similar Characters",
+    "excludeAmbiguous": "Exclude Ambiguous Characters",
+    "generate": "Generate Password",
+    "generatedPassword": "Generated Password",
+    "copySuccess": "Copy Success",
+    "copySuccessDesc": "Password copied to clipboard",
+    "copyError": "Copy Failed",
+    "copyErrorDesc": "Failed to copy to clipboard",
+    "history": "Generation History",
+    "strength": {
+      "title": "Password Strength",
+      "weak": "Weak",
+      "medium": "Medium",
+      "strong": "Strong",
+      "veryStrong": "Very Strong",
+      "suggestions": "Suggestions",
+      "tooShort": "Use at least 8 characters",
+      "needLowercase": "Include lowercase letters",
+      "needUppercase": "Include uppercase letters",
+      "needNumbers": "Include numbers",
+      "needSymbols": "Include symbols",
+      "avoidRepeating": "Avoid repeating characters",
+      "avoidSequential": "Avoid sequential characters"
+    },
+    "securityTips": {
+      "title": "Security Tips",
+      "tip1": "Use different passwords for each account",
+      "tip2": "Change passwords regularly",
+      "tip3": "We recommend using a password manager",
+      "tip4": "Enable two-factor authentication"
+    },
+    "errors": {
+      "noCharacterSet": "No Character Set",
+      "selectAtLeastOne": "Please select at least one character type"
     }
   },
   "thumbnailDownloader": {

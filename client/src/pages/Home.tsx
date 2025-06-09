@@ -218,25 +218,31 @@ export default function Home() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
-          {/* Unit Converter - Next Week */}
-          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-blue-200 relative">
-            <div className="absolute top-2 right-2 z-10">
-              <Badge className="bg-blue-500 text-white text-xs">{t('common.nextWeek')}</Badge>
-            </div>
-            <div className="h-24 md:h-32 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-              <i className="ri-scales-3-line text-white text-3xl md:text-5xl"></i>
-            </div>
-            <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.unitConverter.title')}</h4>
-              <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                {t('tools.unitConverter.description')}
-              </p>
-              <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.0')}</Badge>
-                <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.1')}</Badge>
+          {/* Unit Converter */}
+          <Link href="/converter">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-blue-500/30 active:scale-[0.98]">
+              <div className="h-32 md:h-40 bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent"></div>
+                <i className="ri-scales-3-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.unitConverter.title')}</h3>
+                  <Badge variant="default" className="bg-blue-500/10 text-blue-600 text-xs flex-shrink-0 ml-2">
+                    {t('common.available')}
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  {t('tools.unitConverter.description')}
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.unitConverter.tags.2')}</Badge>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
 
 
 

@@ -85,8 +85,8 @@
     },
     "unitConverter": {
       "title": "Unit Converter",
-      "description": "Convert various units including length, weight, temperature",
-      "tags": ["Length", "Weight"]
+      "description": "Convert various units including length, weight, temperature, and volume quickly and accurately. Provides real-time calculations and conversion history.",
+      "tags": ["Length", "Weight", "Temperature"]
     },
     "passwordGenerator": {
       "title": "Password Generator",

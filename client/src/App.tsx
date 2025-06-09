@@ -10,6 +10,7 @@ import NumberRaffle from "./pages/NumberRaffle";
 import ThumbnailDownloader from "./pages/ThumbnailDownloader";
 import PasswordGenerator from "./pages/PasswordGenerator";
 import UnitConverter from "./pages/UnitConverter";
+import DateCalculator from "./pages/DateCalculator";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/thumbnail" component={ThumbnailDownloader} />
           <Route path="/password" component={PasswordGenerator} />
           <Route path="/converter" component={UnitConverter} />
+          <Route path="/date-calculator" component={DateCalculator} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />

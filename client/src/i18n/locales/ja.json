@@ -217,6 +217,46 @@
     "copyError": "コピー失敗",
     "copyErrorDesc": "クリップボードへのコピーに失敗しました"
   },
+  "dateCalculator": {
+    "title": "日付計算機",
+    "description": "2つの日付間の正確な差を計算し、様々な単位で結果を確認できます。",
+    "subtitle": "開始日と終了日を選択して正確な日付差を計算します。",
+    "calculator": "日付計算機",
+    "startDate": "開始日",
+    "endDate": "終了日",
+    "today": "今日",
+    "calculate": "日付差を計算",
+    "swap": "日付入替",
+    "result": "計算結果",
+    "copy": "コピー",
+    "results": {
+      "sameDay": "同じ日です！",
+      "daysAfter": "{{days}}日後です。",
+      "daysBefore": "{{days}}日前です。",
+      "detailed": "{{years}}年{{months}}ヶ月{{days}}日"
+    },
+    "units": {
+      "weeks": "週",
+      "hours": "時間",
+      "minutes": "分",
+      "seconds": "秒"
+    },
+    "errors": {
+      "selectDates": "開始日と終了日の両方を選択してください。",
+      "invalidDates": "有効な日付を選択してください。"
+    },
+    "tips": {
+      "title": "使用のヒント",
+      "tip1": "日付を選択して計算ボタンをクリックすると自動的に差が計算されます",
+      "tip2": "入替ボタンで開始日と終了日を素早く交換できます",
+      "tip3": "今日ボタンで現在の日付を素早く入力できます",
+      "tip4": "結果をコピーして他の場所で使用できます"
+    },
+    "copySuccess": "コピー完了",
+    "copySuccessDesc": "計算結果がクリップボードにコピーされました",
+    "copyError": "コピー失敗",
+    "copyErrorDesc": "クリップボードへのコピーに失敗しました"
+  },
   "thumbnailDownloader": {
     "title": "YouTube サムネイルダウンローダー",
     "subtitle": "YouTube動画の高画質サムネイルを様々な解像度でダウンロード",

@@ -93,6 +93,11 @@
       "description": "Automatically generate secure and strong passwords. Create customized passwords with various options.",
       "tags": ["Security", "Random Generation", "Strength Meter"]
     },
+    "dateCalculator": {
+      "title": "Date Calculator",
+      "description": "Calculate the exact difference between two dates and view results in years, months, days, hours, and more.",
+      "tags": ["Date Difference", "D-Day", "Duration"]
+    },
     "qrGenerator": {
       "title": "QR Code Generator",
       "description": "Convert links and text to QR codes",
@@ -214,6 +219,46 @@
     },
     "copySuccess": "Copy Success",
     "copySuccessDesc": "Conversion result copied to clipboard",
+    "copyError": "Copy Failed",
+    "copyErrorDesc": "Failed to copy to clipboard"
+  },
+  "dateCalculator": {
+    "title": "Date Calculator",
+    "description": "Calculate the exact difference between two dates and view results in various units.",
+    "subtitle": "Select start and end dates to calculate the precise date difference.",
+    "calculator": "Date Calculator",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "today": "Today",
+    "calculate": "Calculate Date Difference",
+    "swap": "Swap Dates",
+    "result": "Calculation Result",
+    "copy": "Copy",
+    "results": {
+      "sameDay": "Same day!",
+      "daysAfter": "{{days}} days after.",
+      "daysBefore": "{{days}} days before.",
+      "detailed": "{{years}} years {{months}} months {{days}} days"
+    },
+    "units": {
+      "weeks": "Weeks",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "errors": {
+      "selectDates": "Please select both start and end dates.",
+      "invalidDates": "Please select valid dates."
+    },
+    "tips": {
+      "title": "Usage Tips",
+      "tip1": "Select dates and click calculate to automatically compute the difference",
+      "tip2": "Use the swap button to quickly exchange start and end dates",
+      "tip3": "Use the today button to quickly input the current date",
+      "tip4": "Copy the result to use it elsewhere"
+    },
+    "copySuccess": "Copy Success",
+    "copySuccessDesc": "Calculation result copied to clipboard",
     "copyError": "Copy Failed",
     "copyErrorDesc": "Failed to copy to clipboard"
   },

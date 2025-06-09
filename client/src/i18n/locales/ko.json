@@ -93,6 +93,11 @@
       "description": "안전하고 강력한 비밀번호를 자동으로 생성합니다. 다양한 옵션을 설정하여 맞춤형 비밀번호를 만들어보세요.",
       "tags": ["보안", "랜덤 생성", "강도 측정"]
     },
+    "dateCalculator": {
+      "title": "날짜 계산기",
+      "description": "두 날짜 사이의 정확한 차이를 계산하고 년, 월, 일, 시간 등 다양한 단위로 결과를 확인하세요.",
+      "tags": ["날짜 차이", "D-Day", "기간 계산"]
+    },
     "qrGenerator": {
       "title": "QR코드 생성기",
       "description": "링크, 텍스트를 QR코드로 변환",
@@ -214,6 +219,46 @@
     },
     "copySuccess": "복사 완료",
     "copySuccessDesc": "변환 결과가 클립보드에 복사되었습니다",
+    "copyError": "복사 실패",
+    "copyErrorDesc": "클립보드 복사에 실패했습니다"
+  },
+  "dateCalculator": {
+    "title": "날짜 계산기",
+    "description": "두 날짜 사이의 차이를 정확하게 계산하고 다양한 단위로 확인하세요.",
+    "subtitle": "시작 날짜와 종료 날짜를 선택하여 정확한 날짜 차이를 계산합니다.",
+    "calculator": "날짜 계산기",
+    "startDate": "시작 날짜",
+    "endDate": "종료 날짜",
+    "today": "오늘",
+    "calculate": "날짜 차이 계산하기",
+    "swap": "날짜 교체",
+    "result": "계산 결과",
+    "copy": "복사",
+    "results": {
+      "sameDay": "같은 날입니다!",
+      "daysAfter": "{{days}}일 후입니다.",
+      "daysBefore": "{{days}}일 전입니다.",
+      "detailed": "{{years}}년 {{months}}개월 {{days}}일"
+    },
+    "units": {
+      "weeks": "주",
+      "hours": "시간",
+      "minutes": "분",
+      "seconds": "초"
+    },
+    "errors": {
+      "selectDates": "시작 날짜와 종료 날짜를 모두 선택해 주세요.",
+      "invalidDates": "유효한 날짜를 선택해 주세요."
+    },
+    "tips": {
+      "title": "사용 팁",
+      "tip1": "날짜를 선택하고 계산 버튼을 클릭하면 자동으로 차이가 계산됩니다",
+      "tip2": "날짜 교체 버튼으로 시작일과 종료일을 빠르게 바꿀 수 있습니다",
+      "tip3": "오늘 버튼을 사용하여 현재 날짜를 빠르게 입력할 수 있습니다",
+      "tip4": "결과를 복사하여 다른 곳에서 사용할 수 있습니다"
+    },
+    "copySuccess": "복사 완료",
+    "copySuccessDesc": "계산 결과가 클립보드에 복사되었습니다",
     "copyError": "복사 실패",
     "copyErrorDesc": "클립보드 복사에 실패했습니다"
   },

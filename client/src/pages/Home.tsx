@@ -207,17 +207,7 @@ export default function Home() {
               </div>
             </div>
           </Link>
-        </div>
-      </div>
 
-      {/* Coming Soon Section */}
-      <div className="mb-12 md:mb-16 px-4">
-        <div className="text-center mb-8">
-          <h3 className="text-xl md:text-2xl font-bold mb-3">{t('home.nextWeekRelease')}</h3>
-          <p className="text-sm md:text-base text-muted-foreground">{t('home.weeklyUpdates')}</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
           {/* Unit Converter */}
           <Link href="/converter">
             <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-blue-500/30 active:scale-[0.98]">
@@ -243,9 +233,17 @@ export default function Home() {
               </div>
             </div>
           </Link>
+        </div>
+      </div>
 
-
-
+      {/* Coming Soon Section */}
+      <div className="mb-12 md:mb-16 px-4">
+        <div className="text-center mb-8">
+          <h3 className="text-xl md:text-2xl font-bold mb-3">{t('home.nextWeekRelease')}</h3>
+          <p className="text-sm md:text-base text-muted-foreground">{t('home.weeklyUpdates')}</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
           {/* QR Code Generator - Week 3 */}
           <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-purple-200 relative opacity-75">
             <div className="absolute top-2 right-2 z-10">

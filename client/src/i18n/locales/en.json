@@ -151,6 +151,72 @@
       "selectAtLeastOne": "Please select at least one character type"
     }
   },
+  "unitConverter": {
+    "title": "Unit Converter",
+    "description": "Convert various units including length, weight, temperature, and volume quickly and accurately.",
+    "converter": "Converter",
+    "categories": {
+      "length": "Length",
+      "weight": "Weight", 
+      "temperature": "Temperature",
+      "volume": "Volume"
+    },
+    "from": "From",
+    "to": "To",
+    "swap": "Swap Units",
+    "copy": "Copy",
+    "popular": "Popular Conversions",
+    "history": "Conversion History",
+    "quickRef": {
+      "title": "Quick Reference"
+    },
+    "tips": {
+      "title": "Usage Tips",
+      "tip1": "Enter a number to automatically convert",
+      "tip2": "Use the swap button to quickly reverse conversion",
+      "tip3": "Use popular conversion buttons for common conversions",
+      "tip4": "Check conversion history for previous calculations"
+    },
+    "units": {
+      "length": {
+        "mm": "Millimeter",
+        "cm": "Centimeter",
+        "m": "Meter",
+        "km": "Kilometer",
+        "in": "Inch",
+        "ft": "Foot",
+        "yd": "Yard",
+        "mi": "Mile"
+      },
+      "weight": {
+        "mg": "Milligram",
+        "g": "Gram",
+        "kg": "Kilogram",
+        "t": "Ton",
+        "oz": "Ounce",
+        "lb": "Pound",
+        "st": "Stone"
+      },
+      "temperature": {
+        "c": "Celsius",
+        "f": "Fahrenheit",
+        "k": "Kelvin"
+      },
+      "volume": {
+        "ml": "Milliliter",
+        "l": "Liter",
+        "cup": "Cup",
+        "pt": "Pint",
+        "qt": "Quart",
+        "gal": "Gallon",
+        "floz": "Fluid Ounce"
+      }
+    },
+    "copySuccess": "Copy Success",
+    "copySuccessDesc": "Conversion result copied to clipboard",
+    "copyError": "Copy Failed",
+    "copyErrorDesc": "Failed to copy to clipboard"
+  },
   "thumbnailDownloader": {
     "title": "YouTube Thumbnail Downloader",
     "subtitle": "Download high-quality thumbnails from YouTube videos in various resolutions",

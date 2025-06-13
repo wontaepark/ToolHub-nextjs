@@ -138,7 +138,20 @@ export default function Weather() {
       if (!response.ok) {
         throw new Error('Weather data fetch failed');
       }
-      const data = await response.json();
+      
+      const responseText = await response.text();
+      if (!responseText || responseText.trim() === '') {
+        throw new Error('Empty response from server');
+      }
+      
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (jsonError) {
+        console.error('JSON parse error:', jsonError, 'Response:', responseText);
+        throw new Error('Invalid JSON response');
+      }
+      
       setWeatherData(data);
       setError('');
     } catch (error) {
@@ -158,7 +171,20 @@ export default function Weather() {
       if (!response.ok) {
         throw new Error('Weather data fetch failed');
       }
-      const data = await response.json();
+      
+      const responseText = await response.text();
+      if (!responseText || responseText.trim() === '') {
+        throw new Error('Empty response from server');
+      }
+      
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (jsonError) {
+        console.error('JSON parse error:', jsonError, 'Response:', responseText);
+        throw new Error('Invalid JSON response');
+      }
+      
       setWeatherData(data);
       setError('');
       setSearchCity('');

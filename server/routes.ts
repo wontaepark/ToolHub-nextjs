@@ -209,22 +209,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("Searching for city:", cityName);
 
       try {
-        // Search for location using AccuWeather
-        const locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURIComponent(cityName)}&language=ko-kr`;
-        const locationResponse = await fetch(locationUrl);
+        // Search for location using AccuWeather (try multiple search approaches)
+        let locationData = [];
         
-        if (!locationResponse.ok) {
-          console.log("AccuWeather location search failed, using demo data");
-          const demoCoords = getCityCoordinates(cityName);
-          return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
+        // Try primary search
+        const locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURIComponent(cityName)}`;
+        console.log("Making AccuWeather request to:", locationUrl);
+        
+        try {
+          const locationResponse = await fetch(locationUrl);
+          console.log("AccuWeather response status:", locationResponse.status);
+          
+          if (locationResponse.ok) {
+            locationData = await locationResponse.json();
+            console.log("AccuWeather search response:", JSON.stringify(locationData, null, 2));
+          } else {
+            console.log("AccuWeather search failed with status:", locationResponse.status);
+            const errorText = await locationResponse.text();
+            console.log("AccuWeather error:", errorText);
+          }
+        } catch (fetchError) {
+          console.log("AccuWeather fetch error:", fetchError);
         }
         
-        const locationData = await locationResponse.json();
+        // If no results and city name is Korean, try alternative search
+        if ((!locationData || locationData.length === 0) && /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(cityName)) {
+          const cityTranslations: { [key: string]: string } = {
+            '서울': 'Seoul',
+            '부산': 'Busan',
+            '인천': 'Incheon',
+            '대구': 'Daegu',
+            '대전': 'Daejeon',
+            '광주': 'Gwangju',
+            '울산': 'Ulsan',
+            '세종': 'Sejong'
+          };
+          
+          const englishName = cityTranslations[cityName];
+          if (englishName) {
+            const altUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${englishName}`;
+            const altResponse = await fetch(altUrl);
+            if (altResponse.ok) {
+              locationData = await altResponse.json();
+            }
+          }
+        }
         
         if (!locationData || locationData.length === 0) {
-          console.log("City not found in AccuWeather, using demo data");
-          const demoCoords = getCityCoordinates(cityName);
-          return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
+          console.log(`City "${cityName}" not found in AccuWeather, trying fallback`);
+          
+          // For common cities, use direct location keys
+          const directKeys: { [key: string]: string } = {
+            'seoul': '226081',
+            'busan': '226082', 
+            'incheon': '226083',
+            'london': '328328',
+            'tokyo': '226396',
+            'new york': '349727'
+          };
+          
+          const normalizedCity = cityName.toLowerCase().trim();
+          const locationKey = directKeys[normalizedCity];
+          
+          if (locationKey) {
+            console.log(`Using direct location key for ${cityName}: ${locationKey}`);
+            // Skip to weather fetch with known location key
+            locationData = [{ Key: locationKey, LocalizedName: cityName, Country: { ID: 'KR' }, GeoPosition: { Latitude: 37.5665, Longitude: 126.9780 } }];
+          } else {
+            console.log("No fallback available, using demo data");
+            const demoCoords = getCityCoordinates(cityName);
+            return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
+          }
         }
 
         const location = locationData[0];

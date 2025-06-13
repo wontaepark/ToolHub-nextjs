@@ -1,0 +1,146 @@
+Redis 캐싱 시스템 구현
+캐싱 전략:
+
+위치별 캐싱: 각 도시의 Location Key를 영구 캐시 (한 번 조회하면 거의 변하지 않음)
+현재 날씨: 15-30분 캐시 (너무 자주 업데이트할 필요 없음)
+시간별 예보: 1시간 캐시 (상대적으로 안정적)
+일별 예보: 6시간 캐시 (장기 예보는 자주 변하지 않음)
+
+javascript// 예시 캐싱 구현
+const redis = require('redis');
+const client = redis.createClient();
+
+async function getWeatherData(locationKey, type) {
+  const cacheKey = `weather:${type}:${locationKey}`;
+  
+  // 1. 캐시에서 먼저 확인
+  const cached = await client.get(cacheKey);
+  if (cached) {
+    return JSON.parse(cached);
+  }
+  
+  // 2. API 호출
+  try {
+    const weatherData = await callAccuWeatherAPI(locationKey, type);
+    
+    // 3. 캐시에 저장 (TTL 설정)
+    const ttl = getTTL(type); // current: 1800s, hourly: 3600s, daily: 21600s
+    await client.setex(cacheKey, ttl, JSON.stringify(weatherData));
+    
+    return weatherData;
+  } catch (error) {
+    // 4. API 실패 시 오래된 캐시라도 반환
+    const staleData = await client.get(`stale:${cacheKey}`);
+    if (staleData) {
+      return JSON.parse(staleData);
+    }
+    throw error;
+  }
+}
+스마트 캐싱 최적화:
+
+사용자 패턴 기반: 자주 조회되는 지역은 캐시 TTL을 늘리고, 미리 갱신
+배치 업데이트: 새벽 시간대에 인기 지역들의 날씨 데이터를 미리 캐싱
+압축 저장: JSON 데이터를 gzip으로 압축해서 메모리 사용량 줄이기
+
+백업 플랜 및 장애 대응
+다중 API 제공자 활용:
+javascriptconst weatherProviders = [
+  { name: 'AccuWeather', priority: 1, dailyLimit: 50 },
+  { name: 'OpenWeatherMap', priority: 2, dailyLimit: 1000 },
+  { name: 'WeatherAPI', priority: 3, dailyLimit: 100 }
+];
+
+async function getWeatherWithFallback(location) {
+  for (const provider of weatherProviders) {
+    try {
+      if (await checkAPILimit(provider.name)) {
+        return await callWeatherAPI(provider.name, location);
+      }
+    } catch (error) {
+      console.log(`${provider.name} failed, trying next provider...`);
+      continue;
+    }
+  }
+  
+  // 모든 API 실패 시 오래된 캐시 데이터라도 반환
+  return await getStaleDataFromCache(location);
+}
+점진적 성능 저하 (Graceful Degradation):
+
+레벨 1: 실시간 데이터 → 30분 전 캐시 데이터
+레벨 2: 상세 예보 → 간단한 기본 예보만
+레벨 3: 개인화 기능 → 일반적인 날씨 정보만
+레벨 4: 정적 데이터 → "서비스 점검 중" 메시지
+
+오류 상황별 대응 전략:
+API 제한 도달 시:
+javascript// 일일 제한 모니터링
+const rateLimitTracker = {
+  accuweather: { used: 0, limit: 50, resetTime: null },
+  openweather: { used: 0, limit: 1000, resetTime: null }
+};
+
+function selectBestProvider() {
+  return weatherProviders
+    .filter(p => rateLimitTracker[p.name].used < rateLimitTracker[p.name].limit)
+    .sort((a, b) => a.priority - b.priority)[0];
+}
+네트워크 장애 시:
+
+Circuit Breaker 패턴: API가 연속으로 실패하면 일정 시간 호출 중단
+Timeout 설정: 5초 이상 응답 없으면 다음 제공자로 전환
+Retry 로직: 지수 백오프 방식으로 재시도 (1초, 2초, 4초...)
+
+데이터 품질 검증:
+javascriptfunction validateWeatherData(data) {
+  // 상식적 범위 체크
+  if (data.temperature < -50 || data.temperature > 60) return false;
+  if (data.humidity < 0 || data.humidity > 100) return false;
+  if (!data.description || data.description.length < 2) return false;
+  
+  return true;
+}
+모니터링 및 알림 시스템
+실시간 모니터링:
+
+API 응답 시간: 평균 응답 시간이 3초 이상이면 알림
+성공률: 시간당 성공률이 95% 이하로 떨어지면 알림
+캐시 히트율: 70% 이하면 캐싱 전략 재검토 필요
+
+사용자 경험 보장:
+javascript// 로딩 상태 관리
+const weatherService = {
+  async getWeather(location) {
+    const startTime = Date.now();
+    
+    try {
+      // 빠른 응답을 위해 캐시 먼저 확인
+      const cached = await getFromCache(location);
+      if (cached && !isStale(cached)) {
+        return { data: cached, source: 'cache', responseTime: Date.now() - startTime };
+      }
+      
+      // 백그라운드에서 최신 데이터 가져오기
+      const fresh = await fetchFreshData(location);
+      return { data: fresh, source: 'api', responseTime: Date.now() - startTime };
+      
+    } catch (error) {
+      // 에러 시에도 사용 가능한 데이터 제공
+      const fallback = await getFallbackData(location);
+      return { 
+        data: fallback, 
+        source: 'fallback', 
+        warning: '최신 정보를 가져올 수 없어 이전 데이터를 표시합니다',
+        responseTime: Date.now() - startTime 
+      };
+    }
+  }
+};
+운영 팁:
+
+비용 최적화: 새벽 시간대(사용자 적음)에는 캐시 TTL을 더 길게 설정
+지역별 우선순위: 사용자가 많은 주요 도시는 더 자주 갱신
+계절별 조정: 여름철(날씨 변화 많음)에는 TTL 단축, 겨울철에는 연장
+
+이렇게 구축하면 AccuWeather API에 문제가 생겨도 서비스 중단 없이 안정적으로 운영할 수 있습니다. 특히 야외 활동하는 사용자들에게는 "데이터가 30분 전 것이지만 참고용으로 사용하세요" 같은 안내와 함께 서비스를 계속 제공하는 것이 중요해요.

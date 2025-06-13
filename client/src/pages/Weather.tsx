@@ -76,17 +76,13 @@ export default function Weather() {
   };
 
   useEffect(() => {
-    const initWeather = async () => {
-      try {
-        await getCurrentLocationWeather();
-      } catch (error) {
+    const initWeather = () => {
+      getCurrentLocationWeather().catch((error) => {
         handleAsyncError(error, t('weather.errors.fetchFailed'));
-      }
+      });
     };
     
-    initWeather().catch((error) => {
-      handleAsyncError(error, t('weather.errors.fetchFailed'));
-    });
+    initWeather();
   }, []);
 
   const getCurrentLocationWeather = async () => {
@@ -94,28 +90,45 @@ export default function Weather() {
       if (navigator.geolocation) {
         setLoading(true);
         
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
-        
-        const { latitude, longitude } = position.coords;
-        await fetchWeatherByCoords(latitude, longitude);
+        try {
+          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => resolve(pos),
+              (err) => reject(err),
+              { timeout: 10000, enableHighAccuracy: false }
+            );
+          });
+          
+          const { latitude, longitude } = position.coords;
+          await fetchWeatherByCoords(latitude, longitude);
+        } catch (geoError) {
+          console.error('Geolocation failed:', geoError);
+          setError(t('weather.errors.locationDenied'));
+          setLoading(false);
+          
+          // Fallback to Seoul weather
+          try {
+            await fetchWeatherByCity('Seoul');
+          } catch (fallbackError) {
+            console.error('Fallback weather fetch failed:', fallbackError);
+            setError(t('weather.errors.fetchFailed'));
+            setLoading(false);
+          }
+        }
       } else {
         setError(t('weather.errors.geolocationNotSupported'));
-        await fetchWeatherByCity('Seoul');
+        try {
+          await fetchWeatherByCity('Seoul');
+        } catch (fallbackError) {
+          console.error('Fallback weather fetch failed:', fallbackError);
+          setError(t('weather.errors.fetchFailed'));
+          setLoading(false);
+        }
       }
     } catch (error) {
-      console.error('Geolocation error:', error);
-      setError(t('weather.errors.locationDenied'));
+      console.error('Weather initialization error:', error);
+      setError(t('weather.errors.fetchFailed'));
       setLoading(false);
-      
-      try {
-        await fetchWeatherByCity('Seoul');
-      } catch (fallbackError) {
-        console.error('Fallback weather fetch failed:', fallbackError);
-        setError(t('weather.errors.fetchFailed'));
-        setLoading(false);
-      }
     }
   };
 

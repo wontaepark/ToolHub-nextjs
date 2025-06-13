@@ -98,6 +98,11 @@
       "description": "두 날짜 사이의 정확한 차이를 계산하고 년, 월, 일, 시간 등 다양한 단위로 결과를 확인하세요.",
       "tags": ["날짜 차이", "D-Day", "기간 계산"]
     },
+    "weather": {
+      "title": "날씨 정보",
+      "description": "현재 위치 또는 원하는 도시의 실시간 날씨 정보와 5일 예보를 확인하세요.",
+      "tags": ["실시간 날씨", "5일 예보", "위치 기반"]
+    },
     "qrGenerator": {
       "title": "QR코드 생성기",
       "description": "링크, 텍스트를 QR코드로 변환",
@@ -261,6 +266,43 @@
     "copySuccessDesc": "계산 결과가 클립보드에 복사되었습니다",
     "copyError": "복사 실패",
     "copyErrorDesc": "클립보드 복사에 실패했습니다"
+  },
+  "weather": {
+    "title": "날씨 정보",
+    "description": "현재 위치 또는 원하는 도시의 실시간 날씨 정보와 5일 예보를 확인하세요.",
+    "search": {
+      "title": "위치 검색",
+      "description": "도시명을 입력하거나 현재 위치를 사용하여 날씨를 확인하세요.",
+      "placeholder": "도시명 입력 (예: 서울, 부산, Tokyo)",
+      "button": "검색"
+    },
+    "currentLocation": "현재 위치",
+    "refresh": "새로고침",
+    "today": "오늘",
+    "feelsLike": "체감온도",
+    "humidity": "습도",
+    "windSpeed": "풍속",
+    "pressure": "기압",
+    "visibility": "가시거리",
+    "sunrise": "일출",
+    "sunset": "일몰",
+    "forecast": {
+      "title": "5일 날씨 예보",
+      "description": "앞으로 5일간의 날씨 예보를 확인하세요."
+    },
+    "errors": {
+      "locationDenied": "위치 접근이 거부되었습니다. 도시명을 직접 검색해주세요.",
+      "geolocationNotSupported": "브라우저에서 위치 서비스를 지원하지 않습니다.",
+      "fetchFailed": "날씨 정보를 가져오는데 실패했습니다.",
+      "cityNotFound": "해당 도시를 찾을 수 없습니다. 정확한 도시명을 입력해주세요."
+    },
+    "tips": {
+      "title": "사용 팁",
+      "tip1": "현재 위치 버튼을 사용하면 GPS 기반으로 정확한 날씨를 확인할 수 있습니다",
+      "tip2": "도시명은 한국어, 영어 모두 지원합니다 (예: 서울, Seoul)",
+      "tip3": "5일 예보를 통해 미리 계획을 세워보세요",
+      "tip4": "새로고침 버튼으로 최신 날씨 정보를 업데이트할 수 있습니다"
+    }
   },
   "thumbnailDownloader": {
     "title": "YouTube 썸네일 다운로더",

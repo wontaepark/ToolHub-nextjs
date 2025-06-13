@@ -98,6 +98,11 @@
       "description": "Calculate the exact difference between two dates and view results in years, months, days, hours, and more.",
       "tags": ["Date Difference", "D-Day", "Duration"]
     },
+    "weather": {
+      "title": "Weather Info",
+      "description": "Check real-time weather information and 5-day forecast for your current location or any city.",
+      "tags": ["Real-time Weather", "5-day Forecast", "Location-based"]
+    },
     "qrGenerator": {
       "title": "QR Code Generator",
       "description": "Convert links and text to QR codes",

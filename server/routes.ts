@@ -3,6 +3,18 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 // Demo weather data generator
+function getAccuWeatherIcon(accuIcon: number): string {
+  const iconMap: { [key: number]: string } = {
+    1: '01d', 2: '02d', 3: '02d', 4: '03d', 5: '03d', 6: '04d', 7: '04d', 8: '04d',
+    11: '50d', 12: '09d', 13: '10d', 14: '10d', 15: '11d', 16: '11d', 17: '11d', 18: '09d',
+    19: '13d', 20: '13d', 21: '13d', 22: '13d', 23: '13d', 24: '50d', 25: '13d',
+    26: '09d', 29: '09d', 30: '01d', 31: '01d', 32: '02d', 33: '01n', 34: '02n',
+    35: '03n', 36: '04n', 37: '50n', 38: '04n', 39: '09n', 40: '10n', 41: '11n',
+    42: '11n', 43: '13n', 44: '13n'
+  };
+  return iconMap[accuIcon] || '01d';
+}
+
 function generateDemoWeatherData(lat: number, lon: number, cityName: string) {
   const weatherTypes = [
     { main: "Clear", description: "clear sky", icon: "01d" },
@@ -65,7 +77,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.sendFile('robots.txt', { root: 'client/public' });
   });
 
-  // Weather API routes
+  // AccuWeather API routes
   app.get("/api/weather/coordinates", async (req, res) => {
     try {
       const { lat, lon } = req.query;
@@ -74,79 +86,99 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Latitude and longitude are required" });
       }
 
-      const API_KEY = process.env.OPENWEATHER_API_KEY;
+      const API_KEY = process.env.ACCUWEATHER_API_KEY;
       
-      // If no API key or invalid key, return demo data
       if (!API_KEY) {
-        console.log("No API key found, returning demo weather data for coordinates:", lat, lon);
+        console.log("No AccuWeather API key found, returning demo weather data for coordinates:", lat, lon);
         return res.json(generateDemoWeatherData(Number(lat), Number(lon), "Current Location"));
       }
 
-      console.log("Fetching weather for coordinates:", lat, lon);
+      console.log("Fetching AccuWeather data for coordinates:", lat, lon);
       
       try {
-        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        const currentResponse = await fetch(currentWeatherUrl);
+        // Get location key from coordinates
+        const locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${lat},${lon}&language=ko-kr`;
+        const locationResponse = await fetch(locationUrl);
         
-        if (!currentResponse.ok) {
-          console.log("API key invalid or request failed, using demo data");
+        if (!locationResponse.ok) {
+          console.log("AccuWeather location lookup failed, using demo data");
           return res.json(generateDemoWeatherData(Number(lat), Number(lon), "Current Location"));
         }
         
-        const currentData = await currentResponse.json();
-        console.log("Weather data received for:", currentData.name);
+        const locationData = await locationResponse.json();
+        const locationKey = locationData.Key;
+        console.log("Location found:", locationData.LocalizedName);
 
-        // Create forecast data
-        const dailyForecasts = [];
-        for (let i = 0; i < 5; i++) {
-          const futureDate = new Date();
-          futureDate.setDate(futureDate.getDate() + i);
-          dailyForecasts.push({
-            date: futureDate.toISOString().split('T')[0],
-            temp_max: currentData.main.temp + Math.random() * 6 - 3,
-            temp_min: currentData.main.temp - 5 + Math.random() * 4,
-            weather: {
-              main: currentData.weather[0].main,
-              description: currentData.weather[0].description,
-              icon: currentData.weather[0].icon
-            }
-          });
+        // Get current weather
+        const currentUrl = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true&language=ko-kr`;
+        const currentResponse = await fetch(currentUrl);
+        
+        if (!currentResponse.ok) {
+          console.log("AccuWeather current conditions failed, using demo data");
+          return res.json(generateDemoWeatherData(Number(lat), Number(lon), locationData.LocalizedName));
         }
+        
+        const currentData = await currentResponse.json();
+        const current = currentData[0];
+
+        // Get 5-day forecast
+        const forecastUrl = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=true&language=ko-kr`;
+        const forecastResponse = await fetch(forecastUrl);
+        
+        if (!forecastResponse.ok) {
+          console.log("AccuWeather forecast failed, using demo data");
+          return res.json(generateDemoWeatherData(Number(lat), Number(lon), locationData.LocalizedName));
+        }
+        
+        const forecastData = await forecastResponse.json();
+
+        // Process forecast data
+        const dailyForecasts = forecastData.DailyForecasts.map((day: any) => ({
+          date: new Date(day.Date).toISOString().split('T')[0],
+          temp_max: day.Temperature.Maximum.Value,
+          temp_min: day.Temperature.Minimum.Value,
+          weather: {
+            main: day.Day.IconPhrase,
+            description: day.Day.ShortPhrase || day.Day.IconPhrase,
+            icon: getAccuWeatherIcon(day.Day.Icon)
+          }
+        }));
 
         const weatherData = {
           location: {
-            name: currentData.name,
-            country: currentData.sys.country,
-            lat: currentData.coord.lat,
-            lon: currentData.coord.lon
+            name: locationData.LocalizedName,
+            country: locationData.Country.ID,
+            lat: locationData.GeoPosition.Latitude,
+            lon: locationData.GeoPosition.Longitude
           },
           current: {
-            temp: currentData.main.temp,
-            feels_like: currentData.main.feels_like,
-            humidity: currentData.main.humidity,
-            pressure: currentData.main.pressure,
-            visibility: currentData.visibility || 10000,
-            uv_index: 0,
-            wind_speed: currentData.wind?.speed || 0,
-            wind_deg: currentData.wind?.deg || 0,
+            temp: current.Temperature.Metric.Value,
+            feels_like: current.RealFeelTemperature.Metric.Value,
+            humidity: current.RelativeHumidity,
+            pressure: current.Pressure.Metric.Value,
+            visibility: current.Visibility.Metric.Value,
+            uv_index: current.UVIndex || 0,
+            wind_speed: current.Wind.Speed.Metric.Value / 3.6, // Convert km/h to m/s
+            wind_deg: current.Wind.Direction.Degrees,
             weather: {
-              main: currentData.weather[0].main,
-              description: currentData.weather[0].description,
-              icon: currentData.weather[0].icon
+              main: current.WeatherText,
+              description: current.WeatherText,
+              icon: getAccuWeatherIcon(current.WeatherIcon)
             }
           },
           forecast: dailyForecasts,
-          sunrise: currentData.sys.sunrise,
-          sunset: currentData.sys.sunset
+          sunrise: Date.now() / 1000 + 6 * 3600, // Placeholder
+          sunset: Date.now() / 1000 + 18 * 3600  // Placeholder
         };
 
+        console.log("AccuWeather data received for:", weatherData.location.name);
         res.json(weatherData);
       } catch (apiError) {
-        console.log("API request failed, using demo data:", apiError);
+        console.log("AccuWeather API request failed:", apiError);
         res.json(generateDemoWeatherData(Number(lat), Number(lon), "Current Location"));
       }
     } catch (error) {
-      console.error("Weather API error:", error);
+      console.error("AccuWeather API error:", error);
       res.status(500).json({ 
         error: "Failed to fetch weather data"
       });
@@ -161,7 +193,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "City name is required" });
       }
 
-      const API_KEY = process.env.OPENWEATHER_API_KEY;
+      const API_KEY = process.env.ACCUWEATHER_API_KEY;
       const cityName = city as string;
       
       // If no API key, return demo data
@@ -175,77 +207,88 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("Searching for city:", cityName);
 
       try {
-        // Try real API first
-        const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${API_KEY}`;
-        const geoResponse = await fetch(geoUrl);
+        // Search for location using AccuWeather
+        const locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURIComponent(cityName)}&language=ko-kr`;
+        const locationResponse = await fetch(locationUrl);
         
-        if (!geoResponse.ok) {
-          console.log("Geocoding failed, using demo data");
+        if (!locationResponse.ok) {
+          console.log("AccuWeather location search failed, using demo data");
           const demoCoords = getCityCoordinates(cityName);
           return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
         }
         
-        const geoData = await geoResponse.json();
+        const locationData = await locationResponse.json();
         
-        if (geoData.length === 0) {
-          console.log("City not found in API, using demo data");
+        if (!locationData || locationData.length === 0) {
+          console.log("City not found in AccuWeather, using demo data");
           const demoCoords = getCityCoordinates(cityName);
           return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
         }
 
-        const { lat, lon } = geoData[0];
-        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        const currentResponse = await fetch(currentWeatherUrl);
+        const location = locationData[0];
+        const locationKey = location.Key;
+        console.log("AccuWeather location found:", location.LocalizedName);
+
+        // Get current weather
+        const currentUrl = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true&language=ko-kr`;
+        const currentResponse = await fetch(currentUrl);
         
         if (!currentResponse.ok) {
-          console.log("Weather API failed, using demo data");
-          return res.json(generateDemoWeatherData(lat, lon, cityName));
+          console.log("AccuWeather current conditions failed, using demo data");
+          return res.json(generateDemoWeatherData(location.GeoPosition.Latitude, location.GeoPosition.Longitude, cityName));
         }
         
         const currentData = await currentResponse.json();
+        const current = currentData[0];
 
-        // Create forecast data
-        const dailyForecasts = [];
-        for (let i = 0; i < 5; i++) {
-          const futureDate = new Date();
-          futureDate.setDate(futureDate.getDate() + i);
-          dailyForecasts.push({
-            date: futureDate.toISOString().split('T')[0],
-            temp_max: currentData.main.temp + Math.random() * 6 - 3,
-            temp_min: currentData.main.temp - 5 + Math.random() * 4,
-            weather: {
-              main: currentData.weather[0].main,
-              description: currentData.weather[0].description,
-              icon: currentData.weather[0].icon
-            }
-          });
+        // Get 5-day forecast
+        const forecastUrl = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=true&language=ko-kr`;
+        const forecastResponse = await fetch(forecastUrl);
+        
+        if (!forecastResponse.ok) {
+          console.log("AccuWeather forecast failed, using demo data");
+          return res.json(generateDemoWeatherData(location.GeoPosition.Latitude, location.GeoPosition.Longitude, cityName));
         }
+        
+        const forecastData = await forecastResponse.json();
+
+        // Process forecast data
+        const dailyForecasts = forecastData.DailyForecasts.map((day: any) => ({
+          date: new Date(day.Date).toISOString().split('T')[0],
+          temp_max: day.Temperature.Maximum.Value,
+          temp_min: day.Temperature.Minimum.Value,
+          weather: {
+            main: day.Day.IconPhrase,
+            description: day.Day.ShortPhrase || day.Day.IconPhrase,
+            icon: getAccuWeatherIcon(day.Day.Icon)
+          }
+        }));
 
         const weatherData = {
           location: {
-            name: currentData.name,
-            country: currentData.sys.country,
-            lat: currentData.coord.lat,
-            lon: currentData.coord.lon
+            name: location.LocalizedName,
+            country: location.Country.ID,
+            lat: location.GeoPosition.Latitude,
+            lon: location.GeoPosition.Longitude
           },
           current: {
-            temp: currentData.main.temp,
-            feels_like: currentData.main.feels_like,
-            humidity: currentData.main.humidity,
-            pressure: currentData.main.pressure,
-            visibility: currentData.visibility || 10000,
-            uv_index: 0,
-            wind_speed: currentData.wind?.speed || 0,
-            wind_deg: currentData.wind?.deg || 0,
+            temp: current.Temperature.Metric.Value,
+            feels_like: current.RealFeelTemperature.Metric.Value,
+            humidity: current.RelativeHumidity,
+            pressure: current.Pressure.Metric.Value,
+            visibility: current.Visibility.Metric.Value,
+            uv_index: current.UVIndex || 0,
+            wind_speed: current.Wind.Speed.Metric.Value / 3.6, // Convert km/h to m/s
+            wind_deg: current.Wind.Direction.Degrees,
             weather: {
-              main: currentData.weather[0].main,
-              description: currentData.weather[0].description,
-              icon: currentData.weather[0].icon
+              main: current.WeatherText,
+              description: current.WeatherText,
+              icon: getAccuWeatherIcon(current.WeatherIcon)
             }
           },
           forecast: dailyForecasts,
-          sunrise: currentData.sys.sunrise,
-          sunset: currentData.sys.sunset
+          sunrise: Date.now() / 1000 + 6 * 3600, // Placeholder
+          sunset: Date.now() / 1000 + 18 * 3600  // Placeholder
         };
 
         res.json(weatherData);

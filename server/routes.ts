@@ -187,14 +187,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/weather/city", async (req, res) => {
     try {
-      const { city } = req.query;
+      console.log("City weather request query:", req.query);
+      const { q } = req.query;
       
-      if (!city) {
+      if (!q) {
+        console.log("No city name provided in query");
         return res.status(400).json({ error: "City name is required" });
       }
 
       const API_KEY = process.env.ACCUWEATHER_API_KEY;
-      const cityName = city as string;
+      const cityName = q as string;
       
       // If no API key, return demo data
       if (!API_KEY) {

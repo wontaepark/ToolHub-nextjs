@@ -141,7 +141,7 @@ export default function Weather() {
     
     setLoading(true);
     try {
-      const response = await fetch(`/api/weather/city?city=${encodeURIComponent(city)}`);
+      const response = await fetch(`/api/weather/city?q=${encodeURIComponent(city)}`);
       if (!response.ok) {
         throw new Error('Weather data fetch failed');
       }

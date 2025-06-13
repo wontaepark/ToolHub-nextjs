@@ -267,6 +267,43 @@
     "copyError": "Copy Failed",
     "copyErrorDesc": "Failed to copy to clipboard"
   },
+  "weather": {
+    "title": "Weather Info",
+    "description": "Check real-time weather information and 5-day forecast for your current location or any city.",
+    "search": {
+      "title": "Location Search",
+      "description": "Enter a city name or use your current location to check the weather.",
+      "placeholder": "Enter city name (e.g., Seoul, Tokyo, New York)",
+      "button": "Search"
+    },
+    "currentLocation": "Current Location",
+    "refresh": "Refresh",
+    "today": "Today",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "forecast": {
+      "title": "5-Day Weather Forecast",
+      "description": "Check the weather forecast for the next 5 days."
+    },
+    "errors": {
+      "locationDenied": "Location access denied. Please search for a city manually.",
+      "geolocationNotSupported": "Geolocation is not supported by this browser.",
+      "fetchFailed": "Failed to fetch weather data.",
+      "cityNotFound": "City not found. Please enter a valid city name."
+    },
+    "tips": {
+      "title": "Usage Tips",
+      "tip1": "Use the current location button for GPS-based accurate weather information",
+      "tip2": "City names support both local and English names (e.g., Seoul, 서울)",
+      "tip3": "Plan ahead with the 5-day forecast",
+      "tip4": "Use the refresh button to get the latest weather updates"
+    }
+  },
   "thumbnailDownloader": {
     "title": "YouTube Thumbnail Downloader",
     "subtitle": "Download high-quality thumbnails from YouTube videos in various resolutions",

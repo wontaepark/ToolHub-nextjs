@@ -98,6 +98,11 @@
       "description": "2つの日付間の正確な差を計算し、年、月、日、時間など様々な単位で結果を確認できます。",
       "tags": ["日付差", "D-Day", "期間計算"]
     },
+    "weather": {
+      "title": "天気情報",
+      "description": "現在地または任意の都市のリアルタイム天気情報と5日間予報を確認できます。",
+      "tags": ["リアルタイム天気", "5日間予報", "位置ベース"]
+    },
     "qrGenerator": {
       "title": "QRコード生成器",
       "description": "リンク、テキストをQRコードに変換",
@@ -261,6 +266,43 @@
     "copySuccessDesc": "計算結果がクリップボードにコピーされました",
     "copyError": "コピー失敗",
     "copyErrorDesc": "クリップボードへのコピーに失敗しました"
+  },
+  "weather": {
+    "title": "天気情報",
+    "description": "現在地または任意の都市のリアルタイム天気情報と5日間予報を確認できます。",
+    "search": {
+      "title": "位置検索",
+      "description": "都市名を入力するか現在地を使用して天気を確認してください。",
+      "placeholder": "都市名を入力 (例: 東京, 大阪, Seoul)",
+      "button": "検索"
+    },
+    "currentLocation": "現在地",
+    "refresh": "更新",
+    "today": "今日",
+    "feelsLike": "体感温度",
+    "humidity": "湿度",
+    "windSpeed": "風速",
+    "pressure": "気圧",
+    "visibility": "視程",
+    "sunrise": "日の出",
+    "sunset": "日の入り",
+    "forecast": {
+      "title": "5日間天気予報",
+      "description": "今後5日間の天気予報を確認してください。"
+    },
+    "errors": {
+      "locationDenied": "位置へのアクセスが拒否されました。都市名を手動で検索してください。",
+      "geolocationNotSupported": "このブラウザでは位置情報がサポートされていません。",
+      "fetchFailed": "天気データの取得に失敗しました。",
+      "cityNotFound": "都市が見つかりません。有効な都市名を入力してください。"
+    },
+    "tips": {
+      "title": "使用のヒント",
+      "tip1": "現在地ボタンを使用してGPSベースの正確な天気情報を取得できます",
+      "tip2": "都市名は現地語と英語の両方をサポートしています（例：東京、Tokyo）",
+      "tip3": "5日間予報で事前に計画を立てましょう",
+      "tip4": "更新ボタンで最新の天気情報を取得できます"
+    }
   },
   "thumbnailDownloader": {
     "title": "YouTube サムネイルダウンローダー",

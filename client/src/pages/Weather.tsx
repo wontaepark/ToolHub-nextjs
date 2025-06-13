@@ -69,28 +69,46 @@ export default function Weather() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    getCurrentLocationWeather();
+    const initWeather = async () => {
+      try {
+        await getCurrentLocationWeather();
+      } catch (error) {
+        console.error('Initial weather fetch failed:', error);
+        setError(t('weather.errors.fetchFailed'));
+        setLoading(false);
+      }
+    };
+    
+    initWeather();
   }, []);
 
-  const getCurrentLocationWeather = () => {
-    if (navigator.geolocation) {
-      setLoading(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchWeatherByCoords(latitude, longitude);
-        },
-        (error) => {
-          console.error('Geolocation error:', error);
-          setError(t('weather.errors.locationDenied'));
-          setLoading(false);
-          // Fallback to default city (Seoul)
-          fetchWeatherByCity('Seoul');
-        }
-      );
-    } else {
-      setError(t('weather.errors.geolocationNotSupported'));
-      fetchWeatherByCity('Seoul');
+  const getCurrentLocationWeather = async () => {
+    try {
+      if (navigator.geolocation) {
+        setLoading(true);
+        
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+        
+        const { latitude, longitude } = position.coords;
+        await fetchWeatherByCoords(latitude, longitude);
+      } else {
+        setError(t('weather.errors.geolocationNotSupported'));
+        await fetchWeatherByCity('Seoul');
+      }
+    } catch (error) {
+      console.error('Geolocation error:', error);
+      setError(t('weather.errors.locationDenied'));
+      setLoading(false);
+      
+      try {
+        await fetchWeatherByCity('Seoul');
+      } catch (fallbackError) {
+        console.error('Fallback weather fetch failed:', fallbackError);
+        setError(t('weather.errors.fetchFailed'));
+        setLoading(false);
+      }
     }
   };
 
@@ -134,7 +152,11 @@ export default function Weather() {
 
   const handleCitySearch = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchWeatherByCity(searchCity);
+    fetchWeatherByCity(searchCity).catch((error) => {
+      console.error('City search failed:', error);
+      setError(t('weather.errors.cityNotFound'));
+      setLoading(false);
+    });
   };
 
   const getWeatherIcon = (iconCode: string) => {
@@ -218,7 +240,13 @@ export default function Weather() {
               <div className="flex gap-4">
                 <Button 
                   variant="outline" 
-                  onClick={getCurrentLocationWeather}
+                  onClick={() => {
+                    getCurrentLocationWeather().catch((error) => {
+                      console.error('Current location fetch failed:', error);
+                      setError(t('weather.errors.fetchFailed'));
+                      setLoading(false);
+                    });
+                  }}
                   disabled={loading}
                 >
                   <MapPin className="h-4 w-4 mr-2" />
@@ -226,7 +254,15 @@ export default function Weather() {
                 </Button>
                 <Button 
                   variant="outline" 
-                  onClick={() => weatherData && fetchWeatherByCity(weatherData.location.name)}
+                  onClick={() => {
+                    if (weatherData) {
+                      fetchWeatherByCity(weatherData.location.name).catch((error) => {
+                        console.error('Refresh failed:', error);
+                        setError(t('weather.errors.fetchFailed'));
+                        setLoading(false);
+                      });
+                    }
+                  }}
                   disabled={loading || !weatherData}
                 >
                   <RefreshCw className="h-4 w-4 mr-2" />

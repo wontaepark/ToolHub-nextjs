@@ -68,18 +68,25 @@ export default function Weather() {
   const [searchCity, setSearchCity] = useState('');
   const [error, setError] = useState('');
 
+  // Global error handler for async operations
+  const handleAsyncError = (error: unknown, fallbackMessage: string) => {
+    console.error('Async operation failed:', error);
+    setError(fallbackMessage);
+    setLoading(false);
+  };
+
   useEffect(() => {
     const initWeather = async () => {
       try {
         await getCurrentLocationWeather();
       } catch (error) {
-        console.error('Initial weather fetch failed:', error);
-        setError(t('weather.errors.fetchFailed'));
-        setLoading(false);
+        handleAsyncError(error, t('weather.errors.fetchFailed'));
       }
     };
     
-    initWeather();
+    initWeather().catch((error) => {
+      handleAsyncError(error, t('weather.errors.fetchFailed'));
+    });
   }, []);
 
   const getCurrentLocationWeather = async () => {
@@ -153,9 +160,7 @@ export default function Weather() {
   const handleCitySearch = (e: React.FormEvent) => {
     e.preventDefault();
     fetchWeatherByCity(searchCity).catch((error) => {
-      console.error('City search failed:', error);
-      setError(t('weather.errors.cityNotFound'));
-      setLoading(false);
+      handleAsyncError(error, t('weather.errors.cityNotFound'));
     });
   };
 
@@ -242,9 +247,7 @@ export default function Weather() {
                   variant="outline" 
                   onClick={() => {
                     getCurrentLocationWeather().catch((error) => {
-                      console.error('Current location fetch failed:', error);
-                      setError(t('weather.errors.fetchFailed'));
-                      setLoading(false);
+                      handleAsyncError(error, t('weather.errors.fetchFailed'));
                     });
                   }}
                   disabled={loading}
@@ -257,9 +260,7 @@ export default function Weather() {
                   onClick={() => {
                     if (weatherData) {
                       fetchWeatherByCity(weatherData.location.name).catch((error) => {
-                        console.error('Refresh failed:', error);
-                        setError(t('weather.errors.fetchFailed'));
-                        setLoading(false);
+                        handleAsyncError(error, t('weather.errors.fetchFailed'));
                       });
                     }
                   }}

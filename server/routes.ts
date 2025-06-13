@@ -108,174 +108,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { q } = req.query;
       
       if (!q) {
-        console.log("No city name provided in query");
         return res.status(400).json({ error: "City name is required" });
       }
 
-      const API_KEY = process.env.ACCUWEATHER_API_KEY;
       const cityName = q as string;
+      console.log("Fetching weather data for city:", cityName);
       
-      // If no API key, return demo data
-      if (!API_KEY) {
-        console.log("No API key found, returning demo weather data for city:", cityName);
-        // Generate demo coordinates based on city name
-        const demoCoords = getCityCoordinates(cityName);
-        return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
-      }
+      const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false);
+      
+      console.log(`Weather data retrieved from ${weatherData.source} for city:`, cityName);
+      res.json(weatherData);
 
-      console.log("Searching for city:", cityName);
-
-      try {
-        // Search for location using AccuWeather (try multiple search approaches)
-        let locationData = [];
-        
-        // Try primary search
-        const locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURIComponent(cityName)}`;
-        console.log("Making AccuWeather request to:", locationUrl);
-        
-        try {
-          const locationResponse = await fetch(locationUrl);
-          console.log("AccuWeather response status:", locationResponse.status);
-          
-          if (locationResponse.ok) {
-            locationData = await locationResponse.json();
-            console.log("AccuWeather search response:", JSON.stringify(locationData, null, 2));
-          } else {
-            console.log("AccuWeather search failed with status:", locationResponse.status);
-            const errorText = await locationResponse.text();
-            console.log("AccuWeather error:", errorText);
-          }
-        } catch (fetchError) {
-          console.log("AccuWeather fetch error:", fetchError);
-        }
-        
-        // If no results and city name is Korean, try alternative search
-        if ((!locationData || locationData.length === 0) && /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(cityName)) {
-          const cityTranslations: { [key: string]: string } = {
-            '서울': 'Seoul',
-            '부산': 'Busan',
-            '인천': 'Incheon',
-            '대구': 'Daegu',
-            '대전': 'Daejeon',
-            '광주': 'Gwangju',
-            '울산': 'Ulsan',
-            '세종': 'Sejong'
-          };
-          
-          const englishName = cityTranslations[cityName];
-          if (englishName) {
-            const altUrl = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${englishName}`;
-            const altResponse = await fetch(altUrl);
-            if (altResponse.ok) {
-              locationData = await altResponse.json();
-            }
-          }
-        }
-        
-        if (!locationData || locationData.length === 0) {
-          console.log(`City "${cityName}" not found in AccuWeather, trying fallback`);
-          
-          // For common cities, use direct location keys
-          const directKeys: { [key: string]: string } = {
-            'seoul': '226081',
-            'busan': '226082', 
-            'incheon': '226083',
-            'london': '328328',
-            'tokyo': '226396',
-            'new york': '349727'
-          };
-          
-          const normalizedCity = cityName.toLowerCase().trim();
-          const locationKey = directKeys[normalizedCity];
-          
-          if (locationKey) {
-            console.log(`Using direct location key for ${cityName}: ${locationKey}`);
-            // Skip to weather fetch with known location key
-            locationData = [{ Key: locationKey, LocalizedName: cityName, Country: { ID: 'KR' }, GeoPosition: { Latitude: 37.5665, Longitude: 126.9780 } }];
-          } else {
-            console.log("No fallback available, using demo data");
-            const demoCoords = getCityCoordinates(cityName);
-            return res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
-          }
-        }
-
-        const location = locationData[0];
-        const locationKey = location.Key;
-        console.log("AccuWeather location found:", location.LocalizedName);
-
-        // Get current weather
-        const currentUrl = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true&language=ko-kr`;
-        const currentResponse = await fetch(currentUrl);
-        
-        if (!currentResponse.ok) {
-          console.log("AccuWeather current conditions failed, using demo data");
-          return res.json(generateDemoWeatherData(location.GeoPosition.Latitude, location.GeoPosition.Longitude, cityName));
-        }
-        
-        const currentData = await currentResponse.json();
-        const current = currentData[0];
-
-        // Get 5-day forecast
-        const forecastUrl = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=true&language=ko-kr`;
-        const forecastResponse = await fetch(forecastUrl);
-        
-        if (!forecastResponse.ok) {
-          console.log("AccuWeather forecast failed, using demo data");
-          return res.json(generateDemoWeatherData(location.GeoPosition.Latitude, location.GeoPosition.Longitude, cityName));
-        }
-        
-        const forecastData = await forecastResponse.json();
-
-        // Process forecast data
-        const dailyForecasts = forecastData.DailyForecasts.map((day: any) => ({
-          date: new Date(day.Date).toISOString().split('T')[0],
-          temp_max: day.Temperature.Maximum.Value,
-          temp_min: day.Temperature.Minimum.Value,
-          weather: {
-            main: day.Day.IconPhrase,
-            description: day.Day.ShortPhrase || day.Day.IconPhrase,
-            icon: getAccuWeatherIcon(day.Day.Icon)
-          }
-        }));
-
-        const weatherData = {
-          location: {
-            name: location.LocalizedName,
-            country: location.Country.ID,
-            lat: location.GeoPosition.Latitude,
-            lon: location.GeoPosition.Longitude
-          },
-          current: {
-            temp: current.Temperature.Metric.Value,
-            feels_like: current.RealFeelTemperature.Metric.Value,
-            humidity: current.RelativeHumidity,
-            pressure: current.Pressure.Metric.Value,
-            visibility: current.Visibility.Metric.Value,
-            uv_index: current.UVIndex || 0,
-            wind_speed: current.Wind.Speed.Metric.Value / 3.6, // Convert km/h to m/s
-            wind_deg: current.Wind.Direction.Degrees,
-            weather: {
-              main: current.WeatherText,
-              description: current.WeatherText,
-              icon: getAccuWeatherIcon(current.WeatherIcon)
-            }
-          },
-          forecast: dailyForecasts,
-          sunrise: Date.now() / 1000 + 6 * 3600, // Placeholder
-          sunset: Date.now() / 1000 + 18 * 3600  // Placeholder
-        };
-
-        res.json(weatherData);
-      } catch (apiError) {
-        console.log("API request failed, using demo data");
-        const demoCoords = getCityCoordinates(cityName);
-        res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, cityName));
-      }
     } catch (error) {
       console.error("Weather API error:", error);
-      res.status(500).json({ 
-        error: "Failed to fetch weather data"
+      
+      // Final fallback to demo data only if no cached data is available
+      const demoCoords = getCityCoordinates(req.query.q as string);
+      res.json(generateDemoWeatherData(demoCoords.lat, demoCoords.lon, req.query.q as string));
+    }
+  });
+
+  // Weather provider status endpoint
+  app.get("/api/weather/status", (req, res) => {
+    try {
+      const providerStatus = weatherProviderManager.getProviderStatus();
+      res.json({
+        providers: providerStatus,
+        timestamp: new Date().toISOString()
       });
+    } catch (error) {
+      console.error("Provider status error:", error);
+      res.status(500).json({ error: "Failed to get provider status" });
     }
   });
 

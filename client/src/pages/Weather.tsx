@@ -437,12 +437,36 @@ export default function Weather() {
                 <CardContent>
                   <div className="relative h-64 bg-gradient-to-br from-blue-200 via-green-200 to-orange-200 rounded-lg overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/20"></div>
+                    
+                    {/* Location marker with enhanced visibility */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                      <div className="text-xs text-white mt-1 font-semibold text-center">
+                      {/* Pulsing rings */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 bg-red-500/20 rounded-full animate-ping"></div>
+                        <div className="absolute w-8 h-8 bg-red-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                      </div>
+                      {/* Main location dot */}
+                      <div className="relative w-6 h-6 bg-red-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
+                      {/* Location name with better contrast */}
+                      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-md text-sm font-semibold whitespace-nowrap">
                         {weatherData.location.name}
                       </div>
                     </div>
+
+                    {/* Surrounding area temperature indicators */}
+                    <div className="absolute top-8 left-8 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
+                      {Math.round(weatherData.current.temp - 2)}°C
+                    </div>
+                    <div className="absolute top-12 right-12 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
+                      {Math.round(weatherData.current.temp + 1)}°C
+                    </div>
+                    <div className="absolute bottom-16 left-12 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
+                      {Math.round(weatherData.current.temp)}°C
+                    </div>
+                    <div className="absolute bottom-8 right-8 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
+                      {Math.round(weatherData.current.temp - 1)}°C
+                    </div>
+
                     {/* Weather pattern overlay */}
                     <div className="absolute inset-0 opacity-30">
                       <svg className="w-full h-full" viewBox="0 0 400 256">
@@ -944,9 +968,13 @@ export default function Weather() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <div className="w-20 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
-                        <CloudRain className="h-8 w-8 text-white" />
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                      <div className="w-20 h-16 rounded-lg overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=80&h=64&fit=crop&crop=center" 
+                          alt="투명우산을 쓴 아이"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium text-sm mb-1">
@@ -954,12 +982,20 @@ export default function Weather() {
                            i18n.language === 'ja' ? '雨の日、子供には透明な傘を持たせてください' : 
                            'On rainy days, give children transparent umbrellas'}
                         </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {i18n.language === 'ko' ? '안전 · 육아' : 
+                           i18n.language === 'ja' ? '安全・育児' : 'Safety · Parenting'}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <div className="w-20 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                        <Utensils className="h-8 w-8 text-white" />
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                      <div className="w-20 h-16 rounded-lg overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1571212515416-fca060d13ee5?w=80&h=64&fit=crop&crop=center" 
+                          alt="그릭요거트"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium text-sm mb-1">
@@ -967,12 +1003,20 @@ export default function Weather() {
                            i18n.language === 'ja' ? '\'プロテイン爆弾\' ギリシャヨーグルト、もっと健康に食べる' : 
                            '\'Protein bomb\' Greek yogurt, eating it healthier'}
                         </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {i18n.language === 'ko' ? '건강 · 영양' : 
+                           i18n.language === 'ja' ? '健康・栄養' : 'Health · Nutrition'}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <div className="w-20 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                        <Tv className="h-8 w-8 text-white" />
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                      <div className="w-20 h-16 rounded-lg overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=80&h=64&fit=crop&crop=center" 
+                          alt="날씨 뉴스"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium text-sm mb-1">
@@ -980,18 +1024,30 @@ export default function Weather() {
                            i18n.language === 'ja' ? '[天気] 昼間湿度の高い暑さ…明日(15日)再び全国で雨 / KBS' : 
                            '[Weather] High humidity heat during the day...rain nationwide again tomorrow (15th) / KBS'}
                         </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {i18n.language === 'ko' ? 'KBS 뉴스' : 
+                           i18n.language === 'ja' ? 'KBSニュース' : 'KBS News'}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <div className="w-20 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-lg flex items-center justify-center">
-                        <Mountain className="h-8 w-8 text-white" />
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                      <div className="w-20 h-16 rounded-lg overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=80&h=64&fit=crop&crop=center" 
+                          alt="폭포와 계곡"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium text-sm mb-1">
                           {i18n.language === 'ko' ? '\'해변보다 여기가 낫다\'…5m 폭포 쏟아지는 비밀계곡' : 
                            i18n.language === 'ja' ? '\'海辺よりここの方が良い\'…5mの滝が流れる秘密の谷' : 
                            '\'Better than the beach\'...Secret valley with 5m waterfalls'}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {i18n.language === 'ko' ? '여행 · 레저' : 
+                           i18n.language === 'ja' ? '旅行・レジャー' : 'Travel · Leisure'}
                         </div>
                       </div>
                     </div>

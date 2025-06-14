@@ -61,7 +61,7 @@ interface WeatherData {
 }
 
 export default function Weather() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -235,40 +235,7 @@ export default function Weather() {
     return new Date(dateString).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
   };
 
-  const translateWeatherCondition = (condition: string) => {
-    const { i18n } = useTranslation();
-    if (i18n.language !== 'ko') return condition;
-    
-    const translations: { [key: string]: string } = {
-      'Clear': '맑음',
-      'Clouds': '흐림',
-      'Rain': '비',
-      'Snow': '눈',
-      'Thunderstorm': '뇌우',
-      'Drizzle': '이슬비',
-      'Mist': '안개',
-      'Fog': '짙은 안개',
-      'Scattered Clouds': '구름 많음',
-      'Few Clouds': '구름 조금',
-      'Light Rain': '가벼운 비',
-      'clear sky': '맑음',
-      'few clouds': '구름 조금',
-      'scattered clouds': '구름 많음',
-      'broken clouds': '흐림',
-      'overcast clouds': '구름 많이 낀',
-      'light rain': '가벼운 비',
-      'moderate rain': '비',
-      'heavy intensity rain': '강한 비',
-      'shower rain': '소나기',
-      'light snow': '가벼운 눈',
-      'snow': '눈',
-      'heavy snow': '폭설',
-      'mist': '안개',
-      'fog': '짙은 안개'
-    };
-    
-    return translations[condition] || condition;
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100 dark:from-gray-900 dark:to-gray-800">
@@ -382,7 +349,7 @@ export default function Weather() {
                       </h2>
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 capitalize">
-                      {translateWeatherCondition(weatherData.current.weather.description)}
+                      {weatherData.current.weather.description}
                     </p>
                   </div>
 
@@ -455,7 +422,7 @@ export default function Weather() {
                           {getWeatherIcon(day.weather.icon)}
                         </div>
                         <div className="text-xs text-gray-600 dark:text-gray-400 mb-2 capitalize">
-                          {translateWeatherCondition(day.weather.description)}
+                          {day.weather.description}
                         </div>
                         <div className="space-y-1">
                           <div className="text-lg font-semibold">{Math.round(day.temp_max)}°</div>

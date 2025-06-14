@@ -90,26 +90,22 @@ export default function Weather() {
   const [mapImageLoaded, setMapImageLoaded] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
-  // Cache satellite images for better performance
-  const getSatelliteImageUrl = (lat: number, lon: number, zoom: number, type: string) => {
-    const cacheKey = `satellite_${lat}_${lon}_${zoom}_${type}`;
-    const cached = localStorage.getItem(cacheKey);
+  // Get base satellite imagery
+  const getBaseSatelliteUrl = (lat: number, lon: number, zoom: number) => {
+    const x = Math.floor((lon + 180) / 360 * Math.pow(2, zoom));
+    const y = Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));
+    return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${zoom}/${y}/${x}`;
+  };
+
+  // Get weather overlay URLs
+  const getWeatherOverlayUrl = (lat: number, lon: number, zoom: number, layer: string) => {
+    const x = Math.floor((lon + 180) / 360 * Math.pow(2, zoom));
+    const y = Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));
     
-    if (cached) {
-      return cached;
-    }
+    // Using environment variable for OpenWeatherMap API key
+    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY || 'demo';
     
-    const mapStyle = type === 'satellite' ? 'satellite-v9' : 
-                     type === 'hybrid' ? 'satellite-streets-v12' : 'streets-v12';
-    
-    // Using public Mapbox demo token (replace with your own for production)
-    const url = `https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/static/${lon},${lat},${zoom}/800x320@2x?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw`;
-    
-    // Cache for 1 hour
-    localStorage.setItem(cacheKey, url);
-    setTimeout(() => localStorage.removeItem(cacheKey), 3600000);
-    
-    return url;
+    return `https://tile.openweathermap.org/map/${layer}/${zoom}/${x}/${y}.png?appid=${apiKey}`;
   };
 
   // Global error handler for async operations
@@ -501,7 +497,7 @@ export default function Weather() {
                         className="bg-white/90 hover:bg-white text-xs px-2"
                         onClick={() => setMapType('satellite')}
                       >
-                        {i18n.language === 'ko' ? '위성' : i18n.language === 'ja' ? '衛星' : 'Satellite'}
+                        {i18n.language === 'ko' ? '강수' : i18n.language === 'ja' ? '降水' : 'Rain'}
                       </Button>
                       <Button
                         size="sm"
@@ -509,7 +505,7 @@ export default function Weather() {
                         className="bg-white/90 hover:bg-white text-xs px-2"
                         onClick={() => setMapType('hybrid')}
                       >
-                        {i18n.language === 'ko' ? '혼합' : i18n.language === 'ja' ? 'ハイブリッド' : 'Hybrid'}
+                        {i18n.language === 'ko' ? '구름' : i18n.language === 'ja' ? '雲' : 'Clouds'}
                       </Button>
                       <Button
                         size="sm"
@@ -517,7 +513,7 @@ export default function Weather() {
                         className="bg-white/90 hover:bg-white text-xs px-2"
                         onClick={() => setMapType('roadmap')}
                       >
-                        {i18n.language === 'ko' ? '지도' : i18n.language === 'ja' ? '地図' : 'Map'}
+                        {i18n.language === 'ko' ? '위성' : i18n.language === 'ja' ? '衛星' : 'Satellite'}
                       </Button>
                     </div>
 
@@ -540,21 +536,33 @@ export default function Weather() {
                         </div>
                       )}
 
-                      {/* Mapbox Static API with satellite imagery */}
+                      {/* Base Satellite Image */}
                       <img
-                        src={getSatelliteImageUrl(weatherData.location.lat, weatherData.location.lon, mapZoom, mapType)}
-                        alt={`${weatherData.location.name} ${i18n.language === 'ko' ? '위성사진' : i18n.language === 'ja' ? '衛星写真' : 'satellite image'}`}
-                        className="w-full h-full object-cover transition-all duration-300 hover:scale-105"
+                        src={getBaseSatelliteUrl(weatherData.location.lat, weatherData.location.lon, mapZoom)}
+                        alt={`${weatherData.location.name} satellite base`}
+                        className="w-full h-full object-cover"
                         loading="lazy"
                         onLoad={() => setMapImageLoaded(true)}
-                        onError={(e) => {
-                          // Fallback to OpenStreetMap if Mapbox fails
-                          const target = e.target as HTMLImageElement;
-                          const fallbackUrl = `https://tile.openstreetmap.org/${mapZoom}/${Math.floor((weatherData.location.lon + 180) / 360 * Math.pow(2, mapZoom))}/${Math.floor((1 - Math.log(Math.tan(weatherData.location.lat * Math.PI / 180) + 1 / Math.cos(weatherData.location.lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, mapZoom))}.png`;
-                          target.src = fallbackUrl;
-                          setMapImageLoaded(true);
-                        }}
                       />
+
+                      {/* Weather Overlay Layer */}
+                      {mapType === 'satellite' && (
+                        <img
+                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, mapZoom, 'precipitation_new')}
+                          alt="precipitation overlay"
+                          className="absolute inset-0 w-full h-full object-cover opacity-70"
+                          style={{ mixBlendMode: 'multiply' }}
+                        />
+                      )}
+
+                      {mapType === 'hybrid' && (
+                        <img
+                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, mapZoom, 'clouds_new')}
+                          alt="cloud overlay"
+                          className="absolute inset-0 w-full h-full object-cover opacity-60"
+                          style={{ mixBlendMode: 'multiply' }}
+                        />
+                      )}
 
                       {/* Weather overlay with location marker */}
                       <div className="absolute inset-0">
@@ -635,23 +643,34 @@ export default function Weather() {
                       </div>
                     </div>
 
-                    {/* Performance Info */}
+                    {/* Weather Data Info */}
                     <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs">
                       <div className="flex justify-between items-center mb-1">
                         <span className="text-gray-600 dark:text-gray-400">
-                          {i18n.language === 'ko' ? '이미지 소스' : 
-                           i18n.language === 'ja' ? '画像ソース' : 
-                           'Image Source'}
+                          {i18n.language === 'ko' ? '기상 데이터' : 
+                           i18n.language === 'ja' ? '気象データ' : 
+                           'Weather Data'}
                         </span>
-                        <span className="font-medium">Mapbox Satellite API</span>
+                        <span className="font-medium">
+                          {mapType === 'satellite' ? 
+                            (i18n.language === 'ko' ? '강수량' : i18n.language === 'ja' ? '降水量' : 'Precipitation') :
+                           mapType === 'hybrid' ?
+                            (i18n.language === 'ko' ? '구름 분포' : i18n.language === 'ja' ? '雲分布' : 'Cloud Cover') :
+                            (i18n.language === 'ko' ? '위성 지형' : i18n.language === 'ja' ? '衛星地形' : 'Satellite Terrain')
+                          }
+                        </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600 dark:text-gray-400">
-                          {i18n.language === 'ko' ? '해상도' : 
-                           i18n.language === 'ja' ? '解像度' : 
-                           'Resolution'}
+                          {i18n.language === 'ko' ? '업데이트' : 
+                           i18n.language === 'ja' ? '更新' : 
+                           'Updated'}
                         </span>
-                        <span className="font-medium">800x320@2x</span>
+                        <span className="font-medium">
+                          {i18n.language === 'ko' ? '실시간' : 
+                           i18n.language === 'ja' ? 'リアルタイム' : 
+                           'Real-time'}
+                        </span>
                       </div>
                     </div>
                   </div>

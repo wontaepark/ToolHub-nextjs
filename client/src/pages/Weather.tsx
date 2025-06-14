@@ -144,7 +144,7 @@ export default function Weather() {
 
   const fetchWeatherByCoords = async (lat: number, lon: number) => {
     try {
-      const response = await fetch(`/api/weather/coordinates?lat=${lat}&lon=${lon}`);
+      const response = await fetch(`/api/weather/coordinates?lat=${lat}&lon=${lon}&lang=${i18n.language}`);
       if (!response.ok) {
         throw new Error('Weather data fetch failed');
       }
@@ -177,7 +177,7 @@ export default function Weather() {
     
     setLoading(true);
     try {
-      const response = await fetch(`/api/weather/city?q=${encodeURIComponent(city)}`);
+      const response = await fetch(`/api/weather/city?q=${encodeURIComponent(city)}&lang=${i18n.language}`);
       if (!response.ok) {
         throw new Error('Weather data fetch failed');
       }
@@ -430,36 +430,51 @@ export default function Weather() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-                      {weatherData.hourly.map((hour, index) => {
-                        const time = new Date(hour.time);
-                        const timeString = time.toLocaleTimeString(
-                          i18n.language === 'ko' ? 'ko-KR' : 
-                          i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
-                          { hour: '2-digit', minute: '2-digit' }
-                        );
-                        return (
-                          <div key={index} className="text-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                            <div className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
-                              {timeString}
-                            </div>
-                            <div className="flex justify-center mb-2">
-                              {getWeatherIcon(hour.weather.icon)}
-                            </div>
-                            <div className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
-                              {Math.round(hour.temp)}°
-                            </div>
-                            <div className="text-xs text-gray-600 dark:text-gray-400 mb-1 capitalize">
-                              {hour.weather.description}
-                            </div>
-                            {hour.pop > 0 && (
-                              <div className="text-xs text-blue-600 dark:text-blue-400">
-                                {Math.round(hour.pop * 100)}%
+                    <div className="overflow-x-auto">
+                      <div className="flex gap-4 pb-4" style={{ minWidth: 'max-content' }}>
+                        {weatherData.hourly.map((hour, index) => {
+                          const time = new Date(hour.time);
+                          const now = new Date();
+                          const isCurrentHour = index === 0;
+                          
+                          // Format time string based on language
+                          const timeString = isCurrentHour ? 
+                            (i18n.language === 'ko' ? '지금' : 
+                             i18n.language === 'ja' ? '今' : 'Now') :
+                            time.toLocaleTimeString(
+                              i18n.language === 'ko' ? 'ko-KR' : 
+                              i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
+                              { hour: '2-digit', minute: '2-digit' }
+                            );
+                          
+                          return (
+                            <div key={index} className={`text-center p-3 rounded-lg flex-shrink-0 w-24 ${
+                              isCurrentHour ? 'bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700' : 
+                              'bg-gray-50 dark:bg-gray-800'
+                            }`}>
+                              <div className={`text-sm font-medium mb-2 ${
+                                isCurrentHour ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'
+                              }`}>
+                                {timeString}
                               </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                              <div className="flex justify-center mb-2">
+                                {getWeatherIcon(hour.weather.icon)}
+                              </div>
+                              <div className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                                {Math.round(hour.temp)}°
+                              </div>
+                              <div className="text-xs text-gray-600 dark:text-gray-400 mb-1 capitalize">
+                                {hour.weather.description}
+                              </div>
+                              {hour.pop > 0 && (
+                                <div className="text-xs text-blue-600 dark:text-blue-400">
+                                  {Math.round(hour.pop * 100)}%
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

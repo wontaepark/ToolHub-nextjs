@@ -90,12 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Latitude and longitude are required" });
       }
 
-      console.log("Fetching weather data for coordinates:", lat, lon);
-      
-      const query = `${lat},${lon}`;
-      const weatherData = await weatherProviderManager.getWeatherWithFallback(query, true);
-      
-      // Apply language-specific translation based on request language
+      // Determine target language
       const acceptLanguage = req.headers['accept-language'] || '';
       const langParam = req.query.lang as string;
       let targetLang = 'en';
@@ -107,8 +102,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else if (langParam === 'en' || acceptLanguage.includes('en')) {
         targetLang = 'en';
       }
+
+      console.log("Fetching weather data for coordinates:", lat, lon);
       
+      // Create language-specific cache key
+      const cacheKey = `weather:coords:${Number(lat).toFixed(3)},${Number(lon).toFixed(3)}:${targetLang}`;
+      
+      // Check cache first
+      const cached = await weatherCache.get(cacheKey);
+      if (cached && cacheUtils.isFresh(cached, CacheTTL.CURRENT_WEATHER)) {
+        console.log(`Returning cached weather data for: ${lat},${lon} (${targetLang})`);
+        return res.json(cached);
+      }
+      
+      const query = `${lat},${lon}`;
+      const weatherData = await weatherProviderManager.getWeatherWithFallback(query, true);
+      
+      // Apply language-specific translation
       const translatedData = translateWeatherData(weatherData, targetLang);
+      
+      // Cache the translated data with language-specific key
+      await weatherCache.set(cacheKey, translatedData, CacheTTL.CURRENT_WEATHER);
       
       console.log(`Weather data retrieved from ${weatherData.source} for coordinates:`, lat, lon);
       res.json(translatedData);

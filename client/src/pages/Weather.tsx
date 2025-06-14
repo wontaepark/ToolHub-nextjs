@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { 
+  Activity,
   Cloud, 
   Sun, 
   CloudRain, 
@@ -19,7 +20,11 @@ import {
   RefreshCw,
   Sunrise,
   Sunset,
-  Gauge
+  Gauge,
+  Moon,
+  Mountain,
+  Tv,
+  Utensils
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AdSense from '@/components/AdSense';
@@ -415,6 +420,176 @@ export default function Weather() {
                 </CardContent>
               </Card>
 
+              {/* Weather Radar Map */}
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5" />
+                    {i18n.language === 'ko' ? '레이더 및 지도' : 
+                     i18n.language === 'ja' ? 'レーダーと地図' : 'Radar & Map'}
+                  </CardTitle>
+                  <CardDescription>
+                    {i18n.language === 'ko' ? `현재 주변 지역의 기온은 약 ${Math.round(weatherData.current.temp)}°C입니다.` : 
+                     i18n.language === 'ja' ? `現在周辺地域の気温は約${Math.round(weatherData.current.temp)}°Cです。` : 
+                     `Current temperature in surrounding areas is about ${Math.round(weatherData.current.temp)}°C.`}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="relative h-64 bg-gradient-to-br from-blue-200 via-green-200 to-orange-200 rounded-lg overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/20"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="text-xs text-white mt-1 font-semibold text-center">
+                        {weatherData.location.name}
+                      </div>
+                    </div>
+                    {/* Weather pattern overlay */}
+                    <div className="absolute inset-0 opacity-30">
+                      <svg className="w-full h-full" viewBox="0 0 400 256">
+                        <defs>
+                          <pattern id="rainPattern" patternUnits="userSpaceOnUse" width="20" height="20">
+                            <circle cx="10" cy="10" r="1" fill="rgba(59, 130, 246, 0.3)" />
+                          </pattern>
+                        </defs>
+                        <rect width="400" height="256" fill="url(#rainPattern)" />
+                      </svg>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Additional Weather Info Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Pressure Gauge */}
+                <Card className="shadow-xl">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center gap-2 text-sm">
+                      <Gauge className="h-4 w-4" />
+                      {i18n.language === 'ko' ? '기압' : 
+                       i18n.language === 'ja' ? '気圧' : 'Pressure'}
+                    </CardTitle>
+                    <CardDescription className="text-xs">
+                      {i18n.language === 'ko' ? '기압이 낮아지고 있어요' : 
+                       i18n.language === 'ja' ? '気圧が下がっています' : 'Pressure is dropping'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex flex-col items-center">
+                      <div className="relative w-32 h-16 mb-2">
+                        <svg className="w-full h-full" viewBox="0 0 128 64">
+                          <path
+                            d="M 8,56 A 48,48 0 0,1 120,56"
+                            stroke="rgba(156, 163, 175, 0.3)"
+                            strokeWidth="8"
+                            fill="none"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M 8,56 A 48,48 0 0,1 120,56"
+                            stroke="rgb(59, 130, 246)"
+                            strokeWidth="8"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeDasharray={`${(weatherData.current.pressure - 980) / 60 * 175} 175`}
+                          />
+                          <circle
+                            cx="64"
+                            cy="56"
+                            r="2"
+                            fill="rgb(59, 130, 246)"
+                            transform={`rotate(${(weatherData.current.pressure - 980) / 60 * 180 - 90} 64 56)`}
+                          />
+                        </svg>
+                      </div>
+                      <div className="text-2xl font-bold">{weatherData.current.pressure}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">hPa</div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Visibility */}
+                <Card className="shadow-xl">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center gap-2 text-sm">
+                      <Eye className="h-4 w-4" />
+                      {i18n.language === 'ko' ? '가시거리' : 
+                       i18n.language === 'ja' ? '視程' : 'Visibility'}
+                    </CardTitle>
+                    <CardDescription className="text-xs">
+                      {i18n.language === 'ko' ? '가시거리가 보통이에요' : 
+                       i18n.language === 'ja' ? '視程は普通です' : 'Visibility is moderate'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex flex-col items-center">
+                      <div className="text-3xl font-bold">{(weatherData.current.visibility / 1000).toFixed(1)}</div>
+                      <div className="text-lg text-gray-600 dark:text-gray-400">km</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Sun Path and Moon Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Sun Path */}
+                <Card className="shadow-xl">
+                  <CardContent className="p-6">
+                    <div className="relative h-24 mb-4">
+                      <svg className="w-full h-full" viewBox="0 0 300 96">
+                        <path
+                          d="M 20,76 Q 150,20 280,76"
+                          stroke="rgba(251, 191, 36, 0.3)"
+                          strokeWidth="2"
+                          fill="none"
+                        />
+                        <circle cx="150" cy="48" r="12" fill="rgb(251, 191, 36)" />
+                      </svg>
+                      <div className="absolute bottom-2 left-2 text-xs">
+                        <div className="font-medium text-gray-700 dark:text-gray-300">
+                          {i18n.language === 'ko' ? '일출' : i18n.language === 'ja' ? '日の出' : 'Sunrise'}
+                        </div>
+                        <div className="text-gray-600 dark:text-gray-400">{formatTime(weatherData.sunrise)}</div>
+                      </div>
+                      <div className="absolute bottom-2 right-2 text-xs text-right">
+                        <div className="font-medium text-gray-700 dark:text-gray-300">
+                          {i18n.language === 'ko' ? '일몰' : i18n.language === 'ja' ? '日の入り' : 'Sunset'}
+                        </div>
+                        <div className="text-gray-600 dark:text-gray-400">{formatTime(weatherData.sunset)}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Moon Phase */}
+                <Card className="shadow-xl">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-16 h-16">
+                        <div className="w-full h-full bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                        <div className="absolute top-0 left-0 w-full h-full bg-gray-600 dark:bg-gray-800 rounded-full"
+                             style={{ clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%)' }}></div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {i18n.language === 'ko' ? '하현반달' : 
+                           i18n.language === 'ja' ? '下弦の月' : 'Last Quarter'}
+                        </div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-2 space-y-1">
+                          <div>
+                            {i18n.language === 'ko' ? '월출' : i18n.language === 'ja' ? '月の出' : 'Moonrise'}: 
+                            {i18n.language === 'ko' ? ' 오전 7:34' : i18n.language === 'ja' ? ' 午前7:34' : ' 7:34 AM'}
+                          </div>
+                          <div>
+                            {i18n.language === 'ko' ? '월몰' : i18n.language === 'ja' ? '月の入り' : 'Moonset'}: 
+                            {i18n.language === 'ko' ? ' 오후 10:26' : i18n.language === 'ja' ? ' 午後10:26' : ' 10:26 PM'}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
               {/* 24-Hour Hourly Forecast */}
               {weatherData.hourly && weatherData.hourly.length > 0 && (
                 <Card className="shadow-xl bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-800 border-0">
@@ -627,6 +802,231 @@ export default function Weather() {
                         </div>
                       );
                     })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Running Index */}
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Activity className="h-5 w-5" />
+                    {i18n.language === 'ko' ? '달리기지수' : 
+                     i18n.language === 'ja' ? 'ランニング指数' : 'Running Index'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                        <Activity className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <div className="font-medium">
+                          {i18n.language === 'ko' ? '나쁨' : 
+                           i18n.language === 'ja' ? '悪い' : 'Poor'}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                          {i18n.language === 'ko' ? '달리기엔 날씨가 나겨 수 있어요' : 
+                           i18n.language === 'ja' ? 'ランニングには天気が厳しいかもしれません' : 
+                           'Weather might be challenging for running'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      {['오후 4시', '오후 5시', '오후 6시'].map((time, index) => (
+                        <div key={time} className="text-center">
+                          <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">{time}</div>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
+                            index === 0 ? 'bg-red-100 text-red-600' : 
+                            index === 1 ? 'bg-red-100 text-red-600' : 
+                            'bg-yellow-100 text-yellow-600'
+                          }`}>
+                            {index === 0 ? '나쁨' : index === 1 ? '나쁨' : '좋음'}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Air Quality */}
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Wind className="h-5 w-5" />
+                    {i18n.language === 'ko' ? '대기질' : 
+                     i18n.language === 'ja' ? '大気質' : 'Air Quality'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* PM2.5 */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">
+                        {i18n.language === 'ko' ? '미세먼지' : 
+                         i18n.language === 'ja' ? 'PM2.5' : 'Fine Dust'}
+                      </span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {i18n.language === 'ko' ? '좋음 (7μg/㎥)' : 
+                         i18n.language === 'ja' ? '良い (7μg/㎥)' : 'Good (7μg/㎥)'}
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="bg-cyan-400 h-2 rounded-full" style={{ width: '20%' }}></div>
+                    </div>
+                  </div>
+
+                  {/* PM10 */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">
+                        {i18n.language === 'ko' ? '초미세먼지' : 
+                         i18n.language === 'ja' ? 'PM10' : 'Coarse Dust'}
+                      </span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {i18n.language === 'ko' ? '좋음 (5μg/㎥)' : 
+                         i18n.language === 'ja' ? '良い (5μg/㎥)' : 'Good (5μg/㎥)'}
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="bg-cyan-400 h-2 rounded-full" style={{ width: '15%' }}></div>
+                    </div>
+                  </div>
+
+                  {/* Additional Info Grid */}
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sun className="h-4 w-4 text-orange-500" />
+                        <span className="text-sm font-medium">
+                          {i18n.language === 'ko' ? '자외선지수' : 
+                           i18n.language === 'ja' ? '紫外線指数' : 'UV Index'}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                        {i18n.language === 'ko' ? '자외선 지수가 보통이에요' : 
+                         i18n.language === 'ja' ? '紫外線指数は普通です' : 'UV index is moderate'}
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Droplets className="h-4 w-4 text-blue-500" />
+                        <span className="text-sm font-medium">
+                          {i18n.language === 'ko' ? '습도' : 
+                           i18n.language === 'ja' ? '湿度' : 'Humidity'}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                        {i18n.language === 'ko' ? '습도가 높아요' : 
+                         i18n.language === 'ja' ? '湿度が高いです' : 'Humidity is high'}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-lg font-bold">{weatherData.current.humidity}%</div>
+                        <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div className="bg-cyan-400 h-2 rounded-full" style={{ width: `${weatherData.current.humidity}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Weather Stories */}
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle>
+                    {i18n.language === 'ko' ? '오늘의 스토리' : 
+                     i18n.language === 'ja' ? '今日のストーリー' : 'Today\'s Stories'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <div className="w-20 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
+                        <CloudRain className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-sm mb-1">
+                          {i18n.language === 'ko' ? '비 오는 날, 어린이에게 투명우산을 씌워주세요' : 
+                           i18n.language === 'ja' ? '雨の日、子供には透明な傘を持たせてください' : 
+                           'On rainy days, give children transparent umbrellas'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <div className="w-20 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
+                        <Utensils className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-sm mb-1">
+                          {i18n.language === 'ko' ? '\'단백질 폭탄\' 그릭요거트, 더 건강하게 먹기' : 
+                           i18n.language === 'ja' ? '\'プロテイン爆弾\' ギリシャヨーグルト、もっと健康に食べる' : 
+                           '\'Protein bomb\' Greek yogurt, eating it healthier'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <div className="w-20 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+                        <Tv className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-sm mb-1">
+                          {i18n.language === 'ko' ? '[날씨] 한낮 습도 높은 더위…내일(15일) 다시 전국 비 / KBS' : 
+                           i18n.language === 'ja' ? '[天気] 昼間湿度の高い暑さ…明日(15日)再び全国で雨 / KBS' : 
+                           '[Weather] High humidity heat during the day...rain nationwide again tomorrow (15th) / KBS'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <div className="w-20 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-lg flex items-center justify-center">
+                        <Mountain className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-sm mb-1">
+                          {i18n.language === 'ko' ? '\'해변보다 여기가 낫다\'…5m 폭포 쏟아지는 비밀계곡' : 
+                           i18n.language === 'ja' ? '\'海辺よりここの方が良い\'…5mの滝が流れる秘密の谷' : 
+                           '\'Better than the beach\'...Secret valley with 5m waterfalls'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Links */}
+                  <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <div className="text-center">
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '2025 태풍 정보' : 
+                         i18n.language === 'ja' ? '2025台風情報' : '2025 Typhoon Info'}
+                      </div>
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '기상특보' : 
+                         i18n.language === 'ja' ? '気象特報' : 'Weather Warning'}
+                      </div>
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '여름 레저 정보' : 
+                         i18n.language === 'ja' ? '夏のレジャー情報' : 'Summer Leisure Info'}
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '골프장날씨' : 
+                         i18n.language === 'ja' ? 'ゴルフ場の天気' : 'Golf Weather'}
+                      </div>
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '생활지수' : 
+                         i18n.language === 'ja' ? '生活指数' : 'Life Index'}
+                      </div>
+                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {i18n.language === 'ko' ? '전국날씨' : 
+                         i18n.language === 'ja' ? '全国の天気' : 'National Weather'}
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

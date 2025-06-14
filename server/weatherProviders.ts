@@ -1,5 +1,7 @@
 import { weatherCache, CacheKeys, CacheTTL, cacheUtils } from './cache';
 import { isKoreanLocation, normalizeKoreanCity, getKoreanCityCoordinates } from './koreanLocationMap';
+import { selectWeatherAPI, getCacheTTL, shouldUseCoordinates } from './apiStrategy';
+import { WeatherVerification } from './crossVerification';
 
 // Weather provider configuration
 interface WeatherProvider {

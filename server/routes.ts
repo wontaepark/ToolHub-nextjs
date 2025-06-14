@@ -129,6 +129,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       console.log("Fetching weather data for city:", cityName);
       
+      // Clear corrupted Korean cache entries if detected
+      if (cityName.includes('ë') || cityName.includes('ì') || cityName.includes('ì°')) {
+        console.log("Clearing corrupted Korean cache entries");
+        weatherCache.clearKoreanEntries();
+      }
+      
       const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false);
       
       console.log(`Weather data retrieved from ${weatherData.source} for city:`, cityName);
@@ -147,8 +153,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/weather/status", (req, res) => {
     try {
       const providerStatus = weatherProviderManager.getProviderStatus();
+      const cacheStats = weatherCache.getStats();
+      
       res.json({
         providers: providerStatus,
+        cache: {
+          hits: cacheStats.hits,
+          misses: cacheStats.misses,
+          keys: cacheStats.keys,
+          hitRate: Math.round((cacheStats.hits / (cacheStats.hits + cacheStats.misses) * 100) || 0),
+          totalRequests: cacheStats.hits + cacheStats.misses
+        },
+        system: {
+          uptime: process.uptime(),
+          nodeVersion: process.version,
+          platform: process.platform
+        },
         timestamp: new Date().toISOString()
       });
     } catch (error) {

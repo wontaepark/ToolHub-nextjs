@@ -95,10 +95,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const query = `${lat},${lon}`;
       const weatherData = await weatherProviderManager.getWeatherWithFallback(query, true);
       
-      // Apply Korean translation for Korean language requests
+      // Apply language-specific translation based on request language
       const acceptLanguage = req.headers['accept-language'] || '';
-      const isKoreanRequest = acceptLanguage.includes('ko') || req.query.lang === 'ko';
-      const translatedData = isKoreanRequest ? translateWeatherData(weatherData, 'ko') : weatherData;
+      const langParam = req.query.lang as string;
+      let targetLang = 'en';
+      
+      if (langParam === 'ko' || acceptLanguage.includes('ko')) {
+        targetLang = 'ko';
+      } else if (langParam === 'ja' || acceptLanguage.includes('ja')) {
+        targetLang = 'ja';
+      } else if (langParam === 'en' || acceptLanguage.includes('en')) {
+        targetLang = 'en';
+      }
+      
+      const translatedData = translateWeatherData(weatherData, targetLang);
       
       console.log(`Weather data retrieved from ${weatherData.source} for coordinates:`, lat, lon);
       res.json(translatedData);
@@ -149,8 +159,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Apply Korean translation for Korean language requests
       const acceptLanguage = req.headers['accept-language'] || '';
-      const isKoreanRequest = acceptLanguage.includes('ko') || req.query.lang === 'ko';
-      const translatedData = isKoreanRequest ? translateWeatherData(weatherData, 'ko') : weatherData;
+      const langParam = req.query.lang as string;
+      let targetLang = 'en';
+      
+      if (langParam === 'ko' || acceptLanguage.includes('ko')) {
+        targetLang = 'ko';
+      } else if (langParam === 'ja' || acceptLanguage.includes('ja')) {
+        targetLang = 'ja';
+      } else if (langParam === 'en' || acceptLanguage.includes('en')) {
+        targetLang = 'en';
+      }
+      
+      const translatedData = translateWeatherData(weatherData, targetLang);
       
       console.log(`Weather data retrieved from ${weatherData.source} for city:`, cityName);
       res.json(translatedData);

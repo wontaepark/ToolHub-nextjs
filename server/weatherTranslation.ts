@@ -319,5 +319,17 @@ export function translateWeatherData(weatherData: any, targetLang: string = 'ko'
     }));
   }
   
+  // Translate hourly weather
+  if (translated.hourly && Array.isArray(translated.hourly)) {
+    translated.hourly = translated.hourly.map((hour: any) => ({
+      ...hour,
+      weather: {
+        ...hour.weather,
+        main: translateWeatherCondition(hour.weather.main, targetLang),
+        description: translateWeatherCondition(hour.weather.description, targetLang)
+      }
+    }));
+  }
+  
   return translated;
 }

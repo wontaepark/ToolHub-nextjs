@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { weatherProviderManager } from "./weatherProviders";
 import { weatherCache } from "./cache";
 import { apiMonitoring } from "./apiMonitoring";
+import { translateWeatherData } from "./weatherTranslation";
 
 // Demo weather data generator
 function getAccuWeatherIcon(accuIcon: number): string {
@@ -94,8 +95,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const query = `${lat},${lon}`;
       const weatherData = await weatherProviderManager.getWeatherWithFallback(query, true);
       
+      // Apply Korean translation for Korean language requests
+      const acceptLanguage = req.headers['accept-language'] || '';
+      const isKoreanRequest = acceptLanguage.includes('ko') || req.query.lang === 'ko';
+      const translatedData = isKoreanRequest ? translateWeatherData(weatherData, 'ko') : weatherData;
+      
       console.log(`Weather data retrieved from ${weatherData.source} for coordinates:`, lat, lon);
-      res.json(weatherData);
+      res.json(translatedData);
 
     } catch (error) {
       console.error("Weather API error:", error);
@@ -136,10 +142,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         weatherCache.clearKoreanEntries();
       }
       
-      const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false);
+      const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false).catch(error => {
+        console.error("Weather provider error caught:", error);
+        throw error;
+      });
+      
+      // Apply Korean translation for Korean language requests
+      const acceptLanguage = req.headers['accept-language'] || '';
+      const isKoreanRequest = acceptLanguage.includes('ko') || req.query.lang === 'ko';
+      const translatedData = isKoreanRequest ? translateWeatherData(weatherData, 'ko') : weatherData;
       
       console.log(`Weather data retrieved from ${weatherData.source} for city:`, cityName);
-      res.json(weatherData);
+      res.json(translatedData);
 
     } catch (error) {
       console.error("Weather API error:", error);

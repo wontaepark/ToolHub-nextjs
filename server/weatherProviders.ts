@@ -50,6 +50,16 @@ export interface WeatherData {
       icon: string;
     };
   }>;
+  hourly?: Array<{
+    time: string;
+    temp: number;
+    weather: {
+      main: string;
+      description: string;
+      icon: string;
+    };
+    pop: number; // probability of precipitation
+  }>;
   sunrise: number;
   sunset: number;
   source?: string;
@@ -386,6 +396,16 @@ class WeatherProviderManager {
         }
       },
       forecast: dailyForecasts,
+      hourly: forecast.list.slice(0, 8).map((item: any) => ({
+        time: new Date(item.dt * 1000).toISOString(),
+        temp: item.main.temp,
+        weather: {
+          main: item.weather[0].main,
+          description: item.weather[0].description,
+          icon: item.weather[0].icon
+        },
+        pop: item.pop || 0
+      })),
       sunrise: weather.sys.sunrise,
       sunset: weather.sys.sunset,
       source: 'OpenWeatherMap'

@@ -188,12 +188,18 @@ class WeatherProviderManager {
 
     const now = new Date();
     const baseDate = now.toISOString().slice(0, 10).replace(/-/g, '');
-    const baseTime = '0600'; // KMA updates at 6AM, 6PM
+    // Use appropriate base time based on current hour
+    const currentHour = now.getHours();
+    let baseTime = '0600';
+    if (currentHour >= 18) baseTime = '1800';
+    else if (currentHour >= 6) baseTime = '0600';
+    else baseTime = '1800'; // Previous day 18:00
 
     try {
-      const response = await fetch(
-        `${provider.baseUrl}/getVilageFcst?serviceKey=${provider.apiKey}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`
-      );
+      const url = `${provider.baseUrl}/getVilageFcst?serviceKey=${encodeURIComponent(provider.apiKey)}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+      console.log('KMA API URL:', url.replace(provider.apiKey, '[API_KEY]'));
+      
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error(`KMA API request failed: ${response.status}`);
@@ -598,7 +604,9 @@ class WeatherProviderManager {
         console.log(`Trying ${provider.name} for: ${query}`);
         
         let weatherData: WeatherData;
-        if (provider.name === 'AccuWeather') {
+        if (provider.name === 'KMA_API') {
+          weatherData = await this.callKMA(query, isCoordinate);
+        } else if (provider.name === 'AccuWeather') {
           weatherData = await this.callAccuWeather(query, isCoordinate);
         } else if (provider.name === 'OpenWeatherMap') {
           weatherData = await this.callOpenWeatherMap(query, isCoordinate);

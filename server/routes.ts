@@ -111,7 +111,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "City name is required" });
       }
 
-      const cityName = q as string;
+      const cityName = decodeURIComponent(q as string);
       console.log("Fetching weather data for city:", cityName);
       
       const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false);

@@ -3,8 +3,14 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Set proper encoding for Korean characters
+app.use((req, res, next) => {
+  req.setEncoding = req.setEncoding || (() => {});
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();

@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { weatherProviderManager } from "./weatherProviders";
 import { weatherCache } from "./cache";
+import { apiMonitoring } from "./apiMonitoring";
 
 // Demo weather data generator
 function getAccuWeatherIcon(accuIcon: number): string {
@@ -174,6 +175,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Provider status error:", error);
       res.status(500).json({ error: "Failed to get provider status" });
+    }
+  });
+
+  // Comprehensive API monitoring dashboard
+  app.get("/api/weather/monitoring", (req, res) => {
+    try {
+      const monitoringData = apiMonitoring.exportMetrics();
+      res.json(monitoringData);
+    } catch (error) {
+      console.error("Monitoring data error:", error);
+      res.status(500).json({ error: "Failed to get monitoring data" });
     }
   });
 

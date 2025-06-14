@@ -1,5 +1,47 @@
 // Cross-verification system for weather data accuracy
-import { WeatherData } from './weatherProviders';
+export interface WeatherData {
+  location: {
+    name: string;
+    country: string;
+    lat: number;
+    lon: number;
+  };
+  current: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+    visibility: number;
+    uv_index: number;
+    wind_speed: number;
+    wind_deg: number;
+    weather: {
+      main: string;
+      description: string;
+      icon: string;
+    };
+  };
+  forecast: Array<{
+    date: string;
+    temp_max: number;
+    temp_min: number;
+    weather: {
+      main: string;
+      description: string;
+      icon: string;
+    };
+  }>;
+  sunrise: number;
+  sunset: number;
+  source?: string;
+  cached_at?: number;
+  verification?: {
+    confidence: 'high' | 'medium' | 'low';
+    verified: boolean;
+    sources: string[];
+    cross_checked: boolean;
+  };
+}
 
 interface VerificationResult {
   verified: boolean;
@@ -103,7 +145,7 @@ export class WeatherVerification {
     return reliabilityA >= reliabilityB ? dataA : dataB;
   }
 
-  static enhanceWithMetadata(data: WeatherData, verification: VerificationResult): WeatherData {
+  static enhanceWithMetadata(data: WeatherData, verification: VerificationResult): WeatherData & { verification: any } {
     return {
       ...data,
       verification: {

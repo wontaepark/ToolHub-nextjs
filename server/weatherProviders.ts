@@ -18,7 +18,7 @@ interface RateLimitInfo {
   resetTime: number;
 }
 
-interface WeatherData {
+export interface WeatherData {
   location: {
     name: string;
     country: string;

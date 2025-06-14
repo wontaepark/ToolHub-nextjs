@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { weatherProviderManager } from "./weatherProviders";
+import { weatherCache } from "./cache";
 
 // Demo weather data generator
 function getAccuWeatherIcon(accuIcon: number): string {
@@ -111,7 +112,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "City name is required" });
       }
 
-      const cityName = decodeURIComponent(q as string);
+      // Proper UTF-8 decoding for Korean characters
+      let cityName = q as string;
+      try {
+        // Handle double-encoded UTF-8 Korean characters
+        if (cityName.includes('%')) {
+          cityName = decodeURIComponent(cityName);
+        }
+        // Fix garbled Korean characters from encoding issues
+        if (cityName.includes('ë') || cityName.includes('ì') || cityName.includes('ì°')) {
+          cityName = Buffer.from(cityName, 'latin1').toString('utf8');
+        }
+      } catch (e) {
+        // Fallback to original if decoding fails
+        cityName = q as string;
+      }
       console.log("Fetching weather data for city:", cityName);
       
       const weatherData = await weatherProviderManager.getWeatherWithFallback(cityName, false);

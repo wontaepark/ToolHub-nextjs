@@ -92,6 +92,16 @@ class WeatherCache {
   flushAll(): void {
     this.cache.flushAll();
   }
+
+  // Clear specific Korean city entries to refresh with correct encoding
+  clearKoreanEntries(): void {
+    const keys = this.cache.keys();
+    keys.forEach(key => {
+      if (key.includes('ë') || key.includes('ì') || key.includes('ì°')) {
+        this.cache.del(key);
+      }
+    });
+  }
 }
 
 // TTL configurations for different data types

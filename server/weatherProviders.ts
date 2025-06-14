@@ -160,20 +160,41 @@ class WeatherProviderManager {
       locationData = await locationResponse.json();
       locationKey = locationData.Key;
     } else {
-      const locationUrl = `${provider.baseUrl}/locations/v1/cities/search?apikey=${provider.apiKey}&q=${encodeURIComponent(query)}&language=ko-kr`;
-      const locationResponse = await fetch(locationUrl);
-      
-      if (!locationResponse.ok) {
-        throw new Error(`AccuWeather location search failed: ${locationResponse.status}`);
+      // Korean location intelligence for AccuWeather
+      if (isKoreanLocation(query)) {
+        const koreanCity = normalizeKoreanCity(query);
+        if (koreanCity) {
+          // Use coordinates for Korean cities to ensure accuracy
+          const locationUrl = `${provider.baseUrl}/locations/v1/cities/geoposition/search?apikey=${provider.apiKey}&q=${koreanCity.coords.lat},${koreanCity.coords.lon}&language=ko-kr`;
+          console.log(`Using Korean city coordinates for AccuWeather ${query}: ${koreanCity.coords.lat}, ${koreanCity.coords.lon} -> ${koreanCity.en}`);
+          const locationResponse = await fetch(locationUrl);
+          
+          if (!locationResponse.ok) {
+            throw new Error(`AccuWeather location lookup failed: ${locationResponse.status}`);
+          }
+          
+          locationData = await locationResponse.json();
+          locationKey = locationData.Key;
+        } else {
+          throw new Error(`Korean city not found in database: ${query}`);
+        }
+      } else {
+        // Standard city search for non-Korean locations
+        const locationUrl = `${provider.baseUrl}/locations/v1/cities/search?apikey=${provider.apiKey}&q=${encodeURIComponent(query)}&language=ko-kr`;
+        const locationResponse = await fetch(locationUrl);
+        
+        if (!locationResponse.ok) {
+          throw new Error(`AccuWeather location search failed: ${locationResponse.status}`);
+        }
+        
+        const locationResults = await locationResponse.json();
+        if (!locationResults || locationResults.length === 0) {
+          throw new Error('Location not found in AccuWeather');
+        }
+        
+        locationData = locationResults[0];
+        locationKey = locationData.Key;
       }
-      
-      const locationResults = await locationResponse.json();
-      if (!locationResults || locationResults.length === 0) {
-        throw new Error('Location not found in AccuWeather');
-      }
-      
-      locationData = locationResults[0];
-      locationKey = locationData.Key;
     }
 
     // Get current weather

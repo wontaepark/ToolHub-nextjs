@@ -1,4 +1,5 @@
 import { weatherCache, CacheKeys, CacheTTL, cacheUtils } from './cache';
+import { isKoreanLocation, normalizeKoreanCity, getKoreanCityCoordinates } from './koreanLocationMap';
 
 // Weather provider configuration
 interface WeatherProvider {
@@ -210,22 +211,35 @@ class WeatherProviderManager {
       [lat, lon] = query.split(',').map(Number);
       locationName = 'Current Location';
     } else {
-      // Geocoding
-      const geoUrl = `${provider.baseUrl}/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=${provider.apiKey}`;
-      const geoResponse = await fetch(geoUrl);
-      
-      if (!geoResponse.ok) {
-        throw new Error(`OpenWeatherMap geocoding failed: ${geoResponse.status}`);
+      // Korean location intelligence - use coordinates for accurate Korean cities
+      if (isKoreanLocation(query)) {
+        const koreanCity = normalizeKoreanCity(query);
+        if (koreanCity) {
+          lat = koreanCity.coords.lat;
+          lon = koreanCity.coords.lon;
+          locationName = koreanCity.en;
+          console.log(`Using Korean city coordinates for ${query}: ${lat}, ${lon} -> ${locationName}`);
+        } else {
+          throw new Error(`Korean city not found in database: ${query}`);
+        }
+      } else {
+        // Standard geocoding for non-Korean locations
+        const geoUrl = `${provider.baseUrl}/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=${provider.apiKey}`;
+        const geoResponse = await fetch(geoUrl);
+        
+        if (!geoResponse.ok) {
+          throw new Error(`OpenWeatherMap geocoding failed: ${geoResponse.status}`);
+        }
+        
+        const geoData = await geoResponse.json();
+        if (!geoData || geoData.length === 0) {
+          throw new Error('Location not found in OpenWeatherMap');
+        }
+        
+        lat = geoData[0].lat;
+        lon = geoData[0].lon;
+        locationName = geoData[0].name;
       }
-      
-      const geoData = await geoResponse.json();
-      if (!geoData || geoData.length === 0) {
-        throw new Error('Location not found in OpenWeatherMap');
-      }
-      
-      lat = geoData[0].lat;
-      lon = geoData[0].lon;
-      locationName = geoData[0].name;
     }
 
     // Get current weather

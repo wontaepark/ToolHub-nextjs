@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { weatherProviderManager } from "./weatherProviders";
-import { weatherCache } from "./cache";
+import { weatherCache, CacheTTL, cacheUtils } from "./cache";
 import { apiMonitoring } from "./apiMonitoring";
 import { translateWeatherData } from "./weatherTranslation";
 
@@ -110,7 +110,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Check cache first
       const cached = await weatherCache.get(cacheKey);
-      if (cached && cacheUtils.isFresh(cached, CacheTTL.CURRENT_WEATHER)) {
+      if (cached) {
         console.log(`Returning cached weather data for: ${lat},${lon} (${targetLang})`);
         return res.json(cached);
       }
@@ -122,9 +122,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const translatedData = translateWeatherData(weatherData, targetLang);
       
       // Cache the translated data with language-specific key
-      await weatherCache.set(cacheKey, translatedData, CacheTTL.CURRENT_WEATHER);
+      await weatherCache.set(cacheKey, translatedData, 1800);
       
-      console.log(`Weather data retrieved from ${weatherData.source} for coordinates:`, lat, lon);
+      console.log(`Weather data retrieved from ${weatherData.source} for coordinates: ${lat}, ${lon} (lang: ${targetLang})`);
       res.json(translatedData);
 
     } catch (error) {

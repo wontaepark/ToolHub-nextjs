@@ -56,6 +56,16 @@ interface WeatherData {
       icon: string;
     };
   }[];
+  hourly?: {
+    time: string;
+    temp: number;
+    weather: {
+      main: string;
+      description: string;
+      icon: string;
+    };
+    pop: number;
+  }[];
   sunrise: number;
   sunset: number;
 }
@@ -405,11 +415,68 @@ export default function Weather() {
                 </CardContent>
               </Card>
 
+              {/* 24-Hour Hourly Forecast */}
+              {weatherData.hourly && weatherData.hourly.length > 0 && (
+                <Card className="shadow-xl">
+                  <CardHeader>
+                    <CardTitle>
+                      {i18n.language === 'ko' ? '24시간 시간별 날씨' : 
+                       i18n.language === 'ja' ? '24時間の時間別天気' : '24-Hour Hourly Weather'}
+                    </CardTitle>
+                    <CardDescription>
+                      {i18n.language === 'ko' ? '향후 24시간의 시간별 날씨 예보를 확인하세요.' : 
+                       i18n.language === 'ja' ? '今後24時間の時間別天気予報をチェックしてください。' : 
+                       'Check the hourly weather forecast for the next 24 hours.'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                      {weatherData.hourly.map((hour, index) => {
+                        const time = new Date(hour.time);
+                        const timeString = time.toLocaleTimeString(
+                          i18n.language === 'ko' ? 'ko-KR' : 
+                          i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
+                          { hour: '2-digit', minute: '2-digit' }
+                        );
+                        return (
+                          <div key={index} className="text-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <div className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
+                              {timeString}
+                            </div>
+                            <div className="flex justify-center mb-2">
+                              {getWeatherIcon(hour.weather.icon)}
+                            </div>
+                            <div className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                              {Math.round(hour.temp)}°
+                            </div>
+                            <div className="text-xs text-gray-600 dark:text-gray-400 mb-1 capitalize">
+                              {hour.weather.description}
+                            </div>
+                            {hour.pop > 0 && (
+                              <div className="text-xs text-blue-600 dark:text-blue-400">
+                                {Math.round(hour.pop * 100)}%
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
               {/* 5-Day Forecast */}
               <Card className="shadow-xl">
                 <CardHeader>
-                  <CardTitle>{t('weather.forecast.title')}</CardTitle>
-                  <CardDescription>{t('weather.forecast.description')}</CardDescription>
+                  <CardTitle>
+                    {i18n.language === 'ko' ? '5일 날씨 예보' : 
+                     i18n.language === 'ja' ? '5日間天気予報' : '5-Day Weather Forecast'}
+                  </CardTitle>
+                  <CardDescription>
+                    {i18n.language === 'ko' ? '향후 5일간의 날씨 예보를 확인하세요.' : 
+                     i18n.language === 'ja' ? '今후5日間の天気予報をチェックしてください。' : 
+                     'Check the weather forecast for the next 5 days.'}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">

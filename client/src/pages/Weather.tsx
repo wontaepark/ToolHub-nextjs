@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,7 +24,10 @@ import {
   Moon,
   Mountain,
   Tv,
-  Utensils
+  Utensils,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AdSense from '@/components/AdSense';
@@ -82,6 +85,9 @@ export default function Weather() {
   const [loading, setLoading] = useState(false);
   const [searchCity, setSearchCity] = useState('');
   const [error, setError] = useState('');
+  const [mapZoom, setMapZoom] = useState(14);
+  const [mapType, setMapType] = useState<'satellite' | 'roadmap' | 'hybrid'>('satellite');
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   // Global error handler for async operations
   const handleAsyncError = (error: unknown, fallbackMessage: string) => {
@@ -435,48 +441,133 @@ export default function Weather() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="relative h-64 bg-gradient-to-br from-blue-200 via-green-200 to-orange-200 rounded-lg overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/20"></div>
-                    
-                    {/* Location marker with enhanced visibility */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      {/* Pulsing rings */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 bg-red-500/20 rounded-full animate-ping"></div>
-                        <div className="absolute w-8 h-8 bg-red-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
-                      </div>
-                      {/* Main location dot */}
-                      <div className="relative w-6 h-6 bg-red-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
-                      {/* Location name with better contrast */}
-                      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-md text-sm font-semibold whitespace-nowrap">
-                        {weatherData.location.name}
+                  <div className="relative">
+                    {/* Map Controls */}
+                    <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="bg-white/90 hover:bg-white"
+                        onClick={() => setMapZoom(prev => Math.min(prev + 2, 20))}
+                      >
+                        <ZoomIn className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="bg-white/90 hover:bg-white"
+                        onClick={() => setMapZoom(prev => Math.max(prev - 2, 8))}
+                      >
+                        <ZoomOut className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="bg-white/90 hover:bg-white"
+                        onClick={() => setMapZoom(14)}
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                    </div>
+
+                    {/* Map Type Selector */}
+                    <div className="absolute top-4 left-4 z-20 flex gap-1">
+                      <Button
+                        size="sm"
+                        variant={mapType === 'satellite' ? 'default' : 'outline'}
+                        className="bg-white/90 hover:bg-white text-xs px-2"
+                        onClick={() => setMapType('satellite')}
+                      >
+                        {i18n.language === 'ko' ? '위성' : i18n.language === 'ja' ? '衛星' : 'Satellite'}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={mapType === 'hybrid' ? 'default' : 'outline'}
+                        className="bg-white/90 hover:bg-white text-xs px-2"
+                        onClick={() => setMapType('hybrid')}
+                      >
+                        {i18n.language === 'ko' ? '혼합' : i18n.language === 'ja' ? 'ハイブリッド' : 'Hybrid'}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={mapType === 'roadmap' ? 'default' : 'outline'}
+                        className="bg-white/90 hover:bg-white text-xs px-2"
+                        onClick={() => setMapType('roadmap')}
+                      >
+                        {i18n.language === 'ko' ? '지도' : i18n.language === 'ja' ? '地図' : 'Map'}
+                      </Button>
+                    </div>
+
+                    <div 
+                      ref={mapContainerRef}
+                      className="relative h-80 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700"
+                    >
+                      {/* Google Maps Static API with satellite imagery */}
+                      <img
+                        src={`https://maps.googleapis.com/maps/api/staticmap?center=${weatherData.location.lat},${weatherData.location.lon}&zoom=${mapZoom}&size=800x320&maptype=${mapType}&markers=color:red%7C${weatherData.location.lat},${weatherData.location.lon}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dQJCzAOnWwPrVk`}
+                        alt={`${weatherData.location.name} satellite map`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to OpenStreetMap tiles if Google Maps fails
+                          const target = e.target as HTMLImageElement;
+                          target.src = `https://tile.openstreetmap.org/${mapZoom}/${Math.floor((weatherData.location.lon + 180) / 360 * Math.pow(2, mapZoom))}/${Math.floor((1 - Math.log(Math.tan(weatherData.location.lat * Math.PI / 180) + 1 / Math.cos(weatherData.location.lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, mapZoom))}.png`;
+                        }}
+                      />
+
+                      {/* Weather overlay with location marker */}
+                      <div className="absolute inset-0">
+                        {/* Location marker with enhanced visibility */}
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          {/* Pulsing rings */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-12 h-12 bg-red-500/20 rounded-full animate-ping"></div>
+                            <div className="absolute w-8 h-8 bg-red-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                          </div>
+                          {/* Main location dot */}
+                          <div className="relative w-6 h-6 bg-red-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
+                          {/* Location name with better contrast */}
+                          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-1 rounded-md text-sm font-semibold whitespace-nowrap">
+                            {weatherData.location.name}
+                          </div>
+                        </div>
+
+                        {/* Temperature indicators around the location */}
+                        <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
+                          {Math.round(weatherData.current.temp - 2)}°C
+                        </div>
+                        <div className="absolute top-12 right-12 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
+                          {Math.round(weatherData.current.temp + 1)}°C
+                        </div>
+                        <div className="absolute bottom-16 left-12 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
+                          {Math.round(weatherData.current.temp)}°C
+                        </div>
+                        <div className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
+                          {Math.round(weatherData.current.temp - 1)}°C
+                        </div>
+
+                        {/* Weather condition overlay */}
+                        {weatherData.current.weather.main.toLowerCase().includes('rain') && (
+                          <div className="absolute inset-0 pointer-events-none">
+                            <svg className="w-full h-full" viewBox="0 0 800 320">
+                              <defs>
+                                <pattern id="rainOverlay" patternUnits="userSpaceOnUse" width="30" height="30">
+                                  <circle cx="15" cy="15" r="1.5" fill="rgba(59, 130, 246, 0.4)" />
+                                  <circle cx="7" cy="22" r="1" fill="rgba(59, 130, 246, 0.3)" />
+                                  <circle cx="23" cy="8" r="1" fill="rgba(59, 130, 246, 0.3)" />
+                                </pattern>
+                              </defs>
+                              <rect width="800" height="320" fill="url(#rainOverlay)" />
+                            </svg>
+                          </div>
+                        )}
                       </div>
                     </div>
 
-                    {/* Surrounding area temperature indicators */}
-                    <div className="absolute top-8 left-8 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
-                      {Math.round(weatherData.current.temp - 2)}°C
-                    </div>
-                    <div className="absolute top-12 right-12 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
-                      {Math.round(weatherData.current.temp + 1)}°C
-                    </div>
-                    <div className="absolute bottom-16 left-12 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
-                      {Math.round(weatherData.current.temp)}°C
-                    </div>
-                    <div className="absolute bottom-8 right-8 bg-white/80 rounded-lg px-2 py-1 text-xs font-medium">
-                      {Math.round(weatherData.current.temp - 1)}°C
-                    </div>
-
-                    {/* Weather pattern overlay */}
-                    <div className="absolute inset-0 opacity-30">
-                      <svg className="w-full h-full" viewBox="0 0 400 256">
-                        <defs>
-                          <pattern id="rainPattern" patternUnits="userSpaceOnUse" width="20" height="20">
-                            <circle cx="10" cy="10" r="1" fill="rgba(59, 130, 246, 0.3)" />
-                          </pattern>
-                        </defs>
-                        <rect width="400" height="256" fill="url(#rainPattern)" />
-                      </svg>
+                    {/* Map Info */}
+                    <div className="mt-3 text-xs text-gray-600 dark:text-gray-400 text-center">
+                      {i18n.language === 'ko' ? '확대/축소: 버튼 클릭 | 지도 유형: 위성/혼합/지도' : 
+                       i18n.language === 'ja' ? 'ズーム: ボタンクリック | 地図タイプ: 衛星/ハイブリッド/地図' : 
+                       'Zoom: Click buttons | Map type: Satellite/Hybrid/Map'}
                     </div>
                   </div>
                 </CardContent>

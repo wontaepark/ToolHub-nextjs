@@ -417,24 +417,19 @@ export default function Weather() {
 
               {/* 24-Hour Hourly Forecast */}
               {weatherData.hourly && weatherData.hourly.length > 0 && (
-                <Card className="shadow-xl">
-                  <CardHeader>
-                    <CardTitle>
-                      {i18n.language === 'ko' ? '24시간 시간별 날씨' : 
-                       i18n.language === 'ja' ? '24時間の時間別天気' : '24-Hour Hourly Weather'}
+                <Card className="shadow-xl bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-800 border-0">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-white text-lg font-medium">
+                      {i18n.language === 'ko' ? '내일 새벽까지 흐린 날씨가 이어져요' : 
+                       i18n.language === 'ja' ? '明日の明け方まで曇りの天気が続きます' : 
+                       'Cloudy weather continues until tomorrow morning'}
                     </CardTitle>
-                    <CardDescription>
-                      {i18n.language === 'ko' ? '향후 24시간의 시간별 날씨 예보를 확인하세요.' : 
-                       i18n.language === 'ja' ? '今後24時間の時間別天気予報をチェックしてください。' : 
-                       'Check the hourly weather forecast for the next 24 hours.'}
-                    </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="overflow-x-auto">
-                      <div className="flex gap-4 pb-4" style={{ minWidth: 'max-content' }}>
+                  <CardContent className="p-0 pb-4">
+                    <div className="overflow-x-auto scrollbar-hide">
+                      <div className="flex gap-2 px-4" style={{ width: 'max-content' }}>
                         {weatherData.hourly.map((hour, index) => {
                           const time = new Date(hour.time);
-                          const now = new Date();
                           const isCurrentHour = index === 0;
                           
                           // Format time string based on language
@@ -444,36 +439,66 @@ export default function Weather() {
                             time.toLocaleTimeString(
                               i18n.language === 'ko' ? 'ko-KR' : 
                               i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
-                              { hour: '2-digit', minute: '2-digit' }
+                              { hour: 'numeric' }
                             );
                           
                           return (
-                            <div key={index} className={`text-center p-3 rounded-lg flex-shrink-0 w-24 ${
-                              isCurrentHour ? 'bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700' : 
-                              'bg-gray-50 dark:bg-gray-800'
+                            <div key={index} className={`text-center flex-shrink-0 w-16 py-3 ${
+                              isCurrentHour ? 'relative' : ''
                             }`}>
-                              <div className={`text-sm font-medium mb-2 ${
-                                isCurrentHour ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'
+                              {isCurrentHour && (
+                                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-b from-orange-300 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                                  <Sun className="w-6 h-6 text-white" />
+                                </div>
+                              )}
+                              <div className={`text-xs font-medium mb-2 ${
+                                isCurrentHour ? 'text-orange-200 mt-8' : 'text-white/90'
                               }`}>
                                 {timeString}
                               </div>
-                              <div className="flex justify-center mb-2">
-                                {getWeatherIcon(hour.weather.icon)}
-                              </div>
-                              <div className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                              {!isCurrentHour && (
+                                <div className="flex justify-center mb-2">
+                                  <div className="w-6 h-6 flex items-center justify-center">
+                                    {getWeatherIcon(hour.weather.icon)}
+                                  </div>
+                                </div>
+                              )}
+                              <div className={`text-lg font-bold ${
+                                isCurrentHour ? 'text-white text-xl' : 'text-white'
+                              }`}>
                                 {Math.round(hour.temp)}°
                               </div>
-                              <div className="text-xs text-gray-600 dark:text-gray-400 mb-1 capitalize">
-                                {hour.weather.description}
-                              </div>
                               {hour.pop > 0 && (
-                                <div className="text-xs text-blue-600 dark:text-blue-400">
+                                <div className="text-xs text-white/70 mt-1 flex items-center justify-center gap-1">
+                                  <div className="w-1 h-1 bg-white/70 rounded-full"></div>
                                   {Math.round(hour.pop * 100)}%
                                 </div>
                               )}
                             </div>
                           );
                         })}
+                      </div>
+                      {/* Temperature curve line */}
+                      <div className="px-4 mt-2">
+                        <svg className="w-full h-8" viewBox="0 0 400 32" preserveAspectRatio="none">
+                          <path
+                            d="M 0,16 Q 50,12 100,14 T 200,16 T 300,18 T 400,16"
+                            stroke="rgba(255,255,255,0.6)"
+                            strokeWidth="2"
+                            fill="none"
+                            className="drop-shadow-sm"
+                          />
+                          {weatherData.hourly.slice(0, 8).map((_, index) => (
+                            <circle
+                              key={index}
+                              cx={index * 50 + 25}
+                              cy={16 + Math.sin(index * 0.5) * 4}
+                              r="3"
+                              fill="white"
+                              className="drop-shadow-sm"
+                            />
+                          ))}
+                        </svg>
                       </div>
                     </div>
                   </CardContent>

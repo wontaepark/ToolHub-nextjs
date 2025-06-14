@@ -429,17 +429,20 @@ export default function Weather() {
                     <div className="overflow-x-auto scrollbar-hide">
                       <div className="flex gap-2 px-4" style={{ width: 'max-content' }}>
                         {weatherData.hourly.map((hour, index) => {
-                          const time = new Date(hour.time);
+                          const currentHour = new Date().getHours();
+                          const displayHour = (currentHour + index) % 24;
                           const isCurrentHour = index === 0;
                           
-                          // Format time string based on language
+                          // Format time string based on language and actual hour progression
                           const timeString = isCurrentHour ? 
                             (i18n.language === 'ko' ? '지금' : 
                              i18n.language === 'ja' ? '今' : 'Now') :
-                            time.toLocaleTimeString(
-                              i18n.language === 'ko' ? 'ko-KR' : 
-                              i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
-                              { hour: 'numeric' }
+                            (i18n.language === 'ko' ? 
+                              (displayHour < 12 ? `오전 ${displayHour === 0 ? 12 : displayHour}시` : 
+                               `오후 ${displayHour === 12 ? 12 : displayHour - 12}시`) :
+                             i18n.language === 'ja' ? 
+                              (displayHour < 12 ? `午前${displayHour}時` : `午後${displayHour - 12}時`) :
+                              `${displayHour === 0 ? 12 : displayHour > 12 ? displayHour - 12 : displayHour}${displayHour < 12 ? 'AM' : 'PM'}`
                             );
                           
                           return (
@@ -519,24 +522,64 @@ export default function Weather() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    {weatherData.forecast.map((day, index) => (
-                      <div key={index} className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <div className="text-sm font-medium mb-2">
-                          {index === 0 ? t('weather.today') : formatDate(day.date)}
+                  <div className="space-y-3">
+                    {weatherData.forecast.map((day, index) => {
+                      const today = new Date();
+                      const forecastDate = new Date(today);
+                      forecastDate.setDate(today.getDate() + index);
+                      
+                      // Get day name based on language
+                      const dayName = index === 0 ? 
+                        (i18n.language === 'ko' ? '오늘' : 
+                         i18n.language === 'ja' ? '今日' : 'Today') :
+                        forecastDate.toLocaleDateString(
+                          i18n.language === 'ko' ? 'ko-KR' : 
+                          i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
+                          { weekday: 'long' }
+                        );
+                      
+                      const dateString = forecastDate.toLocaleDateString(
+                        i18n.language === 'ko' ? 'ko-KR' : 
+                        i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
+                        { month: 'numeric', day: 'numeric' }
+                      );
+                      
+                      return (
+                        <div key={index} className={`flex items-center justify-between p-4 rounded-lg transition-colors ${
+                          index === 0 ? 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800' : 
+                          'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}>
+                          <div className="flex items-center gap-4 flex-1">
+                            <div className="text-left">
+                              <div className={`font-medium ${
+                                index === 0 ? 'text-yellow-800 dark:text-yellow-200' : 'text-gray-900 dark:text-white'
+                              }`}>
+                                {dayName}
+                              </div>
+                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {dateString}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex justify-center">
+                              {getWeatherIcon(day.weather.icon)}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400 capitalize min-w-0 flex-shrink-0">
+                              {day.weather.description}
+                            </div>
+                            <div className="text-right">
+                              <div className="text-lg font-bold text-gray-900 dark:text-white">
+                                {Math.round(day.temp_max)}°
+                              </div>
+                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {Math.round(day.temp_min)}°
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex justify-center mb-2">
-                          {getWeatherIcon(day.weather.icon)}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2 capitalize">
-                          {day.weather.description}
-                        </div>
-                        <div className="space-y-1">
-                          <div className="text-lg font-semibold">{Math.round(day.temp_max)}°</div>
-                          <div className="text-sm text-gray-500">{Math.round(day.temp_min)}°</div>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>

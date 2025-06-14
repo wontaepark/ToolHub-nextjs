@@ -79,15 +79,22 @@ class WeatherProviderManager {
     // Initialize providers in priority order
     this.providers = [
       {
-        name: 'AccuWeather',
+        name: 'KMA_API',
         priority: 1,
+        dailyLimit: 2000,
+        baseUrl: 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0',
+        apiKey: process.env.KMA_API_KEY || null
+      },
+      {
+        name: 'AccuWeather',
+        priority: 2,
         dailyLimit: 50,
         baseUrl: 'https://dataservice.accuweather.com',
         apiKey: process.env.ACCUWEATHER_API_KEY || null
       },
       {
         name: 'OpenWeatherMap',
-        priority: 2,
+        priority: 3,
         dailyLimit: 1000,
         baseUrl: 'https://api.openweathermap.org',
         apiKey: process.env.OPENWEATHER_API_KEY || null
@@ -150,6 +157,163 @@ class WeatherProviderManager {
     }
 
     return rateLimit.used < rateLimit.limit;
+  }
+
+  private async callKMA(query: string, isCoordinate: boolean = false): Promise<WeatherData> {
+    const provider = this.providers.find(p => p.name === 'KMA_API');
+    if (!provider?.apiKey) throw new Error('KMA API key not available');
+
+    // Convert coordinates to Korean grid coordinates
+    let nx: number, ny: number;
+    let cityName = query;
+    
+    if (isCoordinate) {
+      const [lat, lon] = query.split(',').map(parseFloat);
+      const gridCoords = this.convertToKMAGrid(lat, lon);
+      nx = gridCoords.nx;
+      ny = gridCoords.ny;
+      cityName = `${lat},${lon}`;
+    } else {
+      // Use predefined Korean city coordinates
+      const koreanCity = normalizeKoreanCity(query);
+      if (koreanCity) {
+        const gridCoords = this.convertToKMAGrid(koreanCity.coords.lat, koreanCity.coords.lon);
+        nx = gridCoords.nx;
+        ny = gridCoords.ny;
+        cityName = koreanCity.en;
+      } else {
+        throw new Error('Location not supported by KMA API');
+      }
+    }
+
+    const now = new Date();
+    const baseDate = now.toISOString().slice(0, 10).replace(/-/g, '');
+    const baseTime = '0600'; // KMA updates at 6AM, 6PM
+
+    try {
+      const response = await fetch(
+        `${provider.baseUrl}/getVilageFcst?serviceKey=${provider.apiKey}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`KMA API request failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.response?.header?.resultCode !== '00') {
+        throw new Error(`KMA API error: ${data.response?.header?.resultMsg || 'Unknown error'}`);
+      }
+
+      return this.formatKMAData(data.response.body.items.item, cityName, nx, ny);
+    } catch (error) {
+      console.error('KMA API call failed:', error);
+      throw error;
+    }
+  }
+
+  private convertToKMAGrid(lat: number, lon: number): { nx: number, ny: number } {
+    // Korean Meteorological Administration grid conversion
+    const RE = 6371.00877; // Earth radius
+    const GRID = 5.0; // Grid spacing
+    const SLAT1 = 30.0; // Standard latitude 1
+    const SLAT2 = 60.0; // Standard latitude 2
+    const OLON = 126.0; // Reference longitude
+    const OLAT = 38.0; // Reference latitude
+    const XO = 43; // X offset
+    const YO = 136; // Y offset
+
+    const DEGRAD = Math.PI / 180.0;
+    const re = RE / GRID;
+    const slat1 = SLAT1 * DEGRAD;
+    const slat2 = SLAT2 * DEGRAD;
+    const olon = OLON * DEGRAD;
+    const olat = OLAT * DEGRAD;
+
+    let sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+    let sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+    let ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+    ro = re * sf / Math.pow(ro, sn);
+
+    let ra = Math.tan(Math.PI * 0.25 + (lat) * DEGRAD * 0.5);
+    ra = re * sf / Math.pow(ra, sn);
+    let theta = lon * DEGRAD - olon;
+    if (theta > Math.PI) theta -= 2.0 * Math.PI;
+    if (theta < -Math.PI) theta += 2.0 * Math.PI;
+    theta *= sn;
+
+    const nx = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+    const ny = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+
+    return { nx, ny };
+  }
+
+  private formatKMAData(items: any[], cityName: string, nx: number, ny: number): WeatherData {
+    // KMA data formatting logic
+    const currentTemp = items.find(item => item.category === 'TMP')?.fcstValue || 0;
+    const humidity = items.find(item => item.category === 'REH')?.fcstValue || 0;
+    const windSpeed = items.find(item => item.category === 'WSD')?.fcstValue || 0;
+    const precipitation = items.find(item => item.category === 'PCP')?.fcstValue || '0';
+    const skyCondition = items.find(item => item.category === 'SKY')?.fcstValue || '1';
+
+    // Convert KMA sky condition to weather description
+    let weatherMain = 'Clear';
+    let weatherDescription = '맑음';
+    if (skyCondition === '3') {
+      weatherMain = 'Clouds';
+      weatherDescription = '구름많음';
+    } else if (skyCondition === '4') {
+      weatherMain = 'Clouds';
+      weatherDescription = '흐림';
+    }
+
+    if (precipitation !== '0' && precipitation !== '강수없음') {
+      weatherMain = 'Rain';
+      weatherDescription = '비';
+    }
+
+    return {
+      location: {
+        name: cityName,
+        country: 'KR',
+        lat: 37.5665, // Default to Seoul for grid coordinates
+        lon: 126.978
+      },
+      current: {
+        temp: parseFloat(currentTemp),
+        feels_like: parseFloat(currentTemp),
+        humidity: parseFloat(humidity),
+        pressure: 1013, // Default value
+        visibility: 10000,
+        uv_index: 5,
+        wind_speed: parseFloat(windSpeed),
+        wind_deg: 0,
+        weather: {
+          main: weatherMain,
+          description: weatherDescription,
+          icon: this.getKMAWeatherIcon(skyCondition, precipitation)
+        }
+      },
+      forecast: [],
+      sunrise: Date.now() / 1000,
+      sunset: Date.now() / 1000 + 12 * 3600,
+      source: 'KMA_API'
+    };
+  }
+
+  private getKMAWeatherIcon(skyCondition: string, precipitation: string): string {
+    if (precipitation !== '0' && precipitation !== '강수없음') {
+      return '10d'; // Rain icon
+    }
+    
+    switch (skyCondition) {
+      case '1': return '01d'; // Clear
+      case '3': return '03d'; // Partly cloudy
+      case '4': return '04d'; // Cloudy
+      default: return '01d';
+    }
   }
 
   private async callAccuWeather(query: string, isCoordinate: boolean = false): Promise<WeatherData> {

@@ -85,7 +85,7 @@ export default function Weather() {
   const [loading, setLoading] = useState(false);
   const [searchCity, setSearchCity] = useState('');
   const [error, setError] = useState('');
-  const [mapZoom, setMapZoom] = useState(14);
+  const [mapZoom, setMapZoom] = useState(6); // Show entire country
   const [mapType, setMapType] = useState<'satellite' | 'roadmap' | 'hybrid'>('satellite');
   const [mapImageLoaded, setMapImageLoaded] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -570,11 +570,11 @@ export default function Weather() {
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                           {/* Pulsing rings */}
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-12 h-12 bg-red-500/20 rounded-full animate-ping"></div>
-                            <div className="absolute w-8 h-8 bg-red-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                            <div className="w-12 h-12 bg-green-500/20 rounded-full animate-ping"></div>
+                            <div className="absolute w-8 h-8 bg-green-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
                           </div>
                           {/* Main location dot */}
-                          <div className="relative w-6 h-6 bg-red-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
+                          <div className="relative w-6 h-6 bg-green-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
                           {/* Location name with better contrast */}
                           <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-1 rounded-md text-sm font-semibold whitespace-nowrap">
                             {weatherData.location.name}

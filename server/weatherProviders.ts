@@ -82,7 +82,7 @@ class WeatherProviderManager {
         name: 'KMA_API',
         priority: 1,
         dailyLimit: 2000,
-        baseUrl: 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0',
+        baseUrl: 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0',
         apiKey: process.env.KMA_API_KEY || null
       },
       {
@@ -186,18 +186,31 @@ class WeatherProviderManager {
       }
     }
 
+    // Get the most recent forecast time
     const now = new Date();
-    const baseDate = now.toISOString().slice(0, 10).replace(/-/g, '');
-    // Use appropriate base time based on current hour
-    const currentHour = now.getHours();
-    let baseTime = '0600';
-    if (currentHour >= 18) baseTime = '1800';
-    else if (currentHour >= 6) baseTime = '0600';
-    else baseTime = '1800'; // Previous day 18:00
+    const koreaTime = new Date(now.getTime() + (9 * 60 * 60 * 1000)); // UTC+9
+    let baseDate = koreaTime.toISOString().slice(0, 10).replace(/-/g, '');
+    let baseTime = '0500'; // KMA updates at 02, 05, 08, 11, 14, 17, 20, 23
+    
+    const koreaHour = koreaTime.getHours();
+    if (koreaHour >= 23) baseTime = '2300';
+    else if (koreaHour >= 20) baseTime = '2000';
+    else if (koreaHour >= 17) baseTime = '1700';
+    else if (koreaHour >= 14) baseTime = '1400';
+    else if (koreaHour >= 11) baseTime = '1100';
+    else if (koreaHour >= 8) baseTime = '0800';
+    else if (koreaHour >= 5) baseTime = '0500';
+    else if (koreaHour >= 2) baseTime = '0200';
+    else {
+      // Use previous day's last forecast
+      const yesterday = new Date(koreaTime.getTime() - 24 * 60 * 60 * 1000);
+      baseDate = yesterday.toISOString().slice(0, 10).replace(/-/g, '');
+      baseTime = '2300';
+    }
 
     try {
-      const url = `${provider.baseUrl}/getVilageFcst?serviceKey=${encodeURIComponent(provider.apiKey)}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
-      console.log('KMA API URL:', url.replace(provider.apiKey, '[API_KEY]'));
+      const url = `${provider.baseUrl}/getVilageFcst?serviceKey=${provider.apiKey}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+      console.log('KMA API request for:', cityName, 'date:', baseDate, 'time:', baseTime, 'coords:', nx, ny);
       
       const response = await fetch(url);
 
@@ -205,7 +218,16 @@ class WeatherProviderManager {
         throw new Error(`KMA API request failed: ${response.status}`);
       }
 
-      const data = await response.json();
+      const responseText = await response.text();
+      console.log('KMA API raw response:', responseText.substring(0, 200));
+      
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('KMA API response is not JSON:', responseText.substring(0, 500));
+        throw new Error(`KMA API returned HTML error instead of JSON. Check API key authentication.`);
+      }
       
       if (data.response?.header?.resultCode !== '00') {
         throw new Error(`KMA API error: ${data.response?.header?.resultMsg || 'Unknown error'}`);

@@ -79,26 +79,27 @@ class WeatherProviderManager {
     // Initialize providers in priority order
     this.providers = [
       {
-        name: 'KMA_API',
-        priority: 1,
-        dailyLimit: 2000,
-        baseUrl: 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0',
-        apiKey: process.env.KMA_API_KEY || null
-      },
-      {
         name: 'AccuWeather',
-        priority: 2,
+        priority: 1,
         dailyLimit: 50,
         baseUrl: 'https://dataservice.accuweather.com',
         apiKey: process.env.ACCUWEATHER_API_KEY || null
       },
       {
         name: 'OpenWeatherMap',
-        priority: 3,
+        priority: 2,
         dailyLimit: 1000,
         baseUrl: 'https://api.openweathermap.org',
         apiKey: process.env.OPENWEATHER_API_KEY || null
       }
+      // KMA_API temporarily disabled due to registration requirements
+      // {
+      //   name: 'KMA_API',
+      //   priority: 1,
+      //   dailyLimit: 2000,
+      //   baseUrl: 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0',
+      //   apiKey: 'MYnN23N7SuIJzdtze3ro8Q'
+      // }
     ].filter(provider => provider.apiKey); // Only include providers with valid API keys
   }
 
@@ -209,8 +210,14 @@ class WeatherProviderManager {
     }
 
     try {
-      const url = `${provider.baseUrl}/getVilageFcst?serviceKey=${provider.apiKey}&numOfRows=100&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
-      console.log('KMA API request for:', cityName, 'date:', baseDate, 'time:', baseTime, 'coords:', nx, ny);
+      // Use the new API key and try different service endpoints
+      const kmaApiKey = 'MYnN23N7SuIJzdtze3ro8Q';
+      
+      // Try the ultra short-term forecast service first
+      let serviceEndpoint = 'getUltraSrtFcst';
+      let url = `${provider.baseUrl}/${serviceEndpoint}?serviceKey=${kmaApiKey}&numOfRows=60&pageNo=1&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+      
+      console.log('KMA API request for:', cityName, 'endpoint:', serviceEndpoint, 'date:', baseDate, 'time:', baseTime, 'coords:', nx, ny);
       
       const response = await fetch(url);
 

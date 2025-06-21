@@ -27,7 +27,8 @@ import {
   Utensils,
   ZoomIn,
   ZoomOut,
-  RotateCcw
+  RotateCcw,
+  Radar
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AdSense from '@/components/AdSense';

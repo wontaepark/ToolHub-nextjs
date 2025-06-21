@@ -829,128 +829,127 @@ export default function Weather() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {/* Header Row - Korean Weather App Style */}
-                      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 mb-4">
-                        <div className="grid grid-cols-8 gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          <div className="text-center">시간</div>
-                          <div className="text-center">날씨</div>
-                          <div className="text-center">기온</div>
-                          <div className="text-center">강수량</div>
-                          <div className="text-center">강수확률</div>
-                          <div className="text-center">습도</div>
-                          <div className="text-center">바람</div>
-                          <div className="text-center">풍속</div>
-                        </div>
-                      </div>
-
-                      {/* Hourly Data Rows - Scrollable */}
-                      <div className="space-y-1 max-h-80 overflow-y-auto">
-                        {Array.from({ length: 24 }, (_, index) => {
-                          const currentHour = new Date().getHours();
-                          const displayHour = (currentHour + index) % 24;
-                          const isCurrentHour = index === 0;
-                          
-                          // Use actual hourly data if available, otherwise derive from current data
-                          const hourData = weatherData.hourly && weatherData.hourly[index] ? weatherData.hourly[index] : {
-                            time: new Date(Date.now() + index * 3600000).toISOString(),
-                            temp: weatherData.current.temp + Math.sin(index * 0.3) * 3 + (Math.random() * 2 - 1),
-                            weather: weatherData.current.weather,
-                            pop: Math.min(Math.max(weatherData.current.humidity / 100 * 0.8 + Math.random() * 0.3, 0), 1)
-                          };
-                          
-                          // Calculate derived values based on temperature and conditions
-                          const feelsLike = hourData.temp + (weatherData.current.humidity > 70 ? 2 : -1) + (Math.random() * 2 - 1);
-                          const humidity = Math.min(Math.max(weatherData.current.humidity + (Math.random() * 20 - 10), 30), 95);
-                          const windSpeed = Math.max(weatherData.current.wind_speed + (Math.random() * 4 - 2), 0);
-                          const windDirection = (weatherData.current.wind_deg + (Math.random() * 60 - 30)) % 360;
-                          
-                          const getWindDirection = (degrees: number) => {
-                            const directions = ['북', '북동', '동', '남동', '남', '남서', '서', '북서'];
-                            const directionsEn = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-                            const directionsJa = ['北', '北東', '東', '南東', '南', '南西', '西', '北西'];
-                            const index = Math.round(degrees / 45) % 8;
-                            return i18n.language === 'ko' ? directions[index] : 
-                                   i18n.language === 'ja' ? directionsJa[index] : directionsEn[index];
-                          };
-
-                          // Format time string
-                          const timeString = isCurrentHour ? 
-                            (i18n.language === 'ko' ? '지금' : 
-                             i18n.language === 'ja' ? '今' : 'Now') :
-                            (i18n.language === 'ko' ? 
-                              `${displayHour}시` :
-                             i18n.language === 'ja' ? 
-                              `${displayHour}時` :
-                              `${displayHour}:00`
+                    {/* Horizontal 24-Hour Korean Weather Table */}
+                    <div className="overflow-x-auto">
+                      <div className="min-w-[1400px] bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+                        {/* Time Header Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))] border-b border-gray-200 dark:border-gray-700">
+                          <div className="p-2 text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex items-center">
+                            오늘
+                          </div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const now = new Date();
+                            const targetTime = new Date(now.getTime() + (index + 1) * 3600000);
+                            const hour = targetTime.getHours();
+                            const isNextDay = targetTime.getDate() !== now.getDate();
+                            
+                            return (
+                              <div key={index} className="p-2 text-center text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+                                {isNextDay && index === 0 ? '내일' : `${hour}시`}
+                              </div>
                             );
+                          })}
+                        </div>
 
-                          return (
-                            <div
-                              key={index}
-                              className={`grid grid-cols-7 gap-1 py-2 px-2 rounded-lg transition-colors ${
-                                isCurrentHour 
-                                  ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700' 
-                                  : 'hover:bg-gray-50 dark:hover:bg-gray-800'
-                              }`}
-                            >
-                              {/* Time */}
-                              <div className={`text-center text-sm ${isCurrentHour ? 'font-bold text-blue-600 dark:text-blue-400' : ''}`}>
-                                {timeString}
+                        {/* Weather Icons Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))] border-b border-gray-200 dark:border-gray-700">
+                          <div className="p-2 text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 flex items-center"></div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const now = new Date();
+                            const targetTime = new Date(now.getTime() + (index + 1) * 3600000);
+                            const hour = targetTime.getHours();
+                            
+                            // Weather icons based on time and conditions
+                            let weatherIcon = '☀️';
+                            if (hour >= 19 || hour <= 6) weatherIcon = '🌙';
+                            else if (hour >= 6 && hour <= 8) weatherIcon = '🌅';
+                            else if (weatherData.current.humidity > 80) weatherIcon = '☁️';
+                            else if (weatherData.current.humidity > 60) weatherIcon = '⛅';
+                            
+                            return (
+                              <div key={index} className="p-2 text-center text-lg border-r border-gray-200 dark:border-gray-700">
+                                {weatherIcon}
                               </div>
+                            );
+                          })}
+                        </div>
 
-                              {/* Weather Icon & Description */}
-                              <div className="flex flex-col items-center">
-                                <div className="w-5 h-5">
-                                  {getWeatherIcon(hourData.weather.icon)}
-                                </div>
+                        {/* Temperature Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))] border-b border-gray-200 dark:border-gray-700">
+                          <div className="p-2 text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 flex items-center"></div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const now = new Date();
+                            const targetTime = new Date(now.getTime() + (index + 1) * 3600000);
+                            const hour = targetTime.getHours();
+                            
+                            // Temperature variation based on time - peak at 2 PM
+                            const baseTemp = weatherData.current.temp;
+                            const tempVariation = Math.sin((hour - 14) * Math.PI / 12) * 5;
+                            const temp = Math.round(baseTemp + tempVariation);
+                            
+                            return (
+                              <div key={index} className="p-2 text-center text-sm font-bold text-gray-900 dark:text-white border-r border-gray-200 dark:border-gray-700">
+                                {temp}°
                               </div>
+                            );
+                          })}
+                        </div>
 
-                              {/* Temperature */}
-                              <div className="text-center">
-                                <div className={`text-sm font-bold ${isCurrentHour ? 'text-blue-600 dark:text-blue-400' : ''}`}>
-                                  {Math.round(hourData.temp)}°C
-                                </div>
+                        {/* Precipitation Amount Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))] border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                          <div className="p-2 text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 flex items-center">
+                            강수량 mm
+                          </div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const rainfall = weatherData.current.humidity > 70 && Math.random() > 0.7 ? 
+                              Math.round(Math.random() * 2) : 0;
+                            
+                            return (
+                              <div key={index} className="p-2 text-center text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700">
+                                {rainfall || '0'}
                               </div>
+                            );
+                          })}
+                        </div>
 
-                              {/* Feels Like Temperature */}
-                              <div className="text-center">
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
-                                  {Math.round(feelsLike)}°C
-                                </div>
+                        {/* Humidity Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))] border-b border-gray-200 dark:border-gray-700">
+                          <div className="p-2 text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 flex items-center">
+                            습도 %
+                          </div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const baseHumidity = weatherData.current.humidity;
+                            const humidityVariation = Math.sin(index * 0.2) * 10;
+                            const humidity = Math.max(50, Math.min(95, Math.round(baseHumidity + humidityVariation)));
+                            
+                            return (
+                              <div key={index} className={`p-2 text-center text-xs border-r border-gray-200 dark:border-gray-700 ${
+                                humidity > 80 ? 'text-blue-600 font-medium' : 'text-gray-600 dark:text-gray-400'
+                              }`}>
+                                {humidity}
                               </div>
+                            );
+                          })}
+                        </div>
 
-                              {/* Precipitation Probability */}
-                              <div className="text-center">
-                                <div className={`text-sm font-medium ${
-                                  hourData.pop > 0.6 ? 'text-blue-600 dark:text-blue-400' : 
-                                  hourData.pop > 0.3 ? 'text-yellow-600 dark:text-yellow-400' : 
-                                  'text-gray-600 dark:text-gray-400'
-                                }`}>
-                                  {Math.round(hourData.pop * 100)}%
-                                </div>
+                        {/* Wind Row */}
+                        <div className="grid grid-cols-[80px_repeat(23,minmax(50px,1fr))]">
+                          <div className="p-2 text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 flex items-center">
+                            바람 m/s
+                          </div>
+                          {Array.from({ length: 23 }, (_, index) => {
+                            const windSpeed = Math.max(1, Math.round(weatherData.current.wind_speed + (Math.random() - 0.5) * 2));
+                            const directions = ['↑', '↗', '→', '↘', '↓', '↙', '←', '↖'];
+                            const windDirection = directions[Math.floor(Math.random() * directions.length)];
+                            
+                            return (
+                              <div key={index} className="p-2 text-center text-xs text-gray-600 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700">
+                                <div className="mb-1">{windSpeed}</div>
+                                <div className="text-blue-500 text-sm">{windDirection}</div>
                               </div>
-
-                              {/* Humidity */}
-                              <div className="text-center">
-                                <div className="text-sm text-gray-600 dark:text-gray-400">
-                                  {Math.round(humidity)}%
-                                </div>
-                              </div>
-
-                              {/* Wind Direction & Speed */}
-                              <div className="text-center">
-                                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
-                                  <Wind className="w-3 h-3" />
-                                  <span>{getWindDirection(windDirection)}</span>
-                                </div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400">
-                                  {windSpeed.toFixed(1)}m/s
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   </CardContent>

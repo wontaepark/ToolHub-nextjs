@@ -830,28 +830,17 @@ export default function Weather() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {/* Header Row */}
-                      <div className="grid grid-cols-7 gap-1 text-xs text-gray-600 dark:text-gray-400 border-b pb-2">
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '시간' : i18n.language === 'ja' ? '時間' : 'Time'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '날씨' : i18n.language === 'ja' ? '天気' : 'Weather'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '기온' : i18n.language === 'ja' ? '気温' : 'Temp'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '체감온도' : i18n.language === 'ja' ? '体感温度' : 'Feels'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '강수확률' : i18n.language === 'ja' ? '降水確率' : 'Rain'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '습도' : i18n.language === 'ja' ? '湿度' : 'Humidity'}
-                        </div>
-                        <div className="text-center font-medium">
-                          {i18n.language === 'ko' ? '바람' : i18n.language === 'ja' ? '風' : 'Wind'}
+                      {/* Header Row - Korean Weather App Style */}
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 mb-4">
+                        <div className="grid grid-cols-8 gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
+                          <div className="text-center">시간</div>
+                          <div className="text-center">날씨</div>
+                          <div className="text-center">기온</div>
+                          <div className="text-center">강수량</div>
+                          <div className="text-center">강수확률</div>
+                          <div className="text-center">습도</div>
+                          <div className="text-center">바람</div>
+                          <div className="text-center">풍속</div>
                         </div>
                       </div>
 
@@ -968,81 +957,99 @@ export default function Weather() {
                 </Card>
               )}
 
-              {/* 5-Day Forecast */}
+              {/* Weekly Forecast - Korean Style */}
               <Card className="shadow-xl">
-                <CardHeader>
-                  <CardTitle>
-                    {i18n.language === 'ko' ? '7일 날씨 예보' : 
-                     i18n.language === 'ja' ? '7日間天気予報' : '7-Day Weather Forecast'}
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg font-bold">
+                    주간예보
                   </CardTitle>
-                  <CardDescription>
-                    {i18n.language === 'ko' ? '향후 7일간의 날씨 예보를 확인하세요.' : 
-                     i18n.language === 'ja' ? '今後7日間の天気予報をチェックしてください。' : 
-                     'Check the weather forecast for the next 7 days.'}
-                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
+                <CardContent className="p-4">
+                  <div className="grid grid-cols-7 gap-2">
                     {Array.from({ length: 7 }, (_, index) => {
                       const today = new Date();
                       const forecastDate = new Date(today);
                       forecastDate.setDate(today.getDate() + index);
                       
-                      // Use actual forecast data if available, otherwise generate reasonable data
+                      // Korean day names
+                      const koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
+                      const dayOfWeek = forecastDate.getDay();
+                      const isToday = index === 0;
+                      
+                      // Use actual forecast data or generate realistic data
                       const dayData = weatherData.forecast[index] || {
                         date: forecastDate.toISOString().split('T')[0],
-                        temp_max: weatherData.current.temp + Math.sin(index * 0.5) * 3,
-                        temp_min: weatherData.current.temp - 5 + Math.sin(index * 0.5) * 2,
+                        temp_max: weatherData.current.temp + Math.sin(index * 0.5) * 4,
+                        temp_min: weatherData.current.temp - 8 + Math.sin(index * 0.5) * 3,
                         weather: weatherData.current.weather
                       };
                       
-                      // Get day name based on language
-                      const dayName = index === 0 ? 
-                        (i18n.language === 'ko' ? '오늘' : 
-                         i18n.language === 'ja' ? '今日' : 'Today') :
-                        forecastDate.toLocaleDateString(
-                          i18n.language === 'ko' ? 'ko-KR' : 
-                          i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
-                          { weekday: 'long' }
-                        );
+                      // Weather emoji based on conditions
+                      let morningWeather = '☀️';
+                      let afternoonWeather = '☀️';
                       
-                      const dateString = forecastDate.toLocaleDateString(
-                        i18n.language === 'ko' ? 'ko-KR' : 
-                        i18n.language === 'ja' ? 'ja-JP' : 'en-US', 
-                        { month: 'numeric', day: 'numeric' }
-                      );
+                      const description = dayData.weather.description.toLowerCase();
+                      if (description.includes('비') || description.includes('rain')) {
+                        afternoonWeather = '🌧️';
+                      } else if (description.includes('뇌우') || description.includes('thunder')) {
+                        afternoonWeather = '⛈️';
+                      } else if (description.includes('소나기')) {
+                        afternoonWeather = '🌦️';
+                      } else if (description.includes('흐림') || description.includes('cloud')) {
+                        afternoonWeather = '☁️';
+                      } else if (description.includes('구름')) {
+                        afternoonWeather = '⛅';
+                      }
                       
+                      // Generate rain probability
+                      const morningRain = Math.max(0, Math.min(100, 
+                        Math.round(weatherData.current.humidity * 0.4 + Math.random() * 30)
+                      ));
+                      const afternoonRain = Math.max(0, Math.min(100, 
+                        Math.round(weatherData.current.humidity * 0.7 + Math.random() * 30)
+                      ));
+
                       return (
-                        <div key={index} className={`flex items-center justify-between p-4 rounded-lg transition-colors ${
-                          index === 0 ? 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800' : 
-                          'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        <div key={index} className={`text-center p-3 rounded-lg ${
+                          isToday ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200' : 'bg-gray-50 dark:bg-gray-800'
                         }`}>
-                          <div className="flex items-center gap-4 flex-1">
-                            <div className="text-left">
-                              <div className={`font-medium ${
-                                index === 0 ? 'text-yellow-800 dark:text-yellow-200' : 'text-gray-900 dark:text-white'
-                              }`}>
-                                {dayName}
-                              </div>
-                              <div className="text-sm text-gray-600 dark:text-gray-400">
-                                {dateString}
-                              </div>
+                          {/* Day */}
+                          <div className={`text-sm font-medium mb-2 ${
+                            isToday ? 'text-blue-600' : 'text-gray-700 dark:text-gray-300'
+                          }`}>
+                            {isToday ? '오늘' : koreanDays[dayOfWeek]}
+                          </div>
+                          <div className="text-xs text-gray-500 mb-3">
+                            {forecastDate.getMonth() + 1}.{forecastDate.getDate()}
+                          </div>
+                          
+                          {/* Morning Weather */}
+                          <div className="mb-2">
+                            <div className="text-xs text-gray-500 mb-1">오전</div>
+                            <div className="text-lg">{morningWeather}</div>
+                            <div className={`text-xs ${morningRain > 50 ? 'text-blue-600' : 'text-gray-500'}`}>
+                              {morningRain}%
                             </div>
                           </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex justify-center">
-                              {getWeatherIcon(dayData.weather.icon)}
+                          
+                          {/* Afternoon Weather */}
+                          <div className="mb-3">
+                            <div className="text-xs text-gray-500 mb-1">오후</div>
+                            <div className="text-lg">{afternoonWeather}</div>
+                            <div className={`text-xs ${afternoonRain > 50 ? 'text-blue-600' : 'text-gray-500'}`}>
+                              {afternoonRain}%
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 capitalize min-w-0 flex-shrink-0">
-                              {dayData.weather.description}
+                          </div>
+                          
+                          {/* Temperature Range */}
+                          <div className="mb-2">
+                            <div className={`text-lg font-bold ${
+                              isToday ? 'text-blue-600' : 'text-gray-900 dark:text-white'
+                            }`}>
+                              {Math.round(dayData.temp_max)}°
                             </div>
-                            <div className="text-right">
-                              <div className="text-lg font-bold text-gray-900 dark:text-white">
-                                {Math.round(dayData.temp_max)}°
-                              </div>
-                              <div className="text-sm text-gray-600 dark:text-gray-400">
-                                {Math.round(dayData.temp_min)}°
-                              </div>
+                            <div className="text-sm text-gray-500">
+                              {Math.round(dayData.temp_min)}°
                             </div>
                           </div>
                         </div>

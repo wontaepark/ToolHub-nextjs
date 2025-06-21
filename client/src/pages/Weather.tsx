@@ -445,232 +445,136 @@ export default function Weather() {
                 </CardContent>
               </Card>
 
-              {/* Weather Radar Map */}
+              {/* Satellite & Radar Images */}
               <Card className="shadow-xl">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5" />
-                    {i18n.language === 'ko' ? '레이더 및 지도' : 
-                     i18n.language === 'ja' ? 'レーダーと地図' : 'Radar & Map'}
+                    <Radar className="h-5 w-5" />
+                    위성영상 및 레이더
                   </CardTitle>
-                  <CardDescription>
-                    {i18n.language === 'ko' ? `현재 주변 지역의 기온은 약 ${Math.round(weatherData.current.temp)}°C입니다.` : 
-                     i18n.language === 'ja' ? `現在周辺地域の気温は約${Math.round(weatherData.current.temp)}°Cです。` : 
-                     `Current temperature in surrounding areas is about ${Math.round(weatherData.current.temp)}°C.`}
-                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="relative">
-                    {/* Map Controls */}
-                    <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="bg-white/90 hover:bg-white"
-                        onClick={() => setMapZoom(prev => Math.min(prev + 2, 20))}
-                      >
-                        <ZoomIn className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="bg-white/90 hover:bg-white"
-                        onClick={() => setMapZoom(prev => Math.max(prev - 2, 8))}
-                      >
-                        <ZoomOut className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="bg-white/90 hover:bg-white"
-                        onClick={() => setMapZoom(14)}
-                      >
-                        <RotateCcw className="h-4 w-4" />
-                      </Button>
-                    </div>
-
-                    {/* Map Type Selector */}
-                    <div className="absolute top-4 left-4 z-20 flex gap-1">
-                      <Button
-                        size="sm"
-                        variant={mapType === 'satellite' ? 'default' : 'outline'}
-                        className="bg-white/90 hover:bg-white text-xs px-2"
-                        onClick={() => setMapType('satellite')}
-                      >
-                        {i18n.language === 'ko' ? '강수' : i18n.language === 'ja' ? '降水' : 'Rain'}
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={mapType === 'hybrid' ? 'default' : 'outline'}
-                        className="bg-white/90 hover:bg-white text-xs px-2"
-                        onClick={() => setMapType('hybrid')}
-                      >
-                        {i18n.language === 'ko' ? '구름' : i18n.language === 'ja' ? '雲' : 'Clouds'}
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={mapType === 'roadmap' ? 'default' : 'outline'}
-                        className="bg-white/90 hover:bg-white text-xs px-2"
-                        onClick={() => setMapType('roadmap')}
-                      >
-                        {i18n.language === 'ko' ? '위성' : i18n.language === 'ja' ? '衛星' : 'Satellite'}
-                      </Button>
-                    </div>
-
-                    <div 
-                      ref={mapContainerRef}
-                      className="relative h-80 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 cursor-pointer"
-                      onClick={() => {
-                        // Toggle between zoom levels for quick preview
-                        setMapZoom(prev => prev === 14 ? 16 : 14);
-                      }}
-                    >
-                      {/* Loading placeholder */}
-                      {!mapImageLoaded && (
-                        <div className="absolute inset-0 bg-gray-300 dark:bg-gray-600 animate-pulse flex items-center justify-center">
-                          <div className="text-gray-500 dark:text-gray-400">
-                            {i18n.language === 'ko' ? '위성사진 로딩 중...' : 
-                             i18n.language === 'ja' ? '衛星写真読み込み中...' : 
-                             'Loading satellite image...'}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Base Satellite Image */}
-                      <img
-                        src={getBaseSatelliteUrl(weatherData.location.lat, weatherData.location.lon, mapZoom)}
-                        alt={`${weatherData.location.name} satellite base`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        onLoad={() => setMapImageLoaded(true)}
-                      />
-
-                      {/* Weather Overlay Layer */}
-                      {mapType === 'satellite' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Satellite Image */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-medium">위성영상</h3>
+                        <button className="text-blue-500 text-sm hover:underline">
+                          자세히 보기 →
+                        </button>
+                      </div>
+                      
+                      <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                        {/* Satellite Map Base */}
                         <img
-                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, mapZoom, 'precipitation_new')}
-                          alt="precipitation overlay"
-                          className="absolute inset-0 w-full h-full object-cover opacity-70"
-                          style={{ mixBlendMode: 'multiply' }}
+                          src={getBaseSatelliteUrl(weatherData.location.lat, weatherData.location.lon, 6)}
+                          alt="위성영상"
+                          className="absolute inset-0 w-full h-full object-cover"
                         />
-                      )}
-
-                      {mapType === 'hybrid' && (
-                        <img
-                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, mapZoom, 'clouds_new')}
-                          alt="cloud overlay"
-                          className="absolute inset-0 w-full h-full object-cover opacity-60"
-                          style={{ mixBlendMode: 'multiply' }}
-                        />
-                      )}
-
-                      {/* Weather overlay with location marker */}
-                      <div className="absolute inset-0">
-                        {/* Location marker with enhanced visibility */}
+                        
+                        {/* Location marker */}
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                          {/* Pulsing rings */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-12 h-12 bg-green-500/20 rounded-full animate-ping"></div>
-                            <div className="absolute w-8 h-8 bg-green-500/30 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                          <div className="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
+                        </div>
+                        
+                        {/* City labels overlay */}
+                        <div className="absolute inset-0 text-white text-xs font-medium drop-shadow-lg">
+                          <div className="absolute top-8 left-8">천안</div>
+                          <div className="absolute top-12 right-12">안양</div>
+                          <div className="absolute bottom-20 left-12">인천</div>
+                          <div className="absolute bottom-12 right-16">서울</div>
+                          <div className="absolute top-16 left-1/3">전주</div>
+                          <div className="absolute bottom-16 left-1/4">단양</div>
+                        </div>
+                        
+                        {/* Time control */}
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <div className="bg-black/80 rounded-lg p-2">
+                            <div className="flex items-center gap-2">
+                              <button className="text-white">▶</button>
+                              <div className="flex-1 bg-gray-600 h-1 rounded relative">
+                                <div className="absolute left-0 top-0 h-full w-1/3 bg-green-500 rounded"></div>
+                                <div className="absolute left-1/3 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-green-500 rounded-full border border-white"></div>
+                              </div>
+                              <span className="text-white text-xs">22:00</span>
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-300 mt-1">
+                              <span>22:30</span>
+                              <span>23:00</span>
+                              <span>23:30</span>
+                            </div>
                           </div>
-                          {/* Main location dot */}
-                          <div className="relative w-6 h-6 bg-green-500 rounded-full shadow-lg border-2 border-white animate-pulse"></div>
-                          {/* Location name with better contrast */}
-                          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-1 rounded-md text-sm font-semibold whitespace-nowrap">
-                            {weatherData.location.name}
-                          </div>
                         </div>
-
-                        {/* Semi-transparent weather info overlay */}
-                        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 text-white">
-                          <div className="text-xs opacity-90">
-                            {i18n.language === 'ko' ? '현재 날씨' : 
-                             i18n.language === 'ja' ? '現在の天気' : 'Current Weather'}
-                          </div>
-                          <div className="text-lg font-bold">{Math.round(weatherData.current.temp)}°C</div>
-                          <div className="text-xs opacity-90">{weatherData.current.weather.description}</div>
-                        </div>
-
-                        {/* Temperature indicators around the map */}
-                        <div className="absolute top-8 right-8 bg-white/80 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
-                          {Math.round(weatherData.current.temp + 1)}°C
-                        </div>
-                        <div className="absolute bottom-16 left-8 bg-white/80 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
-                          {Math.round(weatherData.current.temp)}°C
-                        </div>
-                        <div className="absolute bottom-16 right-8 bg-white/80 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium shadow-md">
-                          {Math.round(weatherData.current.temp - 1)}°C
-                        </div>
-
-                        {/* Click to expand indicator */}
-                        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm rounded-lg px-2 py-1 text-white text-xs opacity-70">
-                          {i18n.language === 'ko' ? '클릭하여 확대' : 
-                           i18n.language === 'ja' ? 'クリックして拡大' : 'Click to zoom'}
-                        </div>
-
-                        {/* Weather condition overlay */}
-                        {weatherData.current.weather.main.toLowerCase().includes('rain') && (
-                          <div className="absolute inset-0 pointer-events-none">
-                            <svg className="w-full h-full" viewBox="0 0 800 320">
-                              <defs>
-                                <pattern id="rainOverlay" patternUnits="userSpaceOnUse" width="30" height="30">
-                                  <circle cx="15" cy="15" r="1.5" fill="rgba(59, 130, 246, 0.4)" />
-                                  <circle cx="7" cy="22" r="1" fill="rgba(59, 130, 246, 0.3)" />
-                                  <circle cx="23" cy="8" r="1" fill="rgba(59, 130, 246, 0.3)" />
-                                </pattern>
-                              </defs>
-                              <rect width="800" height="320" fill="url(#rainOverlay)" />
-                            </svg>
-                          </div>
-                        )}
+                      </div>
+                      
+                      <div className="text-xs text-gray-500 text-center">
+                        기상청 발표, 천리안이 적외 천연 영상색상 2025.06.21. 23:50
                       </div>
                     </div>
 
-                    {/* Map Info & Performance Stats */}
-                    <div className="mt-3 flex justify-between items-center text-xs text-gray-600 dark:text-gray-400">
-                      <div>
-                        {i18n.language === 'ko' ? '고해상도 위성사진 | 클릭하여 빠른 줌' : 
-                         i18n.language === 'ja' ? '高解像度衛星写真 | クリックで高速ズーム' : 
-                         'High-res satellite | Click for quick zoom'}
+                    {/* Radar Image */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-medium">레이더 영상</h3>
+                        <button className="text-blue-500 text-sm hover:underline">
+                          자세히 보기 →
+                        </button>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span>
-                          {i18n.language === 'ko' ? '캐시됨' : 
-                           i18n.language === 'ja' ? 'キャッシュ済み' : 
-                           'Cached'}
-                        </span>
+                      
+                      <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-700">
+                        {/* Radar base map */}
+                        <img
+                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, 6, 'precipitation_new')}
+                          alt="레이더 영상"
+                          className="absolute inset-0 w-full h-full object-cover opacity-90"
+                        />
+                        
+                        {/* Radar overlay pattern */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/20 to-green-500/30"></div>
+                        
+                        {/* Location marker */}
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
+                        </div>
+                        
+                        {/* Radar precipitation colors */}
+                        <div className="absolute inset-0">
+                          <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-blue-400/60 rounded-full"></div>
+                          <div className="absolute top-1/3 left-1/3 w-6 h-6 bg-green-400/70 rounded-full"></div>
+                          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 bg-yellow-400/80 rounded-full"></div>
+                        </div>
+                        
+                        {/* Regional labels */}
+                        <div className="absolute inset-0 text-white text-xs font-medium drop-shadow-lg">
+                          <div className="absolute top-6 left-6">경기</div>
+                          <div className="absolute top-6 right-8">강원도</div>
+                          <div className="absolute bottom-20 left-8">충청</div>
+                          <div className="absolute bottom-8 right-12">서울</div>
+                          <div className="absolute top-1/2 left-1/4">인천</div>
+                        </div>
+                        
+                        {/* Time control */}
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <div className="bg-black/80 rounded-lg p-2">
+                            <div className="flex items-center gap-2">
+                              <button className="text-white">▶</button>
+                              <div className="flex-1 bg-gray-600 h-1 rounded relative">
+                                <div className="absolute left-0 top-0 h-full w-1/2 bg-blue-500 rounded"></div>
+                                <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                              </div>
+                              <span className="text-white text-xs">22:10</span>
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-300 mt-1">
+                              <span>22:40</span>
+                              <span>23:10</span>
+                              <span>23:40</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-
-                    {/* Weather Data Info */}
-                    <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-gray-600 dark:text-gray-400">
-                          {i18n.language === 'ko' ? '기상 데이터' : 
-                           i18n.language === 'ja' ? '気象データ' : 
-                           'Weather Data'}
-                        </span>
-                        <span className="font-medium">
-                          {mapType === 'satellite' ? 
-                            (i18n.language === 'ko' ? '강수량' : i18n.language === 'ja' ? '降水量' : 'Precipitation') :
-                           mapType === 'hybrid' ?
-                            (i18n.language === 'ko' ? '구름 분포' : i18n.language === 'ja' ? '雲分布' : 'Cloud Cover') :
-                            (i18n.language === 'ko' ? '위성 지형' : i18n.language === 'ja' ? '衛星地形' : 'Satellite Terrain')
-                          }
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-400">
-                          {i18n.language === 'ko' ? '업데이트' : 
-                           i18n.language === 'ja' ? '更新' : 
-                           'Updated'}
-                        </span>
-                        <span className="font-medium">
-                          {i18n.language === 'ko' ? '실시간' : 
-                           i18n.language === 'ja' ? 'リアルタイム' : 
-                           'Real-time'}
-                        </span>
+                      
+                      <div className="text-xs text-gray-500 text-center">
+                        기상청 발표, 천리안이 적외 천연 영상색상 2025.06.22. 00:00
                       </div>
                     </div>
                   </div>

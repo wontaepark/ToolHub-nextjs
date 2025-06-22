@@ -165,10 +165,40 @@ class WeatherProviderManager {
       throw new Error('KMA API key not configured');
     }
 
-    // Use current time minus 1 hour if no dateTime provided (최근 2일까지 조회가능)
-    const now = new Date();
-    const targetTime = dateTime ? new Date(dateTime) : new Date(now.getTime() - 60 * 60 * 1000);
-    const formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12); // YYYYMMDDHH24MI
+    let formattedTime: string;
+    
+    if (dateTime) {
+      console.log('Received dateTime:', dateTime);
+      // If dateTime is already in YYYYMMDDHHMM format, use it directly
+      if (/^\d{12}$/.test(dateTime)) {
+        formattedTime = dateTime;
+        console.log('Using dateTime as-is:', formattedTime);
+      } else {
+        // Try to parse as ISO string or other format
+        try {
+          console.log('Attempting to parse dateTime:', dateTime);
+          const targetTime = new Date(dateTime);
+          if (isNaN(targetTime.getTime())) {
+            throw new Error('Invalid date format');
+          }
+          formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
+          console.log('Parsed and formatted dateTime:', formattedTime);
+        } catch (error) {
+          console.error('Error parsing dateTime:', dateTime, error);
+          // Fallback to current time minus 1 hour
+          const now = new Date();
+          const fallbackTime = new Date(now.getTime() - 60 * 60 * 1000);
+          formattedTime = fallbackTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
+          console.log('Using fallback time:', formattedTime);
+        }
+      }
+    } else {
+      // Use current time minus 1 hour if no dateTime provided
+      const now = new Date();
+      const targetTime = new Date(now.getTime() - 60 * 60 * 1000);
+      formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
+      console.log('No dateTime provided, using default:', formattedTime);
+    }
 
     const radarUrl = `https://apihub.kma.go.kr/api/typ02/openApi/WthrRadarInfoService/getCompCappiQcdAll`;
     const params = new URLSearchParams({

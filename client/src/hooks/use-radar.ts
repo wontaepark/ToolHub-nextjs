@@ -56,6 +56,11 @@ export function useRadarTimeline() {
     
     for (let i = 12; i >= 0; i--) {
       const time = new Date(now.getTime() - (i * 30 * 60 * 1000));
+      // Round to nearest 10 minutes for KMA API compatibility
+      time.setMinutes(Math.floor(time.getMinutes() / 10) * 10);
+      time.setSeconds(0);
+      time.setMilliseconds(0);
+      
       const timeString = time.toISOString().replace(/[-:T]/g, '').slice(0, 12);
       times.push(timeString);
     }

@@ -29,10 +29,21 @@ export function useRadarData(dateTime?: string) {
       
       const response = await fetch(`/api/weather/radar?${params.toString()}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch radar data');
+        const errorText = await response.text();
+        console.error('Radar API error:', response.status, errorText);
+        throw new Error(`Failed to fetch radar data: ${response.status}`);
       }
       
-      return response.json() as Promise<RadarData>;
+      const data = await response.json();
+      
+      // Check if KMA API returned an error
+      if (data.response?.header?.resultCode === '03' || data.response?.header?.resultMsg === 'NO_DATA_AVAILABLE') {
+        console.warn('KMA API returned NO_DATA for dateTime:', dateTime);
+        // Return null to indicate no data available
+        return null;
+      }
+      
+      return data as RadarData;
     },
     staleTime: 15 * 60 * 1000, // 15 minutes
     retry: 3

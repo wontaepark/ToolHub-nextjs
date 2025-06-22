@@ -167,37 +167,50 @@ class WeatherProviderManager {
 
     let formattedTime: string;
     
-    if (dateTime) {
-      console.log('Received dateTime:', dateTime);
-      // If dateTime is already in YYYYMMDDHHMM format, use it directly
-      if (/^\d{12}$/.test(dateTime)) {
-        formattedTime = dateTime;
-        console.log('Using dateTime as-is:', formattedTime);
-      } else {
-        // Try to parse as ISO string or other format
-        try {
-          console.log('Attempting to parse dateTime:', dateTime);
-          const targetTime = new Date(dateTime);
-          if (isNaN(targetTime.getTime())) {
-            throw new Error('Invalid date format');
+    try {
+      if (dateTime) {
+        // If dateTime is already in YYYYMMDDHHMM format, use it directly
+        if (/^\d{12}$/.test(dateTime)) {
+          formattedTime = dateTime;
+        } else if (/^\d{14}$/.test(dateTime)) {
+          // If it's YYYYMMDDHHMMSS format, truncate to YYYYMMDDHHMM
+          formattedTime = dateTime.slice(0, 12);
+        } else {
+          // Try to parse as ISO string or construct from parts
+          let targetTime: Date;
+          
+          if (dateTime.includes('-') || dateTime.includes('T')) {
+            // ISO format
+            targetTime = new Date(dateTime);
+          } else if (/^\d{8}$/.test(dateTime)) {
+            // YYYYMMDD format - add current hour/minute
+            const year = parseInt(dateTime.slice(0, 4));
+            const month = parseInt(dateTime.slice(4, 6)) - 1;
+            const day = parseInt(dateTime.slice(6, 8));
+            const now = new Date();
+            targetTime = new Date(year, month, day, now.getHours(), now.getMinutes());
+          } else {
+            throw new Error('Unsupported date format');
           }
+          
+          if (isNaN(targetTime.getTime())) {
+            throw new Error('Invalid date value');
+          }
+          
           formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
-          console.log('Parsed and formatted dateTime:', formattedTime);
-        } catch (error) {
-          console.error('Error parsing dateTime:', dateTime, error);
-          // Fallback to current time minus 1 hour
-          const now = new Date();
-          const fallbackTime = new Date(now.getTime() - 60 * 60 * 1000);
-          formattedTime = fallbackTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
-          console.log('Using fallback time:', formattedTime);
         }
+      } else {
+        // Use current time minus 1 hour if no dateTime provided
+        const now = new Date();
+        const targetTime = new Date(now.getTime() - 60 * 60 * 1000);
+        formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
       }
-    } else {
-      // Use current time minus 1 hour if no dateTime provided
+    } catch (error) {
+      console.error('Date parsing error:', error, 'dateTime:', dateTime);
+      // Fallback to current time minus 1 hour
       const now = new Date();
-      const targetTime = new Date(now.getTime() - 60 * 60 * 1000);
-      formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
-      console.log('No dateTime provided, using default:', formattedTime);
+      const fallbackTime = new Date(now.getTime() - 60 * 60 * 1000);
+      formattedTime = fallbackTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
     }
 
     const radarUrl = `https://apihub.kma.go.kr/api/typ02/openApi/WthrRadarInfoService/getCompCappiQcdAll`;

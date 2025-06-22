@@ -541,51 +541,65 @@ export default function Weather() {
                               <div className="text-xs mt-1">잠시 후 다시 시도해주세요</div>
                             </div>
                           </div>
-                        ) : radarData ? (
+                        ) : radarData && radarData.response?.body?.items?.item ? (
                           <>
                             {/* KMA Radar Data Visualization */}
                             <div className="absolute inset-0 bg-gray-800">
                               <canvas 
                                 ref={(canvas) => {
-                                  if (canvas && radarData.value) {
+                                  if (canvas && radarData.response?.body?.items?.item) {
                                     const ctx = canvas.getContext('2d');
-                                    if (ctx) {
-                                      canvas.width = radarData.xdim || 256;
-                                      canvas.height = radarData.ydim || 256;
+                                    const radarItem = radarData.response.body.items.item;
+                                    
+                                    if (ctx && radarItem.value) {
+                                      canvas.width = radarItem.xdim || 256;
+                                      canvas.height = radarItem.ydim || 256;
                                       
                                       // Parse radar value data and render
                                       const imageData = ctx.createImageData(canvas.width, canvas.height);
-                                      const values = radarData.value.split(',').map(Number);
+                                      const values = radarItem.value.split(',').map(Number);
                                       
                                       for (let i = 0; i < values.length; i++) {
                                         const val = values[i];
                                         const pixelIndex = i * 4;
                                         
-                                        // Color mapping for radar reflectivity
-                                        if (val > 50) {
+                                        // Korean weather radar color mapping (dBZ values)
+                                        if (val >= 55) {
+                                          // Very strong precipitation - Dark Red
+                                          imageData.data[pixelIndex] = 139;     // R
+                                          imageData.data[pixelIndex + 1] = 0;   // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 200; // A
+                                        } else if (val >= 45) {
                                           // Strong precipitation - Red
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 0;   // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
                                           imageData.data[pixelIndex + 3] = 180; // A
-                                        } else if (val > 30) {
-                                          // Moderate precipitation - Orange
+                                        } else if (val >= 35) {
+                                          // Heavy precipitation - Orange
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 165; // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
                                           imageData.data[pixelIndex + 3] = 160; // A
-                                        } else if (val > 15) {
-                                          // Light precipitation - Yellow
+                                        } else if (val >= 25) {
+                                          // Moderate precipitation - Yellow
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 255; // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
                                           imageData.data[pixelIndex + 3] = 140; // A
-                                        } else if (val > 5) {
-                                          // Very light precipitation - Green
-                                          imageData.data[pixelIndex] = 0;       // R
-                                          imageData.data[pixelIndex + 1] = 255; // G
-                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                        } else if (val >= 15) {
+                                          // Light precipitation - Light Green
+                                          imageData.data[pixelIndex] = 144;     // R
+                                          imageData.data[pixelIndex + 1] = 238; // G
+                                          imageData.data[pixelIndex + 2] = 144; // B
                                           imageData.data[pixelIndex + 3] = 120; // A
+                                        } else if (val >= 5) {
+                                          // Very light precipitation - Light Blue
+                                          imageData.data[pixelIndex] = 173;     // R
+                                          imageData.data[pixelIndex + 1] = 216; // G
+                                          imageData.data[pixelIndex + 2] = 230; // B
+                                          imageData.data[pixelIndex + 3] = 100; // A
                                         } else {
                                           // No precipitation - Transparent
                                           imageData.data[pixelIndex] = 0;       // R
@@ -618,8 +632,15 @@ export default function Weather() {
                             </div>
                           </>
                         ) : (
-                          <div className="absolute inset-0 bg-gray-600 flex items-center justify-center">
-                            <div className="text-white text-sm">레이더 데이터 없음</div>
+                          <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                            <div className="text-white text-sm text-center p-4">
+                              <div className="mb-2">
+                                <Radar className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+                              </div>
+                              <div className="font-medium">레이더 데이터 없음</div>
+                              <div className="text-xs mt-1 text-gray-300">현재 강수가 없거나 데이터 업데이트 중입니다</div>
+                              <div className="text-xs mt-1 text-gray-400">기상청 레이더는 10분 간격으로 업데이트됩니다</div>
+                            </div>
                           </div>
                         )}
                         
@@ -666,16 +687,16 @@ export default function Weather() {
                       </div>
                       
                       <div className="text-xs text-gray-500 text-center">
-                        {radarData ? (
-                          <>기상청 발표, 레이더 합성영상 {radarData.dateTime && new Date(
-                            radarData.dateTime.slice(0, 4) + '-' + 
-                            radarData.dateTime.slice(4, 6) + '-' + 
-                            radarData.dateTime.slice(6, 8) + 'T' + 
-                            radarData.dateTime.slice(8, 10) + ':' + 
-                            radarData.dateTime.slice(10, 12)
+                        {radarData && radarData.response?.body?.items?.item ? (
+                          <>기상청 발표, 레이더 합성영상 {radarData.response.body.items.item.dateTime && new Date(
+                            radarData.response.body.items.item.dateTime.slice(0, 4) + '-' + 
+                            radarData.response.body.items.item.dateTime.slice(4, 6) + '-' + 
+                            radarData.response.body.items.item.dateTime.slice(6, 8) + 'T' + 
+                            radarData.response.body.items.item.dateTime.slice(8, 10) + ':' + 
+                            radarData.response.body.items.item.dateTime.slice(10, 12)
                           ).toLocaleString('ko-KR')}</>
                         ) : (
-                          '기상청 발표, 천리안이 적외 천연 영상색상 2025.06.22. 00:00'
+                          '기상청 발표, 레이더 데이터 처리 중'
                         )}
                       </div>
                     </div>

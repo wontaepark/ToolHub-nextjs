@@ -431,153 +431,15 @@ export default function Weather() {
                     </div>
                   </div>
 
-                  {/* Sun Times */}
-                  <div className="flex justify-center gap-8 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center gap-2">
-                      <Sunrise className="h-5 w-5 text-orange-500" />
-                      <span className="text-sm">{t('weather.sunrise')}: {formatTime(weatherData.sunrise)}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Sunset className="h-5 w-5 text-orange-600" />
-                      <span className="text-sm">{t('weather.sunset')}: {formatTime(weatherData.sunset)}</span>
-                    </div>
-                  </div>
+                  
                 </CardContent>
               </Card>
 
 
 
-              {/* Additional Weather Info Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Pressure Gauge */}
-                <Card className="shadow-xl">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center gap-2 text-sm">
-                      <Gauge className="h-4 w-4" />
-                      {i18n.language === 'ko' ? '기압' : 
-                       i18n.language === 'ja' ? '気圧' : 'Pressure'}
-                    </CardTitle>
-                    <CardDescription className="text-xs">
-                      {i18n.language === 'ko' ? '기압이 낮아지고 있어요' : 
-                       i18n.language === 'ja' ? '気圧が下がっています' : 'Pressure is dropping'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="flex flex-col items-center">
-                      <div className="relative w-32 h-16 mb-2">
-                        <svg className="w-full h-full" viewBox="0 0 128 64">
-                          <path
-                            d="M 8,56 A 48,48 0 0,1 120,56"
-                            stroke="rgba(156, 163, 175, 0.3)"
-                            strokeWidth="8"
-                            fill="none"
-                            strokeLinecap="round"
-                          />
-                          <path
-                            d="M 8,56 A 48,48 0 0,1 120,56"
-                            stroke="rgb(59, 130, 246)"
-                            strokeWidth="8"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeDasharray={`${(weatherData.current.pressure - 980) / 60 * 175} 175`}
-                          />
-                          <circle
-                            cx="64"
-                            cy="56"
-                            r="2"
-                            fill="rgb(59, 130, 246)"
-                            transform={`rotate(${(weatherData.current.pressure - 980) / 60 * 180 - 90} 64 56)`}
-                          />
-                        </svg>
-                      </div>
-                      <div className="text-2xl font-bold">{weatherData.current.pressure}</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">hPa</div>
-                    </div>
-                  </CardContent>
-                </Card>
+              
 
-                {/* Visibility */}
-                <Card className="shadow-xl">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center gap-2 text-sm">
-                      <Eye className="h-4 w-4" />
-                      {i18n.language === 'ko' ? '가시거리' : 
-                       i18n.language === 'ja' ? '視程' : 'Visibility'}
-                    </CardTitle>
-                    <CardDescription className="text-xs">
-                      {i18n.language === 'ko' ? '가시거리가 보통이에요' : 
-                       i18n.language === 'ja' ? '視程は普通です' : 'Visibility is moderate'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="flex flex-col items-center">
-                      <div className="text-3xl font-bold">{(weatherData.current.visibility / 1000).toFixed(1)}</div>
-                      <div className="text-lg text-gray-600 dark:text-gray-400">km</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Sun Path and Moon Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Sun Path */}
-                <Card className="shadow-xl">
-                  <CardContent className="p-6">
-                    <div className="relative h-24 mb-4">
-                      <svg className="w-full h-full" viewBox="0 0 300 96">
-                        <path
-                          d="M 20,76 Q 150,20 280,76"
-                          stroke="rgba(251, 191, 36, 0.3)"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                        <circle cx="150" cy="48" r="12" fill="rgb(251, 191, 36)" />
-                      </svg>
-                      <div className="absolute bottom-2 left-2 text-xs">
-                        <div className="font-medium text-gray-700 dark:text-gray-300">
-                          {i18n.language === 'ko' ? '일출' : i18n.language === 'ja' ? '日の出' : 'Sunrise'}
-                        </div>
-                        <div className="text-gray-600 dark:text-gray-400">{formatTime(weatherData.sunrise)}</div>
-                      </div>
-                      <div className="absolute bottom-2 right-2 text-xs text-right">
-                        <div className="font-medium text-gray-700 dark:text-gray-300">
-                          {i18n.language === 'ko' ? '일몰' : i18n.language === 'ja' ? '日の入り' : 'Sunset'}
-                        </div>
-                        <div className="text-gray-600 dark:text-gray-400">{formatTime(weatherData.sunset)}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Moon Phase */}
-                <Card className="shadow-xl">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-16 h-16">
-                        <div className="w-full h-full bg-gray-300 dark:bg-gray-600 rounded-full"></div>
-                        <div className="absolute top-0 left-0 w-full h-full bg-gray-600 dark:bg-gray-800 rounded-full"
-                             style={{ clipPath: 'polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%)' }}></div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          {i18n.language === 'ko' ? '하현반달' : 
-                           i18n.language === 'ja' ? '下弦の月' : 'Last Quarter'}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-2 space-y-1">
-                          <div>
-                            {i18n.language === 'ko' ? '월출' : i18n.language === 'ja' ? '月の出' : 'Moonrise'}: 
-                            {i18n.language === 'ko' ? ' 오전 7:34' : i18n.language === 'ja' ? ' 午前7:34' : ' 7:34 AM'}
-                          </div>
-                          <div>
-                            {i18n.language === 'ko' ? '월몰' : i18n.language === 'ja' ? '月の入り' : 'Moonset'}: 
-                            {i18n.language === 'ko' ? ' 오후 10:26' : i18n.language === 'ja' ? ' 午後10:26' : ' 10:26 PM'}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+              
 
               {/* 24-Hour Hourly Forecast */}
               {weatherData.hourly && weatherData.hourly.length > 0 && (

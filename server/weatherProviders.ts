@@ -224,28 +224,69 @@ class WeatherProviderManager {
       authKey: apiKey
     });
 
-    try {
-      console.log(`KMA Radar API request: ${radarUrl}?${params.toString()}`);
-      const response = await fetch(`${radarUrl}?${params.toString()}`, {
-        headers: {
-          'User-Agent': 'ToolHub-Weather/1.0',
-          'Accept': 'application/json'
-        },
-        timeout: 10000
-      });
-
-      if (!response.ok) {
-        throw new Error(`KMA Radar API responded with status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(`KMA Radar API response received for time: ${formattedTime}`);
-      
-      return data;
-    } catch (error) {
-      console.error('Error calling KMA Radar API:', error);
-      throw error;
+    // Try multiple recent times to find available radar data
+    const timeAttempts = [formattedTime];
+    
+    // Generate additional timestamps going back in 10-minute intervals
+    for (let i = 1; i <= 12; i++) {
+      const pastTime = new Date();
+      pastTime.setTime(pastTime.getTime() - (60 + i * 10) * 60 * 1000);
+      const pastTimeFormatted = pastTime.toISOString().replace(/[-:T]/g, '').slice(0, 12);
+      timeAttempts.push(pastTimeFormatted);
     }
+
+    for (const timeToTry of timeAttempts) {
+      try {
+        const tryParams = new URLSearchParams({
+          pageNo: '1',
+          numOfRows: '1',
+          dataType: 'JSON',
+          dateTime: timeToTry,
+          compType: 'CPP',
+          dataTypeCd: 'CZ',
+          authKey: apiKey
+        });
+
+        const response = await fetch(`${radarUrl}?${tryParams.toString()}`, {
+          headers: {
+            'User-Agent': 'ToolHub-Weather/1.0',
+            'Accept': 'application/json'
+          },
+          timeout: 10000
+        });
+
+        if (!response.ok) {
+          console.warn(`KMA Radar API HTTP error for ${timeToTry}: ${response.status}`);
+          continue;
+        }
+
+        const data = await response.json();
+        
+        // Check if we got actual data
+        if (data.response?.header?.resultCode === '00' && data.response?.body?.items?.item) {
+          console.log(`KMA Radar data found for time: ${timeToTry}`);
+          return data;
+        } else {
+          console.log(`No radar data for time: ${timeToTry}, trying earlier time...`);
+          continue;
+        }
+
+      } catch (error) {
+        console.warn(`Error trying time ${timeToTry}:`, error);
+        continue;
+      }
+    }
+
+    // If no data found for any time, return a structured "no data" response
+    console.log('No radar data available for recent times');
+    return {
+      response: {
+        header: {
+          resultCode: '03',
+          resultMsg: 'NO_DATA_AVAILABLE'
+        }
+      }
+    };
   }
 
   private async callKMA(query: string, isCoordinate: boolean = false): Promise<WeatherData> {

@@ -159,6 +159,52 @@ class WeatherProviderManager {
     return rateLimit.used < rateLimit.limit;
   }
 
+  private async callKMARadar(dateTime?: string): Promise<any> {
+    const apiKey = process.env.KMA_API_KEY;
+    if (!apiKey) {
+      throw new Error('KMA API key not configured');
+    }
+
+    // Use current time minus 1 hour if no dateTime provided (최근 2일까지 조회가능)
+    const now = new Date();
+    const targetTime = dateTime ? new Date(dateTime) : new Date(now.getTime() - 60 * 60 * 1000);
+    const formattedTime = targetTime.toISOString().replace(/[-:T]/g, '').slice(0, 12); // YYYYMMDDHH24MI
+
+    const radarUrl = `https://apihub.kma.go.kr/api/typ02/openApi/WthrRadarInfoService/getCompCappiQcdAll`;
+    const params = new URLSearchParams({
+      pageNo: '1',
+      numOfRows: '1',
+      dataType: 'JSON',
+      dateTime: formattedTime,
+      compType: 'CPP', // 합성 CAPPI
+      dataTypeCd: 'CZ', // 반사도
+      authKey: apiKey
+    });
+
+    try {
+      console.log(`KMA Radar API request: ${radarUrl}?${params.toString()}`);
+      const response = await fetch(`${radarUrl}?${params.toString()}`, {
+        headers: {
+          'User-Agent': 'ToolHub-Weather/1.0',
+          'Accept': 'application/json'
+        },
+        timeout: 10000
+      });
+
+      if (!response.ok) {
+        throw new Error(`KMA Radar API responded with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(`KMA Radar API response received for time: ${formattedTime}`);
+      
+      return data;
+    } catch (error) {
+      console.error('Error calling KMA Radar API:', error);
+      throw error;
+    }
+  }
+
   private async callKMA(query: string, isCoordinate: boolean = false): Promise<WeatherData> {
     const provider = this.providers.find(p => p.name === 'KMA_API');
     if (!provider?.apiKey) throw new Error('KMA API key not available');
@@ -721,6 +767,15 @@ class WeatherProviderManager {
     }
 
     throw new Error('All weather providers failed and no cached data available');
+  }
+
+  public async getRadarData(dateTime?: string): Promise<any> {
+    try {
+      return await this.callKMARadar(dateTime);
+    } catch (error) {
+      console.error('Error getting radar data:', error);
+      throw error;
+    }
   }
 
   public getProviderStatus() {

@@ -237,6 +237,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // KMA Radar data endpoint
+  app.get("/api/weather/radar", async (req, res) => {
+    try {
+      const { dateTime } = req.query;
+      
+      // Check cache first
+      const cacheKey = `radar:${dateTime || 'latest'}`;
+      const cached = await weatherCache.get(cacheKey);
+      if (cached) {
+        return res.json(cached);
+      }
+      
+      const radarData = await weatherProviderManager.getRadarData(dateTime as string);
+      
+      // Cache for 15 minutes
+      await weatherCache.set(cacheKey, radarData, 900);
+      
+      res.json(radarData);
+    } catch (error) {
+      console.error("Radar API error:", error);
+      res.status(500).json({ error: "Failed to get radar data" });
+    }
+  });
+
   // Helper function to get demo coordinates for cities
   function getCityCoordinates(cityName: string) {
     const cityCoords: { [key: string]: { lat: number; lon: number } } = {

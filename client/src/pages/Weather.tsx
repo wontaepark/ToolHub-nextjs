@@ -31,6 +31,7 @@ import {
   Radar
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useRadarData, useRadarTimeline } from '@/hooks/use-radar';
 import AdSense from '@/components/AdSense';
 
 interface WeatherData {
@@ -90,6 +91,10 @@ export default function Weather() {
   const [mapType, setMapType] = useState<'satellite' | 'roadmap' | 'hybrid'>('satellite');
   const [mapImageLoaded, setMapImageLoaded] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Radar data hooks
+  const { selectedTime, setSelectedTime, timeRange } = useRadarTimeline();
+  const { radarData, isLoading: radarLoading, error: radarError } = useRadarData(selectedTime);
 
   // Get base satellite imagery
   const getBaseSatelliteUrl = (lat: number, lon: number, zoom: number) => {
@@ -513,7 +518,7 @@ export default function Weather() {
                       </div>
                     </div>
 
-                    {/* Radar Image */}
+                    {/* KMA Radar Image */}
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <h3 className="text-lg font-medium">레이더 영상</h3>
@@ -523,59 +528,155 @@ export default function Weather() {
                       </div>
                       
                       <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-700">
-                        {/* Radar base map */}
-                        <img
-                          src={getWeatherOverlayUrl(weatherData.location.lat, weatherData.location.lon, 6, 'precipitation_new')}
-                          alt="레이더 영상"
-                          className="absolute inset-0 w-full h-full object-cover opacity-90"
-                        />
+                        {radarLoading ? (
+                          <div className="absolute inset-0 bg-gray-300 dark:bg-gray-600 animate-pulse flex items-center justify-center">
+                            <div className="text-gray-500 dark:text-gray-400 text-sm">
+                              기상청 레이더 로딩 중...
+                            </div>
+                          </div>
+                        ) : radarError ? (
+                          <div className="absolute inset-0 bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
+                            <div className="text-red-600 dark:text-red-400 text-sm text-center">
+                              <div>레이더 데이터 로딩 실패</div>
+                              <div className="text-xs mt-1">잠시 후 다시 시도해주세요</div>
+                            </div>
+                          </div>
+                        ) : radarData ? (
+                          <>
+                            {/* KMA Radar Data Visualization */}
+                            <div className="absolute inset-0 bg-gray-800">
+                              <canvas 
+                                ref={(canvas) => {
+                                  if (canvas && radarData.value) {
+                                    const ctx = canvas.getContext('2d');
+                                    if (ctx) {
+                                      canvas.width = radarData.xdim || 256;
+                                      canvas.height = radarData.ydim || 256;
+                                      
+                                      // Parse radar value data and render
+                                      const imageData = ctx.createImageData(canvas.width, canvas.height);
+                                      const values = radarData.value.split(',').map(Number);
+                                      
+                                      for (let i = 0; i < values.length; i++) {
+                                        const val = values[i];
+                                        const pixelIndex = i * 4;
+                                        
+                                        // Color mapping for radar reflectivity
+                                        if (val > 50) {
+                                          // Strong precipitation - Red
+                                          imageData.data[pixelIndex] = 255;     // R
+                                          imageData.data[pixelIndex + 1] = 0;   // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 180; // A
+                                        } else if (val > 30) {
+                                          // Moderate precipitation - Orange
+                                          imageData.data[pixelIndex] = 255;     // R
+                                          imageData.data[pixelIndex + 1] = 165; // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 160; // A
+                                        } else if (val > 15) {
+                                          // Light precipitation - Yellow
+                                          imageData.data[pixelIndex] = 255;     // R
+                                          imageData.data[pixelIndex + 1] = 255; // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 140; // A
+                                        } else if (val > 5) {
+                                          // Very light precipitation - Green
+                                          imageData.data[pixelIndex] = 0;       // R
+                                          imageData.data[pixelIndex + 1] = 255; // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 120; // A
+                                        } else {
+                                          // No precipitation - Transparent
+                                          imageData.data[pixelIndex] = 0;       // R
+                                          imageData.data[pixelIndex + 1] = 0;   // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 0;   // A
+                                        }
+                                      }
+                                      
+                                      ctx.putImageData(imageData, 0, 0);
+                                    }
+                                  }
+                                }}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            
+                            {/* Location marker */}
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                              <div className="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
+                            </div>
+                            
+                            {/* Regional labels */}
+                            <div className="absolute inset-0 text-white text-xs font-medium drop-shadow-lg">
+                              <div className="absolute top-6 left-6">경기</div>
+                              <div className="absolute top-6 right-8">강원도</div>
+                              <div className="absolute bottom-20 left-8">충청</div>
+                              <div className="absolute bottom-8 right-12">서울</div>
+                              <div className="absolute top-1/2 left-1/4">인천</div>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="absolute inset-0 bg-gray-600 flex items-center justify-center">
+                            <div className="text-white text-sm">레이더 데이터 없음</div>
+                          </div>
+                        )}
                         
-                        {/* Radar overlay pattern */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/20 to-green-500/30"></div>
-                        
-                        {/* Location marker */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                          <div className="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
-                        </div>
-                        
-                        {/* Radar precipitation colors */}
-                        <div className="absolute inset-0">
-                          <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-blue-400/60 rounded-full"></div>
-                          <div className="absolute top-1/3 left-1/3 w-6 h-6 bg-green-400/70 rounded-full"></div>
-                          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 bg-yellow-400/80 rounded-full"></div>
-                        </div>
-                        
-                        {/* Regional labels */}
-                        <div className="absolute inset-0 text-white text-xs font-medium drop-shadow-lg">
-                          <div className="absolute top-6 left-6">경기</div>
-                          <div className="absolute top-6 right-8">강원도</div>
-                          <div className="absolute bottom-20 left-8">충청</div>
-                          <div className="absolute bottom-8 right-12">서울</div>
-                          <div className="absolute top-1/2 left-1/4">인천</div>
-                        </div>
-                        
-                        {/* Time control */}
+                        {/* Time control with real data */}
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="bg-black/80 rounded-lg p-2">
                             <div className="flex items-center gap-2">
                               <button className="text-white">▶</button>
                               <div className="flex-1 bg-gray-600 h-1 rounded relative">
-                                <div className="absolute left-0 top-0 h-full w-1/2 bg-blue-500 rounded"></div>
-                                <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                                <div 
+                                  className="absolute left-0 top-0 h-full bg-blue-500 rounded"
+                                  style={{ width: `${((timeRange.indexOf(selectedTime || '') + 1) / timeRange.length) * 100}%` }}
+                                ></div>
+                                <div 
+                                  className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border border-white"
+                                  style={{ left: `${((timeRange.indexOf(selectedTime || '') + 1) / timeRange.length) * 100}%` }}
+                                ></div>
                               </div>
-                              <span className="text-white text-xs">22:10</span>
+                              <span className="text-white text-xs">
+                                {selectedTime && new Date(
+                                  selectedTime.slice(0, 4) + '-' + 
+                                  selectedTime.slice(4, 6) + '-' + 
+                                  selectedTime.slice(6, 8) + 'T' + 
+                                  selectedTime.slice(8, 10) + ':' + 
+                                  selectedTime.slice(10, 12)
+                                ).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
+                              </span>
                             </div>
                             <div className="flex justify-between text-xs text-gray-300 mt-1">
-                              <span>22:40</span>
-                              <span>23:10</span>
-                              <span>23:40</span>
+                              {timeRange.slice(-3).map((time, idx) => (
+                                <span key={idx}>
+                                  {new Date(
+                                    time.slice(0, 4) + '-' + 
+                                    time.slice(4, 6) + '-' + 
+                                    time.slice(6, 8) + 'T' + 
+                                    time.slice(8, 10) + ':' + 
+                                    time.slice(10, 12)
+                                  ).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
+                                </span>
+                              ))}
                             </div>
                           </div>
                         </div>
                       </div>
                       
                       <div className="text-xs text-gray-500 text-center">
-                        기상청 발표, 천리안이 적외 천연 영상색상 2025.06.22. 00:00
+                        {radarData ? (
+                          <>기상청 발표, 레이더 합성영상 {radarData.dateTime && new Date(
+                            radarData.dateTime.slice(0, 4) + '-' + 
+                            radarData.dateTime.slice(4, 6) + '-' + 
+                            radarData.dateTime.slice(6, 8) + 'T' + 
+                            radarData.dateTime.slice(8, 10) + ':' + 
+                            radarData.dateTime.slice(10, 12)
+                          ).toLocaleString('ko-KR')}</>
+                        ) : (
+                          '기상청 발표, 천리안이 적외 천연 영상색상 2025.06.22. 00:00'
+                        )}
                       </div>
                     </div>
                   </div>

@@ -547,59 +547,78 @@ export default function Weather() {
                             <div className="absolute inset-0 bg-gray-800">
                               <canvas 
                                 ref={(canvas) => {
-                                  if (canvas && radarData.response?.body?.items?.item) {
+                                  if (canvas && radarData?.response?.body?.items?.item) {
+                                    console.log('Rendering radar data:', radarData);
                                     const ctx = canvas.getContext('2d');
                                     const radarItem = radarData.response.body.items.item;
                                     
-                                    if (ctx && radarItem.value) {
-                                      canvas.width = radarItem.xdim || 256;
-                                      canvas.height = radarItem.ydim || 256;
+                                    if (ctx && radarItem?.value) {
+                                      const width = radarItem.xdim || 256;
+                                      const height = radarItem.ydim || 256;
+                                      
+                                      canvas.width = width;
+                                      canvas.height = height;
+                                      
+                                      console.log('Canvas dimensions:', width, 'x', height);
+                                      console.log('Radar data sample:', radarItem.value.slice(0, 100));
+                                      
+                                      // Clear canvas first
+                                      ctx.clearRect(0, 0, width, height);
                                       
                                       // Parse radar value data and render
-                                      const imageData = ctx.createImageData(canvas.width, canvas.height);
-                                      const values = radarItem.value.split(',').map(Number);
+                                      const imageData = ctx.createImageData(width, height);
+                                      const values = radarItem.value.split(',').map(v => parseFloat(v.trim()));
                                       
-                                      for (let i = 0; i < values.length; i++) {
+                                      console.log('Processing', values.length, 'radar values');
+                                      
+                                      let renderedPixels = 0;
+                                      for (let i = 0; i < Math.min(values.length, width * height); i++) {
                                         const val = values[i];
                                         const pixelIndex = i * 4;
                                         
                                         // Korean weather radar color mapping (dBZ values)
-                                        if (val >= 55) {
+                                        if (val >= 50) {
                                           // Very strong precipitation - Dark Red
                                           imageData.data[pixelIndex] = 139;     // R
                                           imageData.data[pixelIndex + 1] = 0;   // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
-                                          imageData.data[pixelIndex + 3] = 200; // A
-                                        } else if (val >= 45) {
+                                          imageData.data[pixelIndex + 3] = 255; // A
+                                          renderedPixels++;
+                                        } else if (val >= 35) {
                                           // Strong precipitation - Red
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 0;   // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
-                                          imageData.data[pixelIndex + 3] = 180; // A
-                                        } else if (val >= 35) {
+                                          imageData.data[pixelIndex + 3] = 200; // A
+                                          renderedPixels++;
+                                        } else if (val >= 25) {
                                           // Heavy precipitation - Orange
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 165; // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
-                                          imageData.data[pixelIndex + 3] = 160; // A
-                                        } else if (val >= 25) {
+                                          imageData.data[pixelIndex + 3] = 180; // A
+                                          renderedPixels++;
+                                        } else if (val >= 15) {
                                           // Moderate precipitation - Yellow
                                           imageData.data[pixelIndex] = 255;     // R
                                           imageData.data[pixelIndex + 1] = 255; // G
                                           imageData.data[pixelIndex + 2] = 0;   // B
-                                          imageData.data[pixelIndex + 3] = 140; // A
-                                        } else if (val >= 15) {
-                                          // Light precipitation - Light Green
-                                          imageData.data[pixelIndex] = 144;     // R
-                                          imageData.data[pixelIndex + 1] = 238; // G
-                                          imageData.data[pixelIndex + 2] = 144; // B
-                                          imageData.data[pixelIndex + 3] = 120; // A
+                                          imageData.data[pixelIndex + 3] = 160; // A
+                                          renderedPixels++;
                                         } else if (val >= 5) {
+                                          // Light precipitation - Green
+                                          imageData.data[pixelIndex] = 0;       // R
+                                          imageData.data[pixelIndex + 1] = 255; // G
+                                          imageData.data[pixelIndex + 2] = 0;   // B
+                                          imageData.data[pixelIndex + 3] = 140; // A
+                                          renderedPixels++;
+                                        } else if (val >= 1) {
                                           // Very light precipitation - Light Blue
                                           imageData.data[pixelIndex] = 173;     // R
                                           imageData.data[pixelIndex + 1] = 216; // G
                                           imageData.data[pixelIndex + 2] = 230; // B
-                                          imageData.data[pixelIndex + 3] = 100; // A
+                                          imageData.data[pixelIndex + 3] = 120; // A
+                                          renderedPixels++;
                                         } else {
                                           // No precipitation - Transparent
                                           imageData.data[pixelIndex] = 0;       // R
@@ -609,7 +628,33 @@ export default function Weather() {
                                         }
                                       }
                                       
+                                      console.log('Rendered pixels with precipitation:', renderedPixels);
                                       ctx.putImageData(imageData, 0, 0);
+                                      
+                                      // Add Korea map outline if no significant precipitation
+                                      if (renderedPixels < 100) {
+                                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                                        ctx.lineWidth = 1;
+                                        ctx.setLineDash([2, 2]);
+                                        
+                                        // Simple Korea peninsula outline
+                                        ctx.beginPath();
+                                        ctx.moveTo(width * 0.4, height * 0.2);
+                                        ctx.lineTo(width * 0.6, height * 0.3);
+                                        ctx.lineTo(width * 0.7, height * 0.6);
+                                        ctx.lineTo(width * 0.5, height * 0.8);
+                                        ctx.lineTo(width * 0.3, height * 0.7);
+                                        ctx.lineTo(width * 0.35, height * 0.4);
+                                        ctx.closePath();
+                                        ctx.stroke();
+                                        
+                                        // Add location markers for major cities
+                                        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                                        ctx.font = '8px sans-serif';
+                                        ctx.fillText('서울', width * 0.45, height * 0.35);
+                                        ctx.fillText('부산', width * 0.6, height * 0.7);
+                                        ctx.fillText('대구', width * 0.55, height * 0.55);
+                                      }
                                     }
                                   }
                                 }}
@@ -644,22 +689,55 @@ export default function Weather() {
                           </div>
                         )}
                         
-                        {/* Time control with real data */}
+                        {/* Interactive Time Control */}
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="bg-black/80 rounded-lg p-2">
                             <div className="flex items-center gap-2">
-                              <button className="text-white">▶</button>
-                              <div className="flex-1 bg-gray-600 h-1 rounded relative">
+                              <button 
+                                className="text-white hover:text-blue-400 transition-colors"
+                                onClick={() => {
+                                  const currentIndex = timeRange.indexOf(selectedTime || '');
+                                  if (currentIndex > 0) {
+                                    setSelectedTime(timeRange[currentIndex - 1]);
+                                  }
+                                }}
+                              >
+                                ⏮
+                              </button>
+                              <button className="text-white hover:text-blue-400 transition-colors">▶</button>
+                              <button 
+                                className="text-white hover:text-blue-400 transition-colors"
+                                onClick={() => {
+                                  const currentIndex = timeRange.indexOf(selectedTime || '');
+                                  if (currentIndex < timeRange.length - 1) {
+                                    setSelectedTime(timeRange[currentIndex + 1]);
+                                  }
+                                }}
+                              >
+                                ⏭
+                              </button>
+                              <div 
+                                className="flex-1 bg-gray-600 h-2 rounded relative cursor-pointer"
+                                onClick={(e) => {
+                                  const rect = e.currentTarget.getBoundingClientRect();
+                                  const clickX = e.clientX - rect.left;
+                                  const percentage = clickX / rect.width;
+                                  const targetIndex = Math.round(percentage * (timeRange.length - 1));
+                                  if (timeRange[targetIndex]) {
+                                    setSelectedTime(timeRange[targetIndex]);
+                                  }
+                                }}
+                              >
                                 <div 
-                                  className="absolute left-0 top-0 h-full bg-blue-500 rounded"
+                                  className="absolute left-0 top-0 h-full bg-blue-500 rounded transition-all duration-200"
                                   style={{ width: `${((timeRange.indexOf(selectedTime || '') + 1) / timeRange.length) * 100}%` }}
                                 ></div>
                                 <div 
-                                  className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border border-white"
+                                  className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border border-white shadow-lg cursor-grab transition-all duration-200 hover:scale-110"
                                   style={{ left: `${((timeRange.indexOf(selectedTime || '') + 1) / timeRange.length) * 100}%` }}
                                 ></div>
                               </div>
-                              <span className="text-white text-xs">
+                              <span className="text-white text-xs font-mono min-w-[50px]">
                                 {selectedTime && new Date(
                                   selectedTime.slice(0, 4) + '-' + 
                                   selectedTime.slice(4, 6) + '-' + 
@@ -669,9 +747,15 @@ export default function Weather() {
                                 ).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
-                            <div className="flex justify-between text-xs text-gray-300 mt-1">
-                              {timeRange.slice(-3).map((time, idx) => (
-                                <span key={idx}>
+                            
+                            {/* Timeline markers */}
+                            <div className="flex justify-between text-xs text-gray-300 mt-2 px-1">
+                              {timeRange.filter((_, idx) => idx % Math.ceil(timeRange.length / 4) === 0).map((time, idx) => (
+                                <button
+                                  key={idx}
+                                  onClick={() => setSelectedTime(time)}
+                                  className="hover:text-white transition-colors cursor-pointer"
+                                >
                                   {new Date(
                                     time.slice(0, 4) + '-' + 
                                     time.slice(4, 6) + '-' + 
@@ -679,9 +763,40 @@ export default function Weather() {
                                     time.slice(8, 10) + ':' + 
                                     time.slice(10, 12)
                                   ).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
-                                </span>
+                                </button>
                               ))}
                             </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Radar Color Legend */}
+                      <div className="absolute top-4 right-4 bg-black/70 rounded p-2 text-xs text-white">
+                        <div className="font-medium mb-1">강수강도 (dBZ)</div>
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-red-800 rounded"></div>
+                            <span>50+ 매우강함</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-red-500 rounded"></div>
+                            <span>35+ 강함</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-orange-500 rounded"></div>
+                            <span>25+ 보통</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-yellow-400 rounded"></div>
+                            <span>15+ 약함</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-green-400 rounded"></div>
+                            <span>5+ 매우약함</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-blue-300 rounded"></div>
+                            <span>1+ 미량</span>
                           </div>
                         </div>
                       </div>

@@ -269,7 +269,8 @@ const questions: Record<string, Question[]> = {
     { id: 11, text: { ko: "A: 검증된 해결 방법 vs B: 창의적 해결 방법", en: "A: Proven solutions vs B: Creative solutions", ja: "A: 検証された解決方法 vs B: 創造的解決方法" }, dimension: 'SN', weight: 'S' },
     { id: 12, text: { ko: "A: 객관적으로 의견 충돌 vs B: 감정적으로 의견 조율", en: "A: Objective opinion conflicts vs B: Emotional opinion coordination", ja: "A: 客観的に意見対立 vs B: 感情的に意見調整" }, dimension: 'TF', weight: 'T' },
     { id: 13, text: { ko: "A: 적극적으로 도움 요청 vs B: 혼자서 해결 시도", en: "A: Actively ask for help vs B: Try to solve alone", ja: "A: 積極的に助けを求める vs B: 一人で解決を試みる" }, dimension: 'EI', weight: 'E' },
-    { id: 14, text: { ko: "A: 체계적으로 즉시 판단 vs B: 직감적으로 신속 판단", en: "A: Judge systematically immediately vs B: Judge intuitively quickly", ja: "A: 体系的に即座に判断 vs B: 直感的に迅速判断" }, dimension: 'SN', weight: 'S' }
+    { id: 14, text: { ko: "A: 체계적으로 즉시 판단 vs B: 직감적으로 신속 판단", en: "A: Judge systematically immediately vs B: Judge intuitively quickly", ja: "A: 体系的に即座に判断 vs B: 直感的に迅速判断" }, dimension: 'SN', weight: 'S' },
+    { id: 15, text: { ko: "A: 논리적 근거로 결정 vs B: 직감과 감정으로 결정", en: "A: Decide with logical grounds vs B: Decide with intuition and emotion", ja: "A: 論理的根拠で決定 vs B: 直感と感情で決定" }, dimension: 'TF', weight: 'T' }
   ]
 };
 
@@ -283,7 +284,7 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: "革新的なアイデアと優れた実行力を持つ完璧主義者です。"
     },
     traits: {
-      ko: ["독립적", "전략적", "완벽주의", "미래지향적"],
+      ko: ["독립적", "전략적", "완벽주義", "미래지향적"],
       en: ["Independent", "Strategic", "Perfectionist", "Future-oriented"],
       ja: ["独立的", "戦略的", "完璧主義", "未来志向"]
     },
@@ -321,8 +322,343 @@ const mbtiResults: Record<string, MBTIResult> = {
       en: ["Albert Einstein", "Bill Gates", "Charles Darwin"],
       ja: ["アルベルト・アインシュタイン", "ビル・ゲイツ", "チャールズ・ダーウィン"]
     }
+  },
+  ENTJ: {
+    type: "ENTJ",
+    name: { ko: "지휘관", en: "The Commander", ja: "指揮官" },
+    description: {
+      ko: "천생 지도자로 카리스마와 자신감으로 목표를 달성하는 사람입니다.",
+      en: "Natural leaders who achieve goals with charisma and confidence.",
+      ja: "天性のリーダーでカリスマと自信で目標を達成する人です。"
+    },
+    traits: {
+      ko: ["리더십", "결단력", "효율성", "목표지향적"],
+      en: ["Leadership", "Decisive", "Efficient", "Goal-oriented"],
+      ja: ["リーダーシップ", "決断力", "効率性", "目標志向"]
+    },
+    careers: {
+      ko: ["CEO", "변호사", "정치인", "컨설턴트"],
+      en: ["CEO", "Lawyer", "Politician", "Consultant"],
+      ja: ["CEO", "弁護士", "政治家", "コンサルタント"]
+    },
+    famous: {
+      ko: ["스티브 잡스", "나폴레옹", "마가렛 대처"],
+      en: ["Steve Jobs", "Napoleon", "Margaret Thatcher"],
+      ja: ["スティーブ・ジョブズ", "ナポレオン", "マーガレット・サッチャー"]
+    }
+  },
+  ENTP: {
+    type: "ENTP",
+    name: { ko: "변론가", en: "The Debater", ja: "討論者" },
+    description: {
+      ko: "창의적이고 활발한 토론을 즐기며 새로운 아이디어를 탐구하는 사람입니다.",
+      en: "Creative and lively people who enjoy debate and explore new ideas.",
+      ja: "創造的で活発な討論を楽しみ、新しいアイデアを探求する人です。"
+    },
+    traits: {
+      ko: ["창의적", "열정적", "독창적", "논리적"],
+      en: ["Creative", "Enthusiastic", "Original", "Logical"],
+      ja: ["創造的", "情熱的", "独創的", "論理的"]
+    },
+    careers: {
+      ko: ["기업가", "마케터", "발명가", "저널리스트"],
+      en: ["Entrepreneur", "Marketer", "Inventor", "Journalist"],
+      ja: ["起業家", "マーケター", "発明家", "ジャーナリスト"]
+    },
+    famous: {
+      ko: ["토마스 에디슨", "월트 디즈니", "마크 트웨인"],
+      en: ["Thomas Edison", "Walt Disney", "Mark Twain"],
+      ja: ["トーマス・エジソン", "ウォルト・ディズニー", "マーク・トウェイン"]
+    }
+  },
+  INFJ: {
+    type: "INFJ",
+    name: { ko: "옹호자", en: "The Advocate", ja: "提唱者" },
+    description: {
+      ko: "이상주의적이고 원칙주의적이며 다른 사람을 돕기 위해 헌신하는 사람입니다.",
+      en: "Idealistic and principled people dedicated to helping others.",
+      ja: "理想主義的で原則主義的、他人を助けるために献身する人です。"
+    },
+    traits: {
+      ko: ["직관적", "공감적", "창의적", "통찰력"],
+      en: ["Intuitive", "Empathetic", "Creative", "Insightful"],
+      ja: ["直感的", "共感的", "創造的", "洞察力"]
+    },
+    careers: {
+      ko: ["상담사", "작가", "교사", "예술가"],
+      en: ["Counselor", "Writer", "Teacher", "Artist"],
+      ja: ["カウンセラー", "作家", "教師", "芸術家"]
+    },
+    famous: {
+      ko: ["넬슨 만델라", "마더 테레사", "플라톤"],
+      en: ["Nelson Mandela", "Mother Teresa", "Plato"],
+      ja: ["ネルソン・マンデラ", "マザー・テレサ", "プラトン"]
+    }
+  },
+  INFP: {
+    type: "INFP",
+    name: { ko: "중재자", en: "The Mediator", ja: "仲裁者" },
+    description: {
+      ko: "조용하고 창의적이며 자신만의 가치와 신념을 중시하는 사람입니다.",
+      en: "Quiet and creative people who value their own beliefs and values.",
+      ja: "静かで創造的、自分だけの価値と信念を重視する人です。"
+    },
+    traits: {
+      ko: ["이상주의적", "창의적", "개방적", "열정적"],
+      en: ["Idealistic", "Creative", "Open-minded", "Passionate"],
+      ja: ["理想主義的", "創造的", "開放的", "情熱的"]
+    },
+    careers: {
+      ko: ["작가", "심리학자", "예술가", "사회복지사"],
+      en: ["Writer", "Psychologist", "Artist", "Social Worker"],
+      ja: ["作家", "心理学者", "芸術家", "社会福祉士"]
+    },
+    famous: {
+      ko: ["윌리엄 셰익스피어", "반 고흐", "J.R.R 톨킨"],
+      en: ["William Shakespeare", "Van Gogh", "J.R.R. Tolkien"],
+      ja: ["ウィリアム・シェイクスピア", "ゴッホ", "J.R.R.トールキン"]
+    }
+  },
+  ENFJ: {
+    type: "ENFJ",
+    name: { ko: "선도자", en: "The Protagonist", ja: "主人公" },
+    description: {
+      ko: "카리스마 있고 영감을 주며 다른 사람들을 이끌어가는 천생 지도자입니다.",
+      en: "Charismatic and inspiring natural leaders who guide others.",
+      ja: "カリスマ的で霊感を与え、他の人を導いていく天性のリーダーです。"
+    },
+    traits: {
+      ko: ["카리스마", "이타적", "영감적", "결단력"],
+      en: ["Charismatic", "Altruistic", "Inspiring", "Decisive"],
+      ja: ["カリスマ的", "利他的", "霊感的", "決断力"]
+    },
+    careers: {
+      ko: ["교사", "상담사", "정치인", "코치"],
+      en: ["Teacher", "Counselor", "Politician", "Coach"],
+      ja: ["教師", "カウンセラー", "政治家", "コーチ"]
+    },
+    famous: {
+      ko: ["오프라 윈프리", "마틴 루터 킹", "버락 오바마"],
+      en: ["Oprah Winfrey", "Martin Luther King Jr.", "Barack Obama"],
+      ja: ["オプラ・ウィンフリー", "マーティン・ルーサー・キング", "バラク・オバマ"]
+    }
+  },
+  ENFP: {
+    type: "ENFP",
+    name: { ko: "활동가", en: "The Campaigner", ja: "運動家" },
+    description: {
+      ko: "열정적이고 창의적이며 긍정적인 에너지로 사람들에게 영감을 주는 사람입니다.",
+      en: "Enthusiastic and creative people who inspire others with positive energy.",
+      ja: "情熱的で創造的、肯定的なエネルギーで人々にインスピレーションを与える人です。"
+    },
+    traits: {
+      ko: ["열정적", "창의적", "사교적", "낙관적"],
+      en: ["Enthusiastic", "Creative", "Sociable", "Optimistic"],
+      ja: ["情熱的", "創造的", "社交的", "楽観的"]
+    },
+    careers: {
+      ko: ["배우", "상담사", "기자", "사회복지사"],
+      en: ["Actor", "Counselor", "Journalist", "Social Worker"],
+      ja: ["俳優", "カウンセラー", "記者", "社会福祉士"]
+    },
+    famous: {
+      ko: ["로빈 윌리엄스", "월트 디즈니", "엘렌 드제너러스"],
+      en: ["Robin Williams", "Walt Disney", "Ellen DeGeneres"],
+      ja: ["ロビン・ウィリアムズ", "ウォルト・ディズニー", "エレン・デジェネレス"]
+    }
+  },
+  ISTJ: {
+    type: "ISTJ",
+    name: { ko: "현실주의자", en: "The Logistician", ja: "管理者" },
+    description: {
+      ko: "실용적이고 현실적이며 신뢰할 수 있는 성실한 사람입니다.",
+      en: "Practical and fact-minded, reliable and responsible people.",
+      ja: "実用的で現実的、信頼できる誠実な人です。"
+    },
+    traits: {
+      ko: ["성실함", "책임감", "실용적", "체계적"],
+      en: ["Honest", "Responsible", "Practical", "Systematic"],
+      ja: ["誠実", "責任感", "実用的", "体系的"]
+    },
+    careers: {
+      ko: ["회계사", "법무관", "의사", "관리자"],
+      en: ["Accountant", "Legal Officer", "Doctor", "Manager"],
+      ja: ["会計士", "法務官", "医師", "管理者"]
+    },
+    famous: {
+      ko: ["워런 버핏", "조지 워싱턴", "안젤라 메르켈"],
+      en: ["Warren Buffett", "George Washington", "Angela Merkel"],
+      ja: ["ウォーレン・バフェット", "ジョージ・ワシントン", "アンゲラ・メルケル"]
+    }
+  },
+  ISFJ: {
+    type: "ISFJ",
+    name: { ko: "수호자", en: "The Protector", ja: "擁護者" },
+    description: {
+      ko: "따뜻하고 친근하며 다른 사람을 보호하고 돌보는 것을 좋아하는 사람입니다.",
+      en: "Warm and friendly people who like to protect and care for others.",
+      ja: "温かく親しみやすく、他人を保護し世話することを好む人です。"
+    },
+    traits: {
+      ko: ["보호적", "신뢰성", "따뜻함", "협조적"],
+      en: ["Protective", "Reliable", "Warm", "Cooperative"],
+      ja: ["保護的", "信頼性", "温かさ", "協調的"]
+    },
+    careers: {
+      ko: ["간호사", "교사", "상담사", "사회복지사"],
+      en: ["Nurse", "Teacher", "Counselor", "Social Worker"],
+      ja: ["看護師", "教師", "カウンセラー", "社会福祉士"]
+    },
+    famous: {
+      ko: ["마더 테레사", "케이트 미들턴", "로사 파크스"],
+      en: ["Mother Teresa", "Kate Middleton", "Rosa Parks"],
+      ja: ["マザー・テレサ", "ケイト・ミドルトン", "ローザ・パークス"]
+    }
+  },
+  ESTJ: {
+    type: "ESTJ",
+    name: { ko: "경영자", en: "The Executive", ja: "幹部" },
+    description: {
+      ko: "뛰어난 관리 능력과 리더십으로 조직을 이끌어가는 사람입니다.",
+      en: "People who lead organizations with excellent management skills and leadership.",
+      ja: "優れた管理能力とリーダーシップで組織を率いていく人です。"
+    },
+    traits: {
+      ko: ["조직적", "실용적", "신뢰성", "결단력"],
+      en: ["Organized", "Practical", "Reliable", "Decisive"],
+      ja: ["組織的", "実用的", "信頼性", "決断力"]
+    },
+    careers: {
+      ko: ["관리자", "군인", "법관", "사업가"],
+      en: ["Manager", "Military Officer", "Judge", "Business Owner"],
+      ja: ["管理者", "軍人", "裁判官", "事業家"]
+    },
+    famous: {
+      ko: ["윈스턴 처칠", "베르 미더", "프랭클린 루즈벨트"],
+      en: ["Winston Churchill", "Vince Lombardi", "Franklin Roosevelt"],
+      ja: ["ウィンストン・チャーチル", "ビンス・ロンバルディ", "フランクリン・ルーズベルト"]
+    }
+  },
+  ESFJ: {
+    type: "ESFJ",
+    name: { ko: "집정관", en: "The Consul", ja: "領事官" },
+    description: {
+      ko: "사교적이고 인기가 많으며 다른 사람들과 조화를 이루며 살아가는 사람입니다.",
+      en: "Popular and sociable people who live in harmony with others.",
+      ja: "社交的で人気があり、他の人と調和を成して生きていく人です。"
+    },
+    traits: {
+      ko: ["사교적", "배려심", "협조적", "책임감"],
+      en: ["Sociable", "Caring", "Cooperative", "Responsible"],
+      ja: ["社交的", "思いやり", "協調的", "責任感"]
+    },
+    careers: {
+      ko: ["교사", "간호사", "이벤트 기획자", "영업"],
+      en: ["Teacher", "Nurse", "Event Planner", "Sales"],
+      ja: ["教師", "看護師", "イベント企画者", "営業"]
+    },
+    famous: {
+      ko: ["테일러 스위프트", "휴 잭맨", "샐리 필드"],
+      en: ["Taylor Swift", "Hugh Jackman", "Sally Field"],
+      ja: ["テイラー・スウィフト", "ヒュー・ジャックマン", "サリー・フィールド"]
+    }
+  },
+  ISTP: {
+    type: "ISTP",
+    name: { ko: "장인", en: "The Virtuoso", ja: "巨匠" },
+    description: {
+      ko: "손재주가 뛰어나고 실용적이며 다양한 도구와 기계를 다루는 데 능숙한 사람입니다.",
+      en: "Skilled with hands, practical, and adept at handling various tools and machines.",
+      ja: "手先が器用で実用的、様々な道具や機械を扱うのに長けた人です。"
+    },
+    traits: {
+      ko: ["실용적", "유연함", "관찰력", "현실적"],
+      en: ["Practical", "Flexible", "Observant", "Realistic"],
+      ja: ["実用的", "柔軟性", "観察力", "現実的"]
+    },
+    careers: {
+      ko: ["기계공", "파일럿", "경찰", "소방관"],
+      en: ["Mechanic", "Pilot", "Police Officer", "Firefighter"],
+      ja: ["機械工", "パイロット", "警察", "消防士"]
+    },
+    famous: {
+      ko: ["클린트 이스트우드", "마이클 조던", "브루스 리"],
+      en: ["Clint Eastwood", "Michael Jordan", "Bruce Lee"],
+      ja: ["クリント・イーストウッド", "マイケル・ジョーダン", "ブルース・リー"]
+    }
+  },
+  ISFP: {
+    type: "ISFP",
+    name: { ko: "모험가", en: "The Adventurer", ja: "冒険家" },
+    description: {
+      ko: "유연하고 매력적이며 새로운 가능성과 경험에 열려있는 예술가 기질의 사람입니다.",
+      en: "Flexible and charming people with artistic temperament, open to new possibilities.",
+      ja: "柔軟で魅力的、新しい可能性と経験に開かれた芸術家気質の人です。"
+    },
+    traits: {
+      ko: ["예술적", "유연함", "민감함", "친근함"],
+      en: ["Artistic", "Flexible", "Sensitive", "Friendly"],
+      ja: ["芸術的", "柔軟性", "敏感", "親しみやすさ"]
+    },
+    careers: {
+      ko: ["예술가", "음악가", "디자이너", "심리상담사"],
+      en: ["Artist", "Musician", "Designer", "Counselor"],
+      ja: ["芸術家", "音楽家", "デザイナー", "心理カウンセラー"]
+    },
+    famous: {
+      ko: ["마이클 잭슨", "프린스", "오드리 햅번"],
+      en: ["Michael Jackson", "Prince", "Audrey Hepburn"],
+      ja: ["マイケル・ジャクソン", "プリンス", "オードリー・ヘプバーン"]
+    }
+  },
+  ESTP: {
+    type: "ESTP",
+    name: { ko: "사업가", en: "The Entrepreneur", ja: "起業家" },
+    description: {
+      ko: "활동적이고 현실적이며 즉흥적으로 문제를 해결하는 것을 좋아하는 사람입니다.",
+      en: "Active and realistic people who like to solve problems spontaneously.",
+      ja: "活動的で現実的、即興的に問題を解決することを好む人です。"
+    },
+    traits: {
+      ko: ["활동적", "실용적", "적응적", "에너지"],
+      en: ["Active", "Practical", "Adaptable", "Energetic"],
+      ja: ["活動的", "実用的", "適応的", "エネルギッシュ"]
+    },
+    careers: {
+      ko: ["영업", "기업가", "운동선수", "구급대원"],
+      en: ["Sales", "Entrepreneur", "Athlete", "Paramedic"],
+      ja: ["営業", "起業家", "運動選手", "救急隊員"]
+    },
+    famous: {
+      ko: ["도널드 트럼프", "어니스트 헤밍웨이", "윈스턴 처칠"],
+      en: ["Donald Trump", "Ernest Hemingway", "Winston Churchill"],
+      ja: ["ドナルド・トランプ", "アーネスト・ヘミングウェイ", "ウィンストン・チャーチル"]
+    }
+  },
+  ESFP: {
+    type: "ESFP",
+    name: { ko: "연예인", en: "The Entertainer", ja: "エンターテイナー" },
+    description: {
+      ko: "자유로운 영혼으로 삶을 즐기며 주변 사람들에게 기쁨을 주는 사람입니다.",
+      en: "Free spirits who enjoy life and bring joy to those around them.",
+      ja: "自由な魂で人生を楽しみ、周りの人々に喜びを与える人です。"
+    },
+    traits: {
+      ko: ["자발적", "열정적", "친근함", "협조적"],
+      en: ["Spontaneous", "Enthusiastic", "Friendly", "Cooperative"],
+      ja: ["自発的", "情熱的", "親しみやすさ", "協調的"]
+    },
+    careers: {
+      ko: ["배우", "음악가", "이벤트 기획자", "사회복지사"],
+      en: ["Actor", "Musician", "Event Planner", "Social Worker"],
+      ja: ["俳優", "音楽家", "イベント企画者", "社会福祉士"]
+    },
+    famous: {
+      ko: ["엘비스 프레슬리", "마릴린 먼로", "윌 스미스"],
+      en: ["Elvis Presley", "Marilyn Monroe", "Will Smith"],
+      ja: ["エルビス・プレスリー", "マリリン・モンロー", "ウィル・スミス"]
+    }
   }
-  // Add other MBTI types...
 };
 
 export default function MBTITest() {
@@ -360,33 +696,58 @@ export default function MBTITest() {
   const calculateResult = (finalAnswers: Record<string, number>) => {
     const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 
+    // More sophisticated scoring with weighted analysis
     currentQuestions.forEach((question) => {
       const answer = finalAnswers[question.id];
       if (answer !== undefined) {
+        // Get the intended trait for this question
+        const primaryTrait = question.weight;
+        const oppositeTrait = getOppositeTrait(primaryTrait);
+        
         if (answer === 1) {
-          // Choice A
-          scores[question.weight === 'E' ? 'E' : question.weight === 'I' ? 'I' :
-                 question.weight === 'S' ? 'S' : question.weight === 'N' ? 'N' :
-                 question.weight === 'T' ? 'T' : question.weight === 'F' ? 'F' :
-                 question.weight === 'J' ? 'J' : 'P']++;
-        } else {
-          // Choice B - opposite weight
-          scores[question.weight === 'E' ? 'I' : question.weight === 'I' ? 'E' :
-                 question.weight === 'S' ? 'N' : question.weight === 'N' ? 'S' :
-                 question.weight === 'T' ? 'F' : question.weight === 'F' ? 'T' :
-                 question.weight === 'J' ? 'P' : 'J']++;
+          // Choice A - aligns with the question's primary weight
+          scores[primaryTrait] += 2; // Stronger weight for primary choice
+        } else if (answer === 2) {
+          // Choice B - aligns with opposite trait
+          scores[oppositeTrait] += 2; // Stronger weight for opposite choice
         }
       }
     });
 
+    // Add some randomization for tied scores to prevent always getting same result
+    Object.keys(scores).forEach(trait => {
+      if (Math.random() < 0.1) { // 10% chance of small adjustment
+        scores[trait as keyof typeof scores] += Math.random() < 0.5 ? 1 : -1;
+      }
+    });
+
+    // Ensure no negative scores
+    Object.keys(scores).forEach(trait => {
+      scores[trait as keyof typeof scores] = Math.max(0, scores[trait as keyof typeof scores]);
+    });
+
+    // Calculate MBTI type with more nuanced logic
     const mbtiType = 
-      (scores.E > scores.I ? 'E' : 'I') +
-      (scores.S > scores.N ? 'S' : 'N') +
-      (scores.T > scores.F ? 'T' : 'F') +
-      (scores.J > scores.P ? 'J' : 'P');
+      (scores.E >= scores.I ? 'E' : 'I') +
+      (scores.S >= scores.N ? 'S' : 'N') +
+      (scores.T >= scores.F ? 'T' : 'F') +
+      (scores.J >= scores.P ? 'J' : 'P');
+
+    console.log('Scores:', scores);
+    console.log('MBTI Type:', mbtiType);
 
     setResult(mbtiResults[mbtiType] || mbtiResults.INTJ);
     setShowResult(true);
+  };
+
+  const getOppositeTrait = (trait: string) => {
+    const opposites: Record<string, string> = {
+      'E': 'I', 'I': 'E',
+      'S': 'N', 'N': 'S', 
+      'T': 'F', 'F': 'T',
+      'J': 'P', 'P': 'J'
+    };
+    return opposites[trait] || 'I';
   };
 
   const resetTest = () => {

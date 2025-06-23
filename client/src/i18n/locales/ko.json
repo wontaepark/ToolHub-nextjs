@@ -108,6 +108,11 @@
       "description": "링크, 텍스트를 QR코드로 변환",
       "tags": ["QR", "공유"]
     },
+    "mbti": {
+      "title": "MBTI 성격유형 테스트",
+      "description": "16가지 성격유형 중 당신의 유형을 찾아보는 심리 테스트입니다",
+      "tags": ["성격", "심리", "테스트"]
+    },
     "weather": {
       "title": "날씨 정보",
       "description": "실시간 날씨와 주간 예보",

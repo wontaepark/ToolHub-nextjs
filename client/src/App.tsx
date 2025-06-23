@@ -14,6 +14,7 @@ import DateCalculator from "./pages/DateCalculator";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import MBTITest from "./pages/MBTITest";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/password" component={PasswordGenerator} />
           <Route path="/converter" component={UnitConverter} />
           <Route path="/date-calculator" component={DateCalculator} />
+          <Route path="/mbti" component={MBTITest} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />

@@ -260,6 +260,32 @@ export default function Home() {
             </div>
           </Link>
 
+          {/* MBTI Test */}
+          <Link href="/mbti">
+            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-purple-500/30 active:scale-[0.98]">
+              <div className="h-32 md:h-40 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent"></div>
+                <i className="ri-user-heart-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.mbti.title')}</h3>
+                  <Badge variant="default" className="bg-purple-500/10 text-purple-600 text-xs flex-shrink-0 ml-2">
+                    {t('common.available')}
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
+                  {t('tools.mbti.description')}
+                </p>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
+                  <Badge variant="outline" className="text-xs">{t('tools.mbti.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.mbti.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.mbti.tags.2')}</Badge>
+                </div>
+              </div>
+            </div>
+          </Link>
+
           
         </div>
       </div>

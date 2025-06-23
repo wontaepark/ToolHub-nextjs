@@ -108,6 +108,11 @@
       "description": "Convert links and text to QR codes",
       "tags": ["QR", "Share"]
     },
+    "mbti": {
+      "title": "MBTI Personality Test",
+      "description": "Discover your personality type among 16 different types with this psychological assessment",
+      "tags": ["Personality", "Psychology", "Test"]
+    },
     "weather": {
       "title": "Weather Info",
       "description": "Real-time weather and weekly forecast",

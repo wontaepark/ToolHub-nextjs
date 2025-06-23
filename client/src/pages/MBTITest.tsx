@@ -1282,29 +1282,29 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 1,
       text: {
-        ko: "✈️ 여행지에서 가장 중요한 것은?",
-        en: "✈️ What's most important at a travel destination?",
-        ja: "✈️ 旅行先で最も重要なことは？"
-      },
-      dimension: 'SN',
-      weight: 'S'
-    },
-    {
-      id: 2,
-      text: {
-        ko: "🗺️ 여행 계획을 세우는 방식은?",
-        en: "🗺️ How do you plan your travels?",
-        ja: "🗺️ 旅行計画を立てる方式は？"
+        ko: "여행 일정을 철저히 사전 계획하는 편이다.",
+        en: "I tend to thoroughly plan travel itineraries in advance.",
+        ja: "旅行日程を徹底的に事前計画する方だ。"
       },
       dimension: 'JP',
       weight: 'J'
     },
     {
+      id: 2,
+      text: {
+        ko: "여행 목적은 명소와 맛집 리스트를 완성하는 것이다.",
+        en: "My travel purpose is to complete lists of attractions and restaurants.",
+        ja: "旅行の目的は名所とグルメリストを完成させることだ。"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
       id: 3,
       text: {
-        ko: "🎒 여행 짐을 싸는 스타일은?",
-        en: "🎒 Your style of packing for travel?",
-        ja: "🎒 旅行荷物を詰めるスタイルは？"
+        ko: "출발 전 가방을 미리 챙기고 체크한다.",
+        en: "I pack and check my luggage in advance before departure.",
+        ja: "出発前にバッグを事前に準備してチェックする。"
       },
       dimension: 'JP',
       weight: 'J'
@@ -1312,32 +1312,32 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 4,
       text: {
-        ko: "🏨 숙소 선택 기준은?",
-        en: "🏨 Your criteria for choosing accommodation?",
-        ja: "🏨 宿泊施設選択基準は？"
+        ko: "공항에는 일찍 도착해서 여유있게 움직인다.",
+        en: "I arrive at the airport early and move leisurely.",
+        ja: "空港には早く到着して余裕を持って動く。"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "여행 중 길을 잃으면 지도를 보고 빠르게 해결한다.",
+        en: "When I get lost during travel, I quickly solve it by looking at a map.",
+        ja: "旅行中道に迷ったら地図を見て素早く解決する。"
       },
       dimension: 'TF',
       weight: 'T'
     },
     {
-      id: 5,
-      text: {
-        ko: "🍽️ 현지 음식 도전에 대한 태도는?",
-        en: "🍽️ Your attitude toward trying local food?",
-        ja: "🍽️ 現地料理挑戦に対する態度は？"
-      },
-      dimension: 'SN',
-      weight: 'N'
-    },
-    {
       id: 6,
       text: {
-        ko: "📷 여행 중 사진 촬영과 기록 방식은?",
-        en: "📷 How do you take photos and record during travel?",
-        ja: "📷 旅行中の写真撮影と記録方式は？"
+        ko: "동행자와 갈등이 생기면 원인을 분석하고 조정한다.",
+        en: "When conflicts arise with travel companions, I analyze causes and coordinate.",
+        ja: "同行者と対立が生じたら原因を分析し調整する。"
       },
-      dimension: 'SN',
-      weight: 'S'
+      dimension: 'TF',
+      weight: 'T'
     },
     {
       id: 7,

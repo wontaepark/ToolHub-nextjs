@@ -1445,9 +1445,9 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 2,
       text: {
-        ko: "🎯 학습 목표를 설정하는 방식은?",
-        en: "🎯 How do you set learning goals?",
-        ja: "🎯 学習目標を設定する方式は？"
+        ko: "자료 정리를 위해 노트로 정리하고 요약한다.",
+        en: "I organize and summarize materials in notes.",
+        ja: "資料整理のためノートで整理し要約する。"
       },
       dimension: 'JP',
       weight: 'J'
@@ -1485,52 +1485,52 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 6,
       text: {
-        ko: "💡 복잡한 개념을 이해하는 접근법은?",
-        en: "💡 Your approach to understanding complex concepts?",
-        ja: "💡 複雑な概念を理解するアプローチは？"
+        ko: "질문이 생기면 바로 질문하거나 검색한다.",
+        en: "When questions arise, I immediately ask or search for answers.",
+        ja: "質問が生じたらすぐ質問したり検索する。"
       },
-      dimension: 'SN',
-      weight: 'N'
+      dimension: 'EI',
+      weight: 'E'
     },
     {
       id: 7,
       text: {
-        ko: "📖 교재와 자료 선택 기준은?",
-        en: "📖 Your criteria for choosing textbooks and materials?",
-        ja: "📖 教材と資料選択基準は？"
+        ko: "그룹 스터디는 협업으로 효율이 상승한다고 생각한다.",
+        en: "I believe group study increases efficiency through collaboration.",
+        ja: "グループスタディは協業で効率が上昇すると思う。"
       },
-      dimension: 'TF',
-      weight: 'T'
+      dimension: 'EI',
+      weight: 'E'
     },
     {
       id: 8,
       text: {
-        ko: "🎪 학습 환경 설정에 대한 선호는?",
-        en: "🎪 Your preferences for learning environment setup?",
-        ja: "🎪 学習環境設定に対する好みは？"
-      },
-      dimension: 'EI',
-      weight: 'I'
-    },
-    {
-      id: 9,
-      text: {
-        ko: "🔄 복습과 반복 학습 방식은?",
-        en: "🔄 Your approach to review and repetitive learning?",
-        ja: "🔄 復習と反復学習方式は？"
+        ko: "시험 전날에는 복습 루틴을 철저히 한다.",
+        en: "I thoroughly follow review routines the day before exams.",
+        ja: "試験前日には復習ルーチンを徹底的にする。"
       },
       dimension: 'JP',
       weight: 'J'
     },
     {
+      id: 9,
+      text: {
+        ko: "피드백을 받을 때 냉정하게 수용한다.",
+        en: "I accept feedback objectively when receiving it.",
+        ja: "フィードバックを受ける時、冷静に受け入れる。"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
       id: 10,
       text: {
-        ko: "❓ 질문하고 답을 구하는 방식은?",
-        en: "❓ How do you ask questions and seek answers?",
-        ja: "❓ 質問して答えを求める方式は？"
+        ko: "공부할 때 시각적 도표나 그래프를 선호한다.",
+        en: "I prefer visual charts and graphs when studying.",
+        ja: "勉強する時、視覚的図表やグラフを好む。"
       },
-      dimension: 'EI',
-      weight: 'E'
+      dimension: 'SN',
+      weight: 'S'
     },
     {
       id: 11,

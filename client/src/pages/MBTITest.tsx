@@ -382,6 +382,131 @@ const getBalanceChoiceB = (questionId: number): string => {
   return choices[questionId - 1] || "";
 };
 
+// Choice functions for all styles
+const getChoiceA = (style: string, questionId: number): string => {
+  const styleChoices: Record<string, string[]> = {
+    workplace: [
+      "의견을 먼저 내는 편", "할 일 리스트를 미리 작성", "수치와 사실 위주로 작성", "개선점부터 명확하게 전달",
+      "모두와 이야기하며 분위기 메이커", "계획대로 순서대로 진행", "현실 가능한 아이디어 중심", "사실 중심으로 바로 피드백",
+      "여러 동료들과 함께 먹음", "이미 완료했거나 거의 끝남", "실현 가능성 먼저 따짐", "논리로 설득하려 함",
+      "동료와 수다로 푼다", "과거 사례와 통계 중심", "결과와 성과 위주로 결정"
+    ],
+    routine: [
+      "알람 전에 일어나 준비 철저", "오늘 할 일을 정리함", "꼭 챙겨먹는 편", "사람 많은 곳도 괜찮음",
+      "주변 사람과 쉽게 대화함", "늘 가는 익숙한 메뉴", "캘린더, 플래너 활용", "여러 사람과 대화하며 쉼",
+      "시간과 장소 미리 정함", "논리적으로 정리해 해소", "정해진 루틴 안에서 집중", "즉시 표현하고 나누는 편",
+      "꾸준히 계획적으로 함", "하루를 정리하며 기록", "내일 계획을 정리함"
+    ],
+    lifestyle: [
+      "필요한 걸 미리 메모해두고 감", "자주 마시는 메뉴 고정", "바로 받는 편", "바로 OK",
+      "꼼꼼히 기억하고 준비함", "지도나 앱으로 정확히 확인", "팩트 중심의 기사 선호", "원인·해결 먼저 생각",
+      "하루 일정 미리 짜둠", "평점과 후기 중요", "먼저 말 걸기도 함", "정해진 방식으로 깔끔하게",
+      "꾸준히 기록하며 정리", "이성적으로 해답 제시", "친구와 어울리기"
+    ],
+    romance: [
+      "먼저 연락을 자주 함", "미리 꼼꼼히 계획함", "구체적인 말이 더 신뢰감", "현실적인 해결책 제시",
+      "자주 표현하고 직접적으로", "이벤트 준비 철저히 함", "원인과 해결을 찾음", "자주 확인하고 소통함",
+      "익숙한 장소 선호", "주도적으로 리드", "안정적이고 계획적인 관계", "논리적으로 정리하려 함",
+      "직접 행동으로 표현", "말 그대로 받아들임", "솔직함과 합리성"
+    ],
+    professional: [
+      "하루 계획을 세우고 시작", "문서화, 정리된 방식 선호", "의견을 활발히 제시함", "큰 그림을 먼저 그린다",
+      "미리 처리해 여유 확보", "객관적 원인을 분석", "주도적으로 조율하는 편", "단계별 체크리스트 활용",
+      "명확한 근거와 데이터 중심", "개선점을 중심으로 듣는다", "냉정하게 판단 후 수용", "먼저 분위기를 이끔",
+      "미리 준비하고 적극 참여", "변화에 적극적으로 적응", "업무 정리하며 복기"
+    ],
+    social: [
+      "바로 글/사진 올림", "적극적으로 참여", "진짜 공감될 때만 누름", "먼저 걸기도 함",
+      "잘 정리된 콘셉트 중심", "정보 전달에 초점", "참여하고 질문도 함", "주기적으로 전체 정비",
+      "바로 따라하는 편", "미리 메모하고 챙김", "정보 수집·공유", "자주 참여함",
+      "글/사진 꼼꼼히 고침", "주제별로 정리함", "짧고 명확하게 전달"
+    ],
+    travel: [
+      "철저히 사전 계획", "명소, 맛집 리스트 완성", "가방 미리 챙기고 체크", "일찍 도착해 여유 있게",
+      "지도 보고 빠르게 해결", "원인 분석하고 조정", "사진 정리, 기록 꼼꼼", "재밌어 보여서 바로 OK",
+      "할 일 중심으로 움직임", "후기, 평점 등 데이터 기반", "가보면 좋지! 적극적", "루트별로 철저히 최적화",
+      "새로운 사람과 쉽게 어울림", "실용적인 것 위주", "사진 정리와 후기 작성"
+    ],
+    study: [
+      "계획표부터 작성", "노트로 정리하고 요약", "원인 분석하고 해결", "필기 정리 철저히",
+      "논리적인 구조 우선", "바로 질문하거나 검색", "협업으로 효율 상승", "복습 루틴 철저히",
+      "냉정하게 수용", "시각적 도표/그래프", "구조부터 먼저 이해", "중간중간 계획적으로 휴식",
+      "항상 같은 공간 선호", "계획된 루틴에 포함", "피드백과 정리까지 완료"
+    ],
+    crisis: [
+      "바로 대처 플랜을 만듦", "우선순위 정해 진행", "문제 원인부터 분석", "사실·논리로 해결",
+      "병원, 약국 등 빠르게 수습", "전략 문제부터 되짚음", "최대한 바로 연락·조율", "즉시 입장 정리 후 대응",
+      "분석적 시선으로 파악", "대안 계획 실행", "침착하게 단계별 대응", "논리적 근거 제시",
+      "먼저 주변 사람 챙김", "빠르게 결정하고 실행"
+    ]
+  };
+  
+  const choices = styleChoices[style] || [];
+  return choices[questionId - 1] || "";
+};
+
+const getChoiceB = (style: string, questionId: number): string => {
+  const styleChoices: Record<string, string[]> = {
+    workplace: [
+      "다른 사람 얘기를 듣고 말함", "중요한 것만 기억해두고 시작", "느낌과 흐름 위주로 설명", "기분을 배려하며 말함",
+      "친한 몇 명과 조용히 대화", "우선순위 바꿔가며 유연하게", "독창적이고 새로운 접근 우선", "감정 상하지 않게 에둘러 표현",
+      "혼자 혹은 소수와 먹는 게 편함", "마지막 날 집중해서 처리", "참신함, 창의성이 먼저", "서로 감정을 먼저 이해하려 함",
+      "혼자 정리하는 시간으로 푼다", "새로운 트렌드와 개념 우선", "동료 관계와 분위기도 고려"
+    ],
+    routine: [
+      "알람 여러 번, 여유롭게 시작", "생각나는 대로 하루 시작", "안 먹거나 상황에 따라 다름", "혼자 있는 게 더 편함",
+      "이어폰 끼고 조용히 있음", "새로운 메뉴 시도도 좋아함", "머릿속으로만 대략 정리", "혼자 조용히 쉬는 편",
+      "즉흥적으로 만나도 OK", "감정을 털어내며 해소", "유동적인 상황에서 몰입", "혼자 곱씹고 정리한 후 표현",
+      "하고 싶을 때만 하는 편", "피곤하면 바로 취침", "오늘 있었던 감정을 되새김"
+    ],
+    lifestyle: [
+      "매장 돌며 눈에 띄는 걸 고름", "매번 새로운 메뉴 도전", "잠깐 고민하거나 문자로 돌림", "일정 조정이 필요함",
+      "당일에 생각나면 챙김", "방향 감으로 움직임", "인사이트나 스토리 중심 선호", "감정의 흐름을 우선 고려",
+      "느긋하게 흘러가는 대로", "끌리는 제목이나 포스터", "기다리며 분위기 살핌", "내가 보기 편하면 OK",
+      "하고 싶을 때만 작성", "공감 먼저, 조용히 들어줌", "혼자 영화·책·산책"
+    ],
+    romance: [
+      "상대가 먼저 오길 기다림", "당일 기분 따라 결정", "분위기와 뉘앙스를 중시", "공감하며 마음을 나눔",
+      "눈빛, 행동 등으로 표현", "마음 가는 대로 준비", "감정을 먼저 나눔", "별로 신경 안 씀",
+      "새로운 장소 시도", "조심스럽게 반응", "자유롭고 유동적인 관계", "감정에 크게 흔들림",
+      "글, 선물 등 간접 표현", "의도나 감정을 먼저 파악", "감정적 공감과 배려"
+    ],
+    professional: [
+      "그날 상황에 따라 시작", "말로 전달하며 유동적으로", "듣고 정리한 후 말함", "작은 실무부터 접근",
+      "벼락치기 집중력 발휘", "사람의 감정을 먼저 고려", "흐름에 따라 맞추는 편", "흐름 따라 유동적으로 처리",
+      "핵심만 요약하고 전달", "감정적 표현이 먼저 다가온다", "정서적 뉘앙스를 고려", "조용히 참석해 맞춰줌",
+      "상황 봐서 유동적으로 대처", "기존 방식 선호", "끝나면 바로 퇴근"
+    ],
+    social: [
+      "구경만 하다가 나중에 업로드", "눈팅만 하는 편", "웬만하면 눌러주는 편", "요청 올 때만 수락",
+      "그날 기분 따라 자유롭게", "감정·일상 공유 중심", "보기만 하고 조용히 빠짐", "가끔 생각나면 일부만 삭제",
+      "조용히 지켜보다가 반응", "SNS 알림 뜰 때만 기억", "감정 표현·교류", "불편하면 피함",
+      "즉흥적으로 올림", "감성/재미 위주로 사용", "길고 따뜻한 말투 선호"
+    ],
+    travel: [
+      "현지 가서 유동적으로", "분위기 따라 움직임", "전날 밤에 급히 챙김", "시간 딱 맞춰 움직임",
+      "주변에 물어보거나 경험 의존", "감정 위로 먼저 함", "마음에 드는 것만 남김", "계획 없어 불편함",
+      "하고 싶은 것부터 즐김", "직감과 감정으로 선택", "사람 많으면 피하고 싶음", "되는 대로 흘러가는 여행",
+      "동행 외엔 조용히 즐김", "감성적이거나 특이한 것", "추억만 간직하고 넘어감"
+    ],
+    study: [
+      "일단 시작하며 조정", "머릿속으로만 정리", "그냥 넘어가고 다음 문제", "이해만 되면 패스",
+      "감정·이야기로 연결", "나중에 혼자 고민", "혼자 하는 게 더 집중됨", "벼락치기로 몰입",
+      "위로 먼저 받고 조정", "감각적 키워드/이미지", "사례/비유로 접근", "피곤하면 즉시 쉬는 편",
+      "카페, 도서관 등 다양하게", "필요할 때만 보는 편", "진도 끝나면 종료"
+    ],
+    crisis: [
+      "당황하고 일단 멈춤", "일단 시작하며 조정", "감정적으로 먼저 반응", "감정과 공감으로 접근",
+      "주변 위로부터 받음", "분위기와 팀워크 점검", "일단 걱정되며 망설임", "조용히 지나가길 바람",
+      "감정적으로 깊게 반응", "감정 소모가 커짐", "긴장해 실수할 수도", "분위기 먼저 고려",
+      "본인 상황 먼저 파악", "시간을 두고 고민"
+    ]
+  };
+  
+  const choices = styleChoices[style] || [];
+  return choices[questionId - 1] || "";
+};
+
 const getBalanceChoiceAEn = (questionId: number): string => {
   const choices = [
     "Busy hanging out with friends", "Plan meticulously before departure", "Start with key points", "Focus on actual experience and examples",
@@ -443,14 +568,28 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
         } 
       }
     ],
-    workplace: [
-      { value: 1, label: { ko: "전혀 하지 않는다", en: "Never do this", ja: "全くしない" } },
-      { value: 2, label: { ko: "거의 하지 않는다", en: "Rarely do this", ja: "ほとんどしない" } },
-      { value: 3, label: { ko: "때때로 한다", en: "Sometimes do this", ja: "時々する" } },
-      { value: 4, label: { ko: "자주 한다", en: "Often do this", ja: "よくする" } },
-      { value: 5, label: { ko: "항상 한다", en: "Always do this", ja: "いつもする" } }
-    ],
-    routine: [
+    // All other styles use A/B choice format
+    default: [
+      { 
+        value: 1, 
+        label: { 
+          ko: getChoiceA(style, questionId), 
+          en: getChoiceA(style, questionId), 
+          ja: getChoiceA(style, questionId) 
+        } 
+      },
+      { 
+        value: 2, 
+        label: { 
+          ko: getChoiceB(style, questionId), 
+          en: getChoiceB(style, questionId), 
+          ja: getChoiceB(style, questionId) 
+        } 
+      }
+    ]
+  };
+
+  const defaultOptions = [
       { value: 1, label: { ko: "전혀 해당 없음", en: "Not at all", ja: "全く当てはまらない" } },
       { value: 2, label: { ko: "거의 해당 없음", en: "Rarely applies", ja: "ほとんど当てはまらない" } },
       { value: 3, label: { ko: "보통", en: "Sometimes", ja: "普通" } },
@@ -516,7 +655,7 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
     { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
   ];
   
-  const options = styleAnswers[style] || defaultOptions;
+  const options = styleAnswers[style] || styleAnswers.default || defaultOptions;
   return options.map(option => ({
     value: option.value,
     label: option.label[lang]
@@ -929,8 +1068,8 @@ export default function MBTITest() {
     questions.forEach(question => {
       const answer = answers[question.id];
       if (answer !== undefined) {
-        // For balance game: 1 = Choice A (question weight), 2 = Choice B (opposite weight)
-        if (selectedStyle === 'balance') {
+        // For A/B choice styles: 1 = Choice A (question weight), 2 = Choice B (opposite weight)
+        if (['balance', 'workplace', 'routine', 'lifestyle', 'romance', 'professional', 'social', 'travel', 'study', 'crisis'].includes(selectedStyle)) {
           if (answer === 1) {
             newScores[question.weight]++;
           } else if (answer === 2) {
@@ -944,10 +1083,10 @@ export default function MBTITest() {
             newScores[opposite]++;
           }
         } else {
-          // For 5-point scale styles
-          if (answer >= 4) {
+          // For other A/B choice styles (workplace, routine, etc.)
+          if (answer === 1) {
             newScores[question.weight]++;
-          } else if (answer <= 2) {
+          } else if (answer === 2) {
             const opposite = question.weight === 'E' ? 'I' : 
                             question.weight === 'I' ? 'E' :
                             question.weight === 'S' ? 'N' :

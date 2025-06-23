@@ -1129,9 +1129,9 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 1,
       text: {
-        ko: "📱 SNS에 가장 자주 올리는 컨텐츠는?",
-        en: "📱 What content do you post most on social media?",
-        ja: "📱 SNSに最も頻繁に投稿するコンテンツは？"
+        ko: "SNS에서 많은 사람들과 활발하게 소통하는 것을 즐긴다.",
+        en: "I enjoy actively communicating with many people on social media.",
+        ja: "SNSで多くの人と活発にコミュニケーションすることを楽しむ。"
       },
       dimension: 'EI',
       weight: 'E'
@@ -1139,109 +1139,109 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 2,
       text: {
-        ko: "👍 다른 사람의 게시물에 반응하는 방식은?",
-        en: "👍 How do you react to other people's posts?",
-        ja: "👍 他の人の投稿に反応する方式は？"
-      },
-      dimension: 'TF',
-      weight: 'F'
-    },
-    {
-      id: 3,
-      text: {
-        ko: "📸 사진을 찍고 공유할 때의 기준은?",
-        en: "📸 Your criteria when taking and sharing photos?",
-        ja: "📸 写真を撮って共有する時の基準は？"
-      },
-      dimension: 'SN',
-      weight: 'S'
-    },
-    {
-      id: 4,
-      text: {
-        ko: "💬 온라인 댓글과 토론 참여 방식은?",
-        en: "💬 How do you participate in online comments and discussions?",
-        ja: "💬 オンラインコメントと討論参加方式は？"
-      },
-      dimension: 'TF',
-      weight: 'T'
-    },
-    {
-      id: 5,
-      text: {
-        ko: "🎥 스토리나 실시간 방송 활용 방식은?",
-        en: "🎥 How do you use stories or live broadcasts?",
-        ja: "🎥 ストーリーやライブ配信活用方式は？"
-      },
-      dimension: 'EI',
-      weight: 'E'
-    },
-    {
-      id: 6,
-      text: {
-        ko: "🔔 SNS 알림 관리 방식은?",
-        en: "🔔 How do you manage social media notifications?",
-        ja: "🔔 SNS通知管理方式は？"
-      },
-      dimension: 'JP',
-      weight: 'J'
-    },
-    {
-      id: 7,
-      text: {
-        ko: "👥 새로운 팔로워나 친구 요청에 대한 태도는?",
-        en: "👥 Your attitude toward new follower or friend requests?",
-        ja: "👥 新しいフォロワーや友達リクエストに対する態度は？"
+        ko: "SNS에서는 소수의 친한 사람들과만 소통하는 것을 선호한다.",
+        en: "I prefer communicating only with a few close people on social media.",
+        ja: "SNSでは少数の親しい人とだけコミュニケーションすることを好む。"
       },
       dimension: 'EI',
       weight: 'I'
     },
     {
-      id: 8,
+      id: 3,
       text: {
-        ko: "🌐 온라인에서 개인 정보 공개 수준은?",
-        en: "🌐 Your level of personal information disclosure online?",
-        ja: "🌐 オンラインでの個人情報公開レベルは？"
-      },
-      dimension: 'TF',
-      weight: 'T'
-    },
-    {
-      id: 9,
-      text: {
-        ko: "🎨 창작물이나 취미 공유 방식은?",
-        en: "🎨 How do you share creative works or hobbies?",
-        ja: "🎨 創作物や趣味共有方式は？"
+        ko: "SNS에서 새롭고 창의적인 콘텐츠를 만들어 공유하는 것을 즐긴다.",
+        en: "I enjoy creating and sharing new and creative content on social media.",
+        ja: "SNSで新しく創造的なコンテンツを作って共有することを楽しむ。"
       },
       dimension: 'SN',
       weight: 'N'
     },
     {
-      id: 10,
+      id: 4,
       text: {
-        ko: "📈 SNS 트렌드나 이슈에 대한 반응은?",
-        en: "📈 Your reaction to social media trends or issues?",
-        ja: "📈 SNSトレンドやイシューに対する反応は？"
+        ko: "SNS에서는 일상적이고 실용적인 정보를 주로 공유한다.",
+        en: "I mainly share daily and practical information on social media.",
+        ja: "SNSでは日常的で実用的な情報を主に共有する。"
       },
-      dimension: 'JP',
-      weight: 'P'
+      dimension: 'SN',
+      weight: 'S'
     },
     {
-      id: 11,
+      id: 5,
       text: {
-        ko: "💔 온라인 갈등이나 논란 상황에서의 대처는?",
-        en: "💔 How do you handle online conflicts or controversies?",
-        ja: "💔 オンライン対立や論争状況での対処は？"
+        ko: "SNS에서 논리적이고 객관적인 정보 공유를 중시한다.",
+        en: "I value sharing logical and objective information on social media.",
+        ja: "SNSで論理的で客観的な情報共有を重視する。"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "SNS에서 감정적 공감과 개인적 경험 공유를 중요하게 생각한다.",
+        en: "I value emotional empathy and sharing personal experiences on social media.",
+        ja: "SNSで感情的共感と個人的経験共有を重要に考える。"
       },
       dimension: 'TF',
       weight: 'F'
     },
     {
+      id: 7,
+      text: {
+        ko: "SNS 활동을 체계적으로 계획하고 관리하는 것을 선호한다.",
+        en: "I prefer planning and managing social media activities systematically.",
+        ja: "SNS活動を体系的に計画し管理することを好む。"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "SNS에서 즉흥적이고 자유로운 소통을 즐긴다.",
+        en: "I enjoy spontaneous and free communication on social media.",
+        ja: "SNSで即興的で自由なコミュニケーションを楽しむ。"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "SNS를 통해 많은 사람들과 네트워킹하는 것을 좋아한다.",
+        en: "I like networking with many people through social media.",
+        ja: "SNSを通じて多くの人とネットワーキングすることが好きだ。"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "SNS에서는 개인적이고 깊이 있는 내용을 선별적으로 공유한다.",
+        en: "I selectively share personal and in-depth content on social media.",
+        ja: "SNSでは個人的で深みのある内容を選別的に共有する。"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "SNS에서 미래 지향적이고 혁신적인 아이디어를 탐구한다.",
+        en: "I explore future-oriented and innovative ideas on social media.",
+        ja: "SNSで未来志向的で革新的なアイデアを探求する。"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
       id: 12,
       text: {
-        ko: "🎯 SNS 사용 목적과 가치관은?",
-        en: "🎯 Your purpose and values for using social media?",
-        ja: "🎯 SNS使用目的と価値観は？"
+        ko: "SNS에서는 현실적이고 검증된 정보를 중시한다.",
+        en: "I value realistic and verified information on social media.",
+        ja: "SNSでは現実的で検証された情報を重視する。"
       },
       dimension: 'SN',
       weight: 'S'
@@ -1249,32 +1249,32 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 13,
       text: {
-        ko: "🤝 온라인에서 만난 사람과의 오프라인 만남에 대한 생각은?",
-        en: "🤝 Your thoughts on offline meetings with people met online?",
-        ja: "🤝 オンラインで出会った人とのオフライン出会いに対する考えは？"
+        ko: "SNS에서 합리적 판단과 사실 확인을 중요하게 생각한다.",
+        en: "I consider rational judgment and fact-checking important on social media.",
+        ja: "SNSで合理的判断と事実確認を重要に考える。"
       },
-      dimension: 'EI',
-      weight: 'I'
+      dimension: 'TF',
+      weight: 'T'
     },
     {
       id: 14,
       text: {
-        ko: "🔄 SNS 피드 관리와 정리 방식은?",
-        en: "🔄 How do you manage and organize your social media feed?",
-        ja: "🔄 SNSフィード管理と整理方式は？"
+        ko: "SNS에서 다른 사람들의 감정과 관점을 배려한다.",
+        en: "I consider others' emotions and perspectives on social media.",
+        ja: "SNSで他の人々の感情と観点を配慮する。"
       },
-      dimension: 'JP',
-      weight: 'J'
+      dimension: 'TF',
+      weight: 'F'
     },
     {
       id: 15,
       text: {
-        ko: "🌟 SNS를 통한 자기표현 방식은?",
-        en: "🌟 How do you express yourself through social media?",
-        ja: "🌟 SNSを通じた自己表現方式は？"
+        ko: "SNS 사용에서 일정한 규칙과 원칙을 유지한다.",
+        en: "I maintain consistent rules and principles in social media use.",
+        ja: "SNS使用で一定のルールと原則を維持する。"
       },
-      dimension: 'SN',
-      weight: 'N'
+      dimension: 'JP',
+      weight: 'J'
     }
   ],
   

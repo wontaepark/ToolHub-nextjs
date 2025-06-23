@@ -513,30 +513,1228 @@ const questionSets: Record<string, Question[]> = {
     }
   ],
   
-  // Add other question sets with placeholder questions for now
   routine: [
-    { id: 1, text: { ko: "🌅 아침 첫 시간", en: "🌅 First morning hour", ja: "🌅 朝の最初の時間" }, dimension: 'EI' as const, weight: 'I' as const }
+    {
+      id: 1,
+      text: {
+        ko: "🌅 아침에 일어나자마자 가장 먼저 하는 일은?",
+        en: "🌅 What's the first thing you do when you wake up?",
+        ja: "🌅 朝起きてすぐに最初にすることは？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "☕ 아침 커피/차를 마시며 보내는 시간?",
+        en: "☕ How do you spend time with your morning coffee/tea?",
+        ja: "☕ 朝のコーヒー・お茶の時間の過ごし方は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "📱 하루 일정을 확인하는 방식은?",
+        en: "📱 How do you check your daily schedule?",
+        ja: "📱 一日のスケジュールを確認する方法は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "🚗 출근/등교 시간에 주로 하는 활동은?",
+        en: "🚗 What do you usually do during commute time?",
+        ja: "🚗 通勤・通学時間に主にする活動は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🍽️ 점심 식사 시간의 선호는?",
+        en: "🍽️ Your preference for lunch time?",
+        ja: "🍽️ 昼食時間の好みは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "⏰ 예상치 못한 일정 변경이 생겼을 때?",
+        en: "⏰ When unexpected schedule changes occur?",
+        ja: "⏰ 予想外のスケジュール変更が生じた時？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "📚 새로운 정보를 접할 때의 반응은?",
+        en: "📚 Your reaction when encountering new information?",
+        ja: "📚 新しい情報に接する時の反応は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🌆 퇴근/하교 후 첫 번째 활동은?",
+        en: "🌆 First activity after work/school?",
+        ja: "🌆 退勤・下校後の最初の活動は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🍽️ 저녁 식사 시간의 스타일은?",
+        en: "🍽️ Your dinner time style?",
+        ja: "🍽️ 夕食時間のスタイルは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "📺 저녁 시간 활동 선택 기준은?",
+        en: "📺 Criteria for choosing evening activities?",
+        ja: "📺 夜の時間の活動選択基準は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🛀 잠들기 전 루틴은?",
+        en: "🛀 Your bedtime routine?",
+        ja: "🛀 就寝前のルーティンは？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "💭 잠들기 전 생각하는 것들은?",
+        en: "💭 What do you think about before sleep?",
+        ja: "💭 眠る前に考えることは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "📞 친구/가족과의 연락 방식은?",
+        en: "📞 How do you keep in touch with friends/family?",
+        ja: "📞 友達・家族との連絡方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🎯 하루의 목표 설정 방식은?",
+        en: "🎯 How do you set daily goals?",
+        ja: "🎯 一日の目標設定方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "⭐ 하루를 마무리하는 방식은?",
+        en: "⭐ How do you end your day?",
+        ja: "⭐ 一日を終える方式は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    }
   ],
+  
   lifestyle: [
-    { id: 1, text: { ko: "🏠 일상 선택", en: "🏠 Daily choices", ja: "🏠 日常の選択" }, dimension: 'EI' as const, weight: 'I' as const }
+    {
+      id: 1,
+      text: {
+        ko: "🏠 주말 오후를 보내는 이상적인 방법은?",
+        en: "🏠 What's your ideal way to spend weekend afternoons?",
+        ja: "🏠 週末の午後を過ごす理想的な方法は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "🛒 장보기를 할 때의 스타일은?",
+        en: "🛒 Your style when grocery shopping?",
+        ja: "🛒 買い物をする時のスタイルは？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "🎬 영화/드라마 선택 기준은?",
+        en: "🎬 Your criteria for choosing movies/dramas?",
+        ja: "🎬 映画・ドラマ選択基準は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "🍳 요리를 할 때의 접근 방식은?",
+        en: "🍳 Your approach to cooking?",
+        ja: "🍳 料理をする時のアプローチは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🎵 음악을 듣는 환경과 방식은?",
+        en: "🎵 Your environment and style for listening to music?",
+        ja: "🎵 音楽を聴く環境と方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "📱 스마트폰 사용 패턴은?",
+        en: "📱 Your smartphone usage pattern?",
+        ja: "📱 スマートフォン使用パターンは？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "🧹 집 정리정돈 방식은?",
+        en: "🧹 Your way of organizing your home?",
+        ja: "🧹 家の整理整頓方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "💰 돈을 쓸 때의 기준은?",
+        en: "💰 Your criteria when spending money?",
+        ja: "💰 お金を使う時の基準は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🎨 취미 활동 선택 기준은?",
+        en: "🎨 Your criteria for choosing hobby activities?",
+        ja: "🎨 趣味活動選択基準は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "👥 친구들과의 만남 주선 방식은?",
+        en: "👥 How do you arrange meetings with friends?",
+        ja: "👥 友達との出会いの手配方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "📖 독서할 때의 환경과 방식은?",
+        en: "📖 Your environment and style for reading?",
+        ja: "📖 読書する時の環境と方式は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🛏️ 수면 패턴과 환경 관리는?",
+        en: "🛏️ How do you manage sleep patterns and environment?",
+        ja: "🛏️ 睡眠パターンと環境管理は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🎁 선물을 주고받을 때의 마음가짐은?",
+        en: "🎁 Your mindset when giving and receiving gifts?",
+        ja: "🎁 プレゼントをあげたりもらったりする時の心構えは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🌿 자연과 함께하는 시간의 의미는?",
+        en: "🌿 What does time with nature mean to you?",
+        ja: "🌿 自然と過ごす時間の意味は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "💡 새로운 아이디어가 떠올랐을 때의 행동은?",
+        en: "💡 Your action when new ideas come to mind?",
+        ja: "💡 新しいアイデアが浮かんだ時の行動は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    }
   ],
+  
   romance: [
-    { id: 1, text: { ko: "💕 연애 스타일", en: "💕 Dating style", ja: "💕 恋愛スタイル" }, dimension: 'EI' as const, weight: 'E' as const }
+    {
+      id: 1,
+      text: {
+        ko: "💕 첫 데이트 장소로 선호하는 곳은?",
+        en: "💕 What's your preferred first date location?",
+        ja: "💕 初デートの場所として好むのは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "💌 상대방에게 마음을 표현하는 방식은?",
+        en: "💌 How do you express your feelings to someone?",
+        ja: "💌 相手に気持ちを表現する方式は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "🎭 연인과의 갈등 상황에서의 대처법은?",
+        en: "🎭 How do you handle conflicts with your partner?",
+        ja: "🎭 恋人との対立状況での対処法は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "📱 연인과의 연락 빈도와 방식은?",
+        en: "📱 Frequency and style of communication with your partner?",
+        ja: "📱 恋人との連絡頻度と方式は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🎊 기념일을 챙기는 방식은?",
+        en: "🎊 How do you celebrate anniversaries?",
+        ja: "🎊 記念日を祝う方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "💝 선물을 선택할 때의 기준은?",
+        en: "💝 Your criteria when choosing gifts?",
+        ja: "💝 プレゼントを選ぶ時の基準は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "🌹 로맨틱한 순간을 만드는 방법은?",
+        en: "🌹 How do you create romantic moments?",
+        ja: "🌹 ロマンチックな瞬間を作る方法は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "👥 연인의 친구들과의 관계 형성 방식은?",
+        en: "👥 How do you build relationships with your partner's friends?",
+        ja: "👥 恋人の友達との関係形成方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "💭 연애에서 가장 중요하게 생각하는 가치는?",
+        en: "💭 What values do you consider most important in relationships?",
+        ja: "💭 恋愛で最も重要に考える価値は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "🎯 연애 관계의 미래를 계획하는 방식은?",
+        en: "🎯 How do you plan the future of your relationship?",
+        ja: "🎯 恋愛関係の未来を計画する方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🤔 연인과의 의견 차이가 생겼을 때?",
+        en: "🤔 When you have differences of opinion with your partner?",
+        ja: "🤔 恋人と意見の違いが生じた時？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🏡 함께 보내는 집에서의 시간은?",
+        en: "🏡 Time spent together at home?",
+        ja: "🏡 一緒に過ごす家での時間は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "💪 연인을 응원하고 지지하는 방법은?",
+        en: "💪 How do you support and encourage your partner?",
+        ja: "💪 恋人を応援し支持する方法は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🎪 연인과 함께하는 새로운 경험에 대한 태도는?",
+        en: "🎪 Your attitude toward new experiences with your partner?",
+        ja: "🎪 恋人と一緒にする新しい経験に対する態度は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "💍 연애에서의 약속과 commitment에 대한 생각은?",
+        en: "💍 Your thoughts on promises and commitment in relationships?",
+        ja: "💍 恋愛での約束とコミットメントに対する考えは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    }
   ],
+  
   professional: [
-    { id: 1, text: { ko: "💼 전문성", en: "💼 Professionalism", ja: "💼 プロフェッショナリズム" }, dimension: 'JP' as const, weight: 'J' as const }
+    {
+      id: 1,
+      text: {
+        ko: "💼 중요한 프레젠테이션 준비 방식은?",
+        en: "💼 How do you prepare for important presentations?",
+        ja: "💼 重要なプレゼンテーションの準備方法は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "🤝 클라이언트와의 첫 미팅에서의 접근 방식은?",
+        en: "🤝 Your approach in first meetings with clients?",
+        ja: "🤝 クライアントとの初回ミーティングでのアプローチは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "📊 업무 성과를 평가할 때의 기준은?",
+        en: "📊 Your criteria when evaluating work performance?",
+        ja: "📊 業務成果を評価する時の基準は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "🎯 새로운 프로젝트 접근 방식은?",
+        en: "🎯 Your approach to new projects?",
+        ja: "🎯 新しいプロジェクトのアプローチは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "💡 창의적 아이디어 개발 과정은?",
+        en: "💡 Your process for developing creative ideas?",
+        ja: "💡 創造的アイデア開発過程は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "⏰ 마감 압박 상황에서의 대처법은?",
+        en: "⏰ How do you handle deadline pressure?",
+        ja: "⏰ 締切プレッシャー状況での対処法は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "👔 비즈니스 네트워킹 이벤트에서의 행동은?",
+        en: "👔 Your behavior at business networking events?",
+        ja: "👔 ビジネスネットワーキングイベントでの行動は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "📈 목표 설정과 달성 전략은?",
+        en: "📈 Your goal setting and achievement strategy?",
+        ja: "📈 目標設定と達成戦略は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🤲 팀원들의 의견을 수렴하는 방식은?",
+        en: "🤲 How do you gather team members' opinions?",
+        ja: "🤲 チームメンバーの意見を集める方式は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "🔍 문제 해결 시 중요하게 생각하는 요소는?",
+        en: "🔍 What factors do you consider important in problem-solving?",
+        ja: "🔍 問題解決時に重要に考える要素は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "💻 업무 환경 설정에 대한 선호는?",
+        en: "💻 Your preferences for work environment setup?",
+        ja: "💻 業務環境設定に対する好みは？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "📋 업무 우선순위 결정 방식은?",
+        en: "📋 How do you determine work priorities?",
+        ja: "📋 業務優先順位決定方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🎨 혁신적 솔루션 개발에 대한 접근법은?",
+        en: "🎨 Your approach to developing innovative solutions?",
+        ja: "🎨 革新的ソリューション開発に対するアプローチは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🏆 성공적인 프로젝트 완료 후의 행동은?",
+        en: "🏆 Your actions after successful project completion?",
+        ja: "🏆 成功的なプロジェクト完了後の行動は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "🌟 전문성 향상을 위한 학습 방식은?",
+        en: "🌟 Your learning approach for professional development?",
+        ja: "🌟 専門性向上のための学習方式は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    }
   ],
+  
   social: [
-    { id: 1, text: { ko: "📱 소셜 활동", en: "📱 Social activities", ja: "📱 ソーシャル活動" }, dimension: 'EI' as const, weight: 'E' as const }
+    {
+      id: 1,
+      text: {
+        ko: "📱 SNS에 가장 자주 올리는 컨텐츠는?",
+        en: "📱 What content do you post most on social media?",
+        ja: "📱 SNSに最も頻繁に投稿するコンテンツは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "👍 다른 사람의 게시물에 반응하는 방식은?",
+        en: "👍 How do you react to other people's posts?",
+        ja: "👍 他の人の投稿に反応する方式は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "📸 사진을 찍고 공유할 때의 기준은?",
+        en: "📸 Your criteria when taking and sharing photos?",
+        ja: "📸 写真を撮って共有する時の基準は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "💬 온라인 댓글과 토론 참여 방식은?",
+        en: "💬 How do you participate in online comments and discussions?",
+        ja: "💬 オンラインコメントと討論参加方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🎥 스토리나 실시간 방송 활용 방식은?",
+        en: "🎥 How do you use stories or live broadcasts?",
+        ja: "🎥 ストーリーやライブ配信活用方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "🔔 SNS 알림 관리 방식은?",
+        en: "🔔 How do you manage social media notifications?",
+        ja: "🔔 SNS通知管理方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "👥 새로운 팔로워나 친구 요청에 대한 태도는?",
+        en: "👥 Your attitude toward new follower or friend requests?",
+        ja: "👥 新しいフォロワーや友達リクエストに対する態度は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🌐 온라인에서 개인 정보 공개 수준은?",
+        en: "🌐 Your level of personal information disclosure online?",
+        ja: "🌐 オンラインでの個人情報公開レベルは？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🎨 창작물이나 취미 공유 방식은?",
+        en: "🎨 How do you share creative works or hobbies?",
+        ja: "🎨 創作物や趣味共有方式は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "📈 SNS 트렌드나 이슈에 대한 반응은?",
+        en: "📈 Your reaction to social media trends or issues?",
+        ja: "📈 SNSトレンドやイシューに対する反応は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "💔 온라인 갈등이나 논란 상황에서의 대처는?",
+        en: "💔 How do you handle online conflicts or controversies?",
+        ja: "💔 オンライン対立や論争状況での対処は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🎯 SNS 사용 목적과 가치관은?",
+        en: "🎯 Your purpose and values for using social media?",
+        ja: "🎯 SNS使用目的と価値観は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🤝 온라인에서 만난 사람과의 오프라인 만남에 대한 생각은?",
+        en: "🤝 Your thoughts on offline meetings with people met online?",
+        ja: "🤝 オンラインで出会った人とのオフライン出会いに対する考えは？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🔄 SNS 피드 관리와 정리 방식은?",
+        en: "🔄 How do you manage and organize your social media feed?",
+        ja: "🔄 SNSフィード管理と整理方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "🌟 SNS를 통한 자기표현 방식은?",
+        en: "🌟 How do you express yourself through social media?",
+        ja: "🌟 SNSを通じた自己表現方式は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    }
   ],
+  
   travel: [
-    { id: 1, text: { ko: "✈️ 여행 방식", en: "✈️ Travel style", ja: "✈️ 旅行方式" }, dimension: 'SN' as const, weight: 'S' as const }
+    {
+      id: 1,
+      text: {
+        ko: "✈️ 여행지에서 가장 중요한 것은?",
+        en: "✈️ What's most important at a travel destination?",
+        ja: "✈️ 旅行先で最も重要なことは？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "🗺️ 여행 계획을 세우는 방식은?",
+        en: "🗺️ How do you plan your travels?",
+        ja: "🗺️ 旅行計画を立てる方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "🎒 여행 짐을 싸는 스타일은?",
+        en: "🎒 Your style of packing for travel?",
+        ja: "🎒 旅行荷物を詰めるスタイルは？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "🏨 숙소 선택 기준은?",
+        en: "🏨 Your criteria for choosing accommodation?",
+        ja: "🏨 宿泊施設選択基準は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🍽️ 현지 음식 도전에 대한 태도는?",
+        en: "🍽️ Your attitude toward trying local food?",
+        ja: "🍽️ 現地料理挑戦に対する態度は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "📷 여행 중 사진 촬영과 기록 방식은?",
+        en: "📷 How do you take photos and record during travel?",
+        ja: "📷 旅行中の写真撮影と記録方式は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "👥 여행 동반자 선택과 역할 분담은?",
+        en: "👥 How do you choose travel companions and divide roles?",
+        ja: "👥 旅行同伴者選択と役割分担は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🚇 현지 교통수단 이용 방식은?",
+        en: "🚇 How do you use local transportation?",
+        ja: "🚇 現地交通手段利用方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🎭 현지 문화 체험에 대한 접근법은?",
+        en: "🎭 Your approach to experiencing local culture?",
+        ja: "🎭 現地文化体験に対するアプローチは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "💰 여행 예산 관리 방식은?",
+        en: "💰 How do you manage travel budget?",
+        ja: "💰 旅行予算管理方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🌅 여행 중 하루 일정 관리는?",
+        en: "🌅 How do you manage daily schedules while traveling?",
+        ja: "🌅 旅行中の一日スケジュール管理は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🛍️ 여행지에서의 쇼핑 스타일은?",
+        en: "🛍️ Your shopping style while traveling?",
+        ja: "🛍️ 旅行先でのショッピングスタイルは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🌄 여행 중 예상치 못한 상황에 대한 대처는?",
+        en: "🌄 How do you handle unexpected situations while traveling?",
+        ja: "🌄 旅行中の予想外の状況に対する対処は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🏖️ 여행에서 휴식과 활동의 균형은?",
+        en: "🏖️ How do you balance rest and activities while traveling?",
+        ja: "🏖️ 旅行での休息と活動のバランスは？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "🎁 여행 후 기념품과 추억 정리 방식은?",
+        en: "🎁 How do you organize souvenirs and memories after travel?",
+        ja: "🎁 旅行後のお土産と思い出整理方式は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    }
   ],
+  
   study: [
-    { id: 1, text: { ko: "📚 학습법", en: "📚 Learning method", ja: "📚 学習法" }, dimension: 'SN' as const, weight: 'S' as const }
+    {
+      id: 1,
+      text: {
+        ko: "📚 새로운 것을 배울 때 선호하는 방법은?",
+        en: "📚 What's your preferred way to learn something new?",
+        ja: "📚 新しいことを学ぶ時の好む方法は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "🎯 학습 목표를 설정하는 방식은?",
+        en: "🎯 How do you set learning goals?",
+        ja: "🎯 学習目標を設定する方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "📝 노트 정리와 기록 방식은?",
+        en: "📝 How do you organize notes and records?",
+        ja: "📝 ノート整理と記録方式は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "👥 그룹 스터디에 대한 선호도는?",
+        en: "👥 Your preference for group study?",
+        ja: "👥 グループスタディに対する好みは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🕐 학습 시간 배분과 관리 방식은?",
+        en: "🕐 How do you allocate and manage study time?",
+        ja: "🕐 学習時間配分と管理方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "💡 복잡한 개념을 이해하는 접근법은?",
+        en: "💡 Your approach to understanding complex concepts?",
+        ja: "💡 複雑な概念を理解するアプローチは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "📖 교재와 자료 선택 기준은?",
+        en: "📖 Your criteria for choosing textbooks and materials?",
+        ja: "📖 教材と資料選択基準は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🎪 학습 환경 설정에 대한 선호는?",
+        en: "🎪 Your preferences for learning environment setup?",
+        ja: "🎪 学習環境設定に対する好みは？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🔄 복습과 반복 학습 방식은?",
+        en: "🔄 Your approach to review and repetitive learning?",
+        ja: "🔄 復習と反復学習方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "❓ 질문하고 답을 구하는 방식은?",
+        en: "❓ How do you ask questions and seek answers?",
+        ja: "❓ 質問して答えを求める方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🎨 창의적 학습법 활용에 대한 태도는?",
+        en: "🎨 Your attitude toward using creative learning methods?",
+        ja: "🎨 創造的学習法活用に対する態度は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "📊 학습 성과를 평가하는 방식은?",
+        en: "📊 How do you evaluate learning outcomes?",
+        ja: "📊 学習成果を評価する方式は？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🌟 동기부여와 집중력 유지 방법은?",
+        en: "🌟 How do you maintain motivation and concentration?",
+        ja: "🌟 動機付けと集中力維持方法は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🔮 새로운 학습 기회에 대한 접근 방식은?",
+        en: "🔮 Your approach to new learning opportunities?",
+        ja: "🔮 新しい学習機会に対するアプローチは？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "🏆 학습한 내용을 활용하고 적용하는 방식은?",
+        en: "🏆 How do you utilize and apply what you've learned?",
+        ja: "🏆 学習した内容を活用し適用する方式は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    }
   ],
+  
   crisis: [
-    { id: 1, text: { ko: "🚨 위기 대응", en: "🚨 Crisis response", ja: "🚨 危機対応" }, dimension: 'TF' as const, weight: 'T' as const }
+    {
+      id: 1,
+      text: {
+        ko: "🚨 갑작스러운 문제가 생겼을 때?",
+        en: "🚨 When a sudden problem arises?",
+        ja: "🚨 突然の問題が発生した時？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "⚡ 긴급 상황에서의 첫 번째 반응은?",
+        en: "⚡ Your first reaction in emergency situations?",
+        ja: "⚡ 緊急状況での最初の反応は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "🔥 스트레스가 극심할 때의 대처법은?",
+        en: "🔥 How do you cope when stress is extreme?",
+        ja: "🔥 ストレスが極度の時の対処法は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "💔 예상치 못한 실패나 좌절 상황에서?",
+        en: "💔 In unexpected failure or frustration situations?",
+        ja: "💔 予想外の失敗や挫折状況で？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🆘 도움이 필요한 상황에서의 행동은?",
+        en: "🆘 Your actions when you need help?",
+        ja: "🆘 助けが必要な状況での行動は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "⏰ 시간이 부족한 압박 상황에서?",
+        en: "⏰ In time-pressured situations?",
+        ja: "⏰ 時間が不足した圧迫状況で？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "🎯 중요한 결정을 빠르게 내려야 할 때?",
+        en: "🎯 When you need to make important decisions quickly?",
+        ja: "🎯 重要な決定を早く下さなければならない時？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🌊 통제할 수 없는 상황에 직면했을 때?",
+        en: "🌊 When facing uncontrollable situations?",
+        ja: "🌊 制御できない状況に直面した時？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "💥 갈등이나 충돌 상황에서의 중재 방식은?",
+        en: "💥 Your mediation style in conflict situations?",
+        ja: "💥 対立や衝突状況での仲裁方式は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "🔍 정보가 부족한 상황에서의 판단 기준은?",
+        en: "🔍 Your judgment criteria when information is insufficient?",
+        ja: "🔍 情報が不足した状況での判断基準は？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🎪 예상과 다른 결과가 나왔을 때?",
+        en: "🎪 When results differ from expectations?",
+        ja: "🎪 予想と違う結果が出た時？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🛡️ 다른 사람이 위기에 처했을 때의 지원 방식은?",
+        en: "🛡️ How do you support others in crisis?",
+        ja: "🛡️ 他の人が危機に陥った時の支援方式は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "📉 실수나 잘못을 인정해야 할 때?",
+        en: "📉 When you need to admit mistakes or wrongs?",
+        ja: "📉 ミスや間違いを認めなければならない時？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🌪️ 위기 이후 회복과 재건 과정에서?",
+        en: "🌪️ In recovery and rebuilding process after crisis?",
+        ja: "🌪️ 危機後の回復と再建過程で？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "💪 위기를 통해 얻은 교훈을 활용하는 방식은?",
+        en: "💪 How do you utilize lessons learned from crisis?",
+        ja: "💪 危機を通じて得た教訓を活用する方式は？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    }
   ]
 };
 

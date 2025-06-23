@@ -49,13 +49,13 @@ interface MBTIResult {
 }
 
 const questions: Question[] = [
-  // E vs I questions
+  // E vs I questions (situation-based)
   {
     id: 1,
     text: {
-      ko: "새로운 사람들과 만나는 것을 즐기며, 대화를 통해 에너지를 얻는다",
-      en: "I enjoy meeting new people and gain energy from conversations",
-      ja: "新しい人と出会うことを楽しみ、会話からエネルギーを得る"
+      ko: "🎉 회사 워크샵에서 즉석 발표를 하게 되었습니다. 당신은?",
+      en: "🎉 You're asked to give an impromptu presentation at a company workshop. You:",
+      ja: "🎉 会社のワークショップで即席発表をすることになりました。あなたは？"
     },
     dimension: 'EI',
     weight: 'E'
@@ -63,30 +63,31 @@ const questions: Question[] = [
   {
     id: 2,
     text: {
-      ko: "혼자 있는 시간이 필요하며, 조용한 환경에서 더 집중할 수 있다",
-      en: "I need alone time and can focus better in quiet environments",
-      ja: "一人の時間が必要で、静かな環境でより集中できる"
-    },
-    dimension: 'EI',
-    weight: 'I'
-  },
-  {
-    id: 3,
-    text: {
-      ko: "파티나 모임에서 활발하게 참여하며 많은 사람들과 어울리는 것을 좋아한다",
-      en: "I actively participate in parties and gatherings, enjoying being with many people",
-      ja: "パーティーや集まりで積極的に参加し、多くの人と一緒にいることを好む"
+      ko: "📱 SNS에 새로운 게시물을 올릴 때, 주로 어떤 내용을 선택하시나요?",
+      en: "📱 When posting on social media, what type of content do you usually choose?",
+      ja: "📱 SNSに新しい投稿をする時、主にどんな内容を選びますか？"
     },
     dimension: 'EI',
     weight: 'E'
   },
-  // S vs N questions
+  {
+    id: 3,
+    text: {
+      ko: "🏠 완벽한 주말을 보내는 방법은?",
+      en: "🏠 What's your idea of a perfect weekend?",
+      ja: "🏠 完璧な週末の過ごし方は？"
+    },
+    dimension: 'EI',
+    weight: 'I'
+  },
+  
+  // S vs N questions (image-based scenarios)
   {
     id: 4,
     text: {
-      ko: "현실적이고 구체적인 사실들에 집중하며, 경험을 통해 배우는 것을 선호한다",
-      en: "I focus on realistic and concrete facts, preferring to learn through experience",
-      ja: "現実的で具体的な事実に集中し、経験を通して学ぶことを好む"
+      ko: "🎨 새로운 취미를 배울 때, 어떤 방식을 선호하시나요?",
+      en: "🎨 When learning a new hobby, which approach do you prefer?",
+      ja: "🎨 新しい趣味を学ぶ時、どの方法を好みますか？"
     },
     dimension: 'SN',
     weight: 'S'
@@ -94,9 +95,9 @@ const questions: Question[] = [
   {
     id: 5,
     text: {
-      ko: "새로운 아이디어와 가능성을 탐구하며, 상상력을 발휘하는 것을 즐긴다",
-      en: "I explore new ideas and possibilities, enjoying the use of imagination",
-      ja: "新しいアイデアや可能性を探求し、想像力を発揮することを楽しむ"
+      ko: "📚 책을 읽을 때, 어떤 장르에 더 끌리시나요?",
+      en: "📚 When reading books, which genre attracts you more?",
+      ja: "📚 本を読む時、どのジャンルにより惹かれますか？"
     },
     dimension: 'SN',
     weight: 'N'
@@ -104,94 +105,168 @@ const questions: Question[] = [
   {
     id: 6,
     text: {
-      ko: "세부사항에 주의를 기울이며, 체계적이고 순서대로 일을 처리한다",
-      en: "I pay attention to details and handle tasks systematically and in order",
-      ja: "細部に注意を払い、体系的で順序立てて仕事を処理する"
+      ko: "🏢 새로운 업무를 맡게 되었을 때, 첫 번째 행동은?",
+      en: "🏢 When assigned a new task at work, your first action is:",
+      ja: "🏢 新しい業務を任された時、最初の行動は？"
     },
     dimension: 'SN',
     weight: 'S'
   },
-  // T vs F questions
   {
     id: 7,
     text: {
-      ko: "결정을 내릴 때 논리와 객관적 분석을 중시한다",
-      en: "I prioritize logic and objective analysis when making decisions",
-      ja: "決定を下す際に論理と客観的分析を重視する"
+      ko: "💡 아이디어가 떠올랐을 때, 어떻게 발전시키시나요?",
+      en: "💡 When you have an idea, how do you develop it?",
+      ja: "💡 アイデアが浮かんだ時、どのように発展させますか？"
+    },
+    dimension: 'SN',
+    weight: 'N'
+  },
+
+  // T vs F questions (decision scenarios)
+  {
+    id: 8,
+    text: {
+      ko: "👥 팀에서 갈등이 생겼을 때, 당신의 해결 방식은?",
+      en: "👥 When conflict arises in your team, your approach to resolution is:",
+      ja: "👥 チームで対立が生じた時、あなたの解決方法は？"
     },
     dimension: 'TF',
     weight: 'T'
   },
   {
-    id: 8,
+    id: 9,
     text: {
-      ko: "다른 사람들의 감정과 가치관을 고려하여 결정을 내린다",
-      en: "I make decisions considering other people's emotions and values",
-      ja: "他の人の感情や価値観を考慮して決定を下す"
+      ko: "🤝 친구가 중요한 결정으로 고민할 때, 어떤 조언을 해주시나요?",
+      en: "🤝 When a friend is struggling with an important decision, what advice do you give?",
+      ja: "🤝 友達が重要な決定で悩んでいる時、どんなアドバイスをしますか？"
     },
     dimension: 'TF',
     weight: 'F'
   },
   {
-    id: 9,
+    id: 10,
     text: {
-      ko: "비판적 사고를 통해 문제를 해결하며, 효율성을 추구한다",
-      en: "I solve problems through critical thinking and pursue efficiency",
-      ja: "批判的思考を通じて問題を解決し、効率性を追求する"
+      ko: "⚖️ 영화를 평가할 때, 무엇을 가장 중요하게 생각하시나요?",
+      en: "⚖️ When evaluating a movie, what do you consider most important?",
+      ja: "⚖️ 映画を評価する時、何を最も重要に考えますか？"
     },
     dimension: 'TF',
     weight: 'T'
   },
-  // J vs P questions
   {
-    id: 10,
+    id: 11,
     text: {
-      ko: "계획을 세우고 일정을 지키는 것을 선호하며, 미리 준비하는 편이다",
-      en: "I prefer making plans and keeping schedules, preparing in advance",
-      ja: "計画を立てて日程を守ることを好み、事前に準備する方だ"
+      ko: "💝 선물을 고를 때, 가장 신경 쓰는 부분은?",
+      en: "💝 When choosing a gift, what do you care about most?",
+      ja: "💝 プレゼントを選ぶ時、最も気にする部分は？"
+    },
+    dimension: 'TF',
+    weight: 'F'
+  },
+
+  // J vs P questions (lifestyle scenarios)
+  {
+    id: 12,
+    text: {
+      ko: "✈️ 여행을 계획할 때, 당신의 스타일은?",
+      en: "✈️ When planning a trip, your style is:",
+      ja: "✈️ 旅行を計画する時、あなたのスタイルは？"
     },
     dimension: 'JP',
     weight: 'J'
   },
   {
-    id: 11,
+    id: 13,
     text: {
-      ko: "유연하고 자발적인 것을 좋아하며, 즉흥적으로 행동하는 편이다",
-      en: "I like being flexible and spontaneous, tending to act impromptu",
-      ja: "柔軟で自発的なことを好み、即興的に行動する方だ"
+      ko: "🎯 목표를 설정하고 달성하는 방식은?",
+      en: "🎯 Your approach to setting and achieving goals:",
+      ja: "🎯 目標を設定して達成する方法は？"
+    },
+    dimension: 'JP',
+    weight: 'J'
+  },
+  {
+    id: 14,
+    text: {
+      ko: "🌟 새로운 기회가 갑자기 생겼을 때의 반응은?",
+      en: "🌟 Your reaction when a new opportunity suddenly arises:",
+      ja: "🌟 新しい機会が突然生まれた時の反応は？"
     },
     dimension: 'JP',
     weight: 'P'
   },
   {
-    id: 12,
+    id: 15,
     text: {
-      ko: "결정을 내리기 전에 모든 옵션을 열어두고 싶어한다",
-      en: "I want to keep all options open before making a decision",
-      ja: "決定を下す前にすべての選択肢を開けておきたい"
+      ko: "📅 일정 관리에 대한 당신의 철학은?",
+      en: "📅 Your philosophy about schedule management:",
+      ja: "📅 スケジュール管理に対するあなたの哲学は？"
     },
     dimension: 'JP',
     weight: 'P'
   }
 ];
 
+// Function to get situation-specific answer options for each question
+const getAnswerOptions = (questionId: number, lang: 'ko' | 'en' | 'ja') => {
+  const optionSets: Record<number, { value: number; label: Record<'ko' | 'en' | 'ja', string> }[]> = {
+    1: [ // 즉석 발표
+      { value: 1, label: { ko: "😰 긴장되지만 최선을 다해 발표한다", en: "😰 Feel nervous but do my best", ja: "😰 緊張するが最善を尽くして発表する" } },
+      { value: 2, label: { ko: "🤔 준비 시간을 요청한다", en: "🤔 Ask for preparation time", ja: "🤔 準備時間を要請する" } },
+      { value: 3, label: { ko: "😊 차분하게 준비해서 발표한다", en: "😊 Stay calm and prepare", ja: "😊 落ち着いて準備して発表する" } },
+      { value: 4, label: { ko: "😎 자신감 있게 즉석에서 발표한다", en: "😎 Confidently present on the spot", ja: "😎 自信を持って即席で発表する" } },
+      { value: 5, label: { ko: "🎯 흥미롭게 여기고 적극적으로 참여한다", en: "🎯 Get excited and actively participate", ja: "🎯 面白がって積極的に参加する" } }
+    ],
+    2: [ // SNS 게시물
+      { value: 1, label: { ko: "📝 개인적인 일상과 감정을 공유", en: "📝 Share personal daily life and emotions", ja: "📝 個人的な日常と感情を共有" } },
+      { value: 2, label: { ko: "📸 취미나 관심사에 대한 내용", en: "📸 Content about hobbies and interests", ja: "📸 趣味や関心事についての内容" } },
+      { value: 3, label: { ko: "🎨 창작물이나 예술적 표현", en: "🎨 Creative works or artistic expression", ja: "🎨 創作物や芸術的表現" } },
+      { value: 4, label: { ko: "🌍 사회 이슈나 유용한 정보", en: "🌍 Social issues or useful information", ja: "🌍 社会問題や有用な情報" } },
+      { value: 5, label: { ko: "🎉 친구들과의 활동이나 모임 사진", en: "🎉 Activities or gatherings with friends", ja: "🎉 友達との活動や集まりの写真" } }
+    ],
+    3: [ // 완벽한 주말
+      { value: 1, label: { ko: "📚 혼자서 책을 읽거나 영화 감상", en: "📚 Reading books or watching movies alone", ja: "📚 一人で本を読んだり映画鑑賞" } },
+      { value: 2, label: { ko: "🏡 집에서 휴식하며 에너지 충전", en: "🏡 Resting at home and recharging", ja: "🏡 家で休息してエネルギー充電" } },
+      { value: 3, label: { ko: "🚶 가벼운 산책이나 조용한 활동", en: "🚶 Light walks or quiet activities", ja: "🚶 軽い散歩や静かな活動" } },
+      { value: 4, label: { ko: "👥 소수의 친한 친구들과 만남", en: "👥 Meeting with a few close friends", ja: "👥 少数の親しい友達との出会い" } },
+      { value: 5, label: { ko: "🎪 다양한 사람들과 활발한 활동", en: "🎪 Active activities with various people", ja: "🎪 様々な人との活発な活動" } }
+    ]
+  };
+
+  // Default options for questions not specifically defined
+  const defaultOptions = [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly Disagree", ja: "全くそうではない" } },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通" } },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly Agree", ja: "非常にそうだ" } }
+  ];
+
+  const options = optionSets[questionId] || defaultOptions;
+  return options.map(option => ({
+    value: option.value,
+    label: option.label[lang]
+  }));
+};
+
 const mbtiResults: Record<string, MBTIResult> = {
   INTJ: {
     type: "INTJ",
     name: {
-      ko: "건축가",
+      ko: "전략가",
       en: "The Architect",
       ja: "建築家"
     },
     description: {
-      ko: "상상력이 풍부하고 전략적인 사고를 하는 계획가입니다.",
-      en: "Imaginative and strategic thinkers, with a plan for everything.",
-      ja: "想像力豊かで戦略的な思考を持つ計画家です。"
+      ko: "혁신적인 아이디어와 뛰어난 실행력을 가진 완벽주의자입니다. 독립적이며 미래지향적인 사고를 하는 당신은 복잡한 문제를 체계적으로 해결하는 능력이 뛰어납니다.",
+      en: "A perfectionist with innovative ideas and excellent execution. You're independent with future-oriented thinking and excel at systematically solving complex problems.",
+      ja: "革新的なアイデアと優れた実行力を持つ完璧主義者です。独立的で未来志向的な思考を持つあなたは、複雑な問題を体系的に解決する能力に優れています。"
     },
     traits: {
-      ko: ["독립적", "전략적", "완벽주의", "창의적"],
-      en: ["Independent", "Strategic", "Perfectionist", "Creative"],
-      ja: ["独立的", "戦略的", "完璧主義", "創造的"]
+      ko: ["독립적", "전략적", "완벽주의", "미래지향적"],
+      en: ["Independent", "Strategic", "Perfectionist", "Future-oriented"],
+      ja: ["独立的", "戦略的", "完璧主義", "未来志向"]
     },
     careers: {
       ko: ["과학자", "엔지니어", "건축가", "전략기획자"],
@@ -207,19 +282,19 @@ const mbtiResults: Record<string, MBTIResult> = {
   INTP: {
     type: "INTP",
     name: {
-      ko: "논리술사",
+      ko: "사색가",
       en: "The Thinker",
-      ja: "論理学者"
+      ja: "思想家"
     },
     description: {
-      ko: "혁신적인 발명가로, 지식에 대한 끊임없는 갈증을 가지고 있습니다.",
-      en: "Innovative inventors with an unquenchable thirst for knowledge.",
-      ja: "革新的な発明家で、知識への尽きない渇望を持っています。"
+      ko: "호기심이 많고 창의적인 사고를 하는 이론가입니다. 복잡한 개념을 이해하고 새로운 아이디어를 탐구하는 것을 즐기며, 논리적 사고력이 뛰어납니다.",
+      en: "A curious and creative theoretical thinker. You enjoy understanding complex concepts and exploring new ideas, with excellent logical thinking abilities.",
+      ja: "好奇心旺盛で創造的な思考をする理論家です。複雑な概念を理解し新しいアイデアを探求することを楽しみ、論理的思考力に優れています。"
     },
     traits: {
-      ko: ["분석적", "객관적", "호기심", "논리적"],
-      en: ["Analytical", "Objective", "Curious", "Logical"],
-      ja: ["分析的", "客観的", "好奇心", "論理的"]
+      ko: ["분석적", "창의적", "호기심", "논리적"],
+      en: ["Analytical", "Creative", "Curious", "Logical"],
+      ja: ["分析的", "創造的", "好奇心", "論理的"]
     },
     careers: {
       ko: ["연구원", "프로그래머", "수학자", "철학자"],
@@ -235,19 +310,19 @@ const mbtiResults: Record<string, MBTIResult> = {
   ENTJ: {
     type: "ENTJ",
     name: {
-      ko: "통솔자",
+      ko: "리더",
       en: "The Commander",
       ja: "指揮官"
     },
     description: {
-      ko: "대담하고 상상력이 풍부한 리더로, 길을 찾거나 만들어냅니다.",
-      en: "Bold, imaginative and strong-willed leaders, always finding a way or making one.",
-      ja: "大胆で想像力豊かな強い意志を持つリーダーで、常に道を見つけるか作り出します。"
+      ko: "타고난 리더십과 강한 의지력을 가진 지휘관입니다. 목표 달성을 위해 체계적으로 계획을 세우고 실행하며, 다른 사람들에게 동기를 부여하는 능력이 뛰어납니다.",
+      en: "A natural leader with strong willpower and commanding presence. You systematically plan and execute to achieve goals, excelling at motivating others.",
+      ja: "生まれながらのリーダーシップと強い意志力を持つ指揮官です。目標達成のために体系的に計画を立てて実行し、他の人にモチベーションを与える能力に優れています。"
     },
     traits: {
-      ko: ["리더십", "결단력", "효율성", "야망"],
-      en: ["Leadership", "Decisive", "Efficient", "Ambitious"],
-      ja: ["リーダーシップ", "決断力", "効率性", "野心"]
+      ko: ["리더십", "결단력", "효율성", "목표지향적"],
+      en: ["Leadership", "Decisive", "Efficient", "Goal-oriented"],
+      ja: ["リーダーシップ", "決断力", "効率性", "目標志向"]
     },
     careers: {
       ko: ["CEO", "경영컨설턴트", "변호사", "정치인"],
@@ -255,27 +330,27 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["CEO", "経営コンサルタント", "弁護士", "政治家"]
     },
     famous: {
-      ko: ["스티브 잡스", "고든 램지", "마가렛 대처"],
-      en: ["Steve Jobs", "Gordon Ramsay", "Margaret Thatcher"],
-      ja: ["スティーブ・ジョブズ", "ゴードン・ラムゼイ", "マーガレット・サッチャー"]
+      ko: ["스티브 잡스", "마가렛 대처", "나폴레옹"],
+      en: ["Steve Jobs", "Margaret Thatcher", "Napoleon"],
+      ja: ["スティーブ・ジョブズ", "マーガレット・サッチャー", "ナポレオン"]
     }
   },
   ENTP: {
     type: "ENTP",
     name: {
-      ko: "변론가",
+      ko: "혁신가",
       en: "The Debater",
-      ja: "討論者"
+      ja: "革新者"
     },
     description: {
-      ko: "영리하고 호기심이 많은 사색가로, 지적 도전을 거부할 수 없습니다.",
-      en: "Smart and curious thinkers who cannot resist an intellectual challenge.",
-      ja: "賢くて好奇心旺盛な思想家で、知的挑戦を拒むことができません。"
+      ko: "창의적이고 열정적인 혁신가입니다. 새로운 가능성을 탐구하고 다양한 관점에서 문제를 바라보며, 변화를 주도하는 것을 즐깁니다.",
+      en: "A creative and passionate innovator. You explore new possibilities, view problems from various perspectives, and enjoy leading change.",
+      ja: "創造的で情熱的な革新者です。新しい可能性を探求し様々な観点から問題を見つめ、変化を主導することを楽しみます。"
     },
     traits: {
-      ko: ["창의적", "열정적", "다재다능", "카리스마"],
-      en: ["Creative", "Enthusiastic", "Versatile", "Charismatic"],
-      ja: ["創造的", "情熱的", "多才多能", "カリスマ"]
+      ko: ["창의적", "열정적", "다재다능", "적응적"],
+      en: ["Creative", "Enthusiastic", "Versatile", "Adaptable"],
+      ja: ["創造的", "情熱的", "多才多能", "適応的"]
     },
     careers: {
       ko: ["기업가", "발명가", "마케터", "저널리스트"],
@@ -283,32 +358,32 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["起業家", "発明家", "マーケター", "ジャーナリスト"]
     },
     famous: {
-      ko: ["토마스 에디슨", "로버트 다우니 주니어", "마크 트웨인"],
-      en: ["Thomas Edison", "Robert Downey Jr.", "Mark Twain"],
-      ja: ["トーマス・エジソン", "ロバート・ダウニー・Jr.", "マーク・トウェイン"]
+      ko: ["토마스 에디슨", "마크 트웨인", "월트 디즈니"],
+      en: ["Thomas Edison", "Mark Twain", "Walt Disney"],
+      ja: ["トーマス・エジソン", "マーク・トウェイン", "ウォルト・ディズニー"]
     }
   },
   INFJ: {
     type: "INFJ",
     name: {
-      ko: "옹호자",
+      ko: "상담가",
       en: "The Advocate",
       ja: "提唱者"
     },
     description: {
-      ko: "조용하고 신비로우며 동시에 매우 영감을 주는 이상주의자입니다.",
-      en: "Quiet and mystical, yet very inspiring and tireless idealists.",
-      ja: "静かで神秘的でありながら、非常にインスピレーションを与える理想主義者です。"
+      ko: "깊은 통찰력과 강한 신념을 가진 이상주의자입니다. 다른 사람을 돕고 세상을 더 나은 곳으로 만들고자 하는 열망이 강하며, 창의적이고 결단력이 있습니다.",
+      en: "An idealist with deep insight and strong convictions. You have a strong desire to help others and make the world a better place, being both creative and decisive.",
+      ja: "深い洞察力と強い信念を持つ理想主義者です。他の人を助け世界をより良い場所にしたいという熱望が強く、創造的で決断力があります。"
     },
     traits: {
-      ko: ["통찰력", "이상주의", "결단력", "원칙주의"],
-      en: ["Insightful", "Idealistic", "Decisive", "Principled"],
-      ja: ["洞察力", "理想主義", "決断力", "原則主義"]
+      ko: ["통찰력", "이상주의", "공감능력", "창의적"],
+      en: ["Insightful", "Idealistic", "Empathetic", "Creative"],
+      ja: ["洞察力", "理想主義", "共感能力", "創造的"]
     },
     careers: {
-      ko: ["상담사", "작가", "교사", "활동가"],
-      en: ["Counselor", "Writer", "Teacher", "Activist"],
-      ja: ["カウンセラー", "作家", "教師", "活動家"]
+      ko: ["상담사", "작가", "교사", "사회활동가"],
+      en: ["Counselor", "Writer", "Teacher", "Social Activist"],
+      ja: ["カウンセラー", "作家", "教師", "社会活動家"]
     },
     famous: {
       ko: ["넬슨 만델라", "마틴 루터 킹", "마더 테레사"],
@@ -319,52 +394,52 @@ const mbtiResults: Record<string, MBTIResult> = {
   INFP: {
     type: "INFP",
     name: {
-      ko: "중재자",
+      ko: "예술가",
       en: "The Mediator",
-      ja: "仲裁者"
+      ja: "芸術家"
     },
     description: {
-      ko: "시적이고 친절하며 이타적인 성격으로, 항상 선을 행할 준비가 되어 있습니다.",
-      en: "Poetic, kind and altruistic people, always eager to help a good cause.",
-      ja: "詩的で親切で利他的な人々で、常に善良な目的を助ける準備ができています。"
+      ko: "순수하고 열정적인 예술가 영혼을 가진 사람입니다. 자신만의 가치관을 중시하며, 진정성 있는 삶을 추구하고 창의적 표현을 통해 자신을 드러냅니다.",
+      en: "A person with a pure and passionate artistic soul. You value your own principles, pursue an authentic life, and express yourself through creative means.",
+      ja: "純粋で情熱的な芸術家の魂を持つ人です。自分だけの価値観を重視し、真正性のある人生を追求し創造的表現を通じて自分を表現します。"
     },
     traits: {
-      ko: ["공감능력", "창의성", "개방성", "유연성"],
-      en: ["Empathetic", "Creative", "Open-minded", "Flexible"],
-      ja: ["共感能力", "創造性", "開放性", "柔軟性"]
+      ko: ["공감능력", "창의성", "진정성", "유연성"],
+      en: ["Empathetic", "Creative", "Authentic", "Flexible"],
+      ja: ["共感能力", "創造性", "真正性", "柔軟性"]
     },
     careers: {
-      ko: ["예술가", "심리학자", "사회복지사", "음악가"],
-      en: ["Artist", "Psychologist", "Social Worker", "Musician"],
-      ja: ["芸術家", "心理学者", "ソーシャルワーカー", "音楽家"]
+      ko: ["예술가", "심리학자", "작가", "음악가"],
+      en: ["Artist", "Psychologist", "Writer", "Musician"],
+      ja: ["芸術家", "心理学者", "作家", "音楽家"]
     },
     famous: {
-      ko: ["윌리엄 셰익스피어", "존 레논", "J.R.R. 톨킨"],
-      en: ["William Shakespeare", "John Lennon", "J.R.R. Tolkien"],
-      ja: ["ウィリアム・シェイクスピア", "ジョン・レノン", "J.R.R.トールキン"]
+      ko: ["윌리엄 셰익스피어", "존 레논", "반 고흐"],
+      en: ["William Shakespeare", "John Lennon", "Van Gogh"],
+      ja: ["ウィリアム・シェイクスピア", "ジョン・レノン", "ファン・ゴッホ"]
     }
   },
   ENFJ: {
     type: "ENFJ",
     name: {
-      ko: "주인공",
+      ko: "교육자",
       en: "The Protagonist",
-      ja: "主人公"
+      ja: "教育者"
     },
     description: {
-      ko: "카리스마 있고 영감을 주는 지도자로, 듣는 이들을 매혹시킵니다.",
-      en: "Charismatic and inspiring leaders, able to mesmerize their listeners.",
-      ja: "カリスマ的でインスピレーションを与えるリーダーで、聞き手を魅了することができます。"
+      ko: "따뜻하고 카리스마 있는 교육자입니다. 다른 사람의 잠재력을 발견하고 성장시키는 것을 좋아하며, 강한 공감능력과 의사소통 능력을 가지고 있습니다.",
+      en: "A warm and charismatic educator. You enjoy discovering and nurturing others' potential, possessing strong empathy and communication skills.",
+      ja: "温かくカリスマ性のある教育者です。他の人の潜在能力を発見し成長させることを好み、強い共感能力とコミュニケーション能力を持っています。"
     },
     traits: {
-      ko: ["카리스마", "이타주의", "신뢰성", "자연스러운 리더"],
-      en: ["Charismatic", "Altruistic", "Reliable", "Natural Leader"],
-      ja: ["カリスマ", "利他主義", "信頼性", "自然なリーダー"]
+      ko: ["카리스마", "이타주의", "소통능력", "영감적"],
+      en: ["Charismatic", "Altruistic", "Communicative", "Inspiring"],
+      ja: ["カリスマ", "利他主義", "コミュニケーション能力", "インスピレーション"]
     },
     careers: {
-      ko: ["교사", "정치인", "코치", "상담사"],
-      en: ["Teacher", "Politician", "Coach", "Counselor"],
-      ja: ["教師", "政治家", "コーチ", "カウンセラー"]
+      ko: ["교사", "코치", "상담사", "정치인"],
+      en: ["Teacher", "Coach", "Counselor", "Politician"],
+      ja: ["教師", "コーチ", "カウンセラー", "政治家"]
     },
     famous: {
       ko: ["오프라 윈프리", "버락 오바마", "존 F. 케네디"],
@@ -377,17 +452,17 @@ const mbtiResults: Record<string, MBTIResult> = {
     name: {
       ko: "활동가",
       en: "The Campaigner",
-      ja: "運動家"
+      ja: "活動家"
     },
     description: {
-      ko: "열정적이고 창의적인 성격으로, 긍정적으로 삶을 바라봅니다.",
-      en: "Enthusiastic, creative and sociable free spirits, who can always find a reason to smile.",
-      ja: "情熱的で創造的な性格で、人生を前向きに見つめます。"
+      ko: "열정적이고 창의적인 자유로운 영혼입니다. 새로운 사람들과의 만남을 즐기고, 무한한 가능성을 보며 다른 사람들에게 영감을 주는 능력이 있습니다.",
+      en: "A passionate and creative free spirit. You enjoy meeting new people, see endless possibilities, and have the ability to inspire others.",
+      ja: "情熱的で創造的な自由な魂です。新しい人との出会いを楽しみ、無限の可能性を見て他の人にインスピレーションを与える能力があります。"
     },
     traits: {
-      ko: ["열정적", "창의적", "사교적", "호기심"],
-      en: ["Enthusiastic", "Creative", "Sociable", "Curious"],
-      ja: ["情熱的", "創造的", "社交的", "好奇心"]
+      ko: ["열정적", "창의적", "사교적", "낙관적"],
+      en: ["Enthusiastic", "Creative", "Sociable", "Optimistic"],
+      ja: ["情熱的", "創造的", "社交的", "楽観的"]
     },
     careers: {
       ko: ["마케터", "배우", "기자", "심리학자"],
@@ -403,24 +478,24 @@ const mbtiResults: Record<string, MBTIResult> = {
   ISTJ: {
     type: "ISTJ",
     name: {
-      ko: "논리주의자",
+      ko: "관리자",
       en: "The Logistician",
       ja: "管理者"
     },
     description: {
-      ko: "실용적이고 사실에 근거한 접근을 하는 믿음직한 성격입니다.",
-      en: "Practical and fact-oriented reliability, taking a logical approach to their goals.",
-      ja: "実用的で事実に基づいたアプローチをする信頼できる性格です。"
+      ko: "믿을 수 있고 책임감 강한 실무자입니다. 체계적이고 논리적으로 일을 처리하며, 전통과 질서를 중시하고 맡은 바 역할을 성실히 수행합니다.",
+      en: "A reliable and responsible practitioner. You handle tasks systematically and logically, value tradition and order, and faithfully perform your duties.",
+      ja: "信頼できて責任感の強い実務者です。体系的で論理的に仕事を処理し、伝統と秩序を重視し任された役割を誠実に遂行します。"
     },
     traits: {
-      ko: ["책임감", "성실함", "현실적", "체계적"],
-      en: ["Responsible", "Sincere", "Practical", "Systematic"],
-      ja: ["責任感", "誠実", "現実的", "体系的"]
+      ko: ["책임감", "성실함", "체계적", "신뢰성"],
+      en: ["Responsible", "Diligent", "Systematic", "Reliable"],
+      ja: ["責任感", "誠実", "体系的", "信頼性"]
     },
     careers: {
-      ko: ["회계사", "관리자", "법무관", "은행원"],
-      en: ["Accountant", "Manager", "Legal Officer", "Banker"],
-      ja: ["会計士", "管理者", "法務官", "銀行員"]
+      ko: ["회계사", "관리자", "은행원", "공무원"],
+      en: ["Accountant", "Manager", "Banker", "Civil Servant"],
+      ja: ["会計士", "管理者", "銀行員", "公務員"]
     },
     famous: {
       ko: ["조지 워싱턴", "워렌 버핏", "안젤라 메르켈"],
@@ -431,19 +506,19 @@ const mbtiResults: Record<string, MBTIResult> = {
   ISFJ: {
     type: "ISFJ",
     name: {
-      ko: "수호자",
+      ko: "보호자",
       en: "The Protector",
-      ja: "擁護者"
+      ja: "保護者"
     },
     description: {
-      ko: "따뜻하고 헌신적인 성격으로, 항상 사랑하는 사람들을 보호할 준비가 되어 있습니다.",
-      en: "Warm-hearted and dedicated, always ready to protect their loved ones.",
-      ja: "温かく献身的な性格で、常に愛する人々を守る準備ができています。"
+      ko: "따뜻하고 헌신적인 보호자입니다. 다른 사람의 필요를 민감하게 파악하고 도움을 주는 것을 좋아하며, 조화로운 환경을 만들기 위해 노력합니다.",
+      en: "A warm and dedicated protector. You sensitively understand others' needs and enjoy helping them, working to create harmonious environments.",
+      ja: "温かく献身的な保護者です。他の人のニーズを敏感に把握し助けることを好み、調和のとれた環境を作るために努力します。"
     },
     traits: {
-      ko: ["배려심", "협조적", "신뢰성", "인내심"],
-      en: ["Caring", "Cooperative", "Reliable", "Patient"],
-      ja: ["思いやり", "協力的", "信頼性", "忍耐力"]
+      ko: ["배려심", "협조적", "겸손함", "인내심"],
+      en: ["Caring", "Cooperative", "Humble", "Patient"],
+      ja: ["思いやり", "協力的", "謙遜", "忍耐力"]
     },
     careers: {
       ko: ["간호사", "교사", "사회복지사", "상담사"],
@@ -461,17 +536,17 @@ const mbtiResults: Record<string, MBTIResult> = {
     name: {
       ko: "경영자",
       en: "The Executive",
-      ja: "幹部"
+      ja: "経営者"
     },
     description: {
-      ko: "훌륭한 관리자로, 사물이나 사람들을 관리하는 데 타고난 재능이 있습니다.",
-      en: "Excellent administrators, unsurpassed at managing things or people.",
-      ja: "優秀な管理者で、物事や人々を管理することに生まれつきの才能があります。"
+      ko: "실용적이고 효율적인 경영자입니다. 목표 달성을 위해 체계적으로 계획을 세우고 실행하며, 팀을 이끌고 결과를 만들어내는 능력이 뛰어납니다.",
+      en: "A practical and efficient executive. You systematically plan and execute to achieve goals, excelling at leading teams and producing results.",
+      ja: "実用的で効率的な経営者です。目標達成のために体系的に計画を立てて実行し、チームを率いて結果を出す能力に優れています。"
     },
     traits: {
-      ko: ["조직력", "실용성", "리더십", "결단력"],
-      en: ["Organized", "Practical", "Leadership", "Decisive"],
-      ja: ["組織力", "実用性", "リーダーシップ", "決断力"]
+      ko: ["조직력", "실용성", "결단력", "효율성"],
+      en: ["Organized", "Practical", "Decisive", "Efficient"],
+      ja: ["組織力", "実用性", "決断力", "効率性"]
     },
     careers: {
       ko: ["CEO", "관리자", "판사", "군인"],
@@ -479,27 +554,27 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["CEO", "管理者", "裁判官", "軍人"]
     },
     famous: {
-      ko: ["힐러리 클린턴", "고든 램지", "프랭클린 루즈벨트"],
-      en: ["Hillary Clinton", "Gordon Ramsay", "Franklin Roosevelt"],
-      ja: ["ヒラリー・クリントン", "ゴードン・ラムゼイ", "フランクリン・ルーズベルト"]
+      ko: ["힐러리 클린턴", "프랭클린 루즈벨트", "고든 램지"],
+      en: ["Hillary Clinton", "Franklin Roosevelt", "Gordon Ramsay"],
+      ja: ["ヒラリー・クリントン", "フランクリン・ルーズベルト", "ゴードン・ラムゼイ"]
     }
   },
   ESFJ: {
     type: "ESFJ",
     name: {
-      ko: "집정관",
+      ko: "사교가",
       en: "The Consul",
-      ja: "領事"
+      ja: "社交家"
     },
     description: {
-      ko: "매우 사교적이고 인기가 많으며, 항상 다른 사람을 도우려 합니다.",
-      en: "Extraordinarily caring, social and popular people, always eager to help.",
-      ja: "非常に社交的で人気があり、いつも他人を助けようとします。"
+      ko: "따뜻하고 사교적인 협력자입니다. 다른 사람과의 관계를 중시하며 조화로운 분위기를 만들어가고, 팀워크를 통해 목표를 달성하는 것을 선호합니다.",
+      en: "A warm and sociable collaborator. You value relationships with others, create harmonious atmospheres, and prefer achieving goals through teamwork.",
+      ja: "温かく社交的な協力者です。他の人との関係を重視し調和のとれた雰囲気を作り、チームワークを通じて目標を達成することを好みます。"
     },
     traits: {
-      ko: ["사교적", "배려심", "협력적", "책임감"],
-      en: ["Social", "Caring", "Cooperative", "Responsible"],
-      ja: ["社交的", "思いやり", "協力的", "責任感"]
+      ko: ["사교적", "배려심", "협력적", "성실함"],
+      en: ["Sociable", "Caring", "Cooperative", "Conscientious"],
+      ja: ["社交的", "思いやり", "協力的", "誠実"]
     },
     careers: {
       ko: ["교사", "간호사", "이벤트플래너", "인사담당자"],
@@ -515,19 +590,19 @@ const mbtiResults: Record<string, MBTIResult> = {
   ISTP: {
     type: "ISTP",
     name: {
-      ko: "만능재주꾼",
+      ko: "장인",
       en: "The Virtuoso",
-      ja: "巨匠"
+      ja: "職人"
     },
     description: {
-      ko: "대담하고 실용적인 실험가로, 모든 종류의 도구를 다루는 달인입니다.",
-      en: "Bold and practical experimenters, masters of all kinds of tools.",
-      ja: "大胆で実用的な実験者で、あらゆる種類の道具の達人です。"
+      ko: "실용적이고 유연한 문제 해결사입니다. 손으로 직접 작업하는 것을 좋아하며, 논리적 사고와 실용적 접근으로 효율적인 해결책을 찾아냅니다.",
+      en: "A practical and flexible problem solver. You enjoy hands-on work and find efficient solutions through logical thinking and practical approaches.",
+      ja: "実用的で柔軟な問題解決者です。手で直接作業することを好み、論理的思考と実用的アプローチで効率的な解決策を見つけ出します。"
     },
     traits: {
-      ko: ["실용적", "유연성", "관찰력", "적응력"],
-      en: ["Practical", "Flexible", "Observant", "Adaptable"],
-      ja: ["実用的", "柔軟性", "観察力", "適応力"]
+      ko: ["실용적", "유연성", "논리적", "독립적"],
+      en: ["Practical", "Flexible", "Logical", "Independent"],
+      ja: ["実用的", "柔軟性", "論理的", "独立的"]
     },
     careers: {
       ko: ["엔지니어", "기계공", "파일럿", "프로그래머"],
@@ -535,7 +610,7 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["エンジニア", "機械工", "パイロット", "プログラマー"]
     },
     famous: {
-      ko: ["마이클 조던", "브루스 리", "클리ント 이스트우드"],
+      ko: ["마이클 조던", "브루스 리", "클린트 이스트우드"],
       en: ["Michael Jordan", "Bruce Lee", "Clint Eastwood"],
       ja: ["マイケル・ジョーダン", "ブルース・リー", "クリント・イーストウッド"]
     }
@@ -548,14 +623,14 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: "冒険家"
     },
     description: {
-      ko: "유연하고 매력적인 예술가로, 항상 새로운 가능성을 탐험할 준비가 되어 있습니다.",
-      en: "Flexible and charming artists, always ready to explore new possibilities.",
-      ja: "柔軟で魅力的な芸術家で、常に新しい可能性を探求する準備ができています。"
+      ko: "자유롭고 창의적인 모험가입니다. 자신만의 가치관을 중시하며 예술적 감성이 풍부하고, 새로운 경험과 아름다움을 추구합니다.",
+      en: "A free and creative adventurer. You value your own principles, have rich artistic sensibilities, and pursue new experiences and beauty.",
+      ja: "自由で創造的な冒険家です。自分だけの価値観を重視し芸術的感性が豊かで、新しい経験と美しさを追求します。"
     },
     traits: {
-      ko: ["예술적", "유연성", "민감함", "독립적"],
-      en: ["Artistic", "Flexible", "Sensitive", "Independent"],
-      ja: ["芸術的", "柔軟性", "敏感", "独立的"]
+      ko: ["예술적", "유연성", "민감함", "진정성"],
+      en: ["Artistic", "Flexible", "Sensitive", "Authentic"],
+      ja: ["芸術的", "柔軟性", "敏感", "真正性"]
     },
     careers: {
       ko: ["예술가", "디자이너", "음악가", "사진작가"],
@@ -563,9 +638,9 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["芸術家", "デザイナー", "音楽家", "写真家"]
     },
     famous: {
-      ko: ["마이클 잭슨", "프린스", "볼프강 모차르트"],
-      en: ["Michael Jackson", "Prince", "Wolfgang Mozart"],
-      ja: ["マイケル・ジャクソン", "プリンス", "ヴォルフガング・モーツァルト"]
+      ko: ["마이클 잭슨", "프린스", "모차르트"],
+      en: ["Michael Jackson", "Prince", "Mozart"],
+      ja: ["マイケル・ジャクソン", "プリンス", "モーツァルト"]
     }
   },
   ESTP: {
@@ -576,14 +651,14 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: "起業家"
     },
     description: {
-      ko: "영리하고 에너지 넘치며 지각이 뛰어난 성격으로, 진정으로 삶을 즐깁니다.",
-      en: "Smart, energetic and very perceptive people, who truly enjoy living on the edge.",
-      ja: "賢くエネルギッシュで非常に知覚力のある性格で、本当に人生を楽しみます。"
+      ko: "에너지 넘치고 현실적인 행동가입니다. 순간의 기회를 포착하는 능력이 뛰어나며, 사람들과의 교류를 통해 활력을 얻고 실용적인 해결책을 찾습니다.",
+      en: "An energetic and realistic action-taker. You excel at seizing opportunities in the moment, gain vitality through interactions with people, and find practical solutions.",
+      ja: "エネルギッシュで現実的な行動家です。瞬間の機会を捉える能力に優れ、人々との交流を通じて活力を得て実用的な解決策を見つけます。"
     },
     traits: {
-      ko: ["에너지", "실용성", "관찰력", "사교적"],
-      en: ["Energetic", "Practical", "Observant", "Sociable"],
-      ja: ["エネルギッシュ", "実用性", "観察力", "社交的"]
+      ko: ["에너지", "실용성", "사교적", "적응력"],
+      en: ["Energetic", "Practical", "Sociable", "Adaptable"],
+      ja: ["エネルギッシュ", "実用性", "社交的", "適応力"]
     },
     careers: {
       ko: ["영업사원", "기업가", "운동선수", "연예인"],
@@ -604,14 +679,14 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: "エンターテイナー"
     },
     description: {
-      ko: "자발적이고 열정적이며 사교적인 성격으로, 삶과 사람에 대한 사랑이 넘칩니다.",
-      en: "Spontaneous, energetic and enthusiastic people – life is never boring around them.",
-      ja: "自発的で情熱的で社交的な性格で、人生と人に対する愛に溢れています。"
+      ko: "밝고 사교적인 엔터테이너입니다. 사람들과 함께 있을 때 가장 행복하며, 긍정적인 에너지로 주변을 즐겁게 만들고 순간을 즐기며 삽니다.",
+      en: "A bright and sociable entertainer. You're happiest when with people, making others happy with positive energy and living in the moment.",
+      ja: "明るく社交的なエンターテイナーです。人々と一緒にいる時が最も幸せで、ポジティブなエネルギーで周りを楽しくさせ瞬間を楽しんで生きます。"
     },
     traits: {
-      ko: ["활발함", "친근함", "협력적", "실용적"],
-      en: ["Lively", "Friendly", "Cooperative", "Practical"],
-      ja: ["活発", "親しみやすい", "協力的", "実用的"]
+      ko: ["사교적", "낙관적", "친근함", "융통성"],
+      en: ["Sociable", "Optimistic", "Friendly", "Flexible"],
+      ja: ["社交的", "楽観的", "親しみやすい", "融通性"]
     },
     careers: {
       ko: ["연예인", "교사", "상담사", "이벤트플래너"],
@@ -807,9 +882,9 @@ export default function MBTITest() {
              currentLang === 'ja' ? 'MBTI性格タイプテスト' : 'MBTI Personality Test'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {currentLang === 'ko' ? '16가지 성격유형 중 당신의 유형을 찾아보세요' : 
-             currentLang === 'ja' ? '16の性格タイプの中からあなたのタイプを見つけてください' : 
-             'Discover your personality type among 16 different types'}
+            {currentLang === 'ko' ? '15가지 상황별 질문으로 당신의 성격유형을 찾아보세요' : 
+             currentLang === 'ja' ? '15の状況別質問であなたの性格タイプを見つけてください' : 
+             'Discover your personality type through 15 situation-based questions'}
           </p>
         </div>
 
@@ -842,25 +917,19 @@ export default function MBTITest() {
             </div>
 
             <div className="space-y-3 mb-8">
-              {[
-                { value: 1, label: currentLang === 'ko' ? '전혀 그렇지 않다' : currentLang === 'ja' ? '全くそうではない' : 'Strongly Disagree' },
-                { value: 2, label: currentLang === 'ko' ? '그렇지 않다' : currentLang === 'ja' ? 'そうではない' : 'Disagree' },
-                { value: 3, label: currentLang === 'ko' ? '보통이다' : currentLang === 'ja' ? '普通' : 'Neutral' },
-                { value: 4, label: currentLang === 'ko' ? '그렇다' : currentLang === 'ja' ? 'そうだ' : 'Agree' },
-                { value: 5, label: currentLang === 'ko' ? '매우 그렇다' : currentLang === 'ja' ? '非常にそうだ' : 'Strongly Agree' }
-              ].map((option) => (
+              {getAnswerOptions(questions[currentQuestion].id, currentLang).map((option) => (
                 <Button
                   key={option.value}
                   variant={answers[questions[currentQuestion].id] === option.value ? "default" : "outline"}
-                  className="w-full justify-start p-4 h-auto"
+                  className="w-full justify-start p-4 h-auto text-left"
                   onClick={() => handleAnswer(questions[currentQuestion].id, option.value)}
                 >
-                  <div className="w-4 h-4 rounded-full border-2 border-current mr-3 flex items-center justify-center">
+                  <div className="w-4 h-4 rounded-full border-2 border-current mr-3 flex items-center justify-center flex-shrink-0">
                     {answers[questions[currentQuestion].id] === option.value && (
                       <div className="w-2 h-2 rounded-full bg-current"></div>
                     )}
                   </div>
-                  {option.label}
+                  <span className="text-sm leading-relaxed">{option.label}</span>
                 </Button>
               ))}
             </div>

@@ -207,37 +207,8 @@ const testStyles: TestStyle[] = [
 ];
 
 const questionSets: Record<string, Question[]> = {
-  balance: [
-    {
-      id: 1,
-      text: {
-        ko: "내향적 성향 vs 외향적 성향",
-        en: "Introverted tendencies vs Extroverted tendencies",
-        ja: "内向的傾向 vs 外向的傾向"
-      },
-      dimension: 'EI',
-      weight: 'E'
-    },
-    {
-      id: 2,
-      text: {
-        ko: "혼자서 생각하기 vs 다른 사람과 대화하기",
-        en: "Thinking alone vs Talking with others",
-        ja: "一人で考える vs 他の人と話す"
-      },
-      dimension: 'EI',
-      weight: 'I'
-    },
-    {
-      id: 3,
-      text: {
-        ko: "큰 모임 vs 소규모 모임",
-        en: "Large gatherings vs Small gatherings",
-        ja: "大きな集まり vs 小規模な集まり"
-      },
-      dimension: 'EI',
-      weight: 'E'
-    },
+  // Ready for new questions
+};
     {
       id: 4,
       text: {
@@ -1822,7 +1793,14 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
     ]
   };
 
-  const options = styleAnswers[style] || styleAnswers.professional;
+  const defaultOptions = [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly disagree", ja: "全くそうではない" } },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
+  ];
+  const options = styleAnswers[style] || defaultOptions;
   return options.map(option => ({
     value: option.value,
     label: option.label[lang]

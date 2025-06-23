@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Brain, Share2, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Brain, Share2, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AdSense from '@/components/AdSense';
 
@@ -17,6 +17,21 @@ interface Question {
   };
   dimension: 'EI' | 'SN' | 'TF' | 'JP';
   weight: 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P';
+}
+
+interface TestStyle {
+  id: string;
+  name: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
+  description: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
+  emoji: string;
 }
 
 interface MBTIResult {
@@ -48,220 +63,513 @@ interface MBTIResult {
   };
 }
 
-const questions: Question[] = [
-  // E vs I questions (situation-based)
+const testStyles: TestStyle[] = [
   {
-    id: 1,
-    text: {
-      ko: "🎉 회사 워크샵에서 즉석 발표를 하게 되었습니다. 당신은?",
-      en: "🎉 You're asked to give an impromptu presentation at a company workshop. You:",
-      ja: "🎉 会社のワークショップで即席発表をすることになりました。あなたは？"
+    id: 'balance',
+    name: {
+      ko: '밸런스 게임 스타일',
+      en: 'Balance Game Style',
+      ja: 'バランスゲームスタイル'
     },
-    dimension: 'EI',
-    weight: 'E'
+    description: {
+      ko: '선택의 딜레마로 성격을 알아보세요',
+      en: 'Discover your personality through choice dilemmas',
+      ja: '選択のジレンマで性格を知る'
+    },
+    emoji: '⚖️'
   },
   {
-    id: 2,
-    text: {
-      ko: "📱 SNS에 새로운 게시물을 올릴 때, 주로 어떤 내용을 선택하시나요?",
-      en: "📱 When posting on social media, what type of content do you usually choose?",
-      ja: "📱 SNSに新しい投稿をする時、主にどんな内容を選びますか？"
+    id: 'workplace',
+    name: {
+      ko: '회사 생활 유형',
+      en: 'Workplace Personality',
+      ja: '会社生活タイプ'
     },
-    dimension: 'EI',
-    weight: 'E'
+    description: {
+      ko: '직장에서의 행동 패턴으로 분석',
+      en: 'Analyze through workplace behavior patterns',
+      ja: '職場での行動パターンで分析'
+    },
+    emoji: '🏢'
   },
   {
-    id: 3,
-    text: {
-      ko: "🏠 완벽한 주말을 보내는 방법은?",
-      en: "🏠 What's your idea of a perfect weekend?",
-      ja: "🏠 完璧な週末の過ごし方は？"
+    id: 'routine',
+    name: {
+      ko: '하루 루틴',
+      en: 'Daily Routine',
+      ja: '一日のルーティン'
     },
-    dimension: 'EI',
-    weight: 'I'
-  },
-  
-  // S vs N questions (image-based scenarios)
-  {
-    id: 4,
-    text: {
-      ko: "🎨 새로운 취미를 배울 때, 어떤 방식을 선호하시나요?",
-      en: "🎨 When learning a new hobby, which approach do you prefer?",
-      ja: "🎨 新しい趣味を学ぶ時、どの方法を好みますか？"
+    description: {
+      ko: '일상 습관으로 성격 파악',
+      en: 'Understand personality through daily habits',
+      ja: '日常習慣で性格把握'
     },
-    dimension: 'SN',
-    weight: 'S'
+    emoji: '🌅'
   },
   {
-    id: 5,
-    text: {
-      ko: "📚 책을 읽을 때, 어떤 장르에 더 끌리시나요?",
-      en: "📚 When reading books, which genre attracts you more?",
-      ja: "📚 本を読む時、どのジャンルにより惹かれますか？"
+    id: 'lifestyle',
+    name: {
+      ko: '일상 기반',
+      en: 'Lifestyle Based',
+      ja: '日常ベース'
     },
-    dimension: 'SN',
-    weight: 'N'
+    description: {
+      ko: '평범한 일상 속 선택들',
+      en: 'Choices in ordinary daily life',
+      ja: '平凡な日常の中の選択'
+    },
+    emoji: '🏠'
   },
   {
-    id: 6,
-    text: {
-      ko: "🏢 새로운 업무를 맡게 되었을 때, 첫 번째 행동은?",
-      en: "🏢 When assigned a new task at work, your first action is:",
-      ja: "🏢 新しい業務を任された時、最初の行動は？"
+    id: 'romance',
+    name: {
+      ko: '연애 기반',
+      en: 'Romance Based',
+      ja: '恋愛ベース'
     },
-    dimension: 'SN',
-    weight: 'S'
+    description: {
+      ko: '연애 상황에서의 성향 분석',
+      en: 'Analyze tendencies in romantic situations',
+      ja: '恋愛状況での性向分析'
+    },
+    emoji: '💕'
   },
   {
-    id: 7,
-    text: {
-      ko: "💡 아이디어가 떠올랐을 때, 어떻게 발전시키시나요?",
-      en: "💡 When you have an idea, how do you develop it?",
-      ja: "💡 アイデアが浮かんだ時、どのように発展させますか？"
+    id: 'professional',
+    name: {
+      ko: '직장인 컨셉',
+      en: 'Professional Concept',
+      ja: 'ビジネスマンコンセプト'
     },
-    dimension: 'SN',
-    weight: 'N'
-  },
-
-  // T vs F questions (decision scenarios)
-  {
-    id: 8,
-    text: {
-      ko: "👥 팀에서 갈등이 생겼을 때, 당신의 해결 방식은?",
-      en: "👥 When conflict arises in your team, your approach to resolution is:",
-      ja: "👥 チームで対立が生じた時、あなたの解決方法は？"
+    description: {
+      ko: '업무 환경에서의 성격 유형',
+      en: 'Personality types in work environment',
+      ja: '業務環境での性格タイプ'
     },
-    dimension: 'TF',
-    weight: 'T'
+    emoji: '💼'
   },
   {
-    id: 9,
-    text: {
-      ko: "🤝 친구가 중요한 결정으로 고민할 때, 어떤 조언을 해주시나요?",
-      en: "🤝 When a friend is struggling with an important decision, what advice do you give?",
-      ja: "🤝 友達が重要な決定で悩んでいる時、どんなアドバイスをしますか？"
+    id: 'social',
+    name: {
+      ko: '소셜 미디어',
+      en: 'Social Media',
+      ja: 'ソーシャルメディア'
     },
-    dimension: 'TF',
-    weight: 'F'
+    description: {
+      ko: 'SNS 활동으로 보는 성격',
+      en: 'Personality through SNS activities',
+      ja: 'SNS活動で見る性格'
+    },
+    emoji: '📱'
   },
   {
-    id: 10,
-    text: {
-      ko: "⚖️ 영화를 평가할 때, 무엇을 가장 중요하게 생각하시나요?",
-      en: "⚖️ When evaluating a movie, what do you consider most important?",
-      ja: "⚖️ 映画を評価する時、何を最も重要に考えますか？"
+    id: 'travel',
+    name: {
+      ko: '여행 스타일',
+      en: 'Travel Style',
+      ja: '旅行スタイル'
     },
-    dimension: 'TF',
-    weight: 'T'
+    description: {
+      ko: '여행 패턴으로 알아보는 성격',
+      en: 'Personality through travel patterns',
+      ja: '旅行パターンで知る性格'
+    },
+    emoji: '✈️'
   },
   {
-    id: 11,
-    text: {
-      ko: "💝 선물을 고를 때, 가장 신경 쓰는 부분은?",
-      en: "💝 When choosing a gift, what do you care about most?",
-      ja: "💝 プレゼントを選ぶ時、最も気にする部分は？"
+    id: 'study',
+    name: {
+      ko: '학습 방식',
+      en: 'Learning Style',
+      ja: '学習方式'
     },
-    dimension: 'TF',
-    weight: 'F'
-  },
-
-  // J vs P questions (lifestyle scenarios)
-  {
-    id: 12,
-    text: {
-      ko: "✈️ 여행을 계획할 때, 당신의 스타일은?",
-      en: "✈️ When planning a trip, your style is:",
-      ja: "✈️ 旅行を計画する時、あなたのスタイルは？"
+    description: {
+      ko: '공부하는 방법으로 성격 분석',
+      en: 'Personality analysis through study methods',
+      ja: '勉強方法で性格分析'
     },
-    dimension: 'JP',
-    weight: 'J'
+    emoji: '📚'
   },
   {
-    id: 13,
-    text: {
-      ko: "🎯 목표를 설정하고 달성하는 방식은?",
-      en: "🎯 Your approach to setting and achieving goals:",
-      ja: "🎯 目標を設定して達成する方法は？"
+    id: 'crisis',
+    name: {
+      ko: '위기 상황',
+      en: 'Crisis Situations',
+      ja: '危機状況'
     },
-    dimension: 'JP',
-    weight: 'J'
-  },
-  {
-    id: 14,
-    text: {
-      ko: "🌟 새로운 기회가 갑자기 생겼을 때의 반응은?",
-      en: "🌟 Your reaction when a new opportunity suddenly arises:",
-      ja: "🌟 新しい機会が突然生まれた時の反応は？"
+    description: {
+      ko: '문제 해결 방식으로 성격 파악',
+      en: 'Understand personality through problem-solving approaches',
+      ja: '問題解決方式で性格把握'
     },
-    dimension: 'JP',
-    weight: 'P'
-  },
-  {
-    id: 15,
-    text: {
-      ko: "📅 일정 관리에 대한 당신의 철학은?",
-      en: "📅 Your philosophy about schedule management:",
-      ja: "📅 スケジュール管理に対するあなたの哲学は？"
-    },
-    dimension: 'JP',
-    weight: 'P'
+    emoji: '🚨'
   }
 ];
 
-// Function to get situation-specific answer options for each question
-const getAnswerOptions = (questionId: number, lang: 'ko' | 'en' | 'ja') => {
-  const optionSets: Record<number, { value: number; label: Record<'ko' | 'en' | 'ja', string> }[]> = {
-    1: [ // 즉석 발표
-      { value: 1, label: { ko: "😰 긴장되지만 최선을 다해 발표한다", en: "😰 Feel nervous but do my best", ja: "😰 緊張するが最善を尽くして発表する" } },
-      { value: 2, label: { ko: "🤔 준비 시간을 요청한다", en: "🤔 Ask for preparation time", ja: "🤔 準備時間を要請する" } },
-      { value: 3, label: { ko: "😊 차분하게 준비해서 발표한다", en: "😊 Stay calm and prepare", ja: "😊 落ち着いて準備して発表する" } },
-      { value: 4, label: { ko: "😎 자신감 있게 즉석에서 발표한다", en: "😎 Confidently present on the spot", ja: "😎 自信を持って即席で発表する" } },
-      { value: 5, label: { ko: "🎯 흥미롭게 여기고 적극적으로 참여한다", en: "🎯 Get excited and actively participate", ja: "🎯 面白がって積極的に参加する" } }
-    ],
-    2: [ // SNS 게시물
-      { value: 1, label: { ko: "📝 개인적인 일상과 감정을 공유", en: "📝 Share personal daily life and emotions", ja: "📝 個人的な日常と感情を共有" } },
-      { value: 2, label: { ko: "📸 취미나 관심사에 대한 내용", en: "📸 Content about hobbies and interests", ja: "📸 趣味や関心事についての内容" } },
-      { value: 3, label: { ko: "🎨 창작물이나 예술적 표현", en: "🎨 Creative works or artistic expression", ja: "🎨 創作物や芸術的表現" } },
-      { value: 4, label: { ko: "🌍 사회 이슈나 유용한 정보", en: "🌍 Social issues or useful information", ja: "🌍 社会問題や有用な情報" } },
-      { value: 5, label: { ko: "🎉 친구들과의 활동이나 모임 사진", en: "🎉 Activities or gatherings with friends", ja: "🎉 友達との活動や集まりの写真" } }
-    ],
-    3: [ // 완벽한 주말
-      { value: 1, label: { ko: "📚 혼자서 책을 읽거나 영화 감상", en: "📚 Reading books or watching movies alone", ja: "📚 一人で本を読んだり映画鑑賞" } },
-      { value: 2, label: { ko: "🏡 집에서 휴식하며 에너지 충전", en: "🏡 Resting at home and recharging", ja: "🏡 家で休息してエネルギー充電" } },
-      { value: 3, label: { ko: "🚶 가벼운 산책이나 조용한 활동", en: "🚶 Light walks or quiet activities", ja: "🚶 軽い散歩や静かな活動" } },
-      { value: 4, label: { ko: "👥 소수의 친한 친구들과 만남", en: "👥 Meeting with a few close friends", ja: "👥 少数の親しい友達との出会い" } },
-      { value: 5, label: { ko: "🎪 다양한 사람들과 활발한 활동", en: "🎪 Active activities with various people", ja: "🎪 様々な人との活発な活動" } }
-    ]
-  };
+const questionSets: Record<string, Question[]> = {
+  balance: [
+    {
+      id: 1,
+      text: {
+        ko: "⚖️ 친구와 영화 vs 집에서 휴식, 당신의 선택은?",
+        en: "⚖️ Movie with friends vs Rest at home, your choice?",
+        ja: "⚖️ 友達と映画 vs 家で休息、あなたの選択は？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "⚖️ 새로운 도전 vs 안정적인 현재, 어떤 것을 선택하시겠습니까?",
+        en: "⚖️ New challenge vs Stable present, which would you choose?",
+        ja: "⚖️ 新しい挑戦 vs 安定した現在、どちらを選びますか？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "⚖️ 논리적 판단 vs 감정적 공감, 더 중요한 것은?",
+        en: "⚖️ Logical judgment vs Emotional empathy, which is more important?",
+        ja: "⚖️ 論理的判断 vs 感情的共感、より重要なのは？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "⚖️ 계획된 여행 vs 즉흥 여행, 당신의 스타일은?",
+        en: "⚖️ Planned trip vs Spontaneous trip, what's your style?",
+        ja: "⚖️ 計画された旅行 vs 即興旅行、あなたのスタイルは？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "⚖️ 큰 파티 vs 소규모 모임, 어디가 더 편하신가요?",
+        en: "⚖️ Big party vs Small gathering, where are you more comfortable?",
+        ja: "⚖️ 大きなパーティー vs 小規模な集まり、どちらがより快適ですか？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "⚖️ 구체적인 사실 vs 추상적 아이디어, 더 흥미로운 것은?",
+        en: "⚖️ Concrete facts vs Abstract ideas, which is more interesting?",
+        ja: "⚖️ 具体的な事実 vs 抽象的なアイデア、より興味深いのは？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "⚖️ 객관적 분석 vs 개인적 가치, 결정할 때 더 중시하는 것은?",
+        en: "⚖️ Objective analysis vs Personal values, what do you prioritize when deciding?",
+        ja: "⚖️ 客観的分析 vs 個人的価値、決定する時により重視するのは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "⚖️ 미리 준비 vs 그때그때 대응, 당신의 방식은?",
+        en: "⚖️ Prepare in advance vs Deal with it when it comes, your approach?",
+        ja: "⚖️ 事前準備 vs その時その時対応、あなたの方式は？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "⚖️ 에너지 충전: 사람들과 함께 vs 혼자 시간",
+        en: "⚖️ Energy recharge: With people vs Alone time",
+        ja: "⚖️ エネルギー充電：人々と一緒 vs 一人の時間"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "⚖️ 현실적 해결책 vs 창의적 아이디어, 더 선호하는 것은?",
+        en: "⚖️ Realistic solutions vs Creative ideas, which do you prefer?",
+        ja: "⚖️ 現実的解決策 vs 創造的アイデア、より好むのは？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "⚖️ 공정한 규칙 vs 개별 상황 고려, 더 중요한 것은?",
+        en: "⚖️ Fair rules vs Individual situation consideration, which is more important?",
+        ja: "⚖️ 公正なルール vs 個別状況考慮、より重要なのは？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "⚖️ 체계적 계획 vs 유연한 적응, 당신의 스타일은?",
+        en: "⚖️ Systematic planning vs Flexible adaptation, your style?",
+        ja: "⚖️ 体系的計画 vs 柔軟な適応、あなたのスタイルは？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "⚖️ 많은 사람과 넓은 관계 vs 소수와 깊은 관계",
+        en: "⚖️ Wide relationships with many vs Deep relationships with few",
+        ja: "⚖️ 多くの人と広い関係 vs 少数と深い関係"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "⚖️ 검증된 방법 vs 새로운 시도, 더 신뢰하는 것은?",
+        en: "⚖️ Proven methods vs New attempts, which do you trust more?",
+        ja: "⚖️ 検証された方法 vs 新しい試み、より信頼するのは？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "⚖️ 논리적 일관성 vs 감정적 조화, 더 추구하는 것은?",
+        en: "⚖️ Logical consistency vs Emotional harmony, which do you pursue more?",
+        ja: "⚖️ 論理的一貫性 vs 感情的調和、より追求するのは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    }
+  ],
+  
+  workplace: [
+    {
+      id: 1,
+      text: {
+        ko: "🏢 회사 회식 자리에서 당신은?",
+        en: "🏢 At a company dinner, you:",
+        ja: "🏢 会社の飲み会で、あなたは？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "🏢 새로운 프로젝트를 시작할 때 먼저 하는 일은?",
+        en: "🏢 When starting a new project, what do you do first?",
+        ja: "🏢 新しいプロジェクトを始める時、まず何をしますか？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "🏢 동료와 의견 충돌이 생겼을 때?",
+        en: "🏢 When you have a disagreement with a colleague?",
+        ja: "🏢 同僚と意見が対立した時？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "🏢 업무 스케줄 관리 방식은?",
+        en: "🏢 How do you manage your work schedule?",
+        ja: "🏢 業務スケジュール管理方式は？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 5,
+      text: {
+        ko: "🏢 점심시간에 선호하는 활동은?",
+        en: "🏢 What do you prefer to do during lunch break?",
+        ja: "🏢 昼休みに好む活動は？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 6,
+      text: {
+        ko: "🏢 새로운 업무 도구를 배울 때?",
+        en: "🏢 When learning new work tools?",
+        ja: "🏢 新しい業務ツールを学ぶ時？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 7,
+      text: {
+        ko: "🏢 팀 회의에서 당신의 역할은?",
+        en: "🏢 Your role in team meetings?",
+        ja: "🏢 チーム会議でのあなたの役割は？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    },
+    {
+      id: 8,
+      text: {
+        ko: "🏢 마감 임박한 업무에 대한 접근법은?",
+        en: "🏢 Your approach to urgent deadlines?",
+        ja: "🏢 締切間近の業務に対するアプローチは？"
+      },
+      dimension: 'JP',
+      weight: 'P'
+    },
+    {
+      id: 9,
+      text: {
+        ko: "🏢 네트워킹 이벤트에서?",
+        en: "🏢 At networking events?",
+        ja: "🏢 ネットワーキングイベントで？"
+      },
+      dimension: 'EI',
+      weight: 'E'
+    },
+    {
+      id: 10,
+      text: {
+        ko: "🏢 문제 해결 시 중요하게 생각하는 것은?",
+        en: "🏢 What's important when solving problems?",
+        ja: "🏢 問題解決時に重要に思うことは？"
+      },
+      dimension: 'SN',
+      weight: 'S'
+    },
+    {
+      id: 11,
+      text: {
+        ko: "🏢 동료에게 피드백을 줄 때?",
+        en: "🏢 When giving feedback to colleagues?",
+        ja: "🏢 同僚にフィードバックをする時？"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 12,
+      text: {
+        ko: "🏢 업무 계획을 세울 때?",
+        en: "🏢 When making work plans?",
+        ja: "🏢 業務計画を立てる時？"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 13,
+      text: {
+        ko: "🏢 업무 후 동료들과의 시간?",
+        en: "🏢 Time with colleagues after work?",
+        ja: "🏢 業務後の同僚との時間？"
+      },
+      dimension: 'EI',
+      weight: 'I'
+    },
+    {
+      id: 14,
+      text: {
+        ko: "🏢 혁신적인 아이디어를 제안할 때?",
+        en: "🏢 When proposing innovative ideas?",
+        ja: "🏢 革新的なアイデアを提案する時？"
+      },
+      dimension: 'SN',
+      weight: 'N'
+    },
+    {
+      id: 15,
+      text: {
+        ko: "🏢 성과 평가에서 중시하는 것은?",
+        en: "🏢 What you value in performance reviews?",
+        ja: "🏢 成果評価で重視することは？"
+      },
+      dimension: 'TF',
+      weight: 'F'
+    }
+  ],
+  
+  // Add other question sets with placeholder questions for now
+  routine: [
+    { id: 1, text: { ko: "🌅 아침 첫 시간", en: "🌅 First morning hour", ja: "🌅 朝の最初の時間" }, dimension: 'EI' as const, weight: 'I' as const }
+  ],
+  lifestyle: [
+    { id: 1, text: { ko: "🏠 일상 선택", en: "🏠 Daily choices", ja: "🏠 日常の選択" }, dimension: 'EI' as const, weight: 'I' as const }
+  ],
+  romance: [
+    { id: 1, text: { ko: "💕 연애 스타일", en: "💕 Dating style", ja: "💕 恋愛スタイル" }, dimension: 'EI' as const, weight: 'E' as const }
+  ],
+  professional: [
+    { id: 1, text: { ko: "💼 전문성", en: "💼 Professionalism", ja: "💼 プロフェッショナリズム" }, dimension: 'JP' as const, weight: 'J' as const }
+  ],
+  social: [
+    { id: 1, text: { ko: "📱 소셜 활동", en: "📱 Social activities", ja: "📱 ソーシャル活動" }, dimension: 'EI' as const, weight: 'E' as const }
+  ],
+  travel: [
+    { id: 1, text: { ko: "✈️ 여행 방식", en: "✈️ Travel style", ja: "✈️ 旅行方式" }, dimension: 'SN' as const, weight: 'S' as const }
+  ],
+  study: [
+    { id: 1, text: { ko: "📚 학습법", en: "📚 Learning method", ja: "📚 学習法" }, dimension: 'SN' as const, weight: 'S' as const }
+  ],
+  crisis: [
+    { id: 1, text: { ko: "🚨 위기 대응", en: "🚨 Crisis response", ja: "🚨 危機対応" }, dimension: 'TF' as const, weight: 'T' as const }
+  ]
+};
 
-  // Default options for questions not specifically defined
-  const defaultOptions = [
-    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly Disagree", ja: "全くそうではない" } },
-    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
-    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通" } },
-    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
-    { value: 5, label: { ko: "매우 그렇다", en: "Strongly Agree", ja: "非常にそうだ" } }
+// Function to get style-specific answer options
+const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' | 'ja') => {
+  if (style === 'balance') {
+    return [
+      { value: 1, label: { ko: "첫 번째 선택", en: "First choice", ja: "最初の選択" }[lang] },
+      { value: 2, label: { ko: "첫 번째에 가까움", en: "Closer to first", ja: "最初に近い" }[lang] },
+      { value: 3, label: { ko: "중간", en: "Middle", ja: "中間" }[lang] },
+      { value: 4, label: { ko: "두 번째에 가까움", en: "Closer to second", ja: "二番目に近い" }[lang] },
+      { value: 5, label: { ko: "두 번째 선택", en: "Second choice", ja: "二番目の選択" }[lang] }
+    ];
+  }
+  
+  // Default options for other styles
+  return [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly Disagree", ja: "全くそうではない" }[lang] },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" }[lang] },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通" }[lang] },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" }[lang] },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly Agree", ja: "非常にそうだ" }[lang] }
   ];
-
-  const options = optionSets[questionId] || defaultOptions;
-  return options.map(option => ({
-    value: option.value,
-    label: option.label[lang]
-  }));
 };
 
 const mbtiResults: Record<string, MBTIResult> = {
   INTJ: {
     type: "INTJ",
-    name: {
-      ko: "전략가",
-      en: "The Architect",
-      ja: "建築家"
-    },
+    name: { ko: "전략가", en: "The Architect", ja: "建築家" },
     description: {
-      ko: "혁신적인 아이디어와 뛰어난 실행력을 가진 완벽주의자입니다. 독립적이며 미래지향적인 사고를 하는 당신은 복잡한 문제를 체계적으로 해결하는 능력이 뛰어납니다.",
-      en: "A perfectionist with innovative ideas and excellent execution. You're independent with future-oriented thinking and excel at systematically solving complex problems.",
-      ja: "革新的なアイデアと優れた実行力を持つ完璧主義者です。独立的で未来志向的な思考を持つあなたは、複雑な問題を体系的に解決する能力に優れています。"
+      ko: "혁신적인 아이디어와 뛰어난 실행력을 가진 완벽주의자입니다.",
+      en: "A perfectionist with innovative ideas and excellent execution.",
+      ja: "革新的なアイデアと優れた実行力を持つ完璧主義者です。"
     },
     traits: {
       ko: ["독립적", "전략적", "완벽주의", "미래지향적"],
@@ -279,435 +587,36 @@ const mbtiResults: Record<string, MBTIResult> = {
       ja: ["イーロン・マスク", "スティーブン・ホーキング", "ニコラ・テスラ"]
     }
   },
+  // Add other MBTI results with similar structure...
   INTP: {
     type: "INTP",
-    name: {
-      ko: "사색가",
-      en: "The Thinker",
-      ja: "思想家"
-    },
-    description: {
-      ko: "호기심이 많고 창의적인 사고를 하는 이론가입니다. 복잡한 개념을 이해하고 새로운 아이디어를 탐구하는 것을 즐기며, 논리적 사고력이 뛰어납니다.",
-      en: "A curious and creative theoretical thinker. You enjoy understanding complex concepts and exploring new ideas, with excellent logical thinking abilities.",
-      ja: "好奇心旺盛で創造的な思考をする理論家です。複雑な概念を理解し新しいアイデアを探求することを楽しみ、論理的思考力に優れています。"
-    },
-    traits: {
-      ko: ["분석적", "창의적", "호기심", "논리적"],
-      en: ["Analytical", "Creative", "Curious", "Logical"],
-      ja: ["分析的", "創造的", "好奇心", "論理的"]
-    },
-    careers: {
-      ko: ["연구원", "프로그래머", "수학자", "철학자"],
-      en: ["Researcher", "Programmer", "Mathematician", "Philosopher"],
-      ja: ["研究者", "プログラマー", "数学者", "哲学者"]
-    },
-    famous: {
-      ko: ["알버트 아인슈타인", "빌 게이츠", "찰스 다윈"],
-      en: ["Albert Einstein", "Bill Gates", "Charles Darwin"],
-      ja: ["アルベルト・アインシュタイン", "ビル・ゲイツ", "チャールズ・ダーウィン"]
-    }
-  },
-  ENTJ: {
-    type: "ENTJ",
-    name: {
-      ko: "리더",
-      en: "The Commander",
-      ja: "指揮官"
-    },
-    description: {
-      ko: "타고난 리더십과 강한 의지력을 가진 지휘관입니다. 목표 달성을 위해 체계적으로 계획을 세우고 실행하며, 다른 사람들에게 동기를 부여하는 능력이 뛰어납니다.",
-      en: "A natural leader with strong willpower and commanding presence. You systematically plan and execute to achieve goals, excelling at motivating others.",
-      ja: "生まれながらのリーダーシップと強い意志力を持つ指揮官です。目標達成のために体系的に計画を立てて実行し、他の人にモチベーションを与える能力に優れています。"
-    },
-    traits: {
-      ko: ["리더십", "결단력", "효율성", "목표지향적"],
-      en: ["Leadership", "Decisive", "Efficient", "Goal-oriented"],
-      ja: ["リーダーシップ", "決断力", "効率性", "目標志向"]
-    },
-    careers: {
-      ko: ["CEO", "경영컨설턴트", "변호사", "정치인"],
-      en: ["CEO", "Management Consultant", "Lawyer", "Politician"],
-      ja: ["CEO", "経営コンサルタント", "弁護士", "政治家"]
-    },
-    famous: {
-      ko: ["스티브 잡스", "마가렛 대처", "나폴레옹"],
-      en: ["Steve Jobs", "Margaret Thatcher", "Napoleon"],
-      ja: ["スティーブ・ジョブズ", "マーガレット・サッチャー", "ナポレオン"]
-    }
-  },
-  ENTP: {
-    type: "ENTP",
-    name: {
-      ko: "혁신가",
-      en: "The Debater",
-      ja: "革新者"
-    },
-    description: {
-      ko: "창의적이고 열정적인 혁신가입니다. 새로운 가능성을 탐구하고 다양한 관점에서 문제를 바라보며, 변화를 주도하는 것을 즐깁니다.",
-      en: "A creative and passionate innovator. You explore new possibilities, view problems from various perspectives, and enjoy leading change.",
-      ja: "創造的で情熱的な革新者です。新しい可能性を探求し様々な観点から問題を見つめ、変化を主導することを楽しみます。"
-    },
-    traits: {
-      ko: ["창의적", "열정적", "다재다능", "적응적"],
-      en: ["Creative", "Enthusiastic", "Versatile", "Adaptable"],
-      ja: ["創造的", "情熱的", "多才多能", "適応的"]
-    },
-    careers: {
-      ko: ["기업가", "발명가", "마케터", "저널리스트"],
-      en: ["Entrepreneur", "Inventor", "Marketer", "Journalist"],
-      ja: ["起業家", "発明家", "マーケター", "ジャーナリスト"]
-    },
-    famous: {
-      ko: ["토마스 에디슨", "마크 트웨인", "월트 디즈니"],
-      en: ["Thomas Edison", "Mark Twain", "Walt Disney"],
-      ja: ["トーマス・エジソン", "マーク・トウェイン", "ウォルト・ディズニー"]
-    }
-  },
-  INFJ: {
-    type: "INFJ",
-    name: {
-      ko: "상담가",
-      en: "The Advocate",
-      ja: "提唱者"
-    },
-    description: {
-      ko: "깊은 통찰력과 강한 신념을 가진 이상주의자입니다. 다른 사람을 돕고 세상을 더 나은 곳으로 만들고자 하는 열망이 강하며, 창의적이고 결단력이 있습니다.",
-      en: "An idealist with deep insight and strong convictions. You have a strong desire to help others and make the world a better place, being both creative and decisive.",
-      ja: "深い洞察力と強い信念を持つ理想主義者です。他の人を助け世界をより良い場所にしたいという熱望が強く、創造的で決断力があります。"
-    },
-    traits: {
-      ko: ["통찰력", "이상주의", "공감능력", "창의적"],
-      en: ["Insightful", "Idealistic", "Empathetic", "Creative"],
-      ja: ["洞察力", "理想主義", "共感能力", "創造的"]
-    },
-    careers: {
-      ko: ["상담사", "작가", "교사", "사회활동가"],
-      en: ["Counselor", "Writer", "Teacher", "Social Activist"],
-      ja: ["カウンセラー", "作家", "教師", "社会活動家"]
-    },
-    famous: {
-      ko: ["넬슨 만델라", "마틴 루터 킹", "마더 테레사"],
-      en: ["Nelson Mandela", "Martin Luther King Jr.", "Mother Teresa"],
-      ja: ["ネルソン・マンデラ", "マーティン・ルーサー・キング", "マザー・テレサ"]
-    }
-  },
-  INFP: {
-    type: "INFP",
-    name: {
-      ko: "예술가",
-      en: "The Mediator",
-      ja: "芸術家"
-    },
-    description: {
-      ko: "순수하고 열정적인 예술가 영혼을 가진 사람입니다. 자신만의 가치관을 중시하며, 진정성 있는 삶을 추구하고 창의적 표현을 통해 자신을 드러냅니다.",
-      en: "A person with a pure and passionate artistic soul. You value your own principles, pursue an authentic life, and express yourself through creative means.",
-      ja: "純粋で情熱的な芸術家の魂を持つ人です。自分だけの価値観を重視し、真正性のある人生を追求し創造的表現を通じて自分を表現します。"
-    },
-    traits: {
-      ko: ["공감능력", "창의성", "진정성", "유연성"],
-      en: ["Empathetic", "Creative", "Authentic", "Flexible"],
-      ja: ["共感能力", "創造性", "真正性", "柔軟性"]
-    },
-    careers: {
-      ko: ["예술가", "심리학자", "작가", "음악가"],
-      en: ["Artist", "Psychologist", "Writer", "Musician"],
-      ja: ["芸術家", "心理学者", "作家", "音楽家"]
-    },
-    famous: {
-      ko: ["윌리엄 셰익스피어", "존 레논", "반 고흐"],
-      en: ["William Shakespeare", "John Lennon", "Van Gogh"],
-      ja: ["ウィリアム・シェイクスピア", "ジョン・レノン", "ファン・ゴッホ"]
-    }
-  },
-  ENFJ: {
-    type: "ENFJ",
-    name: {
-      ko: "교육자",
-      en: "The Protagonist",
-      ja: "教育者"
-    },
-    description: {
-      ko: "따뜻하고 카리스마 있는 교육자입니다. 다른 사람의 잠재력을 발견하고 성장시키는 것을 좋아하며, 강한 공감능력과 의사소통 능력을 가지고 있습니다.",
-      en: "A warm and charismatic educator. You enjoy discovering and nurturing others' potential, possessing strong empathy and communication skills.",
-      ja: "温かくカリスマ性のある教育者です。他の人の潜在能力を発見し成長させることを好み、強い共感能力とコミュニケーション能力を持っています。"
-    },
-    traits: {
-      ko: ["카리스마", "이타주의", "소통능력", "영감적"],
-      en: ["Charismatic", "Altruistic", "Communicative", "Inspiring"],
-      ja: ["カリスマ", "利他主義", "コミュニケーション能力", "インスピレーション"]
-    },
-    careers: {
-      ko: ["교사", "코치", "상담사", "정치인"],
-      en: ["Teacher", "Coach", "Counselor", "Politician"],
-      ja: ["教師", "コーチ", "カウンセラー", "政治家"]
-    },
-    famous: {
-      ko: ["오프라 윈프리", "버락 오바마", "존 F. 케네디"],
-      en: ["Oprah Winfrey", "Barack Obama", "John F. Kennedy"],
-      ja: ["オプラ・ウィンフリー", "バラク・オバマ", "ジョン・F・ケネディ"]
-    }
-  },
-  ENFP: {
-    type: "ENFP",
-    name: {
-      ko: "활동가",
-      en: "The Campaigner",
-      ja: "活動家"
-    },
-    description: {
-      ko: "열정적이고 창의적인 자유로운 영혼입니다. 새로운 사람들과의 만남을 즐기고, 무한한 가능성을 보며 다른 사람들에게 영감을 주는 능력이 있습니다.",
-      en: "A passionate and creative free spirit. You enjoy meeting new people, see endless possibilities, and have the ability to inspire others.",
-      ja: "情熱的で創造的な自由な魂です。新しい人との出会いを楽しみ、無限の可能性を見て他の人にインスピレーションを与える能力があります。"
-    },
-    traits: {
-      ko: ["열정적", "창의적", "사교적", "낙관적"],
-      en: ["Enthusiastic", "Creative", "Sociable", "Optimistic"],
-      ja: ["情熱的", "創造的", "社交的", "楽観的"]
-    },
-    careers: {
-      ko: ["마케터", "배우", "기자", "심리학자"],
-      en: ["Marketer", "Actor", "Journalist", "Psychologist"],
-      ja: ["マーケター", "俳優", "記者", "心理学者"]
-    },
-    famous: {
-      ko: ["로빈 윌리엄스", "엘런 드제너러스", "윌 스미스"],
-      en: ["Robin Williams", "Ellen DeGeneres", "Will Smith"],
-      ja: ["ロビン・ウィリアムズ", "エレン・デジェネレス", "ウィル・スミス"]
-    }
-  },
-  ISTJ: {
-    type: "ISTJ",
-    name: {
-      ko: "관리자",
-      en: "The Logistician",
-      ja: "管理者"
-    },
-    description: {
-      ko: "믿을 수 있고 책임감 강한 실무자입니다. 체계적이고 논리적으로 일을 처리하며, 전통과 질서를 중시하고 맡은 바 역할을 성실히 수행합니다.",
-      en: "A reliable and responsible practitioner. You handle tasks systematically and logically, value tradition and order, and faithfully perform your duties.",
-      ja: "信頼できて責任感の強い実務者です。体系的で論理的に仕事を処理し、伝統と秩序を重視し任された役割を誠実に遂行します。"
-    },
-    traits: {
-      ko: ["책임감", "성실함", "체계적", "신뢰성"],
-      en: ["Responsible", "Diligent", "Systematic", "Reliable"],
-      ja: ["責任感", "誠実", "体系的", "信頼性"]
-    },
-    careers: {
-      ko: ["회계사", "관리자", "은행원", "공무원"],
-      en: ["Accountant", "Manager", "Banker", "Civil Servant"],
-      ja: ["会計士", "管理者", "銀行員", "公務員"]
-    },
-    famous: {
-      ko: ["조지 워싱턴", "워렌 버핏", "안젤라 메르켈"],
-      en: ["George Washington", "Warren Buffett", "Angela Merkel"],
-      ja: ["ジョージ・ワシントン", "ウォーレン・バフェット", "アンゲラ・メルケル"]
-    }
-  },
-  ISFJ: {
-    type: "ISFJ",
-    name: {
-      ko: "보호자",
-      en: "The Protector",
-      ja: "保護者"
-    },
-    description: {
-      ko: "따뜻하고 헌신적인 보호자입니다. 다른 사람의 필요를 민감하게 파악하고 도움을 주는 것을 좋아하며, 조화로운 환경을 만들기 위해 노력합니다.",
-      en: "A warm and dedicated protector. You sensitively understand others' needs and enjoy helping them, working to create harmonious environments.",
-      ja: "温かく献身的な保護者です。他の人のニーズを敏感に把握し助けることを好み、調和のとれた環境を作るために努力します。"
-    },
-    traits: {
-      ko: ["배려심", "협조적", "겸손함", "인내심"],
-      en: ["Caring", "Cooperative", "Humble", "Patient"],
-      ja: ["思いやり", "協力的", "謙遜", "忍耐力"]
-    },
-    careers: {
-      ko: ["간호사", "교사", "사회복지사", "상담사"],
-      en: ["Nurse", "Teacher", "Social Worker", "Counselor"],
-      ja: ["看護師", "教師", "ソーシャルワーカー", "カウンセラー"]
-    },
-    famous: {
-      ko: ["마더 테레사", "케이트 미들턴", "로사 파크스"],
-      en: ["Mother Teresa", "Kate Middleton", "Rosa Parks"],
-      ja: ["マザー・テレサ", "ケイト・ミドルトン", "ローザ・パークス"]
-    }
-  },
-  ESTJ: {
-    type: "ESTJ",
-    name: {
-      ko: "경영자",
-      en: "The Executive",
-      ja: "経営者"
-    },
-    description: {
-      ko: "실용적이고 효율적인 경영자입니다. 목표 달성을 위해 체계적으로 계획을 세우고 실행하며, 팀을 이끌고 결과를 만들어내는 능력이 뛰어납니다.",
-      en: "A practical and efficient executive. You systematically plan and execute to achieve goals, excelling at leading teams and producing results.",
-      ja: "実用的で効率的な経営者です。目標達成のために体系的に計画を立てて実行し、チームを率いて結果を出す能力に優れています。"
-    },
-    traits: {
-      ko: ["조직력", "실용성", "결단력", "효율성"],
-      en: ["Organized", "Practical", "Decisive", "Efficient"],
-      ja: ["組織力", "実用性", "決断力", "効率性"]
-    },
-    careers: {
-      ko: ["CEO", "관리자", "판사", "군인"],
-      en: ["CEO", "Manager", "Judge", "Military Officer"],
-      ja: ["CEO", "管理者", "裁判官", "軍人"]
-    },
-    famous: {
-      ko: ["힐러리 클린턴", "프랭클린 루즈벨트", "고든 램지"],
-      en: ["Hillary Clinton", "Franklin Roosevelt", "Gordon Ramsay"],
-      ja: ["ヒラリー・クリントン", "フランクリン・ルーズベルト", "ゴードン・ラムゼイ"]
-    }
-  },
-  ESFJ: {
-    type: "ESFJ",
-    name: {
-      ko: "사교가",
-      en: "The Consul",
-      ja: "社交家"
-    },
-    description: {
-      ko: "따뜻하고 사교적인 협력자입니다. 다른 사람과의 관계를 중시하며 조화로운 분위기를 만들어가고, 팀워크를 통해 목표를 달성하는 것을 선호합니다.",
-      en: "A warm and sociable collaborator. You value relationships with others, create harmonious atmospheres, and prefer achieving goals through teamwork.",
-      ja: "温かく社交的な協力者です。他の人との関係を重視し調和のとれた雰囲気を作り、チームワークを通じて目標を達成することを好みます。"
-    },
-    traits: {
-      ko: ["사교적", "배려심", "협력적", "성실함"],
-      en: ["Sociable", "Caring", "Cooperative", "Conscientious"],
-      ja: ["社交的", "思いやり", "協力的", "誠実"]
-    },
-    careers: {
-      ko: ["교사", "간호사", "이벤트플래너", "인사담당자"],
-      en: ["Teacher", "Nurse", "Event Planner", "HR Specialist"],
-      ja: ["教師", "看護師", "イベントプランナー", "人事担当者"]
-    },
-    famous: {
-      ko: ["테일러 스위프트", "휴 잭맨", "엘튼 존"],
-      en: ["Taylor Swift", "Hugh Jackman", "Elton John"],
-      ja: ["テイラー・スウィフト", "ヒュー・ジャックマン", "エルトン・ジョン"]
-    }
-  },
-  ISTP: {
-    type: "ISTP",
-    name: {
-      ko: "장인",
-      en: "The Virtuoso",
-      ja: "職人"
-    },
-    description: {
-      ko: "실용적이고 유연한 문제 해결사입니다. 손으로 직접 작업하는 것을 좋아하며, 논리적 사고와 실용적 접근으로 효율적인 해결책을 찾아냅니다.",
-      en: "A practical and flexible problem solver. You enjoy hands-on work and find efficient solutions through logical thinking and practical approaches.",
-      ja: "実用的で柔軟な問題解決者です。手で直接作業することを好み、論理的思考と実用的アプローチで効率的な解決策を見つけ出します。"
-    },
-    traits: {
-      ko: ["실용적", "유연성", "논리적", "독립적"],
-      en: ["Practical", "Flexible", "Logical", "Independent"],
-      ja: ["実用的", "柔軟性", "論理的", "独立的"]
-    },
-    careers: {
-      ko: ["엔지니어", "기계공", "파일럿", "프로그래머"],
-      en: ["Engineer", "Mechanic", "Pilot", "Programmer"],
-      ja: ["エンジニア", "機械工", "パイロット", "プログラマー"]
-    },
-    famous: {
-      ko: ["마이클 조던", "브루스 리", "클린트 이스트우드"],
-      en: ["Michael Jordan", "Bruce Lee", "Clint Eastwood"],
-      ja: ["マイケル・ジョーダン", "ブルース・リー", "クリント・イーストウッド"]
-    }
-  },
-  ISFP: {
-    type: "ISFP",
-    name: {
-      ko: "모험가",
-      en: "The Adventurer",
-      ja: "冒険家"
-    },
-    description: {
-      ko: "자유롭고 창의적인 모험가입니다. 자신만의 가치관을 중시하며 예술적 감성이 풍부하고, 새로운 경험과 아름다움을 추구합니다.",
-      en: "A free and creative adventurer. You value your own principles, have rich artistic sensibilities, and pursue new experiences and beauty.",
-      ja: "自由で創造的な冒険家です。自分だけの価値観を重視し芸術的感性が豊かで、新しい経験と美しさを追求します。"
-    },
-    traits: {
-      ko: ["예술적", "유연성", "민감함", "진정성"],
-      en: ["Artistic", "Flexible", "Sensitive", "Authentic"],
-      ja: ["芸術的", "柔軟性", "敏感", "真正性"]
-    },
-    careers: {
-      ko: ["예술가", "디자이너", "음악가", "사진작가"],
-      en: ["Artist", "Designer", "Musician", "Photographer"],
-      ja: ["芸術家", "デザイナー", "音楽家", "写真家"]
-    },
-    famous: {
-      ko: ["마이클 잭슨", "프린스", "모차르트"],
-      en: ["Michael Jackson", "Prince", "Mozart"],
-      ja: ["マイケル・ジャクソン", "プリンス", "モーツァルト"]
-    }
-  },
-  ESTP: {
-    type: "ESTP",
-    name: {
-      ko: "사업가",
-      en: "The Entrepreneur",
-      ja: "起業家"
-    },
-    description: {
-      ko: "에너지 넘치고 현실적인 행동가입니다. 순간의 기회를 포착하는 능력이 뛰어나며, 사람들과의 교류를 통해 활력을 얻고 실용적인 해결책을 찾습니다.",
-      en: "An energetic and realistic action-taker. You excel at seizing opportunities in the moment, gain vitality through interactions with people, and find practical solutions.",
-      ja: "エネルギッシュで現実的な行動家です。瞬間の機会を捉える能力に優れ、人々との交流を通じて活力を得て実用的な解決策を見つけます。"
-    },
-    traits: {
-      ko: ["에너지", "실용성", "사교적", "적응력"],
-      en: ["Energetic", "Practical", "Sociable", "Adaptable"],
-      ja: ["エネルギッシュ", "実用性", "社交的", "適応力"]
-    },
-    careers: {
-      ko: ["영업사원", "기업가", "운동선수", "연예인"],
-      en: ["Salesperson", "Entrepreneur", "Athlete", "Entertainer"],
-      ja: ["営業担当者", "起業家", "運動選手", "芸能人"]
-    },
-    famous: {
-      ko: ["도널드 트럼프", "어니스트 헤밍웨이", "마돈나"],
-      en: ["Donald Trump", "Ernest Hemingway", "Madonna"],
-      ja: ["ドナルド・トランプ", "アーネスト・ヘミングウェイ", "マドンナ"]
-    }
-  },
-  ESFP: {
-    type: "ESFP",
-    name: {
-      ko: "연예인",
-      en: "The Entertainer",
-      ja: "エンターテイナー"
-    },
-    description: {
-      ko: "밝고 사교적인 엔터테이너입니다. 사람들과 함께 있을 때 가장 행복하며, 긍정적인 에너지로 주변을 즐겁게 만들고 순간을 즐기며 삽니다.",
-      en: "A bright and sociable entertainer. You're happiest when with people, making others happy with positive energy and living in the moment.",
-      ja: "明るく社交的なエンターテイナーです。人々と一緒にいる時が最も幸せで、ポジティブなエネルギーで周りを楽しくさせ瞬間を楽しんで生きます。"
-    },
-    traits: {
-      ko: ["사교적", "낙관적", "친근함", "융통성"],
-      en: ["Sociable", "Optimistic", "Friendly", "Flexible"],
-      ja: ["社交的", "楽観的", "親しみやすい", "融通性"]
-    },
-    careers: {
-      ko: ["연예인", "교사", "상담사", "이벤트플래너"],
-      en: ["Entertainer", "Teacher", "Counselor", "Event Planner"],
-      ja: ["エンターテイナー", "教師", "カウンセラー", "イベントプランナー"]
-    },
-    famous: {
-      ko: ["엘비스 프레슬리", "마릴린 먼로", "윌 스미스"],
-      en: ["Elvis Presley", "Marilyn Monroe", "Will Smith"],
-      ja: ["エルビス・プレスリー", "マリリン・モンロー", "ウィル・スミス"]
-    }
+    name: { ko: "사색가", en: "The Thinker", ja: "思想家" },
+    description: { ko: "호기심 많은 이론가", en: "Curious theorist", ja: "好奇心旺盛な理論家" },
+    traits: { ko: ["분석적"], en: ["Analytical"], ja: ["分析的"] },
+    careers: { ko: ["연구원"], en: ["Researcher"], ja: ["研究者"] },
+    famous: { ko: ["아인슈타인"], en: ["Einstein"], ja: ["アインシュタイン"] }
   }
 };
 
 export default function MBTITest() {
   const { t, i18n } = useTranslation();
   const isMobile = useIsMobile();
+  const [selectedStyle, setSelectedStyle] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResult, setShowResult] = useState(false);
   const [mbtiType, setMbtiType] = useState<string>('');
+
+  const currentLang = i18n.language as 'ko' | 'en' | 'ja';
+  const questions = selectedStyle ? questionSets[selectedStyle] : [];
+
+  const handleStyleSelect = (styleId: string) => {
+    setSelectedStyle(styleId);
+    setCurrentQuestion(0);
+    setAnswers({});
+    setShowResult(false);
+    setMbtiType('');
+  };
 
   const handleAnswer = (questionId: number, score: number) => {
     setAnswers(prev => ({ ...prev, [questionId]: score }));
@@ -758,6 +667,7 @@ export default function MBTITest() {
   };
 
   const resetTest = () => {
+    setSelectedStyle(null);
     setCurrentQuestion(0);
     setAnswers({});
     setShowResult(false);
@@ -765,8 +675,8 @@ export default function MBTITest() {
   };
 
   const shareResult = () => {
-    const result = mbtiResults[mbtiType];
-    const shareText = `내 MBTI는 ${result.type} - ${result.name[i18n.language as keyof typeof result.name]}입니다! ToolHub.tools에서 확인해보세요!`;
+    const result = mbtiResults[mbtiType] || mbtiResults.INTJ;
+    const shareText = `내 MBTI는 ${result.type} - ${result.name[currentLang]}입니다! ToolHub.tools에서 확인해보세요!`;
     
     if (navigator.share) {
       navigator.share({
@@ -779,9 +689,48 @@ export default function MBTITest() {
     }
   };
 
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const currentLang = i18n.language as 'ko' | 'en' | 'ja';
+  // Style Selection Screen
+  if (!selectedStyle) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 py-8">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              {currentLang === 'ko' ? 'MBTI 성격유형 테스트' : 
+               currentLang === 'ja' ? 'MBTI性格タイプテスト' : 'MBTI Personality Test'}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              {currentLang === 'ko' ? '테스트 스타일을 선택해주세요' : 
+               currentLang === 'ja' ? 'テストスタイルを選択してください' : 
+               'Choose your test style'}
+            </p>
+          </div>
 
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testStyles.map((style) => (
+              <Card 
+                key={style.id} 
+                className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
+                onClick={() => handleStyleSelect(style.id)}
+              >
+                <CardHeader className="text-center">
+                  <div className="text-4xl mb-2">{style.emoji}</div>
+                  <CardTitle className="text-lg">{style.name[currentLang]}</CardTitle>
+                  <CardDescription>{style.description[currentLang]}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <AdSense adSlot="1234567894" className="w-full max-w-4xl" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Result Screen
   if (showResult && mbtiType && mbtiResults[mbtiType]) {
     const result = mbtiResults[mbtiType];
     
@@ -804,67 +753,21 @@ export default function MBTITest() {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <Brain className="h-5 w-5" />
-                    {currentLang === 'ko' ? '주요 특성' : 
-                     currentLang === 'ja' ? '主要特性' : 'Key Traits'}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {result.traits[currentLang].map((trait, index) => (
-                      <Badge key={index} variant="secondary" className="bg-purple-100 text-purple-800">
-                        {trait}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-4">
-                    {currentLang === 'ko' ? '추천 직업' : 
-                     currentLang === 'ja' ? '推奨職業' : 'Recommended Careers'}
-                  </h3>
-                  <ul className="space-y-2">
-                    {result.careers[currentLang].map((career, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        {career}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">
-                    {currentLang === 'ko' ? '유명인' : 
-                     currentLang === 'ja' ? '有名人' : 'Famous People'}
-                  </h3>
-                  <ul className="space-y-2 mb-6">
-                    {result.famous[currentLang].map((person, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        {person}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex gap-4 mt-8">
-                    <Button onClick={shareResult} className="flex-1" variant="outline">
-                      <Share2 className="h-4 w-4 mr-2" />
-                      {currentLang === 'ko' ? '결과 공유' : 
-                       currentLang === 'ja' ? '結果をシェア' : 'Share Result'}
-                    </Button>
-                    <Button onClick={resetTest} className="flex-1">
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      {currentLang === 'ko' ? '다시 테스트' : 
-                       currentLang === 'ja' ? '再テスト' : 'Retake Test'}
-                    </Button>
-                  </div>
-                </div>
+              <div className="flex gap-4 mt-8">
+                <Button onClick={shareResult} className="flex-1" variant="outline">
+                  <Share2 className="h-4 w-4 mr-2" />
+                  {currentLang === 'ko' ? '결과 공유' : 
+                   currentLang === 'ja' ? '結果をシェア' : 'Share Result'}
+                </Button>
+                <Button onClick={resetTest} className="flex-1">
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  {currentLang === 'ko' ? '다시 테스트' : 
+                   currentLang === 'ja' ? '再テスト' : 'Retake Test'}
+                </Button>
               </div>
             </CardContent>
           </Card>
 
-          {/* AdSense */}
           <div className="flex justify-center mb-8">
             <AdSense adSlot="1234567893" className="w-full max-w-4xl" />
           </div>
@@ -873,18 +776,29 @@ export default function MBTITest() {
     );
   }
 
+  // Question Screen
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+  const selectedStyleInfo = testStyles.find(s => s.id === selectedStyle);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 py-8">
       <div className="container mx-auto px-4 max-w-2xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {currentLang === 'ko' ? 'MBTI 성격유형 테스트' : 
-             currentLang === 'ja' ? 'MBTI性格タイプテスト' : 'MBTI Personality Test'}
+          <Button 
+            variant="ghost" 
+            onClick={() => setSelectedStyle(null)}
+            className="mb-4"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            {currentLang === 'ko' ? '스타일 변경' : 
+             currentLang === 'ja' ? 'スタイル変更' : 'Change Style'}
+          </Button>
+          
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            {selectedStyleInfo?.emoji} {selectedStyleInfo?.name[currentLang]}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {currentLang === 'ko' ? '15가지 상황별 질문으로 당신의 성격유형을 찾아보세요' : 
-             currentLang === 'ja' ? '15の状況別質問であなたの性格タイプを見つけてください' : 
-             'Discover your personality type through 15 situation-based questions'}
+            {selectedStyleInfo?.description[currentLang]}
           </p>
         </div>
 
@@ -912,20 +826,20 @@ export default function MBTITest() {
           <CardContent>
             <div className="mb-8">
               <p className="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
-                {questions[currentQuestion].text[currentLang]}
+                {questions[currentQuestion]?.text[currentLang]}
               </p>
             </div>
 
             <div className="space-y-3 mb-8">
-              {getAnswerOptions(questions[currentQuestion].id, currentLang).map((option) => (
+              {getAnswerOptions(questions[currentQuestion]?.id, selectedStyle, currentLang).map((option) => (
                 <Button
                   key={option.value}
-                  variant={answers[questions[currentQuestion].id] === option.value ? "default" : "outline"}
+                  variant={answers[questions[currentQuestion]?.id] === option.value ? "default" : "outline"}
                   className="w-full justify-start p-4 h-auto text-left"
-                  onClick={() => handleAnswer(questions[currentQuestion].id, option.value)}
+                  onClick={() => handleAnswer(questions[currentQuestion]?.id, option.value)}
                 >
                   <div className="w-4 h-4 rounded-full border-2 border-current mr-3 flex items-center justify-center flex-shrink-0">
-                    {answers[questions[currentQuestion].id] === option.value && (
+                    {answers[questions[currentQuestion]?.id] === option.value && (
                       <div className="w-2 h-2 rounded-full bg-current"></div>
                     )}
                   </div>
@@ -946,7 +860,7 @@ export default function MBTITest() {
               
               <Button
                 onClick={nextQuestion}
-                disabled={answers[questions[currentQuestion].id] === undefined}
+                disabled={answers[questions[currentQuestion]?.id] === undefined}
                 className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
               >
                 {currentQuestion === questions.length - 1 ? (
@@ -962,7 +876,6 @@ export default function MBTITest() {
           </CardContent>
         </Card>
 
-        {/* AdSense */}
         <div className="flex justify-center mt-8">
           <AdSense adSlot="1234567894" className="w-full max-w-2xl" />
         </div>

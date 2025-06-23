@@ -590,27 +590,22 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
   };
 
   const defaultOptions = [
-      { value: 1, label: { ko: "전혀 해당 없음", en: "Not at all", ja: "全く当てはまらない" } },
-      { value: 2, label: { ko: "거의 해당 없음", en: "Rarely applies", ja: "ほとんど当てはまらない" } },
-      { value: 3, label: { ko: "보통", en: "Sometimes", ja: "普通" } },
-      { value: 4, label: { ko: "대체로 그렇다", en: "Usually true", ja: "だいたいそうだ" } },
-      { value: 5, label: { ko: "정확히 맞다", en: "Exactly right", ja: "正確に合う" } }
-    ],
-    lifestyle: [
-      { value: 1, label: { ko: "전혀 선호하지 않음", en: "Don't prefer at all", ja: "全く好まない" } },
-      { value: 2, label: { ko: "별로 선호하지 않음", en: "Don't really prefer", ja: "あまり好まない" } },
-      { value: 3, label: { ko: "상관없음", en: "Don't mind either way", ja: "どちらでも良い" } },
-      { value: 4, label: { ko: "어느 정도 선호함", en: "Somewhat prefer", ja: "ある程度好む" } },
-      { value: 5, label: { ko: "매우 선호함", en: "Strongly prefer", ja: "非常に好む" } }
-    ],
-    romance: [
-      { value: 1, label: { ko: "절대 그렇지 않음", en: "Absolutely not", ja: "絶対にそうではない" } },
-      { value: 2, label: { ko: "그렇지 않음", en: "Not really", ja: "そうではない" } },
-      { value: 3, label: { ko: "상황에 따라", en: "Depends on situation", ja: "状況による" } },
-      { value: 4, label: { ko: "대체로 그렇다", en: "Generally yes", ja: "だいたいそうだ" } },
-      { value: 5, label: { ko: "완전히 그렇다", en: "Completely true", ja: "完全にそうだ" } }
-    ],
-    professional: [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly disagree", ja: "全くそうではない" } },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
+  };
+  
+  const defaultOptions = [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly disagree", ja: "全くそうではない" } },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
+  ];
+  
+  const options = styleAnswers[style] || styleAnswers.default || defaultOptions;
       { value: 1, label: { ko: "전혀 동의하지 않음", en: "Strongly disagree", ja: "全く同意しない" } },
       { value: 2, label: { ko: "동의하지 않음", en: "Disagree", ja: "同意しない" } },
       { value: 3, label: { ko: "중립", en: "Neutral", ja: "中立" } },
@@ -655,7 +650,6 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
     { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
   ];
   
-  const options = styleAnswers[style] || styleAnswers.default || defaultOptions;
   return options.map(option => ({
     value: option.value,
     label: option.label[lang]

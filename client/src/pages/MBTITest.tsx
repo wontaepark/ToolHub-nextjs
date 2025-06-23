@@ -598,11 +598,17 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
   ];
   
   const options = styleAnswers[style] || defaultOptions;
-      { value: 1, label: { ko: "전혀 동의하지 않음", en: "Strongly disagree", ja: "全く同意しない" } },
-      { value: 2, label: { ko: "동의하지 않음", en: "Disagree", ja: "同意しない" } },
+
+  return options.map(option => ({
+    value: option.value,
+    label: option.label[lang]
+  }));
+};
+
+
       { value: 3, label: { ko: "중립", en: "Neutral", ja: "中立" } },
-      { value: 4, label: { ko: "동의함", en: "Agree", ja: "同意する" } },
-      { value: 5, label: { ko: "강하게 동의함", en: "Strongly agree", ja: "強く同意する" } }
+
+
     ],
     social: [
       { value: 1, label: { ko: "전혀 그렇지 않다", en: "Not at all", ja: "全くそうではない" } },

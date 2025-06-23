@@ -1455,32 +1455,32 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 3,
       text: {
-        ko: "📝 노트 정리와 기록 방식은?",
-        en: "📝 How do you organize notes and records?",
-        ja: "📝 ノート整理と記録方式は？"
+        ko: "문제를 틀렸을 때 원인을 분석하고 해결한다.",
+        en: "When I get problems wrong, I analyze causes and solve them.",
+        ja: "問題を間違えた時、原因を分析し解決する。"
+      },
+      dimension: 'TF',
+      weight: 'T'
+    },
+    {
+      id: 4,
+      text: {
+        ko: "강의를 들을 때 필기 정리를 철저히 한다.",
+        en: "I take thorough notes when attending lectures.",
+        ja: "講義を聞く時、筆記整理を徹底的にする。"
       },
       dimension: 'SN',
       weight: 'S'
     },
     {
-      id: 4,
-      text: {
-        ko: "👥 그룹 스터디에 대한 선호도는?",
-        en: "👥 Your preference for group study?",
-        ja: "👥 グループスタディに対する好みは？"
-      },
-      dimension: 'EI',
-      weight: 'E'
-    },
-    {
       id: 5,
       text: {
-        ko: "🕐 학습 시간 배분과 관리 방식은?",
-        en: "🕐 How do you allocate and manage study time?",
-        ja: "🕐 学習時間配分と管理方式は？"
+        ko: "암기법은 논리적인 구조를 우선시한다.",
+        en: "I prioritize logical structure in memorization methods.",
+        ja: "暗記法は論理的な構造を優先する。"
       },
-      dimension: 'JP',
-      weight: 'J'
+      dimension: 'TF',
+      weight: 'T'
     },
     {
       id: 6,
@@ -1535,52 +1535,52 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 11,
       text: {
-        ko: "🎨 창의적 학습법 활용에 대한 태도는?",
-        en: "🎨 Your attitude toward using creative learning methods?",
-        ja: "🎨 創造的学習法活用に対する態度は？"
+        ko: "새로운 개념은 구조부터 먼저 이해한다.",
+        en: "I understand the structure first when learning new concepts.",
+        ja: "新しい概念は構造からまず理解する。"
       },
       dimension: 'SN',
-      weight: 'N'
+      weight: 'S'
     },
     {
       id: 12,
       text: {
-        ko: "📊 학습 성과를 평가하는 방식은?",
-        en: "📊 How do you evaluate learning outcomes?",
-        ja: "📊 学習成果を評価する方式は？"
+        ko: "긴 공부 시간에는 중간중간 계획적으로 휴식한다.",
+        en: "During long study sessions, I take planned breaks in between.",
+        ja: "長い勉強時間には途中で計画的に休息する。"
       },
-      dimension: 'TF',
-      weight: 'T'
+      dimension: 'JP',
+      weight: 'J'
     },
     {
       id: 13,
       text: {
-        ko: "🌟 동기부여와 집중력 유지 방법은?",
-        en: "🌟 How do you maintain motivation and concentration?",
-        ja: "🌟 動機付けと集中力維持方法は？"
+        ko: "공부 장소는 항상 같은 공간을 선호한다.",
+        en: "I prefer studying in the same space consistently.",
+        ja: "勉強場所はいつも同じ空間を好む。"
       },
-      dimension: 'TF',
-      weight: 'F'
+      dimension: 'SN',
+      weight: 'S'
     },
     {
       id: 14,
       text: {
-        ko: "🔮 새로운 학습 기회에 대한 접근 방식은?",
-        en: "🔮 Your approach to new learning opportunities?",
-        ja: "🔮 新しい学習機会に対するアプローチは？"
+        ko: "실전 모의고사는 계획된 루틴에 포함시킨다.",
+        en: "I include practice tests in my planned routine.",
+        ja: "実戦模擬試験は計画されたルーチンに含める。"
       },
       dimension: 'JP',
-      weight: 'P'
+      weight: 'J'
     },
     {
       id: 15,
       text: {
-        ko: "🏆 학습한 내용을 활용하고 적용하는 방식은?",
-        en: "🏆 How do you utilize and apply what you've learned?",
-        ja: "🏆 学習した内容を活用し適用する方式は？"
+        ko: "공부 마무리는 피드백과 정리까지 완료한다.",
+        en: "I complete study sessions with feedback and organization.",
+        ja: "勉強の仕上げはフィードバックと整理まで完了する。"
       },
-      dimension: 'SN',
-      weight: 'S'
+      dimension: 'JP',
+      weight: 'J'
     }
   ],
   
@@ -1588,52 +1588,52 @@ const questionSets: Record<string, Question[]> = {
     {
       id: 1,
       text: {
-        ko: "🚨 갑작스러운 문제가 생겼을 때?",
-        en: "🚨 When a sudden problem arises?",
-        ja: "🚨 突然の問題が発生した時？"
+        ko: "예상 못한 일정 변경이 생기면 바로 대처 플랜을 만든다.",
+        en: "When unexpected schedule changes occur, I immediately create a response plan.",
+        ja: "予想できないスケジュール変更が生じたらすぐ対処プランを作る。"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 2,
+      text: {
+        ko: "마감 1시간 전 상황에서 우선순위를 정해서 진행한다.",
+        en: "I set priorities and proceed when there's 1 hour left before deadline.",
+        ja: "締切1時間前の状況で優先順位を決めて進行する。"
+      },
+      dimension: 'JP',
+      weight: 'J'
+    },
+    {
+      id: 3,
+      text: {
+        ko: "실수했을 때 문제 원인부터 분석한다.",
+        en: "When I make mistakes, I analyze the cause of the problem first.",
+        ja: "実失した時、問題原因から分析する。"
       },
       dimension: 'TF',
       weight: 'T'
     },
     {
-      id: 2,
-      text: {
-        ko: "⚡ 긴급 상황에서의 첫 번째 반응은?",
-        en: "⚡ Your first reaction in emergency situations?",
-        ja: "⚡ 緊急状況での最初の反応は？"
-      },
-      dimension: 'EI',
-      weight: 'E'
-    },
-    {
-      id: 3,
-      text: {
-        ko: "🔥 스트레스가 극심할 때의 대처법은?",
-        en: "🔥 How do you cope when stress is extreme?",
-        ja: "🔥 ストレスが極度の時の対処法は？"
-      },
-      dimension: 'EI',
-      weight: 'I'
-    },
-    {
       id: 4,
       text: {
-        ko: "💔 예상치 못한 실패나 좌절 상황에서?",
-        en: "💔 In unexpected failure or frustration situations?",
-        ja: "💔 予想外の失敗や挫折状況で？"
+        ko: "사람과 갈등이 생기면 사실과 논리로 해결하려 한다.",
+        en: "When conflicts arise with people, I try to resolve them with facts and logic.",
+        ja: "人と対立が生じたら事実と論理で解決しようとする。"
       },
       dimension: 'TF',
-      weight: 'F'
+      weight: 'T'
     },
     {
       id: 5,
       text: {
-        ko: "🆘 도움이 필요한 상황에서의 행동은?",
-        en: "🆘 Your actions when you need help?",
-        ja: "🆘 助けが必要な状況での行動は？"
+        ko: "갑작스러운 질병이나 사고가 생기면 병원이나 약국 등으로 빠르게 수습한다.",
+        en: "When sudden illness or accidents occur, I quickly handle them by going to hospitals or pharmacies.",
+        ja: "突然の病気や事故が生じたら病院や薬局などで素早く収束する。"
       },
-      dimension: 'EI',
-      weight: 'E'
+      dimension: 'TF',
+      weight: 'T'
     },
     {
       id: 6,

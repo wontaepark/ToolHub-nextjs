@@ -1740,24 +1740,93 @@ const questionSets: Record<string, Question[]> = {
 
 // Function to get style-specific answer options
 const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' | 'ja') => {
-  if (style === 'balance') {
-    return [
-      { value: 1, label: { ko: "첫 번째 선택", en: "First choice", ja: "最初の選択" }[lang] },
-      { value: 2, label: { ko: "첫 번째에 가까움", en: "Closer to first", ja: "最初に近い" }[lang] },
-      { value: 3, label: { ko: "중간", en: "Middle", ja: "中間" }[lang] },
-      { value: 4, label: { ko: "두 번째에 가까움", en: "Closer to second", ja: "二番目に近い" }[lang] },
-      { value: 5, label: { ko: "두 번째 선택", en: "Second choice", ja: "二番目の選択" }[lang] }
-    ];
-  }
-  
-  // Default options for other styles
-  return [
-    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly Disagree", ja: "全くそうではない" }[lang] },
-    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" }[lang] },
-    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通" }[lang] },
-    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" }[lang] },
-    { value: 5, label: { ko: "매우 그렇다", en: "Strongly Agree", ja: "非常にそうだ" }[lang] }
-  ];
+  const styleAnswers: Record<string, { value: number; label: Record<'ko' | 'en' | 'ja', string> }[]> = {
+    balance: [
+      { value: 1, label: { ko: "완전히 첫 번째", en: "Completely first option", ja: "完全に最初の選択" } },
+      { value: 2, label: { ko: "첫 번째에 가까움", en: "Closer to first", ja: "最初に近い" } },
+      { value: 3, label: { ko: "중간/상황에 따라", en: "Middle/Depends", ja: "中間・状況次第" } },
+      { value: 4, label: { ko: "두 번째에 가까움", en: "Closer to second", ja: "二番目に近い" } },
+      { value: 5, label: { ko: "완전히 두 번째", en: "Completely second option", ja: "完全に二番目の選択" } }
+    ],
+    
+    workplace: [
+      { value: 1, label: { ko: "전혀 하지 않는다", en: "Never do this", ja: "全くしない" } },
+      { value: 2, label: { ko: "거의 하지 않는다", en: "Rarely do this", ja: "ほとんどしない" } },
+      { value: 3, label: { ko: "때때로 한다", en: "Sometimes do this", ja: "時々する" } },
+      { value: 4, label: { ko: "자주 한다", en: "Often do this", ja: "よくする" } },
+      { value: 5, label: { ko: "항상 한다", en: "Always do this", ja: "いつもする" } }
+    ],
+    
+    routine: [
+      { value: 1, label: { ko: "전혀 해당 없음", en: "Not at all", ja: "全く当てはまらない" } },
+      { value: 2, label: { ko: "거의 해당 없음", en: "Rarely applies", ja: "ほとんど当てはまらない" } },
+      { value: 3, label: { ko: "보통", en: "Sometimes", ja: "普通" } },
+      { value: 4, label: { ko: "대체로 그렇다", en: "Usually true", ja: "だいたいそうだ" } },
+      { value: 5, label: { ko: "정확히 맞다", en: "Exactly right", ja: "正確に合う" } }
+    ],
+    
+    lifestyle: [
+      { value: 1, label: { ko: "전혀 선호하지 않음", en: "Don't prefer at all", ja: "全く好まない" } },
+      { value: 2, label: { ko: "별로 선호하지 않음", en: "Don't really prefer", ja: "あまり好まない" } },
+      { value: 3, label: { ko: "상관없음", en: "Don't mind either way", ja: "どちらでも良い" } },
+      { value: 4, label: { ko: "어느 정도 선호함", en: "Somewhat prefer", ja: "ある程度好む" } },
+      { value: 5, label: { ko: "매우 선호함", en: "Strongly prefer", ja: "非常に好む" } }
+    ],
+    
+    romance: [
+      { value: 1, label: { ko: "절대 그렇지 않음", en: "Absolutely not", ja: "絶対にそうではない" } },
+      { value: 2, label: { ko: "그렇지 않음", en: "Not really", ja: "そうではない" } },
+      { value: 3, label: { ko: "상황에 따라", en: "Depends on situation", ja: "状況による" } },
+      { value: 4, label: { ko: "대체로 그렇다", en: "Generally yes", ja: "だいたいそうだ" } },
+      { value: 5, label: { ko: "완전히 그렇다", en: "Completely true", ja: "完全にそうだ" } }
+    ],
+    
+    professional: [
+      { value: 1, label: { ko: "전혀 동의하지 않음", en: "Strongly disagree", ja: "全く同意しない" } },
+      { value: 2, label: { ko: "동의하지 않음", en: "Disagree", ja: "同意しない" } },
+      { value: 3, label: { ko: "중립", en: "Neutral", ja: "中立" } },
+      { value: 4, label: { ko: "동의함", en: "Agree", ja: "同意する" } },
+      { value: 5, label: { ko: "강하게 동의함", en: "Strongly agree", ja: "強く同意する" } }
+    ],
+    
+    social: [
+      { value: 1, label: { ko: "전혀 하지 않음", en: "Never do", ja: "全くしない" } },
+      { value: 2, label: { ko: "가끔 함", en: "Rarely do", ja: "たまにする" } },
+      { value: 3, label: { ko: "보통 수준", en: "Moderately", ja: "普通レベル" } },
+      { value: 4, label: { ko: "자주 함", en: "Frequently do", ja: "よくする" } },
+      { value: 5, label: { ko: "매우 자주 함", en: "Very frequently", ja: "非常によくする" } }
+    ],
+    
+    travel: [
+      { value: 1, label: { ko: "전혀 중요하지 않음", en: "Not important at all", ja: "全く重要でない" } },
+      { value: 2, label: { ko: "별로 중요하지 않음", en: "Not very important", ja: "あまり重要でない" } },
+      { value: 3, label: { ko: "보통 중요", en: "Moderately important", ja: "普通に重要" } },
+      { value: 4, label: { ko: "중요함", en: "Important", ja: "重要" } },
+      { value: 5, label: { ko: "매우 중요함", en: "Very important", ja: "非常に重要" } }
+    ],
+    
+    study: [
+      { value: 1, label: { ko: "전혀 효과적이지 않음", en: "Not effective at all", ja: "全く効果的でない" } },
+      { value: 2, label: { ko: "별로 효과적이지 않음", en: "Not very effective", ja: "あまり効果的でない" } },
+      { value: 3, label: { ko: "보통", en: "Somewhat effective", ja: "普通" } },
+      { value: 4, label: { ko: "효과적임", en: "Effective", ja: "効果的" } },
+      { value: 5, label: { ko: "매우 효과적임", en: "Very effective", ja: "非常に効果的" } }
+    ],
+    
+    crisis: [
+      { value: 1, label: { ko: "전혀 그렇게 행동하지 않음", en: "Never act this way", ja: "全くそのように行動しない" } },
+      { value: 2, label: { ko: "거의 그렇게 하지 않음", en: "Rarely act this way", ja: "ほとんどそうしない" } },
+      { value: 3, label: { ko: "때때로 그렇게 함", en: "Sometimes act this way", ja: "時々そうする" } },
+      { value: 4, label: { ko: "보통 그렇게 함", en: "Usually act this way", ja: "普通そうする" } },
+      { value: 5, label: { ko: "항상 그렇게 함", en: "Always act this way", ja: "いつもそうする" } }
+    ]
+  };
+
+  const options = styleAnswers[style] || styleAnswers.professional;
+  return options.map(option => ({
+    value: option.value,
+    label: option.label[lang]
+  }));
 };
 
 const mbtiResults: Record<string, MBTIResult> = {

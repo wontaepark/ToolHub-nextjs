@@ -117,6 +117,11 @@
       "title": "날씨 정보",
       "description": "실시간 날씨와 주간 예보",
       "tags": ["실시간", "예보"]
+    },
+    "tetoEgen": {
+      "title": "테토-에겐 성격유형 테스트",
+      "description": "화제의 테토-에겐 밈으로 나의 진짜 성격 찾기",
+      "tags": ["바이럴", "궁합분석", "소셜공유"]
     }
   },
   "passwordGenerator": {

@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.tetoEgen.title')}</h3>
                   <Badge variant="default" className="bg-pink-500/10 text-pink-600 text-xs flex-shrink-0 ml-2">
-                    NEW
+                    {t('common.new')}
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">

@@ -117,6 +117,11 @@
       "title": "Weather Info",
       "description": "Real-time weather and weekly forecast",
       "tags": ["Real-time", "Forecast"]
+    },
+    "tetoEgen": {
+      "title": "Teto-Egen Personality Test",
+      "description": "Find your true personality with the viral Teto-Egen meme",
+      "tags": ["Viral", "Compatibility", "Social Share"]
     }
   },
   "passwordGenerator": {

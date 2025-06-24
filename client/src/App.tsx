@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import MBTITest from "./pages/MBTITest_clean";
+import TetoEgenTest from "./pages/TetoEgenTest";
 import NotFound from "./pages/not-found";
 
 function App() {

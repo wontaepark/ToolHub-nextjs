@@ -26,18 +26,50 @@ interface Question {
 
 interface TestResult {
   type: 'TETO_MALE' | 'TETO_FEMALE' | 'EGEN_MALE' | 'EGEN_FEMALE';
-  title: string;
-  subtitle: string;
-  description: string;
-  personality: string[];
-  loveStyle: string;
+  title: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
+  subtitle: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
+  description: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
+  personality: {
+    ko: string[];
+    en: string[];
+    ja: string[];
+  };
+  loveStyle: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
   compatibility: {
-    best: string;
-    avoid: string;
+    best: {
+      ko: string;
+      en: string;
+      ja: string;
+    };
+    avoid: {
+      ko: string;
+      en: string;
+      ja: string;
+    };
   };
   percentage: number;
   emoji: string;
-  shareText: string;
+  shareText: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
 }
 
 const questions: Question[] = [
@@ -466,18 +498,50 @@ const questions: Question[] = [
 const results: Record<string, TestResult> = {
   TETO_MALE: {
     type: 'TETO_MALE',
-    title: '테토남',
-    subtitle: '조용한 매력의 소유자',
-    description: '차분하고 신중한 성격으로 깊이 있는 대화를 좋아하는 당신. 겉으로는 조용해 보이지만 속에는 따뜻한 마음을 품고 있어요. 진짜 친해지면 의외로 재미있고 다정한 면을 보여주는 반전 매력의 소유자입니다.',
-    personality: ['내향적', '신중함', '깊이 있음', '진정성', '안정감'],
-    loveStyle: '천천히 마음을 열지만 한번 사랑하면 진심으로 대해주는 스타일. 화려한 이벤트보다는 소소하지만 의미 있는 시간을 함께 보내는 것을 좋아해요.',
+    title: {
+      ko: '테토남',
+      en: 'Teto Male',
+      ja: 'テト男'
+    },
+    subtitle: {
+      ko: '조용한 매력의 소유자',
+      en: 'Owner of Quiet Charm',
+      ja: '静かな魅力の持ち主'
+    },
+    description: {
+      ko: '차분하고 신중한 성격으로 깊이 있는 대화를 좋아하는 당신. 겉으로는 조용해 보이지만 속에는 따뜻한 마음을 품고 있어요. 진짜 친해지면 의외로 재미있고 다정한 면을 보여주는 반전 매력의 소유자입니다.',
+      en: 'You have a calm and thoughtful personality who enjoys deep conversations. While you appear quiet on the outside, you have a warm heart within. You are someone with surprising charm who shows an unexpectedly fun and caring side once you become truly close.',
+      ja: '落ち着いて慎重な性格で、深い会話を好むあなた。外見は静かに見えますが、心の中には温かい気持ちを持っています。本当に親しくなると、意外にも面白くて優しい一面を見せる反転魅力の持ち主です。'
+    },
+    personality: {
+      ko: ['내향적', '신중함', '깊이 있음', '진정성', '안정감'],
+      en: ['Introverted', 'Cautious', 'Deep', 'Authentic', 'Stable'],
+      ja: ['内向的', '慎重', '深み', '真正性', '安定感']
+    },
+    loveStyle: {
+      ko: '천천히 마음을 열지만 한번 사랑하면 진심으로 대해주는 스타일. 화려한 이벤트보다는 소소하지만 의미 있는 시간을 함께 보내는 것을 좋아해요.',
+      en: 'You open your heart slowly, but once you love, you treat them with sincerity. You prefer spending quiet but meaningful time together rather than flashy events.',
+      ja: 'ゆっくりと心を開くが、一度愛すると真心で接するスタイル。華やかなイベントよりも、ささやかだが意味のある時間を一緒に過ごすことを好みます。'
+    },
     compatibility: {
-      best: '에겐녀 - 활발한 에너지로 당신의 조용한 매력을 끌어내줄 수 있어요',
-      avoid: '테토녀 - 둘 다 조용해서 관계 발전이 어려울 수 있어요'
+      best: {
+        ko: '에겐녀 - 활발한 에너지로 당신의 조용한 매력을 끌어내줄 수 있어요',
+        en: 'Egen Female - Can draw out your quiet charm with lively energy',
+        ja: 'エゲン女 - 活発なエネルギーであなたの静かな魅力を引き出してくれます'
+      },
+      avoid: {
+        ko: '테토녀 - 둘 다 조용해서 관계 발전이 어려울 수 있어요',
+        en: 'Teto Female - Both being quiet might make relationship progress difficult',
+        ja: 'テト女 - 二人とも静かで関係発展が難しい可能性があります'
+      }
     },
     percentage: 23,
     emoji: '🤫',
-    shareText: '나는 조용한 매력의 테토남! 친구들은 어떤 유형일까?'
+    shareText: {
+      ko: '나는 조용한 매력의 테토남! 친구들은 어떤 유형일까?',
+      en: 'I am a Teto Male with quiet charm! What type are my friends?',
+      ja: '私は静かな魅力のテト男！友達はどんなタイプかな？'
+    }
   },
   TETO_FEMALE: {
     type: 'TETO_FEMALE',
@@ -590,7 +654,7 @@ export default function TetoEgenTest() {
   const shareResult = () => {
     if (result) {
       const shareUrl = window.location.href;
-      const shareText = `${result.shareText} ${shareUrl}`;
+      const shareText = `${result.shareText[i18n.language as keyof typeof result.shareText]} ${shareUrl}`;
       
       if (navigator.share) {
         navigator.share({
@@ -665,10 +729,10 @@ export default function TetoEgenTest() {
             <CardHeader>
               <div className="text-6xl mb-4">{result.emoji}</div>
               <CardTitle className="text-3xl text-purple-600 dark:text-purple-400">
-                {result.title}
+                {result.title[i18n.language as keyof typeof result.title]}
               </CardTitle>
               <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-                {result.subtitle}
+                {result.subtitle[i18n.language as keyof typeof result.subtitle]}
               </h2>
               <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 p-3 rounded-lg mt-4">
                 <p className="text-sm text-purple-700 dark:text-purple-300">
@@ -682,17 +746,19 @@ export default function TetoEgenTest() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Star className="mr-2 h-5 w-5 text-yellow-500" />
-                  성격 분석
+                  {i18n.language === 'ko' ? '성격 분석' : i18n.language === 'ja' ? '性格分析' : 'Personality Analysis'}
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {result.description}
+                  {result.description[i18n.language as keyof typeof result.description]}
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">주요 특성</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  {i18n.language === 'ko' ? '주요 특성' : i18n.language === 'ja' ? '主要特性' : 'Key Traits'}
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {result.personality.map((trait, index) => (
+                  {result.personality[i18n.language as keyof typeof result.personality].map((trait, index) => (
                     <Badge key={index} variant="secondary" className="text-sm">
                       {trait}
                     </Badge>
@@ -703,27 +769,31 @@ export default function TetoEgenTest() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Heart className="mr-2 h-5 w-5 text-red-500" />
-                  연애 성향
+                  {i18n.language === 'ko' ? '연애 성향' : i18n.language === 'ja' ? '恋愛傾向' : 'Love Style'}
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300">
-                  {result.loveStyle}
+                  {result.loveStyle[i18n.language as keyof typeof result.loveStyle]}
                 </p>
               </div>
               
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Users className="mr-2 h-5 w-5 text-green-500" />
-                  궁합 분석
+                  {i18n.language === 'ko' ? '궁합 분석' : i18n.language === 'ja' ? '相性分析' : 'Compatibility Analysis'}
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
                     <p className="text-green-700 dark:text-green-300">
-                      <strong>최고 궁합:</strong> {result.compatibility.best}
+                      <strong>
+                        {i18n.language === 'ko' ? '최고 궁합:' : i18n.language === 'ja' ? '最高の相性:' : 'Best Match:'}
+                      </strong> {result.compatibility.best[i18n.language as keyof typeof result.compatibility.best]}
                     </p>
                   </div>
                   <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
                     <p className="text-red-700 dark:text-red-300">
-                      <strong>주의할 궁합:</strong> {result.compatibility.avoid}
+                      <strong>
+                        {i18n.language === 'ko' ? '주의할 궁합:' : i18n.language === 'ja' ? '注意すべき相性:' : 'Caution Match:'}
+                      </strong> {result.compatibility.avoid[i18n.language as keyof typeof result.compatibility.avoid]}
                     </p>
                   </div>
                 </div>
@@ -732,18 +802,20 @@ export default function TetoEgenTest() {
               <div className="border-t pt-6">
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg mb-4">
                   <p className="text-yellow-800 dark:text-yellow-200 text-sm text-center">
-                    💡 친구들도 테스트해보고 누가 어떤 유형인지 비교해보세요!
+                    💡 {i18n.language === 'ko' ? '친구들도 테스트해보고 누가 어떤 유형인지 비교해보세요!' : 
+                         i18n.language === 'ja' ? '友達もテストして誰がどのタイプか比較してみよう！' : 
+                         'Have your friends take the test too and compare who is what type!'}
                   </p>
                 </div>
                 
                 <div className="flex gap-4 justify-center">
                   <Button onClick={shareResult} variant="default" className="flex-1">
                     <Share2 className="mr-2 h-4 w-4" />
-                    결과 공유하기
+                    {i18n.language === 'ko' ? '결과 공유하기' : i18n.language === 'ja' ? '結果をシェア' : 'Share Results'}
                   </Button>
                   <Button onClick={resetTest} variant="outline" className="flex-1">
                     <RotateCcw className="mr-2 h-4 w-4" />
-                    다시 테스트
+                    {i18n.language === 'ko' ? '다시 테스트' : i18n.language === 'ja' ? 'もう一度テスト' : 'Test Again'}
                   </Button>
                 </div>
               </div>

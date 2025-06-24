@@ -8,9 +8,17 @@ import { ArrowLeft, RotateCcw, Share2, Heart, Users, Star } from 'lucide-react';
 
 interface Question {
   id: number;
-  text: string;
+  text: {
+    ko: string;
+    en: string;
+    ja: string;
+  };
   options: {
-    text: string;
+    text: {
+      ko: string;
+      en: string;
+      ja: string;
+    };
     weight: 'T' | 'E'; // T for 테토, E for 에겐
     intensity: number; // 1-3 강도
   }[];
@@ -35,102 +43,422 @@ interface TestResult {
 const questions: Question[] = [
   {
     id: 1,
-    text: "새로운 사람들이 있는 모임에 갔을 때 당신의 행동은?",
+    text: {
+      ko: "새로운 사람들이 있는 모임에 갔을 때 당신의 행동은?",
+      en: "What do you do when you go to a gathering with new people?",
+      ja: "新しい人がいる集まりに行った時、あなたの行動は？"
+    },
     options: [
-      { text: "조용히 구석에서 아는 사람들과만 대화한다", weight: 'T', intensity: 3 },
-      { text: "처음 보는 사람들에게도 먼저 말을 건다", weight: 'E', intensity: 3 },
-      { text: "아는 사람이 소개해주면 대화를 시작한다", weight: 'T', intensity: 1 },
-      { text: "분위기를 보고 적당히 섞인다", weight: 'E', intensity: 1 }
+      { 
+        text: {
+          ko: "조용히 구석에서 아는 사람들과만 대화한다",
+          en: "Quietly chat only with people I know in the corner",
+          ja: "静かに隅で知っている人とだけ会話する"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "처음 보는 사람들에게도 먼저 말을 건다",
+          en: "Approach strangers first to start conversations",
+          ja: "初めて会う人にも先に話しかける"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "아는 사람이 소개해주면 대화를 시작한다",
+          en: "Start conversations when someone I know introduces me",
+          ja: "知り合いが紹介してくれたら会話を始める"
+        }, 
+        weight: 'T', intensity: 1 
+      },
+      { 
+        text: {
+          ko: "분위기를 보고 적당히 섞인다",
+          en: "Read the atmosphere and naturally blend in",
+          ja: "雰囲気を見て適度に混ざる"
+        }, 
+        weight: 'E', intensity: 1 
+      }
     ]
   },
   {
     id: 2,
-    text: "친구가 고민을 털어놓을 때 당신의 반응은?",
+    text: {
+      ko: "친구가 고민을 털어놓을 때 당신의 반응은?",
+      en: "How do you react when a friend shares their worries?",
+      ja: "友達が悩みを打ち明けた時のあなたの反応は？"
+    },
     options: [
-      { text: "조용히 들어주고 공감해준다", weight: 'T', intensity: 2 },
-      { text: "적극적으로 해결책을 제시한다", weight: 'E', intensity: 2 },
-      { text: "비슷한 경험담을 들려준다", weight: 'E', intensity: 1 },
-      { text: "그냥 옆에 있어준다", weight: 'T', intensity: 3 }
+      { 
+        text: {
+          ko: "조용히 들어주고 공감해준다",
+          en: "Listen quietly and empathize",
+          ja: "静かに聞いて共感してあげる"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "적극적으로 해결책을 제시한다",
+          en: "Actively suggest solutions",
+          ja: "積極的に解決策を提示する"
+        }, 
+        weight: 'E', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "비슷한 경험담을 들려준다",
+          en: "Share similar experiences",
+          ja: "似たような経験談を聞かせる"
+        }, 
+        weight: 'E', intensity: 1 
+      },
+      { 
+        text: {
+          ko: "그냥 옆에 있어준다",
+          en: "Just be there for them",
+          ja: "ただそばにいてあげる"
+        }, 
+        weight: 'T', intensity: 3 
+      }
     ]
   },
   {
     id: 3,
-    text: "SNS에 올리는 게시물의 스타일은?",
+    text: {
+      ko: "SNS에 올리는 게시물의 스타일은?",
+      en: "What's your style for social media posts?",
+      ja: "SNSに投稿する時のスタイルは？"
+    },
     options: [
-      { text: "일상 사진을 간단한 멘트와 함께", weight: 'T', intensity: 2 },
-      { text: "재미있는 밈이나 유머 게시물", weight: 'E', intensity: 2 },
-      { text: "감성적인 글과 함께 인생샷", weight: 'T', intensity: 1 },
-      { text: "거의 올리지 않는다", weight: 'T', intensity: 3 }
+      { 
+        text: {
+          ko: "일상 사진을 간단한 멘트와 함께",
+          en: "Daily photos with simple captions",
+          ja: "日常写真を簡単なコメントと一緒に"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "재미있는 밈이나 유머 게시물",
+          en: "Funny memes or humorous posts",
+          ja: "面白いミームやユーモア投稿"
+        }, 
+        weight: 'E', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "감성적인 글과 함께 인생샷",
+          en: "Life shots with emotional captions",
+          ja: "感性的な文章と一緒に人生ショット"
+        }, 
+        weight: 'T', intensity: 1 
+      },
+      { 
+        text: {
+          ko: "거의 올리지 않는다",
+          en: "Rarely post anything",
+          ja: "ほとんど投稿しない"
+        }, 
+        weight: 'T', intensity: 3 
+      }
     ]
   },
   {
     id: 4,
-    text: "이상형을 만났을 때 당신의 어프로치 방식은?",
+    text: {
+      ko: "이상형을 만났을 때 당신의 어프로치 방식은?",
+      en: "How do you approach someone you're interested in?",
+      ja: "理想のタイプに会った時のあなたのアプローチ方法は？"
+    },
     options: [
-      { text: "눈치를 주면서 상대방이 알아채길 기다린다", weight: 'T', intensity: 3 },
-      { text: "직접적으로 호감을 표현한다", weight: 'E', intensity: 3 },
-      { text: "자연스럽게 대화를 늘려간다", weight: 'E', intensity: 1 },
-      { text: "친구를 통해 간접적으로 접근한다", weight: 'T', intensity: 2 }
+      { 
+        text: {
+          ko: "눈치를 주면서 상대방이 알아채길 기다린다",
+          en: "Give subtle hints and wait for them to notice",
+          ja: "サインを出しながら相手が気づくのを待つ"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "직접적으로 호감을 표현한다",
+          en: "Express interest directly",
+          ja: "直接的に好意を表現する"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "자연스럽게 대화를 늘려간다",
+          en: "Naturally increase conversations",
+          ja: "自然に会話を増やしていく"
+        }, 
+        weight: 'E', intensity: 1 
+      },
+      { 
+        text: {
+          ko: "친구를 통해 간접적으로 접근한다",
+          en: "Approach indirectly through friends",
+          ja: "友達を通して間接的にアプローチする"
+        }, 
+        weight: 'T', intensity: 2 
+      }
     ]
   },
   {
     id: 5,
-    text: "주말에 가장 하고 싶은 활동은?",
+    text: {
+      ko: "주말에 가장 하고 싶은 활동은?",
+      en: "What do you most want to do on weekends?",
+      ja: "週末に最もしたい活動は？"
+    },
     options: [
-      { text: "집에서 넷플릭스 보며 혼자만의 시간", weight: 'T', intensity: 3 },
-      { text: "친구들과 신나게 놀러 나가기", weight: 'E', intensity: 3 },
-      { text: "카페에서 책 읽거나 공부하기", weight: 'T', intensity: 2 },
-      { text: "새로운 맛집이나 장소 탐방하기", weight: 'E', intensity: 2 }
+      { 
+        text: {
+          ko: "집에서 넷플릭스 보며 혼자만의 시간",
+          en: "Watch Netflix at home, enjoying alone time",
+          ja: "家でネットフリックスを見ながら一人の時間"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "친구들과 신나게 놀러 나가기",
+          en: "Go out and have fun with friends",
+          ja: "友達と楽しく遊びに出かける"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "카페에서 책 읽거나 공부하기",
+          en: "Read books or study at a cafe",
+          ja: "カフェで本を読んだり勉強したり"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "새로운 맛집이나 장소 탐방하기",
+          en: "Explore new restaurants or places",
+          ja: "新しいグルメスポットや場所を探検"
+        }, 
+        weight: 'E', intensity: 2 
+      }
     ]
   },
   {
     id: 6,
-    text: "갑작스럽게 계획이 바뀌었을 때 당신의 반응은?",
+    text: {
+      ko: "갑작스럽게 계획이 바뀌었을 때 당신의 반응은?",
+      en: "How do you react when plans suddenly change?",
+      ja: "突然計画が変わった時のあなたの反応は？"
+    },
     options: [
-      { text: "스트레스를 받지만 적응하려고 노력한다", weight: 'T', intensity: 2 },
-      { text: "오히려 더 재미있을 것 같다고 생각한다", weight: 'E', intensity: 2 },
-      { text: "차라리 집에 가고 싶어진다", weight: 'T', intensity: 3 },
-      { text: "새로운 계획을 적극적으로 제안한다", weight: 'E', intensity: 3 }
+      { 
+        text: {
+          ko: "스트레스를 받지만 적응하려고 노력한다",
+          en: "Feel stressed but try to adapt",
+          ja: "ストレスを受けるが適応しようと努力する"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "오히려 더 재미있을 것 같다고 생각한다",
+          en: "Think it might be more fun instead",
+          ja: "むしろもっと面白そうだと思う"
+        }, 
+        weight: 'E', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "차라리 집에 가고 싶어진다",
+          en: "Would rather just go home",
+          ja: "むしろ家に帰りたくなる"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "새로운 계획을 적극적으로 제안한다",
+          en: "Actively suggest new plans",
+          ja: "新しい計画を積極的に提案する"
+        }, 
+        weight: 'E', intensity: 3 
+      }
     ]
   },
   {
     id: 7,
-    text: "연인과의 데이트에서 선호하는 스타일은?",
+    text: {
+      ko: "연인과의 데이트에서 선호하는 스타일은?",
+      en: "What's your preferred style for dates with your partner?",
+      ja: "恋人とのデートで好むスタイルは？"
+    },
     options: [
-      { text: "둘만의 조용하고 아늑한 분위기", weight: 'T', intensity: 3 },
-      { text: "활동적이고 다양한 경험을 할 수 있는 곳", weight: 'E', intensity: 3 },
-      { text: "맛있는 음식을 함께 즐기는 시간", weight: 'T', intensity: 1 },
-      { text: "사람들이 많은 핫플레이스", weight: 'E', intensity: 2 }
+      { 
+        text: {
+          ko: "둘만의 조용하고 아늑한 분위기",
+          en: "Quiet and cozy atmosphere for just the two of us",
+          ja: "二人だけの静かで居心地の良い雰囲気"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "활동적이고 다양한 경험을 할 수 있는 곳",
+          en: "Active places with various experiences",
+          ja: "活動的で様々な経験ができる場所"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "맛있는 음식을 함께 즐기는 시간",
+          en: "Time enjoying delicious food together",
+          ja: "美味しい食べ物を一緒に楽しむ時間"
+        }, 
+        weight: 'T', intensity: 1 
+      },
+      { 
+        text: {
+          ko: "사람들이 많은 핫플레이스",
+          en: "Popular places with lots of people",
+          ja: "人が多い人気スポット"
+        }, 
+        weight: 'E', intensity: 2 
+      }
     ]
   },
   {
     id: 8,
-    text: "친구들 사이에서 당신의 포지션은?",
+    text: {
+      ko: "친구들 사이에서 당신의 포지션은?",
+      en: "What's your position among friends?",
+      ja: "友達の間でのあなたのポジションは？"
+    },
     options: [
-      { text: "조용하지만 든든한 조력자", weight: 'T', intensity: 3 },
-      { text: "분위기 메이커이자 리더", weight: 'E', intensity: 3 },
-      { text: "좋은 리스너이자 상담사", weight: 'T', intensity: 2 },
-      { text: "아이디어 뱅크이자 계획자", weight: 'E', intensity: 2 }
+      { 
+        text: {
+          ko: "조용하지만 든든한 조력자",
+          en: "Quiet but reliable supporter",
+          ja: "静かだが頼もしい協力者"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "분위기 메이커이자 리더",
+          en: "Mood maker and leader",
+          ja: "ムードメーカーでありリーダー"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "좋은 리스너이자 상담사",
+          en: "Good listener and counselor",
+          ja: "良いリスナーでありカウンセラー"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "아이디어 뱅크이자 계획자",
+          en: "Idea bank and planner",
+          ja: "アイデアバンクであり計画者"
+        }, 
+        weight: 'E', intensity: 2 
+      }
     ]
   },
   {
     id: 9,
-    text: "스트레스를 받을 때 당신의 해소 방법은?",
+    text: {
+      ko: "스트레스를 받을 때 당신의 해소 방법은?",
+      en: "How do you relieve stress?",
+      ja: "ストレスを受けた時のあなたの解消方法は？"
+    },
     options: [
-      { text: "혼자만의 시간을 가지며 충전한다", weight: 'T', intensity: 3 },
-      { text: "친구들과 만나서 수다를 떤다", weight: 'E', intensity: 3 },
-      { text: "좋아하는 음악을 들으며 감정을 정리한다", weight: 'T', intensity: 2 },
-      { text: "운동이나 활동적인 것으로 에너지를 발산한다", weight: 'E', intensity: 2 }
+      { 
+        text: {
+          ko: "혼자만의 시간을 가지며 충전한다",
+          en: "Have alone time to recharge",
+          ja: "一人の時間を持って充電する"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "친구들과 만나서 수다를 떤다",
+          en: "Meet friends and chat",
+          ja: "友達と会っておしゃべりする"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "좋아하는 음악을 들으며 감정을 정리한다",
+          en: "Listen to favorite music and process emotions",
+          ja: "好きな音楽を聞きながら感情を整理する"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "운동이나 활동적인 것으로 에너지를 발산한다",
+          en: "Release energy through exercise or activities",
+          ja: "運動や活動的なことでエネルギーを発散する"
+        }, 
+        weight: 'E', intensity: 2 
+      }
     ]
   },
   {
     id: 10,
-    text: "새로운 환경에 적응하는 당신의 스타일은?",
+    text: {
+      ko: "새로운 환경에 적응하는 당신의 스타일은?",
+      en: "What's your style for adapting to new environments?",
+      ja: "新しい環境に適応するあなたのスタイルは？"
+    },
     options: [
-      { text: "천천히 관찰하면서 조심스럽게 적응한다", weight: 'T', intensity: 3 },
-      { text: "적극적으로 새로운 사람들과 친해진다", weight: 'E', intensity: 3 },
-      { text: "필요한 것들부터 차근차근 해결한다", weight: 'T', intensity: 2 },
-      { text: "일단 뛰어들고 부딪히면서 배운다", weight: 'E', intensity: 2 }
+      { 
+        text: {
+          ko: "천천히 관찰하면서 조심스럽게 적응한다",
+          en: "Observe slowly and adapt carefully",
+          ja: "ゆっくり観察しながら慎重に適応する"
+        }, 
+        weight: 'T', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "적극적으로 새로운 사람들과 친해진다",
+          en: "Actively make friends with new people",
+          ja: "積極的に新しい人と親しくなる"
+        }, 
+        weight: 'E', intensity: 3 
+      },
+      { 
+        text: {
+          ko: "필요한 것들부터 차근차근 해결한다",
+          en: "Solve necessary things step by step",
+          ja: "必要なことから着実に解決する"
+        }, 
+        weight: 'T', intensity: 2 
+      },
+      { 
+        text: {
+          ko: "일단 뛰어들고 부딪히면서 배운다",
+          en: "Jump in and learn by experiencing",
+          ja: "とりあえず飛び込んでぶつかりながら学ぶ"
+        }, 
+        weight: 'E', intensity: 2 
+      }
     ]
   }
 ];
@@ -457,7 +785,7 @@ export default function TetoEgenTest() {
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-lg text-center font-medium">
-              {currentQ.text}
+              {currentQ.text[i18n.language as keyof typeof currentQ.text]}
             </p>
             
             <div className="space-y-3">
@@ -468,7 +796,7 @@ export default function TetoEgenTest() {
                   variant="outline"
                   className="w-full p-6 h-auto text-left justify-start hover:bg-purple-50 dark:hover:bg-purple-900/20"
                 >
-                  {option.text}
+                  {option.text[i18n.language as keyof typeof option.text]}
                 </Button>
               ))}
             </div>

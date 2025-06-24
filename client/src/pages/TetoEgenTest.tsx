@@ -283,13 +283,19 @@ export default function TetoEgenTest() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              🔥 테토-에겐 성격유형 테스트
+              🔥 {i18n.language === 'ko' ? '테토-에겐 성격유형 테스트' : 
+                   i18n.language === 'ja' ? 'テト-エゲン性格タイプテスト' : 
+                   'Teto-Egen Personality Test'}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-              나는 테토? 에겐? 나의 진짜 성격유형을 찾아보세요!
+              {i18n.language === 'ko' ? '나는 테토? 에겐? 나의 진짜 성격유형을 찾아보세요!' : 
+               i18n.language === 'ja' ? '私はテト？エゲン？本当の性格タイプを見つけよう！' : 
+               'Am I Teto? Egen? Find your true personality type!'}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              이미 50만명이 참여한 화제의 성격테스트 ✨
+              {i18n.language === 'ko' ? '이미 50만명이 참여한 화제의 성격테스트 ✨' : 
+               i18n.language === 'ja' ? '既に50万人が参加した話題の性格テスト ✨' : 
+               'The viral personality test that 500K people have already taken ✨'}
             </p>
           </div>
 
@@ -300,7 +306,9 @@ export default function TetoEgenTest() {
             >
               <CardHeader className="text-center">
                 <div className="text-4xl mb-2">👨</div>
-                <CardTitle className="text-xl text-blue-600">남성</CardTitle>
+                <CardTitle className="text-xl text-blue-600">
+                  {i18n.language === 'ko' ? '남성' : i18n.language === 'ja' ? '男性' : 'Male'}
+                </CardTitle>
               </CardHeader>
             </Card>
 
@@ -310,7 +318,9 @@ export default function TetoEgenTest() {
             >
               <CardHeader className="text-center">
                 <div className="text-4xl mb-2">👩</div>
-                <CardTitle className="text-xl text-pink-600">여성</CardTitle>
+                <CardTitle className="text-xl text-pink-600">
+                  {i18n.language === 'ko' ? '여성' : i18n.language === 'ja' ? '女性' : 'Female'}
+                </CardTitle>
               </CardHeader>
             </Card>
           </div>
@@ -334,7 +344,9 @@ export default function TetoEgenTest() {
               </h2>
               <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 p-3 rounded-lg mt-4">
                 <p className="text-sm text-purple-700 dark:text-purple-300">
-                  전체 인구의 {result.percentage}%에 해당하는 희귀한 유형입니다!
+                  {i18n.language === 'ko' ? `전체 인구의 ${result.percentage}%에 해당하는 희귀한 유형입니다!` : 
+                   i18n.language === 'ja' ? `全人口の${result.percentage}%に該当する希少なタイプです！` : 
+                   `A rare type representing ${result.percentage}% of the population!`}
                 </p>
               </div>
             </CardHeader>
@@ -426,7 +438,7 @@ export default function TetoEgenTest() {
             size="sm"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            처음으로
+            {i18n.language === 'ko' ? '처음으로' : i18n.language === 'ja' ? '最初に戻る' : 'Back to Start'}
           </Button>
           <div className="text-sm text-gray-500">
             {currentQuestion + 1} / {questions.length}
@@ -438,7 +450,9 @@ export default function TetoEgenTest() {
         <Card>
           <CardHeader>
             <CardTitle className="text-xl text-center">
-              질문 {currentQuestion + 1}
+              {i18n.language === 'ko' ? `질문 ${currentQuestion + 1}` : 
+               i18n.language === 'ja' ? `質問 ${currentQuestion + 1}` : 
+               `Question ${currentQuestion + 1}`}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">

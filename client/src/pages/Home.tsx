@@ -296,18 +296,18 @@ export default function Home() {
               </div>
               <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">테토-에겐 성격유형 테스트</h3>
+                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.tetoEgen.title')}</h3>
                   <Badge variant="default" className="bg-pink-500/10 text-pink-600 text-xs flex-shrink-0 ml-2">
                     NEW
                   </Badge>
                 </div>
                 <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  화제의 테토-에겐 밈으로 나의 진짜 성격 찾기
+                  {t('tools.tetoEgen.description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">바이럴</Badge>
-                  <Badge variant="outline" className="text-xs">궁합분석</Badge>
-                  <Badge variant="outline" className="text-xs">소셜공유</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.tetoEgen.tags.0')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.tetoEgen.tags.1')}</Badge>
+                  <Badge variant="outline" className="text-xs">{t('tools.tetoEgen.tags.2')}</Badge>
                 </div>
               </div>
             </div>

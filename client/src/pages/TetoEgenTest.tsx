@@ -545,48 +545,144 @@ const results: Record<string, TestResult> = {
   },
   TETO_FEMALE: {
     type: 'TETO_FEMALE',
-    title: '테토녀',
-    subtitle: '신비로운 매력의 여신',
-    description: '조용하지만 독특한 개성을 가진 당신. 많은 사람들과 어울리기보다는 진짜 통하는 소수의 사람들과 깊은 관계를 맺는 것을 선호해요. 신비로운 분위기로 사람들의 호기심을 자극하는 매력적인 존재입니다.',
-    personality: ['신비로움', '독립적', '예술적', '섬세함', '직관적'],
-    loveStyle: '로맨틱하고 감성적인 연애를 꿈꾸지만 쉽게 마음을 내보이지 않는 스타일. 상대방이 당신의 진짜 모습을 알아가는 과정을 중요하게 생각해요.',
+    title: {
+      ko: '테토녀',
+      en: 'Teto Female',
+      ja: 'テト女'
+    },
+    subtitle: {
+      ko: '신비로운 매력의 여신',
+      en: 'Goddess of Mysterious Charm',
+      ja: '神秘的な魅力の女神'
+    },
+    description: {
+      ko: '조용하지만 독특한 개성을 가진 당신. 많은 사람들과 어울리기보다는 진짜 통하는 소수의 사람들과 깊은 관계를 맺는 것을 선호해요. 신비로운 분위기로 사람들의 호기심을 자극하는 매력적인 존재입니다.',
+      en: 'You are quiet but have a unique personality. You prefer building deep relationships with a few people who truly understand you rather than mixing with many people. You are an attractive presence that stimulates people\'s curiosity with your mysterious atmosphere.',
+      ja: '静かだが独特な個性を持つあなた。多くの人と付き合うよりも、本当に通じ合う少数の人と深い関係を築くことを好みます。神秘的な雰囲気で人々の好奇心を刺激する魅力的な存在です。'
+    },
+    personality: {
+      ko: ['신비로움', '독립적', '예술적', '섬세함', '직관적'],
+      en: ['Mysterious', 'Independent', 'Artistic', 'Delicate', 'Intuitive'],
+      ja: ['神秘的', '独立的', '芸術的', '繊細', '直感的']
+    },
+    loveStyle: {
+      ko: '로맨틱하고 감성적인 연애를 꿈꾸지만 쉽게 마음을 내보이지 않는 스타일. 상대방이 당신의 진짜 모습을 알아가는 과정을 중요하게 생각해요.',
+      en: 'You dream of romantic and emotional relationships but don\'t easily show your heart. You value the process of your partner getting to know your true self.',
+      ja: 'ロマンチックで感性的な恋愛を夢見るが、簡単に心を見せないスタイル。相手があなたの本当の姿を知っていく過程を大切に思います。'
+    },
     compatibility: {
-      best: '에겐남 - 적극적인 어프로치로 당신의 마음을 열어줄 수 있어요',
-      avoid: '테토남 - 서로 조심스러워서 진전이 없을 수 있어요'
+      best: {
+        ko: '에겐남 - 적극적인 어프로치로 당신의 마음을 열어줄 수 있어요',
+        en: 'Egen Male - Can open your heart with active approach',
+        ja: 'エゲン男 - 積極的なアプローチであなたの心を開いてくれます'
+      },
+      avoid: {
+        ko: '테토남 - 서로 조심스러워서 진전이 없을 수 있어요',
+        en: 'Teto Male - Both being cautious might lead to no progress',
+        ja: 'テト男 - お互い慎重で進展がない可能性があります'
+      }
     },
     percentage: 19,
     emoji: '🌙',
-    shareText: '나는 신비로운 매력의 테토녀! 친구들 중에 누가 에겐남일까?'
+    shareText: {
+      ko: '나는 신비로운 매력의 테토녀! 친구들 중에 누가 에겐남일까?',
+      en: 'I am a Teto Female with mysterious charm! Who among my friends is Egen Male?',
+      ja: '私は神秘的な魅力のテト女！友達の中で誰がエゲン男かな？'
+    }
   },
   EGEN_MALE: {
     type: 'EGEN_MALE',
-    title: '에겐남',
-    subtitle: '활발한 에너지의 리더',
-    description: '사교적이고 활발한 성격으로 어디서든 인기가 많은 당신. 새로운 사람들과 만나는 것을 좋아하고 분위기를 이끄는 능력이 뛰어나요. 긍정적인 에너지로 주변 사람들을 즐겁게 만드는 매력적인 존재입니다.',
-    personality: ['외향적', '리더십', '유머감각', '적극적', '사교적'],
-    loveStyle: '직진형 연애 스타일로 좋아하면 적극적으로 표현하는 타입. 연인과 함께 다양한 경험을 하며 활동적인 데이트를 선호해요.',
+    title: {
+      ko: '에겐남',
+      en: 'Egen Male',
+      ja: 'エゲン男'
+    },
+    subtitle: {
+      ko: '활발한 에너지의 리더',
+      en: 'Leader with Vibrant Energy',
+      ja: '活発なエネルギーのリーダー'
+    },
+    description: {
+      ko: '사교적이고 활발한 성격으로 어디서든 인기가 많은 당신. 새로운 사람들과 만나는 것을 좋아하고 분위기를 이끄는 능력이 뛰어나요. 긍정적인 에너지로 주변 사람들을 즐겁게 만드는 매력적인 존재입니다.',
+      en: 'You have a sociable and active personality that makes you popular everywhere. You love meeting new people and have excellent ability to lead the atmosphere. You are an attractive presence who makes people around you happy with positive energy.',
+      ja: '社交的で活発な性格でどこでも人気のあるあなた。新しい人と会うことを好み、雰囲気を導く能力に優れています。ポジティブなエネルギーで周りの人を楽しませる魅力的な存在です。'
+    },
+    personality: {
+      ko: ['외향적', '리더십', '유머감각', '적극적', '사교적'],
+      en: ['Extroverted', 'Leadership', 'Sense of Humor', 'Active', 'Social'],
+      ja: ['外向的', 'リーダーシップ', 'ユーモア感覚', '積極的', '社交的']
+    },
+    loveStyle: {
+      ko: '직진형 연애 스타일로 좋아하면 적극적으로 표현하는 타입. 연인과 함께 다양한 경험을 하며 활동적인 데이트를 선호해요.',
+      en: 'Straightforward dating style who actively expresses when they like someone. You prefer active dates with various experiences together with your partner.',
+      ja: '直進型の恋愛スタイルで、好きになると積極的に表現するタイプ。恋人と一緒に様々な経験をしながら活動的なデートを好みます。'
+    },
     compatibility: {
-      best: '테토녀 - 조용한 매력에 끌리며 서로 보완적인 관계가 될 수 있어요',
-      avoid: '에겐녀 - 둘 다 활발해서 가끔 충돌할 수 있어요'
+      best: {
+        ko: '테토녀 - 조용한 매력에 끌리며 서로 보완적인 관계가 될 수 있어요',
+        en: 'Teto Female - Attracted to quiet charm and can form complementary relationship',
+        ja: 'テト女 - 静かな魅力に惹かれ、お互い補完的な関係になれます'
+      },
+      avoid: {
+        ko: '에겐녀 - 둘 다 활발해서 가끔 충돌할 수 있어요',
+        en: 'Egen Female - Both being active might sometimes lead to conflicts',
+        ja: 'エゲン女 - 二人とも活発で時々衝突する可能性があります'
+      }
     },
     percentage: 31,
     emoji: '🔥',
-    shareText: '나는 활발한 에너지의 에겐남! 테토녀는 어디 있나요?'
+    shareText: {
+      ko: '나는 활발한 에너지의 에겐남! 테토녀는 어디 있나요?',
+      en: 'I am an Egen Male with vibrant energy! Where are the Teto Females?',
+      ja: '私は活発なエネルギーのエゲン男！テト女はどこにいますか？'
+    }
   },
   EGEN_FEMALE: {
     type: 'EGEN_FEMALE',
-    title: '에겐녀',
-    subtitle: '밝고 긍정적인 분위기 메이커',
-    description: '밝고 활발한 성격으로 모든 모임의 중심이 되는 당신. 누구와도 쉽게 친해지는 능력이 있고 항상 긍정적인 에너지를 발산해요. 사람들과 함께 있을 때 가장 빛나는 타고난 분위기 메이커입니다.',
-    personality: ['활발함', '긍정적', '사교적', '재미있음', '적응력'],
-    loveStyle: '솔직하고 직접적인 표현을 좋아하는 스타일. 연인과 함께 새로운 도전을 하고 재미있는 추억을 만드는 것을 중요하게 생각해요.',
+    title: {
+      ko: '에겐녀',
+      en: 'Egen Female',
+      ja: 'エゲン女'
+    },
+    subtitle: {
+      ko: '밝고 긍정적인 분위기 메이커',
+      en: 'Bright and Positive Mood Maker',
+      ja: '明るくポジティブなムードメーカー'
+    },
+    description: {
+      ko: '밝고 활발한 성격으로 모든 모임의 중심이 되는 당신. 누구와도 쉽게 친해지는 능력이 있고 항상 긍정적인 에너지를 발산해요. 사람들과 함께 있을 때 가장 빛나는 타고난 분위기 메이커입니다.',
+      en: 'You become the center of every gathering with your bright and active personality. You have the ability to easily get along with anyone and always radiate positive energy. You are a natural mood maker who shines brightest when with people.',
+      ja: '明るく活発な性格ですべての集まりの中心となるあなた。誰とでも簡単に親しくなる能力があり、常にポジティブなエネルギーを発散します。人と一緒にいる時に最も輝く生まれながらのムードメーカーです。'
+    },
+    personality: {
+      ko: ['활발함', '긍정적', '사교적', '재미있음', '적응력'],
+      en: ['Active', 'Positive', 'Social', 'Fun', 'Adaptable'],
+      ja: ['活発', 'ポジティブ', '社交的', '面白い', '適応力']
+    },
+    loveStyle: {
+      ko: '솔직하고 직접적인 표현을 좋아하는 스타일. 연인과 함께 새로운 도전을 하고 재미있는 추억을 만드는 것을 중요하게 생각해요.',
+      en: 'You prefer honest and direct expression. You value taking on new challenges with your partner and creating fun memories together.',
+      ja: '率直で直接的な表現を好むスタイル。恋人と一緒に新しい挑戦をし、楽しい思い出を作ることを大切に思います。'
+    },
     compatibility: {
-      best: '테토남 - 조용한 상대방의 매력을 발견하고 끌어내는 능력이 있어요',
-      avoid: '에겐남 - 둘 다 주목받기를 좋아해서 경쟁이 될 수 있어요'
+      best: {
+        ko: '테토남 - 조용한 상대방의 매력을 발견하고 끌어내는 능력이 있어요',
+        en: 'Teto Male - Have the ability to discover and draw out quiet partner\'s charm',
+        ja: 'テト男 - 静かな相手の魅力を発見し引き出す能力があります'
+      },
+      avoid: {
+        ko: '에겐남 - 둘 다 주목받기를 좋아해서 경쟁이 될 수 있어요',
+        en: 'Egen Male - Both like attention, so it might become competitive',
+        ja: 'エゲン男 - 二人とも注目されることを好むので競争になる可能性があります'
+      }
     },
     percentage: 27,
     emoji: '✨',
-    shareText: '나는 밝고 긍정적인 에겐녀! 누가 테토남인지 궁금해!'
+    shareText: {
+      ko: '나는 밝고 긍정적인 에겐녀! 누가 테토남인지 궁금해!',
+      en: 'I am a bright and positive Egen Female! Curious who is Teto Male!',
+      ja: '私は明るくポジティブなエゲン女！誰がテト男か気になる！'
+    }
   }
 };
 

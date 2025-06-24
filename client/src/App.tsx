@@ -34,6 +34,7 @@ function App() {
           <Route path="/converter" component={UnitConverter} />
           <Route path="/date-calculator" component={DateCalculator} />
           <Route path="/mbti" component={MBTITest} />
+          <Route path="/teto-egen-test" component={TetoEgenTest} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />

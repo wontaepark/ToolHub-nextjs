@@ -630,11 +630,18 @@ export default function PasswordGenerator() {
               </p>
             </div>
             <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
-              <h3 className="text-lg font-semibold mb-2">업무용 시스템</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '업무용 시스템' : 
+                 currentLang === 'ja' ? '業務用システム' : 
+                 'Business Systems'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                회사 시스템, 클라우드 서비스, 프로젝트 관리 도구 등 
-                업무에 사용하는 각종 플랫폼의 보안 비밀번호를 생성합니다. 
-                높은 보안 등급이 요구되는 업무 환경에 적합한 복잡한 비밀번호를 만들 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '회사 시스템, 클라우드 서비스, 프로젝트 관리 도구 등 업무에 사용하는 각종 플랫폼의 보안 비밀번호를 생성합니다. 높은 보안 등급이 요구되는 업무 환경에 적합한 복잡한 비밀번호를 만들 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '会社システム、クラウドサービス、プロジェクト管理ツールなど業務で使用する各種プラットフォームのセキュリティパスワードを生成します。高いセキュリティグレードが要求される業務環境に適した複雑なパスワードを作成できます。' :
+                  'Generate secure passwords for various business platforms including company systems, cloud services, and project management tools. Create complex passwords suitable for work environments that require high security levels.'
+                }
               </p>
             </div>
           </div>
@@ -642,34 +649,70 @@ export default function PasswordGenerator() {
 
         {/* 자주 묻는 질문 FAQ */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '자주 묻는 질문 (FAQ)' : 
+             currentLang === 'ja' ? 'よくある質問 (FAQ)' : 
+             'Frequently Asked Questions (FAQ)'}
+          </h2>
           <div className="space-y-4">
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 생성된 비밀번호가 안전한가요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 생성된 비밀번호가 안전한가요?' : 
+                 currentLang === 'ja' ? 'Q. 生成されたパスワードは安全ですか？' : 
+                 'Q. Are the generated passwords secure?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 네, 모든 비밀번호는 브라우저에서 암호학적으로 안전한 랜덤 생성기를 사용하여 로컬로 생성됩니다. 
-                서버로 전송되지 않으므로 완전히 안전합니다.
+                {currentLang === 'ko' ? 
+                  'A. 네, 모든 비밀번호는 브라우저에서 암호학적으로 안전한 랜덤 생성기를 사용하여 로컬로 생성됩니다. 서버로 전송되지 않으므로 완전히 안전합니다.' :
+                 currentLang === 'ja' ? 
+                  'A. はい、すべてのパスワードはブラウザで暗号学的に安全なランダム生成器を使用してローカルで生成されます。サーバーに送信されないため完全に安全です。' :
+                  'A. Yes, all passwords are generated locally in your browser using cryptographically secure random generators. They are not transmitted to servers, making them completely secure.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 비밀번호 길이는 얼마나 해야 하나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 비밀번호 길이는 얼마나 해야 하나요?' : 
+                 currentLang === 'ja' ? 'Q. パスワードの長さはどのくらいにすべきですか？' : 
+                 'Q. How long should passwords be?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 일반적으로 12자 이상을 권장하며, 중요한 계정의 경우 16자 이상을 추천합니다. 
-                길수록 보안이 강화되지만 기억하기 어려우므로 비밀번호 관리자 사용을 권장합니다.
+                {currentLang === 'ko' ? 
+                  'A. 일반적으로 12자 이상을 권장하며, 중요한 계정의 경우 16자 이상을 추천합니다. 길수록 보안이 강화되지만 기억하기 어려우므로 비밀번호 관리자 사용을 권장합니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 一般的に12文字以上を推奨し、重要なアカウントの場合は16文字以上をお勧めします。長いほどセキュリティが強化されますが覚えにくいため、パスワードマネージャーの使用を推奨します。' :
+                  'A. Generally, 12+ characters are recommended, with 16+ characters for important accounts. Longer passwords enhance security, but since they are harder to remember, using a password manager is recommended.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 어떤 문자를 포함해야 하나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 어떤 문자를 포함해야 하나요?' : 
+                 currentLang === 'ja' ? 'Q. どの文字を含めるべきですか？' : 
+                 'Q. What characters should be included?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 대문자, 소문자, 숫자, 특수문자를 모두 포함하는 것이 가장 안전합니다. 
-                다만 일부 사이트에서 특수문자를 제한하는 경우가 있으니 해당 사이트의 정책을 확인하세요.
+                {currentLang === 'ko' ? 
+                  'A. 대문자, 소문자, 숫자, 특수문자를 모두 포함하는 것이 가장 안전합니다. 다만 일부 사이트에서 특수문자를 제한하는 경우가 있으니 해당 사이트의 정책을 확인하세요.' :
+                 currentLang === 'ja' ? 
+                  'A. 大文字、小文字、数字、特殊文字をすべて含むのが最も安全です。ただし一部のサイトで特殊文字を制限する場合があるため、該当サイトのポリシーを確認してください。' :
+                  'A. Including uppercase, lowercase, numbers, and special characters is safest. However, some sites restrict special characters, so check the site\'s policy.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Q. 같은 비밀번호를 여러 곳에 사용해도 되나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 같은 비밀번호를 여러 곳에 사용해도 되나요?' : 
+                 currentLang === 'ja' ? 'Q. 同じパスワードを複数箇所で使用しても良いですか？' : 
+                 'Q. Can I use the same password for multiple accounts?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 절대 안됩니다. 각 계정마다 고유한 비밀번호를 사용해야 합니다. 
-                하나의 계정이 해킹당해도 다른 계정은 안전하게 보호할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  'A. 절대 안됩니다. 각 계정마다 고유한 비밀번호를 사용해야 합니다. 하나의 계정이 해킹당해도 다른 계정은 안전하게 보호할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 絶対にいけません。各アカウントごとに固有のパスワードを使用する必要があります。一つのアカウントがハッキングされても他のアカウントは安全に保護できます。' :
+                  'A. Absolutely not. Each account should have a unique password. Even if one account is hacked, other accounts remain safely protected.'
+                }
               </p>
             </div>
           </div>
@@ -684,21 +727,45 @@ export default function PasswordGenerator() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">비밀번호 관리</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '비밀번호 관리' : 
+                 currentLang === 'ja' ? 'パスワード管理' : 
+                 'Password Management'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 비밀번호 관리자 사용 권장</li>
-                <li>• 정기적인 비밀번호 변경</li>
-                <li>• 2단계 인증 함께 사용</li>
-                <li>• 안전한 장소에 백업 보관</li>
+                <li>• {currentLang === 'ko' ? '비밀번호 관리자 사용 권장' : 
+                      currentLang === 'ja' ? 'パスワードマネージャー使用推奨' : 
+                      'Recommend using password manager'}</li>
+                <li>• {currentLang === 'ko' ? '정기적인 비밀번호 변경' : 
+                      currentLang === 'ja' ? '定期的なパスワード変更' : 
+                      'Regular password changes'}</li>
+                <li>• {currentLang === 'ko' ? '2단계 인증 함께 사용' : 
+                      currentLang === 'ja' ? '2段階認証の併用' : 
+                      'Use two-factor authentication'}</li>
+                <li>• {currentLang === 'ko' ? '안전한 장소에 백업 보관' : 
+                      currentLang === 'ja' ? '安全な場所にバックアップ保管' : 
+                      'Store backups in secure location'}</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">보안 강화</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '보안 강화' : 
+                 currentLang === 'ja' ? 'セキュリティ強化' : 
+                 'Security Enhancement'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 개인정보 포함 금지</li>
-                <li>• 예측 가능한 패턴 피하기</li>
-                <li>• 계정별 고유 비밀번호 사용</li>
-                <li>• 피싱 사이트 주의</li>
+                <li>• {currentLang === 'ko' ? '개인정보 포함 금지' : 
+                      currentLang === 'ja' ? '個人情報含有禁止' : 
+                      'Avoid including personal information'}</li>
+                <li>• {currentLang === 'ko' ? '예측 가능한 패턴 피하기' : 
+                      currentLang === 'ja' ? '予測可能なパターンの回避' : 
+                      'Avoid predictable patterns'}</li>
+                <li>• {currentLang === 'ko' ? '계정별 고유 비밀번호 사용' : 
+                      currentLang === 'ja' ? 'アカウント別固有パスワード使用' : 
+                      'Use unique passwords per account'}</li>
+                <li>• {currentLang === 'ko' ? '피싱 사이트 주의' : 
+                      currentLang === 'ja' ? 'フィッシングサイト注意' : 
+                      'Beware of phishing sites'}</li>
               </ul>
             </div>
           </div>

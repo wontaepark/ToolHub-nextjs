@@ -589,6 +589,13 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
     ]
   };
 
+  const defaultOptions = [
+    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly disagree", ja: "全くそうではない" } },
+    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
+    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
+    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
+    { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
+  ];
   
   const options = styleAnswers[style] || defaultOptions;
 

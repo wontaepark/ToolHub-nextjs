@@ -1019,12 +1019,18 @@ export default function PomodoroTimer() {
       <div className="space-y-12 mt-16">
         {/* 포모도로 기법 소개 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">포모도로 기법이란?</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '포모도로 기법이란?' : 
+             currentLang === 'ja' ? 'ポモドーロテクニックとは？' : 
+             'What is the Pomodoro Technique?'}
+          </h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            포모도로 기법은 1980년대 말 프란체스코 시릴로가 개발한 시간 관리 기법입니다. 
-            25분간 집중하여 작업한 후 5분간 휴식하는 사이클을 반복하는 방식으로, 
-            집중력 향상과 생산성 증대에 효과적인 것으로 입증되었습니다. 
-            이 기법은 뇌의 집중력 한계를 고려하여 설계되었으며, 전 세계 수백만 명이 사용하고 있습니다.
+            {currentLang === 'ko' ? 
+              '포모도로 기법은 1980년대 말 프란체스코 시릴로가 개발한 시간 관리 기법입니다. 25분간 집중하여 작업한 후 5분간 휴식하는 사이클을 반복하는 방식으로, 집중력 향상과 생산성 증대에 효과적인 것으로 입증되었습니다. 이 기법은 뇌의 집중력 한계를 고려하여 설계되었으며, 전 세계 수백만 명이 사용하고 있습니다.' :
+             currentLang === 'ja' ? 
+              'ポモドーロテクニックは1980年代末にフランチェスコ・シリロが開発した時間管理技法です。25分間集中して作業した後5分間休憩するサイクルを繰り返す方式で、集中力向上と生産性増大に効果的であることが実証されています。この技法は脳の集中力限界を考慮して設計されており、世界中で数百万人が使用しています。' :
+              'The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It involves repeating cycles of 25 minutes of focused work followed by 5 minutes of rest, proven effective for improving concentration and increasing productivity. This technique is designed considering the brain\'s concentration limits and is used by millions of people worldwide.'
+            }
           </p>
         </section>
 

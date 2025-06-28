@@ -28,7 +28,8 @@ interface PasswordStrength {
 }
 
 export default function PasswordGenerator() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   const { toast } = useToast();
   
   const [password, setPassword] = useState('');
@@ -481,12 +482,18 @@ export default function PasswordGenerator() {
       <div className="space-y-12 mt-16">
         {/* 비밀번호 생성기 소개 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">안전한 비밀번호 생성기</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '안전한 비밀번호 생성기' : 
+             currentLang === 'ja' ? '安全なパスワード生成器' : 
+             'Secure Password Generator'}
+          </h2>
           <p className="text-muted-foreground leading-relaxed">
-            ToolHub.tools의 비밀번호 생성기는 해킹으로부터 계정을 보호하는 강력하고 안전한 비밀번호를 자동으로 생성합니다. 
-            다양한 옵션을 제공하여 사용자가 원하는 조건에 맞는 비밀번호를 만들 수 있으며, 
-            실시간 보안 강도 분석을 통해 생성된 비밀번호의 안전성을 즉시 확인할 수 있습니다. 
-            모든 비밀번호는 브라우저에서 로컬로 생성되므로 외부로 전송되지 않아 완벽하게 안전합니다.
+            {currentLang === 'ko' ? 
+              'ToolHub.tools의 비밀번호 생성기는 해킹으로부터 계정을 보호하는 강력하고 안전한 비밀번호를 자동으로 생성합니다. 다양한 옵션을 제공하여 사용자가 원하는 조건에 맞는 비밀번호를 만들 수 있으며, 실시간 보안 강도 분석을 통해 생성된 비밀번호의 안전성을 즉시 확인할 수 있습니다. 모든 비밀번호는 브라우저에서 로컬로 생성되므로 외부로 전송되지 않아 완벽하게 안전합니다.' :
+             currentLang === 'ja' ? 
+              'ToolHub.toolsのパスワード生成器は、ハッキングからアカウントを保護する強力で安全なパスワードを自動的に生成します。様々なオプションを提供してユーザーが望む条件に合ったパスワードを作成でき、リアルタイムセキュリティ強度分析により生成されたパスワードの安全性を即座に確認できます。全てのパスワードはブラウザでローカルに生成されるため外部に送信されず、完全に安全です。' :
+              'ToolHub.tools password generator automatically creates strong and secure passwords that protect your accounts from hacking. It provides various options to create passwords that meet your desired conditions, and you can instantly verify the security of generated passwords through real-time security strength analysis. All passwords are generated locally in your browser, so they are not transmitted externally and are completely secure.'
+            }
           </p>
         </section>
 

@@ -8,6 +8,9 @@ interface CalculatorState {
   shouldResetInput: boolean;
   expression: string;
   history: HistoryItem[];
+  memory: number;
+  error: string | null;
+  lastResult: string | null;
 }
 
 export function useCalculator() {
@@ -17,7 +20,10 @@ export function useCalculator() {
     operation: null,
     shouldResetInput: false,
     expression: '',
-    history: []
+    history: [],
+    memory: 0,
+    error: null,
+    lastResult: null
   });
 
   // Load history from localStorage on component mount

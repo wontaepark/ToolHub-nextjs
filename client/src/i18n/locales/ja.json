@@ -829,6 +829,14 @@
     }
   },
   "mbtiTest": {
-    "questionNumber": "質問 {{number}}"
+    "title": "MBTI性格タイプテスト",
+    "subtitle": "様々なスタイルで自分の性格タイプを発見してみましょう",
+    "questionNumber": "質問 {{number}}",
+    "traits": "主要特性",
+    "careers": "おすすめ職業",
+    "famous": "有名人",
+    "retake": "再テスト",
+    "share": "結果共有",
+    "backToStart": "最初に戻る"
   }
 }

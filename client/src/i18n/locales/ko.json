@@ -857,6 +857,14 @@
     }
   },
   "mbtiTest": {
-    "questionNumber": "질문 {{number}}"
+    "title": "MBTI 성격유형 테스트",
+    "subtitle": "다양한 스타일로 나만의 성격유형을 발견해보세요",
+    "questionNumber": "질문 {{number}}",
+    "traits": "주요 특성",
+    "careers": "추천 직업",
+    "famous": "유명인",
+    "retake": "다시 테스트",
+    "share": "결과 공유",
+    "backToStart": "처음으로"
   }
 }

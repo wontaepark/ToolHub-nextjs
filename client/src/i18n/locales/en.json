@@ -829,6 +829,14 @@
     }
   },
   "mbtiTest": {
-    "questionNumber": "Question {{number}}"
+    "title": "MBTI Personality Type Test",
+    "subtitle": "Discover your unique personality type with various styles",
+    "questionNumber": "Question {{number}}",
+    "traits": "Key Traits",
+    "careers": "Recommended Careers",
+    "famous": "Famous People",
+    "retake": "Retake Test",
+    "share": "Share Results",
+    "backToStart": "Back to Start"
   }
 }

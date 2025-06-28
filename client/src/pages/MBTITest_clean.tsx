@@ -764,10 +764,10 @@ export default function MBTITest() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              MBTI 성격유형 테스트
+              {t('mbtiTest.title')}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              다양한 스타일로 나만의 성격유형을 발견해보세요
+              {t('mbtiTest.subtitle')}
             </p>
           </div>
 
@@ -817,7 +817,7 @@ export default function MBTITest() {
               
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">주요 특성</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('mbtiTest.traits')}</h3>
                   <div className="space-y-1">
                     {result.traits[i18n.language as keyof typeof result.traits].map((trait, index) => (
                       <Badge key={index} variant="secondary">{trait}</Badge>
@@ -826,7 +826,7 @@ export default function MBTITest() {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">추천 직업</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('mbtiTest.careers')}</h3>
                   <div className="space-y-1">
                     {result.careers[i18n.language as keyof typeof result.careers].map((career, index) => (
                       <Badge key={index} variant="outline">{career}</Badge>
@@ -835,7 +835,7 @@ export default function MBTITest() {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">유명인</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('mbtiTest.famous')}</h3>
                   <div className="space-y-1">
                     {result.famous[i18n.language as keyof typeof result.famous].map((person, index) => (
                       <Badge key={index} variant="default">{person}</Badge>
@@ -847,11 +847,11 @@ export default function MBTITest() {
               <div className="flex gap-4 justify-center">
                 <Button onClick={resetTest} variant="outline">
                   <RotateCcw className="mr-2 h-4 w-4" />
-                  다시 테스트
+                  {t('mbtiTest.retake')}
                 </Button>
                 <Button onClick={() => {/* Share functionality */}} variant="default">
                   <Share2 className="mr-2 h-4 w-4" />
-                  결과 공유
+                  {t('mbtiTest.share')}
                 </Button>
               </div>
             </CardContent>
@@ -874,7 +874,7 @@ export default function MBTITest() {
             size="sm"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            처음으로
+            {t('mbtiTest.backToStart')}
           </Button>
           <div className="text-sm text-gray-500">
             {currentQuestion + 1} / {currentQuestions.length}

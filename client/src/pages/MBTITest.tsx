@@ -589,44 +589,6 @@ const getAnswerOptions = (questionId: number, style: string, lang: 'ko' | 'en' |
     ]
   };
 
-  const styleAnswers: Record<string, any> = {
-    social: [
-      { value: 1, label: { ko: "전혀 그렇지 않다", en: "Not at all", ja: "全くそうではない" } },
-      { value: 2, label: { ko: "별로 그렇지 않다", en: "Not really", ja: "あまりそうではない" } },
-      { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
-      { value: 4, label: { ko: "대체로 그렇다", en: "Generally true", ja: "だいたいそうだ" } },
-      { value: 5, label: { ko: "매우 그렇다", en: "Very true", ja: "非常にそうだ" } }
-    ],
-    travel: [
-      { value: 1, label: { ko: "전혀 그렇지 않다", en: "Not at all", ja: "全くそうではない" } },
-      { value: 2, label: { ko: "별로 그렇지 않다", en: "Not really", ja: "あまりそうではない" } },
-      { value: 3, label: { ko: "보통이다", en: "Sometimes", ja: "普通だ" } },
-      { value: 4, label: { ko: "대체로 그렇다", en: "Usually true", ja: "だいたいそうだ" } },
-      { value: 5, label: { ko: "매우 그렇다", en: "Always true", ja: "非常にそうだ" } }
-    ],
-    study: [
-      { value: 1, label: { ko: "전혀 그렇지 않다", en: "Not at all", ja: "全くそうではない" } },
-      { value: 2, label: { ko: "별로 그렇지 않다", en: "Not really", ja: "あまりそうではない" } },
-      { value: 3, label: { ko: "보통이다", en: "Sometimes", ja: "普通だ" } },
-      { value: 4, label: { ko: "대체로 그렇다", en: "Usually true", ja: "だいたいそうだ" } },
-      { value: 5, label: { ko: "매우 그렇다", en: "Always true", ja: "非常にそうだ" } }
-    ],
-    crisis: [
-      { value: 1, label: { ko: "전혀 그렇게 행동하지 않음", en: "Never act this way", ja: "全くそのように行動しない" } },
-      { value: 2, label: { ko: "거의 그렇게 하지 않음", en: "Rarely act this way", ja: "ほとんどそうしない" } },
-      { value: 3, label: { ko: "때때로 그렇게 함", en: "Sometimes act this way", ja: "時々そうする" } },
-      { value: 4, label: { ko: "보통 그렇게 함", en: "Usually act this way", ja: "普通そうする" } },
-      { value: 5, label: { ko: "항상 그렇게 함", en: "Always act this way", ja: "いつもそうする" } }
-    ]
-  };
-
-  const defaultOptions = [
-    { value: 1, label: { ko: "전혀 그렇지 않다", en: "Strongly disagree", ja: "全くそうではない" } },
-    { value: 2, label: { ko: "그렇지 않다", en: "Disagree", ja: "そうではない" } },
-    { value: 3, label: { ko: "보통이다", en: "Neutral", ja: "普通だ" } },
-    { value: 4, label: { ko: "그렇다", en: "Agree", ja: "そうだ" } },
-    { value: 5, label: { ko: "매우 그렇다", en: "Strongly agree", ja: "非常にそうだ" } }
-  ];
   
   const options = styleAnswers[style] || defaultOptions;
 

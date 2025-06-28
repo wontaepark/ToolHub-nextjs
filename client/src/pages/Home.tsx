@@ -49,6 +49,68 @@ export default function Home() {
         </div>
       </div>
       
+      {/* Site Introduction Section */}
+      <div className="mb-16 px-4">
+        <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border p-8 md:p-12 shadow-lg">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">
+            ToolHub.tools 소개
+          </h2>
+          
+          <div className="space-y-6 text-muted-foreground leading-relaxed">
+            <p className="text-lg">
+              ToolHub.tools는 일상생활과 업무에서 자주 사용하는 다양한 도구들을 한 곳에 모아놓은 
+              종합 온라인 툴킷입니다. 복잡한 설치나 회원가입 없이 웹브라우저에서 바로 사용할 수 있는 
+              실용적인 도구들을 제공합니다.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">🎯 우리의 목적</h3>
+                <p>
+                  사용자의 시간을 절약하고 일상의 불편함을 해소하기 위해 꼭 필요한 도구들을 
+                  선별하여 제공합니다. 학생, 직장인, 개발자 등 모든 사용자가 쉽고 빠르게 
+                  활용할 수 있도록 직관적인 인터페이스로 설계되었습니다.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">✨ 제공 서비스</h3>
+                <ul className="space-y-2">
+                  <li>• 계산기 및 단위 변환기</li>
+                  <li>• 타이머 및 포모도로 생산성 도구</li>
+                  <li>• 비밀번호 생성기 및 보안 도구</li>
+                  <li>• 유튜브 썸네일 다운로더</li>
+                  <li>• MBTI 성격 테스트</li>
+                  <li>• 추첨 및 랜덤 생성 도구</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
+              <h3 className="text-xl font-semibold mb-3 text-foreground">🌟 사용자 혜택</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-primary font-bold text-lg mb-2">100% 무료</div>
+                  <p className="text-sm">모든 도구를 제한 없이 무료로 이용</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-primary font-bold text-lg mb-2">즉시 사용</div>
+                  <p className="text-sm">설치나 가입 없이 바로 접속하여 사용</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-primary font-bold text-lg mb-2">모든 기기</div>
+                  <p className="text-sm">PC, 모바일, 태블릿 어디서나 최적화</p>
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-center text-lg font-medium text-foreground">
+              ToolHub.tools와 함께 더욱 효율적이고 편리한 디지털 라이프를 경험해보세요! 🚀
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Tools Section */}
       <div className="mb-10 md:mb-12 px-4">
         <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">{t('home.availableTools')}</h3>

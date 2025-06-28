@@ -1013,6 +1013,159 @@ export default function PomodoroTimer() {
           </Card>
         </div>
       </div>
+
+      {/* Detailed Content Section */}
+      <div className="space-y-12 mt-16">
+        {/* 포모도로 기법 소개 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">포모도로 기법이란?</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            포모도로 기법은 1980년대 말 프란체스코 시릴로가 개발한 시간 관리 기법입니다. 
+            25분간 집중하여 작업한 후 5분간 휴식하는 사이클을 반복하는 방식으로, 
+            집중력 향상과 생산성 증대에 효과적인 것으로 입증되었습니다. 
+            이 기법은 뇌의 집중력 한계를 고려하여 설계되었으며, 전 세계 수백만 명이 사용하고 있습니다.
+          </p>
+        </section>
+
+        {/* 주요 기능 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">기본 타이머 기능</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 25분 작업 + 5분 휴식 기본 설정</li>
+                <li>• 15분 장휴식 (4회 완료 후)</li>
+                <li>• 자동 타이머 전환 옵션</li>
+                <li>• 시각적 진행률 표시</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">고급 기능</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 할일 목록 연동 관리</li>
+                <li>• 맞춤형 시간 설정</li>
+                <li>• 완료 통계 및 기록</li>
+                <li>• 알림음 설정</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 상세 사용법 가이드 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-2">1. 기본 포모도로 실행</h3>
+              <p className="text-muted-foreground">
+                '시작' 버튼을 클릭하여 25분 작업 타이머를 시작합니다. 
+                타이머가 종료되면 자동으로 5분 휴식 타이머로 전환됩니다. 
+                4번의 포모도로 완료 후에는 15분 장휴식이 제공됩니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">2. 할일 관리 활용</h3>
+              <p className="text-muted-foreground">
+                우측 패널에서 할일을 추가하고 각 작업에 집중할 수 있습니다. 
+                포모도로가 완료될 때마다 해당 작업의 완료 횟수가 자동으로 기록됩니다. 
+                작업별로 예상 포모도로 개수를 설정하여 진행 상황을 추적할 수 있습니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">3. 설정 맞춤화</h3>
+              <p className="text-muted-foreground">
+                설정 버튼을 통해 작업 시간, 휴식 시간, 자동 시작 여부, 
+                알림음 등을 개인의 작업 스타일에 맞게 조정할 수 있습니다. 
+                집중력이 높은 사람은 작업 시간을 늘리고, 초보자는 짧게 설정하는 것을 권장합니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 활용 예시 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+              <h3 className="text-lg font-semibold mb-2">학습 및 연구</h3>
+              <p className="text-muted-foreground text-sm">
+                독서, 논문 작성, 언어 학습, 온라인 강의 수강 등 
+                집중이 필요한 학습 활동에 효과적입니다. 
+                정해진 시간 동안 한 주제에만 집중하여 학습 효율을 높일 수 있습니다.
+              </p>
+            </div>
+            <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+              <h3 className="text-lg font-semibold mb-2">업무 및 프로젝트</h3>
+              <p className="text-muted-foreground text-sm">
+                코딩, 문서 작성, 기획서 작성, 디자인 작업 등 
+                창의적이고 집중적인 업무에 활용할 수 있습니다. 
+                업무를 작은 단위로 나누어 체계적으로 진행할 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 자주 묻는 질문 FAQ */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+          <div className="space-y-4">
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 25분이 너무 길거나 짧게 느껴져요</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 개인차가 있을 수 있습니다. 설정에서 작업 시간을 15-45분 사이로 조정해보세요. 
+                초보자는 15분부터 시작하여 점차 늘려가는 것을 권장합니다.
+              </p>
+            </div>
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 휴식 시간에 무엇을 해야 하나요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 스트레칭, 깊은 호흡, 물 마시기, 가벼운 산책 등 뇌를 쉬게 하는 활동을 권장합니다. 
+                스마트폰이나 컴퓨터 사용은 피하는 것이 좋습니다.
+              </p>
+            </div>
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 중간에 방해받으면 어떻게 하나요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 예상치 못한 방해가 있으면 타이머를 일시정지하고 방해 요소를 처리한 후 재시작하세요. 
+                가능하면 방해받지 않을 환경을 미리 조성하는 것이 중요합니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Q. 하루에 몇 개의 포모도로가 적당한가요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 개인의 집중력과 업무 강도에 따라 다르지만, 일반적으로 하루 6-12개 정도가 적당합니다. 
+                처음에는 3-4개부터 시작하여 점차 늘려가세요.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 사용 팁과 요령 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">사용 팁과 요령</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">효과적인 포모도로</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 작업 전 명확한 목표 설정</li>
+                <li>• 방해 요소 미리 제거</li>
+                <li>• 휴식 시간 철저히 지키기</li>
+                <li>• 완료된 포모도로 기록하기</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">집중력 향상</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 알림 및 SNS 차단</li>
+                <li>• 편안한 작업 환경 조성</li>
+                <li>• 적절한 조명과 온도 유지</li>
+                <li>• 규칙적인 수면과 식사</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

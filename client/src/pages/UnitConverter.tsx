@@ -456,6 +456,159 @@ export default function UnitConverter() {
           </Card>
         </div>
       </div>
+
+      {/* Detailed Content Section */}
+      <div className="space-y-12 mt-16">
+        {/* 단위 변환기 소개 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">정확한 단위 변환기</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            ToolHub.tools의 단위 변환기는 길이, 무게, 온도, 부피 등 다양한 측정 단위를 빠르고 정확하게 변환해주는 온라인 도구입니다. 
+            과학적 계산, 요리, 여행, 학습 등 일상생활과 전문 업무에서 필요한 모든 단위 변환을 지원합니다. 
+            직관적인 인터페이스와 실시간 변환 기능으로 누구나 쉽게 사용할 수 있으며, 
+            변환 기록을 저장하여 자주 사용하는 변환을 빠르게 다시 확인할 수 있습니다.
+          </p>
+        </section>
+
+        {/* 주요 기능 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">지원 단위 카테고리</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 길이: mm, cm, m, km, inch, feet, yard</li>
+                <li>• 무게: g, kg, oz, lb, ton</li>
+                <li>• 온도: 섭씨, 화씨, 켈빈</li>
+                <li>• 부피: ml, L, cup, gallon, pint</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">편의 기능</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 실시간 자동 변환</li>
+                <li>• 양방향 변환 지원</li>
+                <li>• 변환 기록 저장</li>
+                <li>• 정확한 소수점 계산</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 상세 사용법 가이드 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-2">1. 기본 단위 변환</h3>
+              <p className="text-muted-foreground">
+                원하는 카테고리 탭(길이, 무게, 온도, 부피)을 선택하고, 변환할 값을 입력합니다. 
+                '변환 전' 단위와 '변환 후' 단위를 드롭다운에서 선택하면 자동으로 결과가 계산됩니다. 
+                입력값을 수정할 때마다 실시간으로 변환 결과가 업데이트됩니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">2. 양방향 변환 활용</h3>
+              <p className="text-muted-foreground">
+                가운데 화살표 버튼을 클릭하면 변환 전과 변환 후 단위가 서로 바뀝니다. 
+                이 기능을 통해 역방향 변환을 쉽게 수행할 수 있어, 
+                예를 들어 미터에서 피트로 변환했다가 다시 피트에서 미터로 변환할 수 있습니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">3. 변환 기록 관리</h3>
+              <p className="text-muted-foreground">
+                모든 변환 결과는 자동으로 기록되어 하단의 변환 기록 섹션에 표시됩니다. 
+                이전 변환 결과를 클릭하면 해당 값을 현재 입력으로 불러올 수 있으며, 
+                '기록 지우기' 버튼으로 모든 기록을 삭제할 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 활용 예시 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+              <h3 className="text-lg font-semibold mb-2">일상 생활</h3>
+              <p className="text-muted-foreground text-sm">
+                요리할 때 레시피의 단위 변환, 해외 여행 시 현지 단위 이해, 
+                운동 기록 관리, 온라인 쇼핑에서 제품 크기 확인 등 
+                일상에서 자주 마주치는 단위 변환 상황에 유용합니다.
+              </p>
+            </div>
+            <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+              <h3 className="text-lg font-semibold mb-2">전문 업무</h3>
+              <p className="text-muted-foreground text-sm">
+                건축 설계, 공학 계산, 과학 실험, 제조업 품질 관리, 
+                국제 무역에서의 단위 표준화 등 전문적인 업무 환경에서 
+                정확한 단위 변환이 필요한 상황에 활용할 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 자주 묻는 질문 FAQ */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+          <div className="space-y-4">
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 변환 결과가 정확한가요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 네, 국제 표준 변환 계수를 사용하여 높은 정확도를 보장합니다. 
+                온도 변환의 경우 정확한 공식을 적용하며, 소수점 계산도 정밀하게 처리됩니다.
+              </p>
+            </div>
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 더 많은 단위를 추가할 예정인가요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 사용자 요청에 따라 지속적으로 새로운 단위와 카테고리를 추가할 예정입니다. 
+                현재는 가장 일반적으로 사용되는 단위들을 우선 지원하고 있습니다.
+              </p>
+            </div>
+            <div className="border-b border-border pb-4">
+              <h3 className="font-semibold mb-2">Q. 소수점 자릿수를 조정할 수 있나요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 현재는 최대 6자리 소수점까지 표시되며, 필요에 따라 자동으로 반올림됩니다. 
+                과학적 정밀도가 필요한 경우 전체 정밀도로 계산됩니다.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Q. 복합 단위 변환도 가능한가요?</h3>
+              <p className="text-muted-foreground text-sm">
+                A. 현재는 기본 단위 변환을 지원하며, 복합 단위(예: m/s, kg/m³)는 
+                향후 업데이트에서 추가할 예정입니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 사용 팁과 요령 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">사용 팁과 요령</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">효율적인 사용</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 자주 사용하는 변환은 북마크</li>
+                <li>• 양방향 변환 버튼 활용</li>
+                <li>• 변환 기록으로 재사용</li>
+                <li>• 복사 기능으로 빠른 공유</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">정확성 확보</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 입력값 범위 확인</li>
+                <li>• 단위 기호 정확히 확인</li>
+                <li>• 온도 변환 시 절대온도 주의</li>
+                <li>• 중요한 계산은 검산 권장</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -68,7 +68,7 @@ export function EnhancedCalculator({ showHistory = false }: EnhancedCalculatorPr
   }, [calculator]);
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-4">
+    <div className="w-full max-w-4xl mx-auto space-y-4">
       <CalculatorDisplay 
         currentInput={calculator.currentInput}
         expression={calculator.expression}
@@ -80,9 +80,9 @@ export function EnhancedCalculator({ showHistory = false }: EnhancedCalculatorPr
         showHistory={showHistory}
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Main Calculator */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-3">
           <Card className="p-4 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 border-2 border-gray-200 dark:border-gray-700 shadow-2xl">
             <div className="grid grid-cols-4 gap-3">
               
@@ -301,7 +301,7 @@ export function EnhancedCalculator({ showHistory = false }: EnhancedCalculatorPr
         
         {/* History Panel */}
         {showHistory && (
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <CalculatorHistory 
               history={calculator.history}
               onClearHistory={calculator.clearHistory}

@@ -18,7 +18,7 @@ export function CalculatorHistory({
   const { t } = useTranslation();
   
   return (
-    <div className="w-full md:w-1/2 lg:w-2/3">
+    <div className="w-full">
       <Card className="h-full">
         <CardContent className="p-5">
           <div className="flex justify-between items-center mb-4">

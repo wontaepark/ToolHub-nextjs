@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, RotateCcw, Share2, Heart, Users, Star, BookOpen, CheckCircle, HelpCircle, Lightbulb } from 'lucide-react';
 import AdSense from '@/components/AdSense';
+import SEOHead from '@/components/SEOHead';
 
 interface Question {
   id: number;
@@ -770,6 +771,7 @@ export default function TetoEgenTest() {
   if (!gender) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-4">
+        <SEOHead toolId="teto-egen" />
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">

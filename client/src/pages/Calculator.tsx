@@ -11,6 +11,7 @@ export default function CalculatorPage() {
 
   return (
     <div>
+      <SEOHead toolId="calculator" />
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4">온라인 계산기 - 무료 웹 계산기</h1>
         <p className="text-muted-foreground text-lg mb-6">

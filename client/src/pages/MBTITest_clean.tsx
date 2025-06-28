@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, RotateCcw, Share2, Users, BookOpen, CheckCircle, HelpCircle, Lightbulb } from 'lucide-react';
 import AdSense from '@/components/AdSense';
+import SEOHead from '@/components/SEOHead';
 
 interface Question {
   id: number;

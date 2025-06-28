@@ -586,7 +586,75 @@ export default function NumberRaffle() {
         </div>
       </div>
 
+      {/* Detailed Content Section */}
+      <div className="space-y-8 mt-12">
+        {/* 번호 추첨기 소개 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">공정한 번호 추첨기</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            완전히 랜덤한 번호 추첨을 통해 공정하고 투명한 선택을 도와주는 온라인 도구입니다. 
+            이벤트, 게임, 추첨, 순서 정하기 등 다양한 상황에서 편견 없는 무작위 선택이 필요할 때 사용하세요. 
+            암호학적으로 안전한 난수 생성기를 사용하여 예측 불가능하고 공정한 결과를 보장합니다.
+          </p>
+        </section>
 
+        {/* 주요 기능 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">추첨 옵션</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 범위 설정 (최소값 ~ 최대값)</li>
+                <li>• 추첨 개수 선택</li>
+                <li>• 중복 허용/비허용 설정</li>
+                <li>• 즉시 결과 표시</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">결과 관리</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• 추첨 기록 저장</li>
+                <li>• 시간 순서별 정렬</li>
+                <li>• 결과 복사 기능</li>
+                <li>• 기록 초기화</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 활용 예시 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+              <h3 className="text-lg font-semibold mb-2">이벤트 및 게임</h3>
+              <p className="text-muted-foreground text-sm">
+                경품 추첨, 팀 나누기, 발표 순서 정하기, 
+                보드게임 순서 결정, 벌칙 게임 등에 활용할 수 있습니다.
+              </p>
+            </div>
+            <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+              <h3 className="text-lg font-semibold mb-2">업무 및 학습</h3>
+              <p className="text-muted-foreground text-sm">
+                무작위 샘플링, 실험 설계, 설문 대상자 선정, 
+                업무 분배, 회의 순서 등 공정한 선택이 필요한 상황에 사용하세요.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 사용 팁 */}
+        <section className="bg-card rounded-xl p-6 border border-border">
+          <h2 className="text-2xl font-bold mb-4">사용 팁</h2>
+          <ul className="space-y-3 text-muted-foreground">
+            <li>• 중복을 허용하지 않는 경우 추첨 개수가 범위를 초과하지 않도록 주의하세요</li>
+            <li>• 공정성이 중요한 상황에서는 모든 참가자가 보는 앞에서 추첨하세요</li>
+            <li>• 추첨 기록을 통해 투명성을 확보할 수 있습니다</li>
+            <li>• 큰 범위에서의 추첨도 즉시 처리됩니다</li>
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }

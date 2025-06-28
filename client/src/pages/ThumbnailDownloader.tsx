@@ -228,6 +228,76 @@ export default function ThumbnailDownloader() {
             <p>• {t('thumbnail.instructions.step5')}</p>
           </CardContent>
         </Card>
+
+        {/* Detailed Content Section */}
+        <div className="space-y-8 mt-12">
+          {/* 썸네일 다운로더 소개 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">유튜브 썸네일 다운로더</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              유튜브 동영상의 썸네일 이미지를 고화질로 다운로드할 수 있는 무료 온라인 도구입니다. 
+              콘텐츠 제작, 블로그 작성, 프레젠테이션 등에 필요한 썸네일 이미지를 
+              간단한 URL 입력만으로 빠르게 저장할 수 있습니다.
+            </p>
+          </section>
+
+          {/* 주요 기능 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-3">다양한 해상도 지원</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 최대 해상도 (1280x720)</li>
+                  <li>• 고화질 (480x360)</li>
+                  <li>• 중간 화질 (320x180)</li>
+                  <li>• 기본 화질 (120x90)</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-3">편의 기능</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 원클릭 다운로드</li>
+                  <li>• 미리보기 제공</li>
+                  <li>• 동영상 정보 표시</li>
+                  <li>• 모든 기기 지원</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* 활용 예시 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                <h3 className="text-lg font-semibold mb-2">콘텐츠 제작</h3>
+                <p className="text-muted-foreground text-sm">
+                  블로그 포스팅, 소셜미디어 콘텐츠, 프레젠테이션 자료 제작 시 
+                  참고 이미지나 설명용 이미지로 활용할 수 있습니다.
+                </p>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+                <h3 className="text-lg font-semibold mb-2">연구 및 분석</h3>
+                <p className="text-muted-foreground text-sm">
+                  마케팅 연구, 트렌드 분석, 경쟁사 분석 등의 목적으로 
+                  썸네일 디자인을 수집하고 분석할 수 있습니다.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 사용 팁 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">사용 팁</h2>
+            <ul className="space-y-3 text-muted-foreground">
+              <li>• 저작권을 준수하여 개인적인 용도로만 사용하세요</li>
+              <li>• 고화질이 필요한 경우 최대 해상도를 선택하세요</li>
+              <li>• 정확한 유튜브 URL을 입력해야 정상 작동합니다</li>
+              <li>• 일부 비공개 동영상은 썸네일을 가져올 수 없습니다</li>
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
   );

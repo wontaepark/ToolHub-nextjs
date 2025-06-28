@@ -1343,6 +1343,211 @@ export default function MBTITest() {
         <div className="flex justify-center mt-8">
           <AdSense adSlot="1234567894" className="w-full max-w-2xl" />
         </div>
+
+        {/* Detailed Content Section */}
+        <div className="space-y-12 mt-16 max-w-4xl mx-auto">
+          {/* MBTI 테스트 소개 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">MBTI 성격유형 테스트란?</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              MBTI(Myers-Briggs Type Indicator)는 개인의 성격을 16가지 유형으로 분류하는 세계적으로 인정받는 성격 검사입니다. 
+              캐서린 쿡 브릭스와 이사벨 브릭스 마이어스가 칼 융의 심리학 이론을 바탕으로 개발했으며, 
+              자신의 성격을 객관적으로 이해하고 타인과의 관계 개선, 진로 선택, 팀워크 향상에 도움을 줍니다. 
+              ToolHub.tools의 MBTI 테스트는 정확하고 신뢰할 수 있는 결과를 제공하여 자기 이해와 성장에 기여합니다.
+            </p>
+          </section>
+
+          {/* 주요 기능 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-3">4가지 성격 차원</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 외향(E) vs 내향(I): 에너지 방향</li>
+                  <li>• 감각(S) vs 직관(N): 정보 수집</li>
+                  <li>• 사고(T) vs 감정(F): 의사 결정</li>
+                  <li>• 판단(J) vs 인식(P): 생활 양식</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-3">테스트 특징</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 과학적 근거 기반 질문</li>
+                  <li>• 16가지 상세한 성격 유형</li>
+                  <li>• 직업 적성 및 연애 궁합</li>
+                  <li>• 다국어 지원 (한국어, 영어, 일본어)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* 상세 사용법 가이드 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold mb-2">1. 테스트 진행 방법</h3>
+                <p className="text-muted-foreground">
+                  60개의 질문에 솔직하고 직관적으로 답변해주세요. 정답은 없으며, 
+                  평소 자신의 모습과 가장 가까운 선택지를 고르는 것이 중요합니다. 
+                  너무 오래 고민하지 말고 첫 번째 직감을 따라 선택하시기 바랍니다.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-2">2. 정확한 결과를 위한 팁</h3>
+                <p className="text-muted-foreground">
+                  이상적인 모습보다는 현재의 자신을 기준으로 답변하세요. 
+                  사회적으로 바람직하다고 여겨지는 답변보다는 솔직한 자신의 모습을 선택하는 것이 
+                  더 정확한 성격 유형을 도출할 수 있습니다.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-2">3. 결과 해석 및 활용</h3>
+                <p className="text-muted-foreground">
+                  테스트 완료 후 나타나는 16가지 성격 유형 중 하나의 결과를 받게 됩니다. 
+                  각 유형의 특성, 강점, 개선점, 적합한 직업, 연애 스타일 등의 
+                  상세한 정보를 확인하여 자기 이해와 성장에 활용하세요.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 16가지 성격 유형 개요 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">16가지 MBTI 성격 유형</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-primary/5 rounded-lg p-3 border border-primary/20 text-center">
+                <div className="font-bold text-primary mb-1">INTJ</div>
+                <div className="text-xs text-muted-foreground">건축가</div>
+              </div>
+              <div className="bg-primary/5 rounded-lg p-3 border border-primary/20 text-center">
+                <div className="font-bold text-primary mb-1">INTP</div>
+                <div className="text-xs text-muted-foreground">논리술사</div>
+              </div>
+              <div className="bg-primary/5 rounded-lg p-3 border border-primary/20 text-center">
+                <div className="font-bold text-primary mb-1">ENTJ</div>
+                <div className="text-xs text-muted-foreground">통솔자</div>
+              </div>
+              <div className="bg-primary/5 rounded-lg p-3 border border-primary/20 text-center">
+                <div className="font-bold text-primary mb-1">ENTP</div>
+                <div className="text-xs text-muted-foreground">토론가</div>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-3 border border-secondary/20 text-center">
+                <div className="font-bold text-secondary mb-1">INFJ</div>
+                <div className="text-xs text-muted-foreground">옹호자</div>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-3 border border-secondary/20 text-center">
+                <div className="font-bold text-secondary mb-1">INFP</div>
+                <div className="text-xs text-muted-foreground">중재자</div>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-3 border border-secondary/20 text-center">
+                <div className="font-bold text-secondary mb-1">ENFJ</div>
+                <div className="text-xs text-muted-foreground">선도자</div>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-3 border border-secondary/20 text-center">
+                <div className="font-bold text-secondary mb-1">ENFP</div>
+                <div className="text-xs text-muted-foreground">활동가</div>
+              </div>
+              <div className="bg-accent/5 rounded-lg p-3 border border-accent/20 text-center">
+                <div className="font-bold text-accent mb-1">ISTJ</div>
+                <div className="text-xs text-muted-foreground">물류관리사</div>
+              </div>
+              <div className="bg-accent/5 rounded-lg p-3 border border-accent/20 text-center">
+                <div className="font-bold text-accent mb-1">ISFJ</div>
+                <div className="text-xs text-muted-foreground">수호자</div>
+              </div>
+              <div className="bg-accent/5 rounded-lg p-3 border border-accent/20 text-center">
+                <div className="font-bold text-accent mb-1">ESTJ</div>
+                <div className="text-xs text-muted-foreground">경영자</div>
+              </div>
+              <div className="bg-accent/5 rounded-lg p-3 border border-accent/20 text-center">
+                <div className="font-bold text-accent mb-1">ESFJ</div>
+                <div className="text-xs text-muted-foreground">집정관</div>
+              </div>
+              <div className="bg-muted/20 rounded-lg p-3 border border-muted text-center">
+                <div className="font-bold mb-1">ISTP</div>
+                <div className="text-xs text-muted-foreground">만능재주꾼</div>
+              </div>
+              <div className="bg-muted/20 rounded-lg p-3 border border-muted text-center">
+                <div className="font-bold mb-1">ISFP</div>
+                <div className="text-xs text-muted-foreground">모험가</div>
+              </div>
+              <div className="bg-muted/20 rounded-lg p-3 border border-muted text-center">
+                <div className="font-bold mb-1">ESTP</div>
+                <div className="text-xs text-muted-foreground">사업가</div>
+              </div>
+              <div className="bg-muted/20 rounded-lg p-3 border border-muted text-center">
+                <div className="font-bold mb-1">ESFP</div>
+                <div className="text-xs text-muted-foreground">연예인</div>
+              </div>
+            </div>
+          </section>
+
+          {/* 자주 묻는 질문 FAQ */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+            <div className="space-y-4">
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2">Q. MBTI 결과가 바뀔 수 있나요?</h3>
+                <p className="text-muted-foreground text-sm">
+                  A. 네, 개인의 성장과 경험에 따라 성격이 변화할 수 있습니다. 
+                  일반적으로는 핵심 성향이 유지되지만, 환경과 노력에 따라 
+                  일부 특성은 변화할 수 있어 정기적인 재검사를 권장합니다.
+                </p>
+              </div>
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2">Q. 어떤 유형이 가장 좋은가요?</h3>
+                <p className="text-muted-foreground text-sm">
+                  A. 모든 MBTI 유형은 고유한 강점과 가치를 가지고 있습니다. 
+                  '좋은' 유형은 없으며, 각 유형의 특성을 이해하고 
+                  개인의 강점을 발전시키는 것이 중요합니다.
+                </p>
+              </div>
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2">Q. 연애 궁합은 얼마나 정확한가요?</h3>
+                <p className="text-muted-foreground text-sm">
+                  A. MBTI 궁합은 참고 자료일 뿐이며, 실제 관계에서는 
+                  소통, 이해, 노력이 더 중요합니다. 다른 유형이라도 
+                  서로를 이해하고 존중한다면 좋은 관계를 만들 수 있습니다.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Q. 직업 선택에 얼마나 참고해야 하나요?</h3>
+                <p className="text-muted-foreground text-sm">
+                  A. MBTI는 직업 선택의 한 가지 참고 자료입니다. 
+                  개인의 관심사, 능력, 가치관, 시장 상황 등을 
+                  종합적으로 고려하여 진로를 결정하시기 바랍니다.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 사용 팁과 요령 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">MBTI 활용 팁</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-3">자기 이해</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 강점과 약점 객관적 파악</li>
+                  <li>• 스트레스 요인 및 대처법 이해</li>
+                  <li>• 성장 방향 설정</li>
+                  <li>• 의사결정 패턴 분석</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-3">관계 개선</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• 타인과의 소통 방식 개선</li>
+                  <li>• 팀워크 향상</li>
+                  <li>• 갈등 해결 능력 증진</li>
+                  <li>• 리더십 스타일 개발</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

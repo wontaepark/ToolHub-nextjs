@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Calculator } from "@/components/calculator/Calculator";
 import { CalculatorHistory } from "@/components/calculator/CalculatorHistory";
 import { useCalculator } from "@/hooks/use-calculator";
+import SEOHead from "@/components/SEOHead";
 
 export default function CalculatorPage() {
   const { t, i18n } = useTranslation();

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Star, Zap } from "lucide-react";
 import AdSense from "@/components/AdSense";
+import SEOHead from "@/components/SEOHead";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -12,6 +13,7 @@ export default function Home() {
   
   return (
     <div>
+      <SEOHead />
       {/* Hero Section */}
       <div className="text-center mb-12 md:mb-16 relative px-4">
         <div className="absolute -top-4 -left-4 w-16 h-16 md:w-24 md:h-24 bg-primary/10 rounded-full blur-xl"></div>

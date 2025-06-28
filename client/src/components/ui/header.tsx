@@ -82,9 +82,12 @@ export default function Header() {
                 <Search className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl w-full mx-4">
+            <DialogContent className="max-w-4xl w-full mx-4" aria-describedby="search-description">
               <DialogHeader>
                 <DialogTitle>{t('search.title', '도구 검색')}</DialogTitle>
+                <div id="search-description" className="sr-only">
+                  {t('search.description', '도구를 검색하고 카테고리별로 찾아보세요')}
+                </div>
               </DialogHeader>
               <SearchBox 
                 onClose={() => setIsSearchOpen(false)}

@@ -11,11 +11,16 @@ export default function CalculatorPage() {
       <SEOHead toolId="calculator" />
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          고급 온라인 계산기 - 무료 웹 계산기
+          {currentLang === 'ko' ? '고급 온라인 계산기 - 무료 웹 계산기' : 
+           currentLang === 'ja' ? '高度なオンライン計算機 - 無料ウェブ計算機' : 
+           'Advanced Online Calculator - Free Web Calculator'}
         </h1>
         <p className="text-muted-foreground text-lg mb-6 max-w-3xl mx-auto">
-          최신 기술로 구현된 고급 온라인 계산기입니다. 메모리 기능, 복사 기능, 오류 처리, 계산 기록 등 
-          전문적인 기능을 제공하며 키보드 단축키와 모바일 터치를 완벽 지원합니다.
+          {currentLang === 'ko' ? 
+            '최신 기술로 구현된 고급 온라인 계산기입니다. 메모리 기능, 복사 기능, 오류 처리, 계산 기록 등 전문적인 기능을 제공하며 키보드 단축키와 모바일 터치를 완벽 지원합니다.' :
+           currentLang === 'ja' ? 
+            '最新技術で実装された高度なオンライン計算機です。メモリ機能、コピー機能、エラー処理、計算履歴など専門的な機能を提供し、キーボードショートカットとモバイルタッチを完全サポートします。' :
+            'An advanced online calculator built with cutting-edge technology. Offers professional features including memory functions, copy functionality, error handling, calculation history, and full support for keyboard shortcuts and mobile touch.'}
         </p>
       </div>
       

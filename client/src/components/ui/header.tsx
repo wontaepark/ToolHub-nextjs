@@ -3,11 +3,14 @@ import { Link, useLocation } from "wouter";
 import { useTheme } from "../ThemeProvider";
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import LanguageSelector from "../LanguageSelector";
-import { Sun, Moon, Menu, Github } from "lucide-react";
+import SearchBox from "../SearchBox";
+import { Sun, Moon, Menu, Github, Search } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
   const [location] = useLocation();

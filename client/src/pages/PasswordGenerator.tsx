@@ -613,7 +613,11 @@ export default function PasswordGenerator() {
 
         {/* 사용 팁과 요령 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">사용 팁과 요령</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '사용 팁과 요령' : 
+             currentLang === 'ja' ? '使用ヒントとコツ' : 
+             'Usage Tips & Tricks'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-semibold mb-3">비밀번호 관리</h3>

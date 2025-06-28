@@ -1525,7 +1525,11 @@ export default function MBTITest() {
 
           {/* 사용 팁과 요령 */}
           <section className="bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-2xl font-bold mb-4">MBTI 활용 팁</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? 'MBTI 활용 팁' : 
+               currentLang === 'ja' ? 'MBTI活用ヒント' : 
+               'MBTI Usage Tips'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-3">자기 이해</h3>

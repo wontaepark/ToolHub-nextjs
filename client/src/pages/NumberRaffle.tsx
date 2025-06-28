@@ -718,12 +718,40 @@ export default function NumberRaffle() {
 
         {/* 사용 팁 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">사용 팁</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '사용 팁' : 
+             currentLang === 'ja' ? '使用ヒント' : 
+             'Usage Tips'}
+          </h2>
           <ul className="space-y-3 text-muted-foreground">
-            <li>• 중복을 허용하지 않는 경우 추첨 개수가 범위를 초과하지 않도록 주의하세요</li>
-            <li>• 공정성이 중요한 상황에서는 모든 참가자가 보는 앞에서 추첨하세요</li>
-            <li>• 추첨 기록을 통해 투명성을 확보할 수 있습니다</li>
-            <li>• 큰 범위에서의 추첨도 즉시 처리됩니다</li>
+            <li>
+              {currentLang === 'ko' ? 
+                '• 중복을 허용하지 않는 경우 추첨 개수가 범위를 초과하지 않도록 주의하세요' :
+               currentLang === 'ja' ? 
+                '• 重複を許可しない場合、抽選数が範囲を超えないよう注意してください' :
+                '• When not allowing duplicates, ensure the number of draws doesn\'t exceed the range'}
+            </li>
+            <li>
+              {currentLang === 'ko' ? 
+                '• 공정성이 중요한 상황에서는 모든 참가자가 보는 앞에서 추첨하세요' :
+               currentLang === 'ja' ? 
+                '• 公平性が重要な状況では全ての参加者が見ている前で抽選してください' :
+                '• In situations where fairness is important, conduct the draw in front of all participants'}
+            </li>
+            <li>
+              {currentLang === 'ko' ? 
+                '• 추첨 기록을 통해 투명성을 확보할 수 있습니다' :
+               currentLang === 'ja' ? 
+                '• 抽選記録により透明性を確保できます' :
+                '• Transparency can be ensured through draw records'}
+            </li>
+            <li>
+              {currentLang === 'ko' ? 
+                '• 큰 범위에서의 추첨도 즉시 처리됩니다' :
+               currentLang === 'ja' ? 
+                '• 大きな範囲での抽選も即座に処理されます' :
+                '• Draws from large ranges are also processed instantly'}
+            </li>
           </ul>
         </section>
       </div>

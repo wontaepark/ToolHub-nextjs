@@ -258,12 +258,24 @@ export default function ThumbnailDownloader() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold mb-3">다양한 해상도 지원</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  {currentLang === 'ko' ? '다양한 해상도 지원' : 
+                   currentLang === 'ja' ? '様々な解像度サポート' : 
+                   'Multiple Resolution Support'}
+                </h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• 최대 해상도 (1280x720)</li>
-                  <li>• 고화질 (480x360)</li>
-                  <li>• 중간 화질 (320x180)</li>
-                  <li>• 기본 화질 (120x90)</li>
+                  <li>• {currentLang === 'ko' ? '최대 해상도 (1280x720)' : 
+                        currentLang === 'ja' ? '最大解像度 (1280x720)' : 
+                        'Maximum Resolution (1280x720)'}</li>
+                  <li>• {currentLang === 'ko' ? '고화질 (480x360)' : 
+                        currentLang === 'ja' ? '高画質 (480x360)' : 
+                        'High Quality (480x360)'}</li>
+                  <li>• {currentLang === 'ko' ? '중간 화질 (320x180)' : 
+                        currentLang === 'ja' ? '中画質 (320x180)' : 
+                        'Medium Quality (320x180)'}</li>
+                  <li>• {currentLang === 'ko' ? '기본 화질 (120x90)' : 
+                        currentLang === 'ja' ? '基本画質 (120x90)' : 
+                        'Standard Quality (120x90)'}</li>
                 </ul>
               </div>
               <div>
@@ -321,7 +333,11 @@ export default function ThumbnailDownloader() {
 
           {/* 사용 팁 */}
           <section className="bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-2xl font-bold mb-4">사용 팁</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '사용 팁' : 
+               currentLang === 'ja' ? '使用ヒント' : 
+               'Usage Tips'}
+            </h2>
             <ul className="space-y-3 text-muted-foreground">
               <li>• 저작권을 준수하여 개인적인 용도로만 사용하세요</li>
               <li>• 고화질이 필요한 경우 최대 해상도를 선택하세요</li>

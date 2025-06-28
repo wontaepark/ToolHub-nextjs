@@ -4,6 +4,8 @@
     "tools": "ツール",
     "github": "GitHub",
     "contact": "お問い合わせ",
+    "search": "検索",
+    "searchPlaceholder": "ツール検索...",
     "newTools": "新しいツールが継続的に追加されています",
     "available": "利用可能",
     "new": "新規",
@@ -17,6 +19,15 @@
     "processing": "処理中...",
     "error": "エラー",
     "success": "成功"
+  },
+  "search": {
+    "title": "ツール検索",
+    "results": "検索結果",
+    "suggestions": "おすすめ検索語",
+    "popular": "人気ツール",
+    "categories": "カテゴリ別ツール",
+    "noResults": "検索結果が見つかりません",
+    "tryOtherKeywords": "他のキーワードを試してください"
   },
   "header": {
     "title": "ToolHub.tools",

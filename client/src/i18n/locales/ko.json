@@ -4,6 +4,8 @@
     "tools": "도구",
     "github": "GitHub",
     "contact": "문의하기",
+    "search": "검색",
+    "searchPlaceholder": "도구 검색...",
     "newTools": "새로운 도구들이 계속 추가됩니다",
     "available": "사용 가능",
     "new": "새로운",
@@ -17,6 +19,15 @@
     "processing": "처리 중...",
     "error": "오류",
     "success": "성공"
+  },
+  "search": {
+    "title": "도구 검색",
+    "results": "검색 결과",
+    "suggestions": "추천 검색어",
+    "popular": "인기 도구",
+    "categories": "카테고리별 도구",
+    "noResults": "검색 결과가 없습니다",
+    "tryOtherKeywords": "다른 검색어를 시도해보세요"
   },
   "header": {
     "title": "ToolHub.tools",

@@ -70,6 +70,30 @@ export default function Header() {
             <span>{t('common.github')}</span>
           </a>
           
+          {/* Search Button */}
+          <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                aria-label={t('common.search', '검색')}
+                className="flex items-center justify-center border border-border hover:bg-accent h-9 w-9 md:h-10 md:w-10"
+              >
+                <Search className="h-4 w-4 md:h-5 md:w-5" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-full mx-4">
+              <DialogHeader>
+                <DialogTitle>{t('search.title', '도구 검색')}</DialogTitle>
+              </DialogHeader>
+              <SearchBox 
+                onClose={() => setIsSearchOpen(false)}
+                autoFocus={true}
+                showCategories={true}
+              />
+            </DialogContent>
+          </Dialog>
+
           <LanguageSelector />
           
           <Button 

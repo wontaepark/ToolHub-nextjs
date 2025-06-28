@@ -1036,24 +1036,68 @@ export default function PomodoroTimer() {
 
         {/* 주요 기능 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '주요 기능' : 
+             currentLang === 'ja' ? '主要機能' : 
+             'Main Features'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">기본 타이머 기능</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '기본 타이머 기능' : 
+                 currentLang === 'ja' ? '基本タイマー機能' : 
+                 'Basic Timer Features'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 25분 작업 + 5분 휴식 기본 설정</li>
-                <li>• 15분 장휴식 (4회 완료 후)</li>
-                <li>• 자동 타이머 전환 옵션</li>
-                <li>• 시각적 진행률 표시</li>
+                <li>
+                  {currentLang === 'ko' ? '• 25분 작업 + 5분 휴식 기본 설정' : 
+                   currentLang === 'ja' ? '• 25分作業＋5分休憩の基本設定' : 
+                   '• Default 25-minute work + 5-minute break setting'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 15분 장휴식 (4회 완료 후)' : 
+                   currentLang === 'ja' ? '• 15分長休憩（4回完了後）' : 
+                   '• 15-minute long break (after 4 completions)'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 자동 타이머 전환 옵션' : 
+                   currentLang === 'ja' ? '• 自動タイマー切り替えオプション' : 
+                   '• Automatic timer transition option'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 시각적 진행률 표시' : 
+                   currentLang === 'ja' ? '• 視覚的進行率表示' : 
+                   '• Visual progress display'}
+                </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">고급 기능</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '고급 기능' : 
+                 currentLang === 'ja' ? '高度な機能' : 
+                 'Advanced Features'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 할일 목록 연동 관리</li>
-                <li>• 맞춤형 시간 설정</li>
-                <li>• 완료 통계 및 기록</li>
-                <li>• 알림음 설정</li>
+                <li>
+                  {currentLang === 'ko' ? '• 할일 목록 연동 관리' : 
+                   currentLang === 'ja' ? '• タスクリスト連動管理' : 
+                   '• Integrated task list management'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 맞춤형 시간 설정' : 
+                   currentLang === 'ja' ? '• カスタム時間設定' : 
+                   '• Custom time settings'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 완료 통계 및 기록' : 
+                   currentLang === 'ja' ? '• 完了統計および記録' : 
+                   '• Completion statistics and records'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 알림음 설정' : 
+                   currentLang === 'ja' ? '• 通知音設定' : 
+                   '• Sound notification settings'}
+                </li>
               </ul>
             </div>
           </div>
@@ -1061,30 +1105,55 @@ export default function PomodoroTimer() {
 
         {/* 상세 사용법 가이드 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '상세 사용법 가이드' : 
+             currentLang === 'ja' ? '詳細使用法ガイド' : 
+             'Detailed Usage Guide'}
+          </h2>
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold mb-2">1. 기본 포모도로 실행</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '1. 기본 포모도로 실행' : 
+                 currentLang === 'ja' ? '1. 基本ポモドーロ実行' : 
+                 '1. Basic Pomodoro Execution'}
+              </h3>
               <p className="text-muted-foreground">
-                '시작' 버튼을 클릭하여 25분 작업 타이머를 시작합니다. 
-                타이머가 종료되면 자동으로 5분 휴식 타이머로 전환됩니다. 
-                4번의 포모도로 완료 후에는 15분 장휴식이 제공됩니다.
+                {currentLang === 'ko' ? 
+                  '\'시작\' 버튼을 클릭하여 25분 작업 타이머를 시작합니다. 타이머가 종료되면 자동으로 5분 휴식 타이머로 전환됩니다. 4번의 포모도로 완료 후에는 15분 장휴식이 제공됩니다.' :
+                 currentLang === 'ja' ? 
+                  '「開始」ボタンをクリックして25分作業タイマーを開始します。タイマーが終了すると自動的に5分休憩タイマーに切り替わります。4回のポモドーロ完了後は15分の長休憩が提供されます。' :
+                  'Click the \'Start\' button to begin a 25-minute work timer. When the timer ends, it automatically switches to a 5-minute break timer. After completing 4 pomodoros, a 15-minute long break is provided.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">2. 할일 관리 활용</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '2. 할일 관리 활용' : 
+                 currentLang === 'ja' ? '2. タスク管理活用' : 
+                 '2. Using Task Management'}
+              </h3>
               <p className="text-muted-foreground">
-                우측 패널에서 할일을 추가하고 각 작업에 집중할 수 있습니다. 
-                포모도로가 완료될 때마다 해당 작업의 완료 횟수가 자동으로 기록됩니다. 
-                작업별로 예상 포모도로 개수를 설정하여 진행 상황을 추적할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '우측 패널에서 할일을 추가하고 각 작업에 집중할 수 있습니다. 포모도로가 완료될 때마다 해당 작업의 완료 횟수가 자동으로 기록됩니다. 작업별로 예상 포모도로 개수를 설정하여 진행 상황을 추적할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '右パネルでタスクを追加し、各作業に集中できます。ポモドーロが完了するたびに該当作業の完了回数が自動的に記録されます。作業別に予想ポモドーロ数を設定して進行状況を追跡できます。' :
+                  'Add tasks in the right panel and focus on each task. Each time a pomodoro is completed, the completion count for that task is automatically recorded. You can set expected pomodoro counts for each task to track progress.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">3. 설정 맞춤화</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '3. 설정 맞춤화' : 
+                 currentLang === 'ja' ? '3. 設定カスタマイズ' : 
+                 '3. Settings Customization'}
+              </h3>
               <p className="text-muted-foreground">
-                설정 버튼을 통해 작업 시간, 휴식 시간, 자동 시작 여부, 
-                알림음 등을 개인의 작업 스타일에 맞게 조정할 수 있습니다. 
-                집중력이 높은 사람은 작업 시간을 늘리고, 초보자는 짧게 설정하는 것을 권장합니다.
+                {currentLang === 'ko' ? 
+                  '설정 버튼을 통해 작업 시간, 휴식 시간, 자동 시작 여부, 알림음 등을 개인의 작업 스타일에 맞게 조정할 수 있습니다. 집중력이 높은 사람은 작업 시간을 늘리고, 초보자는 짧게 설정하는 것을 권장합니다.' :
+                 currentLang === 'ja' ? 
+                  '設定ボタンで作業時間、休憩時間、自動開始の有無、通知音などを個人の作業スタイルに合わせて調整できます。集中力が高い人は作業時間を延ばし、初心者は短く設定することを推奨します。' :
+                  'Through the settings button, you can adjust work time, break time, auto-start options, notification sounds, and more to match your personal work style. Those with high concentration can increase work time, while beginners are recommended to set shorter durations.'
+                }
               </p>
             </div>
           </div>
@@ -1092,22 +1161,40 @@ export default function PomodoroTimer() {
 
         {/* 활용 예시 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '활용 예시' : 
+             currentLang === 'ja' ? '活用例' : 
+             'Usage Examples'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
-              <h3 className="text-lg font-semibold mb-2">학습 및 연구</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '학습 및 연구' : 
+                 currentLang === 'ja' ? '学習・研究' : 
+                 'Study & Research'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                독서, 논문 작성, 언어 학습, 온라인 강의 수강 등 
-                집중이 필요한 학습 활동에 효과적입니다. 
-                정해진 시간 동안 한 주제에만 집중하여 학습 효율을 높일 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '독서, 논문 작성, 언어 학습, 온라인 강의 수강 등 집중이 필요한 학습 활동에 효과적입니다. 정해진 시간 동안 한 주제에만 집중하여 학습 효율을 높일 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '読書、論文作成、言語学習、オンライン講義受講など集中が必要な学習活動に効果的です。決められた時間の間に一つのテーマだけに集中して学習効率を高めることができます。' :
+                  'Effective for learning activities that require concentration such as reading, writing papers, language learning, and taking online courses. You can improve learning efficiency by focusing on one topic for a set period of time.'
+                }
               </p>
             </div>
             <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
-              <h3 className="text-lg font-semibold mb-2">업무 및 프로젝트</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '업무 및 프로젝트' : 
+                 currentLang === 'ja' ? '業務・プロジェクト' : 
+                 'Work & Projects'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                코딩, 문서 작성, 기획서 작성, 디자인 작업 등 
-                창의적이고 집중적인 업무에 활용할 수 있습니다. 
-                업무를 작은 단위로 나누어 체계적으로 진행할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '코딩, 문서 작성, 기획서 작성, 디자인 작업 등 창의적이고 집중적인 업무에 활용할 수 있습니다. 업무를 작은 단위로 나누어 체계적으로 진행할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  'コーディング、文書作成、企画書作成、デザイン作業など創造的で集中的な業務に活用できます。業務を小さな単位に分けて体系的に進行できます。' :
+                  'Can be used for creative and intensive work such as coding, document writing, proposal writing, and design work. You can systematically proceed by dividing work into small units.'
+                }
               </p>
             </div>
           </div>
@@ -1115,34 +1202,70 @@ export default function PomodoroTimer() {
 
         {/* 자주 묻는 질문 FAQ */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '자주 묻는 질문 (FAQ)' : 
+             currentLang === 'ja' ? 'よくある質問（FAQ）' : 
+             'Frequently Asked Questions (FAQ)'}
+          </h2>
           <div className="space-y-4">
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 25분이 너무 길거나 짧게 느껴져요</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 25분이 너무 길거나 짧게 느껴져요' : 
+                 currentLang === 'ja' ? 'Q. 25分が長すぎたり短すぎたりします' : 
+                 'Q. 25 minutes feels too long or too short'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 개인차가 있을 수 있습니다. 설정에서 작업 시간을 15-45분 사이로 조정해보세요. 
-                초보자는 15분부터 시작하여 점차 늘려가는 것을 권장합니다.
+                {currentLang === 'ko' ? 
+                  'A. 개인차가 있을 수 있습니다. 설정에서 작업 시간을 15-45분 사이로 조정해보세요. 초보자는 15분부터 시작하여 점차 늘려가는 것을 권장합니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 個人差がある場合があります。設定で作業時間を15-45分の間で調整してみてください。初心者は15分から始めて徐々に延ばしていくことを推奨します。' :
+                  'A. Individual differences may exist. Try adjusting the work time between 15-45 minutes in settings. Beginners are recommended to start with 15 minutes and gradually increase.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 휴식 시간에 무엇을 해야 하나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 휴식 시간에 무엇을 해야 하나요?' : 
+                 currentLang === 'ja' ? 'Q. 休憩時間に何をすればよいですか？' : 
+                 'Q. What should I do during break time?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 스트레칭, 깊은 호흡, 물 마시기, 가벼운 산책 등 뇌를 쉬게 하는 활동을 권장합니다. 
-                스마트폰이나 컴퓨터 사용은 피하는 것이 좋습니다.
+                {currentLang === 'ko' ? 
+                  'A. 스트레칭, 깊은 호흡, 물 마시기, 가벼운 산책 등 뇌를 쉬게 하는 활동을 권장합니다. 스마트폰이나 컴퓨터 사용은 피하는 것이 좋습니다.' :
+                 currentLang === 'ja' ? 
+                  'A. ストレッチ、深呼吸、水分補給、軽い散歩など脳を休ませる活動を推奨します。スマートフォンやコンピューターの使用は避けることをお勧めします。' :
+                  'A. We recommend activities that rest your brain such as stretching, deep breathing, drinking water, and light walking. It\'s best to avoid using smartphones or computers.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 중간에 방해받으면 어떻게 하나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 중간에 방해받으면 어떻게 하나요?' : 
+                 currentLang === 'ja' ? 'Q. 途中で邪魔されたらどうすればよいですか？' : 
+                 'Q. What should I do if interrupted?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 예상치 못한 방해가 있으면 타이머를 일시정지하고 방해 요소를 처리한 후 재시작하세요. 
-                가능하면 방해받지 않을 환경을 미리 조성하는 것이 중요합니다.
+                {currentLang === 'ko' ? 
+                  'A. 예상치 못한 방해가 있으면 타이머를 일시정지하고 방해 요소를 처리한 후 재시작하세요. 가능하면 방해받지 않을 환경을 미리 조성하는 것이 중요합니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 予想外の邪魔があった場合は、タイマーを一時停止して邪魔な要素を処理した後再開してください。可能であれば邪魔されない環境を事前に作ることが重要です。' :
+                  'A. If unexpected interruptions occur, pause the timer, handle the interruption, then restart. It\'s important to create an undisturbed environment in advance when possible.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Q. 하루에 몇 개의 포모도로가 적당한가요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 하루에 몇 개의 포모도로가 적당한가요?' : 
+                 currentLang === 'ja' ? 'Q. 1日何個のポモドーロが適切ですか？' : 
+                 'Q. How many pomodoros per day is appropriate?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 개인의 집중력과 업무 강도에 따라 다르지만, 일반적으로 하루 6-12개 정도가 적당합니다. 
-                처음에는 3-4개부터 시작하여 점차 늘려가세요.
+                {currentLang === 'ko' ? 
+                  'A. 개인의 집중력과 업무 강도에 따라 다르지만, 일반적으로 하루 6-12개 정도가 적당합니다. 처음에는 3-4개부터 시작하여 점차 늘려가세요.' :
+                 currentLang === 'ja' ? 
+                  'A. 個人の集中力と業務強度によって異なりますが、一般的に1日6-12個程度が適切です。最初は3-4個から始めて徐々に増やしてください。' :
+                  'A. It varies depending on individual concentration and work intensity, but generally 6-12 per day is appropriate. Start with 3-4 initially and gradually increase.'
+                }
               </p>
             </div>
           </div>
@@ -1150,24 +1273,68 @@ export default function PomodoroTimer() {
 
         {/* 사용 팁과 요령 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">사용 팁과 요령</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '사용 팁과 요령' : 
+             currentLang === 'ja' ? '使用ヒントとコツ' : 
+             'Usage Tips & Tricks'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">효과적인 포모도로</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '효과적인 포모도로' : 
+                 currentLang === 'ja' ? '効果的なポモドーロ' : 
+                 'Effective Pomodoro'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 작업 전 명확한 목표 설정</li>
-                <li>• 방해 요소 미리 제거</li>
-                <li>• 휴식 시간 철저히 지키기</li>
-                <li>• 완료된 포모도로 기록하기</li>
+                <li>
+                  {currentLang === 'ko' ? '• 작업 전 명확한 목표 설정' : 
+                   currentLang === 'ja' ? '• 作業前に明確な目標設定' : 
+                   '• Set clear goals before work'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 방해 요소 미리 제거' : 
+                   currentLang === 'ja' ? '• 妨害要素を事前に除去' : 
+                   '• Remove distractions in advance'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 휴식 시간 철저히 지키기' : 
+                   currentLang === 'ja' ? '• 休憩時間を徹底的に守る' : 
+                   '• Strictly observe break times'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 완료된 포모도로 기록하기' : 
+                   currentLang === 'ja' ? '• 完了したポモドーロを記録' : 
+                   '• Record completed pomodoros'}
+                </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">집중력 향상</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '집중력 향상' : 
+                 currentLang === 'ja' ? '集中力向上' : 
+                 'Improve Concentration'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 알림 및 SNS 차단</li>
-                <li>• 편안한 작업 환경 조성</li>
-                <li>• 적절한 조명과 온도 유지</li>
-                <li>• 규칙적인 수면과 식사</li>
+                <li>
+                  {currentLang === 'ko' ? '• 알림 및 SNS 차단' : 
+                   currentLang === 'ja' ? '• 通知およびSNSブロック' : 
+                   '• Block notifications and social media'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 편안한 작업 환경 조성' : 
+                   currentLang === 'ja' ? '• 快適な作業環境作り' : 
+                   '• Create a comfortable work environment'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 적절한 조명과 온도 유지' : 
+                   currentLang === 'ja' ? '• 適切な照明と温度維持' : 
+                   '• Maintain proper lighting and temperature'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 규칙적인 수면과 식사' : 
+                   currentLang === 'ja' ? '• 規則的な睡眠と食事' : 
+                   '• Regular sleep and meals'}
+                </li>
               </ul>
             </div>
           </div>

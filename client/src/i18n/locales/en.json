@@ -726,5 +726,103 @@
     "learnMore": "Learn more",
     "accept": "Accept",
     "reject": "Reject"
+  },
+  "contentSections": {
+    "calculator": {
+      "introduction": {
+        "title": "Smart Calculator",
+        "description": "ToolHub.tools' smart calculator is an online tool that can quickly and accurately handle all mathematical calculations needed in daily life and work. It supports everything from basic arithmetic to complex mathematical functions, with an intuitive interface and keyboard shortcuts that anyone can easily use. It automatically saves calculation history for quick reuse of previous results and provides the same user experience across all devices."
+      },
+      "features": {
+        "title": "Key Features",
+        "basicOperations": "Basic Operations",
+        "basicOperationsDesc": "Arithmetic operations, percentages, square roots, etc.",
+        "advancedFunctions": "Advanced Functions",
+        "advancedFunctionsDesc": "Memory functions, calculation history, keyboard support",
+        "userInterface": "User Interface",
+        "userInterfaceDesc": "Intuitive button layout, responsive design",
+        "accessibility": "Accessibility",
+        "accessibilityDesc": "Keyboard navigation, voice support, high contrast mode"
+      },
+      "guide": {
+        "title": "Detailed Usage Guide",
+        "basicCalc": "1. Basic Calculation",
+        "basicCalcDesc": "Click number buttons or type directly on the keyboard to create calculations, then press the = button or Enter key to see results. Operator precedence is automatically applied for accurate complex formula calculations.",
+        "memory": "2. Using Memory Functions",
+        "memoryDesc": "Store current results in memory with the M+ button, and recall stored values with the MR button. Clear memory with the MC button to efficiently manage intermediate results in complex calculations.",
+        "history": "3. Managing Calculation History",
+        "historyDesc": "All calculations are automatically recorded and can be viewed in the calculation history panel on the right. Click previous calculation results to load that value as current input, and use the clear history button to delete all records."
+      },
+      "examples": {
+        "title": "Usage Examples",
+        "daily": "Daily Life",
+        "dailyDesc": "Useful for common calculation situations like shopping budget calculations, discount rate calculations, tip calculations, cooking recipe ratio calculations, and household accounting.",
+        "work": "Work Applications",
+        "workDesc": "Can be used in work situations requiring accurate calculations such as creating quotes, sales calculations, tax calculations, project budget management, and profitability analysis."
+      },
+      "faq": {
+        "title": "Frequently Asked Questions (FAQ)",
+        "accuracy": "Q. Are the calculation results accurate?",
+        "accuracyAnswer": "A. Yes, we use JavaScript's high-precision mathematical operations to provide accurate calculation results. However, for very large numbers or extremely precise decimal calculations, minor errors may occur due to the nature of floating-point arithmetic.",
+        "shortcuts": "Q. Are keyboard shortcuts supported?",
+        "shortcutsAnswer": "A. Yes, all major keyboard inputs are supported including number keys, operator keys (+, -, *, /), Enter key (=), Escape key (C), and Backspace key.",
+        "mobile": "Q. Does it work well on mobile?",
+        "mobileAnswer": "A. Yes, with responsive design it works conveniently on smartphones and tablets. It's optimized for touch interfaces, enabling accurate input in mobile environments."
+      },
+      "tips": {
+        "title": "Usage Tips and Tricks",
+        "efficiency": "Efficient Usage",
+        "efficiencyTips": "Use keyboard shortcuts, save intermediate values with memory functions, reuse calculation history, quick sharing with copy function",
+        "accuracy": "Ensuring Accuracy",
+        "accuracyTips": "Use parentheses for complex formulas, check decimal places, verify important calculations, ensure unit consistency"
+      }
+    },
+    "unitConverter": {
+      "introduction": {
+        "title": "Accurate Unit Converter",
+        "description": "ToolHub.tools' unit converter is an online tool that quickly and accurately converts various measurement units such as length, weight, temperature, and volume. It supports all unit conversions needed in daily life and professional work including scientific calculations, cooking, travel, and learning. With an intuitive interface and real-time conversion features, anyone can easily use it, and conversion history is saved for quick re-checking of frequently used conversions."
+      },
+      "features": {
+        "title": "Key Features",
+        "categories": "Supported Unit Categories",
+        "categoriesDesc": "Length: mm, cm, m, km, inch, feet, yard / Weight: g, kg, oz, lb, ton / Temperature: Celsius, Fahrenheit, Kelvin / Volume: ml, L, cup, gallon, pint",
+        "convenience": "Convenience Features",
+        "convenienceDesc": "Real-time automatic conversion, bidirectional conversion support, conversion history storage, accurate decimal calculations"
+      },
+      "guide": {
+        "title": "Detailed Usage Guide",
+        "basic": "1. Basic Unit Conversion",
+        "basicDesc": "Select the desired category tab (length, weight, temperature, volume) and enter the value to convert. Select the 'from' and 'to' units from the dropdown menus and the result will be calculated automatically. Conversion results update in real-time whenever you modify the input value.",
+        "bidirectional": "2. Using Bidirectional Conversion",
+        "bidirectionalDesc": "Click the arrow button in the middle to swap the 'from' and 'to' units. This feature allows easy reverse conversion, for example converting from meters to feet and then back from feet to meters.",
+        "history": "3. Managing Conversion History",
+        "historyDesc": "All conversion results are automatically recorded and displayed in the conversion history section at the bottom. Click previous conversion results to load that value as current input, and use the 'clear history' button to delete all records."
+      },
+      "examples": {
+        "title": "Usage Examples",
+        "daily": "Daily Life",
+        "dailyDesc": "Useful for common unit conversion situations like recipe unit conversions while cooking, understanding local units while traveling abroad, managing exercise records, and checking product sizes when online shopping.",
+        "professional": "Professional Work",
+        "professionalDesc": "Can be used in professional work environments requiring accurate unit conversions such as architectural design, engineering calculations, scientific experiments, manufacturing quality control, and unit standardization in international trade."
+      },
+      "faq": {
+        "title": "Frequently Asked Questions (FAQ)",
+        "accuracy": "Q. Are the conversion results accurate?",
+        "accuracyAnswer": "A. Yes, we use international standard conversion factors to ensure high accuracy. For temperature conversions, precise formulas are applied, and decimal calculations are handled with precision.",
+        "moreUnits": "Q. Will more units be added?",
+        "moreUnitsAnswer": "A. We plan to continuously add new units and categories based on user requests. Currently, we prioritize supporting the most commonly used units.",
+        "decimal": "Q. Can decimal places be adjusted?",
+        "decimalAnswer": "A. Currently, up to 6 decimal places are displayed and automatically rounded as needed. For scientific precision requirements, calculations are performed with full precision.",
+        "compound": "Q. Are compound unit conversions possible?",
+        "compoundAnswer": "A. Currently we support basic unit conversions, and compound units (e.g., m/s, kg/m³) will be added in future updates."
+      },
+      "tips": {
+        "title": "Usage Tips and Tricks",
+        "efficiency": "Efficient Usage",
+        "efficiencyTips": "Bookmark frequently used conversions, use bidirectional conversion button, reuse conversion history, quick sharing with copy function",
+        "accuracy": "Ensuring Accuracy",
+        "accuracyTips": "Check input value ranges, verify unit symbols accurately, pay attention to absolute temperature in temperature conversions, recommend verification for important calculations"
+      }
+    }
   }
 }

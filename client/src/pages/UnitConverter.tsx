@@ -30,8 +30,9 @@ interface ConversionHistory {
 }
 
 export default function UnitConverter() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
+  const currentLang = i18n.language;
   
   const [activeTab, setActiveTab] = useState('length');
   const [inputValue, setInputValue] = useState('1');

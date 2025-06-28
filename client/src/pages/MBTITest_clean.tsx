@@ -886,7 +886,7 @@ export default function MBTITest() {
         <Card>
           <CardHeader>
             <CardTitle className="text-xl text-center">
-              질문 {currentQuestion + 1}
+              {t('mbtiTest.questionNumber', { number: currentQuestion + 1 })}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">

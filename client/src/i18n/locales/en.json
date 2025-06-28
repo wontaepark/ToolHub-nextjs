@@ -827,5 +827,8 @@
         "accuracyTips": "Check input value ranges, verify unit symbols accurately, pay attention to absolute temperature in temperature conversions, recommend verification for important calculations"
       }
     }
+  },
+  "mbtiTest": {
+    "questionNumber": "Question {{number}}"
   }
 }

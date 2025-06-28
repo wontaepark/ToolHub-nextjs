@@ -827,5 +827,8 @@
         "accuracyTips": "入力値範囲の確認、単位記号の正確な確認、温度変換時の絶対温度注意、重要な計算は検算推奨"
       }
     }
+  },
+  "mbtiTest": {
+    "questionNumber": "質問 {{number}}"
   }
 }

@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-center md:text-left">
             <p className="text-xs md:text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Toolhub.tools. All rights reserved.
+              © {new Date().getFullYear()} Toolhub.tools. {t('footer.allRightsReserved')}
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 mt-2">
               <Link href="/privacy">

@@ -24,6 +24,9 @@
     "darkMode": "ダークモードに切り替え",
     "openMenu": "メニューを開く"
   },
+  "footer": {
+    "allRightsReserved": "著作権所有。"
+  },
   "home": {
     "title": "ToolHub.tools",
     "subtitle": "日常をより便利にするツールコレクション",

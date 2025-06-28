@@ -24,6 +24,9 @@
     "darkMode": "Switch to dark mode",
     "openMenu": "Open menu"
   },
+  "footer": {
+    "allRightsReserved": "All rights reserved."
+  },
   "home": {
     "title": "ToolHub.tools",
     "subtitle": "A collection of tools to make your daily life more convenient",

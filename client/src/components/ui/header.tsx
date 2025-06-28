@@ -89,7 +89,7 @@ export default function Header() {
             size="icon" 
             className="md:hidden h-9 w-9" 
             onClick={toggleMobileMenu}
-            aria-label="메뉴 열기"
+            aria-label={t('header.openMenu')}
           >
             <Menu className="h-4 w-4" />
           </Button>

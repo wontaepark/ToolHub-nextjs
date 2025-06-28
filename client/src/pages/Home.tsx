@@ -54,59 +54,132 @@ export default function Home() {
       <div className="mb-16 px-4">
         <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border p-8 md:p-12 shadow-lg">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">
-            ToolHub.tools 소개
+            {currentLang === 'ko' ? 'ToolHub.tools 소개' : 
+             currentLang === 'ja' ? 'ToolHub.tools 紹介' : 
+             'About ToolHub.tools'}
           </h2>
           
           <div className="space-y-6 text-muted-foreground leading-relaxed">
             <p className="text-lg">
-              ToolHub.tools는 일상생활과 업무에서 자주 사용하는 다양한 도구들을 한 곳에 모아놓은 
-              종합 온라인 툴킷입니다. 복잡한 설치나 회원가입 없이 웹브라우저에서 바로 사용할 수 있는 
-              실용적인 도구들을 제공합니다.
+              {currentLang === 'ko' ? 
+                'ToolHub.tools는 일상생활과 업무에서 자주 사용하는 다양한 도구들을 한 곳에 모아놓은 종합 온라인 툴킷입니다. 복잡한 설치나 회원가입 없이 웹브라우저에서 바로 사용할 수 있는 실용적인 도구들을 제공합니다.' :
+               currentLang === 'ja' ? 
+                'ToolHub.toolsは日常生活と業務でよく使用する様々なツールを一箇所に集めた総合オンラインツールキットです。複雑なインストールや会員登録なしにウェブブラウザですぐに使用できる実用的なツールを提供します。' :
+                'ToolHub.tools is a comprehensive online toolkit that gathers various tools frequently used in daily life and work in one place. We provide practical tools that can be used directly in a web browser without complex installation or registration.'
+              }
             </p>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">🎯 우리의 목적</h3>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  {currentLang === 'ko' ? '🎯 우리의 목적' : 
+                   currentLang === 'ja' ? '🎯 私たちの目的' : 
+                   '🎯 Our Purpose'}
+                </h3>
                 <p>
-                  사용자의 시간을 절약하고 일상의 불편함을 해소하기 위해 꼭 필요한 도구들을 
-                  선별하여 제공합니다. 학생, 직장인, 개발자 등 모든 사용자가 쉽고 빠르게 
-                  활용할 수 있도록 직관적인 인터페이스로 설계되었습니다.
+                  {currentLang === 'ko' ? 
+                    '사용자의 시간을 절약하고 일상의 불편함을 해소하기 위해 꼭 필요한 도구들을 선별하여 제공합니다. 학생, 직장인, 개발자 등 모든 사용자가 쉽고 빠르게 활용할 수 있도록 직관적인 인터페이스로 설계되었습니다.' :
+                   currentLang === 'ja' ? 
+                    'ユーザーの時間を節約し、日常の不便さを解消するために必要不可欠なツールを厳選して提供します。学生、会社員、開発者など全てのユーザーが簡単かつ迅速に活用できるよう直感的なインターフェースで設計されています。' :
+                    'We provide carefully selected essential tools to save users time and resolve daily inconveniences. Designed with an intuitive interface so that all users - students, office workers, developers, and more - can easily and quickly utilize our tools.'
+                  }
                 </p>
               </div>
               
               <div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">✨ 제공 서비스</h3>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  {currentLang === 'ko' ? '✨ 제공 서비스' : 
+                   currentLang === 'ja' ? '✨ 提供サービス' : 
+                   '✨ Services Offered'}
+                </h3>
                 <ul className="space-y-2">
-                  <li>• 계산기 및 단위 변환기</li>
-                  <li>• 타이머 및 포모도로 생산성 도구</li>
-                  <li>• 비밀번호 생성기 및 보안 도구</li>
-                  <li>• 유튜브 썸네일 다운로더</li>
-                  <li>• MBTI 성격 테스트</li>
-                  <li>• 추첨 및 랜덤 생성 도구</li>
+                  <li>
+                    {currentLang === 'ko' ? '• 계산기 및 단위 변환기' : 
+                     currentLang === 'ja' ? '• 計算機および単位変換器' : 
+                     '• Calculator and Unit Converter'}
+                  </li>
+                  <li>
+                    {currentLang === 'ko' ? '• 타이머 및 포모도로 생산성 도구' : 
+                     currentLang === 'ja' ? '• タイマーおよびポモドーロ生産性ツール' : 
+                     '• Timer and Pomodoro Productivity Tools'}
+                  </li>
+                  <li>
+                    {currentLang === 'ko' ? '• 비밀번호 생성기 및 보안 도구' : 
+                     currentLang === 'ja' ? '• パスワード生成器およびセキュリティツール' : 
+                     '• Password Generator and Security Tools'}
+                  </li>
+                  <li>
+                    {currentLang === 'ko' ? '• 유튜브 썸네일 다운로더' : 
+                     currentLang === 'ja' ? '• YouTubeサムネイルダウンローダー' : 
+                     '• YouTube Thumbnail Downloader'}
+                  </li>
+                  <li>
+                    {currentLang === 'ko' ? '• MBTI 성격 테스트' : 
+                     currentLang === 'ja' ? '• MBTI性格テスト' : 
+                     '• MBTI Personality Test'}
+                  </li>
+                  <li>
+                    {currentLang === 'ko' ? '• 추첨 및 랜덤 생성 도구' : 
+                     currentLang === 'ja' ? '• 抽選およびランダム生成ツール' : 
+                     '• Raffle and Random Generation Tools'}
+                  </li>
                 </ul>
               </div>
             </div>
             
             <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
-              <h3 className="text-xl font-semibold mb-3 text-foreground">🌟 사용자 혜택</h3>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">
+                {currentLang === 'ko' ? '🌟 사용자 혜택' : 
+                 currentLang === 'ja' ? '🌟 ユーザー特典' : 
+                 '🌟 User Benefits'}
+              </h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="text-center">
-                  <div className="text-primary font-bold text-lg mb-2">100% 무료</div>
-                  <p className="text-sm">모든 도구를 제한 없이 무료로 이용</p>
+                  <div className="text-primary font-bold text-lg mb-2">
+                    {currentLang === 'ko' ? '100% 무료' : 
+                     currentLang === 'ja' ? '100% 無料' : 
+                     '100% Free'}
+                  </div>
+                  <p className="text-sm">
+                    {currentLang === 'ko' ? '모든 도구를 제한 없이 무료로 이용' : 
+                     currentLang === 'ja' ? '全てのツールを制限なく無料で利用' : 
+                     'Use all tools for free without limitations'}
+                  </p>
                 </div>
                 <div className="text-center">
-                  <div className="text-primary font-bold text-lg mb-2">즉시 사용</div>
-                  <p className="text-sm">설치나 가입 없이 바로 접속하여 사용</p>
+                  <div className="text-primary font-bold text-lg mb-2">
+                    {currentLang === 'ko' ? '즉시 사용' : 
+                     currentLang === 'ja' ? '即座に使用' : 
+                     'Instant Use'}
+                  </div>
+                  <p className="text-sm">
+                    {currentLang === 'ko' ? '설치나 가입 없이 바로 접속하여 사용' : 
+                     currentLang === 'ja' ? 'インストールや登録なしで即座にアクセスして使用' : 
+                     'Access and use immediately without installation or registration'}
+                  </p>
                 </div>
                 <div className="text-center">
-                  <div className="text-primary font-bold text-lg mb-2">모든 기기</div>
-                  <p className="text-sm">PC, 모바일, 태블릿 어디서나 최적화</p>
+                  <div className="text-primary font-bold text-lg mb-2">
+                    {currentLang === 'ko' ? '모든 기기' : 
+                     currentLang === 'ja' ? '全てのデバイス' : 
+                     'All Devices'}
+                  </div>
+                  <p className="text-sm">
+                    {currentLang === 'ko' ? 'PC, 모바일, 태블릿 어디서나 최적화' : 
+                     currentLang === 'ja' ? 'PC、モバイル、タブレットどこでも最適化' : 
+                     'Optimized for PC, mobile, and tablet everywhere'}
+                  </p>
                 </div>
               </div>
             </div>
             
             <p className="text-center text-lg font-medium text-foreground">
-              ToolHub.tools와 함께 더욱 효율적이고 편리한 디지털 라이프를 경험해보세요! 🚀
+              {currentLang === 'ko' ? 
+                'ToolHub.tools와 함께 더욱 효율적이고 편리한 디지털 라이프를 경험해보세요! 🚀' :
+               currentLang === 'ja' ? 
+                'ToolHub.toolsで、より効率的で便利なデジタルライフを体験してください！🚀' :
+                'Experience a more efficient and convenient digital life with ToolHub.tools! 🚀'
+              }
             </p>
           </div>
         </div>

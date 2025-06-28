@@ -608,24 +608,68 @@ export default function NumberRaffle() {
 
         {/* 주요 기능 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '주요 기능' : 
+             currentLang === 'ja' ? '主要機能' : 
+             'Main Features'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">추첨 옵션</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '추첨 옵션' : 
+                 currentLang === 'ja' ? '抽選オプション' : 
+                 'Raffle Options'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 범위 설정 (최소값 ~ 최대값)</li>
-                <li>• 추첨 개수 선택</li>
-                <li>• 중복 허용/비허용 설정</li>
-                <li>• 즉시 결과 표시</li>
+                <li>
+                  {currentLang === 'ko' ? '• 범위 설정 (최소값 ~ 최대값)' : 
+                   currentLang === 'ja' ? '• 範囲設定（最小値～最大値）' : 
+                   '• Range Setting (Min ~ Max values)'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 추첨 개수 선택' : 
+                   currentLang === 'ja' ? '• 抽選数選択' : 
+                   '• Number of draws selection'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 중복 허용/비허용 설정' : 
+                   currentLang === 'ja' ? '• 重複許可/非許可設定' : 
+                   '• Allow/Disallow duplicates setting'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 즉시 결과 표시' : 
+                   currentLang === 'ja' ? '• 即座に結果表示' : 
+                   '• Instant result display'}
+                </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">결과 관리</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '결과 관리' : 
+                 currentLang === 'ja' ? '結果管理' : 
+                 'Result Management'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 추첨 기록 저장</li>
-                <li>• 시간 순서별 정렬</li>
-                <li>• 결과 복사 기능</li>
-                <li>• 기록 초기화</li>
+                <li>
+                  {currentLang === 'ko' ? '• 추첨 기록 저장' : 
+                   currentLang === 'ja' ? '• 抽選記録保存' : 
+                   '• Save raffle history'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 시간 순서별 정렬' : 
+                   currentLang === 'ja' ? '• 時間順ソート' : 
+                   '• Sort by time order'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 결과 복사 기능' : 
+                   currentLang === 'ja' ? '• 結果コピー機能' : 
+                   '• Copy result function'}
+                </li>
+                <li>
+                  {currentLang === 'ko' ? '• 기록 초기화' : 
+                   currentLang === 'ja' ? '• 記録初期化' : 
+                   '• Clear history'}
+                </li>
               </ul>
             </div>
           </div>

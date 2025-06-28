@@ -279,12 +279,24 @@ export default function ThumbnailDownloader() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-3">편의 기능</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  {currentLang === 'ko' ? '편의 기능' : 
+                   currentLang === 'ja' ? '便利機能' : 
+                   'Convenience Features'}
+                </h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• 원클릭 다운로드</li>
-                  <li>• 미리보기 제공</li>
-                  <li>• 동영상 정보 표시</li>
-                  <li>• 모든 기기 지원</li>
+                  <li>• {currentLang === 'ko' ? '원클릭 다운로드' : 
+                        currentLang === 'ja' ? 'ワンクリックダウンロード' : 
+                        'One-Click Download'}</li>
+                  <li>• {currentLang === 'ko' ? '미리보기 제공' : 
+                        currentLang === 'ja' ? 'プレビュー提供' : 
+                        'Preview Available'}</li>
+                  <li>• {currentLang === 'ko' ? '동영상 정보 표시' : 
+                        currentLang === 'ja' ? '動画情報表示' : 
+                        'Video Information Display'}</li>
+                  <li>• {currentLang === 'ko' ? '모든 기기 지원' : 
+                        currentLang === 'ja' ? '全デバイス対応' : 
+                        'All Device Support'}</li>
                 </ul>
               </div>
             </div>
@@ -339,10 +351,18 @@ export default function ThumbnailDownloader() {
                'Usage Tips'}
             </h2>
             <ul className="space-y-3 text-muted-foreground">
-              <li>• 저작권을 준수하여 개인적인 용도로만 사용하세요</li>
-              <li>• 고화질이 필요한 경우 최대 해상도를 선택하세요</li>
-              <li>• 정확한 유튜브 URL을 입력해야 정상 작동합니다</li>
-              <li>• 일부 비공개 동영상은 썸네일을 가져올 수 없습니다</li>
+              <li>• {currentLang === 'ko' ? '저작권을 준수하여 개인적인 용도로만 사용하세요' : 
+                     currentLang === 'ja' ? '著作権を遵守して個人的な用途でのみご利用ください' : 
+                     'Please respect copyright and use only for personal purposes'}</li>
+              <li>• {currentLang === 'ko' ? '고화질이 필요한 경우 최대 해상도를 선택하세요' : 
+                     currentLang === 'ja' ? '高画質が必要な場合は最大解像度を選択してください' : 
+                     'Select maximum resolution when high quality is needed'}</li>
+              <li>• {currentLang === 'ko' ? '정확한 유튜브 URL을 입력해야 정상 작동합니다' : 
+                     currentLang === 'ja' ? '正確なYouTube URLを入力する必要があります' : 
+                     'Enter accurate YouTube URL for proper functionality'}</li>
+              <li>• {currentLang === 'ko' ? '일부 비공개 동영상은 썸네일을 가져올 수 없습니다' : 
+                     currentLang === 'ja' ? '一部の非公開動画はサムネイルを取得できません' : 
+                     'Some private videos may not allow thumbnail retrieval'}</li>
             </ul>
           </section>
         </div>

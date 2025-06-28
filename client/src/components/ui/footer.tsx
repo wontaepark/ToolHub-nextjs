@@ -31,6 +31,12 @@ export default function Footer() {
                   {t('contact.title')}
                 </span>
               </Link>
+              <span className="text-xs text-muted-foreground">•</span>
+              <Link href="/sitemap">
+                <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                  {t('sitemap.title', '사이트맵')}
+                </span>
+              </Link>
             </div>
           </div>
           <div className="flex space-x-4 md:space-x-6">

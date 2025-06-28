@@ -285,7 +285,7 @@ export default function Sitemap() {
                         </Button>
                       </Link>
                       {tool.isPopular && (
-                        <Badge variant="destructive" size="sm">
+                        <Badge variant="destructive">
                           <TrendingUp className="h-3 w-3 mr-1" />
                           인기
                         </Badge>

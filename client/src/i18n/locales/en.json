@@ -29,6 +29,9 @@
     "noResults": "No search results found",
     "tryOtherKeywords": "Try different keywords"
   },
+  "sitemap": {
+    "title": "Sitemap"
+  },
   "header": {
     "title": "ToolHub.tools",
     "lightMode": "Switch to light mode",

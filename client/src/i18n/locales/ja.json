@@ -29,6 +29,9 @@
     "noResults": "検索結果が見つかりません",
     "tryOtherKeywords": "他のキーワードを試してください"
   },
+  "sitemap": {
+    "title": "サイトマップ"
+  },
   "header": {
     "title": "ToolHub.tools",
     "lightMode": "ライトモードに切り替え",

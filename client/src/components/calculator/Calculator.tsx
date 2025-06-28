@@ -3,18 +3,11 @@ import { Card } from "@/components/ui/card";
 import { CalculatorDisplay } from "./CalculatorDisplay";
 import { CalculatorButton } from "./CalculatorButton";
 import { KeyboardShortcuts } from "./KeyboardShortcuts";
+import { CalculatorHistory } from "./CalculatorHistory";
+import { useCalculatorEnhanced } from "@/hooks/use-calculator-enhanced";
 
 interface CalculatorProps {
-  currentInput: string;
-  expression: string;
-  onNumberClick: (num: string) => void;
-  onOperationClick: (operation: string) => void;
-  onClearClick: () => void;
-  onClearEntryClick: () => void;
-  onBackspaceClick: () => void;
-  onDecimalClick: () => void;
-  onEqualsClick: () => void;
-  onNegateClick: () => void;
+  showHistory?: boolean;
 }
 
 export function Calculator({

@@ -1,43 +1,26 @@
 import { useTranslation } from 'react-i18next';
-import { Calculator } from "@/components/calculator/Calculator";
-import { CalculatorHistory } from "@/components/calculator/CalculatorHistory";
-import { useCalculator } from "@/hooks/use-calculator";
+import { EnhancedCalculator } from "@/components/calculator/EnhancedCalculator";
 import SEOHead from "@/components/SEOHead";
 
 export default function CalculatorPage() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language;
-  const { state, operations, calculations } = useCalculator();
 
   return (
     <div>
       <SEOHead toolId="calculator" />
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">온라인 계산기 - 무료 웹 계산기</h1>
-        <p className="text-muted-foreground text-lg mb-6">
-          간편하고 정확한 온라인 계산기로 복잡한 계산을 빠르게 처리하세요. 키보드 단축키 지원으로 더욱 효율적인 작업이 가능합니다.
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          고급 온라인 계산기 - 무료 웹 계산기
+        </h1>
+        <p className="text-muted-foreground text-lg mb-6 max-w-3xl mx-auto">
+          최신 기술로 구현된 고급 온라인 계산기입니다. 메모리 기능, 복사 기능, 오류 처리, 계산 기록 등 
+          전문적인 기능을 제공하며 키보드 단축키와 모바일 터치를 완벽 지원합니다.
         </p>
       </div>
       
-      <div className="flex flex-col md:flex-row gap-6 mb-12">
-        <Calculator 
-          currentInput={state.currentInput}
-          expression={state.expression}
-          onNumberClick={operations.handleNumberInput}
-          onOperationClick={operations.handleOperation}
-          onClearClick={operations.clear}
-          onClearEntryClick={operations.clearEntry}
-          onBackspaceClick={operations.backspace}
-          onDecimalClick={operations.handleDecimalInput}
-          onEqualsClick={operations.calculate}
-          onNegateClick={() => operations.negate()}
-        />
-        
-        <CalculatorHistory 
-          history={state.history} 
-          onClearHistory={calculations.clearHistory}
-          onUseResult={calculations.useHistoryResult}
-        />
+      <div className="mb-12">
+        <EnhancedCalculator showHistory={true} />
       </div>
 
       {/* Detailed Content Section */}

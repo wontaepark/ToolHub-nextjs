@@ -155,3 +155,200 @@
     display: none;
   }
 }
+
+/* Enhanced Calculator Styles */
+.calculator-display {
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.calculator-button {
+  transition: all 0.2s ease;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calculator-button:active {
+  transform: translateY(2px) scale(0.95);
+  transition-duration: 0.1s;
+}
+
+.calculator-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+/* Ripple effect for calculator buttons */
+.calculator-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  pointer-events: none;
+}
+
+.calculator-button:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* Enhanced mobile styles */
+@media (max-width: 768px) {
+  .calculator-button {
+    min-height: 60px;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .calculator-display {
+    font-size: 2.5rem;
+    padding: 1.5rem;
+  }
+  
+  /* Improve touch targets */
+  .calculator-button:not(:active):hover {
+    transform: none;
+  }
+  
+  /* Better spacing on mobile */
+  .calculator-grid {
+    gap: 0.75rem;
+  }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  .calculator-button {
+    border: 2px solid currentColor;
+    background: Canvas;
+    color: CanvasText;
+  }
+  
+  .calculator-button:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .calculator-button {
+    transition: none;
+  }
+  
+  .calculator-button::before {
+    display: none;
+  }
+  
+  .calculator-display {
+    transition: none;
+  }
+}
+
+/* Dark mode enhancements */
+.dark .calculator-button {
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .calculator-button:hover {
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Number input animation */
+@keyframes numberInput {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.calculator-display-animate {
+  animation: numberInput 0.2s ease-out;
+}
+
+/* Error shake animation */
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.calculator-error {
+  animation: errorShake 0.5s ease-in-out;
+}
+
+/* Memory indicator pulse */
+@keyframes memoryPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.memory-indicator {
+  animation: memoryPulse 2s infinite;
+}
+
+/* Equals button special effects */
+.calculator-button.equals {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Copy success animation */
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.copy-success {
+  animation: copySuccess 0.3s ease-out;
+}

@@ -486,21 +486,45 @@ export default function UnitConverter() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">지원 단위 카테고리</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '지원 단위 카테고리' : 
+                 currentLang === 'ja' ? 'サポート単位カテゴリ' : 
+                 'Supported Unit Categories'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 길이: mm, cm, m, km, inch, feet, yard</li>
-                <li>• 무게: g, kg, oz, lb, ton</li>
-                <li>• 온도: 섭씨, 화씨, 켈빈</li>
-                <li>• 부피: ml, L, cup, gallon, pint</li>
+                <li>• {currentLang === 'ko' ? '길이: mm, cm, m, km, inch, feet, yard' : 
+                      currentLang === 'ja' ? '長さ: mm, cm, m, km, inch, feet, yard' : 
+                      'Length: mm, cm, m, km, inch, feet, yard'}</li>
+                <li>• {currentLang === 'ko' ? '무게: g, kg, oz, lb, ton' : 
+                      currentLang === 'ja' ? '重量: g, kg, oz, lb, ton' : 
+                      'Weight: g, kg, oz, lb, ton'}</li>
+                <li>• {currentLang === 'ko' ? '온도: 섭씨, 화씨, 켈빈' : 
+                      currentLang === 'ja' ? '温度: 摂氏、華氏、ケルビン' : 
+                      'Temperature: Celsius, Fahrenheit, Kelvin'}</li>
+                <li>• {currentLang === 'ko' ? '부피: ml, L, cup, gallon, pint' : 
+                      currentLang === 'ja' ? '体積: ml, L, cup, gallon, pint' : 
+                      'Volume: ml, L, cup, gallon, pint'}</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">편의 기능</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '편의 기능' : 
+                 currentLang === 'ja' ? '便利機能' : 
+                 'Convenience Features'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 실시간 자동 변환</li>
-                <li>• 양방향 변환 지원</li>
-                <li>• 변환 기록 저장</li>
-                <li>• 정확한 소수점 계산</li>
+                <li>• {currentLang === 'ko' ? '실시간 자동 변환' : 
+                      currentLang === 'ja' ? 'リアルタイム自動変換' : 
+                      'Real-time automatic conversion'}</li>
+                <li>• {currentLang === 'ko' ? '양방향 변환 지원' : 
+                      currentLang === 'ja' ? '双方向変換サポート' : 
+                      'Bidirectional conversion support'}</li>
+                <li>• {currentLang === 'ko' ? '변환 기록 저장' : 
+                      currentLang === 'ja' ? '変換履歴保存' : 
+                      'Conversion history saving'}</li>
+                <li>• {currentLang === 'ko' ? '정확한 소수점 계산' : 
+                      currentLang === 'ja' ? '正確な小数点計算' : 
+                      'Accurate decimal calculations'}</li>
               </ul>
             </div>
           </div>
@@ -508,30 +532,55 @@ export default function UnitConverter() {
 
         {/* 상세 사용법 가이드 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '상세 사용법 가이드' : 
+             currentLang === 'ja' ? '詳細使用法ガイド' : 
+             'Detailed Usage Guide'}
+          </h2>
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold mb-2">1. 기본 단위 변환</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '1. 기본 단위 변환' : 
+                 currentLang === 'ja' ? '1. 基本単位変換' : 
+                 '1. Basic Unit Conversion'}
+              </h3>
               <p className="text-muted-foreground">
-                원하는 카테고리 탭(길이, 무게, 온도, 부피)을 선택하고, 변환할 값을 입력합니다. 
-                '변환 전' 단위와 '변환 후' 단위를 드롭다운에서 선택하면 자동으로 결과가 계산됩니다. 
-                입력값을 수정할 때마다 실시간으로 변환 결과가 업데이트됩니다.
+                {currentLang === 'ko' ? 
+                  '원하는 카테고리 탭(길이, 무게, 온도, 부피)을 선택하고, 변환할 값을 입력합니다. \'변환 전\' 단위와 \'변환 후\' 단위를 드롭다운에서 선택하면 자동으로 결과가 계산됩니다. 입력값을 수정할 때마다 실시간으로 변환 결과가 업데이트됩니다.' :
+                 currentLang === 'ja' ? 
+                  '希望するカテゴリタブ（長さ、重量、温度、体積）を選択し、変換する値を入力します。「変換前」単位と「変換後」単位をドロップダウンから選択すると自動的に結果が計算されます。入力値を修正するたびにリアルタイムで変換結果が更新されます。' :
+                  'Select the desired category tab (length, weight, temperature, volume) and enter the value to convert. Choose the "from" and "to" units from the dropdowns and the result will be calculated automatically. The conversion result updates in real-time whenever you modify the input value.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">2. 양방향 변환 활용</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '2. 양방향 변환 활용' : 
+                 currentLang === 'ja' ? '2. 双方向変換活用' : 
+                 '2. Bidirectional Conversion Usage'}
+              </h3>
               <p className="text-muted-foreground">
-                가운데 화살표 버튼을 클릭하면 변환 전과 변환 후 단위가 서로 바뀝니다. 
-                이 기능을 통해 역방향 변환을 쉽게 수행할 수 있어, 
-                예를 들어 미터에서 피트로 변환했다가 다시 피트에서 미터로 변환할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '가운데 화살표 버튼을 클릭하면 변환 전과 변환 후 단위가 서로 바뀝니다. 이 기능을 통해 역방향 변환을 쉽게 수행할 수 있어, 예를 들어 미터에서 피트로 변환했다가 다시 피트에서 미터로 변환할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '中央の矢印ボタンをクリックすると、変換前と変換後の単位が入れ替わります。この機能により逆方向変換を簡単に実行でき、例えばメートルからフィートに変換した後、再びフィートからメートルに変換することができます。' :
+                  'Clicking the center arrow button swaps the "from" and "to" units. This feature allows you to easily perform reverse conversions, for example converting from meters to feet and then back from feet to meters.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">3. 변환 기록 관리</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '3. 변환 기록 관리' : 
+                 currentLang === 'ja' ? '3. 変換履歴管理' : 
+                 '3. Conversion History Management'}
+              </h3>
               <p className="text-muted-foreground">
-                모든 변환 결과는 자동으로 기록되어 하단의 변환 기록 섹션에 표시됩니다. 
-                이전 변환 결과를 클릭하면 해당 값을 현재 입력으로 불러올 수 있으며, 
-                '기록 지우기' 버튼으로 모든 기록을 삭제할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '모든 변환 결과는 자동으로 기록되어 하단의 변환 기록 섹션에 표시됩니다. 이전 변환 결과를 클릭하면 해당 값을 현재 입력으로 불러올 수 있으며, \'기록 지우기\' 버튼으로 모든 기록을 삭제할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  'すべての変換結果は自動的に記録され、下部の変換履歴セクションに表示されます。以前の変換結果をクリックするとその値を現在の入力として読み込むことができ、「履歴削除」ボタンですべての履歴を削除できます。' :
+                  'All conversion results are automatically recorded and displayed in the conversion history section at the bottom. You can click on previous conversion results to load those values as current input, and use the "Clear History" button to delete all records.'
+                }
               </p>
             </div>
           </div>
@@ -539,22 +588,40 @@ export default function UnitConverter() {
 
         {/* 활용 예시 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '활용 예시' : 
+             currentLang === 'ja' ? '活用例' : 
+             'Usage Examples'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
-              <h3 className="text-lg font-semibold mb-2">일상 생활</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '일상 생활' : 
+                 currentLang === 'ja' ? '日常生活' : 
+                 'Daily Life'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                요리할 때 레시피의 단위 변환, 해외 여행 시 현지 단위 이해, 
-                운동 기록 관리, 온라인 쇼핑에서 제품 크기 확인 등 
-                일상에서 자주 마주치는 단위 변환 상황에 유용합니다.
+                {currentLang === 'ko' ? 
+                  '요리할 때 레시피의 단위 변환, 해외 여행 시 현지 단위 이해, 운동 기록 관리, 온라인 쇼핑에서 제품 크기 확인 등 일상에서 자주 마주치는 단위 변환 상황에 유용합니다.' :
+                 currentLang === 'ja' ? 
+                  '料理時のレシピ単位変換、海外旅行時の現地単位理解、運動記録管理、オンラインショッピングでの商品サイズ確認など、日常でよく遭遇する単位変換状況に便利です。' :
+                  'Useful for common unit conversion situations in daily life such as recipe unit conversions while cooking, understanding local units during overseas travel, managing exercise records, and checking product sizes in online shopping.'
+                }
               </p>
             </div>
             <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
-              <h3 className="text-lg font-semibold mb-2">전문 업무</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '전문 업무' : 
+                 currentLang === 'ja' ? '専門業務' : 
+                 'Professional Work'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                건축 설계, 공학 계산, 과학 실험, 제조업 품질 관리, 
-                국제 무역에서의 단위 표준화 등 전문적인 업무 환경에서 
-                정확한 단위 변환이 필요한 상황에 활용할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '건축 설계, 공학 계산, 과학 실험, 제조업 품질 관리, 국제 무역에서의 단위 표준화 등 전문적인 업무 환경에서 정확한 단위 변환이 필요한 상황에 활용할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '建築設計、工学計算、科学実験、製造業品質管理、国際貿易での単位標準化など、専門的な業務環境で正確な単位変換が必要な状況に活用できます。' :
+                  'Can be utilized in professional work environments requiring accurate unit conversions such as architectural design, engineering calculations, scientific experiments, manufacturing quality control, and unit standardization in international trade.'
+                }
               </p>
             </div>
           </div>
@@ -562,34 +629,70 @@ export default function UnitConverter() {
 
         {/* 자주 묻는 질문 FAQ */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">자주 묻는 질문 (FAQ)</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '자주 묻는 질문 (FAQ)' : 
+             currentLang === 'ja' ? 'よくある質問 (FAQ)' : 
+             'Frequently Asked Questions (FAQ)'}
+          </h2>
           <div className="space-y-4">
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 변환 결과가 정확한가요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 변환 결과가 정확한가요?' : 
+                 currentLang === 'ja' ? 'Q. 変換結果は正確ですか？' : 
+                 'Q. Are the conversion results accurate?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 네, 국제 표준 변환 계수를 사용하여 높은 정확도를 보장합니다. 
-                온도 변환의 경우 정확한 공식을 적용하며, 소수점 계산도 정밀하게 처리됩니다.
+                {currentLang === 'ko' ? 
+                  'A. 네, 국제 표준 변환 계수를 사용하여 높은 정확도를 보장합니다. 온도 변환의 경우 정확한 공식을 적용하며, 소수점 계산도 정밀하게 처리됩니다.' :
+                 currentLang === 'ja' ? 
+                  'A. はい、国際標準変換係数を使用して高い精度を保証します。温度変換の場合は正確な公式を適用し、小数点計算も精密に処理されます。' :
+                  'A. Yes, we guarantee high accuracy using international standard conversion factors. For temperature conversions, accurate formulas are applied, and decimal calculations are processed precisely.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 더 많은 단위를 추가할 예정인가요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 더 많은 단위를 추가할 예정인가요?' : 
+                 currentLang === 'ja' ? 'Q. より多くの単位を追加する予定ですか？' : 
+                 'Q. Will more units be added in the future?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 사용자 요청에 따라 지속적으로 새로운 단위와 카테고리를 추가할 예정입니다. 
-                현재는 가장 일반적으로 사용되는 단위들을 우선 지원하고 있습니다.
+                {currentLang === 'ko' ? 
+                  'A. 사용자 요청에 따라 지속적으로 새로운 단위와 카테고리를 추가할 예정입니다. 현재는 가장 일반적으로 사용되는 단위들을 우선 지원하고 있습니다.' :
+                 currentLang === 'ja' ? 
+                  'A. ユーザーのリクエストに応じて継続的に新しい単位とカテゴリを追加する予定です。現在は最も一般的に使用される単位を優先的にサポートしています。' :
+                  'A. We plan to continuously add new units and categories based on user requests. Currently, we prioritize supporting the most commonly used units.'
+                }
               </p>
             </div>
             <div className="border-b border-border pb-4">
-              <h3 className="font-semibold mb-2">Q. 소수점 자릿수를 조정할 수 있나요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 소수점 자릿수를 조정할 수 있나요?' : 
+                 currentLang === 'ja' ? 'Q. 小数点桁数を調整できますか？' : 
+                 'Q. Can I adjust the decimal places?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 현재는 최대 6자리 소수점까지 표시되며, 필요에 따라 자동으로 반올림됩니다. 
-                과학적 정밀도가 필요한 경우 전체 정밀도로 계산됩니다.
+                {currentLang === 'ko' ? 
+                  'A. 현재는 최대 6자리 소수점까지 표시되며, 필요에 따라 자동으로 반올림됩니다. 과학적 정밀도가 필요한 경우 전체 정밀도로 계산됩니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 現在は最大6桁の小数点まで表示され、必要に応じて自動的に四捨五入されます。科学的精度が必要な場合は完全な精度で計算されます。' :
+                  'A. Currently, up to 6 decimal places are displayed and automatically rounded as needed. For scientific precision requirements, calculations are performed with full precision.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Q. 복합 단위 변환도 가능한가요?</h3>
+              <h3 className="font-semibold mb-2">
+                {currentLang === 'ko' ? 'Q. 복합 단위 변환도 가능한가요?' : 
+                 currentLang === 'ja' ? 'Q. 複合単位変換も可能ですか？' : 
+                 'Q. Are compound unit conversions possible?'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                A. 현재는 기본 단위 변환을 지원하며, 복합 단위(예: m/s, kg/m³)는 
-                향후 업데이트에서 추가할 예정입니다.
+                {currentLang === 'ko' ? 
+                  'A. 현재는 기본 단위 변환을 지원하며, 복합 단위(예: m/s, kg/m³)는 향후 업데이트에서 추가할 예정입니다.' :
+                 currentLang === 'ja' ? 
+                  'A. 現在は基本単位変換をサポートしており、複合単位（例：m/s、kg/m³）は今後のアップデートで追加予定です。' :
+                  'A. Currently we support basic unit conversions, and compound units (e.g., m/s, kg/m³) will be added in future updates.'
+                }
               </p>
             </div>
           </div>

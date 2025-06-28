@@ -1,14 +1,17 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Star, Zap } from "lucide-react";
+import { Sparkles, Star, Zap, Search } from "lucide-react";
+import { useState } from 'react';
 import AdSense from "@/components/AdSense";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language;
+  const [, setLocation] = useLocation();
+  const [searchQuery, setSearchQuery] = useState('');
   
   return (
     <div>

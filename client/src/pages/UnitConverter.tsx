@@ -707,21 +707,45 @@ export default function UnitConverter() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">효율적인 사용</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '효율적인 사용' : 
+                 currentLang === 'ja' ? '効率的な使用' : 
+                 'Efficient Usage'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 자주 사용하는 변환은 북마크</li>
-                <li>• 양방향 변환 버튼 활용</li>
-                <li>• 변환 기록으로 재사용</li>
-                <li>• 복사 기능으로 빠른 공유</li>
+                <li>• {currentLang === 'ko' ? '자주 사용하는 변환은 북마크' : 
+                      currentLang === 'ja' ? 'よく使用する変換はブックマーク' : 
+                      'Bookmark frequently used conversions'}</li>
+                <li>• {currentLang === 'ko' ? '양방향 변환 버튼 활용' : 
+                      currentLang === 'ja' ? '双方向変換ボタン活用' : 
+                      'Utilize bidirectional conversion button'}</li>
+                <li>• {currentLang === 'ko' ? '변환 기록으로 재사용' : 
+                      currentLang === 'ja' ? '変換履歴で再使用' : 
+                      'Reuse with conversion history'}</li>
+                <li>• {currentLang === 'ko' ? '복사 기능으로 빠른 공유' : 
+                      currentLang === 'ja' ? 'コピー機能で素早く共有' : 
+                      'Quick sharing with copy function'}</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">정확성 확보</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '정확성 확보' : 
+                 currentLang === 'ja' ? '正確性確保' : 
+                 'Ensuring Accuracy'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 입력값 범위 확인</li>
-                <li>• 단위 기호 정확히 확인</li>
-                <li>• 온도 변환 시 절대온도 주의</li>
-                <li>• 중요한 계산은 검산 권장</li>
+                <li>• {currentLang === 'ko' ? '입력값 범위 확인' : 
+                      currentLang === 'ja' ? '入力値範囲確認' : 
+                      'Check input value range'}</li>
+                <li>• {currentLang === 'ko' ? '단위 기호 정확히 확인' : 
+                      currentLang === 'ja' ? '単位記号を正確に確認' : 
+                      'Verify unit symbols accurately'}</li>
+                <li>• {currentLang === 'ko' ? '온도 변환 시 절대온도 주의' : 
+                      currentLang === 'ja' ? '温度変換時は絶対温度に注意' : 
+                      'Be careful with absolute temperature in conversions'}</li>
+                <li>• {currentLang === 'ko' ? '중요한 계산은 검산 권장' : 
+                      currentLang === 'ja' ? '重要な計算は検算を推奨' : 
+                      'Recommend double-checking important calculations'}</li>
               </ul>
             </div>
           </div>

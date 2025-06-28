@@ -251,7 +251,11 @@ export default function ThumbnailDownloader() {
 
           {/* 주요 기능 */}
           <section className="bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '주요 기능' : 
+               currentLang === 'ja' ? '主要機能' : 
+               'Main Features'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-3">다양한 해상도 지원</h3>
@@ -276,20 +280,40 @@ export default function ThumbnailDownloader() {
 
           {/* 활용 예시 */}
           <section className="bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '활용 예시' : 
+               currentLang === 'ja' ? '活用例' : 
+               'Usage Examples'}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
-                <h3 className="text-lg font-semibold mb-2">콘텐츠 제작</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '콘텐츠 제작' : 
+                   currentLang === 'ja' ? 'コンテンツ制作' : 
+                   'Content Creation'}
+                </h3>
                 <p className="text-muted-foreground text-sm">
-                  블로그 포스팅, 소셜미디어 콘텐츠, 프레젠테이션 자료 제작 시 
-                  참고 이미지나 설명용 이미지로 활용할 수 있습니다.
+                  {currentLang === 'ko' ? 
+                    '블로그 포스팅, 소셜미디어 콘텐츠, 프레젠테이션 자료 제작 시 참고 이미지나 설명용 이미지로 활용할 수 있습니다.' :
+                   currentLang === 'ja' ? 
+                    'ブログ投稿、ソーシャルメディアコンテンツ、プレゼンテーション資料制作時に参考画像や説明用画像として活用できます。' :
+                    'Perfect for blog posts, social media content, and presentation materials as reference or explanatory images.'
+                  }
                 </p>
               </div>
               <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
-                <h3 className="text-lg font-semibold mb-2">연구 및 분석</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '연구 및 분석' : 
+                   currentLang === 'ja' ? '研究・分析' : 
+                   'Research & Analysis'}
+                </h3>
                 <p className="text-muted-foreground text-sm">
-                  마케팅 연구, 트렌드 분석, 경쟁사 분석 등의 목적으로 
-                  썸네일 디자인을 수집하고 분석할 수 있습니다.
+                  {currentLang === 'ko' ? 
+                    '마케팅 연구, 트렌드 분석, 경쟁사 분석 등의 목적으로 썸네일 디자인을 수집하고 분석할 수 있습니다.' :
+                   currentLang === 'ja' ? 
+                    'マーケティング研究、トレンド分析、競合分析などの目的でサムネイルデザインを収集・分析できます。' :
+                    'Collect and analyze thumbnail designs for marketing research, trend analysis, competitor analysis, and more.'
+                  }
                 </p>
               </div>
             </div>

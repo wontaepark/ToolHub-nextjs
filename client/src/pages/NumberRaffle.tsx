@@ -677,20 +677,40 @@ export default function NumberRaffle() {
 
         {/* 활용 예시 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '활용 예시' : 
+             currentLang === 'ja' ? '活用例' : 
+             'Usage Examples'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
-              <h3 className="text-lg font-semibold mb-2">이벤트 및 게임</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '이벤트 및 게임' : 
+                 currentLang === 'ja' ? 'イベント・ゲーム' : 
+                 'Events & Games'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                경품 추첨, 팀 나누기, 발표 순서 정하기, 
-                보드게임 순서 결정, 벌칙 게임 등에 활용할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '경품 추첨, 팀 나누기, 발표 순서 정하기, 보드게임 순서 결정, 벌칙 게임 등에 활용할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '景品抽選、チーム分け、発表順決め、ボードゲーム順番決定、罰ゲームなどに活用できます。' :
+                  'Perfect for prize draws, team divisions, presentation order, board game turns, penalty games, and more.'
+                }
               </p>
             </div>
             <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
-              <h3 className="text-lg font-semibold mb-2">업무 및 학습</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '업무 및 학습' : 
+                 currentLang === 'ja' ? '業務・学習' : 
+                 'Work & Study'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                무작위 샘플링, 실험 설계, 설문 대상자 선정, 
-                업무 분배, 회의 순서 등 공정한 선택이 필요한 상황에 사용하세요.
+                {currentLang === 'ko' ? 
+                  '무작위 샘플링, 실험 설계, 설문 대상자 선정, 업무 분배, 회의 순서 등 공정한 선택이 필요한 상황에 사용하세요.' :
+                 currentLang === 'ja' ? 
+                  'ランダムサンプリング、実験設計、アンケート対象者選定、業務分担、会議順番など公正な選択が必要な状況でご利用ください。' :
+                  'Use for random sampling, experiment design, survey participant selection, task distribution, meeting order, and other situations requiring fair selection.'
+                }
               </p>
             </div>
           </div>

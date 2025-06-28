@@ -1,0 +1,392 @@
+1. 다국어 검색 데이터 구조
+javascriptconst toolsData = [
+  {
+    id: "calculator",
+    names: {
+      ko: "계산기",
+      en: "Calculator", 
+      ja: "電卓",
+      zh: "计算器",
+      es: "Calculadora",
+      fr: "Calculatrice",
+      de: "Rechner",
+      ru: "Калькулятор"
+    },
+    descriptions: {
+      ko: "기본 사칙연산 계산기",
+      en: "Basic arithmetic calculator",
+      ja: "基本的な四則演算電卓",
+      zh: "基本四则运算计算器",
+      es: "Calculadora aritmética básica",
+      fr: "Calculatrice arithmétique de base",
+      de: "Grundrechner für Arithmetik",
+      ru: "Базовый арифметический калькулятор"
+    },
+    keywords: {
+      ko: ["계산", "사칙연산", "수학", "더하기", "빼기", "곱하기", "나누기"],
+      en: ["calculation", "arithmetic", "math", "add", "subtract", "multiply", "divide"],
+      ja: ["計算", "算数", "数学", "足し算", "引き算", "掛け算", "割り算"],
+      zh: ["计算", "算术", "数学", "加法", "减法", "乘法", "除法"],
+      es: ["cálculo", "aritmética", "matemáticas", "suma", "resta", "multiplicación", "división"],
+      fr: ["calcul", "arithmétique", "mathématiques", "addition", "soustraction", "multiplication", "division"],
+      de: ["Berechnung", "Arithmetik", "Mathematik", "Addition", "Subtraktion", "Multiplikation", "Division"],
+      ru: ["вычисление", "арифметика", "математика", "сложение", "вычитание", "умножение", "деление"]
+    },
+    url: "/calculator"
+  },
+  {
+    id: "timer",
+    names: {
+      ko: "포모도로 타이머",
+      en: "Pomodoro Timer",
+      ja: "ポモドーロタイマー", 
+      zh: "番茄工作法计时器",
+      es: "Temporizador Pomodoro",
+      fr: "Minuteur Pomodoro",
+      de: "Pomodoro-Timer",
+      ru: "Помодоро таймер"
+    },
+    descriptions: {
+      ko: "집중력 향상을 위한 타이머",
+      en: "Timer for improving focus",
+      ja: "集中力向上のためのタイマー",
+      zh: "提高专注力的计时器",
+      es: "Temporizador para mejorar el enfoque",
+      fr: "Minuteur pour améliorer la concentration", 
+      de: "Timer zur Verbesserung der Konzentration",
+      ru: "Таймер для улучшения концентрации"
+    },
+    keywords: {
+      ko: ["타이머", "포모도로", "집중", "시간관리", "생산성", "휴식"],
+      en: ["timer", "pomodoro", "focus", "time management", "productivity", "break"],
+      ja: ["タイマー", "ポモドーロ", "集中", "時間管理", "生産性", "休憩"],
+      zh: ["计时器", "番茄工作法", "专注", "时间管理", "生产力", "休息"],
+      es: ["temporizador", "pomodoro", "enfoque", "gestión del tiempo", "productividad", "descanso"],
+      fr: ["minuteur", "pomodoro", "concentration", "gestion du temps", "productivité", "pause"],
+      de: ["timer", "pomodoro", "fokus", "zeitmanagement", "produktivität", "pause"],
+      ru: ["таймер", "помодоро", "фокус", "управление временем", "продуктивность", "перерыв"]
+    },
+    url: "/timer"
+  },
+  {
+    id: "random-generator",
+    names: {
+      ko: "랜덤 생성기",
+      en: "Random Generator",
+      ja: "ランダム生成器",
+      zh: "随机生成器", 
+      es: "Generador Aleatorio",
+      fr: "Générateur Aléatoire",
+      de: "Zufallsgenerator",
+      ru: "Генератор случайных чисел"
+    },
+    descriptions: {
+      ko: "숫자, 문자, 색상 등을 랜덤으로 생성",
+      en: "Generate random numbers, text, colors, etc.",
+      ja: "数字、文字、色などをランダムに生成",
+      zh: "随机生成数字、文本、颜色等",
+      es: "Generar números, texto, colores aleatorios, etc.",
+      fr: "Générer des nombres, textes, couleurs aléatoires, etc.",
+      de: "Zufällige Zahlen, Texte, Farben usw. generieren",
+      ru: "Генерация случайных чисел, текста, цветов и т.д."
+    },
+    keywords: {
+      ko: ["랜덤", "무작위", "생성기", "숫자", "문자", "색상", "추첨"],
+      en: ["random", "generator", "number", "text", "color", "lottery", "picker"],
+      ja: ["ランダム", "無作為", "生成器", "数字", "文字", "色", "抽選"],
+      zh: ["随机", "生成器", "数字", "文本", "颜色", "抽奖", "选择器"],
+      es: ["aleatorio", "generador", "número", "texto", "color", "sorteo", "selector"],
+      fr: ["aléatoire", "générateur", "nombre", "texte", "couleur", "tirage", "sélecteur"],
+      de: ["zufällig", "generator", "nummer", "text", "farbe", "lotterie", "auswahl"],
+      ru: ["случайный", "генератор", "число", "текст", "цвет", "лотерея", "выбор"]
+    },
+    url: "/random-generator"
+  }
+];
+
+2. 언어 감지 및 검색 함수
+javascript// 언어 감지 함수
+function detectLanguage(text) {
+  // 한글 패턴
+  if (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text)) return 'ko';
+  
+  // 일본어 패턴 (히라가나, 가타카나, 한자)
+  if (/[ひらがな]|[カタカナ]|[一-龯]/.test(text)) return 'ja';
+  
+  // 중국어 패턴 (간체)
+  if (/[一-龯]/.test(text) && !/[ひらがな]|[カタカナ]/.test(text)) return 'zh';
+  
+  // 러시아어 패턴
+  if (/[а-яё]/i.test(text)) return 'ru';
+  
+  // 독일어 특수문자
+  if (/[äöüß]/i.test(text)) return 'de';
+  
+  // 프랑스어 특수문자
+  if (/[àâäéèêëïîôöùûüÿç]/i.test(text)) return 'fr';
+  
+  // 스페인어 특수문자
+  if (/[ñáéíóúü]/i.test(text)) return 'es';
+  
+  // 기본값은 영어
+  return 'en';
+}
+
+// 다국어 검색 함수
+function searchToolsMultiLanguage(query) {
+  const normalizedQuery = query.toLowerCase().trim();
+  const detectedLang = detectLanguage(query);
+  
+  const results = toolsData.filter(tool => {
+    // 현재 감지된 언어로 검색
+    const currentLangMatches = checkLanguageMatch(tool, normalizedQuery, detectedLang);
+    
+    // 모든 언어에서 검색 (fallback)
+    const allLangMatches = Object.keys(tool.names).some(lang => 
+      checkLanguageMatch(tool, normalizedQuery, lang)
+    );
+    
+    return currentLangMatches || allLangMatches;
+  });
+  
+  // 관련도 점수로 정렬
+  return results.sort((a, b) => {
+    const scoreA = calculateRelevanceScore(a, normalizedQuery, detectedLang);
+    const scoreB = calculateRelevanceScore(b, normalizedQuery, detectedLang);
+    return scoreB - scoreA;
+  });
+}
+
+// 특정 언어에서 매치 확인
+function checkLanguageMatch(tool, query, lang) {
+  const name = tool.names[lang]?.toLowerCase() || '';
+  const description = tool.descriptions[lang]?.toLowerCase() || '';
+  const keywords = tool.keywords[lang] || [];
+  
+  // 이름에서 완전 매치
+  if (name.includes(query)) return true;
+  
+  // 설명에서 매치
+  if (description.includes(query)) return true;
+  
+  // 키워드에서 매치
+  return keywords.some(keyword => 
+    keyword.toLowerCase().includes(query) || 
+    query.includes(keyword.toLowerCase())
+  );
+}
+
+// 관련도 점수 계산
+function calculateRelevanceScore(tool, query, primaryLang) {
+  let score = 0;
+  
+  const name = tool.names[primaryLang]?.toLowerCase() || '';
+  const description = tool.descriptions[primaryLang]?.toLowerCase() || '';
+  const keywords = tool.keywords[primaryLang] || [];
+  
+  // 이름 완전 매치 (최고 점수)
+  if (name === query) score += 100;
+  else if (name.includes(query)) score += 50;
+  else if (query.includes(name)) score += 30;
+  
+  // 키워드 매치
+  keywords.forEach(keyword => {
+    if (keyword.toLowerCase() === query) score += 80;
+    else if (keyword.toLowerCase().includes(query)) score += 40;
+    else if (query.includes(keyword.toLowerCase())) score += 20;
+  });
+  
+  // 설명 매치
+  if (description.includes(query)) score += 10;
+  
+  return score;
+}
+
+3. 검색 UI 개선
+html<div class="search-container">
+  <div class="search-input-wrapper">
+    <input 
+      type="text" 
+      id="search-input" 
+      placeholder="도구 검색... (한국어, English, 日本語, 中文, Español, Français, Deutsch, Русский)"
+      autocomplete="off"
+    >
+    <div class="language-indicator" id="lang-indicator">🌐</div>
+    <button onclick="performSearch()">🔍</button>
+  </div>
+  
+  <div class="search-suggestions" id="search-suggestions">
+    <!-- 자동완성 결과 -->
+  </div>
+  
+  <div class="language-examples">
+    <small>
+      예시: "계산기", "Calculator", "電卓", "计算器", "Calculadora"
+    </small>
+  </div>
+</div>
+
+4. 자동완성 개선
+javascript// 다국어 자동완성 데이터
+const autocompleteSuggestions = {
+  ko: ["계산기", "타이머", "랜덤 생성기", "단위 변환기", "포모도로"],
+  en: ["calculator", "timer", "random generator", "unit converter", "pomodoro"],
+  ja: ["電卓", "タイマー", "ランダム生成器", "単位変換器", "ポモドーロ"],
+  zh: ["计算器", "计时器", "随机生成器", "单位转换器", "番茄工作法"],
+  es: ["calculadora", "temporizador", "generador aleatorio", "conversor", "pomodoro"],
+  fr: ["calculatrice", "minuteur", "générateur aléatoire", "convertisseur", "pomodoro"],
+  de: ["rechner", "timer", "zufallsgenerator", "umrechner", "pomodoro"],
+  ru: ["калькулятор", "таймер", "генератор", "конвертер", "помодоро"]
+};
+
+function showMultiLanguageSuggestions(input) {
+  const detectedLang = detectLanguage(input);
+  const currentLangSuggestions = autocompleteSuggestions[detectedLang] || [];
+  
+  // 현재 언어 + 영어 제안
+  const suggestions = [
+    ...currentLangSuggestions.filter(item => 
+      item.toLowerCase().includes(input.toLowerCase())
+    ),
+    ...autocompleteSuggestions.en.filter(item => 
+      item.toLowerCase().includes(input.toLowerCase()) && 
+      detectedLang !== 'en'
+    )
+  ].slice(0, 8); // 최대 8개까지
+  
+  displaySuggestions(suggestions, detectedLang);
+}
+
+function displaySuggestions(suggestions, detectedLang) {
+  const container = document.getElementById('search-suggestions');
+  const langIndicator = document.getElementById('lang-indicator');
+  
+  // 언어 표시기 업데이트
+  const langFlags = {
+    ko: '🇰🇷', en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳',
+    es: '🇪🇸', fr: '🇫🇷', de: '🇩🇪', ru: '🇷🇺'
+  };
+  langIndicator.textContent = langFlags[detectedLang] || '🌐';
+  
+  container.innerHTML = suggestions.map(suggestion => 
+    `<div class="suggestion-item" onclick="selectSuggestion('${suggestion}')">
+      ${suggestion}
+    </div>`
+  ).join('');
+}
+
+5. 검색 결과 표시 개선
+javascriptfunction displaySearchResults(results, query, detectedLang) {
+  const container = document.getElementById('search-results');
+  const langNames = {
+    ko: '한국어', en: 'English', ja: '日本語', zh: '中文',
+    es: 'Español', fr: 'Français', de: 'Deutsch', ru: 'Русский'
+  };
+  
+  if (results.length === 0) {
+    container.innerHTML = `
+      <div class="no-results">
+        <h3>검색 결과가 없습니다 / No results found</h3>
+        <p>다른 언어로 시도해보세요 / Try searching in other languages:</p>
+        <div class="language-suggestions">
+          ${Object.keys(langNames).map(lang => 
+            `<button onclick="translateAndSearch('${query}', '${lang}')">${langNames[lang]}</button>`
+          ).join('')}
+        </div>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = `
+    <div class="search-info">
+      <p>
+        "${query}" 검색 결과 (${langNames[detectedLang]}) - ${results.length}개 도구 발견
+      </p>
+    </div>
+    ${results.map(tool => `
+      <div class="search-result-item">
+        <h3>
+          <a href="${tool.url}">
+            ${tool.names[detectedLang] || tool.names.en}
+          </a>
+        </h3>
+        <p>${tool.descriptions[detectedLang] || tool.descriptions.en}</p>
+        <div class="multilang-names">
+          ${Object.entries(tool.names)
+            .filter(([lang]) => lang !== detectedLang)
+            .slice(0, 3)
+            .map(([lang, name]) => `<span class="lang-tag">${name} (${langNames[lang]})</span>`)
+            .join('')}
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+6. URL 및 SEO 고려사항
+javascript// URL에 언어 정보 포함
+function updateSearchURL(query, lang) {
+  const url = new URL(window.location);
+  url.searchParams.set('q', query);
+  url.searchParams.set('lang', lang);
+  window.history.pushState({}, '', url);
+}
+
+// 페이지 로드 시 URL에서 검색어 읽기
+function loadSearchFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('q');
+  const lang = params.get('lang');
+  
+  if (query) {
+    document.getElementById('search-input').value = query;
+    performSearch(query, lang);
+  }
+}
+
+7. 언어별 메타데이터
+html<!-- 다국어 검색 페이지 메타데이터 -->
+<title>도구 검색 | Tool Search | ツール検索 - ToolHub.tools</title>
+<meta name="description" content="다양한 온라인 도구를 한국어, 영어, 일본어, 중국어 등 여러 언어로 검색하세요. Search online tools in Korean, English, Japanese, Chinese and more.">
+<meta name="keywords" content="도구 검색, tool search, ツール検索, 工具搜索, herramientas, outils, werkzeuge, инструменты">
+
+<!-- 다국어 대체 URL -->
+<link rel="alternate" hreflang="ko" href="https://toolhub.tools/search?lang=ko">
+<link rel="alternate" hreflang="en" href="https://toolhub.tools/search?lang=en">
+<link rel="alternate" hreflang="ja" href="https://toolhub.tools/search?lang=ja">
+<link rel="alternate" hreflang="zh" href="https://toolhub.tools/search?lang=zh">
+
+8. 성능 최적화
+javascript// 검색어 캐싱
+const searchCache = new Map();
+
+function cachedSearch(query) {
+  const cacheKey = query.toLowerCase();
+  
+  if (searchCache.has(cacheKey)) {
+    return searchCache.get(cacheKey);
+  }
+  
+  const results = searchToolsMultiLanguage(query);
+  searchCache.set(cacheKey, results);
+  
+  // 캐시 크기 제한 (최대 100개)
+  if (searchCache.size > 100) {
+    const firstKey = searchCache.keys().next().value;
+    searchCache.delete(firstKey);
+  }
+  
+  return results;
+}
+
+// 디바운스 적용
+let searchTimeout;
+function debouncedSearch(query) {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    const results = cachedSearch(query);
+    displaySearchResults(results, query, detectLanguage(query));
+  }, 300);
+}
+이렇게 구현하면 사용자가 어떤 언어로 검색하든 관련 도구를 찾을 수 있게 됩니다! 🌍✨

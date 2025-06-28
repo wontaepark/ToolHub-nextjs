@@ -12,6 +12,24 @@ export default function Home() {
   const currentLang = i18n.language;
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setLocation(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const getSearchPlaceholder = () => {
+    switch (currentLang) {
+      case 'ko':
+        return '도구 검색... 예: "계산기", "포모도로", "MBTI"';
+      case 'ja':
+        return 'ツール検索... 例: "電卓", "ポモドーロ", "MBTI"';
+      default:
+        return 'Search tools... e.g. "calculator", "pomodoro", "MBTI"';
+    }
+  };
   
   return (
     <div>
@@ -49,6 +67,39 @@ export default function Home() {
           <div className="flex items-center gap-1.5 md:gap-2">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
             {t('home.features.allDevices')}
+          </div>
+        </div>
+
+        {/* Search Box */}
+        <div className="mt-8 md:mt-12 max-w-2xl mx-auto">
+          <form onSubmit={handleSearch} className="relative">
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+              <Search className="h-5 w-5" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={getSearchPlaceholder()}
+              className="w-full pl-12 pr-4 py-4 bg-background border-2 border-border rounded-2xl text-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 shadow-sm"
+            />
+            <Button
+              type="submit"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 px-6 py-2 rounded-xl"
+              disabled={!searchQuery.trim()}
+            >
+              {currentLang === 'ko' ? '검색' : 
+               currentLang === 'ja' ? '検索' : 
+               'Search'}
+            </Button>
+          </form>
+          
+          <div className="mt-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              {currentLang === 'ko' ? '한국어, English, 日本語로 검색 가능' :
+               currentLang === 'ja' ? '한국어、English、日本語で検索可能' :
+               'Search in Korean, English, Japanese'}
+            </p>
           </div>
         </div>
       </div>

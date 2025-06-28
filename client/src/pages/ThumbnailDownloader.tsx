@@ -19,7 +19,8 @@ interface ThumbnailData {
 }
 
 export default function ThumbnailDownloader() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   const [url, setUrl] = useState('');
   const [thumbnailData, setThumbnailData] = useState<ThumbnailData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -233,11 +234,18 @@ export default function ThumbnailDownloader() {
         <div className="space-y-8 mt-12">
           {/* 썸네일 다운로더 소개 */}
           <section className="bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-2xl font-bold mb-4">유튜브 썸네일 다운로더</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '유튜브 썸네일 다운로더' : 
+               currentLang === 'ja' ? 'YouTubeサムネイルダウンローダー' : 
+               'YouTube Thumbnail Downloader'}
+            </h2>
             <p className="text-muted-foreground leading-relaxed">
-              유튜브 동영상의 썸네일 이미지를 고화질로 다운로드할 수 있는 무료 온라인 도구입니다. 
-              콘텐츠 제작, 블로그 작성, 프레젠테이션 등에 필요한 썸네일 이미지를 
-              간단한 URL 입력만으로 빠르게 저장할 수 있습니다.
+              {currentLang === 'ko' ? 
+                '유튜브 동영상의 썸네일 이미지를 고화질로 다운로드할 수 있는 무료 온라인 도구입니다. 콘텐츠 제작, 블로그 작성, 프레젠테이션 등에 필요한 썸네일 이미지를 간단한 URL 입력만으로 빠르게 저장할 수 있습니다.' :
+               currentLang === 'ja' ? 
+                'YouTube動画のサムネイル画像を高画質でダウンロードできる無料オンラインツールです。コンテンツ制作、ブログ執筆、プレゼンテーションなどに必要なサムネイル画像を簡単なURL入力だけで素早く保存できます。' :
+                'A free online tool that allows you to download YouTube video thumbnail images in high quality. You can quickly save thumbnail images needed for content creation, blog writing, presentations, etc. with just a simple URL input.'
+              }
             </p>
           </section>
 

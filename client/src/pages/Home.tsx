@@ -7,7 +7,8 @@ import { Sparkles, Star, Zap } from "lucide-react";
 import AdSense from "@/components/AdSense";
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   
   return (
     <div>

@@ -13,7 +13,8 @@ interface RaffleResult {
 }
 
 export default function NumberRaffle() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   const [maxNumber, setMaxNumber] = useState(() => {
     const saved = localStorage.getItem('raffle-max-number');
     return saved ? parseInt(saved) : 100;
@@ -590,11 +591,18 @@ export default function NumberRaffle() {
       <div className="space-y-8 mt-12">
         {/* 번호 추첨기 소개 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">공정한 번호 추첨기</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '공정한 번호 추첨기' : 
+             currentLang === 'ja' ? '公正な番号抽選機' : 
+             'Fair Number Raffle'}
+          </h2>
           <p className="text-muted-foreground leading-relaxed">
-            완전히 랜덤한 번호 추첨을 통해 공정하고 투명한 선택을 도와주는 온라인 도구입니다. 
-            이벤트, 게임, 추첨, 순서 정하기 등 다양한 상황에서 편견 없는 무작위 선택이 필요할 때 사용하세요. 
-            암호학적으로 안전한 난수 생성기를 사용하여 예측 불가능하고 공정한 결과를 보장합니다.
+            {currentLang === 'ko' ? 
+              '완전히 랜덤한 번호 추첨을 통해 공정하고 투명한 선택을 도와주는 온라인 도구입니다. 이벤트, 게임, 추첨, 순서 정하기 등 다양한 상황에서 편견 없는 무작위 선택이 필요할 때 사용하세요. 암호학적으로 안전한 난수 생성기를 사용하여 예측 불가능하고 공정한 결과를 보장합니다.' :
+             currentLang === 'ja' ? 
+              '完全にランダムな番号抽選により公正で透明な選択をサポートするオンラインツールです。イベント、ゲーム、抽選、順番決めなど様々な状況で偏見のない無作為選択が必要な時にご利用ください。暗号学的に安全な乱数生成器を使用して予測不可能で公正な結果を保証します。' :
+              'An online tool that helps with fair and transparent selection through completely random number drawing. Use it when you need unbiased random selection in various situations such as events, games, raffles, and ordering. It uses cryptographically secure random number generators to ensure unpredictable and fair results.'
+            }
           </p>
         </section>
 

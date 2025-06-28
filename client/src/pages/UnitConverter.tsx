@@ -462,18 +462,28 @@ export default function UnitConverter() {
       <div className="space-y-12 mt-16">
         {/* 단위 변환기 소개 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">정확한 단위 변환기</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '정확한 단위 변환기' : 
+             currentLang === 'ja' ? '正確な単位変換ツール' : 
+             'Accurate Unit Converter'}
+          </h2>
           <p className="text-muted-foreground leading-relaxed">
-            ToolHub.tools의 단위 변환기는 길이, 무게, 온도, 부피 등 다양한 측정 단위를 빠르고 정확하게 변환해주는 온라인 도구입니다. 
-            과학적 계산, 요리, 여행, 학습 등 일상생활과 전문 업무에서 필요한 모든 단위 변환을 지원합니다. 
-            직관적인 인터페이스와 실시간 변환 기능으로 누구나 쉽게 사용할 수 있으며, 
-            변환 기록을 저장하여 자주 사용하는 변환을 빠르게 다시 확인할 수 있습니다.
+            {currentLang === 'ko' ? 
+              'ToolHub.tools의 단위 변환기는 길이, 무게, 온도, 부피 등 다양한 측정 단위를 빠르고 정확하게 변환해주는 온라인 도구입니다. 과학적 계산, 요리, 여행, 학습 등 일상생활과 전문 업무에서 필요한 모든 단위 변환을 지원합니다. 직관적인 인터페이스와 실시간 변환 기능으로 누구나 쉽게 사용할 수 있으며, 변환 기록을 저장하여 자주 사용하는 변환을 빠르게 다시 확인할 수 있습니다.' :
+             currentLang === 'ja' ? 
+              'ToolHub.toolsの単位変換ツールは、長さ、重量、温度、体積など様々な測定単位を迅速かつ正確に変換するオンラインツールです。科学計算、料理、旅行、学習など、日常生活や専門業務で必要なすべての単位変換をサポートします。直感的なインターフェースとリアルタイム変換機能により誰でも簡単に使用でき、変換履歴を保存してよく使用する変換を素早く再確認できます。' :
+              'ToolHub.tools\' unit converter is an online tool that quickly and accurately converts various measurement units such as length, weight, temperature, and volume. It supports all unit conversions needed in daily life and professional work including scientific calculations, cooking, travel, and learning. With an intuitive interface and real-time conversion features, anyone can easily use it, and conversion history is saved for quick re-checking of frequently used conversions.'
+            }
           </p>
         </section>
 
         {/* 주요 기능 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '주요 기능' : 
+             currentLang === 'ja' ? '主な機能' : 
+             'Key Features'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-semibold mb-3">지원 단위 카테고리</h3>

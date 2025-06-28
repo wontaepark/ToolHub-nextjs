@@ -499,24 +499,52 @@ export default function PasswordGenerator() {
 
         {/* 주요 기능 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">주요 기능</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '주요 기능' : 
+             currentLang === 'ja' ? '主要機能' : 
+             'Main Features'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">비밀번호 생성 옵션</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '비밀번호 생성 옵션' : 
+                 currentLang === 'ja' ? 'パスワード生成オプション' : 
+                 'Password Generation Options'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 4-128자 길이 조절 가능</li>
-                <li>• 대소문자, 숫자, 특수문자 선택</li>
-                <li>• 혼동하기 쉬운 문자 제외 옵션</li>
-                <li>• 모호한 문자 제외 기능</li>
+                <li>• {currentLang === 'ko' ? '4-128자 길이 조절 가능' : 
+                      currentLang === 'ja' ? '4-128文字の長さ調整可能' : 
+                      'Adjustable length from 4-128 characters'}</li>
+                <li>• {currentLang === 'ko' ? '대소문자, 숫자, 특수문자 선택' : 
+                      currentLang === 'ja' ? '大文字・小文字、数字、特殊文字選択' : 
+                      'Select uppercase, lowercase, numbers, symbols'}</li>
+                <li>• {currentLang === 'ko' ? '혼동하기 쉬운 문자 제외 옵션' : 
+                      currentLang === 'ja' ? '混同しやすい文字除外オプション' : 
+                      'Option to exclude confusing characters'}</li>
+                <li>• {currentLang === 'ko' ? '모호한 문자 제외 기능' : 
+                      currentLang === 'ja' ? '曖昧な文字除外機能' : 
+                      'Exclude ambiguous characters feature'}</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-3">보안 분석 기능</h3>
+              <h3 className="text-lg font-semibold mb-3">
+                {currentLang === 'ko' ? '보안 분석 기능' : 
+                 currentLang === 'ja' ? 'セキュリティ分析機能' : 
+                 'Security Analysis Features'}
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• 실시간 보안 강도 측정</li>
-                <li>• 색상별 보안 등급 표시</li>
-                <li>• 보안 개선 제안 사항</li>
-                <li>• 생성 기록 관리</li>
+                <li>• {currentLang === 'ko' ? '실시간 보안 강도 측정' : 
+                      currentLang === 'ja' ? 'リアルタイムセキュリティ強度測定' : 
+                      'Real-time security strength measurement'}</li>
+                <li>• {currentLang === 'ko' ? '색상별 보안 등급 표시' : 
+                      currentLang === 'ja' ? '色別セキュリティレベル表示' : 
+                      'Color-coded security level display'}</li>
+                <li>• {currentLang === 'ko' ? '보안 개선 제안 사항' : 
+                      currentLang === 'ja' ? 'セキュリティ改善提案事項' : 
+                      'Security improvement suggestions'}</li>
+                <li>• {currentLang === 'ko' ? '생성 기록 관리' : 
+                      currentLang === 'ja' ? '生成履歴管理' : 
+                      'Generation history management'}</li>
               </ul>
             </div>
           </div>
@@ -524,30 +552,55 @@ export default function PasswordGenerator() {
 
         {/* 상세 사용법 가이드 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">상세 사용법 가이드</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '상세 사용법 가이드' : 
+             currentLang === 'ja' ? '詳細使用法ガイド' : 
+             'Detailed Usage Guide'}
+          </h2>
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold mb-2">1. 기본 비밀번호 생성</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '1. 기본 비밀번호 생성' : 
+                 currentLang === 'ja' ? '1. 基本パスワード生成' : 
+                 '1. Basic Password Generation'}
+              </h3>
               <p className="text-muted-foreground">
-                길이 슬라이더로 원하는 비밀번호 길이를 설정하고, 포함할 문자 유형을 체크박스로 선택합니다. 
-                '비밀번호 생성' 버튼을 클릭하면 조건에 맞는 안전한 비밀번호가 즉시 생성됩니다. 
-                일반적으로 12자 이상, 모든 문자 유형을 포함하는 것을 권장합니다.
+                {currentLang === 'ko' ? 
+                  '길이 슬라이더로 원하는 비밀번호 길이를 설정하고, 포함할 문자 유형을 체크박스로 선택합니다. \'비밀번호 생성\' 버튼을 클릭하면 조건에 맞는 안전한 비밀번호가 즉시 생성됩니다. 일반적으로 12자 이상, 모든 문자 유형을 포함하는 것을 권장합니다.' :
+                 currentLang === 'ja' ? 
+                  '長さスライダーで希望するパスワードの長さを設定し、含める文字タイプをチェックボックスで選択します。「パスワード生成」ボタンをクリックすると条件に合った安全なパスワードが即座に生成されます。一般的に12文字以上、すべての文字タイプを含むことを推奨します。' :
+                  'Set your desired password length with the length slider, and select character types to include using checkboxes. Click the \'Generate Password\' button to instantly create a secure password that meets your conditions. Generally, 12+ characters including all character types is recommended.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">2. 고급 옵션 활용</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '2. 고급 옵션 활용' : 
+                 currentLang === 'ja' ? '2. 高度なオプション活用' : 
+                 '2. Advanced Options Usage'}
+              </h3>
               <p className="text-muted-foreground">
-                '유사한 문자 제외' 옵션을 선택하면 0과 O, 1과 l 같이 헷갈리기 쉬운 문자를 제외합니다. 
-                '모호한 문자 제외' 옵션은 {}, [], () 같은 특수문자를 제외하여 
-                입력하기 어려운 문자들을 피할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '\'유사한 문자 제외\' 옵션을 선택하면 0과 O, 1과 l 같이 헷갈리기 쉬운 문자를 제외합니다. \'모호한 문자 제외\' 옵션은 {}, [], () 같은 특수문자를 제외하여 입력하기 어려운 문자들을 피할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '「類似文字除外」オプションを選択すると0とO、1とlのような混同しやすい文字を除外します。「曖昧文字除外」オプションは{}、[]、()のような特殊文字を除外して入力しにくい文字を避けることができます。' :
+                  'Selecting the \'Exclude Similar Characters\' option excludes easily confused characters like 0 and O, 1 and l. The \'Exclude Ambiguous Characters\' option excludes special characters like {}, [], () to avoid hard-to-type characters.'
+                }
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">3. 보안 강도 확인 및 복사</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '3. 보안 강도 확인 및 복사' : 
+                 currentLang === 'ja' ? '3. セキュリティ強度確認とコピー' : 
+                 '3. Security Strength Check & Copy'}
+              </h3>
               <p className="text-muted-foreground">
-                생성된 비밀번호의 보안 강도를 확인하고, 복사 버튼으로 클립보드에 저장합니다. 
-                '약함', '보통', '강함', '매우 강함' 등급을 참고하여 적절한 보안 수준의 비밀번호를 선택하세요. 
-                생성 기록에서 이전에 만든 비밀번호들을 다시 확인할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '생성된 비밀번호의 보안 강도를 확인하고, 복사 버튼으로 클립보드에 저장합니다. \'약함\', \'보통\', \'강함\', \'매우 강함\' 등급을 참고하여 적절한 보안 수준의 비밀번호를 선택하세요. 생성 기록에서 이전에 만든 비밀번호들을 다시 확인할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  '生成されたパスワードのセキュリティ強度を確認し、コピーボタンでクリップボードに保存します。「弱い」、「普通」、「強い」、「非常に強い」グレードを参考に適切なセキュリティレベルのパスワードを選択してください。生成履歴で以前作成したパスワードを再確認できます。' :
+                  'Check the security strength of generated passwords and save them to clipboard with the copy button. Select appropriate security level passwords by referring to \'Weak\', \'Medium\', \'Strong\', \'Very Strong\' grades. You can review previously generated passwords in the generation history.'
+                }
               </p>
             </div>
           </div>
@@ -555,14 +608,25 @@ export default function PasswordGenerator() {
 
         {/* 활용 예시 */}
         <section className="bg-card rounded-xl p-6 border border-border">
-          <h2 className="text-2xl font-bold mb-4">활용 예시</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            {currentLang === 'ko' ? '활용 예시' : 
+             currentLang === 'ja' ? '活用例' : 
+             'Usage Examples'}
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
-              <h3 className="text-lg font-semibold mb-2">온라인 계정 보안</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {currentLang === 'ko' ? '온라인 계정 보안' : 
+                 currentLang === 'ja' ? 'オンラインアカウントセキュリティ' : 
+                 'Online Account Security'}
+              </h3>
               <p className="text-muted-foreground text-sm">
-                이메일, 소셜미디어, 온라인 쇼핑몰, 은행 계정 등 
-                중요한 온라인 서비스의 비밀번호를 생성할 때 사용합니다. 
-                각 계정마다 고유한 강력한 비밀번호를 설정하여 보안을 강화할 수 있습니다.
+                {currentLang === 'ko' ? 
+                  '이메일, 소셜미디어, 온라인 쇼핑몰, 은행 계정 등 중요한 온라인 서비스의 비밀번호를 생성할 때 사용합니다. 각 계정마다 고유한 강력한 비밀번호를 설정하여 보안을 강화할 수 있습니다.' :
+                 currentLang === 'ja' ? 
+                  'メール、ソーシャルメディア、オンラインショッピング、銀行口座など重要なオンラインサービスのパスワードを生成する際に使用します。各アカウントごとに固有の強力なパスワードを設定してセキュリティを強化できます。' :
+                  'Use for generating passwords for important online services such as email, social media, online shopping, and bank accounts. You can enhance security by setting unique strong passwords for each account.'
+                }
               </p>
             </div>
             <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">

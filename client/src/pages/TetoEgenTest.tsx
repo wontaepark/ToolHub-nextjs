@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, RotateCcw, Share2, Heart, Users, Star } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Share2, Heart, Users, Star, BookOpen, CheckCircle, HelpCircle, Lightbulb } from 'lucide-react';
+import AdSense from '@/components/AdSense';
 
 interface Question {
   id: number;
@@ -688,6 +689,7 @@ const results: Record<string, TestResult> = {
 
 export default function TetoEgenTest() {
   const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResult, setShowResult] = useState(false);
@@ -812,6 +814,309 @@ export default function TetoEgenTest() {
               </CardHeader>
             </Card>
           </div>
+        </div>
+
+        {/* AdSense */}
+        <div className="mb-8 flex justify-center">
+          <AdSense adSlot="1234567890" className="w-full max-w-4xl" />
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* 테토-에겐 테스트란 무엇인가요? */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '테토-에겐 성격유형 테스트란 무엇인가요?' : 
+               currentLang === 'ja' ? 'テト-エゲン性格タイプテストとは何ですか？' : 
+               'What is the Teto-Egen Personality Type Test?'}
+            </h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>
+                {currentLang === 'ko' ? 
+                  '테토-에겐 성격유형 테스트는 최근 SNS에서 화제가 된 바이럴 성격 분석 도구입니다. "테토"와 "에겐"이라는 두 가지 주요 성향으로 사람들을 분류하며, 성별에 따라 총 4가지 유형(테토남, 테토녀, 에겐남, 에겐녀)으로 나누어집니다. 테토는 내향적이고 신중한 성향을, 에겐은 외향적이고 활발한 성향을 나타냅니다. 이 테스트는 연애 성향, 사회적 관계, 일상적 행동 패턴 등을 종합적으로 분석하여 재미있고 직관적인 결과를 제공합니다.' :
+                 currentLang === 'ja' ? 
+                  'テト-エゲン性格タイプテストは、最近SNSで話題になったバイラル性格分析ツールです。「テト」と「エゲン」という2つの主要傾向で人々を分類し、性別によって計4つのタイプ（テト男、テト女、エゲン男、エゲン女）に分けられます。テトは内向的で慎重な傾向を、エゲンは外向的で活発な傾向を表します。このテストは恋愛傾向、社会的関係、日常的行動パターンなどを総合的に分析し、面白くて直感的な結果を提供します。' :
+                  'The Teto-Egen personality type test is a viral personality analysis tool that recently became popular on social media. It classifies people into two main tendencies, "Teto" and "Egen," and divides them into four types based on gender (Teto Male, Teto Female, Egen Male, Egen Female). Teto represents introverted and cautious tendencies, while Egen represents extroverted and active tendencies. This test comprehensively analyzes romantic tendencies, social relationships, and daily behavioral patterns to provide fun and intuitive results.'
+                }
+              </p>
+              <p>
+                {currentLang === 'ko' ? 
+                  '특히 젊은 세대 사이에서 큰 인기를 얻고 있으며, 친구들과 함께 테스트하고 결과를 비교하는 것이 하나의 트렌드가 되었습니다. 각 유형별로 궁합 분석, 연애 스타일, 성격 특성 등을 상세히 제공하여 자신과 타인을 이해하는 새로운 방법을 제시합니다. 결과는 희귀도와 함께 제공되어 특별함을 느낄 수 있도록 설계되었습니다.' :
+                 currentLang === 'ja' ? 
+                  '特に若い世代の間で大きな人気を得ており、友達と一緒にテストして結果を比較することが一つのトレンドになりました。各タイプ別に相性分析、恋愛スタイル、性格特性などを詳しく提供し、自分と他人を理解する新しい方法を提示します。結果は希少度と一緒に提供され、特別感を感じられるよう設計されています。' :
+                  'It has gained great popularity especially among younger generations, and testing together with friends and comparing results has become a trend. It provides detailed compatibility analysis, love styles, and personality traits for each type, offering a new way to understand yourself and others. Results are provided with rarity percentages to create a sense of uniqueness.'
+                }
+              </p>
+            </div>
+          </section>
+
+          {/* 주요 기능 및 특징 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '주요 기능 및 특징' : 
+               currentLang === 'ja' ? '主要機能と特徴' : 
+               'Key Features and Characteristics'}
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Heart className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      {currentLang === 'ko' ? '연애 성향 분석' : 
+                       currentLang === 'ja' ? '恋愛傾向分析' : 
+                       'Love Style Analysis'}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {currentLang === 'ko' ? 
+                        '각 유형별 연애 스타일과 어프로치 방법을 상세히 분석하여 제공' :
+                       currentLang === 'ja' ? 
+                        '各タイプ別の恋愛スタイルとアプローチ方法を詳しく分析して提供' :
+                        'Detailed analysis of dating styles and approach methods for each type'
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Users className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      {currentLang === 'ko' ? '궁합 매칭 시스템' : 
+                       currentLang === 'ja' ? '相性マッチングシステム' : 
+                       'Compatibility Matching System'}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {currentLang === 'ko' ? 
+                        '최고 궁합과 주의할 궁합을 분석하여 관계 개선에 도움' :
+                       currentLang === 'ja' ? 
+                        '最高の相性と注意すべき相性を分析して関係改善に役立つ' :
+                        'Analyzes best matches and cautionary matches to help improve relationships'
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Star className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      {currentLang === 'ko' ? '희귀도 시스템' : 
+                       currentLang === 'ja' ? '希少度システム' : 
+                       'Rarity System'}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {currentLang === 'ko' ? 
+                        '각 유형별 희귀도 퍼센트로 특별함과 재미 요소 추가' :
+                       currentLang === 'ja' ? 
+                        '各タイプ別希少度パーセントで特別感と楽しさ要素追加' :
+                        'Adds uniqueness and fun factor with rarity percentages for each type'
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Share2 className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      {currentLang === 'ko' ? '바이럴 공유 기능' : 
+                       currentLang === 'ja' ? 'バイラル共有機能' : 
+                       'Viral Sharing Feature'}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {currentLang === 'ko' ? 
+                        '친구들을 유도하는 공유 메시지로 바이럴 확산 최적화' :
+                       currentLang === 'ja' ? 
+                        '友達を誘導する共有メッセージでバイラル拡散最適化' :
+                        'Optimized for viral spread with share messages that encourage friends to participate'
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* AdSense */}
+          <div className="flex justify-center">
+            <AdSense adSlot="1234567891" className="w-full max-w-4xl" />
+          </div>
+
+          {/* 상세 사용법 가이드 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '상세 사용법 가이드' : 
+               currentLang === 'ja' ? '詳細使用法ガイド' : 
+               'Detailed Usage Guide'}
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '1. 성별 선택' : 
+                   currentLang === 'ja' ? '1. 性別選択' : 
+                   '1. Gender Selection'}
+                </h3>
+                <p className="text-muted-foreground">
+                  {currentLang === 'ko' ? 
+                    '테스트 시작 시 자신의 성별을 선택합니다. 이는 결과 분석에서 성별별 특성과 연애 성향을 더 정확하게 제공하기 위한 것입니다. 남성과 여성 버튼 중 해당하는 것을 클릭하여 테스트를 시작하세요.' :
+                   currentLang === 'ja' ? 
+                    'テスト開始時に自分の性別を選択します。これは結果分析で性別別特性と恋愛傾向をより正確に提供するためです。男性と女性ボタンの中から該当するものをクリックしてテストを開始してください。' :
+                    'At the start of the test, select your gender. This is to provide more accurate gender-specific traits and romantic tendencies in the result analysis. Click the appropriate button between male and female to start the test.'
+                  }
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '2. 질문 응답하기' : 
+                   currentLang === 'ja' ? '2. 質問への回答' : 
+                   '2. Answering Questions'}
+                </h3>
+                <p className="text-muted-foreground">
+                  {currentLang === 'ko' ? 
+                    '총 10개의 질문에 답합니다. 각 질문은 일상생활, 사회적 상황, 스트레스 대처법 등 다양한 상황에서의 선택을 다룹니다. 가장 자연스럽고 솔직하게 자신의 성향에 맞는 답변을 선택하세요. 진행률 바를 통해 테스트 진행 상황을 확인할 수 있습니다.' :
+                   currentLang === 'ja' ? 
+                    '合計10の質問に答えます。各質問は日常生活、社会的状況、ストレス対処法など様々な状況での選択を扱います。最も自然で正直に自分の傾向に合った答えを選択してください。進行率バーでテストの進行状況を確認できます。' :
+                    'Answer a total of 10 questions. Each question deals with choices in various situations such as daily life, social situations, and stress coping methods. Choose the most natural and honest answers that match your tendencies. You can check test progress through the progress bar.'
+                  }
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '3. 결과 확인 및 공유' : 
+                   currentLang === 'ja' ? '3. 結果確認と共有' : 
+                   '3. Checking and Sharing Results'}
+                </h3>
+                <p className="text-muted-foreground">
+                  {currentLang === 'ko' ? 
+                    '테스트 완료 후 자신의 유형(테토남/테토녀/에겐남/에겐녀)과 상세 분석을 확인합니다. 성격 특성, 연애 스타일, 궁합 분석, 희귀도 등의 정보를 제공받습니다. "결과 공유하기" 버튼을 통해 친구들에게 테스트를 권유하고 서로의 유형을 비교해보세요.' :
+                   currentLang === 'ja' ? 
+                    'テスト完了後、自分のタイプ（テト男/テト女/エゲン男/エゲン女）と詳細分析を確認します。性格特性、恋愛スタイル、相性分析、希少度などの情報を提供されます。「結果をシェア」ボタンで友達にテストを勧めてお互いのタイプを比較してみてください。' :
+                    'After completing the test, check your type (Teto Male/Teto Female/Egen Male/Egen Female) and detailed analysis. You will receive information about personality traits, love style, compatibility analysis, and rarity. Use the "Share Results" button to recommend the test to friends and compare each other\'s types.'
+                  }
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 활용 예시 */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '활용 예시' : 
+               currentLang === 'ja' ? '活用例' : 
+               'Usage Examples'}
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '친구들과 함께' : 
+                   currentLang === 'ja' ? '友達と一緒に' : 
+                   'With Friends'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    '친구들과 함께 테스트를 하고 서로의 유형을 비교하며 재미있는 시간을 보낼 수 있습니다. 궁합 분석을 통해 친구 관계를 더 잘 이해하고, 각자의 성향에 맞는 소통 방법을 찾을 수 있습니다. SNS에 결과를 공유하여 더 많은 친구들의 참여를 유도할 수 있습니다.' :
+                   currentLang === 'ja' ? 
+                    '友達と一緒にテストをしてお互いのタイプを比較しながら楽しい時間を過ごせます。相性分析を通じて友人関係をより良く理解し、それぞれの傾向に合ったコミュニケーション方法を見つけることができます。SNSに結果をシェアしてより多くの友達の参加を促すことができます。' :
+                    'You can have fun taking the test with friends and comparing each other\'s types. Through compatibility analysis, you can better understand friendships and find communication methods that suit each person\'s tendencies. Share results on social media to encourage more friends to participate.'
+                  }
+                </p>
+              </div>
+              <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+                <h3 className="text-lg font-semibold mb-2">
+                  {currentLang === 'ko' ? '연애와 관계' : 
+                   currentLang === 'ja' ? '恋愛と関係' : 
+                   'Dating and Relationships'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    '연인이나 관심 있는 상대와 함께 테스트하여 서로의 성향을 파악하고 더 나은 관계를 만들어갈 수 있습니다. 각 유형별 연애 스타일과 궁합 분석을 통해 상대를 이해하고 적절한 어프로치 방법을 찾을 수 있습니다.' :
+                   currentLang === 'ja' ? 
+                    '恋人や気になる相手と一緒にテストしてお互いの傾向を把握し、より良い関係を築いていけます。各タイプ別の恋愛スタイルと相性分析を通じて相手を理解し、適切なアプローチ方法を見つけることができます。' :
+                    'Take the test with your partner or someone you\'re interested in to understand each other\'s tendencies and build better relationships. Through dating styles and compatibility analysis for each type, you can understand your partner and find appropriate approach methods.'
+                  }
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* AdSense */}
+          <div className="flex justify-center">
+            <AdSense adSlot="1234567892" className="w-full max-w-4xl" />
+          </div>
+
+          {/* 자주 묻는 질문 FAQ */}
+          <section className="bg-card rounded-xl p-6 border border-border">
+            <h2 className="text-2xl font-bold mb-4">
+              {currentLang === 'ko' ? '자주 묻는 질문 (FAQ)' : 
+               currentLang === 'ja' ? 'よくある질問 (FAQ)' : 
+               'Frequently Asked Questions (FAQ)'}
+            </h2>
+            <div className="space-y-4">
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <HelpCircle className="h-4 w-4" />
+                  {currentLang === 'ko' ? 'Q. 테토와 에겐의 차이점은 무엇인가요?' : 
+                   currentLang === 'ja' ? 'Q. テトとエゲンの違いは何ですか？' : 
+                   'Q. What is the difference between Teto and Egen?'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    'A. 테토는 내향적이고 신중한 성향을 가진 유형으로, 혼자만의 시간을 중시하고 깊이 있는 관계를 선호합니다. 에겐은 외향적이고 활발한 성향으로, 사람들과의 만남을 즐기고 에너지가 넘치는 특성을 가집니다.' :
+                   currentLang === 'ja' ? 
+                    'A. テトは内向的で慎重な傾向を持つタイプで、一人の時間を重視し深い関係を好みます。エゲンは外向的で活発な傾向で、人との出会いを楽しみエネルギーに満ちた特性を持ちます。' :
+                    'A. Teto is an introverted and cautious type that values alone time and prefers deep relationships. Egen is an extroverted and active type that enjoys meeting people and has energetic characteristics.'
+                  }
+                </p>
+              </div>
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <HelpCircle className="h-4 w-4" />
+                  {currentLang === 'ko' ? 'Q. 궁합 분석이 실제로 맞나요?' : 
+                   currentLang === 'ja' ? 'Q. 相性分析は実際に当たりますか？' : 
+                   'Q. Is the compatibility analysis actually accurate?'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    'A. 궁합 분석은 일반적인 성향을 바탕으로 한 재미있는 참고 자료입니다. 실제 관계는 개인의 성격, 경험, 상황 등 다양한 요소에 의해 결정되므로, 절대적인 기준보다는 흥미로운 관점으로 활용하시기 바랍니다.' :
+                   currentLang === 'ja' ? 
+                    'A. 相性分析は一般的な傾向に基づく楽しい参考資料です。実際の関係は個人の性格、経験、状況など様々な要素によって決まるため、絶対的な基準よりも興味深い観点として活用してください。' :
+                    'A. Compatibility analysis is fun reference material based on general tendencies. Actual relationships are determined by various factors such as individual personality, experience, and situations, so please use it as an interesting perspective rather than an absolute standard.'
+                  }
+                </p>
+              </div>
+              <div className="border-b border-border pb-4">
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <HelpCircle className="h-4 w-4" />
+                  {currentLang === 'ko' ? 'Q. 희귀도는 어떻게 계산되나요?' : 
+                   currentLang === 'ja' ? 'Q. 希少度はどのように計算されますか？' : 
+                   'Q. How is the rarity calculated?'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    'A. 희귀도는 기존 테스트 참여자들의 결과 분포를 바탕으로 계산된 통계적 수치입니다. 더 적은 사람들이 해당하는 유형일수록 높은 희귀도를 가지며, 이는 재미와 특별함을 위한 요소로 제공됩니다.' :
+                   currentLang === 'ja' ? 
+                    'A. 希少度は既存のテスト参加者の結果分布に基づいて計算された統計的数値です。より少ない人が該当するタイプほど高い希少度を持ち、これは楽しさと特別感のための要素として提供されます。' :
+                    'A. Rarity is a statistical figure calculated based on the result distribution of existing test participants. Types that fewer people fall into have higher rarity, and this is provided as an element for fun and uniqueness.'
+                  }
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <HelpCircle className="h-4 w-4" />
+                  {currentLang === 'ko' ? 'Q. 테스트 결과가 시간이 지나면 바뀔 수 있나요?' : 
+                   currentLang === 'ja' ? 'Q. テスト結果は時間が経つと変わることがありますか？' : 
+                   'Q. Can test results change over time?'}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {currentLang === 'ko' ? 
+                    'A. 네, 개인의 성장이나 환경 변화에 따라 성향이 변할 수 있습니다. 특히 인생의 중요한 변화나 새로운 경험을 통해 답변이 달라질 수 있으니, 주기적으로 다시 테스트해보시는 것도 재미있을 것입니다.' :
+                   currentLang === 'ja' ? 
+                    'A. はい、個人の成長や環境変化によって傾向が変わることがあります。特に人生の重要な変化や新しい経験を通じて答えが変わることがあるので、定期的に再テストしてみるのも面白いでしょう。' :
+                    'A. Yes, tendencies can change due to personal growth or environmental changes. Especially through important life changes or new experiences, answers may differ, so it would be interesting to retake the test periodically.'
+                  }
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     );

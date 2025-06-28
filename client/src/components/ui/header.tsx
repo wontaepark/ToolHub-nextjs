@@ -4,7 +4,7 @@ import { useTheme } from "../ThemeProvider";
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import LanguageSelector from "../LanguageSelector";
-import { Sun, Moon, Menu, Github, Search } from "lucide-react";
+import { Sun, Moon, Menu, Github } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -47,16 +47,6 @@ export default function Header() {
             </Button>
           </Link>
           
-          <Link href="/search">
-            <Button 
-              variant="ghost" 
-              className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
-            >
-              <Search className="h-4 w-4 md:h-5 md:w-5" />
-              <span>{t('common.search')}</span>
-            </Button>
-          </Link>
-
           <Link href="/contact">
             <Button 
               variant="ghost" 
@@ -174,17 +164,6 @@ export default function Header() {
                   >
                     <i className="ri-image-line text-lg"></i>
                     <span className="font-medium">{t('tools.thumbnail.title')}</span>
-                  </div>
-                </Link>
-              </li>
-              <li>
-                <Link href="/search">
-                  <div 
-                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/search" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Search className="h-4 w-4" />
-                    <span className="font-medium">{t('common.search')}</span>
                   </div>
                 </Link>
               </li>

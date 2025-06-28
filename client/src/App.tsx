@@ -16,7 +16,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import MBTITest from "./pages/MBTITest_clean";
 import TetoEgenTest from "./pages/TetoEgenTest";
-import Search from "./pages/Search";
 import NotFound from "./pages/not-found";
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
           <Route path="/date-calculator" component={DateCalculator} />
           <Route path="/mbti" component={MBTITest} />
           <Route path="/teto-egen-test" component={TetoEgenTest} />
-          <Route path="/search" component={Search} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />

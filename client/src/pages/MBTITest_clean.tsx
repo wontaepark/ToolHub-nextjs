@@ -794,6 +794,309 @@ export default function MBTITest() {
               </Card>
             ))}
           </div>
+
+          {/* AdSense */}
+          <div className="mb-8 flex justify-center">
+            <AdSense adSlot="1234567890" className="w-full max-w-4xl" />
+          </div>
+
+          <div className="space-y-8">
+            {/* MBTI 테스트란 무엇인가요? */}
+            <section className="bg-card rounded-xl p-6 border border-border">
+              <h2 className="text-2xl font-bold mb-4">
+                {currentLang === 'ko' ? 'MBTI 성격유형 테스트란 무엇인가요?' : 
+                 currentLang === 'ja' ? 'MBTI性格タイプテストとは何ですか？' : 
+                 'What is the MBTI Personality Type Test?'}
+              </h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  {currentLang === 'ko' ? 
+                    'MBTI(Myers-Briggs Type Indicator) 성격유형 테스트는 칼 융의 심리학적 유형론을 바탕으로 개발된 성격 분류 도구입니다. 16가지 고유한 성격 유형으로 사람들을 분류하며, 각 유형은 4가지 핵심 차원의 조합으로 구성됩니다: 외향성(E) vs 내향성(I), 감각(S) vs 직관(N), 사고(T) vs 감정(F), 판단(J) vs 인식(P). 이 테스트는 자기 이해를 높이고, 다른 사람들과의 관계를 개선하며, 적합한 직업이나 학습 스타일을 찾는 데 도움을 줍니다.' :
+                   currentLang === 'ja' ? 
+                    'MBTI（Myers-Briggs Type Indicator）性格タイプテストは、カール・ユングの心理学的類型論を基に開発された性格分類ツールです。16の独特な性格タイプで人々を分類し、各タイプは4つの核心次元の組み合わせで構成されます：外向性(E) vs 内向性(I)、感覚(S) vs 直感(N)、思考(T) vs 感情(F)、判断(J) vs 知覚(P)。このテストは自己理解を高め、他の人との関係を改善し、適切な職業や学習スタイルを見つけるのに役立ちます。' :
+                    'The MBTI (Myers-Briggs Type Indicator) personality type test is a personality classification tool developed based on Carl Jung\'s psychological typology. It classifies people into 16 unique personality types, with each type consisting of a combination of four core dimensions: Extraversion (E) vs Introversion (I), Sensing (S) vs Intuition (N), Thinking (T) vs Feeling (F), and Judging (J) vs Perceiving (P). This test helps increase self-understanding, improve relationships with others, and find suitable careers or learning styles.'
+                  }
+                </p>
+                <p>
+                  {currentLang === 'ko' ? 
+                    '전 세계적으로 널리 사용되는 이 도구는 기업의 팀 빌딩, 개인의 진로 탐색, 교육 방법 개선 등 다양한 분야에서 활용되고 있습니다. ToolHub.tools의 MBTI 테스트는 10가지 다양한 테스트 스타일을 제공하여 사용자가 자신에게 가장 적합한 방식으로 성격을 탐색할 수 있도록 돕습니다.' :
+                   currentLang === 'ja' ? 
+                    '世界中で広く使用されているこのツールは、企業のチームビルディング、個人のキャリア探索、教育方法改善など様々な分野で活用されています。ToolHub.toolsのMBTIテストは10種類の様々なテストスタイルを提供し、ユーザーが自分に最も適した方法で性格を探索できるよう支援します。' :
+                    'This globally used tool is utilized in various fields such as corporate team building, personal career exploration, and educational method improvement. ToolHub.tools\' MBTI test provides 10 different test styles to help users explore their personality in the way that suits them best.'
+                  }
+                </p>
+              </div>
+            </section>
+
+            {/* 주요 기능 및 특징 */}
+            <section className="bg-card rounded-xl p-6 border border-border">
+              <h2 className="text-2xl font-bold mb-4">
+                {currentLang === 'ko' ? '주요 기능 및 특징' : 
+                 currentLang === 'ja' ? '主要機能と特徴' : 
+                 'Key Features and Characteristics'}
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <BookOpen className="h-5 w-5 text-primary mt-1" />
+                    <div>
+                      <h3 className="font-semibold mb-1">
+                        {currentLang === 'ko' ? '다양한 테스트 스타일' : 
+                         currentLang === 'ja' ? '様々なテストスタイル' : 
+                         'Various Test Styles'}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {currentLang === 'ko' ? 
+                          '직장인, 학생, 일반인 등 상황별 맞춤형 10가지 테스트 스타일 제공' :
+                         currentLang === 'ja' ? 
+                          'オフィスワーカー、学生、一般人など状況別カスタマイズされた10種類のテストスタイル提供' :
+                          'Provides 10 customized test styles for different situations like office workers, students, and general users'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-1" />
+                    <div>
+                      <h3 className="font-semibold mb-1">
+                        {currentLang === 'ko' ? '상세 결과 분석' : 
+                         currentLang === 'ja' ? '詳細結果分析' : 
+                         'Detailed Result Analysis'}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {currentLang === 'ko' ? 
+                          '16가지 성격 유형별 특성, 적합한 직업, 유명인 등 종합적 분석 제공' :
+                         currentLang === 'ja' ? 
+                          '16種類の性格タイプ別特性、適職、有名人など総合的分析提供' :
+                          'Comprehensive analysis including traits, suitable careers, and famous people for all 16 personality types'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Lightbulb className="h-5 w-5 text-primary mt-1" />
+                    <div>
+                      <h3 className="font-semibold mb-1">
+                        {currentLang === 'ko' ? '과학적 신뢰성' : 
+                         currentLang === 'ja' ? '科学的信頼性' : 
+                         'Scientific Reliability'}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {currentLang === 'ko' ? 
+                          '칼 융의 심리학 이론에 기반한 검증된 성격 분석 방법론 사용' :
+                         currentLang === 'ja' ? 
+                          'カール・ユングの心理学理論に基づく検証された性格分析方法論使用' :
+                          'Uses verified personality analysis methodology based on Carl Jung\'s psychological theory'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Share2 className="h-5 w-5 text-primary mt-1" />
+                    <div>
+                      <h3 className="font-semibold mb-1">
+                        {currentLang === 'ko' ? '소셜 공유 기능' : 
+                         currentLang === 'ja' ? 'ソーシャル共有機能' : 
+                         'Social Sharing Feature'}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {currentLang === 'ko' ? 
+                          '테스트 결과를 친구들과 쉽게 공유하고 서로의 성격 유형 비교 가능' :
+                         currentLang === 'ja' ? 
+                          'テスト結果を友達と簡単に共有し、お互いの性格タイプ比較可能' :
+                          'Easy sharing of test results with friends and comparison of each other\'s personality types'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* AdSense */}
+            <div className="flex justify-center">
+              <AdSense adSlot="1234567891" className="w-full max-w-4xl" />
+            </div>
+
+            {/* 상세 사용법 가이드 */}
+            <section className="bg-card rounded-xl p-6 border border-border">
+              <h2 className="text-2xl font-bold mb-4">
+                {currentLang === 'ko' ? '상세 사용법 가이드' : 
+                 currentLang === 'ja' ? '詳細使用法ガイド' : 
+                 'Detailed Usage Guide'}
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {currentLang === 'ko' ? '1. 테스트 스타일 선택' : 
+                     currentLang === 'ja' ? '1. テストスタイル選択' : 
+                     '1. Test Style Selection'}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {currentLang === 'ko' ? 
+                      '10가지 테스트 스타일 중 자신의 상황과 선호도에 맞는 것을 선택하세요. 직장 상황, 학습 환경, 일상생활, 연애 관계 등 다양한 상황별 질문으로 구성되어 있어 더욱 정확한 결과를 얻을 수 있습니다. 각 스타일은 고유한 질문 세트와 접근 방식을 가지고 있습니다.' :
+                     currentLang === 'ja' ? 
+                      '10種類のテストスタイルの中から自分の状況と好みに合うものを選択してください。職場状況、学習環境、日常生活、恋愛関係など様々な状況別質問で構成されており、より正確な結果を得ることができます。各スタイルは独自の質問セットとアプローチ方式を持っています。' :
+                      'Choose from 10 test styles that match your situation and preferences. Composed of various situational questions including workplace situations, learning environments, daily life, and romantic relationships for more accurate results. Each style has its own unique question set and approach.'
+                    }
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {currentLang === 'ko' ? '2. 질문 응답하기' : 
+                     currentLang === 'ja' ? '2. 質問への回答' : 
+                     '2. Answering Questions'}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {currentLang === 'ko' ? 
+                      '각 질문에 대해 A 또는 B 중 자신에게 더 맞는 답변을 선택하세요. 정답이나 틀린 답은 없으니 자연스럽고 솔직하게 응답하는 것이 중요합니다. 진행률 바를 통해 현재 테스트 진행 상황을 확인할 수 있으며, 이전 질문으로 돌아가서 답변을 수정할 수도 있습니다.' :
+                     currentLang === 'ja' ? 
+                      '各質問に対してAまたはBの中から自分により合った答えを選択してください。正解や間違った答えはないので、自然で正直に回答することが重要です。進行率バーで現在のテスト進行状況を確認でき、前の質問に戻って答えを修正することもできます。' :
+                      'For each question, choose the answer that suits you better between A or B. There are no right or wrong answers, so it\'s important to respond naturally and honestly. You can check the current test progress through the progress bar and go back to previous questions to modify your answers.'
+                    }
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {currentLang === 'ko' ? '3. 결과 해석 및 활용' : 
+                     currentLang === 'ja' ? '3. 結果解釈と活用' : 
+                     '3. Result Interpretation and Application'}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {currentLang === 'ko' ? 
+                      '테스트 완료 후 자신의 MBTI 유형과 상세 분석을 확인하세요. 성격 특성, 적합한 직업군, 동일한 유형의 유명인 등의 정보를 제공받습니다. 이 결과를 바탕으로 자기 이해를 높이고, 진로 결정이나 인간관계 개선에 활용할 수 있습니다. 결과는 언제든 다시 확인하거나 친구들과 공유할 수 있습니다.' :
+                     currentLang === 'ja' ? 
+                      'テスト完了後、自分のMBTIタイプと詳細分析を確認してください。性格特性、適職群、同じタイプの有名人などの情報を提供されます。この結果を基に自己理解を高め、進路決定や人間関係改善に活用できます。結果はいつでも再確認したり友達と共有したりできます。' :
+                      'After completing the test, check your MBTI type and detailed analysis. You will receive information about personality traits, suitable career fields, and famous people of the same type. Based on these results, you can increase self-understanding and use it for career decisions or relationship improvement. Results can be checked again anytime or shared with friends.'
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* 활용 예시 */}
+            <section className="bg-card rounded-xl p-6 border border-border">
+              <h2 className="text-2xl font-bold mb-4">
+                {currentLang === 'ko' ? '활용 예시' : 
+                 currentLang === 'ja' ? '活用例' : 
+                 'Usage Examples'}
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                  <h3 className="text-lg font-semibold mb-2">
+                    {currentLang === 'ko' ? '개인 발전' : 
+                     currentLang === 'ja' ? '個人発展' : 
+                     'Personal Development'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      '자신의 성격 유형을 이해함으로써 강점을 발견하고 약점을 보완할 수 있습니다. 학습 방법, 의사소통 스타일, 스트레스 관리 방법 등을 개선하여 더 나은 자신이 될 수 있습니다. 또한 자신에게 맞는 환경과 활동을 찾아 삶의 만족도를 높일 수 있습니다.' :
+                     currentLang === 'ja' ? 
+                      '自分の性格タイプを理解することで強みを発見し弱点を補完できます。学習方法、コミュニケーションスタイル、ストレス管理方法などを改善してより良い自分になれます。また、自分に合った環境と活動を見つけて人生の満足度を高められます。' :
+                      'By understanding your personality type, you can discover strengths and compensate for weaknesses. You can become a better version of yourself by improving learning methods, communication styles, and stress management techniques. You can also increase life satisfaction by finding environments and activities that suit you.'
+                    }
+                  </p>
+                </div>
+                <div className="bg-secondary/5 rounded-lg p-4 border border-secondary/20">
+                  <h3 className="text-lg font-semibold mb-2">
+                    {currentLang === 'ko' ? '관계 개선' : 
+                     currentLang === 'ja' ? '関係改善' : 
+                     'Relationship Improvement'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      '가족, 친구, 동료들과 MBTI 결과를 공유하여 서로를 더 잘 이해할 수 있습니다. 각자의 성향을 알게 되면 갈등을 줄이고 더 효과적으로 소통할 수 있습니다. 팀 프로젝트나 협업 시에도 각 구성원의 강점을 활용하여 더 나은 결과를 얻을 수 있습니다.' :
+                     currentLang === 'ja' ? 
+                      '家族、友人、同僚とMBTI結果を共有してお互いをより良く理解できます。それぞれの傾向を知ると対立を減らしより効果的にコミュニケーションできます。チームプロジェクトや協業時にも各メンバーの強みを活用してより良い結果を得られます。' :
+                      'Share MBTI results with family, friends, and colleagues to better understand each other. Knowing each person\'s tendencies can reduce conflicts and enable more effective communication. In team projects and collaborations, you can achieve better results by utilizing each member\'s strengths.'
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* AdSense */}
+            <div className="flex justify-center">
+              <AdSense adSlot="1234567892" className="w-full max-w-4xl" />
+            </div>
+
+            {/* 자주 묻는 질문 FAQ */}
+            <section className="bg-card rounded-xl p-6 border border-border">
+              <h2 className="text-2xl font-bold mb-4">
+                {currentLang === 'ko' ? '자주 묻는 질문 (FAQ)' : 
+                 currentLang === 'ja' ? 'よくある질問 (FAQ)' : 
+                 'Frequently Asked Questions (FAQ)'}
+              </h2>
+              <div className="space-y-4">
+                <div className="border-b border-border pb-4">
+                  <h3 className="font-semibold mb-2 flex items-center gap-2">
+                    <HelpCircle className="h-4 w-4" />
+                    {currentLang === 'ko' ? 'Q. MBTI 테스트 결과가 얼마나 정확한가요?' : 
+                     currentLang === 'ja' ? 'Q. MBTIテスト結果はどのくらい正確ですか？' : 
+                     'Q. How accurate are MBTI test results?'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      'A. MBTI는 과학적으로 검증된 성격 분석 도구로, 일관성 있게 응답하면 높은 신뢰도를 보입니다. 다만 개인의 성장이나 환경 변화에 따라 결과가 달라질 수 있으므로, 절대적 기준보다는 자기 이해의 도구로 활용하시기 바랍니다.' :
+                     currentLang === 'ja' ? 
+                      'A. MBTIは科学的に検証された性格分析ツールで、一貫性を持って回答すれば高い信頼度を示します。ただし、個人の成長や環境変化によって結果が変わることがあるので、絶対的基準よりも自己理解のツールとして活用してください。' :
+                      'A. MBTI is a scientifically validated personality analysis tool that shows high reliability when answered consistently. However, results may change due to personal growth or environmental changes, so please use it as a tool for self-understanding rather than an absolute standard.'
+                    }
+                  </p>
+                </div>
+                <div className="border-b border-border pb-4">
+                  <h3 className="font-semibold mb-2 flex items-center gap-2">
+                    <HelpCircle className="h-4 w-4" />
+                    {currentLang === 'ko' ? 'Q. 테스트를 다시 받으면 결과가 달라질 수 있나요?' : 
+                     currentLang === 'ja' ? 'Q. テストを再受験すると結果が変わることがありますか？' : 
+                     'Q. Can the results change if I retake the test?'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      'A. 네, 가능합니다. 개인의 성장, 경험, 환경 변화 등에 따라 성향이 변할 수 있습니다. 특히 경계선상에 있는 성향의 경우 작은 변화로도 다른 결과가 나올 수 있으니, 주기적으로 테스트를 받아보시는 것도 좋습니다.' :
+                     currentLang === 'ja' ? 
+                      'A. はい、可能です。個人の成長、経験、環境変化などによって傾向が変わることがあります。特に境界線上にある傾向の場合、小さな変化でも異なる結果が出ることがあるので、定期的にテストを受けてみることをお勧めします。' :
+                      'A. Yes, it is possible. Tendencies can change due to personal growth, experiences, and environmental changes. Especially for tendencies on the borderline, small changes can lead to different results, so it\'s good to take the test periodically.'
+                    }
+                  </p>
+                </div>
+                <div className="border-b border-border pb-4">
+                  <h3 className="font-semibold mb-2 flex items-center gap-2">
+                    <HelpCircle className="h-4 w-4" />
+                    {currentLang === 'ko' ? 'Q. 어떤 성격 유형이 더 좋거나 나쁜 건 아닌가요?' : 
+                     currentLang === 'ja' ? 'Q. どの性格タイプがより良いまたは悪いということはありませんか？' : 
+                     'Q. Are some personality types better or worse than others?'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      'A. 절대 그렇지 않습니다. 모든 MBTI 유형은 고유한 강점과 가치를 가지고 있습니다. 각 유형은 서로 다른 상황에서 빛을 발하며, 다양성이야말로 사회를 풍요롭게 만드는 원동력입니다. 중요한 것은 자신의 유형을 이해하고 강점을 발전시키는 것입니다.' :
+                     currentLang === 'ja' ? 
+                      'A. 絶対にそうではありません。すべてのMBTIタイプは独自の強みと価値を持っています。各タイプは異なる状況で輝きを放ち、多様性こそが社会を豊かにする原動力です。重要なのは自分のタイプを理解し強みを発展させることです。' :
+                      'A. Absolutely not. All MBTI types have unique strengths and values. Each type shines in different situations, and diversity is what enriches society. What\'s important is understanding your type and developing your strengths.'
+                    }
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2 flex items-center gap-2">
+                    <HelpCircle className="h-4 w-4" />
+                    {currentLang === 'ko' ? 'Q. 예상과 다른 결과가 나왔는데 틀린 건 아닌가요?' : 
+                     currentLang === 'ja' ? 'Q. 予想と異なる結果が出ましたが、間違っているのではありませんか？' : 
+                     'Q. I got unexpected results. Could it be wrong?'}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentLang === 'ko' ? 
+                      'A. 예상과 다른 결과는 새로운 자기 발견의 기회일 수 있습니다. 때로는 자신이 생각하는 모습과 실제 행동 패턴이 다를 수 있으며, 이는 매우 자연스러운 현상입니다. 결과를 통해 자신을 새로운 각도에서 이해해보세요.' :
+                     currentLang === 'ja' ? 
+                      'A. 予想と異なる結果は新しい自己発見の機会かもしれません。時には自分が思っている姿と実際の行動パターンが異なることがあり、これは非常に自然な現象です。結果を通じて自分を新しい角度から理解してみてください。' :
+                      'A. Unexpected results can be an opportunity for new self-discovery. Sometimes the image you have of yourself and your actual behavioral patterns can differ, which is a very natural phenomenon. Try to understand yourself from new angles through the results.'
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     );

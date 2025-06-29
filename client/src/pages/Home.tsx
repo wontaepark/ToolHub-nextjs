@@ -471,9 +471,9 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Link href="/calculator">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 dark:from-blue-900/20 dark:to-blue-800/20 dark:border-blue-700/30">
                   <CardContent className="p-6 text-center">
-                    <Calculator className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <Calculator className="w-12 h-12 text-blue-600 mx-auto mb-4" />
                     <h4 className="font-bold mb-2">
                       {currentLang === 'ko' ? '고급 계산기' : 
                        currentLang === 'ja' ? '高級計算機' : 
@@ -488,46 +488,52 @@ export default function Home() {
                 </Card>
               </Link>
 
-              <Link href="/pomodoro">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <Timer className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? '포모도로 타이머' : 
-                       currentLang === 'ja' ? 'ポモドーロタイマー' : 
-                       'Pomodoro Timer'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '25분 집중 + 5분 휴식으로 생산성 극대화' : 
-                       currentLang === 'ja' ? '25分集中+5分休憩で生産性最大化' : 
-                       'Maximize productivity with 25min focus + 5min break'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-red-50 to-red-100 border-red-200 dark:from-red-900/20 dark:to-red-800/20 dark:border-red-700/30">
+                <CardContent className="p-6 text-center">
+                  <Timer className="w-12 h-12 text-red-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? '포모도로 타이머' : 
+                     currentLang === 'ja' ? 'ポモドーロタイマー' : 
+                     'Pomodoro Timer'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '25분 집중 + 5분 휴식으로 생산성 극대화' : 
+                     currentLang === 'ja' ? '25分集中+5分休憩で生産性最大化' : 
+                     'Maximize productivity with 25min focus + 5min break'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
 
-              <Link href="/timer">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <Clock className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? '범용 타이머' : 
-                       currentLang === 'ja' ? '汎用タイマー' : 
-                       'Universal Timer'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '자유롭게 시간 설정이 가능한 맞춤형 타이머' : 
-                       currentLang === 'ja' ? '自由に時間設定可能なカスタマイズタイマー' : 
-                       'Customizable timer with flexible time settings'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-emerald-50 to-emerald-100 border-emerald-200 dark:from-emerald-900/20 dark:to-emerald-800/20 dark:border-emerald-700/30">
+                <CardContent className="p-6 text-center">
+                  <Clock className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? '범용 타이머' : 
+                     currentLang === 'ja' ? '汎用タイマー' : 
+                     'Universal Timer'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '자유롭게 시간 설정이 가능한 맞춤형 타이머' : 
+                     currentLang === 'ja' ? '自由に時間設定可能なカスタマイズタイマー' : 
+                     'Customizable timer with flexible time settings'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
 
               <Link href="/date-calculator">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-green-50 to-green-100 border-green-200 dark:from-green-900/20 dark:to-green-800/20 dark:border-green-700/30">
                   <CardContent className="p-6 text-center">
-                    <Calendar className="w-12 h-12 text-green-500 mx-auto mb-4" />
+                    <Calendar className="w-12 h-12 text-green-600 mx-auto mb-4" />
                     <h4 className="font-bold mb-2">
                       {currentLang === 'ko' ? '날짜 계산기' : 
                        currentLang === 'ja' ? '日付計算機' : 
@@ -557,28 +563,31 @@ export default function Home() {
               </h3>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Link href="/unit-converter">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <Gauge className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? '단위 변환기' : 
-                       currentLang === 'ja' ? '単位変換器' : 
-                       'Unit Converter'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '길이, 무게, 온도, 부피 등 다양한 단위 변환' : 
-                       currentLang === 'ja' ? '長さ、重さ、温度、体積など様々な単位変換' : 
-                       'Convert length, weight, temperature, volume and more'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 dark:from-orange-900/20 dark:to-orange-800/20 dark:border-orange-700/30">
+                <CardContent className="p-6 text-center">
+                  <Gauge className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? '단위 변환기' : 
+                     currentLang === 'ja' ? '単位変換器' : 
+                     'Unit Converter'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '길이, 무게, 온도, 부피 등 다양한 단위 변환' : 
+                     currentLang === 'ja' ? '長さ、重さ、温度、体積など様々な単位変換' : 
+                     'Convert length, weight, temperature, volume and more'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
 
               <Link href="/password-generator">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 dark:from-purple-900/20 dark:to-purple-800/20 dark:border-purple-700/30">
                   <CardContent className="p-6 text-center">
-                    <Lock className="w-12 h-12 text-purple-500 mx-auto mb-4" />
+                    <Lock className="w-12 h-12 text-purple-600 mx-auto mb-4" />
                     <h4 className="font-bold mb-2">
                       {currentLang === 'ko' ? '비밀번호 생성기' : 
                        currentLang === 'ja' ? 'パスワード生成器' : 
@@ -593,10 +602,10 @@ export default function Home() {
                 </Card>
               </Link>
 
-              <Link href="/raffle">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+              <Link href="/number-raffle">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-pink-50 to-pink-100 border-pink-200 dark:from-pink-900/20 dark:to-pink-800/20 dark:border-pink-700/30">
                   <CardContent className="p-6 text-center">
-                    <Shuffle className="w-12 h-12 text-pink-500 mx-auto mb-4" />
+                    <Shuffle className="w-12 h-12 text-pink-600 mx-auto mb-4" />
                     <h4 className="font-bold mb-2">
                       {currentLang === 'ko' ? '번호 추첨기' : 
                        currentLang === 'ja' ? '番号抽選器' : 
@@ -611,23 +620,26 @@ export default function Home() {
                 </Card>
               </Link>
 
-              <Link href="/qr-generator">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <QrCode className="w-12 h-12 text-indigo-500 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? 'QR 코드 생성기' : 
-                       currentLang === 'ja' ? 'QRコード生成器' : 
-                       'QR Code Generator'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '텍스트, URL을 QR 코드로 변환' : 
-                       currentLang === 'ja' ? 'テキスト、URLをQRコードに変換' : 
-                       'Convert text and URLs to QR codes'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200 dark:from-indigo-900/20 dark:to-indigo-800/20 dark:border-indigo-700/30">
+                <CardContent className="p-6 text-center">
+                  <QrCode className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? 'QR 코드 생성기' : 
+                     currentLang === 'ja' ? 'QRコード生成器' : 
+                     'QR Code Generator'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '텍스트, URL을 QR 코드로 변환' : 
+                     currentLang === 'ja' ? 'テキスト、URLをQRコードに変換' : 
+                     'Convert text and URLs to QR codes'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
@@ -644,28 +656,31 @@ export default function Home() {
               </h3>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Link href="/youtube-thumbnail">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <Youtube className="w-12 h-12 text-red-600 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? '유튜브 썸네일 다운로더' : 
-                       currentLang === 'ja' ? 'YouTube サムネイルダウンローダー' : 
-                       'YouTube Thumbnail Downloader'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '유튜브 영상의 썸네일 이미지를 고화질로 다운로드' : 
-                       currentLang === 'ja' ? 'YouTube動画のサムネイル画像を高画質でダウンロード' : 
-                       'Download YouTube video thumbnails in high quality'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-red-50 to-red-100 border-red-200 dark:from-red-900/20 dark:to-red-800/20 dark:border-red-700/30">
+                <CardContent className="p-6 text-center">
+                  <Youtube className="w-12 h-12 text-red-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? '유튜브 썸네일 다운로더' : 
+                     currentLang === 'ja' ? 'YouTube サムネイルダウンローダー' : 
+                     'YouTube Thumbnail Downloader'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '유튜브 영상의 썸네일 이미지를 고화질로 다운로드' : 
+                     currentLang === 'ja' ? 'YouTube動画のサムネイル画像を高画質でダウンロード' : 
+                     'Download YouTube video thumbnails in high quality'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
 
               <Link href="/mbti-test">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-cyan-50 to-cyan-100 border-cyan-200 dark:from-cyan-900/20 dark:to-cyan-800/20 dark:border-cyan-700/30">
                   <CardContent className="p-6 text-center">
-                    <TestTube className="w-12 h-12 text-cyan-500 mx-auto mb-4" />
+                    <TestTube className="w-12 h-12 text-cyan-600 mx-auto mb-4" />
                     <h4 className="font-bold mb-2">
                       {currentLang === 'ko' ? 'MBTI 성격유형 테스트' : 
                        currentLang === 'ja' ? 'MBTI性格タイプテスト' : 
@@ -680,23 +695,26 @@ export default function Home() {
                 </Card>
               </Link>
 
-              <Link href="/teto-egen-test">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <Users className="w-12 h-12 text-teal-500 mx-auto mb-4" />
-                    <h4 className="font-bold mb-2">
-                      {currentLang === 'ko' ? '테토-에겐 테스트' : 
-                       currentLang === 'ja' ? 'テト-エゲンテスト' : 
-                       'Teto-Egen Test'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {currentLang === 'ko' ? '독창적인 성격 분석 및 궁합 테스트' : 
-                       currentLang === 'ja' ? '独創的な性格分析および相性テスト' : 
-                       'Creative personality analysis and compatibility test'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gradient-to-br from-teal-50 to-teal-100 border-teal-200 dark:from-teal-900/20 dark:to-teal-800/20 dark:border-teal-700/30">
+                <CardContent className="p-6 text-center">
+                  <Users className="w-12 h-12 text-teal-600 mx-auto mb-4" />
+                  <h4 className="font-bold mb-2">
+                    {currentLang === 'ko' ? '테토-에겐 테스트' : 
+                     currentLang === 'ja' ? 'テト-エゲンテスト' : 
+                     'Teto-Egen Test'}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {currentLang === 'ko' ? '독창적인 성격 분석 및 궁합 테스트' : 
+                     currentLang === 'ja' ? '独창적な性격分析および相性テスト' : 
+                     'Creative personality analysis and compatibility test'}
+                  </p>
+                  <p className="text-xs text-orange-600 font-medium">
+                    {currentLang === 'ko' ? '곧 출시 예정' : 
+                     currentLang === 'ja' ? '近日リリース予定' : 
+                     'Coming Soon'}
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

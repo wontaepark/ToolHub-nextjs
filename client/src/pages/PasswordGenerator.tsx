@@ -770,6 +770,390 @@ export default function PasswordGenerator() {
             </div>
           </div>
         </section>
+
+        {/* 현대 사이버 보안 위협과 비밀번호의 중요성 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-spy-line text-red-500"></i>
+              {currentLang === 'ko' ? '현대 사이버 보안 위협과 비밀번호의 중요성' :
+               currentLang === 'ja' ? '現代サイバーセキュリティ脅威とパスワードの重要性' :
+               'Modern Cybersecurity Threats and Password Importance'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-error-warning-line text-orange-500"></i>
+                  {currentLang === 'ko' ? '급증하는 사이버 범죄 현황' :
+                   currentLang === 'ja' ? '急増するサイバー犯罪現況' :
+                   'Rising Cybercrime Statistics'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 p-3 rounded-lg border border-red-200/50 dark:border-red-800/30">
+                    <h4 className="font-medium text-red-800 dark:text-red-300 mb-1">
+                      {currentLang === 'ko' ? '글로벌 해킹 통계' :
+                       currentLang === 'ja' ? 'グローバルハッキング統計' :
+                       'Global Hacking Statistics'}
+                    </h4>
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {currentLang === 'ko' ? '2024년 사이버 보안 연구에 따르면, 전 세계적으로 매초 39명이 해킹 피해를 당하고 있으며, 이 중 81%가 약한 비밀번호나 재사용된 비밀번호로 인한 것입니다. 한국의 경우 2023년 개인정보 유출 신고 건수가 전년 대비 43% 증가했습니다.' :
+                       currentLang === 'ja' ? '2024年サイバーセキュリティ研究によると、世界的に毎秒39人がハッキング被害を受けており、このうち81%が弱いパスワードや再使用されたパスワードによるものです。韓国の場合、2023年個人情報流出申告件数が前年比43%増加しました。' :
+                       'According to 2024 cybersecurity research, 39 people worldwide fall victim to hacking every second, with 81% due to weak or reused passwords. In Korea, personal information breach reports increased by 43% in 2023 compared to the previous year.'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-950/20 dark:to-yellow-950/20 p-3 rounded-lg border border-orange-200/50 dark:border-orange-800/30">
+                    <h4 className="font-medium text-orange-800 dark:text-orange-300 mb-1">
+                      {currentLang === 'ko' ? '경제적 피해 규모' :
+                       currentLang === 'ja' ? '経済的被害規模' :
+                       'Economic Damage Scale'}
+                    </h4>
+                    <p className="text-sm text-orange-600 dark:text-orange-400">
+                      {currentLang === 'ko' ? 'IBM의 \"2024 데이터 유출 비용 보고서\"에 따르면, 데이터 유출로 인한 전 세계 평균 피해 비용은 445만 달러에 달하며, 개인의 경우 평균 158달러의 직접적 손실과 함께 신용도 하락, 개인정보 도용 등의 2차 피해가 발생합니다.' :
+                       currentLang === 'ja' ? 'IBMの「2024データ流出コスト報告書」によると、データ流出による世界平均被害コストは445万ドルに達し、個人の場合平均158ドルの直接的損失とともに信用度下落、個人情報盗用などの二次被害が発生します。' :
+                       'According to IBM\'s \"2024 Cost of Data Breach Report,\" the global average cost of data breaches reaches $4.45 million, with individuals facing an average direct loss of $158 plus secondary damages including credit score decline and identity theft.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-hacker-line text-purple-500"></i>
+                  {currentLang === 'ko' ? '비밀번호 공격 기법의 진화' :
+                   currentLang === 'ja' ? 'パスワード攻撃技法の進化' :
+                   'Evolution of Password Attack Techniques'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20 p-3 rounded-lg border border-purple-200/50 dark:border-purple-800/30">
+                    <h4 className="font-medium text-purple-800 dark:text-purple-300 mb-1">
+                      {currentLang === 'ko' ? '무차별 대입 공격 (Brute Force)' :
+                       currentLang === 'ja' ? '総当たり攻撃 (Brute Force)' :
+                       'Brute Force Attack'}
+                    </h4>
+                    <p className="text-sm text-purple-600 dark:text-purple-400">
+                      {currentLang === 'ko' ? '현대의 해커들은 초당 수십억 번의 비밀번호 조합을 시도할 수 있는 고성능 컴퓨터를 사용합니다. 8자리 숫자로만 구성된 비밀번호는 단 몇 초 만에 뚫릴 수 있으며, 12자리 복합 문자 비밀번호도 몇 시간 내에 해독 가능합니다.' :
+                       currentLang === 'ja' ? '現代のハッカーは毎秒数十億回のパスワード組み合わせを試行できる高性能コンピュータを使用します。8桁の数字のみで構成されたパスワードは数秒で破られ、12桁の複合文字パスワードも数時間で解読可能です。' :
+                       'Modern hackers use high-performance computers capable of attempting billions of password combinations per second. 8-digit numeric passwords can be cracked in seconds, and even 12-character complex passwords can be decoded within hours.'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 p-3 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                      {currentLang === 'ko' ? 'AI를 활용한 패스워드 크래킹' :
+                       currentLang === 'ja' ? 'AIを活用したパスワードクラッキング' :
+                       'AI-Powered Password Cracking'}
+                    </h4>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      {currentLang === 'ko' ? '인공지능 기술의 발전으로 기존 방식보다 훨씬 빠른 비밀번호 해독이 가능해졌습니다. 대응책으로 더 긴 비밀번호(최소 16자 이상)와 완전한 랜덤성 확보가 필요합니다.' :
+                       currentLang === 'ja' ? '人工知能技術の発展により従来の方式よりもはるかに速いパスワード解読が可能になりました。対応策として、より長いパスワード（最低16文字以上）と完全なランダム性の確保が必要です。' :
+                       'AI technology advancement has enabled much faster password cracking than traditional methods. Countermeasures include longer passwords (minimum 16+ characters) and ensuring complete randomness.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 핵심 기능과 고급 보안 옵션 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-settings-3-line text-primary"></i>
+              {currentLang === 'ko' ? '핵심 기능과 고급 보안 옵션' :
+               currentLang === 'ja' ? '主要機能と高度セキュリティオプション' :
+               'Core Features and Advanced Security Options'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-cpu-line text-green-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '강력한 비밀번호 생성 엔진' :
+                   currentLang === 'ja' ? '強力なパスワード生成エンジン' :
+                   'Powerful Password Generation Engine'}
+                </h3>
+                <div className="space-y-2">
+                  <div className="text-sm">
+                    <span className="font-medium text-green-600">
+                      {currentLang === 'ko' ? '암호학적 보안 난수 생성' :
+                       currentLang === 'ja' ? '暗号学的セキュア乱数生成' :
+                       'Cryptographically Secure Random Generation'}
+                    </span>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {currentLang === 'ko' ? 'Web Crypto API를 활용한 암호학적으로 안전한 의사난수 생성기(CSPRNG) 사용. 군사급 암호화 수준의 보안성 제공' :
+                       currentLang === 'ja' ? 'Web Crypto APIを活用した暗号学的に安全な擬似乱数生成器（CSPRNG）使用。軍事級暗号化レベルのセキュリティ提供' :
+                       'Uses Web Crypto API-based Cryptographically Secure Pseudo-Random Number Generator (CSPRNG). Provides military-grade encryption level security'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-tools-line text-blue-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '맞춤형 설정 옵션' :
+                   currentLang === 'ja' ? 'カスタム設定オプション' :
+                   'Customizable Settings Options'}
+                </h3>
+                <div className="space-y-2">
+                  <div className="text-sm">
+                    <span className="font-medium text-blue-600">
+                      {currentLang === 'ko' ? '길이 설정 (4-128자)' :
+                       currentLang === 'ja' ? '長さ設定（4-128文字）' :
+                       'Length Settings (4-128 characters)'}
+                    </span>
+                    <ul className="text-xs text-muted-foreground mt-1 space-y-1">
+                      <li>• {currentLang === 'ko' ? '12-16자: 일반 온라인 계정용 (권장)' :
+                              currentLang === 'ja' ? '12-16文字：一般オンラインアカウント用（推奨）' :
+                              '12-16 chars: General online accounts (recommended)'}</li>
+                      <li>• {currentLang === 'ko' ? '20-32자: 중요한 금융/업무 계정용' :
+                              currentLang === 'ja' ? '20-32文字：重要な金融・業務アカウント用' :
+                              '20-32 chars: Important financial/business accounts'}</li>
+                      <li>• {currentLang === 'ko' ? '64-128자: 마스터 패스워드용 (최고 보안)' :
+                              currentLang === 'ja' ? '64-128文字：マスターパスワード用（最高セキュリティ）' :
+                              '64-128 chars: Master passwords (maximum security)'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-shield-star-line text-purple-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '실시간 보안 강도 분석' :
+                   currentLang === 'ja' ? 'リアルタイムセキュリティ強度分析' :
+                   'Real-time Security Strength Analysis'}
+                </h3>
+                <div className="space-y-2">
+                  <div className="text-sm">
+                    <span className="font-medium text-purple-600">
+                      {currentLang === 'ko' ? 'NIST 가이드라인 기반 평가' :
+                       currentLang === 'ja' ? 'NISTガイドライン基盤評価' :
+                       'NIST Guideline-based Evaluation'}
+                    </span>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {currentLang === 'ko' ? '미국 국립표준기술연구소(NIST)의 최신 비밀번호 가이드라인을 기반으로 실시간 보안 강도 평가' :
+                       currentLang === 'ja' ? '米国国立標準技術研究所（NIST）の最新パスワードガイドラインに基づくリアルタイムセキュリティ強度評価' :
+                       'Real-time security strength evaluation based on the latest NIST password guidelines'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 비밀번호 보안 모범 사례 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-shield-check-line text-green-500"></i>
+              {currentLang === 'ko' ? '비밀번호 보안 모범 사례' :
+               currentLang === 'ja' ? 'パスワードセキュリティベストプラクティス' :
+               'Password Security Best Practices'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-folder-settings-line text-blue-500"></i>
+                  {currentLang === 'ko' ? '생성 후 관리 전략' :
+                   currentLang === 'ja' ? '生成後管理戦略' :
+                   'Post-Generation Management Strategy'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 p-4 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2">
+                      {currentLang === 'ko' ? '비밀번호 관리자 활용' :
+                       currentLang === 'ja' ? 'パスワードマネージャー活用' :
+                       'Password Manager Utilization'}
+                    </h4>
+                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
+                      {currentLang === 'ko' ? '생성된 강력한 비밀번호는 반드시 신뢰할 수 있는 비밀번호 관리자에 저장하세요:' :
+                       currentLang === 'ja' ? '生成された強力なパスワードは必ず信頼できるパスワードマネージャーに保存してください：' :
+                       'Always store generated strong passwords in a trusted password manager:'}
+                    </p>
+                    <ul className="text-xs text-blue-500 dark:text-blue-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '추천 도구: 1Password, Bitwarden, LastPass, KeePass' :
+                              currentLang === 'ja' ? '推奨ツール：1Password、Bitwarden、LastPass、KeePass' :
+                              'Recommended tools: 1Password, Bitwarden, LastPass, KeePass'}</li>
+                      <li>• {currentLang === 'ko' ? '장점: 자동 입력, 안전한 저장, 다기기 동기화' :
+                              currentLang === 'ja' ? 'メリット：自動入力、安全な保存、マルチデバイス同期' :
+                              'Benefits: Auto-fill, secure storage, multi-device sync'}</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 p-4 rounded-lg border border-green-200/50 dark:border-green-800/30">
+                    <h4 className="font-medium text-green-800 dark:text-green-300 mb-2">
+                      {currentLang === 'ko' ? '정기적 비밀번호 갱신' :
+                       currentLang === 'ja' ? '定期的パスワード更新' :
+                       'Regular Password Updates'}
+                    </h4>
+                    <ul className="text-xs text-green-600 dark:text-green-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '최고 보안 (금융): 3개월' :
+                              currentLang === 'ja' ? '最高セキュリティ（金融）：3ヶ月' :
+                              'Maximum security (financial): 3 months'}</li>
+                      <li>• {currentLang === 'ko' ? '높은 보안 (이메일, 업무): 6개월' :
+                              currentLang === 'ja' ? '高セキュリティ（メール、業務）：6ヶ月' :
+                              'High security (email, work): 6 months'}</li>
+                      <li>• {currentLang === 'ko' ? '일반 보안 (소셜미디어): 12개월' :
+                              currentLang === 'ja' ? '一般セキュリティ（ソーシャルメディア）：12ヶ月' :
+                              'General security (social media): 12 months'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-alert-line text-red-500"></i>
+                  {currentLang === 'ko' ? '절대 금지 사항' :
+                   currentLang === 'ja' ? '絶対禁止事項' :
+                   'Absolute Prohibitions'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 p-4 rounded-lg border border-red-200/50 dark:border-red-800/30">
+                    <h4 className="font-medium text-red-800 dark:text-red-300 mb-2">
+                      {currentLang === 'ko' ? '위험한 저장 및 공유 방법' :
+                       currentLang === 'ja' ? '危険な保存・共有方法' :
+                       'Dangerous Storage and Sharing Methods'}
+                    </h4>
+                    <ul className="text-xs text-red-600 dark:text-red-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '이메일/메신저로 비밀번호 전송: 평문으로 전송 시 탈취 위험' :
+                              currentLang === 'ja' ? 'メール・メッセンジャーでパスワード送信：平文送信時盗取リスク' :
+                              'Email/messenger password transmission: Risk of interception in plain text'}</li>
+                      <li>• {currentLang === 'ko' ? '메모장이나 텍스트 파일에 저장: 악성 소프트웨어 접근 가능' :
+                              currentLang === 'ja' ? 'メモ帳やテキストファイルに保存：マルウェアアクセス可能' :
+                              'Notepad or text file storage: Accessible to malware'}</li>
+                      <li>• {currentLang === 'ko' ? '동일한 비밀번호 재사용: 하나의 침해가 전체 계정 위험으로 확산' :
+                              currentLang === 'ja' ? '同一パスワード再使用：一つの侵害が全アカウントリスクに拡散' :
+                              'Reusing same password: One breach spreads to all accounts'}</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-950/20 dark:to-yellow-950/20 p-4 rounded-lg border border-orange-200/50 dark:border-orange-800/30">
+                    <h4 className="font-medium text-orange-800 dark:text-orange-300 mb-2">
+                      {currentLang === 'ko' ? '2단계 인증 (2FA) 필수 적용' :
+                       currentLang === 'ja' ? '2段階認証（2FA）必須適用' :
+                       'Mandatory Two-Factor Authentication (2FA)'}
+                    </h4>
+                    <ul className="text-xs text-orange-600 dark:text-orange-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? 'SMS 인증: 기본적이지만 SIM 스와핑 위험' :
+                              currentLang === 'ja' ? 'SMS認証：基本的だがSIMスワッピングリスク' :
+                              'SMS authentication: Basic but SIM swapping risk'}</li>
+                      <li>• {currentLang === 'ko' ? '앱 기반 인증: Google Authenticator, Authy 등 권장' :
+                              currentLang === 'ja' ? 'アプリ基盤認証：Google Authenticator、Authy等推奨' :
+                              'App-based authentication: Google Authenticator, Authy recommended'}</li>
+                      <li>• {currentLang === 'ko' ? '하드웨어 키: YubiKey 등 물리적 보안 키 (최고 보안)' :
+                              currentLang === 'ja' ? 'ハードウェアキー：YubiKey等物理的セキュリティキー（最高セキュリティ）' :
+                              'Hardware keys: YubiKey etc. physical security keys (maximum security)'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 자주 묻는 질문 확장 버전 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-question-line text-primary"></i>
+              {currentLang === 'ko' ? '자주 묻는 질문 (FAQ) - 상세 가이드' :
+               currentLang === 'ja' ? 'よくある質問（FAQ）- 詳細ガイド' :
+               'Frequently Asked Questions (FAQ) - Detailed Guide'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              <div className="border-l-4 border-blue-500 pl-4">
+                <h3 className="font-semibold mb-2 text-blue-700 dark:text-blue-400">
+                  {currentLang === 'ko' ? 'Q1. 생성된 비밀번호가 정말 안전한가요?' :
+                   currentLang === 'ja' ? 'Q1. 生成されたパスワードは本当に安全ですか？' :
+                   'Q1. Are the generated passwords really secure?'}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {currentLang === 'ko' ? 
+                    '네, 우리의 비밀번호 생성기는 Web Crypto API를 사용한 암호학적으로 안전한 난수 생성기를 활용합니다. 모든 비밀번호는 브라우저에서 로컬로 생성되어 외부로 전송되지 않으며, 군사급 암호화에서 사용되는 수준의 보안성을 제공합니다.' :
+                   currentLang === 'ja' ? 
+                    'はい、私たちのパスワード生成器はWeb Crypto APIを使用した暗号学的に安全な乱数生成器を活用します。すべてのパスワードはブラウザでローカルに生成され外部に送信されず、軍事級暗号化で使用されるレベルのセキュリティを提供します。' :
+                    'Yes, our password generator uses cryptographically secure random number generators through Web Crypto API. All passwords are generated locally in your browser without external transmission, providing military-grade encryption level security.'
+                  }
+                </p>
+                <div className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded text-xs text-blue-600 dark:text-blue-400">
+                  {currentLang === 'ko' ? '16자 이상의 복합 문자 비밀번호는 현재 기술로 수백 년이 걸려야 해독 가능합니다.' :
+                   currentLang === 'ja' ? '16文字以上の複合文字パスワードは現在の技術で数百年かかって解読可能です。' :
+                   '16+ character complex passwords would take hundreds of years to crack with current technology.'}
+                </div>
+              </div>
+
+              <div className="border-l-4 border-green-500 pl-4">
+                <h3 className="font-semibold mb-2 text-green-700 dark:text-green-400">
+                  {currentLang === 'ko' ? 'Q2. 비밀번호 길이는 얼마나 설정해야 하나요?' :
+                   currentLang === 'ja' ? 'Q2. パスワードの長さはどのくらいに設定すべきですか？' :
+                   'Q2. How long should passwords be set?'}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {currentLang === 'ko' ? 
+                    '사용 목적에 따라 다르지만, 일반적으로 최소 12자 이상을 권장합니다. 은행이나 중요한 업무 계정은 16자 이상, 소셜미디어 등 일반 계정은 12-14자가 적당합니다.' :
+                   currentLang === 'ja' ? 
+                    '使用目的によって異なりますが、一般的に最低12文字以上を推奨します。銀行や重要な業務アカウントは16文字以上、ソーシャルメディア等一般アカウントは12-14文字が適当です。' :
+                    'It depends on usage purpose, but generally minimum 12+ characters are recommended. Banking or important business accounts should use 16+ characters, while general accounts like social media can use 12-14 characters.'
+                  }
+                </p>
+                <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded text-xs text-green-600 dark:text-green-400">
+                  {currentLang === 'ko' ? '길이가 길수록 보안이 강화되지만, 비밀번호 관리자를 사용하면 길이에 대한 부담을 줄일 수 있습니다.' :
+                   currentLang === 'ja' ? '長いほどセキュリティが強化されますが、パスワードマネージャーを使用すれば長さの負担を減らせます。' :
+                   'Longer passwords enhance security, but using a password manager can reduce the burden of length.'}
+                </div>
+              </div>
+
+              <div className="border-l-4 border-orange-500 pl-4">
+                <h3 className="font-semibold mb-2 text-orange-700 dark:text-orange-400">
+                  {currentLang === 'ko' ? 'Q3. 특수문자를 반드시 포함해야 하나요?' :
+                   currentLang === 'ja' ? 'Q3. 特殊文字を必ず含める必要がありますか？' :
+                   'Q3. Must special characters be included?'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {currentLang === 'ko' ? 
+                    '특수문자를 포함하면 비밀번호의 복잡성이 크게 증가하여 보안이 강화됩니다. 다만 일부 웹사이트나 시스템에서는 특정 특수문자를 허용하지 않는 경우가 있으므로, 해당 서비스의 비밀번호 정책을 확인한 후 설정하는 것이 좋습니다.' :
+                   currentLang === 'ja' ? 
+                    '特殊文字を含めるとパスワードの複雑性が大幅に増加してセキュリティが強化されます。ただし一部のウェブサイトやシステムでは特定の特殊文字を許可しない場合があるため、該当サービスのパスワードポリシーを確認後設定することをお勧めします。' :
+                    'Including special characters significantly increases password complexity and enhances security. However, some websites or systems may not allow certain special characters, so it\'s recommended to check the password policy of the specific service before setting.'
+                  }
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 마무리 섹션 */}
+        <div className="text-center bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 rounded-xl p-8 border border-green-200/50 dark:border-green-800/30">
+          <h2 className="text-2xl font-bold mb-4 text-foreground">
+            {currentLang === 'ko' ? '안전한 디지털 라이프의 시작' :
+             currentLang === 'ja' ? '安全なデジタルライフの始まり' :
+             'The Beginning of Secure Digital Life'}
+          </h2>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto">
+            {currentLang === 'ko' ? 'ToolHub.tools 비밀번호 생성기와 함께 사이버 위협으로부터 안전한 디지털 환경을 구축하세요. 강력한 비밀번호는 여러분의 소중한 정보를 지키는 첫 번째 방어선입니다.' :
+             currentLang === 'ja' ? 'ToolHub.toolsパスワード生成器と一緒にサイバー脅威から安全なデジタル環境を構築してください。強力なパスワードはあなたの大切な情報を守る第一の防御線です。' :
+             'Build a secure digital environment protected from cyber threats with ToolHub.tools password generator. Strong passwords are the first line of defense protecting your valuable information.'}
+          </p>
+          <div className="flex justify-center">
+            <div className="animate-pulse">
+              <i className="ri-shield-keyhole-line text-primary text-4xl"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

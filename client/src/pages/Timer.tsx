@@ -965,6 +965,353 @@ export default function Timer() {
           <p>• {t('timer.tips.tip5')}</p>
         </CardContent>
       </Card>
+
+      {/* 상세 사용법 가이드 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <i className="ri-book-open-line text-primary"></i>
+            {t('timer.detailedGuide.title', '상세 사용법 가이드')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                <span className="w-6 h-6 bg-blue-500 text-white rounded-full text-sm flex items-center justify-center">1</span>
+                {t('timer.basicSetup.title', '기본 타이머 설정')}
+              </h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <i className="ri-time-line text-blue-500 mt-0.5"></i>
+                  <span>{t('timer.basicSetup.step1', '시간 입력: 분과 초 필드에 원하는 시간을 직접 입력하세요')}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <i className="ri-play-line text-green-500 mt-0.5"></i>
+                  <span>{t('timer.basicSetup.step2', '시작 버튼: 설정 완료 후 "시작" 버튼을 클릭하여 카운트다운 시작')}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <i className="ri-eye-line text-purple-500 mt-0.5"></i>
+                  <span>{t('timer.basicSetup.step3', '진행 확인: 화면에 표시되는 큰 숫자로 남은 시간을 실시간 확인')}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <i className="ri-notification-line text-orange-500 mt-0.5"></i>
+                  <span>{t('timer.basicSetup.step4', '완료 알림: 시간이 끝나면 선택한 알람음과 함께 시각적 알림 표시')}</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                <span className="w-6 h-6 bg-green-500 text-white rounded-full text-sm flex items-center justify-center">2</span>
+                {t('timer.quickSetup.title', '빠른 설정 활용법')}
+              </h3>
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 p-3 rounded-lg border border-red-200/50 dark:border-red-800/30">
+                  <h4 className="font-medium text-red-800 dark:text-red-300 mb-1">{t('timer.cooking.title', '요리용')}</h4>
+                  <p className="text-sm text-red-600 dark:text-red-400">{t('timer.cooking.desc', '음식별 최적 조리 시간이 미리 설정되어 있어 요리 실수를 방지')}</p>
+                </div>
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 p-3 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                  <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-1">{t('timer.workout.title', '운동용')}</h4>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">{t('timer.workout.desc', '휴식 시간, 운동 세트 간격 등을 정확히 측정')}</p>
+                </div>
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 p-3 rounded-lg border border-purple-200/50 dark:border-purple-800/30">
+                  <h4 className="font-medium text-purple-800 dark:text-purple-300 mb-1">{t('timer.study.title', '학습용')}</h4>
+                  <p className="text-sm text-purple-600 dark:text-purple-400">{t('timer.study.desc', '집중 학습 시간, 휴식 시간 관리에 활용')}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 다양한 활용 사례 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <i className="ri-lightbulb-line text-yellow-500"></i>
+            {t('timer.useCases.title', '다양한 활용 사례')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center">
+                <i className="ri-restaurant-line text-red-600 text-xl"></i>
+              </div>
+              <h3 className="font-semibold text-foreground">{t('timer.useCases.cooking.title', '요리와 베이킹')}</h3>
+              <p className="text-sm text-muted-foreground">{t('timer.useCases.cooking.desc', '요리에서 정확한 시간 측정은 맛과 안전의 핵심입니다')}</p>
+              <ul className="text-xs space-y-1 text-muted-foreground">
+                <li>• {t('timer.useCases.cooking.item1', '파스타 삶기: 면 종류별 최적 삶는 시간 준수')}</li>
+                <li>• {t('timer.useCases.cooking.item2', '스테이크 굽기: 원하는 익힘 정도에 맞는 정확한 시간')}</li>
+                <li>• {t('timer.useCases.cooking.item3', '베이킹: 오븐 요리의 정확한 조리 시간으로 완벽한 결과')}</li>
+                <li>• {t('timer.useCases.cooking.item4', '발효: 빵 반죽, 요거트 등의 발효 시간 관리')}</li>
+              </ul>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                <i className="ri-run-line text-blue-600 text-xl"></i>
+              </div>
+              <h3 className="font-semibold text-foreground">{t('timer.useCases.fitness.title', '운동과 피트니스')}</h3>
+              <p className="text-sm text-muted-foreground">{t('timer.useCases.fitness.desc', '효과적인 운동을 위한 시간 관리')}</p>
+              <ul className="text-xs space-y-1 text-muted-foreground">
+                <li>• {t('timer.useCases.fitness.item1', '인터벌 트레이닝: 고강도 운동과 휴식의 정확한 시간 배분')}</li>
+                <li>• {t('timer.useCases.fitness.item2', '플랭크: 코어 운동의 지속 시간 측정')}</li>
+                <li>• {t('timer.useCases.fitness.item3', '스트레칭: 각 동작별 충분한 스트레칭 시간 확보')}</li>
+                <li>• {t('timer.useCases.fitness.item4', '휴식 시간: 세트 간 적절한 휴식으로 운동 효과 극대화')}</li>
+              </ul>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center">
+                <i className="ri-book-line text-green-600 text-xl"></i>
+              </div>
+              <h3 className="font-semibold text-foreground">{t('timer.useCases.study.title', '학습과 업무')}</h3>
+              <p className="text-sm text-muted-foreground">{t('timer.useCases.study.desc', '생산성 향상을 위한 시간 관리')}</p>
+              <ul className="text-xs space-y-1 text-muted-foreground">
+                <li>• {t('timer.useCases.study.item1', '집중 학습: 25분 집중 + 5분 휴식의 포모도로 기법')}</li>
+                <li>• {t('timer.useCases.study.item2', '독서: 정해진 시간 동안 집중 독서로 독서 습관 형성')}</li>
+                <li>• {t('timer.useCases.study.item3', '회의 관리: 안건별 토론 시간 제한으로 효율적 회의 진행')}</li>
+                <li>• {t('timer.useCases.study.item4', '프레젠테이션: 발표 연습 시 시간 배분 확인')}</li>
+              </ul>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                <i className="ri-home-line text-purple-600 text-xl"></i>
+              </div>
+              <h3 className="font-semibold text-foreground">{t('timer.useCases.lifestyle.title', '일상생활 관리')}</h3>
+              <p className="text-sm text-muted-foreground">{t('timer.useCases.lifestyle.desc', '다양한 생활 패턴 관리')}</p>
+              <ul className="text-xs space-y-1 text-muted-foreground">
+                <li>• {t('timer.useCases.lifestyle.item1', '파워 낮잠: 20분 이내의 효과적인 낮잠')}</li>
+                <li>• {t('timer.useCases.lifestyle.item2', '명상: 정해진 시간 동안의 집중 명상')}</li>
+                <li>• {t('timer.useCases.lifestyle.item3', '게임 시간: 자녀의 게임 시간 관리')}</li>
+                <li>• {t('timer.useCases.lifestyle.item4', '화상 통화: 통화 시간 제한으로 효율적 소통')}</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* FAQ 섹션 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <i className="ri-question-line text-primary"></i>
+            {t('timer.faq.title', '자주 묻는 질문 (FAQ)')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-4">
+            <div className="border-l-4 border-blue-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q1', 'Q1. 타이머가 정확한가요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a1', '네, 브라우저의 고정밀 타이머 API를 사용하여 초 단위까지 정확한 시간 측정을 보장합니다. 컴퓨터의 시계와 동일한 정확도를 제공합니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-green-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q2', 'Q2. 다른 탭에서 작업해도 타이머가 계속 실행되나요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a2', '네, 백그라운드에서 계속 실행되어 다른 탭이나 프로그램을 사용하는 중에도 정확히 작동합니다. 타이머 완료 시 브라우저 알림으로 알려드립니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-orange-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q3', 'Q3. 브라우저를 닫으면 타이머가 어떻게 되나요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a3', '브라우저나 탭을 닫으면 타이머가 중단됩니다. 중요한 타이머는 브라우저를 열어둔 상태로 유지하시기 바랍니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-purple-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q4', 'Q4. 음성 명령이 작동하지 않는데요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a4', '음성 명령은 실험적 기능으로, 브라우저의 마이크 권한을 허용해야 합니다. Chrome, Firefox 최신 버전에서 가장 잘 작동합니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-red-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q5', 'Q5. 알람음을 들을 수 없어요.')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a5', '브라우저의 소리 설정과 컴퓨터 볼륨을 확인하세요. 또한 "사운드 테스트" 버튼으로 미리 알람음을 확인할 수 있습니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-cyan-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q6', 'Q6. 타이머를 여러 개 동시에 실행할 수 있나요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a6', '현재는 한 번에 하나의 타이머만 실행 가능합니다. 여러 개의 타이머가 필요한 경우 여러 브라우저 탭을 사용하시면 됩니다.')}
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-pink-500 pl-4">
+              <h4 className="font-semibold text-foreground mb-2">{t('timer.faq.q7', 'Q7. 모바일에서도 사용할 수 있나요?')}</h4>
+              <p className="text-sm text-muted-foreground">
+                {t('timer.faq.a7', '네, 모바일과 태블릿에 완전히 최적화되어 있습니다. 터치 인터페이스와 모바일 브라우저의 백그라운드 실행도 지원합니다.')}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 기술적 특징과 호환성 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <i className="ri-settings-line text-primary"></i>
+            {t('timer.technical.title', '기술적 특징과 호환성')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <i className="ri-global-line text-blue-500"></i>
+                {t('timer.technical.browser.title', '브라우저 호환성')}
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.browser.desktop', '데스크톱: Chrome, Firefox, Safari, Edge 모든 최신 버전 지원')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.browser.mobile', '모바일: iOS Safari, Android Chrome 완벽 지원')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.browser.voice', '음성 명령: Chrome, Firefox에서 최적 성능')}</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <i className="ri-speed-line text-green-500"></i>
+                {t('timer.technical.performance.title', '성능 최적화')}
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.performance.lightweight', '경량 설계: 빠른 로딩과 부드러운 애니메이션')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.performance.battery', '배터리 효율: 모바일 기기의 배터리 소모 최소화')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.performance.memory', '메모리 관리: 장시간 사용해도 안정적인 성능 유지')}</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <i className="ri-accessibility-line text-purple-500"></i>
+                {t('timer.technical.accessibility.title', '접근성 지원')}
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.accessibility.keyboard', '키보드 네비게이션: 마우스 없이도 모든 기능 사용 가능')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.accessibility.screen', '스크린 리더: 시각 장애인을 위한 접근성 지원')}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="ri-check-line text-green-500"></i>
+                  <span>{t('timer.technical.accessibility.contrast', '고대비 모드: 시각적 구분이 어려운 사용자를 위한 배려')}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 업데이트와 개선 계획 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <i className="ri-roadmap-line text-primary"></i>
+            {t('timer.roadmap.title', '업데이트와 개선 계획')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <i className="ri-star-line text-green-500"></i>
+                {t('timer.roadmap.recent.title', '최근 추가된 기능')}
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
+                  <i className="ri-mic-line text-green-600 mt-0.5"></i>
+                  <div>
+                    <h4 className="font-medium text-green-800 dark:text-green-300">{t('timer.roadmap.recent.voice', '음성 명령 지원 (실험적)')}</h4>
+                    <p className="text-sm text-green-600 dark:text-green-400">{t('timer.roadmap.recent.voiceDesc', '음성으로 타이머를 제어할 수 있는 혁신적 기능')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <i className="ri-volume-up-line text-blue-600 mt-0.5"></i>
+                  <div>
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300">{t('timer.roadmap.recent.sounds', '다양한 알람음 옵션')}</h4>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">{t('timer.roadmap.recent.soundsDesc', '4가지 알람음과 볼륨 조절 기능')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <i className="ri-rocket-line text-purple-500"></i>
+                {t('timer.roadmap.future.title', '향후 개발 계획')}
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <i className="ri-timer-2-line text-purple-600 mt-0.5"></i>
+                  <div>
+                    <h4 className="font-medium text-purple-800 dark:text-purple-300">{t('timer.roadmap.future.multi', '다중 타이머')}</h4>
+                    <p className="text-sm text-purple-600 dark:text-purple-400">{t('timer.roadmap.future.multiDesc', '여러 타이머 동시 실행 기능')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                  <i className="ri-save-line text-orange-600 mt-0.5"></i>
+                  <div>
+                    <h4 className="font-medium text-orange-800 dark:text-orange-300">{t('timer.roadmap.future.presets', '타이머 프리셋 저장')}</h4>
+                    <p className="text-sm text-orange-600 dark:text-orange-400">{t('timer.roadmap.future.presetsDesc', '사용자 맞춤 설정 저장 기능')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-cyan-50 dark:bg-cyan-950/20 rounded-lg border border-cyan-200 dark:border-cyan-800">
+                  <i className="ri-bar-chart-line text-cyan-600 mt-0.5"></i>
+                  <div>
+                    <h4 className="font-medium text-cyan-800 dark:text-cyan-300">{t('timer.roadmap.future.stats', '통계 기능')}</h4>
+                    <p className="text-sm text-cyan-600 dark:text-cyan-400">{t('timer.roadmap.future.statsDesc', '타이머 사용 패턴 분석 및 통계')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 마무리 섹션 */}
+      <div className="text-center bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-8 border border-blue-200/50 dark:border-blue-800/30">
+        <h2 className="text-2xl font-bold mb-4 text-foreground">
+          {t('timer.conclusion.title', '효율적인 시간 관리의 시작')}
+        </h2>
+        <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto">
+          {t('timer.conclusion.description', 'ToolHub.tools 범용 타이머와 함께 더욱 체계적이고 효율적인 시간 관리를 시작해보세요. 요리부터 운동, 학습까지 모든 순간이 더욱 의미있어집니다.')}
+        </p>
+        <div className="flex justify-center">
+          <div className="animate-pulse">
+            <i className="ri-time-line text-primary text-4xl"></i>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

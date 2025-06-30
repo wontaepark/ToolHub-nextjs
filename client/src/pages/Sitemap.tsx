@@ -19,7 +19,8 @@ import {
   Mail,
   Shield,
   FileText,
-  TrendingUp
+  TrendingUp,
+  Wrench
 } from 'lucide-react';
 import { toolsSearchData } from '../lib/searchData';
 
@@ -239,7 +240,7 @@ export default function Sitemap() {
       {/* 도구들 (카테고리별) */}
       <section>
         <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Calculator className="h-6 w-6" />
+          <Wrench className="h-6 w-6" />
           {currentLang === 'ko' ? '도구 목록' : currentLang === 'en' ? 'Tools List' : 'ツール一覧'}
         </h2>
         

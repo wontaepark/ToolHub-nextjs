@@ -142,17 +142,7 @@ export default function Header() {
                   </div>
                 </Link>
               </li>
-              <li>
-                <Link href="/calculator">
-                  <div 
-                    className={`flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors ${location === "/calculator" ? "bg-primary/10 text-primary" : "hover:bg-muted"}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="ri-calculator-line text-lg"></i>
-                    <span className="font-medium">{t('tools.calculator.title')}</span>
-                  </div>
-                </Link>
-              </li>
+
               <li>
                 <Link href="/pomodoro">
                   <div 

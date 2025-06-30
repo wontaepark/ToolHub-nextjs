@@ -476,11 +476,11 @@ export const mainPageSEO = {
     canonical: 'https://toolhub.tools/'
   },
   en: {
-    title: 'ToolHub.tools | Free Online Tools Collection - Calculator, Timer, Tests',
-    description: 'Use useful online tools like calculator, pomodoro timer, password generator, MBTI test for free at ToolHub.tools. Ready to run on all devices.',
-    keywords: ['online tools', 'free tools', 'web tools', 'calculator', 'timer', 'MBTI test', 'password generator', 'utilities', 'productivity tools'],
+    title: 'ToolHub.tools | Free Online Tools Collection - Timer, Tests, Utilities',
+    description: 'Use useful online tools like pomodoro timer, password generator, MBTI test, unit converter for free at ToolHub.tools. Ready to run on all devices.',
+    keywords: ['online tools', 'free tools', 'web tools', 'timer', 'MBTI test', 'password generator', 'unit converter', 'utilities', 'productivity tools'],
     ogTitle: 'ToolHub.tools - Free Online Tools Collection',
-    ogDescription: 'From calculators to personality tests, all essential tools in one place. Free, fast, simple.',
+    ogDescription: 'From timers to personality tests, all essential tools in one place. Free, fast, simple.',
     canonical: 'https://toolhub.tools/'
   },
   ja: {

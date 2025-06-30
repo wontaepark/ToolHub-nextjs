@@ -374,7 +374,7 @@ export default function Timer() {
       try {
         recognitionRef.current.stop();
         setIsListening(false);
-        console.log('음성 인식 중지');
+
       } catch (error) {
         console.error('음성 인식 중지 오류:', error);
         setIsListening(false);
@@ -383,7 +383,7 @@ export default function Timer() {
       try {
         recognitionRef.current.start();
         setIsListening(true);
-        console.log('음성 인식 시작');
+
       } catch (error) {
         console.error('음성 인식 시작 오류:', error);
         setIsListening(false);
@@ -398,8 +398,7 @@ export default function Timer() {
           
           recognitionRef.current.onresult = (event: any) => {
             const command = event.results[0][0].transcript.toLowerCase().trim();
-            console.log('원본 음성 인식:', event.results[0][0].transcript);
-            console.log('처리할 명령:', command);
+
             handleVoiceCommand(command);
             setIsListening(false);
           };
@@ -410,7 +409,7 @@ export default function Timer() {
           };
           
           recognitionRef.current.onend = () => {
-            console.log('음성 인식 종료');
+
             setIsListening(false);
           };
           
@@ -418,7 +417,7 @@ export default function Timer() {
           try {
             recognitionRef.current.start();
             setIsListening(true);
-            console.log('음성 인식 재시작 성공');
+
           } catch (retryError) {
             console.error('음성 인식 재시작 실패:', retryError);
           }

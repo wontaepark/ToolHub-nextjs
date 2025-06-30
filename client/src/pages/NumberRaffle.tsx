@@ -101,7 +101,7 @@ export default function NumberRaffle() {
           });
         }
       }).catch(() => {
-        console.log('드럼 사운드 파일을 찾을 수 없습니다.');
+
       });
     }
   }, [volume]);
@@ -224,7 +224,7 @@ export default function NumberRaffle() {
       await drumAudioRef.current.play();
     } catch (error) {
       isPlayingRef.current = false;
-      console.log('드럼 사운드 재생 중 오류 발생');
+
     }
   };
 

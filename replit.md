@@ -26,6 +26,10 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- Console 로그 출력문 완전 제거 (2025-01-30)
+  - 콘솔창 노출 방지를 위해 모든 console.log() 출력문 제거
+  - 제거 대상: ThemeProvider, header, Timer, MBTI테스트, NumberRaffle 컴포넌트
+  - console.error, console.warn은 디버깅 목적으로 유지
 - 계산기 기능 완전 제거 (2025-01-30)
   - 이유: 가장 흔한 기능으로 독창성 부족
   - 제거 항목: 계산기 페이지, 홈 카드, 사이트맵, 검색데이터, SEO메타데이터, 헤더 메뉴

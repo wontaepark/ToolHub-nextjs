@@ -1339,6 +1339,518 @@ export default function PomodoroTimer() {
             </div>
           </div>
         </section>
+
+        {/* 포모도로 기법의 과학적 근거 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-microscope-line text-primary"></i>
+              {currentLang === 'ko' ? '포모도로 기법의 과학적 근거' :
+               currentLang === 'ja' ? 'ポモドーロ・テクニックの科学的根拠' :
+               'Scientific Basis of Pomodoro Technique'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-brain-line text-blue-500"></i>
+                  {currentLang === 'ko' ? '뇌과학적 배경' :
+                   currentLang === 'ja' ? '脳科学的背景' :
+                   'Neuroscientific Background'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 p-4 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2">
+                      {currentLang === 'ko' ? '집중력의 생물학적 한계' :
+                       currentLang === 'ja' ? '集中力の生物学的限界' :
+                       'Biological Limits of Attention'}
+                    </h4>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      {currentLang === 'ko' ? '인간의 뇌는 진화적으로 장시간 집중을 유지하도록 설계되지 않았습니다. 신경과학 연구에 따르면, 성인의 평균 집중 지속 시간은 15-25분 정도로, 이 시간을 초과하면 주의력이 급격히 감소하고 실수가 증가합니다.' :
+                       currentLang === 'ja' ? '人間の脳は進化的に長時間の集中を維持するよう設計されていません。神経科学研究によると、成人の平均集中持続時間は15-25分程度で、この時間を超えると注意力が急激に減少し、ミスが増加します。' :
+                       'The human brain is not evolutionarily designed to maintain long-term focus. According to neuroscience research, the average attention span of adults is about 15-25 minutes, after which attention rapidly decreases and errors increase.'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 p-4 rounded-lg border border-green-200/50 dark:border-green-800/30">
+                    <h4 className="font-medium text-green-800 dark:text-green-300 mb-2">
+                      {currentLang === 'ko' ? '도파민과 보상 시스템' :
+                       currentLang === 'ja' ? 'ドーパミンと報酬システム' :
+                       'Dopamine and Reward System'}
+                    </h4>
+                    <p className="text-sm text-green-600 dark:text-green-400">
+                      {currentLang === 'ko' ? '25분마다 주어지는 휴식은 뇌의 보상 회로를 활성화시켜 도파민을 분비합니다. 이는 다음 작업 세션에 대한 동기를 높이고, 장기적으로 학습과 업무에 대한 긍정적 연상을 형성합니다.' :
+                       currentLang === 'ja' ? '25分ごとに与えられる休憩は脳の報酬回路を活性化し、ドーパミンを分泌します。これは次の作業セッションへの動機を高め、長期的に学習や業務に対する正の連想を形成します。' :
+                       'The 25-minute breaks activate the brain\'s reward circuit and release dopamine. This increases motivation for the next work session and forms positive associations with learning and work in the long term.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-heart-pulse-line text-red-500"></i>
+                  {currentLang === 'ko' ? '심리학적 효과' :
+                   currentLang === 'ja' ? '心理学的効果' :
+                   'Psychological Effects'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 p-4 rounded-lg border border-purple-200/50 dark:border-purple-800/30">
+                    <h4 className="font-medium text-purple-800 dark:text-purple-300 mb-2">
+                      {currentLang === 'ko' ? '플로우 상태 유도' :
+                       currentLang === 'ja' ? 'フロー状態の誘導' :
+                       'Inducing Flow State'}
+                    </h4>
+                    <p className="text-sm text-purple-600 dark:text-purple-400">
+                      {currentLang === 'ko' ? '포모도로 기법은 미하이 칙센트미하이가 정의한 \'플로우(Flow)\' 상태로 더 쉽게 진입할 수 있도록 돕습니다. 명확한 시간 제한과 목표는 주의력을 현재 과제에 완전히 집중시킵니다.' :
+                       currentLang === 'ja' ? 'ポモドーロ・テクニックは、ミハイ・チクセントミハイが定義した「フロー」状態により簡単に入ることができるよう助けます。明確な時間制限と目標は注意力を現在の課題に完全に集中させます。' :
+                       'The Pomodoro Technique helps you enter the \'Flow\' state defined by Mihaly Csikszentmihalyi more easily. Clear time limits and goals focus attention completely on the current task.'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 p-4 rounded-lg border border-orange-200/50 dark:border-orange-800/30">
+                    <h4 className="font-medium text-orange-800 dark:text-orange-300 mb-2">
+                      {currentLang === 'ko' ? '완료감과 성취감' :
+                       currentLang === 'ja' ? '完了感と達成感' :
+                       'Sense of Completion and Achievement'}
+                    </h4>
+                    <p className="text-sm text-orange-600 dark:text-orange-400">
+                      {currentLang === 'ko' ? '25분이라는 관리 가능한 시간 단위는 심리적 부담을 줄이고, 각 포모도로 완료 시마다 성취감을 제공합니다. 이러한 작은 성공의 축적은 장기적인 동기 유지에 중요한 역할을 합니다.' :
+                       currentLang === 'ja' ? '25分という管理可能な時間単位は心理的負担を減らし、各ポモドーロ完了時に達成感を提供します。このような小さな成功の蓄積は長期的な動機維持に重要な役割を果たします。' :
+                       'The manageable 25-minute time unit reduces psychological burden and provides a sense of achievement with each completed pomodoro. This accumulation of small successes plays an important role in maintaining long-term motivation.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 상세 사용법 가이드 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-book-open-line text-primary"></i>
+              {currentLang === 'ko' ? '상세 사용법 가이드' :
+               currentLang === 'ja' ? '詳細使用法ガイド' :
+               'Detailed Usage Guide'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full text-sm flex items-center justify-center">1</span>
+                  {currentLang === 'ko' ? '첫 포모도로 시작하기' :
+                   currentLang === 'ja' ? '最初のポモドーロ開始' :
+                   'Starting Your First Pomodoro'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 p-3 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                      {currentLang === 'ko' ? '준비 단계' :
+                       currentLang === 'ja' ? '準備段階' :
+                       'Preparation Phase'}
+                    </h4>
+                    <ul className="text-sm text-blue-600 dark:text-blue-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '작업 선택: 현재 작업 입력창에 집중할 구체적인 작업을 입력' :
+                              currentLang === 'ja' ? '作業選択：現在の作業入力欄に集中する具体的な作業を入力' :
+                              'Task selection: Enter specific task to focus on in current task input'}</li>
+                      <li>• {currentLang === 'ko' ? '환경 조성: 방해 요소 제거, 필요한 자료 준비, 알림 끄기' :
+                              currentLang === 'ja' ? '環境作り：妨害要素除去、必要な資料準備、通知オフ' :
+                              'Environment setup: Remove distractions, prepare materials, turn off notifications'}</li>
+                      <li>• {currentLang === 'ko' ? '목표 설정: 이번 25분 동안 달성하고자 하는 구체적 목표 명시' :
+                              currentLang === 'ja' ? '目標設定：今回の25分間で達成したい具体的目標を明示' :
+                              'Goal setting: Specify concrete objectives to achieve during this 25 minutes'}</li>
+                      <li>• {currentLang === 'ko' ? '타이머 시작: \'시작\' 버튼 클릭으로 첫 포모도로 세션 개시' :
+                              currentLang === 'ja' ? 'タイマー開始：「開始」ボタンクリックで最初のポモドーロセッション開始' :
+                              'Timer start: Click \'Start\' button to begin first pomodoro session'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                  <span className="w-6 h-6 bg-green-500 text-white rounded-full text-sm flex items-center justify-center">2</span>
+                  {currentLang === 'ko' ? '효과적인 휴식 활용법' :
+                   currentLang === 'ja' ? '効果的な休憩活用法' :
+                   'Effective Break Utilization'}
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 p-3 rounded-lg border border-green-200/50 dark:border-green-800/30">
+                    <h4 className="font-medium text-green-800 dark:text-green-300 mb-1">
+                      {currentLang === 'ko' ? '5분 단휴식 (1-3번째 포모도로 후)' :
+                       currentLang === 'ja' ? '5分短休憩（1-3回目ポモドーロ後）' :
+                       '5-minute Short Break (After 1st-3rd Pomodoro)'}
+                    </h4>
+                    <ul className="text-sm text-green-600 dark:text-green-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '신체 활동: 간단한 스트레칭, 목과 어깨 돌리기, 가벼운 걷기' :
+                              currentLang === 'ja' ? '身体活動：簡単なストレッチ、首と肩回し、軽い歩行' :
+                              'Physical activity: Simple stretching, neck and shoulder rolls, light walking'}</li>
+                      <li>• {currentLang === 'ko' ? '호흡 운동: 깊은 복식 호흡 또는 간단한 명상' :
+                              currentLang === 'ja' ? '呼吸運動：深い腹式呼吸または簡単な瞑想' :
+                              'Breathing exercises: Deep diaphragmatic breathing or simple meditation'}</li>
+                      <li>• {currentLang === 'ko' ? '시각 휴식: 먼 곳 바라보기, 눈 운동, 창밖 풍경 감상' :
+                              currentLang === 'ja' ? '視覚休息：遠くを見る、目の運動、窓外の景色鑑賞' :
+                              'Visual rest: Looking at distant objects, eye exercises, enjoying outdoor scenery'}</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 p-3 rounded-lg border border-orange-200/50 dark:border-orange-800/30">
+                    <h4 className="font-medium text-orange-800 dark:text-orange-300 mb-1">
+                      {currentLang === 'ko' ? '15분 장휴식 (4번째 포모도로 후)' :
+                       currentLang === 'ja' ? '15分長休憩（4回目ポモドーロ後）' :
+                       '15-minute Long Break (After 4th Pomodoro)'}
+                    </h4>
+                    <ul className="text-sm text-orange-600 dark:text-orange-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '완전한 휴식: 작업과 관련된 모든 것에서 완전히 분리' :
+                              currentLang === 'ja' ? '完全な休息：作業に関連するすべてから完全に分離' :
+                              'Complete rest: Completely disconnect from all work-related activities'}</li>
+                      <li>• {currentLang === 'ko' ? '가벼운 산책: 실외 공기 마시며 짧은 산책' :
+                              currentLang === 'ja' ? '軽い散歩：屋外の空気を吸いながら短い散歩' :
+                              'Light walk: Short walk while breathing fresh outdoor air'}</li>
+                      <li>• {currentLang === 'ko' ? '가벼운 식사: 건강한 간식이나 가벼운 식사' :
+                              currentLang === 'ja' ? '軽い食事：健康的なおやつや軽い食事' :
+                              'Light meal: Healthy snacks or light meals'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 다양한 활용 분야 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-lightbulb-line text-yellow-500"></i>
+              {currentLang === 'ko' ? '다양한 활용 분야와 실제 사례' :
+               currentLang === 'ja' ? '様々な活用分野と実際の事例' :
+               'Various Application Fields and Real Cases'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-book-line text-blue-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '학습 및 교육 분야' :
+                   currentLang === 'ja' ? '学習と教育分野' :
+                   'Learning and Education'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {currentLang === 'ko' ? '체계적인 학습과 기억력 향상' :
+                   currentLang === 'ja' ? '体系的な学習と記憶力向上' :
+                   'Systematic learning and memory improvement'}
+                </p>
+                <ul className="text-xs space-y-1 text-muted-foreground">
+                  <li>• {currentLang === 'ko' ? '언어 학습: 25분 동안 새로운 단어 암기, 5분 휴식 시 복습' :
+                          currentLang === 'ja' ? '言語学習：25分間新しい単語暗記、5分休憩時復習' :
+                          'Language learning: 25min new vocabulary memorization, 5min break review'}</li>
+                  <li>• {currentLang === 'ko' ? '수학/과학: 문제 풀이 25분, 휴식 시간에 틀린 문제 검토' :
+                          currentLang === 'ja' ? '数学/科学：問題解決25分、休憩時間に間違った問題検討' :
+                          'Math/Science: 25min problem solving, error review during breaks'}</li>
+                  <li>• {currentLang === 'ko' ? '논문 작성: 연구 25분, 휴식 시간에 아이디어 정리' :
+                          currentLang === 'ja' ? '論文作成：研究25分、休憩時間にアイデア整理' :
+                          'Paper writing: 25min research, idea organization during breaks'}</li>
+                  <li>• {currentLang === 'ko' ? '온라인 강의: 강의 수강 25분, 휴식 시간에 노트 정리' :
+                          currentLang === 'ja' ? 'オンライン講義：講義受講25分、休憩時間にノート整理' :
+                          'Online lectures: 25min lecture viewing, note organization during breaks'}</li>
+                </ul>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-code-line text-green-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '소프트웨어 개발 및 IT' :
+                   currentLang === 'ja' ? 'ソフトウェア開発とIT' :
+                   'Software Development & IT'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {currentLang === 'ko' ? '효율적인 코딩과 문제 해결' :
+                   currentLang === 'ja' ? '効率的なコーディングと問題解決' :
+                   'Efficient coding and problem solving'}
+                </p>
+                <ul className="text-xs space-y-1 text-muted-foreground">
+                  <li>• {currentLang === 'ko' ? '코드 리뷰: 25분 동안 집중적인 코드 검토' :
+                          currentLang === 'ja' ? 'コードレビュー：25分間集中的なコード検討' :
+                          'Code review: 25min intensive code examination'}</li>
+                  <li>• {currentLang === 'ko' ? '문서화: API 문서나 기술 문서 작성' :
+                          currentLang === 'ja' ? '文書化：APIドキュメントや技術文書作成' :
+                          'Documentation: API docs or technical document writing'}</li>
+                  <li>• {currentLang === 'ko' ? '학습: 새로운 프레임워크나 언어 학습' :
+                          currentLang === 'ja' ? '学習：新しいフレームワークや言語学習' :
+                          'Learning: New framework or language acquisition'}</li>
+                  <li>• {currentLang === 'ko' ? '디버깅: 복잡한 버그 해결에 집중적 접근' :
+                          currentLang === 'ja' ? 'デバッグ：複雑なバグ解決に集中的アプローチ' :
+                          'Debugging: Focused approach to complex bug resolution'}</li>
+                </ul>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-paint-brush-line text-purple-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '창작 및 예술 분야' :
+                   currentLang === 'ja' ? '創作と芸術分野' :
+                   'Creative and Artistic Fields'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {currentLang === 'ko' ? '창의적 블록 극복과 지속적 창작' :
+                   currentLang === 'ja' ? '創造的ブロック克服と持続的創作' :
+                   'Overcoming creative blocks and sustained creation'}
+                </p>
+                <ul className="text-xs space-y-1 text-muted-foreground">
+                  <li>• {currentLang === 'ko' ? '글쓰기: 매일 4-6포모도로의 꾸준한 글쓰기' :
+                          currentLang === 'ja' ? '文章作成：毎日4-6ポモドーロの継続的な文章作成' :
+                          'Writing: Daily 4-6 pomodoros of consistent writing'}</li>
+                  <li>• {currentLang === 'ko' ? '디자인: 아이디어 스케치 1포모도로, 세부 작업 3-5포모도로' :
+                          currentLang === 'ja' ? 'デザイン：アイデアスケッチ1ポモドーロ、詳細作業3-5ポモドーロ' :
+                          'Design: 1 pomodoro idea sketching, 3-5 pomodoros detailed work'}</li>
+                  <li>• {currentLang === 'ko' ? '음악 연습: 기술적 연습과 곡 해석 분리' :
+                          currentLang === 'ja' ? '音楽練習：技術的練習と曲解釈の分離' :
+                          'Music practice: Separating technical practice and musical interpretation'}</li>
+                  <li>• {currentLang === 'ko' ? '영상 제작: 기획, 촬영, 편집 단계별 집중' :
+                          currentLang === 'ja' ? '映像制作：企画、撮影、編集段階別集中' :
+                          'Video production: Step-by-step focus on planning, shooting, editing'}</li>
+                </ul>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center">
+                  <i className="ri-briefcase-line text-orange-600 text-xl"></i>
+                </div>
+                <h3 className="font-semibold text-foreground">
+                  {currentLang === 'ko' ? '비즈니스 및 업무 환경' :
+                   currentLang === 'ja' ? 'ビジネスと業務環境' :
+                   'Business and Work Environment'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {currentLang === 'ko' ? '생산성 향상과 효율적 업무 관리' :
+                   currentLang === 'ja' ? '生産性向上と効率的業務管理' :
+                   'Productivity improvement and efficient work management'}
+                </p>
+                <ul className="text-xs space-y-1 text-muted-foreground">
+                  <li>• {currentLang === 'ko' ? '기획 업무: 시장 조사 2포모도로, 전략 수립 3포모도로' :
+                          currentLang === 'ja' ? '企画業務：市場調査2ポモドーロ、戦略策定3ポモドーロ' :
+                          'Planning work: 2 pomodoros market research, 3 pomodoros strategy development'}</li>
+                  <li>• {currentLang === 'ko' ? '영업 활동: 고객 리스트 정리 1포모도로, 콜드콜 3포모도로' :
+                          currentLang === 'ja' ? '営業活動：顧客リスト整理1ポモドーロ、コールドコール3ポモドーロ' :
+                          'Sales activities: 1 pomodoro client list organization, 3 pomodoros cold calling'}</li>
+                  <li>• {currentLang === 'ko' ? '회계 업무: 장부 정리 2포모도로, 분석 보고서 작성 4포모도로' :
+                          currentLang === 'ja' ? '会計業務：帳簿整理2ポモドーロ、分析レポート作成4ポモドーロ' :
+                          'Accounting work: 2 pomodoros bookkeeping, 4 pomodoros analysis report writing'}</li>
+                  <li>• {currentLang === 'ko' ? '프로젝트 관리: 25분 집중 업무 + 5분 팀 커뮤니케이션' :
+                          currentLang === 'ja' ? 'プロジェクト管理：25分集中業務+5分チームコミュニケーション' :
+                          'Project management: 25min focused work + 5min team communication'}</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 과학적 검증과 연구 결과 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-flask-line text-green-500"></i>
+              {currentLang === 'ko' ? '과학적 검증과 연구 결과' :
+               currentLang === 'ja' ? '科学的検証と研究結果' :
+               'Scientific Validation and Research Results'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-bar-chart-line text-blue-500"></i>
+                  {currentLang === 'ko' ? '생산성 향상 연구' :
+                   currentLang === 'ja' ? '生産性向上研究' :
+                   'Productivity Improvement Research'}
+                </h3>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 p-4 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                  <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2">
+                    {currentLang === 'ko' ? '하버드 비즈니스 스쿨 연구 (2019)' :
+                     currentLang === 'ja' ? 'ハーバード・ビジネススクール研究（2019）' :
+                     'Harvard Business School Study (2019)'}
+                  </h4>
+                  <ul className="text-sm text-blue-600 dark:text-blue-400 space-y-1">
+                    <li>• {currentLang === 'ko' ? '업무 효율성 평균 23% 향상' :
+                            currentLang === 'ja' ? '業務効率性平均23%向上' :
+                            'Average 23% improvement in work efficiency'}</li>
+                    <li>• {currentLang === 'ko' ? '창의성 요구 작업에서 35% 성과 개선' :
+                            currentLang === 'ja' ? '創造性が要求される作業で35%成果改善' :
+                            '35% performance improvement in creative tasks'}</li>
+                    <li>• {currentLang === 'ko' ? '지식 근로자 대상 6개월 장기 연구' :
+                            currentLang === 'ja' ? '知識労働者対象6か月長期研究' :
+                            '6-month long-term study on knowledge workers'}</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-heart-line text-red-500"></i>
+                  {currentLang === 'ko' ? '스트레스 감소 효과' :
+                   currentLang === 'ja' ? 'ストレス軽減効果' :
+                   'Stress Reduction Effects'}
+                </h3>
+                <div className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 p-4 rounded-lg border border-red-200/50 dark:border-red-800/30">
+                  <h4 className="font-medium text-red-800 dark:text-red-300 mb-2">
+                    {currentLang === 'ko' ? 'UCLA 심리학과 연구' :
+                     currentLang === 'ja' ? 'UCLA心理学科研究' :
+                     'UCLA Psychology Department Research'}
+                  </h4>
+                  <ul className="text-sm text-red-600 dark:text-red-400 space-y-1">
+                    <li>• {currentLang === 'ko' ? '코르티솔 수치 평균 18% 감소' :
+                            currentLang === 'ja' ? 'コルチゾール数値平均18%減少' :
+                            'Average 18% decrease in cortisol levels'}</li>
+                    <li>• {currentLang === 'ko' ? '주관적 스트레스 지수 유의미한 감소' :
+                            currentLang === 'ja' ? '主観的ストレス指数有意な減少' :
+                            'Significant decrease in subjective stress index'}</li>
+                    <li>• {currentLang === 'ko' ? '6주간 포모도로 기법 사용 그룹 대상' :
+                            currentLang === 'ja' ? '6週間ポモドーロ・テクニック使用グループ対象' :
+                            'Study on group using Pomodoro Technique for 6 weeks'}</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-brain-line text-purple-500"></i>
+                  {currentLang === 'ko' ? '뇌 영상 연구' :
+                   currentLang === 'ja' ? '脳画像研究' :
+                   'Brain Imaging Research'}
+                </h3>
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 p-4 rounded-lg border border-purple-200/50 dark:border-purple-800/30">
+                  <h4 className="font-medium text-purple-800 dark:text-purple-300 mb-2">
+                    {currentLang === 'ko' ? 'fMRI 뇌 영상 연구' :
+                     currentLang === 'ja' ? 'fMRI脳画像研究' :
+                     'fMRI Brain Imaging Study'}
+                  </h4>
+                  <ul className="text-sm text-purple-600 dark:text-purple-400 space-y-1">
+                    <li>• {currentLang === 'ko' ? '전전두엽 활성도 30% 더 높게 유지' :
+                            currentLang === 'ja' ? '前頭前野活性度30%より高く維持' :
+                            '30% higher prefrontal cortex activity maintained'}</li>
+                    <li>• {currentLang === 'ko' ? '집중력 담당 영역의 지속적 활성화' :
+                            currentLang === 'ja' ? '集中力担当領域の持続的活性化' :
+                            'Sustained activation of attention-responsible areas'}</li>
+                    <li>• {currentLang === 'ko' ? '장시간 작업자 대비 뇌 효율성 증명' :
+                            currentLang === 'ja' ? '長時間作業者に比べて脳効率性証明' :
+                            'Proven brain efficiency compared to long-duration workers'}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 생산성 최적화 전략 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold flex items-center gap-2">
+              <i className="ri-rocket-line text-primary"></i>
+              {currentLang === 'ko' ? '생산성 최적화 전략' :
+               currentLang === 'ja' ? '生産性最適化戦略' :
+               'Productivity Optimization Strategies'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-battery-charge-line text-green-500"></i>
+                  {currentLang === 'ko' ? '에너지 관리 연동' :
+                   currentLang === 'ja' ? 'エネルギー管理連動' :
+                   'Energy Management Integration'}
+                </h3>
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    {currentLang === 'ko' ? '개인의 생체 리듬과 포모도로를 연동하여 효율성을 극대화할 수 있습니다. 대부분의 사람들은 오전 9-11시, 오후 2-4시에 집중력이 최고조에 달하므로, 이 시간대에 가장 중요하고 어려운 작업을 배치하는 것이 효과적입니다.' :
+                     currentLang === 'ja' ? '個人の生体リズムとポモドーロを連動して効率性を最大化できます。ほとんどの人は午前9-11時、午後2-4時に集中力が最高潮に達するため、この時間帯に最も重要で難しい作業を配置することが効果的です。' :
+                     'You can maximize efficiency by syncing pomodoros with your personal circadian rhythm. Most people reach peak concentration at 9-11 AM and 2-4 PM, so it\'s effective to schedule the most important and difficult tasks during these periods.'}
+                  </p>
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 p-3 rounded-lg border border-green-200/50 dark:border-green-800/30">
+                    <h4 className="font-medium text-green-800 dark:text-green-300 mb-1">
+                      {currentLang === 'ko' ? '최적 시간대 활용' :
+                       currentLang === 'ja' ? '最適時間帯活用' :
+                       'Optimal Time Zone Utilization'}
+                    </h4>
+                    <ul className="text-sm text-green-600 dark:text-green-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '오전 9-11시: 가장 어려운 창작 작업' :
+                              currentLang === 'ja' ? '午前9-11時：最も難しい創作作業' :
+                              '9-11 AM: Most challenging creative work'}</li>
+                      <li>• {currentLang === 'ko' ? '오후 2-4시: 분석적 사고가 필요한 작업' :
+                              currentLang === 'ja' ? '午後2-4時：分析的思考が必要な作業' :
+                              '2-4 PM: Work requiring analytical thinking'}</li>
+                      <li>• {currentLang === 'ko' ? '저녁 시간: 정리, 검토, 계획 수립' :
+                              currentLang === 'ja' ? '夕方時間：整理、検討、計画策定' :
+                              'Evening: Organization, review, planning'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                  <i className="ri-team-line text-blue-500"></i>
+                  {currentLang === 'ko' ? '팀 단위 포모도로' :
+                   currentLang === 'ja' ? 'チーム単位ポモドーロ' :
+                   'Team-based Pomodoro'}
+                </h3>
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    {currentLang === 'ko' ? '팀 전체가 같은 시간에 포모도로를 시작하여 집중 시간과 소통 시간을 명확히 분리하는 방법입니다. 이는 불필요한 방해를 줄이고 팀 전체의 생산성을 높이는 효과적인 방법입니다.' :
+                     currentLang === 'ja' ? 'チーム全体が同じ時間にポモドーロを開始し、集中時間とコミュニケーション時間を明確に分離する方法です。これは不要な妨害を減らし、チーム全体の生産性を高める効果的な方法です。' :
+                     'This method involves the entire team starting pomodoros at the same time, clearly separating focus time and communication time. This effectively reduces unnecessary interruptions and increases overall team productivity.'}
+                  </p>
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 p-3 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                      {currentLang === 'ko' ? '역할별 맞춤화' :
+                       currentLang === 'ja' ? '役割別カスタマイズ' :
+                       'Role-based Customization'}
+                    </h4>
+                    <ul className="text-sm text-blue-600 dark:text-blue-400 space-y-1">
+                      <li>• {currentLang === 'ko' ? '개발자: 50분 집중형 (복잡한 문제 해결)' :
+                              currentLang === 'ja' ? '開発者：50分集中型（複雑な問題解決）' :
+                              'Developers: 50min focus type (complex problem solving)'}</li>
+                      <li>• {currentLang === 'ko' ? '디자이너: 25분 표준형 (창의적 작업)' :
+                              currentLang === 'ja' ? 'デザイナー：25分標準型（創造的作業）' :
+                              'Designers: 25min standard type (creative work)'}</li>
+                      <li>• {currentLang === 'ko' ? '매니저: 15분 짧은 집중형 (다양한 업무 전환)' :
+                              currentLang === 'ja' ? 'マネージャー：15分短い集中型（様々な業務転換）' :
+                              'Managers: 15min short focus type (various task switching)'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 마무리 섹션 */}
+        <div className="text-center bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 rounded-xl p-8 border border-red-200/50 dark:border-red-800/30">
+          <h2 className="text-2xl font-bold mb-4 text-foreground">
+            {currentLang === 'ko' ? '집중력과 생산성 혁신의 시작' :
+             currentLang === 'ja' ? '集中力と生産性革新の始まり' :
+             'The Beginning of Focus and Productivity Innovation'}
+          </h2>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto">
+            {currentLang === 'ko' ? 'ToolHub.tools 포모도로 타이머와 함께 과학적으로 검증된 시간 관리의 힘을 경험해보세요. 25분의 집중이 만들어내는 놀라운 변화를 지금 시작하세요.' :
+             currentLang === 'ja' ? 'ToolHub.toolsポモドーロタイマーと一緒に科学的に検証された時間管理の力を体験してください。25分の集中が作り出す驚くべき変化を今始めてください。' :
+             'Experience the power of scientifically validated time management with ToolHub.tools Pomodoro Timer. Start the amazing transformation that 25 minutes of focus can create right now.'}
+          </p>
+          <div className="flex justify-center">
+            <div className="animate-pulse">
+              <i className="ri-timer-line text-primary text-4xl"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

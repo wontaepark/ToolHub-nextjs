@@ -50,7 +50,7 @@ export function ThemeProvider({
     
     try {
       localStorage.setItem("theme", theme);
-      console.log("Theme applied:", theme, "Classes:", root.className);
+
     } catch (error) {
       console.warn("Failed to save theme to localStorage:", error);
     }
@@ -59,7 +59,7 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (newTheme: Theme) => {
-      console.log("Setting theme to:", newTheme);
+
       setTheme(newTheme);
       
       // Force immediate DOM update
@@ -70,7 +70,7 @@ export function ThemeProvider({
       } else {
         root.classList.add("light");
       }
-      console.log("Forced theme update:", newTheme, "Classes:", root.className);
+
     },
   };
 

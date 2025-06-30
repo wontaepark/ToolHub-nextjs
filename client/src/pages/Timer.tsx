@@ -181,8 +181,7 @@ export default function Timer() {
       
       recognitionRef.current.onresult = (event: any) => {
         const command = event.results[0][0].transcript.toLowerCase().trim();
-        console.log('원본 음성 인식:', event.results[0][0].transcript);
-        console.log('처리할 명령:', command);
+
         handleVoiceCommand(command);
         setIsListening(false);
       };
@@ -237,7 +236,7 @@ export default function Timer() {
 
   // 음성 명령 처리
   const handleVoiceCommand = (command: string) => {
-    console.log('음성 명령:', command);
+
     
     // 한글 숫자를 아라비아 숫자로 변환
     const convertKoreanNumbers = (text: string) => {
@@ -274,7 +273,7 @@ export default function Timer() {
     });
     
     if (matchedPreset && state === 'idle') {
-      console.log('프리셋 선택:', matchedPreset.name);
+
       
       // 해당 프리셋이 속한 카테고리로 전환
       const presetCategory = Object.keys(TIMER_PRESETS).find(category => 
@@ -282,7 +281,7 @@ export default function Timer() {
       );
       if (presetCategory) {
         setActiveCategory(presetCategory);
-        console.log('카테고리 전환:', presetCategory);
+
       }
       
       setMinutes(matchedPreset.minutes);
@@ -367,7 +366,7 @@ export default function Timer() {
   // 음성 인식 시작/중지
   const toggleVoiceRecognition = () => {
     if (!recognitionRef.current) {
-      console.log('음성 인식이 지원되지 않거나 초기화되지 않았습니다.');
+
       return;
     }
     

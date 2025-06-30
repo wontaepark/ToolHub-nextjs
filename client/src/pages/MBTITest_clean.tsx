@@ -736,8 +736,7 @@ export default function MBTITest() {
       (scores.T >= scores.F ? 'T' : 'F') +
       (scores.J >= scores.P ? 'J' : 'P');
 
-    console.log('Scores:', scores);
-    console.log('MBTI Type:', mbtiType);
+
 
     setResult(mbtiResults[mbtiType] || mbtiResults.INTJ);
     setShowResult(true);

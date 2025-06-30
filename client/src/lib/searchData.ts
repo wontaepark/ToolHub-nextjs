@@ -26,32 +26,7 @@ export interface ToolSearchData {
 }
 
 export const toolsSearchData: ToolSearchData[] = [
-  {
-    id: 'calculator',
-    path: '/calculator',
-    title: {
-      ko: '계산기',
-      en: 'Calculator',
-      ja: '電卓'
-    },
-    description: {
-      ko: '기본적인 사칙연산과 고급 계산 기능을 제공하는 온라인 계산기',
-      en: 'Online calculator with basic arithmetic and advanced calculation features',
-      ja: '基本的な四則演算と高度な計算機能を提供するオンライン電卓'
-    },
-    keywords: {
-      ko: ['계산기', '계산', '수학', '덧셈', '뺄셈', '곱셈', '나눗셈', '사칙연산', '수치계산'],
-      en: ['calculator', 'calculate', 'math', 'addition', 'subtraction', 'multiplication', 'division', 'arithmetic', 'computation'],
-      ja: ['電卓', '計算', '数学', '足し算', '引き算', '掛け算', '割り算', '四則演算', '計算機']
-    },
-    category: {
-      ko: '계산 도구',
-      en: 'Calculation Tools',
-      ja: '計算ツール'
-    },
-    tags: ['math', 'basic', 'utility'],
-    popularity: 95
-  },
+
   {
     id: 'pomodoro',
     path: '/pomodoro',

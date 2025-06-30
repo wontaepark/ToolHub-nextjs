@@ -66,7 +66,7 @@ export default function Home() {
             <div className="text-center">
               <p className="text-lg mb-6">
                 {currentLang === 'ko' ? 
-                  'ToolHub.tools는 누구나 쉽고 빠르게 사용할 수 있는 웹 기반 유틸리티 도구 모음입니다. 계산기, 포모도로 타이머, 번호 추첨기, 유튜브 썸네일 다운로더, 비밀번호 생성기, 단위 변환기 등 일상과 업무에 유용한 14가지 도구를 하나의 웹사이트에서 제공합니다.' :
+                  'ToolHub.tools는 누구나 쉽고 빠르게 사용할 수 있는 웹 기반 유틸리티 도구 모음입니다. 포모도로 타이머, 번호 추첨기, 유튜브 썸네일 다운로더, 비밀번호 생성기, 단위 변환기, MBTI 테스트 등 일상과 업무에 유용한 13가지 도구를 하나의 웹사이트에서 제공합니다.' :
                  currentLang === 'ja' ? 
                   'ToolHub.toolsは誰でも簡単かつ迅速に使用できるウェブベースのユーティリティツール集です。計算機、ポモドーロタイマー、番号抽選機、YouTubeサムネイルダウンローダー、パスワード生成器、単位変換器など、日常と業務に役立つ14種類のツールを一つのウェブサイトで提供します。' :
                   'ToolHub.tools is a collection of web-based utility tools that anyone can use easily and quickly. We provide 14 useful tools for daily life and work, including calculator, Pomodoro timer, number raffle, YouTube thumbnail downloader, password generator, unit converter, and more on a single website.'
@@ -620,32 +620,7 @@ export default function Home() {
       <div className="mb-10 md:mb-12 px-4">
         <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">{t('home.availableTools')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-          {/* Calculator Card */}
-          <Link href="/calculator">
-            <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-primary/30 active:scale-[0.98]">
-              <div className="h-32 md:h-40 gradient-bg flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
-                <i className="ri-calculator-line text-white text-4xl md:text-6xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
-              </div>
-              <div className="p-4 md:p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg md:text-xl leading-tight">{t('tools.calculator.title')}</h3>
-                  <Badge variant="default" className="bg-primary/10 text-primary text-xs flex-shrink-0 ml-2">
-                    {t('common.available')}
-                  </Badge>
-                </div>
-                <p className="text-muted-foreground text-sm md:text-base mb-4 leading-relaxed">
-                  {t('tools.calculator.description')}
-                </p>
-                <div className="flex flex-wrap gap-1.5 md:gap-2">
-                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.0')}</Badge>
-                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.1')}</Badge>
-                  <Badge variant="outline" className="text-xs">{t('tools.calculator.tags.2')}</Badge>
-                </div>
-              </div>
-            </div>
-          </Link>
-          
+
           {/* Pomodoro Timer Card */}
           <Link href="/pomodoro">
             <div className="group tool-card bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 border border-border/50 hover:border-red-500/30 active:scale-[0.98]">

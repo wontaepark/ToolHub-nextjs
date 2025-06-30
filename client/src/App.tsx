@@ -3,7 +3,7 @@ import Header from "./components/ui/header";
 import Footer from "./components/ui/footer";
 import CookieConsent from "./components/CookieConsent";
 import Home from "./pages/Home";
-import Calculator from "./pages/Calculator";
+
 import PomodoroTimer from "./pages/PomodoroTimer";
 import Timer from "./pages/Timer";
 import NumberRaffle from "./pages/NumberRaffle";
@@ -26,7 +26,7 @@ function App() {
       <main className="flex-grow container mx-auto px-4 py-8">
         <Switch>
           <Route path="/" component={Home} />
-          <Route path="/calculator" component={Calculator} />
+
           <Route path="/pomodoro" component={PomodoroTimer} />
           <Route path="/timer" component={Timer} />
           <Route path="/raffle" component={NumberRaffle} />

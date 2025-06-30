@@ -546,6 +546,11 @@ export default function Home() {
                     <div className="flex items-center gap-2 mt-3">
                       <i className="ri-mail-line text-blue-500"></i>
                       <span className="font-mono text-blue-600">contact@toolhub.tools</span>
+                      <Link href="/contact">
+                        <button className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">
+                          문의하기
+                        </button>
+                      </Link>
                     </div>
                     <div className="flex items-center gap-2">
                       <i className="ri-time-line text-green-500"></i>

@@ -68,8 +68,8 @@ export default function Home() {
                 {currentLang === 'ko' ? 
                   'ToolHub.tools는 누구나 쉽고 빠르게 사용할 수 있는 웹 기반 유틸리티 도구 모음입니다. 포모도로 타이머, 번호 추첨기, 유튜브 썸네일 다운로더, 비밀번호 생성기, 단위 변환기, MBTI 테스트 등 일상과 업무에 유용한 13가지 도구를 하나의 웹사이트에서 제공합니다.' :
                  currentLang === 'ja' ? 
-                  'ToolHub.toolsは誰でも簡単かつ迅速に使用できるウェブベースのユーティリティツール集です。計算機、ポモドーロタイマー、番号抽選機、YouTubeサムネイルダウンローダー、パスワード生成器、単位変換器など、日常と業務に役立つ14種類のツールを一つのウェブサイトで提供します。' :
-                  'ToolHub.tools is a collection of web-based utility tools that anyone can use easily and quickly. We provide 14 useful tools for daily life and work, including calculator, Pomodoro timer, number raffle, YouTube thumbnail downloader, password generator, unit converter, and more on a single website.'
+                  'ToolHub.toolsは誰でも簡単かつ迅速に使用できるウェブベースのユーティリティツール集です。ポモドーロタイマー、番号抽選機、YouTubeサムネイルダウンローダー、パスワード生成器、単位変換器、MBTIテストなど、日常と業務に役立つ13種類のツールを一つのウェブサイトで提供します。' :
+                  'ToolHub.tools is a collection of web-based utility tools that anyone can use easily and quickly. We provide 13 useful tools for daily life and work, including Pomodoro timer, number raffle, YouTube thumbnail downloader, password generator, unit converter, MBTI test, and more on a single website.'
                 }
               </p>
               <p className="text-base">
@@ -124,10 +124,10 @@ export default function Home() {
                 </h3>
                 <p>
                   {currentLang === 'ko' ? 
-                    '앞으로 더 많은 유용한 도구들을 추가하여 사용자들의 디지털 라이프를 더욱 편리하게 만들어가겠습니다. 인공지능 기반 도구, 더욱 정교한 계산기, 고급 시간 관리 도구 등을 통해 웹 기반 유틸리티의 새로운 표준을 제시하고자 합니다.' :
+                    '앞으로 더 많은 유용한 도구들을 추가하여 사용자들의 디지털 라이프를 더욱 편리하게 만들어가겠습니다. 인공지능 기반 도구, 고급 시간 관리 도구, 더욱 다양한 변환 도구 등을 통해 웹 기반 유틸리티의 새로운 표준을 제시하고자 합니다.' :
                    currentLang === 'ja' ? 
-                    '今後、より多くの有用なツールを追加してユーザーのデジタルライフをさらに便利にしていきます。人工知能ベースのツール、より精密な計算機、高度な時間管理ツールなどを通じてウェブベースユーティリティの新しい基準を提示したいと考えています。' :
-                    'We will continue to add more useful tools to make users\' digital lives even more convenient. We aim to present new standards for web-based utilities through AI-based tools, more sophisticated calculators, advanced time management tools, and more.'
+                    '今後、より多くの有用なツールを追加してユーザーのデジタルライフをさらに便利にしていきます。人工知能ベースのツール、高度な時間管理ツール、より多様な変換ツールなどを通じてウェブベースユーティリティの新しい基準を提示したいと考えています。' :
+                    'We will continue to add more useful tools to make users\' digital lives even more convenient. We aim to present new standards for web-based utilities through AI-based tools, advanced time management tools, more diverse conversion tools, and more.'
                   }
                 </p>
               </div>
@@ -151,7 +151,7 @@ export default function Home() {
                      'Productivity Tools'}
                   </h4>
                   <ul className="text-sm space-y-1">
-                    <li>{currentLang === 'ko' ? '• 계산기' : currentLang === 'ja' ? '• 計算機' : '• Calculator'}</li>
+
                     <li>{currentLang === 'ko' ? '• 포모도로 타이머' : currentLang === 'ja' ? '• ポモドーロタイマー' : '• Pomodoro Timer'}</li>
                     <li>{currentLang === 'ko' ? '• 범용 타이머' : currentLang === 'ja' ? '• 汎用タイマー' : '• General Timer'}</li>
                     <li>{currentLang === 'ko' ? '• 날짜 계산기' : currentLang === 'ja' ? '• 日付計算機' : '• Date Calculator'}</li>

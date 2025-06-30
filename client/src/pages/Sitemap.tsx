@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { 
-  Calculator, 
   Timer, 
   Clock, 
   Hash, 
@@ -81,9 +80,6 @@ export default function Sitemap() {
   const toolPages: SitemapItem[] = toolsSearchData.map(tool => {
     let icon;
     switch (tool.id) {
-      case 'calculator':
-        icon = <Calculator className="h-5 w-5" />;
-        break;
       case 'pomodoro':
         icon = <Timer className="h-5 w-5" />;
         break;

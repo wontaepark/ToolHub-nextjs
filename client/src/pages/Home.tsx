@@ -915,55 +915,86 @@ export default function Home() {
       <Card className="mt-8 md:mt-16 mx-4">
         <CardContent className="p-6 md:p-8">
           <div className="text-center mb-8">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">{t('home.aboutTitle')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6 max-w-3xl mx-auto leading-relaxed">
-              {t('home.aboutDescription')}
+            <h3 className="text-xl md:text-2xl font-bold mb-6 text-foreground">
+              <strong>ToolHub.tools 소개</strong>
+            </h3>
+            <p className="text-lg text-foreground font-medium mb-4">
+              일상과 업무에 필요한 웹 도구를 한 곳에서!
+            </p>
+            <p className="text-muted-foreground text-sm md:text-base mb-6 max-w-2xl mx-auto leading-relaxed">
+              ToolHub.tools는 설치 없이 브라우저에서 바로 사용할 수 있는<br />
+              무료 유틸리티 도구 모음입니다.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-rocket-line text-blue-600 text-2xl"></i>
+          <div className="mb-8">
+            <h4 className="text-lg font-bold mb-4 text-center text-foreground">
+              <strong>핵심 특징</strong>
+            </h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="bg-card border rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="ri-money-dollar-circle-line text-green-600 text-xl"></i>
+                </div>
+                <div className="text-sm">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <i className="ri-check-line text-green-500 text-sm"></i>
+                    <span className="font-semibold text-foreground">완전 무료</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">숨겨진 비용 없음</p>
+                </div>
               </div>
-              <h4 className="font-semibold mb-2">{t('home.mission.title')}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {t('home.mission.description')}
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-shield-check-line text-green-600 text-2xl"></i>
+              
+              <div className="bg-card border rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="ri-download-line text-blue-600 text-xl"></i>
+                </div>
+                <div className="text-sm">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <i className="ri-check-line text-green-500 text-sm"></i>
+                    <span className="font-semibold text-foreground">설치 불필요</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">브라우저에서 즉시 실행</p>
+                </div>
               </div>
-              <h4 className="font-semibold mb-2">{t('home.security.title')}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {t('home.security.description')}
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-global-line text-purple-600 text-2xl"></i>
+              
+              <div className="bg-card border rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="ri-shield-check-line text-purple-600 text-xl"></i>
+                </div>
+                <div className="text-sm">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <i className="ri-check-line text-green-500 text-sm"></i>
+                    <span className="font-semibold text-foreground">프라이버시 보장</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">데이터는 브라우저에만 저장</p>
+                </div>
               </div>
-              <h4 className="font-semibold mb-2">{t('home.accessibility.title')}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {t('home.accessibility.description')}
-              </p>
+              
+              <div className="bg-card border rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="ri-smartphone-line text-orange-600 text-xl"></i>
+                </div>
+                <div className="text-sm">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <i className="ri-check-line text-green-500 text-sm"></i>
+                    <span className="font-semibold text-foreground">모든 기기 지원</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">모바일, 태블릿, 데스크톱 최적화</p>
+                </div>
+              </div>
             </div>
           </div>
           
-          <div className="mt-8 pt-6 border-t border-border">
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-4">
-                {t('home.contact.description')}
-              </p>
-              <Link href="/contact">
-                <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
-                  {t('home.contact.button')}
-                </button>
-              </Link>
-            </div>
+          <div className="text-center pt-6 border-t border-border">
+            <p className="text-sm text-muted-foreground mb-4">
+              더 나은 서비스를 위해 여러분의 의견을 기다립니다.
+            </p>
+            <Link href="/contact">
+              <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                문의하기
+              </button>
+            </Link>
           </div>
         </CardContent>
       </Card>

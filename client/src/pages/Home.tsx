@@ -586,7 +586,9 @@ export default function Home() {
                       <span className="font-mono text-blue-600">contact@toolhub.tools</span>
                       <Link href="/contact">
                         <button className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">
-                          문의하기
+                          {currentLang === 'ko' ? '문의하기' : 
+                           currentLang === 'ja' ? 'お問い合わせ' : 
+                           'Contact'}
                         </button>
                       </Link>
                     </div>

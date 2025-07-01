@@ -19,7 +19,16 @@ export default function Home() {
         <div className="absolute -top-4 -left-4 w-16 h-16 md:w-24 md:h-24 bg-primary/10 rounded-full blur-xl"></div>
         <div className="absolute -bottom-8 -right-8 w-20 h-20 md:w-32 md:h-32 bg-secondary/10 rounded-full blur-xl"></div>
         
-        <Badge variant="secondary" className="mb-4 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm">
+        <Badge 
+          variant="secondary" 
+          className="mb-4 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm cursor-pointer hover:bg-secondary/80 transition-colors"
+          onClick={() => {
+            const toolsSection = document.getElementById('tools-section');
+            if (toolsSection) {
+              toolsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
+        >
           <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
           {t('common.newTools')}
         </Badge>
@@ -651,7 +660,7 @@ export default function Home() {
       </div>
 
       {/* Tools Section */}
-      <div className="mb-10 md:mb-12 px-4">
+      <div id="tools-section" className="mb-10 md:mb-12 px-4">
         <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">{t('home.availableTools')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
 

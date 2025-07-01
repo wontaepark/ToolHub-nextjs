@@ -1269,7 +1269,7 @@ export default function TetoEgenTest() {
                   key={index}
                   onClick={() => handleAnswer(index)}
                   variant="outline"
-                  className="w-full p-6 h-auto text-left justify-start hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                  className="w-full p-6 h-auto text-left justify-start hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md hover:scale-[1.02] transition-all duration-300 active:scale-[0.98]"
                 >
                   {option.text[i18n.language as keyof typeof option.text]}
                 </Button>

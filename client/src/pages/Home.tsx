@@ -36,6 +36,35 @@ export default function Home() {
           {t('home.description')}
         </p>
         
+        {/* Social Proof Section */}
+        <div className="bg-card/50 rounded-2xl p-4 md:p-6 mb-6 md:mb-8 max-w-4xl mx-auto border border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-2">
+                <i className="ri-user-line text-primary text-xl"></i>
+              </div>
+              <div className="text-xl md:text-2xl font-bold text-primary">{t('home.stats.users')}</div>
+              <div className="text-xs md:text-sm text-muted-foreground">{t('home.stats.usersLabel')}</div>
+            </div>
+            
+            <div className="flex flex-col items-center space-y-2">
+              <div className="flex items-center justify-center w-12 h-12 bg-secondary/10 rounded-full mb-2">
+                <i className="ri-bar-chart-line text-secondary text-xl"></i>
+              </div>
+              <div className="text-xl md:text-2xl font-bold text-secondary">{t('home.stats.usage')}</div>
+              <div className="text-xs md:text-sm text-muted-foreground">{t('home.stats.usageLabel')}</div>
+            </div>
+            
+            <div className="flex flex-col items-center space-y-2">
+              <div className="flex items-center justify-center w-12 h-12 bg-accent/10 rounded-full mb-2">
+                <i className="ri-star-line text-accent text-xl"></i>
+              </div>
+              <div className="text-xl md:text-2xl font-bold text-accent">{t('home.stats.satisfaction')}</div>
+              <div className="text-xs md:text-sm text-muted-foreground">{t('home.stats.satisfactionLabel')}</div>
+            </div>
+          </div>
+        </div>
+        
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
           <div className="flex items-center gap-1.5 md:gap-2">
             <Zap className="w-3 h-3 md:w-4 md:h-4 text-primary" />

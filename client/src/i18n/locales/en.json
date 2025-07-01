@@ -7,7 +7,7 @@
     "contact": "Contact",
     "search": "Search",
     "searchPlaceholder": "Search tools...",
-    "newTools": "New tools are continuously being added",
+    "newTools": "Try Popular Tools Now",
     "available": "Available",
     "new": "New",
     "comingSoon": "Coming Soon",
@@ -69,6 +69,14 @@
       "optimizedForMobileTabletDesktop": "Optimized for mobile, tablet, desktop"
     },
     "feedbackMessage": "We look forward to your feedback for better service.",
+    "stats": {
+      "users": "10,000+",
+      "usersLabel": "Users already using",
+      "usage": "50,000+",
+      "usageLabel": "Monthly tool usage",
+      "satisfaction": "98%",
+      "satisfactionLabel": "User satisfaction"
+    },
     "aboutDescription": "ToolHub.tools is a collection of web-based utility tools that anyone can use easily and quickly. We provide various functions useful for daily life and work, such as calculators, timers, number raffles, and YouTube thumbnail downloaders, all in one website. Our goal is to enhance user productivity and convenience through free tools that can be used directly in the browser without installation or registration.",
     "roadmap": "Weekly Release Plan: Unit Converter → Password Generator → QR Code Generator → Weather Info",
     "regularUpdates": "More tools will be added through regular updates",

@@ -376,7 +376,7 @@ export default function NumberRaffle() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">{t('numberRaffle.settings.maxNumber')}</label>
+                  <label className="text-sm font-medium mb-2 block text-foreground">{t('numberRaffle.settings.maxNumber')}</label>
                   <Input
                     type="number"
                     min="1"
@@ -389,12 +389,12 @@ export default function NumberRaffle() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">{t('numberRaffle.settings.drawCount')}</label>
+                  <label className="text-sm font-medium mb-2 block text-foreground">{t('numberRaffle.settings.drawCount')}</label>
                   <select
                     value={drawCount}
                     onChange={(e) => setDrawCount(parseInt(e.target.value))}
                     disabled={isDrawing}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                    className="w-full px-3 py-2 border border-border rounded-md text-lg font-medium bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                   >
                     <option value={1}>1개</option>
                     <option value={2}>2개</option>
@@ -454,15 +454,15 @@ export default function NumberRaffle() {
                 {/* Statistics */}
                 <div className="space-y-2 pt-4 border-t">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.totalNumbers')}</span>
+                    <span className="text-sm text-muted-foreground">{t('numberRaffle.stats.totalNumbers')}</span>
                     <Badge variant="secondary">{maxNumber}개</Badge>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.drawnNumbers')}</span>
+                    <span className="text-sm text-muted-foreground">{t('numberRaffle.stats.drawnNumbers')}</span>
                     <Badge variant="default">{drawnCount}개</Badge>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">{t('numberRaffle.stats.remainingNumbers')}</span>
+                    <span className="text-sm text-muted-foreground">{t('numberRaffle.stats.remainingNumbers')}</span>
                     <Badge variant="outline">{remainingCount}개</Badge>
                   </div>
                 </div>
@@ -572,7 +572,7 @@ export default function NumberRaffle() {
                         className={`p-4 rounded-lg text-center transition-all duration-300 ${
                           index === 0
                             ? 'bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-lg scale-105'
-                            : 'bg-gray-100 hover:bg-gray-200'
+                            : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100'
                         }`}
                       >
                         <div className="text-2xl font-bold">{result.number}</div>

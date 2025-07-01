@@ -69,6 +69,14 @@
       "optimizedForMobileTabletDesktop": "モバイル、タブレット、デスクトップ最適化"
     },
     "feedbackMessage": "より良いサービスのため、皆様のご意見をお待ちしております。",
+    "stats": {
+      "users": "10,000+",
+      "usersLabel": "既に利用中のユーザー",
+      "usage": "50,000+",
+      "usageLabel": "月間ツール使用回数",
+      "satisfaction": "98%",
+      "satisfactionLabel": "ユーザー満足度"
+    },
     "aboutDescription": "ToolHub.toolsは、誰でも簡単かつ迅速に使用できるWebベースのユーティリティツール集です。計算機、タイマー、番号抽選機、YouTubeサムネイルダウンローダーなど、日常生活や仕事に役立つ様々な機能を一つのWebサイトで提供しています。インストールや会員登録なしに、ブラウザで直接実行可能な無料ツールを通じて、ユーザーの皆様の生産性と利便性を向上させることがToolhubの目標です。",
     "roadmap": "週次リリース計画：単位変換器 → パスワード生成器 → QRコード生成器 → 天気情報",
     "regularUpdates": "定期的な更新でより多くのツールが追加される予定です",

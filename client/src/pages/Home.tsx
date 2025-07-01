@@ -916,20 +916,19 @@ export default function Home() {
         <CardContent className="p-6 md:p-8">
           <div className="text-center mb-8">
             <h3 className="text-xl md:text-2xl font-bold mb-6 text-foreground">
-              <strong>ToolHub.tools 소개</strong>
+              <strong>{t('home.aboutTitle')}</strong>
             </h3>
             <p className="text-lg text-foreground font-medium mb-4">
-              일상과 업무에 필요한 웹 도구를 한 곳에서!
+              {t('home.aboutIntro')}
             </p>
             <p className="text-muted-foreground text-sm md:text-base mb-6 max-w-2xl mx-auto leading-relaxed">
-              ToolHub.tools는 설치 없이 브라우저에서 바로 사용할 수 있는<br />
-              무료 유틸리티 도구 모음입니다.
+              {t('home.aboutSubtitle')}
             </p>
           </div>
           
           <div className="mb-8">
             <h4 className="text-lg font-bold mb-4 text-center text-foreground">
-              <strong>핵심 특징</strong>
+              <strong>{t('home.coreFeatures')}</strong>
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
               <div className="bg-card border rounded-lg p-4 text-center">
@@ -939,9 +938,9 @@ export default function Home() {
                 <div className="text-sm">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <i className="ri-check-line text-green-500 text-sm"></i>
-                    <span className="font-semibold text-foreground">완전 무료</span>
+                    <span className="font-semibold text-foreground">{t('home.features.completelyFree')}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">숨겨진 비용 없음</p>
+                  <p className="text-xs text-muted-foreground">{t('home.features.noHiddenCosts')}</p>
                 </div>
               </div>
               
@@ -952,9 +951,9 @@ export default function Home() {
                 <div className="text-sm">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <i className="ri-check-line text-green-500 text-sm"></i>
-                    <span className="font-semibold text-foreground">설치 불필요</span>
+                    <span className="font-semibold text-foreground">{t('home.features.noInstallation')}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">브라우저에서 즉시 실행</p>
+                  <p className="text-xs text-muted-foreground">{t('home.features.runDirectlyInBrowser')}</p>
                 </div>
               </div>
               
@@ -965,9 +964,9 @@ export default function Home() {
                 <div className="text-sm">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <i className="ri-check-line text-green-500 text-sm"></i>
-                    <span className="font-semibold text-foreground">프라이버시 보장</span>
+                    <span className="font-semibold text-foreground">{t('home.features.privacyGuaranteed')}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">데이터는 브라우저에만 저장</p>
+                  <p className="text-xs text-muted-foreground">{t('home.features.dataStoredOnlyInBrowser')}</p>
                 </div>
               </div>
               
@@ -978,9 +977,9 @@ export default function Home() {
                 <div className="text-sm">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <i className="ri-check-line text-green-500 text-sm"></i>
-                    <span className="font-semibold text-foreground">모든 기기 지원</span>
+                    <span className="font-semibold text-foreground">{t('home.features.allDevicesSupported')}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">모바일, 태블릿, 데스크톱 최적화</p>
+                  <p className="text-xs text-muted-foreground">{t('home.features.optimizedForMobileTabletDesktop')}</p>
                 </div>
               </div>
             </div>
@@ -988,11 +987,11 @@ export default function Home() {
           
           <div className="text-center pt-6 border-t border-border">
             <p className="text-sm text-muted-foreground mb-4">
-              더 나은 서비스를 위해 여러분의 의견을 기다립니다.
+              {t('home.feedbackMessage')}
             </p>
             <Link href="/contact">
               <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
-                문의하기
+                {t('home.contact.button')}
               </button>
             </Link>
           </div>

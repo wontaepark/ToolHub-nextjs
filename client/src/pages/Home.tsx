@@ -864,43 +864,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Coming Soon Section */}
-      <div className="mb-12 md:mb-16 px-4">
-        <div className="text-center mb-8">
-          <h3 className="text-xl md:text-2xl font-bold mb-3">{t('home.nextWeekRelease')}</h3>
-          <p className="text-sm md:text-base text-muted-foreground">{t('home.weeklyUpdates')}</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
-          {/* QR Code Generator - Week 3 */}
-          <div className="tool-card bg-card rounded-2xl shadow-lg overflow-hidden border border-purple-200 relative opacity-75">
-            <div className="absolute top-2 right-2 z-10">
-              <Badge variant="outline" className="bg-purple-100 text-purple-600 text-xs">{t('common.week3')}</Badge>
-            </div>
-            <div className="h-24 md:h-32 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-              <i className="ri-qr-code-line text-white text-3xl md:text-5xl"></i>
-            </div>
-            <div className="p-3 md:p-4">
-              <h4 className="font-bold text-sm md:text-base mb-2">{t('tools.qrGenerator.title')}</h4>
-              <p className="text-xs md:text-sm text-muted-foreground mb-2">
-                {t('tools.qrGenerator.description')}
-              </p>
-              <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs">{t('tools.qrGenerator.tags.0')}</Badge>
-                <Badge variant="outline" className="text-xs">{t('tools.qrGenerator.tags.1')}</Badge>
-              </div>
-            </div>
-          </div>
-
-          
-        </div>
-        
-        <div className="text-center mt-6">
-          <p className="text-xs md:text-sm text-muted-foreground">
-            📅 {t('home.regularUpdates')}
-          </p>
-        </div>
-      </div>
+      
 
       {/* AdSense Banner */}
       <div className="mt-8 mx-4">

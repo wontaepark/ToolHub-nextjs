@@ -49,6 +49,16 @@ export default function Header() {
             </Button>
           </Link>
           
+          <Link href="/sitemap">
+            <Button 
+              variant="ghost" 
+              className="hidden md:flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors"
+            >
+              <i className="ri-sitemap-line text-lg"></i>
+              <span>{t('common.sitemap')}</span>
+            </Button>
+          </Link>
+          
           <Link href="/contact">
             <Button 
               variant="ghost" 

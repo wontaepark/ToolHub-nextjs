@@ -26,7 +26,7 @@ export default function Footer() {
             </Link>
             <Link href="/password">
               <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
-                {t('tools.password', '비밀번호 생성기')}
+                {t('tools.password', 'Password Generator')}
               </span>
             </Link>
             <Link href="/converter">

@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { generateStaticHTML } from "./ssr";
+import { generateDynamicSitemap, generateHtmlSitemap } from "./sitemap";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // SSR 라우트들 - 크롤러 봇 감지 및 정적 HTML 제공
@@ -88,10 +89,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Serve static files for SEO
+  // 동적 사이트맵 제공
   app.get('/sitemap.xml', (req, res) => {
-    res.setHeader('Content-Type', 'application/xml');
-    res.sendFile('sitemap.xml', { root: '.' });
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    const dynamicSitemap = generateDynamicSitemap();
+    res.send(dynamicSitemap);
+  });
+
+  // HTML 사이트맵 페이지 제공
+  app.get('/sitemap-html', (req, res) => {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    const htmlSitemap = generateHtmlSitemap();
+    res.send(htmlSitemap);
   });
 
   app.get('/robots.txt', (req, res) => {

@@ -31,7 +31,7 @@ export default function Footer() {
             </Link>
             <Link href="/converter">
               <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
-                {t('tools.converter', '단위 변환기')}
+                {t('tools.converter', 'Unit Converter')}
               </span>
             </Link>
             <Link href="/thumbnail">

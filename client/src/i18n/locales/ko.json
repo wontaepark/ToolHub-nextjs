@@ -40,7 +40,18 @@
     "openMenu": "메뉴 열기"
   },
   "footer": {
-    "allRightsReserved": "모든 권리 보유."
+    "allRightsReserved": "모든 권리 보유.",
+    "popularTools": "인기 도구"
+  },
+  "tools": {
+    "pomodoro": "포모도로 타이머",
+    "raffle": "번호 추첨기",
+    "password": "비밀번호 생성기",
+    "converter": "단위 변환기",
+    "thumbnail": "썸네일 다운로더",
+    "mbti": "MBTI 테스트",
+    "timer": "범용 타이머",
+    "dateCalculator": "날짜 계산기"
   },
   "home": {
     "title": "ToolHub.tools",

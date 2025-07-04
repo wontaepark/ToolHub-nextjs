@@ -40,7 +40,18 @@
     "openMenu": "Open menu"
   },
   "footer": {
-    "allRightsReserved": "All rights reserved."
+    "allRightsReserved": "All rights reserved.",
+    "popularTools": "Popular Tools"
+  },
+  "tools": {
+    "pomodoro": "Pomodoro Timer",
+    "raffle": "Number Raffle",
+    "password": "Password Generator",
+    "converter": "Unit Converter",
+    "thumbnail": "Thumbnail Downloader",
+    "mbti": "MBTI Test",
+    "timer": "Universal Timer",
+    "dateCalculator": "Date Calculator"
   },
   "home": {
     "title": "ToolHub.tools",

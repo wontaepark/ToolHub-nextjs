@@ -40,7 +40,18 @@
     "openMenu": "メニューを開く"
   },
   "footer": {
-    "allRightsReserved": "著作権所有。"
+    "allRightsReserved": "著作権所有。",
+    "popularTools": "人気ツール"
+  },
+  "tools": {
+    "pomodoro": "ポモドーロタイマー",
+    "raffle": "番号抽選機",
+    "password": "パスワード生成器",
+    "converter": "単位変換器",
+    "thumbnail": "サムネイルダウンローダー",
+    "mbti": "MBTI テスト",
+    "timer": "汎用タイマー",
+    "dateCalculator": "日付計算機"
   },
   "home": {
     "title": "ToolHub.tools",

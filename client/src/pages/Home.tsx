@@ -189,10 +189,21 @@ export default function Home() {
                      'Productivity Tools'}
                   </h4>
                   <ul className="text-sm space-y-1">
-
-                    <li>{currentLang === 'ko' ? '• 포모도로 타이머' : currentLang === 'ja' ? '• ポモドーロタイマー' : '• Pomodoro Timer'}</li>
-                    <li>{currentLang === 'ko' ? '• 범용 타이머' : currentLang === 'ja' ? '• 汎用タイマー' : '• General Timer'}</li>
-                    <li>{currentLang === 'ko' ? '• 날짜 계산기' : currentLang === 'ja' ? '• 日付計算機' : '• Date Calculator'}</li>
+                    <li>
+                      <Link href="/pomodoro" className="text-green-600 hover:text-green-700 hover:underline">
+                        {currentLang === 'ko' ? '• 포모도로 타이머' : currentLang === 'ja' ? '• ポモドーロタイマー' : '• Pomodoro Timer'}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/timer" className="text-green-600 hover:text-green-700 hover:underline">
+                        {currentLang === 'ko' ? '• 범용 타이머' : currentLang === 'ja' ? '• 汎用タイマー' : '• General Timer'}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/date-calculator" className="text-green-600 hover:text-green-700 hover:underline">
+                        {currentLang === 'ko' ? '• 날짜 계산기' : currentLang === 'ja' ? '• 日付計算機' : '• Date Calculator'}
+                      </Link>
+                    </li>
                   </ul>
                 </div>
                 
@@ -206,10 +217,21 @@ export default function Home() {
                      'Utility Tools'}
                   </h4>
                   <ul className="text-sm space-y-1">
-                    <li>{currentLang === 'ko' ? '• 단위 변환기' : currentLang === 'ja' ? '• 単位変換器' : '• Unit Converter'}</li>
-                    <li>{currentLang === 'ko' ? '• 비밀번호 생성기' : currentLang === 'ja' ? '• パスワード生成器' : '• Password Generator'}</li>
-                    <li>{currentLang === 'ko' ? '• 번호 추첨기' : currentLang === 'ja' ? '• 番号抽選機' : '• Number Raffle'}</li>
-                    <li>{currentLang === 'ko' ? '• QR 코드 생성기' : currentLang === 'ja' ? '• QRコード生成器' : '• QR Code Generator'}</li>
+                    <li>
+                      <Link href="/converter" className="text-blue-600 hover:text-blue-700 hover:underline">
+                        {currentLang === 'ko' ? '• 단위 변환기' : currentLang === 'ja' ? '• 単位変換器' : '• Unit Converter'}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/password" className="text-blue-600 hover:text-blue-700 hover:underline">
+                        {currentLang === 'ko' ? '• 비밀번호 생성기' : currentLang === 'ja' ? '• パスワード生成器' : '• Password Generator'}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/raffle" className="text-blue-600 hover:text-blue-700 hover:underline">
+                        {currentLang === 'ko' ? '• 번호 추첨기' : currentLang === 'ja' ? '• 番号抽選機' : '• Number Raffle'}
+                      </Link>
+                    </li>
                   </ul>
                 </div>
                 
@@ -223,8 +245,11 @@ export default function Home() {
                      'Multimedia Tools'}
                   </h4>
                   <ul className="text-sm space-y-1">
-                    <li>{currentLang === 'ko' ? '• 유튜브 썸네일 다운로더' : currentLang === 'ja' ? '• YouTubeサムネイルダウンローダー' : '• YouTube Thumbnail Downloader'}</li>
-                    <li>{currentLang === 'ko' ? '• 이미지 도구' : currentLang === 'ja' ? '• 画像ツール' : '• Image Tools'}</li>
+                    <li>
+                      <Link href="/thumbnail" className="text-red-600 hover:text-red-700 hover:underline">
+                        {currentLang === 'ko' ? '• 유튜브 썸네일 다운로더' : currentLang === 'ja' ? '• YouTubeサムネイルダウンローダー' : '• YouTube Thumbnail Downloader'}
+                      </Link>
+                    </li>
                   </ul>
                 </div>
                 
@@ -238,8 +263,16 @@ export default function Home() {
                      'Fun Tools'}
                   </h4>
                   <ul className="text-sm space-y-1">
-                    <li>{currentLang === 'ko' ? '• MBTI 성격유형 테스트' : currentLang === 'ja' ? '• MBTI性格タイプテスト' : '• MBTI Personality Test'}</li>
-                    <li>{currentLang === 'ko' ? '• 테토 에겐 테스트' : currentLang === 'ja' ? '• テト エゲン テスト' : '• Teto Egen Test'}</li>
+                    <li>
+                      <Link href="/mbti" className="text-purple-600 hover:text-purple-700 hover:underline">
+                        {currentLang === 'ko' ? '• MBTI 성격유형 테스트' : currentLang === 'ja' ? '• MBTI性格タイプテスト' : '• MBTI Personality Test'}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/teto-egen-test" className="text-purple-600 hover:text-purple-700 hover:underline">
+                        {currentLang === 'ko' ? '• 테토 에겐 테스트' : currentLang === 'ja' ? '• テト エゲン テスト' : '• Teto Egen Test'}
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>

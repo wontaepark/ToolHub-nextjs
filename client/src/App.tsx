@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import Header from "./components/ui/header";
 import Footer from "./components/ui/footer";
 import CookieConsent from "./components/CookieConsent";
+import Breadcrumb from "./components/Breadcrumb";
 import Home from "./pages/Home";
 
 import PomodoroTimer from "./pages/PomodoroTimer";
@@ -24,6 +25,7 @@ function App() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
+        <Breadcrumb />
         <Switch>
           <Route path="/" component={Home} />
 

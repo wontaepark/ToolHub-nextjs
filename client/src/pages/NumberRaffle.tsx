@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Shuffle, RotateCcw, Settings } from 'lucide-react';
+import RelatedTools from "@/components/RelatedTools";
 
 interface RaffleResult {
   number: number;
@@ -1380,6 +1381,9 @@ export default function NumberRaffle() {
             </div>
           </div>
         </div>
+        
+        {/* 관련 도구 섹션 */}
+        <RelatedTools currentTool="/raffle" maxItems={4} />
       </div>
     </div>
   );

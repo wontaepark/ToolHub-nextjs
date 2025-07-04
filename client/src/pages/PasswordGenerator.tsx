@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Copy, RefreshCw, Shield, Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdSense from "@/components/AdSense";
+import RelatedTools from "@/components/RelatedTools";
 
 interface PasswordOptions {
   length: number;
@@ -1154,6 +1155,9 @@ export default function PasswordGenerator() {
             </div>
           </div>
         </div>
+        
+        {/* 관련 도구 섹션 */}
+        <RelatedTools currentTool="/password" maxItems={4} />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Play, Pause, Square, Settings, Volume2, SkipForward, Plus, Trash2 } from "lucide-react";
+import RelatedTools from "@/components/RelatedTools";
 
 type TimerState = 'work' | 'shortBreak' | 'longBreak' | 'idle';
 
@@ -1851,6 +1852,9 @@ export default function PomodoroTimer() {
             </div>
           </div>
         </div>
+        
+        {/* 관련 도구 섹션 */}
+        <RelatedTools currentTool="/pomodoro" maxItems={4} />
       </div>
     </div>
   );

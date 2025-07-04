@@ -209,42 +209,42 @@ function generatePageContent(url: string, lang: string): string {
           <p>일상과 업무에 필요한 다양한 도구를 한 곳에서 무료로 사용하세요</p>
         </div>
         <div class="tool-grid">
-          <div class="tool-card">
+          <a href="/pomodoro" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">포모도로 타이머</h3>
             <p class="tool-description">25분 집중 + 5분 휴식의 포모도로 기법으로 생산성을 높이세요</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/timer" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">범용 타이머</h3>
             <p class="tool-description">요리, 운동, 공부 등 다양한 용도로 사용할 수 있는 타이머</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/raffle" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">번호 추첨기</h3>
             <p class="tool-description">이벤트나 추첨에 사용할 수 있는 공정한 랜덤 번호 생성 도구</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/thumbnail" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">유튜브 썸네일 다운로더</h3>
             <p class="tool-description">유튜브 비디오의 썸네일을 고화질로 다운로드</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/password" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">비밀번호 생성기</h3>
             <p class="tool-description">해킹으로부터 안전한 강력한 비밀번호 생성</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/converter" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">단위 변환기</h3>
             <p class="tool-description">길이, 무게, 온도 등 다양한 단위를 빠르고 정확하게 변환</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/date-calculator" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">날짜 계산기</h3>
             <p class="tool-description">날짜 간 차이 계산 및 날짜 연산 도구</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/mbti" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">MBTI 성격유형 테스트</h3>
             <p class="tool-description">16가지 성격유형 중 당신은 어떤 유형인지 알아보세요</p>
-          </div>
-          <div class="tool-card">
+          </a>
+          <a href="/teto-egen-test" class="tool-card" style="text-decoration: none; color: inherit;">
             <h3 class="tool-title">테토-에겐 성격유형 테스트</h3>
             <p class="tool-description">화제의 테토-에겐 성격유형 테스트로 나의 성향을 알아보세요</p>
-          </div>
+          </a>
         </div>
       `;
     

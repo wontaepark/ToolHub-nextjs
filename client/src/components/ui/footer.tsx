@@ -7,7 +7,56 @@ export default function Footer() {
 
   return (
     <footer className="bg-background border-t mt-auto">
-      <div className="container mx-auto px-4 py-4 md:py-6">
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        {/* 인기 도구 링크 섹션 */}
+        <div className="mb-6 pb-6 border-b border-border">
+          <h3 className="text-sm font-semibold mb-3 text-foreground">
+            {t('footer.popularTools', '인기 도구')}
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <Link href="/pomodoro">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.pomodoro', '포모도로 타이머')}
+              </span>
+            </Link>
+            <Link href="/raffle">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.raffle', '번호 추첨기')}
+              </span>
+            </Link>
+            <Link href="/password">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.password', '비밀번호 생성기')}
+              </span>
+            </Link>
+            <Link href="/converter">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.converter', '단위 변환기')}
+              </span>
+            </Link>
+            <Link href="/thumbnail">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.thumbnail', '썸네일 다운로더')}
+              </span>
+            </Link>
+            <Link href="/mbti">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.mbti', 'MBTI 테스트')}
+              </span>
+            </Link>
+            <Link href="/timer">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.timer', '범용 타이머')}
+              </span>
+            </Link>
+            <Link href="/date-calculator">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer block py-1">
+                {t('tools.dateCalculator', '날짜 계산기')}
+              </span>
+            </Link>
+          </div>
+        </div>
+        
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-center md:text-left">
             <p className="text-xs md:text-sm text-muted-foreground">

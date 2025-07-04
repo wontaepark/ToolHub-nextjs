@@ -67,7 +67,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // 다른 라우트에서 처리되지 않은 경우에만 실행됨
   app.get('*', (req, res, next) => {
     // 정적 파일 요청은 제외 (css, js, images 등)
-    if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+    if (req.path.match(/\.(css|js|tsx|ts|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|map)$/)) {
+      return next();
+    }
+    
+    // Vite의 특수 경로들 제외
+    if (req.path.startsWith('/@') || req.path.startsWith('/src/') || req.path.startsWith('/node_modules/')) {
       return next();
     }
     

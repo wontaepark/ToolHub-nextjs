@@ -61,22 +61,210 @@ export function generateStaticHTML(url: string, lang: string = 'ko'): string {
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5553606229740788" crossorigin="anonymous"></script>
     
-    <!-- 초기 스타일링 -->
+    <!-- Tailwind CSS 및 커스텀 스타일 -->
     <style>
-      body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: #ffffff; }
+      /* Tailwind CSS Reset */
+      *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; }
+      ::before, ::after { --tw-content: ''; }
+      html { line-height: 1.5; -webkit-text-size-adjust: 100%; -moz-tab-size: 4; tab-size: 4; font-family: 'Inter', sans-serif; font-feature-settings: normal; font-variation-settings: normal; }
+      body { margin: 0; line-height: inherit; }
+      h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+      a { color: inherit; text-decoration: inherit; }
+      button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0; padding: 0; }
+      
+      /* CSS Variables */
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 20 14.3% 4.1%;
+        --primary: 244 75% 59%;
+        --primary-foreground: 211 100% 99%;
+        --muted: 60 4.8% 95.9%;
+        --muted-foreground: 25 5.3% 44.7%;
+        --border: 20 5.9% 90%;
+        --radius: 0.5rem;
+      }
+      
+      /* Base Styles */
+      body { 
+        font-family: 'Inter', sans-serif; 
+        margin: 0; 
+        padding: 0; 
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        line-height: 1.6;
+      }
+      
+      /* Layout */
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-      .header { background: #ffffff; border-bottom: 1px solid #e5e7eb; padding: 1rem 0; }
+      
+      /* Header */
+      .header { 
+        background: hsl(var(--background)); 
+        border-bottom: 1px solid hsl(var(--border)); 
+        padding: 1rem 0;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      }
       .nav { display: flex; justify-content: space-between; align-items: center; }
-      .logo { font-size: 1.5rem; font-weight: bold; color: #1f2937; }
-      .main-content { padding: 2rem 0; min-height: 60vh; }
-      .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-      .tool-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; }
-      .tool-title { font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem; }
-      .tool-description { color: #6b7280; font-size: 0.875rem; }
-      .hero { text-align: center; margin-bottom: 3rem; }
-      .hero h1 { font-size: 2.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem; }
-      .hero p { font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto; }
-      .footer { background: #f9fafb; border-top: 1px solid #e5e7eb; padding: 2rem 0; margin-top: 3rem; text-align: center; }
+      .logo { 
+        font-size: 1.75rem; 
+        font-weight: 700; 
+        color: hsl(var(--primary));
+        background: linear-gradient(135deg, hsl(var(--primary)), #8b5cf6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .nav a {
+        color: hsl(var(--muted-foreground));
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius);
+        transition: all 0.2s ease;
+      }
+      .nav a:hover {
+        color: hsl(var(--primary));
+        background-color: hsl(var(--muted));
+      }
+      
+      /* Main Content */
+      .main-content { padding: 3rem 0; min-height: 60vh; }
+      
+      /* Hero Section */
+      .hero { text-align: center; margin-bottom: 4rem; }
+      .hero h1 { 
+        font-size: 3rem; 
+        font-weight: 800; 
+        color: hsl(var(--foreground));
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+      }
+      .hero p { 
+        font-size: 1.25rem; 
+        color: hsl(var(--muted-foreground)); 
+        max-width: 600px; 
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      
+      /* Tool Grid */
+      .tool-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+        gap: 2rem; 
+        margin-top: 3rem; 
+      }
+      .tool-card { 
+        background: hsl(var(--background)); 
+        border: 1px solid hsl(var(--border)); 
+        border-radius: calc(var(--radius) * 2);
+        padding: 2rem; 
+        transition: all 0.3s ease;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .tool-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        border-color: hsl(var(--primary));
+      }
+      .tool-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, hsl(var(--primary)), #8b5cf6, #ec4899);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .tool-card:hover::before {
+        opacity: 1;
+      }
+      .tool-title { 
+        font-size: 1.5rem; 
+        font-weight: 600; 
+        color: hsl(var(--foreground)); 
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+      }
+      .tool-description { 
+        color: hsl(var(--muted-foreground)); 
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      
+      /* Content Sections */
+      .content-section {
+        background: hsl(var(--muted));
+        border: 1px solid hsl(var(--border));
+        border-radius: calc(var(--radius) * 2);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+      }
+      .content-section h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: hsl(var(--foreground));
+        margin-bottom: 1rem;
+      }
+      .content-section h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: hsl(var(--foreground));
+        margin: 1.5rem 0 0.75rem 0;
+      }
+      .content-section p {
+        color: hsl(var(--muted-foreground));
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .content-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+      .content-section li {
+        color: hsl(var(--muted-foreground));
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+      .content-section li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: hsl(var(--primary));
+        font-weight: bold;
+      }
+      
+      /* Footer */
+      .footer { 
+        background: hsl(var(--muted)); 
+        border-top: 1px solid hsl(var(--border)); 
+        padding: 3rem 0; 
+        margin-top: 4rem; 
+        text-align: center; 
+      }
+      .footer p {
+        color: hsl(var(--muted-foreground));
+        font-size: 0.875rem;
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 2.25rem; }
+        .tool-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        .container { padding: 0 0.75rem; }
+        .tool-card { padding: 1.5rem; }
+        .content-section { padding: 2rem; }
+      }
     </style>
   </head>
   <body>
@@ -254,7 +442,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>포모도로 타이머</h1>
           <p>25분 집중 + 5분 휴식의 포모도로 기법으로 생산성을 높이세요</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>포모도로 기법이란?</h2>
           <p>포모도로 기법은 1980년대 후반 프란체스코 시릴로가 개발한 시간 관리 방법입니다. 25분 동안 집중해서 일하고, 5분 휴식을 취하는 것을 한 세트로 하여 반복하는 방식입니다.</p>
           <h3>포모도로 기법의 장점</h3>
@@ -273,7 +461,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>범용 타이머</h1>
           <p>요리, 운동, 공부 등 다양한 용도로 사용할 수 있는 타이머</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>다양한 용도의 타이머</h2>
           <p>일상생활에서 시간 관리가 필요한 모든 순간에 활용할 수 있는 범용 타이머입니다.</p>
           <h3>활용 예시</h3>
@@ -292,7 +480,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>번호 추첨기</h1>
           <p>이벤트나 추첨에 사용할 수 있는 공정한 랜덤 번호 생성 도구</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>공정한 랜덤 번호 생성</h2>
           <p>이벤트, 추첨, 게임 등에 사용할 수 있는 완전히 무작위적인 번호 생성 도구입니다.</p>
           <h3>특징</h3>
@@ -311,7 +499,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>유튜브 썸네일 다운로더</h1>
           <p>유튜브 비디오의 썸네일을 고화질로 다운로드</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>고화질 썸네일 다운로드</h2>
           <p>유튜브 URL만 입력하면 해당 비디오의 썸네일을 다양한 해상도로 다운로드할 수 있습니다.</p>
           <h3>지원 해상도</h3>
@@ -330,7 +518,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>비밀번호 생성기</h1>
           <p>해킹으로부터 안전한 강력한 비밀번호 생성</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>안전한 비밀번호 생성</h2>
           <p>해킹과 무차별 대입 공격으로부터 안전한 강력한 비밀번호를 생성합니다.</p>
           <h3>비밀번호 보안 팁</h3>
@@ -349,7 +537,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>단위 변환기</h1>
           <p>길이, 무게, 온도 등 다양한 단위를 빠르고 정확하게 변환</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>다양한 단위 변환</h2>
           <p>일상생활과 업무에서 필요한 다양한 단위를 정확하게 변환할 수 있습니다.</p>
           <h3>지원 단위</h3>
@@ -368,7 +556,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>날짜 계산기</h1>
           <p>날짜 간 차이 계산 및 날짜 연산 도구</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>정확한 날짜 계산</h2>
           <p>두 날짜 사이의 차이를 계산하거나 특정 날짜에서 일/월/년을 더하고 빼는 계산을 할 수 있습니다.</p>
           <h3>주요 기능</h3>
@@ -387,7 +575,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>MBTI 성격유형 테스트</h1>
           <p>16가지 성격유형 중 당신은 어떤 유형인지 알아보세요</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>MBTI 성격유형 검사</h2>
           <p>과학적으로 검증된 MBTI 성격유형 검사로 자신의 성격을 정확히 파악해보세요.</p>
           <h3>16가지 성격유형</h3>
@@ -407,7 +595,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>테토-에겐 성격유형 테스트</h1>
           <p>화제의 테토-에겐 성격유형 테스트로 나의 성향을 알아보세요</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>테토형 vs 에겐형</h2>
           <p>최근 소셜미디어에서 화제가 되고 있는 테토-에겐 성격유형 테스트입니다.</p>
           <h3>테스트 특징</h3>
@@ -426,7 +614,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>사이트맵</h1>
           <p>ToolHub.tools의 모든 페이지를 한눈에 확인하세요</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>전체 도구 목록</h2>
           <div class="tool-grid">
             <div class="tool-card">
@@ -468,7 +656,7 @@ function generatePageContent(url: string, lang: string): string {
           <h1>문의하기</h1>
           <p>ToolHub.tools에 대한 문의사항이 있으시면 언제든지 연락해주세요</p>
         </div>
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div class="content-section">
           <h2>연락처 정보</h2>
           <p>새로운 도구 제안, 버그 신고, 협업 문의 등 모든 문의를 환영합니다.</p>
           <h3>문의 방법</h3>

@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-background border-t mt-auto">
       <div className="container mx-auto px-4 py-6 md:py-8">
-        {/* 인기 도구 링크 섹션 */}
+        {/* Popular Tools Links Section */}
         <div className="mb-6 pb-6 border-b border-border">
           <h3 className="text-sm font-semibold mb-3 text-foreground">
             {t('footer.popularTools', '인기 도구')}

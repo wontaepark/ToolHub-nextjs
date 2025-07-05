@@ -27,6 +27,11 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- Google AdSense 승인을 위한 robots.txt 최적화 (2025-07-04)
+  - 모든 Google 봇 명시적 허용 (Googlebot, AdsBot-Google 등)
+  - AdSense 관련 리소스 접근 완전 허용 (/pagead/, /*.js, /*.css)
+  - JavaScript/CSS 파일 크롤링 허용으로 페이지 완전성 보장
+  - 개발 파일만 선별적 차단으로 보안 유지
 - 하이브리드 SSR 시스템 최적화 (2025-07-04)
   - 크롤러 봇에게는 완전한 SSR HTML 제공 (Google AdSense 승인)
   - 일반 사용자에게는 React 앱 제공 (최적의 사용자 경험)

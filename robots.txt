@@ -1,13 +1,42 @@
+# Google 봇들 명시적 허용 (AdSense 승인용)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: AdsBot-Google-Mobile-Apps
+Allow: /
+
+# 모든 봇 기본 허용
 User-agent: *
 Allow: /
 
 # Sitemap location
 Sitemap: https://toolhub.tools/sitemap.xml
 
-# Disallow crawling of development files
+# AdSense 관련 리소스 명시적 허용
+Allow: /pagead/
+Allow: /adsystem/
+Allow: /*.js
+Allow: /*.css
+
+# 개발 파일만 차단
 Disallow: /src/
 Disallow: /node_modules/
 Disallow: /.git/
-Disallow: /*.json
-Disallow: /*.ts
-Disallow: /*.tsx
+Disallow: /*.json$
+Disallow: /*.ts$
+Disallow: /*.tsx$

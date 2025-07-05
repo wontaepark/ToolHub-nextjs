@@ -74,11 +74,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     app.get(route, (req, res, next) => {
       const userAgent = req.get('User-Agent') || '';
       
-      // 프로덕션에서는 항상 SSR 제공, 개발에서는 크롤러 봇 감지
-      const isProduction = process.env.NODE_ENV === 'production';
-      const shouldRenderSSR = isProduction || isBotRequest(userAgent) || req.query.ssr === 'true';
-      
-      if (shouldRenderSSR) {
+      // 크롤러 봇이거나 특정 조건일 때만 SSR HTML 제공
+      if (isBotRequest(userAgent) || req.query.ssr === 'true') {
         const lang = req.query.lang as string || 'ko';
         const staticHTML = generateStaticHTML(route, lang);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -86,7 +83,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return;
       }
       
-      // 개발 환경에서 일반 사용자는 기본 Vite 처리로 넘김
+      // 일반 사용자는 기본 처리로 넘김 (React 앱 제공)
       next();
     });
   });

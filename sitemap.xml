@@ -2,44 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://toolhub.tools/</loc>
-    <lastmod>2025-06-03</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/calculator</loc>
-    <lastmod>2025-06-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://toolhub.tools/pomodoro</loc>
-    <lastmod>2025-06-03</lastmod>
+    <lastmod>2025-07-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://toolhub.tools/timer</loc>
-    <lastmod>2025-06-03</lastmod>
+    <lastmod>2025-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://toolhub.tools/raffle</loc>
-    <lastmod>2025-06-03</lastmod>
+    <lastmod>2025-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://toolhub.tools/thumbnail</loc>
-    <lastmod>2025-06-03</lastmod>
+    <lastmod>2025-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://toolhub.tools/password</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/converter</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/date-calculator</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/mbti</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/teto-egen-test</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/weather</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/qr-generator</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/sitemap</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://toolhub.tools/contact</loc>
-    <lastmod>2025-06-03</lastmod>
+    <lastmod>2025-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/privacy</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/terms</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

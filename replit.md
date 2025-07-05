@@ -34,11 +34,13 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
   - 날씨 정보 페이지 daily 업데이트 주기 설정
   - 개인정보처리방침, 이용약관 페이지 추가
   - 총 13개 도구 + 5개 정보 페이지로 구성
-- Google AdSense 승인을 위한 robots.txt 최적화 (2025-07-04)
-  - 모든 Google 봇 명시적 허용 (Googlebot, AdsBot-Google 등)
-  - AdSense 관련 리소스 접근 완전 허용 (/pagead/, /*.js, /*.css)
-  - JavaScript/CSS 파일 크롤링 허용으로 페이지 완전성 보장
-  - 개발 파일만 선별적 차단으로 보안 유지
+- robots.txt AdSense 봇 완전 최적화 (2025-07-04)
+  - AdSense 전용 봇들 Crawl-delay: 0 설정 (즉시 크롤링 허용)
+  - Google 모든 봇 유형별 세분화 설정 (Googlebot, AdsBot-Google, Googlebot-Image 등)
+  - AdSense 리소스 경로 확장 (/pagead/*, /doubleclick/*, /googleads/* 등)
+  - 모든 미디어 파일 형식 크롤링 허용 (png, jpg, svg, ico 등)
+  - 주요 검색엔진 및 소셜 미디어 크롤러 모두 포함
+  - 개발 파일과 환경변수만 선별적 차단으로 보안 강화
 - 하이브리드 SSR 시스템 최적화 (2025-07-04)
   - 크롤러 봇에게는 완전한 SSR HTML 제공 (Google AdSense 승인)
   - 일반 사용자에게는 React 앱 제공 (최적의 사용자 경험)

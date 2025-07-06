@@ -6,42 +6,55 @@ import { generateStaticHTML } from "./ssr";
 export async function registerRoutes(app: Express): Promise<Server> {
   // SSR 라우트들 - 크롤러 봇 감지 및 정적 HTML 제공
   const botUserAgents = [
+    // Google 봇들 (AdSense 포함)
     'googlebot',
+    'adsbot-google',
+    'adsbot-google-mobile',
+    'adsbot-google-mobile-apps',
+    'googlebot-image',
+    'googlebot-news',
+    'googlebot-video',
+    'google-site-verification',
+    'chrome-lighthouse',
+    'google page speed',
+    'developers.google.com/+/web/snippet',
+    
+    // 기타 검색엔진 봇들
     'bingbot',
     'slurp',
     'duckduckbot',
     'baiduspider',
     'yandexbot',
     'sogou',
+    
+    // 소셜 미디어 크롤러들
     'facebookexternalhit',
     'twitterbot',
-    'rogerbot',
     'linkedinbot',
+    'whatsapp',
+    'telegrambot',
+    'discordbot',
+    'slackbot',
+    'skypeuripreview',
+    
+    // 콘텐츠 크롤러들
+    'rogerbot',
     'embedly',
     'quora link preview',
     'showyoubot',
     'outbrain',
     'pinterest/0.',
-    'developers.google.com/+/web/snippet',
-    'slackbot',
-    'vkShare',
-    'W3C_Validator',
-    'redditbot',
-    'applebot',
-    'whatsapp',
+    'pinterestbot',
     'flipboard',
     'tumblr',
     'bitlybot',
-    'skypeuripreview',
     'nuzzel',
-    'discordbot',
-    'google page speed',
-    'qwantify',
-    'pinterestbot',
+    'redditbot',
+    'applebot',
+    'vkShare',
+    'W3C_Validator',
     'bitrix link preview',
-    'xing-contenttabreceiver',
-    'chrome-lighthouse',
-    'telegrambot'
+    'xing-contenttabreceiver'
   ];
 
   // 크롤러 봇 감지 함수

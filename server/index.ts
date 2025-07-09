@@ -3,6 +3,22 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+
+// 301 리다이렉트 미들웨어 (www → non-www)
+app.use((req, res, next) => {
+  // www가 있으면 www 없는 도메인으로 리다이렉트
+  if (req.headers.host === 'www.toolhub.tools') {
+    return res.redirect(301, `https://toolhub.tools${req.url}`);
+  }
+  
+  // HTTP로 접근하면 HTTPS로 리다이렉트 (프로덕션 환경에서만)
+  if (req.headers['x-forwarded-proto'] !== 'https' && req.headers.host !== 'localhost' && !req.headers.host?.includes('replit.app')) {
+    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  }
+  
+  next();
+});
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 

@@ -72,7 +72,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     'urllib',
     'libcurl',
     'okhttp',
-    'apache-httpclient'
+    'apache-httpclient',
+    
+    // AI 도구들 및 web_fetch 도구
+    'claude',
+    'anthropic',
+    'web_fetch',
+    'web-fetch',
+    'openai',
+    'gpt',
+    'chatgpt',
+    'replit',
+    'codesandbox',
+    'codepen',
+    'jsfiddle',
+    'stackblitz'
   ];
 
   // 크롤러 봇 감지 함수 (완전한 SSR을 위해 매우 포괄적)
@@ -94,7 +108,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       'postman', 'insomnia', 'test', 'monitor', 'check', 'validator',
       'lighthouse', 'pagespeed', 'gtmetrix', 'pingdom', 'uptime',
       'facebook', 'twitter', 'whatsapp', 'telegram', 'discord',
-      'libwww', 'libcurl', 'winhttp', 'nsurlsession', 'urlsession'
+      'libwww', 'libcurl', 'winhttp', 'nsurlsession', 'urlsession',
+      
+      // AI 도구들과 web_fetch 도구들
+      'claude', 'anthropic', 'web_fetch', 'web-fetch', 'openai', 'gpt',
+      'chatgpt', 'replit', 'codesandbox', 'codepen', 'jsfiddle', 'stackblitz',
+      'http-client', 'client', 'tool', 'automation', 'script'
     ];
     
     const hasGeneralBotPattern = botPatterns.some(pattern => ua.includes(pattern));
@@ -106,7 +125,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     // 일반적인 브라우저 패턴이 아닌 경우
     const isNotTypicalBrowser = !ua.includes('chrome') && !ua.includes('firefox') && !ua.includes('safari') && !ua.includes('edge') && !ua.includes('opera');
     
-    return isKnownBot || hasGeneralBotPattern || isSuspiciousPattern || isNotTypicalBrowser;
+    // web_fetch 도구 특별 처리 (대소문자 구분 없이)
+    const isWebFetchTool = ua.includes('web_fetch') || ua.includes('web-fetch') || ua.includes('claude') || ua.includes('anthropic');
+    
+    // 포괄적 접근: 확실한 브라우저가 아니면 모두 봇으로 간주
+    const isDefinitelyNotBrowser = !ua.includes('mozilla') || ua.includes('compatible;') || ua.length < 30;
+    
+    return isKnownBot || hasGeneralBotPattern || isSuspiciousPattern || isNotTypicalBrowser || isWebFetchTool || isDefinitelyNotBrowser;
   };
 
   // SSR 라우트들

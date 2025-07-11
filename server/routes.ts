@@ -54,42 +54,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     'vkShare',
     'W3C_Validator',
     'bitrix link preview',
-    'xing-contenttabreceiver',
-    
-    // HTTP 클라이언트 및 도구들 (AdSense 검증 도구 포함)
-    'python-requests',
-    'requests',
-    'curl',
-    'wget',
-    'postman',
-    'insomnia',
-    'httpclient',
-    'http_request',
-    'urlopen',
-    'fetch',
-    'axios',
-    'node-fetch',
-    'urllib',
-    'libcurl',
-    'okhttp',
-    'apache-httpclient',
-    
-    // AI 도구들 및 web_fetch 도구
-    'claude',
-    'anthropic',
-    'web_fetch',
-    'web-fetch',
-    'openai',
-    'gpt',
-    'chatgpt',
-    'replit',
-    'codesandbox',
-    'codepen',
-    'jsfiddle',
-    'stackblitz'
+    'xing-contenttabreceiver'
   ];
 
-
+  // 크롤러 봇 감지 함수
+  const isBotRequest = (userAgent: string): boolean => {
+    if (!userAgent) return false;
+    const ua = userAgent.toLowerCase();
+    return botUserAgents.some(bot => ua.includes(bot));
+  };
 
   // SSR 라우트들
   const ssrRoutes = [
@@ -109,34 +82,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     '/terms'
   ];
 
-  // 각 SSR 라우트에 대한 핸들러 등록 (완전한 SSR 우선 접근)
+  // 각 SSR 라우트에 대한 핸들러 등록
   ssrRoutes.forEach(route => {
     app.get(route, (req, res, next) => {
       const userAgent = req.get('User-Agent') || '';
       
-      // 🔥 강력한 SSR 우선 접근: 명확한 브라우저가 아니면 모두 SSR 제공
-      const isDefinitelyRealBrowser = (
-        userAgent.includes('Chrome/') && 
-        userAgent.includes('Mozilla/') && 
-        userAgent.includes('Safari/') &&
-        !userAgent.includes('compatible;') &&
-        !userAgent.includes('bot') &&
-        !userAgent.includes('crawler') &&
-        !userAgent.includes('spider') &&
-        userAgent.length > 50 &&
-        req.get('Accept')?.includes('text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      );
-      
-      // 명확한 브라우저가 아니면 모두 SSR 제공 (AdSense 승인 보장)
-      if (!isDefinitelyRealBrowser || req.query.ssr === 'true') {
+      // 크롤러 봇이거나 특정 조건일 때만 SSR HTML 제공
+      if (isBotRequest(userAgent) || req.query.ssr === 'true') {
         const lang = req.query.lang as string || 'ko';
         const staticHTML = generateStaticHTML(route, lang);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('Cache-Control', 'public, max-age=3600'); // 1시간 캐시
-        return res.send(staticHTML);
+        res.send(staticHTML);
+        return;
       }
       
-      // 오직 명확한 브라우저만 React 앱 제공
+      // 일반 사용자는 기본 처리로 넘김 (React 앱 제공)
       next();
     });
   });

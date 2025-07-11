@@ -199,52 +199,256 @@ function getPageMetadata(url: string, lang: string) {
   };
 }
 
-// 페이지별 정적 콘텐츠 생성
+// 페이지별 정적 콘텐츠 생성 (완전한 HTML 콘텐츠)
 function generatePageContent(url: string, lang: string): string {
   switch (url) {
     case '/':
       return `
         <div class="hero">
-          <h1>무료 웹 도구 모음</h1>
-          <p>일상과 업무에 필요한 다양한 도구를 한 곳에서 무료로 사용하세요</p>
+          <h1>무료 웹 도구 모음 - ToolHub.tools</h1>
+          <p>일상과 업무에 필요한 다양한 도구를 한 곳에서 무료로 사용하세요. 포모도로 타이머부터 MBTI 테스트까지 모든 도구가 준비되어 있습니다.</p>
         </div>
         <div class="tool-grid">
           <a href="/pomodoro" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">포모도로 타이머</h3>
-            <p class="tool-description">25분 집중 + 5분 휴식의 포모도로 기법으로 생산성을 높이세요</p>
+            <h3 class="tool-title">🍅 포모도로 타이머</h3>
+            <p class="tool-description">25분 집중 + 5분 휴식의 포모도로 기법으로 생산성을 높이세요. 커스텀 설정과 사운드 알림 기능 포함</p>
           </a>
           <a href="/timer" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">범용 타이머</h3>
-            <p class="tool-description">요리, 운동, 공부 등 다양한 용도로 사용할 수 있는 타이머</p>
+            <h3 class="tool-title">⏰ 범용 타이머</h3>
+            <p class="tool-description">요리, 운동, 공부 등 다양한 용도로 사용할 수 있는 타이머. 알람 설정과 반복 타이머 기능</p>
           </a>
           <a href="/raffle" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">번호 추첨기</h3>
-            <p class="tool-description">이벤트나 추첨에 사용할 수 있는 공정한 랜덤 번호 생성 도구</p>
+            <h3 class="tool-title">🎯 번호 추첨기</h3>
+            <p class="tool-description">이벤트나 추첨에 사용할 수 있는 공정한 랜덤 번호 생성 도구. 중복 없는 추첨 보장</p>
           </a>
           <a href="/thumbnail" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">유튜브 썸네일 다운로더</h3>
-            <p class="tool-description">유튜브 비디오의 썸네일을 고화질로 다운로드</p>
+            <h3 class="tool-title">🖼️ 유튜브 썸네일 다운로더</h3>
+            <p class="tool-description">유튜브 비디오의 썸네일을 고화질로 다운로드할 수 있는 무료 도구. 다양한 해상도 옵션 제공</p>
           </a>
           <a href="/password" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">비밀번호 생성기</h3>
-            <p class="tool-description">해킹으로부터 안전한 강력한 비밀번호 생성</p>
+            <h3 class="tool-title">🔒 비밀번호 생성기</h3>
+            <p class="tool-description">해킹으로부터 안전한 강력한 비밀번호 생성. 길이와 문자 유형을 커스터마이즈 가능</p>
           </a>
           <a href="/converter" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">단위 변환기</h3>
-            <p class="tool-description">길이, 무게, 온도 등 다양한 단위를 빠르고 정확하게 변환</p>
+            <h3 class="tool-title">🔄 단위 변환기</h3>
+            <p class="tool-description">길이, 무게, 온도 등 다양한 단위를 빠르고 정확하게 변환. 국제 단위 시스템 지원</p>
           </a>
           <a href="/date-calculator" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">날짜 계산기</h3>
-            <p class="tool-description">날짜 간 차이 계산 및 날짜 연산 도구</p>
+            <h3 class="tool-title">📅 날짜 계산기</h3>
+            <p class="tool-description">날짜 간 차이 계산 및 날짜 연산 도구. 업무일 계산과 기간 계산에 유용</p>
           </a>
           <a href="/mbti" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">MBTI 성격유형 테스트</h3>
-            <p class="tool-description">16가지 성격유형 중 당신은 어떤 유형인지 알아보세요</p>
+            <h3 class="tool-title">🧠 MBTI 성격유형 테스트</h3>
+            <p class="tool-description">16가지 성격유형 중 당신의 유형을 찾아보세요. 과학적으로 검증된 MBTI 검사</p>
           </a>
           <a href="/teto-egen-test" class="tool-card" style="text-decoration: none; color: inherit;">
-            <h3 class="tool-title">테토-에겐 성격유형 테스트</h3>
-            <p class="tool-description">화제의 테토-에겐 성격유형 테스트로 나의 성향을 알아보세요</p>
+            <h3 class="tool-title">🎭 테토-에겐 성격유형 테스트</h3>
+            <p class="tool-description">화제의 테토-에겐 성격유형 테스트. 나는 테토형? 에겐형? 친구들과 결과를 공유해보세요</p>
           </a>
+        </div>
+        <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: #f9fafb; border-radius: 8px;">
+          <h2 style="color: #1f2937; margin-bottom: 1rem;">ToolHub.tools 특징</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="padding: 1rem;">
+              <h3 style="color: #059669; margin-bottom: 0.5rem;">🆓 완전 무료</h3>
+              <p style="color: #6b7280; font-size: 0.875rem;">모든 도구를 무료로 사용할 수 있습니다</p>
+            </div>
+            <div style="padding: 1rem;">
+              <h3 style="color: #059669; margin-bottom: 0.5rem;">🌐 다국어 지원</h3>
+              <p style="color: #6b7280; font-size: 0.875rem;">한국어, 영어, 일본어 지원</p>
+            </div>
+            <div style="padding: 1rem;">
+              <h3 style="color: #059669; margin-bottom: 0.5rem;">📱 모바일 친화적</h3>
+              <p style="color: #6b7280; font-size: 0.875rem;">PC와 모바일에서 모두 사용 가능</p>
+            </div>
+            <div style="padding: 1rem;">
+              <h3 style="color: #059669; margin-bottom: 0.5rem;">🔒 프라이버시 보호</h3>
+              <p style="color: #6b7280; font-size: 0.875rem;">개인정보 수집 없이 안전하게 사용</p>
+            </div>
+          </div>
+        </div>`;
+    
+    case '/sitemap':
+      return `
+        <div class="hero">
+          <h1>사이트맵</h1>
+          <p>ToolHub.tools의 모든 도구와 페이지를 한눈에 확인하세요</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>생산성 도구</h2>
+          <ul>
+            <li><a href="/pomodoro" style="color: #059669;">포모도로 타이머</a></li>
+            <li><a href="/timer" style="color: #059669;">범용 타이머</a></li>
+            <li><a href="/password" style="color: #059669;">비밀번호 생성기</a></li>
+            <li><a href="/converter" style="color: #059669;">단위 변환기</a></li>
+            <li><a href="/date-calculator" style="color: #059669;">날짜 계산기</a></li>
+          </ul>
+          <h2>유틸리티 도구</h2>
+          <ul>
+            <li><a href="/raffle" style="color: #059669;">번호 추첨기</a></li>
+            <li><a href="/thumbnail" style="color: #059669;">유튜브 썸네일 다운로더</a></li>
+          </ul>
+          <h2>성격 테스트</h2>
+          <ul>
+            <li><a href="/mbti" style="color: #059669;">MBTI 성격유형 테스트</a></li>
+            <li><a href="/teto-egen-test" style="color: #059669;">테토-에겐 성격유형 테스트</a></li>
+          </ul>
+        </div>
+      `;
+
+    case '/password':
+      return `
+        <div class="hero">
+          <h1>비밀번호 생성기</h1>
+          <p>해킹으로부터 안전한 강력한 비밀번호를 생성하세요</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>안전한 비밀번호의 중요성</h2>
+          <p>강력한 비밀번호는 온라인 보안의 첫 번째 방어선입니다. 해킹과 데이터 유출로부터 계정을 보호하세요.</p>
+          <h3>강력한 비밀번호 조건</h3>
+          <ul>
+            <li>최소 12자 이상</li>
+            <li>대문자와 소문자 조합</li>
+            <li>숫자와 특수문자 포함</li>
+            <li>예측 가능한 패턴 회피</li>
+          </ul>
+        </div>
+      `;
+
+    case '/converter':
+      return `
+        <div class="hero">
+          <h1>단위 변환기</h1>
+          <p>길이, 무게, 온도 등 다양한 단위를 빠르고 정확하게 변환</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>지원하는 단위 변환</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div>
+              <h3>길이</h3>
+              <p>미터, 킬로미터, 센티미터, 인치, 피트, 야드, 마일</p>
+            </div>
+            <div>
+              <h3>무게</h3>
+              <p>킬로그램, 그램, 파운드, 온스, 톤</p>
+            </div>
+            <div>
+              <h3>온도</h3>
+              <p>섭씨, 화씨, 켈빈</p>
+            </div>
+            <div>
+              <h3>면적</h3>
+              <p>제곱미터, 제곱킬로미터, 평, 에이커</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+    case '/date-calculator':
+      return `
+        <div class="hero">
+          <h1>날짜 계산기</h1>
+          <p>날짜 간 차이 계산 및 날짜 연산을 쉽게 해결</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>날짜 계산기 기능</h2>
+          <ul>
+            <li>두 날짜 사이의 정확한 차이 계산 (년, 월, 일)</li>
+            <li>특정 날짜에서 일/월/년 더하기 또는 빼기</li>
+            <li>업무일 계산 (주말 및 공휴일 제외)</li>
+            <li>나이 계산 및 디데이 계산</li>
+            <li>다양한 날짜 형식 지원</li>
+          </ul>
+        </div>
+      `;
+
+    case '/mbti':
+      return `
+        <div class="hero">
+          <h1>MBTI 성격유형 테스트</h1>
+          <p>16가지 성격유형 중 당신의 유형을 찾아보세요</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>MBTI란?</h2>
+          <p>Myers-Briggs Type Indicator는 개인의 성격을 16가지 유형으로 분류하는 심리 도구입니다.</p>
+          <h3>4가지 성격 차원</h3>
+          <ul>
+            <li><strong>E(외향) vs I(내향)</strong>: 에너지 방향</li>
+            <li><strong>S(감각) vs N(직관)</strong>: 정보 수집 방식</li>
+            <li><strong>T(사고) vs F(감정)</strong>: 의사결정 방식</li>
+            <li><strong>J(판단) vs P(인식)</strong>: 생활 양식</li>
+          </ul>
+        </div>
+      `;
+
+    case '/teto-egen-test':
+      return `
+        <div class="hero">
+          <h1>테토-에겐 성격유형 테스트</h1>
+          <p>화제의 테토-에겐 성격유형 테스트로 나의 성향을 알아보세요</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>테토형 vs 에겐형</h2>
+          <p>최근 인기를 끌고 있는 성격 분류 방식으로, 당신의 성향을 재미있게 알아볼 수 있습니다.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="padding: 1rem; background: #fff; border-radius: 6px;">
+              <h3>테토형</h3>
+              <p>활발하고 외향적인 성격, 새로운 것을 좋아하는 타입</p>
+            </div>
+            <div style="padding: 1rem; background: #fff; border-radius: 6px;">
+              <h3>에겐형</h3>
+              <p>신중하고 내향적인 성격, 안정감을 추구하는 타입</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+    case '/contact':
+      return `
+        <div class="hero">
+          <h1>문의하기</h1>
+          <p>ToolHub.tools에 대한 문의사항이나 제안사항을 보내주세요</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>연락처 정보</h2>
+          <p>더 나은 서비스 제공을 위해 여러분의 소중한 의견을 기다리고 있습니다.</p>
+          <ul>
+            <li>이메일: contact@toolhub.tools</li>
+            <li>GitHub: https://github.com/toolhub-tools</li>
+            <li>응답 시간: 1-2 영업일</li>
+          </ul>
+        </div>
+      `;
+
+    case '/privacy':
+      return `
+        <div class="hero">
+          <h1>개인정보처리방침</h1>
+          <p>ToolHub.tools 개인정보 보호 정책</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>개인정보 수집 및 이용</h2>
+          <p>ToolHub.tools는 사용자의 개인정보를 수집하지 않습니다. 모든 도구는 클라이언트 측에서 실행되며, 개인 데이터는 사용자 기기에서만 처리됩니다.</p>
+          <h3>쿠키 사용</h3>
+          <p>사용자 경험 개선을 위해 최소한의 쿠키를 사용합니다. 언어 설정, 테마 설정 등의 환경 설정만 저장됩니다.</p>
+        </div>
+      `;
+
+    case '/terms':
+      return `
+        <div class="hero">
+          <h1>이용약관</h1>
+          <p>ToolHub.tools 서비스 이용 약관</p>
+        </div>
+        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2>서비스 이용</h2>
+          <p>ToolHub.tools는 무료로 제공되는 웹 도구 모음입니다. 모든 사용자는 서비스를 자유롭게 이용할 수 있습니다.</p>
+          <h3>이용 제한</h3>
+          <ul>
+            <li>서비스의 정상적인 운영을 방해하는 행위 금지</li>
+            <li>악의적인 목적으로 도구를 사용하는 행위 금지</li>
+            <li>서비스의 소스코드를 무단으로 복제하는 행위 금지</li>
+          </ul>
         </div>
       `;
     

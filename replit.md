@@ -27,6 +27,12 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- AdSense 승인 최종 완료를 위한 SSR 시스템 완전 최적화 (2025-07-11)
+  - 모든 Google 봇들이 완전한 SSR 콘텐츠 수신 확인 (AdsBot-Google, Googlebot/2.1)
+  - 추가 안전장치 구현: 의심스러운 요청 패턴 자동 감지 및 SSR 제공
+  - 봇 감지 로직 강화: 짧은 User-Agent, 비표준 Accept 헤더 등 감지
+  - 캐시 최적화: 봇 요청 1시간 캐시, 의심스러운 요청 30분 캐시
+  - 모든 도구 페이지에서 완전한 HTML 콘텐츠 제공 확인
 - www → non-www 301 리다이렉트 설정 추가 (2025-07-08)
   - Express.js 미들웨어로 www.toolhub.tools → toolhub.tools 자동 리다이렉트
   - HTTPS 강제 리다이렉트 설정 (프로덕션 환경)

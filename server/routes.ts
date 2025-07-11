@@ -89,50 +89,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     'stackblitz'
   ];
 
-  // 크롤러 봇 감지 함수 (완전한 SSR을 위해 매우 포괄적)
-  const isBotRequest = (userAgent: string): boolean => {
-    if (!userAgent) return true; // User-Agent가 없으면 봇으로 간주
-    const ua = userAgent.toLowerCase();
-    
-    // 명시적 봇 목록
-    const isKnownBot = botUserAgents.some(bot => ua.includes(bot));
-    
-    // 일반적인 봇 패턴 감지 (매우 포괄적)
-    const botPatterns = [
-      'bot', 'crawler', 'spider', 'scraper', 'fetch', 'curl', 'wget',
-      'python-requests', 'node-fetch', 'axios', 'okhttp', 'httpclient',
-      'java/', 'php/', 'ruby/', 'go-http-client', 'requests/',
-      'urllib', 'apache-httpclient', 'jetty', 'reactor-netty',
-      'mozilla/5.0 (compatible;', // 많은 봇들이 사용하는 패턴
-      'headless', 'phantomjs', 'selenium', 'puppeteer', 'playwright',
-      'postman', 'insomnia', 'test', 'monitor', 'check', 'validator',
-      'lighthouse', 'pagespeed', 'gtmetrix', 'pingdom', 'uptime',
-      'facebook', 'twitter', 'whatsapp', 'telegram', 'discord',
-      'libwww', 'libcurl', 'winhttp', 'nsurlsession', 'urlsession',
-      
-      // AI 도구들과 web_fetch 도구들
-      'claude', 'anthropic', 'web_fetch', 'web-fetch', 'openai', 'gpt',
-      'chatgpt', 'replit', 'codesandbox', 'codepen', 'jsfiddle', 'stackblitz',
-      'http-client', 'client', 'tool', 'automation', 'script'
-    ];
-    
-    const hasGeneralBotPattern = botPatterns.some(pattern => ua.includes(pattern));
-    
-    // 의심스러운 패턴 (매우 짧은 User-Agent 등)
-    const isSuspiciousPattern = ua.length < 15 || 
-                               (!ua.includes('mozilla') && !ua.includes('webkit') && !ua.includes('chrome') && !ua.includes('safari') && !ua.includes('firefox'));
-    
-    // 일반적인 브라우저 패턴이 아닌 경우
-    const isNotTypicalBrowser = !ua.includes('chrome') && !ua.includes('firefox') && !ua.includes('safari') && !ua.includes('edge') && !ua.includes('opera');
-    
-    // web_fetch 도구 특별 처리 (대소문자 구분 없이)
-    const isWebFetchTool = ua.includes('web_fetch') || ua.includes('web-fetch') || ua.includes('claude') || ua.includes('anthropic');
-    
-    // 포괄적 접근: 확실한 브라우저가 아니면 모두 봇으로 간주
-    const isDefinitelyNotBrowser = !ua.includes('mozilla') || ua.includes('compatible;') || ua.length < 30;
-    
-    return isKnownBot || hasGeneralBotPattern || isSuspiciousPattern || isNotTypicalBrowser || isWebFetchTool || isDefinitelyNotBrowser;
-  };
+
 
   // SSR 라우트들
   const ssrRoutes = [
@@ -152,13 +109,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     '/terms'
   ];
 
-  // 각 SSR 라우트에 대한 핸들러 등록 (완전한 SSR)
+  // 각 SSR 라우트에 대한 핸들러 등록 (완전한 SSR 우선 접근)
   ssrRoutes.forEach(route => {
     app.get(route, (req, res, next) => {
       const userAgent = req.get('User-Agent') || '';
       
-      // 🔥 모든 봇과 의심스러운 요청에 완전한 SSR 제공
-      if (isBotRequest(userAgent) || req.query.ssr === 'true') {
+      // 🔥 강력한 SSR 우선 접근: 명확한 브라우저가 아니면 모두 SSR 제공
+      const isDefinitelyRealBrowser = (
+        userAgent.includes('Chrome/') && 
+        userAgent.includes('Mozilla/') && 
+        userAgent.includes('Safari/') &&
+        !userAgent.includes('compatible;') &&
+        !userAgent.includes('bot') &&
+        !userAgent.includes('crawler') &&
+        !userAgent.includes('spider') &&
+        userAgent.length > 50 &&
+        req.get('Accept')?.includes('text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      );
+      
+      // 명확한 브라우저가 아니면 모두 SSR 제공 (AdSense 승인 보장)
+      if (!isDefinitelyRealBrowser || req.query.ssr === 'true') {
         const lang = req.query.lang as string || 'ko';
         const staticHTML = generateStaticHTML(route, lang);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -166,31 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.send(staticHTML);
       }
       
-      // 추가 안전장치: 일반 사용자도 의심스러운 패턴이면 SSR 제공
-      const referer = req.get('Referer') || '';
-      const acceptHeader = req.get('Accept') || '';
-      const xForwardedFor = req.get('X-Forwarded-For') || '';
-      
-      // AdSense 검증 도구나 알려지지 않은 크롤러 감지
-      const isSuspiciousRequest = 
-        !referer || // 직접 접근
-        !acceptHeader.includes('text/html') || // HTML 요청이 아님
-        userAgent.length < 20 || // 매우 짧은 User-Agent
-        !userAgent.includes('Mozilla') || // 브라우저 패턴 없음
-        acceptHeader.includes('*/*') || // 모든 타입 허용 (봇의 특징)
-        xForwardedFor.includes('bot') || // 프록시에서 봇 감지
-        req.path.includes('bot') || // URL에 봇 관련 키워드
-        req.query.bot; // 쿼리에 봇 파라미터
-      
-      if (isSuspiciousRequest) {
-        const lang = req.query.lang as string || 'ko';
-        const staticHTML = generateStaticHTML(route, lang);
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('Cache-Control', 'public, max-age=1800'); // 30분 캐시
-        return res.send(staticHTML);
-      }
-      
-      // 일반 사용자는 기본 처리로 넘김 (React 앱 제공)
+      // 오직 명확한 브라우저만 React 앱 제공
       next();
     });
   });

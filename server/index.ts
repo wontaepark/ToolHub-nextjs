@@ -12,7 +12,11 @@ app.use((req, res, next) => {
   }
   
   // HTTP로 접근하면 HTTPS로 리다이렉트 (프로덕션 환경에서만)
-  if (req.headers['x-forwarded-proto'] !== 'https' && req.headers.host !== 'localhost' && !req.headers.host?.includes('replit.app')) {
+  if (req.headers['x-forwarded-proto'] !== 'https' && 
+      req.headers.host !== 'localhost' && 
+      !req.headers.host?.includes('replit.app') &&
+      !req.headers.host?.includes('localhost:') &&
+      process.env.NODE_ENV === 'production') {
     return res.redirect(301, `https://${req.headers.host}${req.url}`);
   }
   
@@ -75,7 +79,9 @@ app.use((req, res, next) => {
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // For production, we need to ensure SSR routes are handled before static files
+    // The serveStatic function is called within registerRoutes for production
+    // to maintain proper route precedence
   }
 
   // Use environment port for production deployment, fallback to 5000 for development

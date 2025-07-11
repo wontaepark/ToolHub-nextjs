@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { generateStaticHTML } from "./ssr";
+import { serveStatic } from "./vite";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // SSR 라우트들 - 크롤러 봇 감지 및 정적 HTML 제공
@@ -111,6 +112,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.setHeader('Content-Type', 'text/plain');
     res.sendFile('robots.txt', { root: '.' });
   });
+
+  // Set up static file serving for production after all SSR routes are registered
+  if (process.env.NODE_ENV === "production") {
+    serveStatic(app);
+  }
 
   const httpServer = createServer(app);
   return httpServer;

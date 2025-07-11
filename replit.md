@@ -27,6 +27,13 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- 개발 서버 SSR 완벽 구현 및 프로덕션 환경 준비 완료 (2025-07-11)
+  - 개발 서버에서 SSR 100% 정상 작동 확인 (GoogleBot 테스트 통과)
+  - 9개 도구 목록 모두 HTML에 포함된 완전한 SSR 응답 제공
+  - 프로덕션 환경에서 SSR 라우트가 정적 파일보다 먼저 처리되도록 수정
+  - HTTPS 리다이렉트 조건 개선 (개발 환경에서 비활성화)
+  - registerRoutes 함수에서 프로덕션 환경 시 serveStatic 호출 추가
+  - 개발 서버 상태: AdSense 승인 준비 완료 (tool-hub-central-wtpark10.replit.app)
 - www → non-www 301 리다이렉트 설정 추가 (2025-07-08)
   - Express.js 미들웨어로 www.toolhub.tools → toolhub.tools 자동 리다이렉트
   - HTTPS 강제 리다이렉트 설정 (프로덕션 환경)

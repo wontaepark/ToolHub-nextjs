@@ -16,38 +16,38 @@ interface Preset {
   category: string;
 }
 
-const PRESET_KEYS = {
+const TIMER_PRESETS = {
   basic: [
-    { key: '5min', minutes: 5, seconds: 0, color: 'bg-blue-500', category: 'basic' },
-    { key: '10min', minutes: 10, seconds: 0, color: 'bg-green-500', category: 'basic' },
-    { key: '15min', minutes: 15, seconds: 0, color: 'bg-orange-500', category: 'basic' },
-    { key: '30min', minutes: 30, seconds: 0, color: 'bg-purple-500', category: 'basic' },
+    { name: '5분', minutes: 5, seconds: 0, color: 'bg-blue-500', category: '기본' },
+    { name: '10분', minutes: 10, seconds: 0, color: 'bg-green-500', category: '기본' },
+    { name: '15분', minutes: 15, seconds: 0, color: 'bg-orange-500', category: '기본' },
+    { name: '30분', minutes: 30, seconds: 0, color: 'bg-purple-500', category: '기본' },
   ],
   workout: [
-    { key: 'hiitRound', minutes: 0, seconds: 30, color: 'bg-red-500', category: 'workout' },
-    { key: 'hiitRest', minutes: 0, seconds: 10, color: 'bg-orange-500', category: 'workout' },
-    { key: 'stretching', minutes: 5, seconds: 0, color: 'bg-green-500', category: 'workout' },
-    { key: 'plank', minutes: 1, seconds: 0, color: 'bg-yellow-500', category: 'workout' },
-    { key: 'rest', minutes: 2, seconds: 0, color: 'bg-blue-500', category: 'workout' },
+    { name: 'HIIT 라운드', minutes: 0, seconds: 30, color: 'bg-red-500', category: '운동' },
+    { name: 'HIIT 휴식', minutes: 0, seconds: 10, color: 'bg-orange-500', category: '운동' },
+    { name: '스트레칭', minutes: 5, seconds: 0, color: 'bg-green-500', category: '운동' },
+    { name: '플랭크', minutes: 1, seconds: 0, color: 'bg-yellow-500', category: '운동' },
+    { name: '휴식', minutes: 2, seconds: 0, color: 'bg-blue-500', category: '운동' },
   ],
   cooking: [
-    { key: 'ramen', minutes: 3, seconds: 0, color: 'bg-red-500', category: 'cooking' },
-    { key: 'eggSoft', minutes: 6, seconds: 0, color: 'bg-yellow-500', category: 'cooking' },
-    { key: 'eggHard', minutes: 10, seconds: 0, color: 'bg-orange-500', category: 'cooking' },
-    { key: 'teaBrewing', minutes: 3, seconds: 0, color: 'bg-green-500', category: 'cooking' },
-    { key: 'coffeeExtraction', minutes: 4, seconds: 0, color: 'bg-amber-600', category: 'cooking' },
+    { name: '라면', minutes: 3, seconds: 0, color: 'bg-red-500', category: '요리' },
+    { name: '계란 (반숙)', minutes: 6, seconds: 0, color: 'bg-yellow-500', category: '요리' },
+    { name: '계란 (완숙)', minutes: 10, seconds: 0, color: 'bg-orange-500', category: '요리' },
+    { name: '차 우리기', minutes: 3, seconds: 0, color: 'bg-green-500', category: '요리' },
+    { name: '커피 추출', minutes: 4, seconds: 0, color: 'bg-amber-600', category: '요리' },
   ],
   study: [
-    { key: 'focus45', minutes: 45, seconds: 0, color: 'bg-purple-500', category: 'study' },
-    { key: 'deepWork90', minutes: 90, seconds: 0, color: 'bg-indigo-500', category: 'study' },
-    { key: 'review20', minutes: 20, seconds: 0, color: 'bg-blue-500', category: 'study' },
-    { key: 'break15', minutes: 15, seconds: 0, color: 'bg-green-500', category: 'study' },
+    { name: '집중 45분', minutes: 45, seconds: 0, color: 'bg-purple-500', category: '학습' },
+    { name: '딥워크 90분', minutes: 90, seconds: 0, color: 'bg-indigo-500', category: '학습' },
+    { name: '복습 20분', minutes: 20, seconds: 0, color: 'bg-blue-500', category: '학습' },
+    { name: '휴식 15분', minutes: 15, seconds: 0, color: 'bg-green-500', category: '학습' },
   ],
   meeting: [
-    { key: 'standup', minutes: 15, seconds: 0, color: 'bg-cyan-500', category: 'meeting' },
-    { key: 'presentationTime', minutes: 10, seconds: 0, color: 'bg-purple-500', category: 'meeting' },
-    { key: 'brainstorm', minutes: 30, seconds: 0, color: 'bg-pink-500', category: 'meeting' },
-    { key: 'feedback', minutes: 5, seconds: 0, color: 'bg-orange-500', category: 'meeting' },
+    { name: '스탠드업', minutes: 15, seconds: 0, color: 'bg-cyan-500', category: '회의' },
+    { name: '발표 시간', minutes: 10, seconds: 0, color: 'bg-purple-500', category: '회의' },
+    { name: '브레인스톰', minutes: 30, seconds: 0, color: 'bg-pink-500', category: '회의' },
+    { name: '피드백', minutes: 5, seconds: 0, color: 'bg-orange-500', category: '회의' },
   ],
 };
 
@@ -66,10 +66,10 @@ export default function Timer() {
   const [customPresets, setCustomPresets] = useState(() => {
     const saved = localStorage.getItem('timer-custom-presets');
     return saved ? JSON.parse(saved) : {
-      ramen: { minutes: 3, seconds: 0 },
-      plank: { minutes: 1, seconds: 0 },
-      focus: { minutes: 25, seconds: 0 },
-      egg: { minutes: 6, seconds: 0 }
+      라면: { minutes: 3, seconds: 0 },
+      플랭크: { minutes: 1, seconds: 0 },
+      집중: { minutes: 25, seconds: 0 },
+      계란: { minutes: 6, seconds: 0 }
     };
   });
   const [editingPreset, setEditingPreset] = useState<string | null>(null);
@@ -255,29 +255,29 @@ export default function Timer() {
     const convertedCommand = convertKoreanNumbers(command);
     
     // 프리셋 명령 확인 (더 정확한 매칭)
-    const allPresets = Object.values(PRESET_KEYS).flat();
+    const allPresets = Object.values(TIMER_PRESETS).flat();
     const matchedPreset = allPresets.find(preset => {
-      const presetName = t(`timer.presets.${preset.key}`).toLowerCase();
+      const presetName = preset.name.toLowerCase();
       // 정확한 매칭 또는 포함 관계 확인
       return command === presetName || 
              convertedCommand === presetName ||
              command.includes(presetName) || 
              convertedCommand.includes(presetName) ||
              // 유사한 발음 매칭
-             (preset.key === 'ramen' && (command.includes('라') || command.includes('면'))) ||
-             (preset.key === 'plank' && (command.includes('플랭') || command.includes('플랑'))) ||
-             (preset.key === 'eggSoft' && (command.includes('계란') && command.includes('반'))) ||
-             (preset.key === 'eggHard' && (command.includes('계란') && command.includes('완'))) ||
-             (preset.key === 'coffeeExtraction' && (command.includes('커피'))) ||
-             (preset.key === 'teaBrewing' && (command.includes('차')));
+             (presetName === '라면' && (command.includes('라') || command.includes('면'))) ||
+             (presetName === '플랭크' && (command.includes('플랭') || command.includes('플랑'))) ||
+             (presetName === '계란 (반숙)' && (command.includes('계란') && command.includes('반'))) ||
+             (presetName === '계란 (완숙)' && (command.includes('계란') && command.includes('완'))) ||
+             (presetName === '커피 추출' && (command.includes('커피'))) ||
+             (presetName === '차 우리기' && (command.includes('차')));
     });
     
     if (matchedPreset && state === 'idle') {
 
       
       // 해당 프리셋이 속한 카테고리로 전환
-      const presetCategory = Object.keys(PRESET_KEYS).find(category => 
-        PRESET_KEYS[category as keyof typeof PRESET_KEYS].includes(matchedPreset)
+      const presetCategory = Object.keys(TIMER_PRESETS).find(category => 
+        TIMER_PRESETS[category as keyof typeof TIMER_PRESETS].includes(matchedPreset)
       );
       if (presetCategory) {
         setActiveCategory(presetCategory);
@@ -286,7 +286,7 @@ export default function Timer() {
       
       setMinutes(matchedPreset.minutes);
       setSeconds(matchedPreset.seconds);
-      setSelectedPreset(matchedPreset.key);
+      setSelectedPreset(matchedPreset.name);
       
       // "플랭크 시작" 같은 명령이면 바로 시작
       if (command.includes('시작') || command.includes('start')) {
@@ -456,7 +456,7 @@ export default function Timer() {
     if (state === 'idle') {
       setMinutes(preset.minutes);
       setSeconds(preset.seconds);
-      setSelectedPreset(preset.key);
+      setSelectedPreset(preset.name);
     }
   };
 
@@ -510,8 +510,8 @@ export default function Timer() {
 
   // 프리셋 데이터 가져오기 (커스터마이징 적용)
   const getPresetData = (presetName: string) => {
-    const allPresets = Object.values(PRESET_KEYS).flat();
-    const defaultPreset = allPresets.find((preset: any) => preset.key === presetName);
+    const allPresets = Object.values(TIMER_PRESETS).flat();
+    const defaultPreset = allPresets.find((preset: Preset) => preset.name === presetName);
     
     if (defaultPreset) {
       // 커스터마이징된 데이터가 있으면 적용
@@ -689,7 +689,7 @@ export default function Timer() {
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('timer.quickSetup')}</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {getFavoritePresetsData().map((preset: any) => (
-                      <div key={preset.key} className="relative">
+                      <div key={preset.name} className="relative">
                         <Button
                           onClick={() => applyPreset(preset)}
                           variant="outline"
@@ -698,17 +698,17 @@ export default function Timer() {
                         >
                           <div className="text-center">
                             <div className="text-sm">
-                              {preset.key === 'ramen' && '🍜'} 
-                              {preset.key === 'plank' && '💪'} 
-                              {preset.key === 'focus' && '📚'} 
-                              {preset.key === 'eggSoft' && '🥚'} 
-                              {preset.key === 'standup' && '👥'} 
-                              {preset.key === 'presentationTime' && '🎤'} 
-                              {preset.key === 'hiitRound' && '🏃'} 
-                              {preset.key === 'stretching' && '💪'} 
-                              {preset.key === 'coffeeExtraction' && '☕'} 
-                              {preset.key === 'teaBrewing' && '🍵'} 
-                              {t(`timer.presets.${preset.key}`)}
+                              {preset.name === '라면' && '🍜'} 
+                              {preset.name === '플랭크' && '💪'} 
+                              {preset.name === '집중시간' && '📚'} 
+                              {preset.name === '계란 (반숙)' && '🥚'} 
+                              {preset.name === '스탠드업' && '👥'} 
+                              {preset.name === '발표 시간' && '🎤'} 
+                              {preset.name === '브레이크아웃' && '🏃'} 
+                              {preset.name === '푸쉬업' && '💪'} 
+                              {preset.name === '커피 추출' && '☕'} 
+                              {preset.name === '차 우리기' && '🍵'} 
+                              {t(`timer.presets.${preset.name}`)}
                             </div>
                             <div className="text-xs text-gray-500">
                               {preset.minutes}{t('timer.minutes')} {preset.seconds > 0 && `${preset.seconds}${t('timer.seconds')}`}
@@ -765,7 +765,7 @@ export default function Timer() {
           <CardContent className="space-y-4">
             {/* 카테고리 선택 */}
             <div className="flex flex-wrap gap-2">
-              {Object.keys(PRESET_KEYS).map((category) => (
+              {Object.keys(TIMER_PRESETS).map((category) => (
                 <Button
                   key={category}
                   variant={activeCategory === category ? "default" : "outline"}
@@ -780,16 +780,16 @@ export default function Timer() {
             
             {/* 선택된 카테고리의 프리셋들 */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {PRESET_KEYS[activeCategory as keyof typeof PRESET_KEYS]?.map((preset: any, index: number) => {
-                const customized = customizedPresets[preset.key];
+              {TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS]?.map((preset: Preset, index: number) => {
+                const customized = customizedPresets[preset.name];
                 const displayMinutes = customized ? customized.minutes : preset.minutes;
                 const displaySeconds = customized ? customized.seconds : preset.seconds;
                 
                 return (
                   <div key={index} className="relative">
-                    {editingPreset === preset.key ? (
+                    {editingPreset === preset.name ? (
                       <div className="p-2 border rounded-lg space-y-1 h-16 flex flex-col justify-center bg-blue-50 dark:bg-blue-900/30">
-                        <div className="text-xs font-medium text-center">{t(`timer.presets.${preset.key}`)}</div>
+                        <div className="text-xs font-medium text-center">{preset.name}</div>
                         <div className="flex gap-1">
                           <Input
                             type="number"
@@ -798,7 +798,7 @@ export default function Timer() {
                             value={displayMinutes}
                             onChange={(e) => {
                               const newMinutes = parseInt(e.target.value) || 0;
-                              saveCustomizedPreset(preset.key, newMinutes, displaySeconds);
+                              saveCustomizedPreset(preset.name, newMinutes, displaySeconds);
                             }}
                             className="h-5 text-xs"
                             placeholder={t('timer.minutes')}
@@ -810,7 +810,7 @@ export default function Timer() {
                             value={displaySeconds}
                             onChange={(e) => {
                               const newSeconds = parseInt(e.target.value) || 0;
-                              saveCustomizedPreset(preset.key, displayMinutes, newSeconds);
+                              saveCustomizedPreset(preset.name, displayMinutes, newSeconds);
                             }}
                             className="h-5 text-xs"
                             placeholder={t('timer.seconds')}
@@ -827,24 +827,24 @@ export default function Timer() {
                       </div>
                     ) : (
                       <Button
-                        variant={selectedPreset === preset.key ? "default" : "outline"}
+                        variant={selectedPreset === preset.name ? "default" : "outline"}
                         onClick={() => {
                           const presetToApply = customized 
                             ? { ...preset, minutes: displayMinutes, seconds: displaySeconds }
                             : preset;
                           applyPreset(presetToApply);
                         }}
-                        onDoubleClick={() => setEditingPreset(preset.key)}
+                        onDoubleClick={() => setEditingPreset(preset.name)}
                         className={`h-16 w-full flex flex-col items-center justify-center gap-1 transition-all ${
-                          selectedPreset === preset.key 
+                          selectedPreset === preset.name 
                             ? 'bg-primary text-primary-foreground shadow-lg scale-105' 
                             : 'hover:bg-primary/10'
                         }`}
                       >
                         <div className={`w-3 h-3 rounded-full ${
-                          selectedPreset === preset.key ? 'bg-white' : preset.color
+                          selectedPreset === preset.name ? 'bg-white' : preset.color
                         }`} />
-                        <span className="font-semibold text-xs">{t(`timer.presets.${preset.key}`)}</span>
+                        <span className="font-semibold text-xs">{t(`timer.presets.${preset.name}`)}</span>
                         <span className="text-xs opacity-70">
                           {displayMinutes}{t('timer.minutes')} {displaySeconds > 0 && `${displaySeconds}${t('timer.seconds')}`}
                           {customized && <span className="text-blue-500"> ✓</span>}
@@ -862,15 +862,15 @@ export default function Timer() {
                       className="absolute top-2 right-2 cursor-pointer z-10"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleFavoritePreset(preset.key);
+                        toggleFavoritePreset(preset.name);
                       }}
                     >
                       <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                        favoritePresets.includes(preset.key) 
+                        favoritePresets.includes(preset.name) 
                           ? 'bg-blue-500 border-blue-500 text-white' 
                           : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:border-blue-400'
                       }`}>
-                        {favoritePresets.includes(preset.key) && (
+                        {favoritePresets.includes(preset.name) && (
                           <Check className="w-3 h-3" />
                         )}
                       </div>

@@ -762,8 +762,7 @@
       "title": "문의사항",
       "content": "개인정보 처리에 관한 문의사항이 있으시면 문의하기 페이지를 통해 연락주시기 바랍니다."
     },
-    "lastUpdated": "최종 수정일",
-    "lastUpdatedDate": "2025년 6월 3일"
+    "lastUpdated": "최종 수정일"
   },
   "terms": {
     "title": "이용약관",
@@ -798,8 +797,7 @@
       "title": "약관 변경",
       "content": "본 약관은 필요에 따라 변경될 수 있으며, 변경된 약관은 웹사이트에 게시함으로써 효력이 발생합니다."
     },
-    "lastUpdated": "최종 수정일",
-    "lastUpdatedDate": "2025년 6월 3일"
+    "lastUpdated": "최종 수정일"
   },
   "cookies": {
     "title": "쿠키 사용 안내",
@@ -916,70 +914,5 @@
     "retake": "다시 테스트",
     "share": "결과 공유",
     "backToStart": "처음으로"
-  },
-  "notFound": {
-    "title": "404 페이지를 찾을 수 없습니다",
-    "description": "요청하신 페이지를 찾을 수 없습니다. URL을 확인해주세요."
-  },
-  "timer": {
-    "title": "범용 타이머",
-    "subtitle": "포모도로부터 운동, 요리까지 모든 용도의 정밀 타이머",
-    "categories": {
-      "basic": "기본",
-      "workout": "운동",
-      "cooking": "요리",
-      "study": "학습",
-      "meeting": "회의"
-    },
-    "presets": {
-      "5min": "5분",
-      "10min": "10분", 
-      "15min": "15분",
-      "30min": "30분",
-      "hiitRound": "HIIT 라운드",
-      "hiitRest": "HIIT 휴식",
-      "stretching": "스트레칭",
-      "plank": "플랭크",
-      "rest": "휴식",
-      "ramen": "라면",
-      "eggSoft": "계란 (반숙)",
-      "eggHard": "계란 (완숙)",
-      "teaBrewing": "차 우리기",
-      "coffeeExtraction": "커피 추출",
-      "focus45": "집중 45분",
-      "deepWork90": "딥워크 90분",
-      "review20": "복습 20분",
-      "break15": "휴식 15분",
-      "standup": "스탠드업",
-      "presentationTime": "발표 시간",
-      "brainstorm": "브레인스톰",
-      "feedback": "피드백"
-    },
-    "customPresets": {
-      "ramen": "라면",
-      "plank": "플랭크", 
-      "focus": "집중",
-      "egg": "계란"
-    },
-    "notification": {
-      "title": "타이머 완료!",
-      "body": "설정한 시간이 완료되었습니다."
-    },
-    "quickSetup": "빠른 설정",
-    "minutes": "분",
-    "seconds": "초",
-    "buttons": {
-      "start": "시작",
-      "pause": "일시정지",
-      "resume": "재개",
-      "stop": "정지"
-    },
-    "voiceCommand": {
-      "title": "음성 명령",
-      "button": "음성 명령",
-      "listening": "듣는 중...",
-      "examples": "예: '5분 시작', '라면', '정지'"
-    },
-    "favoriteInstructions": "즐겨찾는 프리셋을 체크해주세요"
   }
 }

@@ -6,8 +6,6 @@ import { generateStaticHTML } from "./ssr";
 import { serveStatic } from "./vite";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Sitemap routes are now handled in server/index.ts BEFORE Vite middleware
-
   // SSR 라우트들 - 크롤러 봇 감지 및 정적 HTML 제공
   const botUserAgents = [
     // Google 봇들 (AdSense 포함)

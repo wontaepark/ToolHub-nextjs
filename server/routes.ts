@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { generateStaticHTML } from "./ssr";
@@ -109,9 +110,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.sendFile('robots.txt', { root: '.' });
   });
 
-  // Set up static file serving for production after all SSR routes are registered
+  // Set up static file serving for development and production
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
+  } else {
+    // Development: serve static files from public directory
+    app.use(express.static('public'));
   }
 
   const httpServer = createServer(app);

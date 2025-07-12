@@ -26,6 +26,120 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// CRITICAL: Force sitemap route BEFORE any other middleware
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex');
+  
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/pomodoro</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/password</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/mbti</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/teto-egen-test</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/timer</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/raffle</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/thumbnail</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/converter</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/date-calculator</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/sitemap</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/contact</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/privacy</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://tool-hub-central-wtpark10.replit.app/terms</loc>
+  <lastmod>2025-07-12</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+</urlset>`;
+  
+  res.send(sitemap);
+});
+
 // Set proper encoding for Korean characters
 app.use((req, res, next) => {
   req.setEncoding = req.setEncoding || (() => {});

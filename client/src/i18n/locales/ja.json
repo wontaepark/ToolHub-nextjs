@@ -734,7 +734,8 @@
       "title": "お問い合わせ",
       "content": "個人情報処理に関するご質問がございましたら、お問い合わせページからご連絡ください。"
     },
-    "lastUpdated": "最終更新日"
+    "lastUpdated": "最終更新日",
+    "lastUpdatedDate": "2025年6月3日"
   },
   "terms": {
     "title": "利用規約",
@@ -769,7 +770,8 @@
       "title": "規約変更",
       "content": "本規約は必要に応じて変更され、変更された規約はウェブサイトに掲載することで効力が発生します。"
     },
-    "lastUpdated": "最終更新日"
+    "lastUpdated": "最終更新日",
+    "lastUpdatedDate": "2025年6月3日"
   },
   "cookies": {
     "title": "クッキー使用について",
@@ -886,5 +888,9 @@
     "retake": "再テスト",
     "share": "結果共有",
     "backToStart": "最初に戻る"
+  },
+  "notFound": {
+    "title": "404 ページが見つかりません",
+    "description": "お探しのページが見つかりません。URLを確認してください。"
   }
 }

@@ -734,7 +734,8 @@
       "title": "Contact",
       "content": "If you have any questions about personal information processing, please contact us through the contact page."
     },
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "lastUpdatedDate": "June 3, 2025"
   },
   "terms": {
     "title": "Terms of Service",
@@ -769,7 +770,8 @@
       "title": "Terms Changes",
       "content": "These terms may be changed as needed, and the revised terms take effect upon posting on the website."
     },
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "lastUpdatedDate": "June 3, 2025"
   },
   "cookies": {
     "title": "Cookie Usage Notice",
@@ -886,5 +888,9 @@
     "retake": "Retake Test",
     "share": "Share Results",
     "backToStart": "Back to Start"
+  },
+  "notFound": {
+    "title": "404 Page Not Found",
+    "description": "The page you requested could not be found. Please check the URL."
   }
 }

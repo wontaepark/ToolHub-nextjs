@@ -250,7 +250,7 @@ export default function Sitemap() {
               <div className="w-2 h-6 bg-primary rounded"></div>
               {category}
               <Badge variant="secondary" className="ml-2">
-                {tools.length}개
+                {tools.length}{currentLang === 'ko' ? '개' : currentLang === 'en' ? ' tools' : '個'}
               </Badge>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -264,10 +264,10 @@ export default function Sitemap() {
                       </div>
                       <div className="flex gap-1">
                         {tool.isPopular && (
-                          <div className="w-3 h-3 bg-red-500 rounded-full" title="인기 도구" />
+                          <div className="w-3 h-3 bg-red-500 rounded-full" title={currentLang === 'ko' ? '인기 도구' : currentLang === 'en' ? 'Popular Tool' : '人気ツール'} />
                         )}
                         {tool.isNew && (
-                          <div className="w-3 h-3 bg-green-500 rounded-full" title="신규 도구" />
+                          <div className="w-3 h-3 bg-green-500 rounded-full" title={currentLang === 'ko' ? '신규 도구' : currentLang === 'en' ? 'New Tool' : '新規ツール'} />
                         )}
                       </div>
                     </div>
@@ -284,7 +284,7 @@ export default function Sitemap() {
                       {tool.isPopular && (
                         <Badge variant="destructive">
                           <TrendingUp className="h-3 w-3 mr-1" />
-                          인기
+                          {currentLang === 'ko' ? '인기' : currentLang === 'en' ? 'Popular' : '人気'}
                         </Badge>
                       )}
                     </div>

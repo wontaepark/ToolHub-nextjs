@@ -80,7 +80,7 @@ export default function Terms() {
 
             <div className="border-t pt-6 mt-8">
               <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-                {t('terms.lastUpdated')}: 2025년 6월 3일
+                {t('terms.lastUpdated')}: {t('terms.lastUpdatedDate')}
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://toolhub.tools/sitemap.xml
+Sitemap: https://tool-hub-central-wtpark10.replit.app/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

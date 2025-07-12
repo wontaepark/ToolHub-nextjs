@@ -70,7 +70,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://toolhub.tools/sitemap.xml
+Sitemap: https://tool-hub-central-wtpark10.replit.app/sitemap.xml
 
 # AdSense 관련 리소스 명시적 허용
 Allow: /pagead/*

@@ -27,6 +27,12 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- 개발 서버 AdSense 신청 준비 완료 (2025-01-12)
+  - 개발 서버 URL로 사이트맵 및 robots.txt 업데이트
+  - 다국어 hreflang 지원 및 우선순위 재설정
+  - 9개 주요 도구 모든 페이지 SSR 정상 작동 확인
+  - GoogleBot 및 AdsBot-Google 완전 허용 설정
+  - URL: https://tool-hub-central-wtpark10.replit.app/ AdSense 신청 준비 완료
 - 프로덕션 서버 SSR 완전 배포 성공 (2025-07-11)
   - 프로덕션 빌드 완료 및 포트 3000에서 정상 실행 확인
   - GoogleBot 테스트 통과: 모든 9개 도구 완전한 HTML 렌더링

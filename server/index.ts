@@ -26,9 +26,19 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CRITICAL: Sitemap routes MUST be registered BEFORE Vite middleware
-app.get('/sitemap.xml', (req, res) => {
+// CRITICAL: Universal sitemap handler - works for both domains
+const generateSitemap = (req, res) => {
   const timestamp = Date.now();
+  const host = req.headers.host;
+  
+  // Determine the base URL based on the host
+  let baseUrl;
+  if (host && host.includes('toolhub.tools')) {
+    baseUrl = 'https://toolhub.tools';
+  } else {
+    baseUrl = 'https://tool-hub-central-wtpark10.replit.app';
+  }
+  
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
@@ -38,102 +48,102 @@ app.get('/sitemap.xml', (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex');
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated at ${timestamp} -->
+<!-- Generated at ${timestamp} for ${baseUrl} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/</loc>
+  <loc>${baseUrl}/</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/pomodoro</loc>
+  <loc>${baseUrl}/pomodoro</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/password</loc>
+  <loc>${baseUrl}/password</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/mbti</loc>
+  <loc>${baseUrl}/mbti</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/teto-egen-test</loc>
+  <loc>${baseUrl}/teto-egen-test</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/timer</loc>
+  <loc>${baseUrl}/timer</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/raffle</loc>
+  <loc>${baseUrl}/raffle</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/thumbnail</loc>
+  <loc>${baseUrl}/thumbnail</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/converter</loc>
+  <loc>${baseUrl}/converter</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/date-calculator</loc>
+  <loc>${baseUrl}/date-calculator</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/sitemap</loc>
+  <loc>${baseUrl}/sitemap</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/contact</loc>
+  <loc>${baseUrl}/contact</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/privacy</loc>
+  <loc>${baseUrl}/privacy</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.5</priority>
 </url>
 
 <url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/terms</loc>
+  <loc>${baseUrl}/terms</loc>
   <lastmod>2025-07-12</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.5</priority>
@@ -142,124 +152,11 @@ app.get('/sitemap.xml', (req, res) => {
 </urlset>`;
   
   res.send(sitemap);
-});
+};
 
-app.get('/sitemap-new.xml', (req, res) => {
-  const timestamp = Date.now();
-  res.setHeader('Content-Type', 'application/xml');
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.setHeader('ETag', `"${timestamp}"`);
-  res.setHeader('Last-Modified', new Date().toUTCString());
-  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex');
-  
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated at ${timestamp} -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/pomodoro</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/password</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/mbti</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/teto-egen-test</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/timer</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/raffle</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/thumbnail</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/converter</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/date-calculator</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/sitemap</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/contact</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.6</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/privacy</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.5</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/terms</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.5</priority>
-</url>
-
-</urlset>`;
-  
-  res.send(sitemap);
-});
+// Register sitemap routes BEFORE Vite middleware
+app.get('/sitemap.xml', generateSitemap);
+app.get('/sitemap-new.xml', generateSitemap);
 
 // Set proper encoding for Korean characters
 app.use((req, res, next) => {

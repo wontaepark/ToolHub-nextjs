@@ -26,15 +26,19 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CRITICAL: Force sitemap route BEFORE any other middleware
+// CRITICAL: Force sitemap route with cache busting
 app.get('/sitemap.xml', (req, res) => {
+  const timestamp = Date.now();
   res.setHeader('Content-Type', 'application/xml');
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
+  res.setHeader('ETag', `"${timestamp}"`);
+  res.setHeader('Last-Modified', new Date().toUTCString());
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex');
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated at ${timestamp} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>

@@ -16,7 +16,7 @@ interface Preset {
   category: string;
 }
 
-const TIMER_PRESETS = {
+const TIMER_PRESETS: Record<string, Preset[]> = {
   basic: [
     { name: '5분', minutes: 5, seconds: 0, color: 'bg-blue-500', category: '기본' },
     { name: '10분', minutes: 10, seconds: 0, color: 'bg-green-500', category: '기본' },
@@ -552,10 +552,10 @@ export default function Timer() {
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 flex items-center justify-center gap-3">
           <TimerIcon className="h-8 w-8 md:h-10 md:w-10 text-primary" />
-          {t('timer.title')}
+범용 타이머
         </h1>
         <p className="text-muted-foreground">
-          {t('timer.description')}
+포모도로, 운동, 요리, 학습 등 다양한 용도로 사용할 수 있는 타이머입니다.
         </p>
       </div>
 
@@ -566,10 +566,10 @@ export default function Timer() {
             {/* 시간 설정 (idle 상태에서만) */}
             {state === 'idle' && (
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">{t('timer.timeSetup')}</h3>
+                <h3 className="text-lg font-semibold">시간 설정</h3>
                 <div className="flex justify-center items-center gap-4 max-w-xs mx-auto">
                   <div className="flex flex-col items-center gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">{t('timer.minutes')}</label>
+                    <label className="text-sm font-medium text-muted-foreground">분</label>
                     <Input
                       type="number"
                       min="0"
@@ -581,7 +581,7 @@ export default function Timer() {
                   </div>
                   <div className="text-2xl font-bold mt-6">:</div>
                   <div className="flex flex-col items-center gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">{t('timer.seconds')}</label>
+                    <label className="text-sm font-medium text-muted-foreground">초</label>
                     <Input
                       type="number"
                       min="0"
@@ -616,25 +616,25 @@ export default function Timer() {
                 {state === 'idle' && (
                   <Badge variant="secondary" className="px-4 py-2">
                     <Clock className="w-4 h-4 mr-2" />
-                    {t('timer.status.waiting')}
+대기 중
                   </Badge>
                 )}
                 {state === 'running' && (
                   <Badge variant="default" className="px-4 py-2 bg-green-500">
                     <Play className="w-4 h-4 mr-2" />
-                    {t('timer.status.running')}
+실행 중
                   </Badge>
                 )}
                 {state === 'paused' && (
                   <Badge variant="outline" className="px-4 py-2">
                     <Pause className="w-4 h-4 mr-2" />
-                    {t('timer.status.paused')}
+일시정지
                   </Badge>
                 )}
                 {state === 'finished' && (
                   <Badge variant="destructive" className="px-4 py-2">
                     <Square className="w-4 h-4 mr-2" />
-                    {t('timer.status.finished')}
+완료
                   </Badge>
                 )}
               </div>
@@ -651,14 +651,14 @@ export default function Timer() {
                     disabled={minutes === 0 && seconds === 0}
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    {t('timer.buttons.start')}
+시작
                   </Button>
                 )}
                 
                 {state === 'running' && (
                   <Button onClick={pauseTimer} size="lg" className="px-8" variant="outline">
                     <Pause className="w-5 h-5 mr-2" />
-                    {t('timer.buttons.pause')}
+일시정지
                   </Button>
                 )}
                 
@@ -666,11 +666,11 @@ export default function Timer() {
                   <>
                     <Button onClick={startTimer} size="lg" className="px-8">
                       <Play className="w-5 h-5 mr-2" />
-                      {t('timer.buttons.resume')}
+재개
                     </Button>
                     <Button onClick={resetTimer} size="lg" variant="outline">
                       <RotateCcw className="w-5 h-5 mr-2" />
-                      {t('timer.buttons.reset')}
+리셋
                     </Button>
                   </>
                 )}
@@ -678,7 +678,7 @@ export default function Timer() {
                 {(state === 'running' || state === 'paused' || state === 'finished') && (
                   <Button onClick={stopTimer} size="lg" variant="destructive">
                     <Square className="w-5 h-5 mr-2" />
-                    {t('timer.buttons.stop')}
+중지
                   </Button>
                 )}
               </div>
@@ -686,7 +686,7 @@ export default function Timer() {
               {/* 빠른 프리셋 버튼들 */}
               {state === 'idle' && (
                 <div className="space-y-3 mt-4">
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('timer.quickSetup')}</h4>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400">빠른 설정</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {getFavoritePresetsData().map((preset: any) => (
                       <div key={preset.name} className="relative">
@@ -708,10 +708,10 @@ export default function Timer() {
                               {preset.name === '푸쉬업' && '💪'} 
                               {preset.name === '커피 추출' && '☕'} 
                               {preset.name === '차 우리기' && '🍵'} 
-                              {t(`timer.presets.${preset.name}`)}
+                              {preset?.name || 'Timer'}
                             </div>
                             <div className="text-xs text-gray-500">
-                              {preset.minutes}{t('timer.minutes')} {preset.seconds > 0 && `${preset.seconds}${t('timer.seconds')}`}
+                              {preset.minutes}분 {preset.seconds > 0 && `${preset.seconds}초`}
                             </div>
                           </div>
                         </Button>
@@ -720,7 +720,7 @@ export default function Timer() {
                   </div>
                   {getFavoritePresetsData().length === 0 && (
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                      {t('timer.favoriteInstructions')}
+즐겨찾기 프리셋을 추가해보세요
                     </p>
                   )}
                 </div>
@@ -760,7 +760,7 @@ export default function Timer() {
       {state === 'idle' && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">{t('timer.quickSetup')}</CardTitle>
+            <CardTitle className="text-lg">빠른 설정</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* 카테고리 선택 */}
@@ -773,14 +773,18 @@ export default function Timer() {
                   onClick={() => setActiveCategory(category)}
                   className="capitalize"
                 >
-                  {t(`timer.categories.${category}`)}
+                  {category === 'basic' ? '기본' : 
+                   category === 'workout' ? '운동' :
+                   category === 'cooking' ? '요리' :
+                   category === 'study' ? '학습' :
+                   category === 'meeting' ? '회의' : category}
                 </Button>
               ))}
             </div>
             
             {/* 선택된 카테고리의 프리셋들 */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS]?.map((preset: Preset, index: number) => {
+              {(TIMER_PRESETS[activeCategory as keyof typeof TIMER_PRESETS] || []).map((preset: Preset, index: number) => {
                 const customized = customizedPresets[preset.name];
                 const displayMinutes = customized ? customized.minutes : preset.minutes;
                 const displaySeconds = customized ? customized.seconds : preset.seconds;
@@ -844,9 +848,9 @@ export default function Timer() {
                         <div className={`w-3 h-3 rounded-full ${
                           selectedPreset === preset.name ? 'bg-white' : preset.color
                         }`} />
-                        <span className="font-semibold text-xs">{t(`timer.presets.${preset.name}`)}</span>
+                        <span className="font-semibold text-xs">{preset?.name || 'Timer'}</span>
                         <span className="text-xs opacity-70">
-                          {displayMinutes}{t('timer.minutes')} {displaySeconds > 0 && `${displaySeconds}${t('timer.seconds')}`}
+                          {displayMinutes}분 {displaySeconds > 0 && `${displaySeconds}초`}
                           {customized && <span className="text-blue-500"> ✓</span>}
                         </span>
                         {!editingPreset && (

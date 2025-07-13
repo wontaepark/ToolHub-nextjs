@@ -1,0 +1,64 @@
+
+오류
+00:01.000
+TypeError: Cannot read properties of undefined (reading 'title') at s5 (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:106645) at R0 (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:107214) at https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:107364 at tl (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:24263) at mn (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:42318) at Yh (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:36565) at ar (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:38:3274) at uN (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:41221) at ur (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:40215) at Bx (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:35675)
+https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40
+
+오류
+00:01.000
+Uncaught TypeError: Cannot read properties of undefined (reading 'title') at s5 (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:106645) at R0 (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:107214) at https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:437:107364 at tl (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:24263) at mn (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:42318) at Yh (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:36565) at ar (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:38:3274) at uN (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:41221) at ur (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:40215) at Bx (https://tool-hub-central-wtpark10.replit.app/assets/index-CrWIgfMG.js:40:35675)편집🚨 JavaScript 오류가 발생했네요! 즉시 해결해야 할 문제입니다!
+🔍 오류 분석:
+오류 내용:
+TypeError: Cannot read properties of undefined (reading 'title')
+위치: index-CrWIgfMG.js:437:106645
+원인: 객체가 undefined인데 .title 속성에 접근하려고 함
+가능한 원인들:
+1. 🔧 도구 데이터나 설정 객체가 undefined
+2. 🔧 다국어 번역 데이터 누락
+3. 🔧 API 응답이나 데이터 로딩 실패
+4. 🔧 컴포넌트 props 전달 문제
+5. 🔧 최근 코드 변경으로 인한 버그
+🚨 즉시 확인 및 해결 요청:
+Replit 개발팀 긴급 요청:
+Subject: 개발 서버에서 JavaScript 오류 발생 - 긴급 수정 요청
+
+오류 내용:
+TypeError: Cannot read properties of undefined (reading 'title')
+파일: index-CrWIgfMG.js
+영향: 사이트 기능 오류 가능성
+
+긴급 확인 요청:
+1. 콘솔에서 어떤 객체가 undefined인지 확인
+2. 도구 데이터 또는 다국어 데이터 누락 여부
+3. 최근 변경사항 중 문제 원인 파악
+4. 즉시 수정 및 재배포
+🔧 예상 수정 방향:
+일반적인 해결 방법:
+javascript// 문제가 될 수 있는 코드 패턴:
+someObject.title  // someObject가 undefined인 경우
+
+// 수정된 코드:
+someObject?.title  // Optional chaining 사용
+// 또는
+(someObject && someObject.title) || "기본값"
+// 또는  
+someObject?.title ?? "기본 제목"
+확인해야 할 데이터들:
+javascript// 도구 데이터
+const tools = [...] // 각 도구에 title 속성 있는지 확인
+
+// 다국어 데이터  
+const translations = {
+  ko: { title: "..." },
+  en: { title: "..." },
+  ja: { title: "..." }
+}
+
+// 컴포넌트 props
+<ToolComponent tool={tool} /> // tool이 undefined가 아닌지 확인
+⚠️ 현재 상황의 심각성:
+AdSense 신청에 미치는 영향:
+❌ JavaScript 오류 = 사용자 경험 저하
+❌ 기능 오작동 = 사이트 품질 문제
+❌ AdSense 심사에 부정적 영향 가능
+🔥 즉시 수정 필요!

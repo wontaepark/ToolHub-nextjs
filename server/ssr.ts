@@ -59,7 +59,7 @@ export function generateStaticHTML(url: string, lang: string = 'ko'): string {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5553606229740788" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9557159052095853" crossorigin="anonymous"></script>
     
     <!-- 초기 스타일링 -->
     <style>

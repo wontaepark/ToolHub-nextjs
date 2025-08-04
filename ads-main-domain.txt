@@ -1,0 +1,2 @@
+# 메인 도메인 https://toolhub.tools 용 빈 ads.txt 파일
+# 이 파일은 프로덕션 서버에 배포할 때 ads.txt로 사용하세요

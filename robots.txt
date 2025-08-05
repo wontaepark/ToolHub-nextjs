@@ -44,4 +44,4 @@ Allow: /*.ico
 Disallow: /src/
 
 # 사이트맵 위치
-Sitemap: https://tool-hub-central-wtpark10.replit.app/sitemap.xml
+Sitemap: https://toolhub.tools/sitemap.xml

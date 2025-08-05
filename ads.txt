@@ -1,1 +1,1 @@
-google.com, pub-9557159052095853, DIRECT, f08c47fec0942fa0
+# 메인 도메인 https://toolhub.tools 용 빈 ads.txt 파일

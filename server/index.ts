@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // CRITICAL: Force sitemap route with cache busting - 환경별 도메인 자동 감지
 app.get('/sitemap.xml', (req, res) => {
   const timestamp = Date.now();
-  const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+  const currentDate = '2025-08-06'; // 고정된 날짜 사용
   
   // 환경별 도메인 자동 감지
   const isDevServer = req.headers.host?.includes('replit.app') || req.headers.host?.includes('localhost');

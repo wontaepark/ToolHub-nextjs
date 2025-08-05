@@ -26,119 +26,103 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CRITICAL: Force sitemap route with cache busting
+// CRITICAL: Force sitemap route with cache busting - 메인 도메인 버전
 app.get('/sitemap.xml', (req, res) => {
   const timestamp = Date.now();
+  const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   res.setHeader('ETag', `"${timestamp}"`);
   res.setHeader('Last-Modified', new Date().toUTCString());
-  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex');
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated at ${timestamp} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/pomodoro</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/password</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/mbti</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/teto-egen-test</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/timer</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/raffle</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/thumbnail</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/converter</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/date-calculator</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/sitemap</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/contact</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.6</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/privacy</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.5</priority>
-</url>
-
-<url>
-  <loc>https://tool-hub-central-wtpark10.replit.app/terms</loc>
-  <lastmod>2025-07-12</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.5</priority>
-</url>
-
+  <url>
+    <loc>https://toolhub.tools/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/pomodoro</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/password</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/mbti</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/teto-egen-test</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/timer</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/raffle</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/thumbnail</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/converter</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/date-calculator</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/sitemap</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/contact</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/privacy</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://toolhub.tools/terms</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>`;
   
   res.send(sitemap);

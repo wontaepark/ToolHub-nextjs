@@ -27,6 +27,11 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- AdSense 승인 완료 및 메인 도메인 전환 (2025-01-31)
+  - 개발 서버(tool-hub-central-wtpark10.replit.app)에서 AdSense 승인 성공
+  - 모든 sitemap.xml과 robots.txt를 메인 도메인(toolhub.tools)으로 복원
+  - ads.txt를 메인 도메인용 빈 파일로 변경
+  - 프로덕션 배포 준비 완료
 - 개발 서버 AdSense 신청 준비 완료 (2025-01-12)
   - 개발 서버 URL로 사이트맵 및 robots.txt 업데이트
   - 다국어 hreflang 지원 및 우선순위 재설정

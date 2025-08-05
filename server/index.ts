@@ -26,10 +26,15 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CRITICAL: Force sitemap route with cache busting - 메인 도메인 버전
+// CRITICAL: Force sitemap route with cache busting - 환경별 도메인 자동 감지
 app.get('/sitemap.xml', (req, res) => {
   const timestamp = Date.now();
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+  
+  // 환경별 도메인 자동 감지
+  const isDevServer = req.headers.host?.includes('replit.app') || req.headers.host?.includes('localhost');
+  const baseUrl = isDevServer ? 'https://tool-hub-central-wtpark10.replit.app' : 'https://toolhub.tools';
+  
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
@@ -40,85 +45,85 @@ app.get('/sitemap.xml', (req, res) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://toolhub.tools/</loc>
+    <loc>${baseUrl}/</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/pomodoro</loc>
+    <loc>${baseUrl}/pomodoro</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/password</loc>
+    <loc>${baseUrl}/password</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/mbti</loc>
+    <loc>${baseUrl}/mbti</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/teto-egen-test</loc>
+    <loc>${baseUrl}/teto-egen-test</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/timer</loc>
+    <loc>${baseUrl}/timer</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/raffle</loc>
+    <loc>${baseUrl}/raffle</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/thumbnail</loc>
+    <loc>${baseUrl}/thumbnail</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/converter</loc>
+    <loc>${baseUrl}/converter</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/date-calculator</loc>
+    <loc>${baseUrl}/date-calculator</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/sitemap</loc>
+    <loc>${baseUrl}/sitemap</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/contact</loc>
+    <loc>${baseUrl}/contact</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/privacy</loc>
+    <loc>${baseUrl}/privacy</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://toolhub.tools/terms</loc>
+    <loc>${baseUrl}/terms</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

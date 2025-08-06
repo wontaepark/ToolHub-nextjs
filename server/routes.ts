@@ -110,6 +110,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.sendFile('robots.txt', { root: '.' });
   });
 
+  // ads.txt 라우트 - 환경별 AdSense 발행자 ID 제공
+  app.get('/ads.txt', (req, res) => {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.send('google.com, pub-9557159052095853, DIRECT, f08c47fec0942fa0');
+  });
+
 
 
   // Set up static file serving for development and production

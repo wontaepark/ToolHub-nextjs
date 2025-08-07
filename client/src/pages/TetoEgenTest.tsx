@@ -690,7 +690,8 @@ const results: Record<string, TestResult> = {
 
 export default function TetoEgenTest() {
   const { t, i18n } = useTranslation();
-  const currentLang = i18n.language;
+  const currentLang = i18n.language as 'ko' | 'en' | 'ja';
+  const safeLang = currentLang === 'ko' || currentLang === 'en' || currentLang === 'ja' ? currentLang : 'ko';
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResult, setShowResult] = useState(false);
@@ -753,17 +754,45 @@ export default function TetoEgenTest() {
   const shareResult = () => {
     if (result) {
       const shareUrl = window.location.href;
-      const shareText = `${result.shareText[i18n.language as keyof typeof result.shareText]} ${shareUrl}`;
+      const currentLang = i18n.language as 'ko' | 'en' | 'ja';
+      const fallbackLang = currentLang === 'ko' || currentLang === 'en' || currentLang === 'ja' ? currentLang : 'ko';
+      const shareText = `${result.shareText[fallbackLang]} ${shareUrl}`;
       
       if (navigator.share) {
         navigator.share({
-          title: '테토-에겐 성격유형 테스트',
+          title: currentLang === 'ko' ? '테토-에겐 성격유형 테스트' : 
+                 currentLang === 'ja' ? 'テト-エゲン性格タイプテスト' : 
+                 'Teto-Egen Personality Test',
           text: shareText,
           url: shareUrl
+        }).catch(err => {
+          console.warn('Share API failed:', err);
+          // Fallback to clipboard
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(shareText);
+            alert(currentLang === 'ko' ? '결과가 클립보드에 복사되었습니다!' :
+                  currentLang === 'ja' ? '結果がクリップボードにコピーされました！' :
+                  'Result copied to clipboard!');
+          }
         });
-      } else {
-        navigator.clipboard.writeText(shareText);
-        alert('결과가 클립보드에 복사되었습니다!');
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(() => {
+          alert(currentLang === 'ko' ? '결과가 클립보드에 복사되었습니다!' :
+                currentLang === 'ja' ? '結果がクリップボードにコピーされました！' :
+                'Result copied to clipboard!');
+        }).catch(err => {
+          console.warn('Clipboard API failed:', err);
+          // Manual fallback
+          const textArea = document.createElement('textarea');
+          textArea.value = shareText;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          alert(currentLang === 'ko' ? '결과가 클립보드에 복사되었습니다!' :
+                currentLang === 'ja' ? '結果がクリップボードにコピーされました！' :
+                'Result copied to clipboard!');
+        });
       }
     }
   };
@@ -775,18 +804,18 @@ export default function TetoEgenTest() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              🔥 {i18n.language === 'ko' ? '테토-에겐 성격유형 테스트' : 
-                   i18n.language === 'ja' ? 'テト-エゲン性格タイプテスト' : 
+              🔥 {safeLang === 'ko' ? '테토-에겐 성격유형 테스트' : 
+                   safeLang === 'ja' ? 'テト-エゲン性格タイプテスト' : 
                    'Teto-Egen Personality Test'}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-              {i18n.language === 'ko' ? '나는 테토? 에겐? 나의 진짜 성격유형을 찾아보세요!' : 
-               i18n.language === 'ja' ? '私はテト？エゲン？本当の性格タイプを見つけよう！' : 
+              {safeLang === 'ko' ? '나는 테토? 에겐? 나의 진짜 성격유형을 찾아보세요!' : 
+               safeLang === 'ja' ? '私はテト？エゲン？本当の性格タイプを見つけよう！' : 
                'Am I Teto? Egen? Find your true personality type!'}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {i18n.language === 'ko' ? '이미 50만명이 참여한 화제의 성격테스트 ✨' : 
-               i18n.language === 'ja' ? '既に50万人が参加した話題の性格テスト ✨' : 
+              {safeLang === 'ko' ? '이미 50만명이 참여한 화제의 성격테스트 ✨' : 
+               safeLang === 'ja' ? '既に50万人が参加した話題の性격テスト ✨' : 
                'The viral personality test that 500K people have already taken ✨'}
             </p>
           </div>
@@ -799,7 +828,7 @@ export default function TetoEgenTest() {
               <CardHeader className="text-center">
                 <div className="text-4xl mb-2">👨</div>
                 <CardTitle className="text-xl text-blue-600">
-                  {i18n.language === 'ko' ? '남성' : i18n.language === 'ja' ? '男性' : 'Male'}
+                  {safeLang === 'ko' ? '남성' : safeLang === 'ja' ? '男性' : 'Male'}
                 </CardTitle>
               </CardHeader>
             </Card>
@@ -811,7 +840,7 @@ export default function TetoEgenTest() {
               <CardHeader className="text-center">
                 <div className="text-4xl mb-2">👩</div>
                 <CardTitle className="text-xl text-pink-600">
-                  {i18n.language === 'ko' ? '여성' : i18n.language === 'ja' ? '女性' : 'Female'}
+                  {safeLang === 'ko' ? '여성' : safeLang === 'ja' ? '女性' : 'Female'}
                 </CardTitle>
               </CardHeader>
             </Card>
@@ -827,8 +856,8 @@ export default function TetoEgenTest() {
           {/* 테토-에겐 테스트란 무엇인가요? */}
           <section className="bg-card rounded-xl p-6 border border-border">
             <h2 className="text-2xl font-bold mb-4">
-              {currentLang === 'ko' ? '테토-에겐 성격유형 테스트란 무엇인가요?' : 
-               currentLang === 'ja' ? 'テト-エゲン性格タイプテストとは何ですか？' : 
+              {safeLang === 'ko' ? '테토-에겐 성격유형 테스트란 무엇인가요?' : 
+               safeLang === 'ja' ? 'テト-エゲン性格タイプテストとは何ですか？' : 
                'What is the Teto-Egen Personality Type Test?'}
             </h2>
             <div className="space-y-4 text-muted-foreground">

@@ -89,8 +89,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     app.get(route, (req, res, next) => {
       const userAgent = req.get('User-Agent') || '';
       
-      // 크롤러 봇이거나 특정 조건일 때만 SSR HTML 제공
-      if (isBotRequest(userAgent) || req.query.ssr === 'true') {
+      // 환경별 SSR 활성화 여부 결정 (개발서버만 SSR 제공, 도메인서버는 SSR 비활성화)
+      const isDevServer = req.headers.host?.includes('replit.app') || req.headers.host?.includes('localhost');
+      const isProductionDomain = req.headers.host === 'toolhub.tools' || req.headers.host === 'www.toolhub.tools';
+      
+      // 도메인 서버(toolhub.tools)에서는 SSR 완전 비활성화 - AdSense 승인을 위해
+      if (isProductionDomain) {
+        // 도메인 서버에서는 항상 React 앱으로 넘김 (SSR 비활성화)
+        next();
+        return;
+      }
+      
+      // 개발서버에서만 크롤러 봇이거나 특정 조건일 때 SSR HTML 제공
+      if (isDevServer && (isBotRequest(userAgent) || req.query.ssr === 'true')) {
         const lang = req.query.lang as string || 'ko';
         const staticHTML = generateStaticHTML(route, lang);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');

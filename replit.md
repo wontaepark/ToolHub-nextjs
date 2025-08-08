@@ -27,6 +27,12 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
+- 도메인 서버 SSR 비활성화로 AdSense 승인 최적화 (2025-08-08)
+  - 도메인 서버(toolhub.tools)에서만 SSR 완전 비활성화 구현
+  - 개발 서버(tool-hub-central-wtpark10.replit.app)는 기존 SSR 유지 (AdSense 승인 완료)
+  - 환경별 SSR 제어 로직으로 각 서버 최적화
+  - 도메인 서버: 모든 요청에 React 앱 제공 (AdSense 승인용)
+  - 개발 서버: 봇에는 SSR, 일반 사용자에는 React 앱 제공
 - AdSense 승인 완료 및 환경별 sitemap 분리 구현 (2025-08-06)
   - 개발 서버(tool-hub-central-wtpark10.replit.app)에서 AdSense 승인 성공
   - 환경별 sitemap.xml 자동 감지 시스템 구현

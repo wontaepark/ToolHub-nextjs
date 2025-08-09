@@ -1,0 +1,329 @@
+{
+  "tools": [
+    {
+      "id": "pomodoro",
+      "name": {
+        "ko": "포모도로 타이머",
+        "en": "Pomodoro Timer",
+        "ja": "ポモドーロタイマー"
+      },
+      "description": {
+        "ko": "25분 집중 + 5분 휴식으로 생산성을 높이는 시간 관리 도구",
+        "en": "Productivity tool using 25-minute work + 5-minute break cycles",
+        "ja": "25分集中+5分休憩で生産性を向上させる時間管理ツール"
+      },
+      "emoji": "🍅",
+      "category": "productivity",
+      "isCompleted": true,
+      "migrationStatus": "completed",
+      "renderingMode": "SSG",
+      "features": ["custom_duration", "sound_notifications", "task_management", "statistics"],
+      "seoKeywords": {
+        "ko": "포모도로 타이머, 뽀모도로, 집중력, 생산성, 시간관리, 온라인 타이머, 무료 타이머",
+        "en": "pomodoro timer, productivity, focus, time management, online timer, free timer",
+        "ja": "ポモドーロタイマー, 生産性, 集中力, 時間管理, オンラインタイマー"
+      }
+    },
+    {
+      "id": "mbti",
+      "name": {
+        "ko": "MBTI 성격유형 테스트",
+        "en": "MBTI Personality Test",
+        "ja": "MBTI性格タイプテスト"
+      },
+      "description": {
+        "ko": "16가지 성격유형 중 나는 어떤 타입일까요? 정확한 테스트로 알아보세요",
+        "en": "Discover your personality type among 16 MBTI types with accurate testing",
+        "ja": "16種類の性格タイプの中で、あなたはどのタイプ？正確なテストで確認"
+      },
+      "emoji": "🧠",
+      "category": "personality",
+      "isCompleted": true,
+      "migrationStatus": "completed",
+      "renderingMode": "SSG",
+      "features": ["16_types", "detailed_analysis", "social_sharing", "multiple_styles"],
+      "seoKeywords": {
+        "ko": "MBTI 테스트, 성격유형 테스트, 16가지 성격, 무료 MBTI, 성격 검사, 심리테스트",
+        "en": "MBTI test, personality test, 16 personality types, free MBTI, psychological test",
+        "ja": "MBTIテスト, 性格診断, 16性格タイプ, 無料MBTI, 心理テスト"
+      }
+    },
+    {
+      "id": "teto-egen",
+      "name": {
+        "ko": "테토-에겐 성격유형 테스트",
+        "en": "Teto-Egen Personality Test",
+        "ja": "テト-エゲン性格タイプテスト"
+      },
+      "description": {
+        "ko": "화제의 테토-에겐 테스트! 나는 테토? 아니면 에겐?",
+        "en": "Trending Teto-Egen test! Are you Teto or Egen?",
+        "ja": "話題のテト-エゲンテスト！あなたはテト？それともエゲン？"
+      },
+      "emoji": "✨",
+      "category": "personality",
+      "isCompleted": true,
+      "migrationStatus": "completed",
+      "renderingMode": "SSG",
+      "features": ["4_result_types", "compatibility_analysis", "social_sharing", "viral_content"],
+      "seoKeywords": {
+        "ko": "테토 에겐 테스트, 테토에겐, 성격테스트, 바이럴 테스트, 재미있는 테스트, 무료 심리테스트",
+        "en": "teto egen test, viral personality test, fun test, free psychological test",
+        "ja": "テトエゲンテスト, バイラル性格テスト, 楽しいテスト, 無料心理テスト"
+      }
+    },
+    {
+      "id": "thumbnail-downloader",
+      "name": {
+        "ko": "유튜브 썸네일 다운로더",
+        "en": "YouTube Thumbnail Downloader",
+        "ja": "YouTubeサムネイルダウンローダー"
+      },
+      "description": {
+        "ko": "유튜브 동영상의 썸네일을 다양한 해상도로 다운로드",
+        "en": "Download YouTube video thumbnails in various resolutions",
+        "ja": "YouTube動画のサムネイルを様々な解像度でダウンロード"
+      },
+      "emoji": "📸",
+      "category": "utility",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["multiple_resolutions", "instant_download", "url_validation", "preview"],
+      "seoKeywords": {
+        "ko": "유튜브 썸네일 다운로드, 썸네일 추출, 이미지 다운로드, 유튜브 도구",
+        "en": "youtube thumbnail download, thumbnail extractor, image download, youtube tools",
+        "ja": "YouTubeサムネイルダウンロード, サムネイル抽出, 画像ダウンロード"
+      }
+    },
+    {
+      "id": "unit-converter",
+      "name": {
+        "ko": "단위 변환기",
+        "en": "Unit Converter",
+        "ja": "単位変換器"
+      },
+      "description": {
+        "ko": "길이, 무게, 온도, 부피 등 다양한 단위를 간편하게 변환",
+        "en": "Easily convert length, weight, temperature, volume and more",
+        "ja": "長さ、重さ、温度、体積など様々な単位を簡単に変換"
+      },
+      "emoji": "📐",
+      "category": "calculator",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["multiple_categories", "real_time_conversion", "history", "precise_calculation"],
+      "seoKeywords": {
+        "ko": "단위 변환, 길이 변환, 무게 변환, 온도 변환, 부피 변환, 미터법",
+        "en": "unit conversion, length converter, weight converter, temperature converter, metric conversion",
+        "ja": "単位変換, 長さ変換, 重量変換, 温度変換, 体積変換"
+      }
+    },
+    {
+      "id": "date-calculator",
+      "name": {
+        "ko": "날짜 계산기",
+        "en": "Date Calculator",
+        "ja": "日付計算機"
+      },
+      "description": {
+        "ko": "두 날짜 사이의 차이를 계산하거나 특정 기간 후 날짜 계산",
+        "en": "Calculate difference between dates or find dates after specific periods",
+        "ja": "二つの日付の差を計算したり、特定期間後の日付を計算"
+      },
+      "emoji": "📅",
+      "category": "calculator",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["date_difference", "date_addition", "multiple_formats", "business_days"],
+      "seoKeywords": {
+        "ko": "날짜 계산, 날짜 차이, 기간 계산, 달력 계산기, 날짜 더하기",
+        "en": "date calculator, date difference, period calculation, calendar calculator, date addition",
+        "ja": "日付計算, 日付差, 期間計算, カレンダー計算機"
+      }
+    },
+    {
+      "id": "number-raffle",
+      "name": {
+        "ko": "번호 추첨기",
+        "en": "Number Raffle",
+        "ja": "番号抽選機"
+      },
+      "description": {
+        "ko": "공정한 랜덤 번호 생성과 추첨을 위한 도구",
+        "en": "Fair random number generation and raffle tool",
+        "ja": "公正なランダム番号生成と抽選ツール"
+      },
+      "emoji": "🎲",
+      "category": "utility",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["custom_range", "multiple_numbers", "no_duplicates", "animation"],
+      "seoKeywords": {
+        "ko": "번호 추첨, 랜덤 번호, 추첨기, 번호 생성기, 공정한 추첨",
+        "en": "number raffle, random number, lottery generator, fair draw, number picker",
+        "ja": "番号抽選, ランダム番号, 抽選機, 番号生成器"
+      }
+    },
+    {
+      "id": "password-generator",
+      "name": {
+        "ko": "비밀번호 생성기",
+        "en": "Password Generator",
+        "ja": "パスワード生成器"
+      },
+      "description": {
+        "ko": "강력하고 안전한 비밀번호를 자동으로 생성",
+        "en": "Generate strong and secure passwords automatically",
+        "ja": "強力で安全なパスワードを自動生成"
+      },
+      "emoji": "🔐",
+      "category": "security",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["customizable_length", "character_options", "strength_meter", "copy_to_clipboard"],
+      "seoKeywords": {
+        "ko": "비밀번호 생성, 강력한 비밀번호, 보안 비밀번호, 랜덤 비밀번호",
+        "en": "password generator, strong password, secure password, random password",
+        "ja": "パスワード生成, 強力なパスワード, セキュアパスワード"
+      }
+    },
+    {
+      "id": "timer",
+      "name": {
+        "ko": "범용 타이머",
+        "en": "Universal Timer",
+        "ja": "汎用タイマー"
+      },
+      "description": {
+        "ko": "사용자 지정 시간으로 설정 가능한 범용 타이머",
+        "en": "Customizable universal timer for any time duration",
+        "ja": "任意の時間に設定可能な汎用タイマー"
+      },
+      "emoji": "⏰",
+      "category": "productivity",
+      "isCompleted": false,
+      "migrationStatus": "pending",
+      "renderingMode": "SSG",
+      "features": ["custom_duration", "sound_alerts", "visual_indicators", "preset_times"],
+      "seoKeywords": {
+        "ko": "타이머, 시간 측정, 알람, 온라인 타이머, 스톱워치",
+        "en": "timer, time measurement, alarm, online timer, stopwatch",
+        "ja": "タイマー, 時間測定, アラーム, オンラインタイマー"
+      }
+    }
+  ],
+  "pages": [
+    {
+      "id": "contact",
+      "name": {
+        "ko": "문의하기",
+        "en": "Contact",
+        "ja": "お問い合わせ"
+      },
+      "description": {
+        "ko": "ToolHub.tools에 문의사항이나 제안이 있으시면 연락주세요",
+        "en": "Contact us for inquiries or suggestions about ToolHub.tools",
+        "ja": "ToolHub.toolsに関するお問い合わせやご提案はこちら"
+      },
+      "migrationStatus": "pending",
+      "renderingMode": "SSG"
+    },
+    {
+      "id": "privacy",
+      "name": {
+        "ko": "개인정보처리방침",
+        "en": "Privacy Policy",
+        "ja": "プライバシーポリシー"
+      },
+      "description": {
+        "ko": "ToolHub.tools의 개인정보 수집 및 이용에 관한 정책",
+        "en": "Privacy policy regarding personal information collection and usage",
+        "ja": "個人情報の収集・利用に関するポリシー"
+      },
+      "migrationStatus": "pending",
+      "renderingMode": "SSG"
+    },
+    {
+      "id": "terms",
+      "name": {
+        "ko": "이용약관",
+        "en": "Terms of Service",
+        "ja": "利用規約"
+      },
+      "description": {
+        "ko": "ToolHub.tools 서비스 이용에 관한 약관",
+        "en": "Terms and conditions for using ToolHub.tools service",
+        "ja": "ToolHub.toolsサービス利用に関する約款"
+      },
+      "migrationStatus": "pending",
+      "renderingMode": "SSG"
+    },
+    {
+      "id": "sitemap",
+      "name": {
+        "ko": "사이트맵",
+        "en": "Sitemap",
+        "ja": "サイトマップ"
+      },
+      "description": {
+        "ko": "ToolHub.tools의 모든 페이지와 도구 목록",
+        "en": "Complete list of all pages and tools on ToolHub.tools",
+        "ja": "ToolHub.toolsの全ページとツール一覧"
+      },
+      "migrationStatus": "pending",
+      "renderingMode": "SSG"
+    }
+  ],
+  "categories": {
+    "productivity": {
+      "name": {
+        "ko": "생산성",
+        "en": "Productivity",
+        "ja": "生産性"
+      },
+      "icon": "💼",
+      "tools": ["pomodoro", "timer"]
+    },
+    "personality": {
+      "name": {
+        "ko": "성격 테스트",
+        "en": "Personality Tests",
+        "ja": "性格テスト"
+      },
+      "icon": "🧠",
+      "tools": ["mbti", "teto-egen"]
+    },
+    "utility": {
+      "name": {
+        "ko": "유틸리티",
+        "en": "Utilities",
+        "ja": "ユーティリティ"
+      },
+      "icon": "🛠️",
+      "tools": ["thumbnail-downloader", "number-raffle"]
+    },
+    "calculator": {
+      "name": {
+        "ko": "계산기",
+        "en": "Calculators",
+        "ja": "計算機"
+      },
+      "icon": "📊",
+      "tools": ["unit-converter", "date-calculator"]
+    },
+    "security": {
+      "name": {
+        "ko": "보안",
+        "en": "Security",
+        "ja": "セキュリティ"
+      },
+      "icon": "🔐",
+      "tools": ["password-generator"]
+    }
+  }
+}

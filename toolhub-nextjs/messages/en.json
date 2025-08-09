@@ -1,0 +1,97 @@
+{
+  "common": {
+    "home": "Home",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "sitemap": "Sitemap",
+    "search": "Search",
+    "language": "Language",
+    "theme": "Theme",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "copy": "Copy",
+    "copied": "Copied",
+    "reset": "Reset",
+    "start": "Start",
+    "stop": "Stop",
+    "pause": "Pause",
+    "resume": "Resume"
+  },
+  "homepage": {
+    "title": "Free Online Tools Collection | ToolHub.tools",
+    "description": "Useful free online tools in one place! Pomodoro timer, MBTI test, password generator, unit converter and more.",
+    "hero": {
+      "title": "All the tools you need in one place",
+      "subtitle": "Various online tools you can use for free without registration",
+      "cta": "Start using popular tools now"
+    },
+    "categories": {
+      "productivity": "Productivity Tools",
+      "personality": "Personality Tests",
+      "utility": "Utilities",
+      "converter": "Converters"
+    },
+    "stats": {
+      "users": "Users",
+      "monthlyUsage": "Monthly Usage",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "tools": {
+    "pomodoro": {
+      "name": "Pomodoro Timer",
+      "description": "25-minute work, 5-minute break timer for improved focus",
+      "workTime": "Work Time",
+      "breakTime": "Break Time",
+      "sessions": "Sessions",
+      "currentSession": "Current Session"
+    },
+    "mbti": {
+      "name": "MBTI Personality Test",
+      "description": "Accurate MBTI test to discover your personality among 16 types",
+      "question": "Question",
+      "of": "of",
+      "result": "Result"
+    },
+    "password": {
+      "name": "Password Generator",
+      "description": "Generate strong and secure passwords and check security strength",
+      "length": "Length",
+      "includeUppercase": "Include Uppercase",
+      "includeLowercase": "Include Lowercase",
+      "includeNumbers": "Include Numbers",
+      "includeSymbols": "Include Symbols",
+      "generate": "Generate",
+      "strength": "Security Strength"
+    },
+    "unit": {
+      "name": "Unit Converter",
+      "description": "Quickly convert various units like length, weight, temperature, volume",
+      "categories": {
+        "length": "Length",
+        "weight": "Weight",
+        "temperature": "Temperature",
+        "volume": "Volume",
+        "area": "Area",
+        "speed": "Speed"
+      }
+    },
+    "date": {
+      "name": "Date Calculator",
+      "description": "Calculate date differences, add/subtract dates, calculate age",
+      "difference": "Date Difference",
+      "calculation": "Date Calculation",
+      "age": "Age Calculation"
+    },
+    "raffle": {
+      "name": "Number Raffle",
+      "description": "Solve decision dilemmas with fair random number drawing",
+      "min": "Minimum",
+      "max": "Maximum",
+      "count": "Count",
+      "draw": "Draw"
+    }
+  }
+}

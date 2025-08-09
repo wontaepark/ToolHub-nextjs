@@ -1,0 +1,97 @@
+{
+  "common": {
+    "home": "홈",
+    "contact": "문의하기",
+    "privacy": "개인정보처리방침",
+    "terms": "이용약관",
+    "sitemap": "사이트맵",
+    "search": "검색",
+    "language": "언어",
+    "theme": "테마",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "retry": "다시 시도",
+    "copy": "복사",
+    "copied": "복사됨",
+    "reset": "초기화",
+    "start": "시작",
+    "stop": "정지",
+    "pause": "일시정지",
+    "resume": "재개"
+  },
+  "homepage": {
+    "title": "무료 온라인 도구 모음 | ToolHub.tools",
+    "description": "일상에서 유용한 무료 온라인 도구들을 한 곳에서! 포모도로 타이머, MBTI 테스트, 비밀번호 생성기, 단위 변환기 등 다양한 도구를 제공합니다.",
+    "hero": {
+      "title": "일상에 필요한 모든 도구를 한 곳에서",
+      "subtitle": "회원가입 없이 무료로 사용할 수 있는 다양한 온라인 도구들",
+      "cta": "지금 바로 인기 도구 사용하기"
+    },
+    "categories": {
+      "productivity": "생산성 도구",
+      "personality": "성격 테스트",
+      "utility": "유틸리티",
+      "converter": "변환 도구"
+    },
+    "stats": {
+      "users": "사용자",
+      "monthlyUsage": "월 사용횟수",
+      "satisfaction": "만족도"
+    }
+  },
+  "tools": {
+    "pomodoro": {
+      "name": "포모도로 타이머",
+      "description": "집중력 향상을 위한 25분 작업, 5분 휴식 타이머",
+      "workTime": "작업 시간",
+      "breakTime": "휴식 시간",
+      "sessions": "세션",
+      "currentSession": "현재 세션"
+    },
+    "mbti": {
+      "name": "MBTI 성격유형 테스트",
+      "description": "16가지 성격유형으로 나를 알아보는 정확한 MBTI 테스트",
+      "question": "질문",
+      "of": "중",
+      "result": "결과"
+    },
+    "password": {
+      "name": "비밀번호 생성기",
+      "description": "강력하고 안전한 비밀번호를 생성하고 보안 강도를 확인하세요",
+      "length": "길이",
+      "includeUppercase": "대문자 포함",
+      "includeLowercase": "소문자 포함",
+      "includeNumbers": "숫자 포함",
+      "includeSymbols": "특수문자 포함",
+      "generate": "생성하기",
+      "strength": "보안 강도"
+    },
+    "unit": {
+      "name": "단위 변환기",
+      "description": "길이, 무게, 온도, 부피 등 다양한 단위를 빠르게 변환하세요",
+      "categories": {
+        "length": "길이",
+        "weight": "무게",
+        "temperature": "온도",
+        "volume": "부피",
+        "area": "넓이",
+        "speed": "속도"
+      }
+    },
+    "date": {
+      "name": "날짜 계산기",
+      "description": "날짜 차이 계산, 날짜 더하기/빼기, 나이 계산 등",
+      "difference": "날짜 차이",
+      "calculation": "날짜 계산",
+      "age": "나이 계산"
+    },
+    "raffle": {
+      "name": "번호 추첨기",
+      "description": "공정한 랜덤 번호 추첨으로 선택의 고민을 해결하세요",
+      "min": "최소값",
+      "max": "최대값",
+      "count": "개수",
+      "draw": "추첨하기"
+    }
+  }
+}

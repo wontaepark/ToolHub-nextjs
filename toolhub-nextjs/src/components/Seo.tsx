@@ -1,6 +1,6 @@
 'use client';
 
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 interface SeoProps {
   title?: string;
@@ -52,30 +52,59 @@ export function Seo({
   };
 
   return (
-    <Head>
-      {/* 기본 메타 태그 */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      <meta name="author" content="Toolhub Team" />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={canonicalUrl} />
-      
-      {/* Open Graph */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="ToolHub.tools" />
-      
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:site" content="@toolhub" />
+    <>
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={canonicalUrl}
+        openGraph={{
+          type: 'website',
+          locale: 'ko_KR',
+          url: canonicalUrl,
+          siteName: 'ToolHub.tools',
+          title: title,
+          description: description,
+          images: [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: title,
+              type: 'image/png',
+            }
+          ],
+        }}
+        twitter={{
+          handle: '@toolhub',
+          site: '@toolhub',
+          cardType: 'summary_large_image',
+        }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: keywords
+          },
+          {
+            name: 'author',
+            content: 'Toolhub Team'
+          },
+          {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1'
+          }
+        ]}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.ico',
+          },
+          {
+            rel: 'apple-touch-icon',
+            href: '/apple-touch-icon.png',
+            sizes: '180x180'
+          }
+        ]}
+      />
       
       {/* 구조화된 데이터 */}
       <script
@@ -84,7 +113,7 @@ export function Seo({
           __html: JSON.stringify(defaultSchema)
         }}
       />
-    </Head>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { AdBanner } from './AdBanner';
+import { ThemeToggle } from './ThemeToggle';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -59,10 +60,10 @@ export default function Layout({
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                  ToolHub.tools
+                  🛠️ ToolHub.tools
                 </h1>
               </div>
-              <nav className="hidden md:flex space-x-8">
+              <nav className="hidden md:flex items-center space-x-8">
                 <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                   홈
                 </Link>
@@ -72,6 +73,9 @@ export default function Layout({
                 <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                   문의하기
                 </Link>
+                <div className="ml-4">
+                  <ThemeToggle />
+                </div>
               </nav>
             </div>
           </div>

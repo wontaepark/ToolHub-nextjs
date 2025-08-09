@@ -68,9 +68,10 @@ export default function HomePage() {
               <Link href="/sitemap" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                 사이트맵
               </Link>
+              <ThemeToggle />
             </nav>
             
-            <div className="flex items-center space-x-2">
+            <div className="md:hidden">
               <ThemeToggle />
             </div>
           </div>

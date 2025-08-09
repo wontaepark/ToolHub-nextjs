@@ -1,8 +1,7 @@
-'use client';
+// Next.js App Router는 metadata export를 사용하므로 Seo 컴포넌트는 필요없음
+// 이 컴포넌트는 호환성을 위해 빈 컴포넌트로 유지
 
-import { NextSeo } from 'next-seo';
-
-interface SeoProps {
+export interface SeoProps {
   title?: string;
   description?: string;
   keywords?: string;
@@ -12,109 +11,9 @@ interface SeoProps {
   schemaData?: Record<string, unknown>;
 }
 
-export function Seo({
-  title = "ToolHub.tools - 무료 웹 도구 모음",
-  description = "포모도로 타이머, MBTI 테스트, 테토-에겐 테스트 등 일상과 업무에 필요한 웹 도구를 한 곳에 모은 무료 서비스입니다.",
-  keywords = "웹 도구, 포모도로 타이머, MBTI 테스트, 테토-에겐 테스트, 무료 유틸리티, 온라인 도구",
-  ogImage = "https://toolhub.tools/og-image.png",
-  canonicalUrl = "https://toolhub.tools",
-  schemaType = 'WebApplication',
-  schemaData = {}
-}: SeoProps) {
-  // 기본 Schema.org 구조화된 데이터
-  const defaultSchema = {
-    '@context': 'https://schema.org',
-    '@type': schemaType,
-    name: title,
-    description: description,
-    url: canonicalUrl,
-    ...(schemaType === 'WebApplication' && {
-      applicationCategory: 'UtilitiesApplication',
-      operatingSystem: 'Web Browser',
-      publisher: {
-        '@type': 'Organization',
-        name: 'Toolhub Team',
-        url: 'https://toolhub.tools'
-      },
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock'
-      },
-      author: {
-        '@type': 'Organization',
-        name: 'Toolhub Team',
-        url: 'https://toolhub.tools'
-      }
-    }),
-    ...schemaData
-  };
-
-  return (
-    <>
-      <NextSeo
-        title={title}
-        description={description}
-        canonical={canonicalUrl}
-        openGraph={{
-          type: 'website',
-          locale: 'ko_KR',
-          url: canonicalUrl,
-          siteName: 'ToolHub.tools',
-          title: title,
-          description: description,
-          images: [
-            {
-              url: ogImage,
-              width: 1200,
-              height: 630,
-              alt: title,
-              type: 'image/png',
-            }
-          ],
-        }}
-        twitter={{
-          handle: '@toolhub',
-          site: '@toolhub',
-          cardType: 'summary_large_image',
-        }}
-        additionalMetaTags={[
-          {
-            name: 'keywords',
-            content: keywords
-          },
-          {
-            name: 'author',
-            content: 'Toolhub Team'
-          },
-          {
-            name: 'viewport',
-            content: 'width=device-width, initial-scale=1'
-          }
-        ]}
-        additionalLinkTags={[
-          {
-            rel: 'icon',
-            href: '/favicon.ico',
-          },
-          {
-            rel: 'apple-touch-icon',
-            href: '/apple-touch-icon.png',
-            sizes: '180x180'
-          }
-        ]}
-      />
-      
-      {/* 구조화된 데이터 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(defaultSchema)
-        }}
-      />
-    </>
-  );
+export function Seo(_props: SeoProps) {
+  // App Router에서는 metadata export를 사용하므로 빈 컴포넌트 반환
+  return null;
 }
 
 // 페이지별 SEO 프리셋

@@ -1,24 +1,28 @@
-'use client';
-
 import React from 'react';
-import { Seo } from '@/components/Seo';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileText, Users, Shield, AlertTriangle, Scale, Globe, Mail, Calendar } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '이용약관 | ToolHub.tools',
+  description: 'ToolHub.tools 서비스 이용약관 및 사용자 권리와 의무에 대한 안내',
+  keywords: ['이용약관', '서비스약관', '사용조건', '이용규칙'],
+  openGraph: {
+    title: '이용약관 | ToolHub.tools',
+    description: 'ToolHub.tools 서비스 이용약관 및 사용자 권리와 의무에 대한 안내',
+    url: 'https://toolhub.tools/terms',
+  },
+  alternates: {
+    canonical: 'https://toolhub.tools/terms',
+  },
+};
 
 export default function TermsPage() {
   const lastUpdated = '2025년 8월 9일';
 
   return (
-    <>
-      <Seo 
-        title="이용약관 | ToolHub.tools"
-        description="ToolHub.tools 서비스 이용약관 및 사용자 권리와 의무에 대한 안내"
-        keywords="이용약관,서비스약관,사용조건,이용규칙"
-        canonicalUrl="https://toolhub.tools/terms"
-      />
-
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 py-8">
           {/* 헤더 */}
           <div className="text-center mb-8">
@@ -422,6 +426,5 @@ export default function TermsPage() {
           </div>
         </div>
       </div>
-    </>
   );
 }

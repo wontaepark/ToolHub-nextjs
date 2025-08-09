@@ -1,24 +1,28 @@
-'use client';
-
 import React from 'react';
-import { Seo } from '@/components/Seo';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Eye, Lock, Database, Cookie, Globe, Mail, Calendar } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '개인정보처리방침 | ToolHub.tools',
+  description: 'ToolHub.tools의 개인정보 수집, 이용, 보호 정책에 대한 상세 안내',
+  keywords: ['개인정보처리방침', '프라이버시', '데이터보호', '개인정보보호'],
+  openGraph: {
+    title: '개인정보처리방침 | ToolHub.tools',
+    description: 'ToolHub.tools의 개인정보 수집, 이용, 보호 정책에 대한 상세 안내',
+    url: 'https://toolhub.tools/privacy',
+  },
+  alternates: {
+    canonical: 'https://toolhub.tools/privacy',
+  },
+};
 
 export default function PrivacyPage() {
   const lastUpdated = '2025년 8월 9일';
 
   return (
-    <>
-      <Seo 
-        title="개인정보처리방침 | ToolHub.tools"
-        description="ToolHub.tools의 개인정보 수집, 이용, 보호 정책에 대한 상세 안내"
-        keywords="개인정보처리방침,프라이버시,데이터보호,개인정보보호"
-        canonicalUrl="https://toolhub.tools/privacy"
-      />
-
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 py-8">
           {/* 헤더 */}
           <div className="text-center mb-8">
@@ -427,6 +431,5 @@ export default function PrivacyPage() {
           </div>
         </div>
       </div>
-    </>
   );
 }

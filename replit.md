@@ -33,6 +33,7 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
   - Next.js App Router 기반 기본 SEO 메타데이터 구조 완성
   - sitemap.xml, robots.txt 정적 라우트 구현 (dynamic = 'force-static')
   - 단일 언어(한국어) 우선 적용으로 빌드 안정성 확보
+  - 성공적인 빌드 완료: 21개 페이지 정적 생성, 13초 빌드 시간 유지
 - Stage 2 Next.js 마이그레이션 완전 완료 - 100% 달성 (2025-08-09)
   - 핵심 도구 6개 완료: NumberRaffle, PasswordGenerator, Timer, UnitConverter, DateCalculator, ThumbnailDownloader
   - 필수 정보 페이지 4개 완료: Contact, Privacy, Terms, Sitemap (SSG 렌더링)

@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 export async function GET(): Promise<Response> {
   const baseUrl = 'https://toolhub.tools';
   
@@ -91,9 +93,7 @@ Allow: /googletagmanager/
 Allow: /analytics/
 
 # Sitemap location
-Sitemap: ${baseUrl}/ko/sitemap.xml
-Sitemap: ${baseUrl}/en/sitemap.xml
-Sitemap: ${baseUrl}/ja/sitemap.xml
+Sitemap: ${baseUrl}/sitemap.xml
 
 # Host preference
 Host: ${baseUrl}`;

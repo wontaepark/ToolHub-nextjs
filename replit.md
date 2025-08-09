@@ -27,12 +27,12 @@ ToolHub.tools는 다양한 유용한 도구들을 모아놓은 웹 애플리케�
 - MBTI 테스트 스코어링 개선으로 신뢰성 향상
 
 ## Recent Changes
-- Stage 3 다국어, 테마, SEO 최적화 인프라 구축 시작 (2025-08-09)
-  - next-intl, next-seo, next-themes 패키지 설치 완료
-  - 다국어 메시지 파일 3개 언어 (한국어, 영어, 일본어) 준비
-  - ThemeProvider 및 다크/라이트 모드 토글 컴포넌트 구현
-  - SEO 구조화: NextSeo 통합, 구조화된 데이터, sitemap.xml/robots.txt 라우트
-  - 복잡한 국제화 구조로 인한 빌드 오류 발생 - 단계적 적용 필요
+- Stage 3 단순화된 테마 시스템 구현 완료 (2025-08-09)
+  - 복잡한 next-intl 구조 제거 후 기본 테마 시스템 집중
+  - 자체 구현 ThemeToggle 컴포넌트로 다크/라이트/시스템 모드 지원
+  - Next.js App Router 기반 기본 SEO 메타데이터 구조 완성
+  - sitemap.xml, robots.txt 정적 라우트 구현 (dynamic = 'force-static')
+  - 단일 언어(한국어) 우선 적용으로 빌드 안정성 확보
 - Stage 2 Next.js 마이그레이션 완전 완료 - 100% 달성 (2025-08-09)
   - 핵심 도구 6개 완료: NumberRaffle, PasswordGenerator, Timer, UnitConverter, DateCalculator, ThumbnailDownloader
   - 필수 정보 페이지 4개 완료: Contact, Privacy, Terms, Sitemap (SSG 렌더링)

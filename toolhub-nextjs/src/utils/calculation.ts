@@ -48,30 +48,7 @@ export interface UnitCategory {
   units: Unit[];
 }
 
-// 기본 단위 변환 함수
-export const convertUnit = (
-  value: number,
-  fromUnit: Unit,
-  toUnit: Unit,
-  isTemperature: boolean = false
-): number => {
-  if (isTemperature) {
-    // 온도 변환 (섭씨 기준)
-    const celsius = fromUnit.offset 
-      ? (value + fromUnit.offset) / fromUnit.toBase 
-      : value;
-    
-    const result = toUnit.offset 
-      ? celsius * toUnit.toBase - toUnit.offset 
-      : celsius;
-    
-    return result;
-  } else {
-    // 일반 단위 변환
-    const baseValue = value * fromUnit.toBase;
-    return baseValue / toUnit.toBase;
-  }
-};
+// 단위 변환 함수는 아래에서 더 완전한 형태로 구현됨
 
 /**
  * 날짜 계산 관련 유틸리티
@@ -292,4 +269,146 @@ export const calculatePasswordStrength = (password: string): {
   else level = 'very-strong';
   
   return { score, level, feedback };
+};
+
+/**
+ * 단위 변환 관련 함수들
+ */
+export type ConversionCategory = 'length' | 'weight' | 'temperature' | 'volume' | 'area' | 'speed';
+
+export interface Unit {
+  key: string;
+  name: string;
+  symbol: string;
+  toBase: number;
+  offset?: number;
+}
+
+const unitDefinitions: Record<ConversionCategory, Unit[]> = {
+  length: [
+    { key: 'mm', name: '밀리미터', symbol: 'mm', toBase: 0.001 },
+    { key: 'cm', name: '센티미터', symbol: 'cm', toBase: 0.01 },
+    { key: 'm', name: '미터', symbol: 'm', toBase: 1 },
+    { key: 'km', name: '킬로미터', symbol: 'km', toBase: 1000 },
+    { key: 'in', name: '인치', symbol: 'in', toBase: 0.0254 },
+    { key: 'ft', name: '피트', symbol: 'ft', toBase: 0.3048 },
+    { key: 'yd', name: '야드', symbol: 'yd', toBase: 0.9144 },
+    { key: 'mi', name: '마일', symbol: 'mi', toBase: 1609.344 },
+  ],
+  weight: [
+    { key: 'mg', name: '밀리그램', symbol: 'mg', toBase: 0.000001 },
+    { key: 'g', name: '그램', symbol: 'g', toBase: 0.001 },
+    { key: 'kg', name: '킬로그램', symbol: 'kg', toBase: 1 },
+    { key: 't', name: '톤', symbol: 't', toBase: 1000 },
+    { key: 'oz', name: '온스', symbol: 'oz', toBase: 0.0283495 },
+    { key: 'lb', name: '파운드', symbol: 'lb', toBase: 0.453592 },
+    { key: 'st', name: '스톤', symbol: 'st', toBase: 6.35029 },
+  ],
+  temperature: [
+    { key: 'c', name: '섭씨', symbol: '°C', toBase: 1, offset: 0 },
+    { key: 'f', name: '화씨', symbol: '°F', toBase: 5/9, offset: -32 },
+    { key: 'k', name: '켈빈', symbol: 'K', toBase: 1, offset: -273.15 },
+  ],
+  volume: [
+    { key: 'ml', name: '밀리리터', symbol: 'ml', toBase: 0.001 },
+    { key: 'l', name: '리터', symbol: 'L', toBase: 1 },
+    { key: 'cup', name: '컵', symbol: 'cup', toBase: 0.236588 },
+    { key: 'pt', name: '파인트', symbol: 'pt', toBase: 0.473176 },
+    { key: 'qt', name: '쿼트', symbol: 'qt', toBase: 0.946353 },
+    { key: 'gal', name: '갤런', symbol: 'gal', toBase: 3.78541 },
+  ],
+  area: [
+    { key: 'mm2', name: '제곱밀리미터', symbol: 'mm²', toBase: 0.000001 },
+    { key: 'cm2', name: '제곱센티미터', symbol: 'cm²', toBase: 0.0001 },
+    { key: 'm2', name: '제곱미터', symbol: 'm²', toBase: 1 },
+    { key: 'km2', name: '제곱킬로미터', symbol: 'km²', toBase: 1000000 },
+    { key: 'in2', name: '제곱인치', symbol: 'in²', toBase: 0.00064516 },
+    { key: 'ft2', name: '제곱피트', symbol: 'ft²', toBase: 0.092903 },
+  ],
+  speed: [
+    { key: 'mps', name: '미터/초', symbol: 'm/s', toBase: 1 },
+    { key: 'kmh', name: '킬로미터/시', symbol: 'km/h', toBase: 0.277778 },
+    { key: 'mph', name: '마일/시', symbol: 'mph', toBase: 0.44704 },
+    { key: 'fps', name: '피트/초', symbol: 'ft/s', toBase: 0.3048 },
+    { key: 'knot', name: '노트', symbol: 'kn', toBase: 0.514444 },
+  ],
+};
+
+export const getUnitConversions = (category: ConversionCategory): Unit[] => {
+  return unitDefinitions[category] || [];
+};
+
+export const convertUnit = (value: number, fromUnit: string, toUnit: string, category: ConversionCategory): number => {
+  const units = getUnitConversions(category);
+  const from = units.find(u => u.key === fromUnit);
+  const to = units.find(u => u.key === toUnit);
+
+  if (!from || !to) {
+    throw new Error('Invalid unit');
+  }
+
+  if (category === 'temperature') {
+    let celsius: number;
+    
+    if (from.key === 'c') {
+      celsius = value;
+    } else if (from.key === 'f') {
+      celsius = (value - 32) * 5/9;
+    } else if (from.key === 'k') {
+      celsius = value - 273.15;
+    } else {
+      throw new Error('Unknown temperature unit');
+    }
+
+    if (to.key === 'c') {
+      return celsius;
+    } else if (to.key === 'f') {
+      return celsius * 9/5 + 32;
+    } else if (to.key === 'k') {
+      return celsius + 273.15;
+    } else {
+      throw new Error('Unknown temperature unit');
+    }
+  } else {
+    const baseValue = value * from.toBase;
+    return baseValue / to.toBase;
+  }
+};
+
+/**
+ * 추가 날짜 함수들 (기존 함수와 다른 시그니처)
+ */
+export const isValidDate = (dateString: string): boolean => {
+  const date = new Date(dateString);
+  return !isNaN(date.getTime());
+};
+
+export const subtractDaysFromDate = (dateString: string, days: number): string => {
+  const date = new Date(dateString);
+  date.setDate(date.getDate() - days);
+  return date.toISOString().split('T')[0];
+};
+
+export const calculateAge = (birthDate: string) => {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+  let days = today.getDate() - birth.getDate();
+  
+  if (days < 0) {
+    months--;
+    const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+    days += lastMonth.getDate();
+  }
+  
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+  
+  const totalDays = Math.floor((today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+  
+  return { years, months, days, totalDays };
 };

@@ -29,14 +29,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ja: 'ポモドーロタイマー、MBTI診断、パスワード生成器など、日常や仕事に必要な様々なツールを無料で提供します。'
   };
 
+  // 메시지에서 메타데이터 가져오기 
+  const messages = await getMessages();
+  const title = messages.meta?.title || titles[validLocale];
+  const description = messages.meta?.description || descriptions[validLocale];
+  const keywords = messages.meta?.keywords;
+
   return {
-    title: titles[validLocale],
-    description: descriptions[validLocale],
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: titles[validLocale],
-      description: descriptions[validLocale],
+      title,
+      description,
       url: `https://toolhub.tools${validLocale === 'ko' ? '' : '/' + validLocale}`,
+      siteName: 'ToolHub.tools',
+      images: [
+        {
+          url: `/og/${validLocale}.png`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
       locale: validLocale === 'ko' ? 'ko_KR' : validLocale === 'en' ? 'en_US' : 'ja_JP',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`/og/${validLocale}.png`],
     },
     alternates: {
       canonical: `https://toolhub.tools${validLocale === 'ko' ? '' : '/' + validLocale}`,
@@ -44,6 +67,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'ko': 'https://toolhub.tools',
         'en': 'https://toolhub.tools/en',
         'ja': 'https://toolhub.tools/ja',
+        'x-default': 'https://toolhub.tools/en',
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
     },
   };

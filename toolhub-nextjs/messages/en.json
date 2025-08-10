@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "ToolHub.tools - Free Online Tools Collection",
+    "description": "Free online tools including Pomodoro Timer, MBTI Test, Password Generator and more utilities for daily life and work productivity.",
+    "keywords": "free tools,online tools,pomodoro,MBTI,password generator,unit converter,date calculator"
+  },
   "common": {
     "home": "Home",
     "tools": "Tools",

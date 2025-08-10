@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Seo } from '@/components/Seo';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -78,12 +78,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Seo 
-        title="문의하기 | ToolHub.tools"
-        description="ToolHub.tools에 대한 문의, 버그 신고, 기능 제안을 보내주세요"
-        keywords="문의하기,고객지원,버그신고,기능제안,연락처"
-        canonicalUrl="https://toolhub.tools/contact"
-      />
 
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 py-8">

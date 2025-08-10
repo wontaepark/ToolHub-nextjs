@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -167,12 +166,6 @@ export default function ThumbnailDownloaderPage() {
 
   return (
     <>
-      <Seo 
-        title="유튜브 썸네일 다운로더 | ToolHub.tools"
-        description="YouTube 동영상 썸네일을 고화질로 다운로드"
-        keywords="유튜브썸네일,썸네일다운로드,YouTube,이미지다운로드"
-        canonicalUrl="https://toolhub.tools/tools/thumbnail-downloader"
-      />
       
       <ToolLayout
         title="유튜브 썸네일 다운로더"

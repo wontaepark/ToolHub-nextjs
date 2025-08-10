@@ -1,97 +1,86 @@
 {
   "common": {
     "home": "ホーム",
+    "tools": "ツール",
+    "about": "概要",
     "contact": "お問い合わせ",
+    "sitemap": "サイトマップ",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約",
-    "sitemap": "サイトマップ",
-    "search": "検索",
-    "language": "言語",
-    "theme": "テーマ",
-    "loading": "読み込み中...",
-    "error": "エラーが発生しました",
-    "retry": "再試行",
-    "copy": "コピー",
-    "copied": "コピーしました",
-    "reset": "リセット",
-    "start": "開始",
-    "stop": "停止",
-    "pause": "一時停止",
-    "resume": "再開"
+    "darkMode": "ダークモード",
+    "lightMode": "ライトモード",
+    "systemMode": "システムモード",
+    "toggleTheme": "テーマ切り替え"
   },
-  "homepage": {
-    "title": "無料オンラインツール集 | ToolHub.tools",
-    "description": "便利な無料オンラインツールが一箇所に！ポモドーロタイマー、MBTI診断、パスワード生成器、単位変換器など。",
+  "home": {
+    "title": "ToolHub.tools - 無料ウェブツール集",
+    "description": "ポモドーロタイマー、MBTI診断、パスワード生成器など、日常や仕事に必要な様々なツールを無料で提供します。",
     "hero": {
-      "title": "必要なツールがすべて一箇所に",
-      "subtitle": "登録不要で無料で使える様々なオンラインツール",
-      "cta": "今すぐ人気ツールを使う"
-    },
-    "categories": {
-      "productivity": "生産性ツール",
-      "personality": "性格診断",
-      "utility": "ユーティリティ",
-      "converter": "変換ツール"
+      "title": "日常と仕事のための無料ウェブツール集",
+      "subtitle": "ポモドーロタイマー、MBTI診断、単位変換器など便利なツールを一箇所で",
+      "cta": "今すぐ人気ツールを使用する"
     },
     "stats": {
       "users": "ユーザー",
-      "monthlyUsage": "月間利用回数",
+      "monthlyUsage": "月間使用回数",
       "satisfaction": "満足度"
+    },
+    "toolCategories": {
+      "productivity": "生産性",
+      "personality": "性格診断",
+      "utilities": "ユーティリティ",
+      "entertainment": "エンターテインメント"
     }
   },
   "tools": {
     "pomodoro": {
       "name": "ポモドーロタイマー",
-      "description": "集中力向上のための25分作業、5分休憩タイマー",
-      "workTime": "作業時間",
-      "breakTime": "休憩時間",
-      "sessions": "セッション",
-      "currentSession": "現在のセッション"
+      "description": "25分集中＋5分休憩で生産性を向上させる時間管理テクニック",
+      "shortDesc": "生産性向上のための時間管理ツール"
     },
     "mbti": {
       "name": "MBTI性格診断",
-      "description": "16の性格タイプであなたを知る正確なMBTI診断",
-      "question": "質問",
-      "of": "の",
-      "result": "結果"
+      "description": "16種類の性格タイプであなたの性格を知る心理学ベースの診断",
+      "shortDesc": "あなたの性格タイプを見つける心理診断"
     },
-    "password": {
+    "password-generator": {
       "name": "パスワード生成器",
-      "description": "強力で安全なパスワードを生成し、セキュリティ強度を確認",
-      "length": "長さ",
-      "includeUppercase": "大文字を含む",
-      "includeLowercase": "小文字を含む",
-      "includeNumbers": "数字を含む",
-      "includeSymbols": "記号を含む",
-      "generate": "生成する",
-      "strength": "セキュリティ強度"
+      "description": "安全で強力なパスワードを自動生成するセキュリティツール",
+      "shortDesc": "安全なパスワード生成ツール"
     },
-    "unit": {
+    "unit-converter": {
       "name": "単位変換器",
-      "description": "長さ、重さ、温度、体積など様々な単位を素早く変換",
-      "categories": {
-        "length": "長さ",
-        "weight": "重さ",
-        "temperature": "温度",
-        "volume": "体積",
-        "area": "面積",
-        "speed": "速度"
-      }
+      "description": "長さ、重さ、温度、面積など様々な単位を簡単に変換する計算ツール",
+      "shortDesc": "様々な単位変換計算機"
     },
-    "date": {
+    "date-calculator": {
       "name": "日付計算機",
-      "description": "日付の差計算、日付の加算減算、年齢計算など",
-      "difference": "日付の差",
-      "calculation": "日付計算",
-      "age": "年齢計算"
+      "description": "二つの日付間の差を計算し、日付演算を支援する便利なツール",
+      "shortDesc": "日付差計算および日付演算ツール"
     },
-    "raffle": {
+    "thumbnail-downloader": {
+      "name": "YouTubeサムネイルダウンローダー",
+      "description": "YouTube動画のサムネイル画像を高画質でダウンロードするツール",
+      "shortDesc": "YouTubeサムネイル画像ダウンロード"
+    },
+    "number-raffle": {
       "name": "番号抽選器",
-      "description": "公正なランダム番号抽選で選択の悩みを解決",
-      "min": "最小値",
-      "max": "最大値",
-      "count": "個数",
-      "draw": "抽選する"
+      "description": "公正なランダム番号抽選で抽選イベントやゲームに活用するツール",
+      "shortDesc": "公正なランダム番号抽選ツール"
+    },
+    "timer": {
+      "name": "範囲タイマー",
+      "description": "希望の時間を設定して使用するシンプルで便利なタイマー",
+      "shortDesc": "カスタム時間設定タイマー"
+    },
+    "teto-egen": {
+      "name": "テト-エゲン性格診断",
+      "description": "話題のミームベース性格タイプ診断で楽しくあなたの性向を知る",
+      "shortDesc": "ミームベースの楽しい性格診断"
     }
+  },
+  "footer": {
+    "copyright": "© 2025 ToolHub.tools. 全ての権利を保有しています。",
+    "popularTools": "人気ツール"
   }
 }

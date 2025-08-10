@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Seo, SeoPresets } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 
 export default function PomodoroPage() {
@@ -76,89 +75,29 @@ export default function PomodoroPage() {
 
   return (
     <>
-      <Seo {...SeoPresets.pomodoro} />
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* 헤더 */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            🍅 포모도로 타이머
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+            포모도로 타이머
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            25분 집중 + 5분 휴식으로 생산성을 극대화하세요
-          </p>
-        </div>
-
-        {/* 타이머 메인 */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center mb-8">
-          {/* 현재 상태 표시 */}
-          <div className="mb-6">
-            <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
-              isBreak 
-                ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                : 'bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100'
-            }`}>
-              {isBreak ? '🌟 휴식 시간' : '💪 집중 시간'}
-            </div>
-          </div>
-
-          {/* 타이머 디스플레이 */}
-          <div className="text-8xl sm:text-9xl font-mono font-bold text-gray-900 dark:text-white mb-8">
-            {formatTime(minutes, seconds)}
-          </div>
-
-          {/* 컨트롤 버튼 */}
-          <div className="flex justify-center space-x-4 mb-6">
-            {!isActive ? (
-              <button
-                onClick={startTimer}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors"
-              >
-                시작
-              </button>
-            ) : (
-              <button
-                onClick={pauseTimer}
-                className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors"
-              >
-                일시정지
-              </button>
-            )}
-            <button
-              onClick={resetTimer}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors"
-            >
-              리셋
-            </button>
-          </div>
-        </div>
-
-        {/* 설정 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            시간 설정
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                작업 시간 (분)
-              </label>
-              <input
-                type="number"
-                min="1"
-                max="60"
-                value={workDuration}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value);
-                  setWorkDuration(value);
-                  if (!isActive && !isBreak) {
-                    setMinutes(value);
-                    setSeconds(0);
-                  }
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              />
-            </div>
+          
+          {/* 설정 */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">설정</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  작업 시간 (분)
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  max="60"
+                  value={workDuration}
+                  onChange={(e) => setWorkDuration(parseInt(e.target.value))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                />
+              </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 휴식 시간 (분)

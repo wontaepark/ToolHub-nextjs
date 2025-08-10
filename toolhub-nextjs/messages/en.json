@@ -1,97 +1,86 @@
 {
   "common": {
     "home": "Home",
+    "tools": "Tools",
+    "about": "About",
     "contact": "Contact",
+    "sitemap": "Sitemap",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "sitemap": "Sitemap",
-    "search": "Search",
-    "language": "Language",
-    "theme": "Theme",
-    "loading": "Loading...",
-    "error": "An error occurred",
-    "retry": "Retry",
-    "copy": "Copy",
-    "copied": "Copied",
-    "reset": "Reset",
-    "start": "Start",
-    "stop": "Stop",
-    "pause": "Pause",
-    "resume": "Resume"
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "systemMode": "System Mode",
+    "toggleTheme": "Toggle Theme"
   },
-  "homepage": {
-    "title": "Free Online Tools Collection | ToolHub.tools",
-    "description": "Useful free online tools in one place! Pomodoro timer, MBTI test, password generator, unit converter and more.",
+  "home": {
+    "title": "ToolHub.tools - Free Web Tools Collection",
+    "description": "Free online tools including Pomodoro Timer, MBTI Test, Password Generator and more utilities for daily use and work.",
     "hero": {
-      "title": "All the tools you need in one place",
-      "subtitle": "Various online tools you can use for free without registration",
-      "cta": "Start using popular tools now"
-    },
-    "categories": {
-      "productivity": "Productivity Tools",
-      "personality": "Personality Tests",
-      "utility": "Utilities",
-      "converter": "Converters"
+      "title": "Free Web Tools Collection for Daily Life and Work",
+      "subtitle": "Pomodoro Timer, MBTI Test, Unit Converter and more useful tools in one place",
+      "cta": "Start Using Popular Tools Now"
     },
     "stats": {
       "users": "Users",
       "monthlyUsage": "Monthly Usage",
       "satisfaction": "Satisfaction"
+    },
+    "toolCategories": {
+      "productivity": "Productivity",
+      "personality": "Personality Tests",
+      "utilities": "Utilities",
+      "entertainment": "Entertainment"
     }
   },
   "tools": {
     "pomodoro": {
       "name": "Pomodoro Timer",
-      "description": "25-minute work, 5-minute break timer for improved focus",
-      "workTime": "Work Time",
-      "breakTime": "Break Time",
-      "sessions": "Sessions",
-      "currentSession": "Current Session"
+      "description": "25 minutes focus + 5 minutes break time management technique to boost productivity",
+      "shortDesc": "Time management tool for productivity enhancement"
     },
     "mbti": {
       "name": "MBTI Personality Test",
-      "description": "Accurate MBTI test to discover your personality among 16 types",
-      "question": "Question",
-      "of": "of",
-      "result": "Result"
+      "description": "Psychology-based test to discover your personality type among 16 different types",
+      "shortDesc": "Psychological test to find your personality type"
     },
-    "password": {
+    "password-generator": {
       "name": "Password Generator",
-      "description": "Generate strong and secure passwords and check security strength",
-      "length": "Length",
-      "includeUppercase": "Include Uppercase",
-      "includeLowercase": "Include Lowercase",
-      "includeNumbers": "Include Numbers",
-      "includeSymbols": "Include Symbols",
-      "generate": "Generate",
-      "strength": "Security Strength"
+      "description": "Security tool that automatically generates safe and strong passwords",
+      "shortDesc": "Secure password generation tool"
     },
-    "unit": {
+    "unit-converter": {
       "name": "Unit Converter",
-      "description": "Quickly convert various units like length, weight, temperature, volume",
-      "categories": {
-        "length": "Length",
-        "weight": "Weight",
-        "temperature": "Temperature",
-        "volume": "Volume",
-        "area": "Area",
-        "speed": "Speed"
-      }
+      "description": "Calculation tool to easily convert various units like length, weight, temperature, area",
+      "shortDesc": "Various unit conversion calculator"
     },
-    "date": {
+    "date-calculator": {
       "name": "Date Calculator",
-      "description": "Calculate date differences, add/subtract dates, calculate age",
-      "difference": "Date Difference",
-      "calculation": "Date Calculation",
-      "age": "Age Calculation"
+      "description": "Useful tool to calculate differences between two dates and perform date operations",
+      "shortDesc": "Date difference calculation and date operation tool"
     },
-    "raffle": {
+    "thumbnail-downloader": {
+      "name": "YouTube Thumbnail Downloader",
+      "description": "Tool to download YouTube video thumbnail images in high quality",
+      "shortDesc": "YouTube thumbnail image downloader"
+    },
+    "number-raffle": {
       "name": "Number Raffle",
-      "description": "Solve decision dilemmas with fair random number drawing",
-      "min": "Minimum",
-      "max": "Maximum",
-      "count": "Count",
-      "draw": "Draw"
+      "description": "Fair random number draw tool for lottery events and games",
+      "shortDesc": "Fair random number drawing tool"
+    },
+    "timer": {
+      "name": "Range Timer",
+      "description": "Simple and useful timer with custom time settings",
+      "shortDesc": "Customizable time setting timer"
+    },
+    "teto-egen": {
+      "name": "Teto-Egen Personality Test",
+      "description": "Trending meme-based personality type test to discover your tendencies in a fun way",
+      "shortDesc": "Meme-based fun personality test"
     }
+  },
+  "footer": {
+    "copyright": "© 2025 ToolHub.tools. All rights reserved.",
+    "popularTools": "Popular Tools"
   }
 }

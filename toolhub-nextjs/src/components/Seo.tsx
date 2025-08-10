@@ -11,7 +11,7 @@ export interface SeoProps {
   schemaData?: Record<string, unknown>;
 }
 
-export function Seo(_props: SeoProps) {
+export function Seo(): null {
   // App Router에서는 metadata export를 사용하므로 빈 컴포넌트 반환
   return null;
 }

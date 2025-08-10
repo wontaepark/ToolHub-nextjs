@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -133,12 +132,6 @@ export default function PasswordGeneratorPage() {
 
   return (
     <>
-      <Seo 
-        title="비밀번호 생성기 | ToolHub.tools"
-        description="강력하고 안전한 비밀번호를 자동으로 생성"
-        keywords="비밀번호생성기,패스워드,보안,암호"
-        canonicalUrl="https://toolhub.tools/tools/password-generator"
-      />
       
       <ToolLayout
         title="비밀번호 생성기"

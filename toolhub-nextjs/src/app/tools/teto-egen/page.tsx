@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Seo, SeoPresets } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 
 interface Question {
@@ -208,59 +207,14 @@ export default function TetoEgenPage() {
   if (step === 'gender') {
     return (
       <>
-        <Seo {...SeoPresets.tetoEgen} />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              ✨ 테토-에겐 성격유형 테스트
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+              테토-에겐 성격 테스트
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              나는 테토? 아니면 에겐? 10개 질문으로 알아보는 나의 성향
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
               성별을 선택해주세요
-            </h2>
-            
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-              <button
-                onClick={() => handleGenderSelect('male')}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors"
-              >
-                🙋‍♂️ 남성
-              </button>
-              <button
-                onClick={() => handleGenderSelect('female')}
-                className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-4 px-8 rounded-xl text-lg transition-colors"
-              >
-                🙋‍♀️ 여성
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              테토-에겐이란?
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🌟 테토 (Teto)</h4>
-                <p className="text-gray-600 dark:text-gray-400">
-                  감정 표현이 풍부하고 사교적이며 로맨틱한 성향. 
-                  사랑을 적극적으로 표현하고 관계에서 애정을 중시합니다.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🌙 에겐 (Egen)</h4>
-                <p className="text-gray-600 dark:text-gray-400">
-                  차분하고 내향적이며 독립적인 성향. 
-                  감정을 내재화하고 깊이 있는 관계를 선호합니다.
-                </p>
-              </div>
-            </div>
+            </p>
           </div>
         </div>
       </>
@@ -273,82 +227,27 @@ export default function TetoEgenPage() {
     
     return (
       <>
-        <Seo {...SeoPresets.tetoEgen} />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              ✨ 테토-에겐 테스트 결과
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+              테토-에겐 테스트 결과
             </h1>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center mb-8">
-            <div className="text-8xl mb-4">{resultData.emoji}</div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {resultData.name}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
-              {resultData.description}
-            </p>
             
-            <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-6">
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">희귀도</div>
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                {resultData.rarity}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              {resultData.traits.map((trait, index) => (
-                <div key={index} className="bg-blue-50 dark:bg-blue-900 rounded-lg p-3">
-                  <span className="text-blue-800 dark:text-blue-200 font-medium">
-                    {trait}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-pink-50 dark:bg-pink-900 rounded-xl p-4 mb-6">
-              <h3 className="font-semibold text-pink-800 dark:text-pink-200 mb-2">
-                💕 최고 궁합
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                친구들은 어떤 유형일까요?
               </h3>
-              <div className="text-lg font-medium text-pink-700 dark:text-pink-300">
-                {resultData.compatibility}
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                친구들과 함께 테스트하고 서로의 성향을 알아보세요. 
+                궁합도 확인할 수 있어서 더욱 재미있답니다!
+              </p>
               <button
-                onClick={shareResult}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                onClick={() => shareResult()}
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
               >
-                친구들에게 자랑하기
-              </button>
-              <button
-                onClick={resetTest}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                다시 테스트하기
+                친구들에게 공유하기
               </button>
             </div>
-          </div>
-
-          <AdBannerInline />
-
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              친구들은 어떤 유형일까요?
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              친구들과 함께 테스트하고 서로의 성향을 알아보세요. 
-              궁합도 확인할 수 있어서 더욱 재미있답니다!
-            </p>
-            <button
-              onClick={() => shareResult()}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              친구들에게 공유하기
-            </button>
           </div>
         </div>
       </>
@@ -358,62 +257,14 @@ export default function TetoEgenPage() {
   // 테스트 진행 화면
   return (
     <>
-      <Seo {...SeoPresets.tetoEgen} />
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            ✨ 테토-에겐 성격유형 테스트
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+            테토-에겐 성격 테스트
           </h1>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-          {/* 진행률 바 */}
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
-              <span>진행률</span>
-              <span>{currentQuestion + 1}/{questions.length}</span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-purple-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-
-          {/* 질문 */}
-          <div className="text-center mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              {questions[currentQuestion].text}
-            </h2>
-            
-            <div className="space-y-4">
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(index)}
-                  className="w-full p-4 text-left bg-gray-50 dark:bg-gray-700 hover:bg-purple-50 dark:hover:bg-purple-900 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600"
-                >
-                  <span className="text-gray-900 dark:text-white">
-                    {option.text}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 이전 버튼 */}
-          {currentQuestion > 0 && (
-            <div className="text-center">
-              <button
-                onClick={() => setCurrentQuestion(currentQuestion - 1)}
-                className="text-purple-600 dark:text-purple-400 hover:underline"
-              >
-                ← 이전 질문으로
-              </button>
-            </div>
-          )}
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+            질문에 답해주세요
+          </p>
         </div>
       </div>
     </>

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Seo } from '@/components/Seo';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -172,12 +171,6 @@ export default function WeatherPage() {
 
   return (
     <>
-      <Seo 
-        title="실시간 날씨 정보 | ToolHub.tools"
-        description="현재 위치 및 전 세계 도시의 실시간 날씨 정보를 확인하세요"
-        keywords="날씨,기상정보,온도,습도,현재날씨,날씨예보"
-        canonicalUrl="https://toolhub.tools/weather"
-      />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4 py-8">

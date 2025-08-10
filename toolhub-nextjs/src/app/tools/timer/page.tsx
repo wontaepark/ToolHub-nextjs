@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -189,12 +188,6 @@ export default function TimerPage() {
 
   return (
     <>
-      <Seo 
-        title="범용 타이머 | ToolHub.tools"
-        description="사용자 지정 시간으로 설정 가능한 범용 타이머"
-        keywords="타이머,스톱워치,시간측정,카운트다운"
-        canonicalUrl="https://toolhub.tools/tools/timer"
-      />
       
       <ToolLayout
         title="범용 타이머"

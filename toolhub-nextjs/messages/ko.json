@@ -1,97 +1,86 @@
 {
   "common": {
     "home": "홈",
+    "tools": "도구",
+    "about": "소개",
     "contact": "문의하기",
+    "sitemap": "사이트맵",
     "privacy": "개인정보처리방침",
     "terms": "이용약관",
-    "sitemap": "사이트맵",
-    "search": "검색",
-    "language": "언어",
-    "theme": "테마",
-    "loading": "로딩 중...",
-    "error": "오류가 발생했습니다",
-    "retry": "다시 시도",
-    "copy": "복사",
-    "copied": "복사됨",
-    "reset": "초기화",
-    "start": "시작",
-    "stop": "정지",
-    "pause": "일시정지",
-    "resume": "재개"
+    "darkMode": "다크 모드",
+    "lightMode": "라이트 모드",
+    "systemMode": "시스템 모드",
+    "toggleTheme": "테마 변경"
   },
-  "homepage": {
-    "title": "무료 온라인 도구 모음 | ToolHub.tools",
-    "description": "일상에서 유용한 무료 온라인 도구들을 한 곳에서! 포모도로 타이머, MBTI 테스트, 비밀번호 생성기, 단위 변환기 등 다양한 도구를 제공합니다.",
+  "home": {
+    "title": "ToolHub.tools - 무료 웹 도구 모음",
+    "description": "포모도로 타이머, MBTI 테스트, 비밀번호 생성기 등 일상과 업무에 필요한 다양한 도구들을 무료로 제공합니다.",
     "hero": {
-      "title": "일상에 필요한 모든 도구를 한 곳에서",
-      "subtitle": "회원가입 없이 무료로 사용할 수 있는 다양한 온라인 도구들",
+      "title": "일상과 업무를 위한 무료 웹 도구 모음",
+      "subtitle": "포모도로 타이머, MBTI 테스트, 단위 변환기 등 유용한 도구들을 한 곳에서",
       "cta": "지금 바로 인기 도구 사용하기"
-    },
-    "categories": {
-      "productivity": "생산성 도구",
-      "personality": "성격 테스트",
-      "utility": "유틸리티",
-      "converter": "변환 도구"
     },
     "stats": {
       "users": "사용자",
       "monthlyUsage": "월 사용횟수",
       "satisfaction": "만족도"
+    },
+    "toolCategories": {
+      "productivity": "생산성",
+      "personality": "성격 테스트",
+      "utilities": "유틸리티",
+      "entertainment": "엔터테인먼트"
     }
   },
   "tools": {
     "pomodoro": {
       "name": "포모도로 타이머",
-      "description": "집중력 향상을 위한 25분 작업, 5분 휴식 타이머",
-      "workTime": "작업 시간",
-      "breakTime": "휴식 시간",
-      "sessions": "세션",
-      "currentSession": "현재 세션"
+      "description": "25분 집중 + 5분 휴식으로 생산성을 높이는 시간 관리 기법",
+      "shortDesc": "생산성 향상을 위한 시간 관리 도구"
     },
     "mbti": {
-      "name": "MBTI 성격유형 테스트",
-      "description": "16가지 성격유형으로 나를 알아보는 정확한 MBTI 테스트",
-      "question": "질문",
-      "of": "중",
-      "result": "결과"
+      "name": "MBTI 성격 테스트",
+      "description": "16가지 성격 유형으로 나의 성격을 알아보는 심리학 기반 테스트",
+      "shortDesc": "나의 성격 유형을 찾아보는 심리 테스트"
     },
-    "password": {
+    "password-generator": {
       "name": "비밀번호 생성기",
-      "description": "강력하고 안전한 비밀번호를 생성하고 보안 강도를 확인하세요",
-      "length": "길이",
-      "includeUppercase": "대문자 포함",
-      "includeLowercase": "소문자 포함",
-      "includeNumbers": "숫자 포함",
-      "includeSymbols": "특수문자 포함",
-      "generate": "생성하기",
-      "strength": "보안 강도"
+      "description": "안전하고 강력한 비밀번호를 자동으로 생성해주는 보안 도구",
+      "shortDesc": "안전한 비밀번호 생성 도구"
     },
-    "unit": {
+    "unit-converter": {
       "name": "단위 변환기",
-      "description": "길이, 무게, 온도, 부피 등 다양한 단위를 빠르게 변환하세요",
-      "categories": {
-        "length": "길이",
-        "weight": "무게",
-        "temperature": "온도",
-        "volume": "부피",
-        "area": "넓이",
-        "speed": "속도"
-      }
+      "description": "길이, 무게, 온도, 면적 등 다양한 단위를 쉽게 변환하는 계산 도구",
+      "shortDesc": "다양한 단위 변환 계산기"
     },
-    "date": {
+    "date-calculator": {
       "name": "날짜 계산기",
-      "description": "날짜 차이 계산, 날짜 더하기/빼기, 나이 계산 등",
-      "difference": "날짜 차이",
-      "calculation": "날짜 계산",
-      "age": "나이 계산"
+      "description": "두 날짜 사이의 차이 계산 및 날짜 연산을 도와주는 유용한 도구",
+      "shortDesc": "날짜 차이 계산 및 날짜 연산 도구"
     },
-    "raffle": {
+    "thumbnail-downloader": {
+      "name": "유튜브 썸네일 다운로더",
+      "description": "유튜브 동영상의 썸네일 이미지를 고화질로 다운로드하는 도구",
+      "shortDesc": "유튜브 썸네일 이미지 다운로드"
+    },
+    "number-raffle": {
       "name": "번호 추첨기",
-      "description": "공정한 랜덤 번호 추첨으로 선택의 고민을 해결하세요",
-      "min": "최소값",
-      "max": "최대값",
-      "count": "개수",
-      "draw": "추첨하기"
+      "description": "공정한 랜덤 번호 추첨으로 추첨 이벤트나 게임에 활용하는 도구",
+      "shortDesc": "공정한 랜덤 번호 추첨 도구"
+    },
+    "timer": {
+      "name": "범위 타이머",
+      "description": "원하는 시간을 설정해서 사용하는 간단하고 유용한 타이머",
+      "shortDesc": "사용자 정의 시간 설정 타이머"
+    },
+    "teto-egen": {
+      "name": "테토-에겐 성격 테스트",
+      "description": "화제의 밈 기반 성격 유형 테스트로 나의 성향을 재미있게 알아보기",
+      "shortDesc": "밈 기반 재미있는 성격 테스트"
     }
+  },
+  "footer": {
+    "copyright": "© 2025 ToolHub.tools. 모든 권리 보유.",
+    "popularTools": "인기 도구"
   }
 }

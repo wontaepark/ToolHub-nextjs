@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Seo, SeoPresets } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 
 interface Question {
@@ -228,62 +227,21 @@ export default function MBTIPage() {
     
     return (
       <>
-        <Seo {...SeoPresets.mbti} />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              🧠 MBTI 테스트 결과
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+              MBTI 성격 테스트 결과
             </h1>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center mb-8">
-            <div className="text-6xl font-bold text-blue-600 dark:text-blue-400 mb-4">
-              {result}
-            </div>
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              {resultData.name}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-              {resultData.description}
-            </p>
             
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              {resultData.traits.map((trait, index) => (
-                <div key={index} className="bg-blue-50 dark:bg-blue-900 rounded-lg p-3">
-                  <span className="text-blue-800 dark:text-blue-200 font-medium">
-                    {trait}
-                  </span>
-                </div>
-              ))}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                MBTI란?
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                MBTI(Myers-Briggs Type Indicator)는 개인의 선호도를 파악하여 16가지 성격유형 중 하나로 분류하는 성격 검사입니다. 
+                자신을 이해하고 타인과의 관계를 개선하는 데 도움이 됩니다.
+              </p>
             </div>
-
-            <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
-              <button
-                onClick={shareResult}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                결과 공유하기
-              </button>
-              <button
-                onClick={resetTest}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                다시 테스트하기
-              </button>
-            </div>
-          </div>
-
-          <AdBannerInline />
-
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              MBTI란?
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              MBTI(Myers-Briggs Type Indicator)는 개인의 선호도를 파악하여 16가지 성격유형 중 하나로 분류하는 성격 검사입니다. 
-              자신을 이해하고 타인과의 관계를 개선하는 데 도움이 됩니다.
-            </p>
           </div>
         </div>
       </>
@@ -292,89 +250,14 @@ export default function MBTIPage() {
 
   return (
     <>
-      <Seo {...SeoPresets.mbti} />
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            🧠 MBTI 성격유형 테스트
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+            MBTI 성격 테스트
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            8개의 질문으로 알아보는 나의 성격 유형
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+            간단한 질문으로 나의 성격 유형을 알아보세요
           </p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-          {/* 진행률 바 */}
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
-              <span>진행률</span>
-              <span>{currentQuestion + 1}/{questions.length}</span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-
-          {/* 질문 */}
-          <div className="text-center mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              {questions[currentQuestion].text}
-            </h2>
-            
-            <div className="space-y-4">
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(option.dimension, option.value)}
-                  className="w-full p-4 text-left bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-lg transition-colors border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-600"
-                >
-                  <span className="text-gray-900 dark:text-white">
-                    {option.text}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 이전 버튼 */}
-          {currentQuestion > 0 && (
-            <div className="text-center">
-              <button
-                onClick={() => setCurrentQuestion(currentQuestion - 1)}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                ← 이전 질문으로
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            MBTI 4가지 선호 지표
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">에너지 방향</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">외향(E) vs 내향(I)</p>
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">인식 기능</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">감각(S) vs 직관(N)</p>
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">판단 기능</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">사고(T) vs 감정(F)</p>
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">생활 양식</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">판단(J) vs 인식(P)</p>
-            </div>
-          </div>
         </div>
       </div>
     </>

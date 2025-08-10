@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -186,12 +185,6 @@ export default function NumberRafflePage() {
 
   return (
     <>
-      <Seo 
-        title="번호 추첨기 | ToolHub.tools"
-        description="공정한 랜덤 번호 생성과 추첨을 위한 도구"
-        keywords="번호추첨기,랜덤번호,추첨,로또번호"
-        canonicalUrl="https://toolhub.tools/tools/number-raffle"
-      />
       
       <ToolLayout
         title="번호 추첨기"

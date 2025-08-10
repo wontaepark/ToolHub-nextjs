@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -159,12 +158,6 @@ export default function UnitConverterPage() {
 
   return (
     <>
-      <Seo 
-        title="단위 변환기 | ToolHub.tools"
-        description="길이, 무게, 온도, 부피 등 다양한 단위를 쉽게 변환"
-        keywords="단위변환기,길이변환,무게변환,온도변환,부피변환"
-        canonicalUrl="https://toolhub.tools/tools/unit-converter"
-      />
       
       <ToolLayout
         title="단위 변환기"

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Seo } from '@/components/Seo';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Map, Clock, Star, TrendingUp } from 'lucide-react';
@@ -82,12 +81,6 @@ export default function SitemapPage() {
 
   return (
     <>
-      <Seo 
-        title="사이트맵 | ToolHub.tools"
-        description="ToolHub.tools의 모든 도구와 페이지를 한눈에 확인하세요"
-        keywords="사이트맵,도구목록,전체메뉴,네비게이션"
-        canonicalUrl="https://toolhub.tools/sitemap"
-      />
 
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 py-8">

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import ToolLayout from '@/components/ToolLayout';
-import { Seo } from '@/components/Seo';
 import { AdBannerInline } from '@/components/AdBanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -215,12 +214,6 @@ export default function DateCalculatorPage() {
 
   return (
     <>
-      <Seo 
-        title="날짜 계산기 | ToolHub.tools"
-        description="날짜 간격 계산, 날짜 더하기/빼기, 나이 계산을 쉽게"
-        keywords="날짜계산기,나이계산,날짜차이,디데이"
-        canonicalUrl="https://toolhub.tools/tools/date-calculator"
-      />
       
       <ToolLayout
         title="날짜 계산기"

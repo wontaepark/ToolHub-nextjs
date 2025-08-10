@@ -40,18 +40,22 @@ npm install
 # 3. Start the development server
 npm run dev
 
+```
 🌐 Live Demo
+
 👉 **[Try the demo](https://tool-hub-central-wtpark10.replit.app)**
 
+```
 📄 Deployment Guide
 Replit
-Automatically runs via the .replit configuration file
+  Automatically runs via the .replit configuration file
 
-See replit.md for environment setup and SEO optimization
+  See replit.md for environment setup and SEO optimization
 
 Vercel
-Requires configuration via vercel.json or environment variables
+  Requires configuration via vercel.json or environment variables
 
-Refer to production-deploy.md for detailed instructions
+  Refer to production-deploy.md for detailed instructions
 
-Make sure to include robots.txt, ads.txt, and sitemap.xml in the root directory to ensure proper SEO and ad setup.
+Make sure to include robots.txt, ads.txt, and sitemap.xml in the root directory to
+ensure proper SEO and ad setup.

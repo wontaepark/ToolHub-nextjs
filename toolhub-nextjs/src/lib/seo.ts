@@ -82,11 +82,11 @@ export function generateToolMetadata(
   locale: Locale,
   messages: any
 ): Metadata {
-  const toolName = messages.tools?.[toolId]?.name || toolId;
-  const toolDescription = messages.tools?.[toolId]?.description || '';
+  const toolName = (messages as any).tools?.[toolId]?.name || toolId;
+  const toolDescription = (messages as any).tools?.[toolId]?.description || '';
   
   const title = `${toolName} | ToolHub.tools`;
-  const description = toolDescription || messages.tools?.[toolId]?.shortDesc || '';
+  const description = toolDescription || (messages as any).tools?.[toolId]?.shortDesc || '';
   
   return generateSEOMetadata({
     title,
@@ -99,9 +99,9 @@ export function generateToolMetadata(
 
 // 홈페이지 메타데이터 생성
 export function generateHomeMetadata(locale: Locale, messages: any): Metadata {
-  const title = messages.meta?.title || messages.home?.title || 'ToolHub.tools';
-  const description = messages.meta?.description || messages.home?.description || '';
-  const keywords = messages.meta?.keywords || '';
+  const title = (messages as any).meta?.title || (messages as any).home?.title || 'ToolHub.tools';
+  const description = (messages as any).meta?.description || (messages as any).home?.description || '';
+  const keywords = (messages as any).meta?.keywords || '';
 
   return generateSEOMetadata({
     title,
@@ -118,7 +118,7 @@ export function generateStructuredData(config: {
   description: string;
   url: string;
   locale: Locale;
-  additionalData?: Record<string, any>;
+  additionalData?: Record<string, unknown>;
 }) {
   const { type, name, description, url, locale, additionalData = {} } = config;
   

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getMessages } from 'next-intl/server';
 import { locales, type Locale } from '@/lib/i18n';
-import { getAllTools, getAllPages } from '@/lib/tools';
+import { getAllTools } from '@/lib/tools';
 import { generateSEOMetadata } from '@/lib/seo';
 import Link from 'next/link';
 
@@ -35,7 +35,6 @@ export default async function SitemapPage({ params }: Props) {
   const messages = await getMessages();
   
   const tools = getAllTools();
-  const pages = getAllPages();
 
   const completedTools = tools.filter(tool => tool.isCompleted);
   const inDevelopmentTools = tools.filter(tool => !tool.isCompleted);

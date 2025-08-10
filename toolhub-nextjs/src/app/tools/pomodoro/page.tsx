@@ -74,30 +74,29 @@ export default function PomodoroPage() {
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
-            포모도로 타이머
-          </h1>
-          
-          {/* 설정 */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">설정</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  작업 시간 (분)
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="60"
-                  value={workDuration}
-                  onChange={(e) => setWorkDuration(parseInt(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                />
-              </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+          포모도로 타이머
+        </h1>
+        
+        {/* 설정 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">설정</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                작업 시간 (분)
+              </label>
+              <input
+                type="number"
+                min="1"
+                max="60"
+                value={workDuration}
+                onChange={(e) => setWorkDuration(parseInt(e.target.value))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              />
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 휴식 시간 (분)
@@ -111,6 +110,39 @@ export default function PomodoroPage() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
             </div>
+          </div>
+        </div>
+
+        {/* 타이머 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center mb-6">
+          <div className={`text-6xl font-mono font-bold mb-6 ${isBreak ? 'text-green-600' : 'text-blue-600'}`}>
+            {formatTime(minutes, seconds)}
+          </div>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            {isBreak ? '휴식 시간' : '집중 시간'}
+          </p>
+          <div className="flex justify-center space-x-4">
+            {!isActive ? (
+              <button
+                onClick={startTimer}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+              >
+                시작
+              </button>
+            ) : (
+              <button
+                onClick={pauseTimer}
+                className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors font-semibold"
+              >
+                일시정지
+              </button>
+            )}
+            <button
+              onClick={resetTimer}
+              className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-semibold"
+            >
+              리셋
+            </button>
           </div>
         </div>
 
@@ -149,14 +181,11 @@ export default function PomodoroPage() {
         </div>
 
         {/* 알림 소리 (숨겨진 오디오 요소) */}
-        <audio
-          ref={audioRef}
-          preload="auto"
-        >
+        <audio ref={audioRef} preload="auto">
           <source src="/notification.mp3" type="audio/mpeg" />
           {/* 브라우저 호환성을 위한 대체 소리 */}
         </audio>
       </div>
-    </>
+    </div>
   );
 }

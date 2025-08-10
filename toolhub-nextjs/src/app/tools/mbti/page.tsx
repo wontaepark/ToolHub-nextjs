@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AdBannerInline } from '@/components/AdBanner';
+// import { AdBannerInline } from '@/components/AdBanner'; // 사용 예정
 
 interface Question {
   id: number;

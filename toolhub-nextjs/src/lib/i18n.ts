@@ -16,9 +16,10 @@ export function isValidLocale(locale: string): locale is Locale {
 // next-intl 설정
 export default getRequestConfig(async ({ locale }) => {
   // 유효하지 않은 로케일 체크
-  if (!isValidLocale(locale)) notFound();
+  if (!locale || !isValidLocale(locale)) notFound();
 
   return {
+    locale,
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });

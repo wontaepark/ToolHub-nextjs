@@ -1,18 +1,17 @@
 'use client';
 
 import { NextIntlClientProvider } from 'next-intl';
-import { ReactNode } from 'react';
 
 interface IntlProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
   locale: string;
-  messages: Record<string, unknown>;
+  messages: any;
 }
 
 export default function IntlProvider({ children, locale, messages }: IntlProviderProps) {
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
+      {children as any}
     </NextIntlClientProvider>
   );
 }

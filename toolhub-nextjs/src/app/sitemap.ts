@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { locales } from '@/lib/i18n';
-import { getAllTools, getAllPages } from '@/lib/tools';
+import { getAllTools } from '@/lib/tools';
+
+export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://toolhub.tools';

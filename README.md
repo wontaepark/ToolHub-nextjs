@@ -41,7 +41,7 @@ npm install
 npm run dev
 
 🌐 Live Demo
-👉 [Try the demo](https://tool-hub-central-wtpark10.replit.app)
+👉 **[Try the demo](https://tool-hub-central-wtpark10.replit.app)**
 
 📄 Deployment Guide
 Replit
